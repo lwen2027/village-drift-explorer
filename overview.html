@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Coverage and aggregate findings from the AI Village goal-drift audit.">
+  <title>AI Village — Drift Pipeline Overview</title>
+  <style>
+    :root {
+      --paper: #ece5d5;
+      --paper-deep: #dfd3bc;
+      --card: #f8f4e9;
+      --card-strong: #fffdf7;
+      --ink: #26251f;
+      --muted: #706d62;
+      --line: #cec2ab;
+      --line-strong: #9e927d;
+      --green: #385a4c;
+      --green-soft: #bfd0b8;
+      --rust: #a34e35;
+      --rust-soft: #ddb19d;
+      --amber: #a57a35;
+      --unknown: #cbbfa9;
+      --blue: #3e6f80;
+      --shadow: 0 16px 38px rgba(62, 48, 27, .1);
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% 8%, rgba(255,255,255,.52), transparent 26rem),
+        linear-gradient(rgba(92, 78, 52, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92, 78, 52, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: auto, 24px 24px, 24px 24px, auto;
+      color: var(--ink);
+    }
+
+    button { font: inherit; }
+
+    .page-shell {
+      width: min(1440px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 32px 0 72px;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 26px;
+    }
+
+    .eyebrow, .micro-label {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 500;
+      line-height: .96;
+      letter-spacing: -.04em;
+    }
+
+    .header-side {
+      max-width: 460px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      text-align: right;
+    }
+
+    .header-side p { margin-bottom: 12px; }
+
+    .snapshot {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      letter-spacing: .04em;
+    }
+
+    .view-tabs {
+      display: inline-flex;
+      gap: 4px;
+      margin-top: 16px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(248, 244, 233, .64);
+    }
+
+    .view-tab {
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .view-tab:hover { color: var(--ink); }
+
+    .view-tab.is-active {
+      background: var(--green);
+      color: #fffdf7;
+    }
+
+    .provisional-note {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      margin-bottom: 18px;
+      padding: 15px 18px;
+      border: 1px solid #c5a66f;
+      border-radius: 14px;
+      background: #f4ead4;
+      color: #655231;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .provisional-note strong {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .scope-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .metric-card, .panel {
+      border: 1px solid var(--line);
+      background: rgba(248, 244, 233, .84);
+      box-shadow: var(--shadow);
+    }
+
+    .metric-card {
+      min-height: 150px;
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .metric-value {
+      display: block;
+      margin: 9px 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(36px, 4vw, 52px);
+      line-height: .9;
+      letter-spacing: -.035em;
+    }
+
+    .metric-detail {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .panel {
+      min-width: 0;
+      padding: 24px;
+      border-radius: 18px;
+    }
+
+    .goal-status { grid-column: span 7; }
+    .pipeline { grid-column: span 5; }
+    .agents { grid-column: span 7; }
+    .quality { grid-column: span 5; }
+    .time { grid-column: 1 / -1; }
+    .definitions { grid-column: 1 / -1; }
+
+    .panel-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .panel-heading h2 {
+      margin-bottom: 5px;
+      font-size: 20px;
+      line-height: 1.15;
+    }
+
+    .panel-heading p {
+      max-width: 540px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .status-layout {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .donut {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--rust) 0 9.85%,
+        var(--green) 9.85% 49.58%,
+        var(--unknown) 49.58% 100%
+      );
+    }
+
+    .donut::after {
+      position: absolute;
+      inset: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--card);
+      content: "589\A goal periods";
+      white-space: pre;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: 12px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: baseline;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .status-row:last-child { border-bottom: 0; }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .status-name { font-size: 13px; font-weight: 750; }
+    .status-explain { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; font-weight: 450; line-height: 1.35; }
+    .status-number { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; text-align: right; }
+    .status-number strong { display: block; color: var(--ink); font-size: 17px; }
+
+    .funnel {
+      display: grid;
+      gap: 9px;
+    }
+
+    .funnel-step {
+      position: relative;
+      overflow: hidden;
+      min-height: 64px;
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card-strong);
+    }
+
+    .funnel-step::before {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: var(--step-color, var(--green));
+      content: "";
+    }
+
+    .funnel-value { font-family: Georgia, "Times New Roman", serif; font-size: 26px; line-height: 1; }
+    .funnel-label { margin-left: 7px; color: var(--muted); font-size: 12px; }
+    .funnel-note { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; }
+
+    .toggle {
+      display: inline-flex;
+      flex: 0 0 auto;
+      gap: 3px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+    }
+
+    .toggle button {
+      padding: 7px 10px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .toggle button[aria-pressed="true"] { background: var(--card-strong); color: var(--ink); box-shadow: 0 1px 5px rgba(50,40,20,.1); }
+
+    .ranking { display: grid; gap: 11px; }
+    .rank-row { display: grid; grid-template-columns: minmax(130px, 190px) 1fr 58px; gap: 12px; align-items: center; }
+    .rank-name { overflow: hidden; font-size: 12px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+    .rank-track { height: 10px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
+    .rank-fill { height: 100%; border-radius: inherit; background: var(--rust); transition: width .25s ease; }
+    .rank-value { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); font-size: 11px; text-align: right; }
+
+    .coverage-callout {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .coverage-callout strong { color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 25px; font-weight: 500; }
+
+    .quality-block + .quality-block { margin-top: 22px; }
+    .quality-label { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+    .quality-label span:last-child { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 500; }
+    .stack { display: flex; overflow: hidden; height: 15px; border-radius: 999px; background: var(--paper-deep); }
+    .stack > span { display: block; min-width: 2px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px 18px; margin-top: 10px; color: var(--muted); font-size: 10px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 8px; height: 8px; border-radius: 2px; }
+
+    .timeline-chart {
+      display: grid;
+      grid-template-columns: repeat(18, minmax(18px, 1fr));
+      gap: 8px;
+      align-items: end;
+      height: 220px;
+      padding: 18px 8px 0;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .month {
+      display: flex;
+      height: 100%;
+      min-width: 0;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .month-count { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; }
+    .month-bar { width: min(30px, 82%); min-height: 2px; border-radius: 5px 5px 0 0; background: var(--rust); }
+    .month-label { min-height: 29px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; line-height: 1.15; text-align: center; }
+
+    .definition-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .definition { padding-left: 14px; border-left: 3px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .definition strong { display: block; margin-bottom: 5px; color: var(--ink); font-size: 13px; }
+
+    .source-note {
+      margin: 20px 0 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 1040px) {
+      .scope-grid { grid-template-columns: repeat(2, 1fr); }
+      .goal-status, .pipeline, .agents, .quality { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 720px) {
+      .page-shell { width: min(100% - 28px, 1440px); padding-top: 20px; }
+      .site-header { align-items: flex-start; flex-direction: column; }
+      .header-side { text-align: left; }
+      .scope-grid { grid-template-columns: 1fr; }
+      .metric-card { min-height: 0; }
+      .panel { padding: 18px; }
+      .panel-heading { align-items: flex-start; flex-direction: column; }
+      .status-layout { grid-template-columns: 1fr; }
+      .donut { margin: 0 auto; }
+      .rank-row { grid-template-columns: minmax(105px, 140px) 1fr 50px; gap: 8px; }
+      .timeline-chart { grid-template-columns: repeat(9, 1fr); height: auto; align-items: end; row-gap: 18px; }
+      .month { height: 150px; }
+      .definition-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">AI Village / goal-drift audit</p>
+        <h1>Pipeline Overview</h1>
+        <nav class="view-tabs" aria-label="Explorer views">
+          <a class="view-tab is-active" href="overview.html" aria-current="page">Pipeline overview</a>
+          <a class="view-tab" href="index.html">Episode explorer</a>
+        </nav>
+      </div>
+      <div class="header-side">
+        <p>A coverage-first view of what has been analyzed, what has been confirmed, and where the current audit still has unresolved evidence.</p>
+        <span class="snapshot">SNAPSHOT · OCT 5, 2026 · PROVISIONAL</span>
+      </div>
+    </header>
+
+    <div class="provisional-note">
+      <strong>Read first</strong>
+      <span>This is a pipeline snapshot, not a population-level model leaderboard. Agents have different amounts of exposure, and 643 of 1,225 Stage 2 windows are partial or incomplete. “No confirmed drift” therefore does not necessarily mean “confirmed non-drift.”</span>
+    </div>
+
+    <section class="scope-grid" aria-label="Audit coverage">
+      <article class="metric-card">
+        <p class="micro-label">Analyzed activity</p>
+        <span class="metric-value">5,127</span>
+        <span class="metric-detail">agent-days completed in Stage 1</span>
+      </article>
+      <article class="metric-card">
+        <p class="micro-label">Calendar coverage</p>
+        <span class="metric-value">413</span>
+        <span class="metric-detail">distinct Village days · Apr 2, 2025–Oct 2, 2026</span>
+      </article>
+      <article class="metric-card">
+        <p class="micro-label">Goal-period coverage</p>
+        <span class="metric-value">589</span>
+        <span class="metric-detail">observed agent–goal assignments across 52 agents</span>
+      </article>
+      <article class="metric-card">
+        <p class="micro-label">Confirmed findings</p>
+        <span class="metric-value">80</span>
+        <span class="metric-detail">drift episodes in 58 goal periods and 24 agents</span>
+      </article>
+    </section>
+
+    <main class="dashboard-grid">
+      <section class="panel goal-status" aria-labelledby="goal-status-title">
+        <div class="panel-heading">
+          <div>
+            <p class="micro-label">Primary denominator</p>
+            <h2 id="goal-status-title">What happened across goal periods?</h2>
+            <p>Each period is one agent working under one recorded goal. Categories are mutually exclusive.</p>
+          </div>
+        </div>
+        <div class="status-layout">
+          <div class="donut" role="img" aria-label="Of 589 goal periods, 58 have confirmed drift, 234 are strict non-drift, and 297 remain unresolved."></div>
+          <div>
+            <div class="status-row">
+              <i class="status-dot" style="background:var(--rust)"></i>
+              <span class="status-name">Confirmed drift<span class="status-explain">At least one Stage 2 confirmed episode.</span></span>
+              <span class="status-number"><strong>58</strong>9.8%</span>
+            </div>
+            <div class="status-row">
+              <i class="status-dot" style="background:var(--green)"></i>
+              <span class="status-name">Strict non-drift<span class="status-explain">Every analyzed day was Stage 1 non-drift and no Stage 2 episode was confirmed.</span></span>
+              <span class="status-number"><strong>234</strong>39.7%</span>
+            </div>
+            <div class="status-row">
+              <i class="status-dot" style="background:var(--unknown)"></i>
+              <span class="status-name">Still unresolved<span class="status-explain">No confirmed episode, but at least one day was routed as drift or undefined.</span></span>
+              <span class="status-number"><strong>297</strong>50.4%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel pipeline" aria-labelledby="pipeline-title">
+        <div class="panel-heading">
+          <div>
+            <p class="micro-label">Audit funnel</p>
+            <h2 id="pipeline-title">From activity to episodes</h2>
+            <p>Counts change unit at each stage; this shows review volume, not conversion quality.</p>
+          </div>
+        </div>
+        <div class="funnel">
+          <div class="funnel-step" style="--step-color:var(--green)">
+            <span class="funnel-value">5,127</span><span class="funnel-label">agent-days analyzed</span>
+            <span class="funnel-note">All expected Stage 1 rows completed</span>
+          </div>
+          <div class="funnel-step" style="--step-color:#6c8065">
+            <span class="funnel-value">2,505</span><span class="funnel-label">agent-days routed</span>
+            <span class="funnel-note">Positive or low-confidence Stage 1 judgments</span>
+          </div>
+          <div class="funnel-step" style="--step-color:var(--amber)">
+            <span class="funnel-value">1,225</span><span class="funnel-label">Stage 2 review windows</span>
+            <span class="funnel-note">582 final · 28 partial · 615 incomplete</span>
+          </div>
+          <div class="funnel-step" style="--step-color:var(--rust)">
+            <span class="funnel-value">80</span><span class="funnel-label">confirmed episodes</span>
+            <span class="funnel-note">79 source windows after reconciliation</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel agents" aria-labelledby="agents-title">
+        <div class="panel-heading">
+          <div>
+            <p class="micro-label">Agent comparison</p>
+            <h2 id="agents-title">Who has the most confirmed drift?</h2>
+            <p id="ranking-caption">Episode count shows repeated distinct episodes, without adjusting for exposure.</p>
+          </div>
+          <div class="toggle" role="group" aria-label="Agent ranking metric">
+            <button id="episodes-toggle" type="button" aria-pressed="true">Episodes</button>
+            <button id="rate-toggle" type="button" aria-pressed="false">Goal rate</button>
+          </div>
+        </div>
+        <div class="ranking" id="ranking" aria-live="polite"></div>
+        <div class="coverage-callout">
+          <span>Agents with ≥1 confirmed episode</span>
+          <span><strong>24</strong> of 52 · 46.2%</span>
+        </div>
+      </section>
+
+      <section class="panel quality" aria-labelledby="quality-title">
+        <div class="panel-heading">
+          <div>
+            <p class="micro-label">Evidence health</p>
+            <h2 id="quality-title">How resolved is the audit?</h2>
+            <p>Coverage state applies to all Stage 2 windows; duration quality applies to the 80 confirmed episodes.</p>
+          </div>
+        </div>
+
+        <div class="quality-block">
+          <div class="quality-label"><span>Stage 2 window coverage</span><span>1,225 windows</span></div>
+          <div class="stack" aria-label="582 final, 28 partial, 615 incomplete Stage 2 windows">
+            <span style="width:47.5%;background:var(--green)"></span>
+            <span style="width:2.3%;background:var(--amber)"></span>
+            <span style="width:50.2%;background:var(--unknown)"></span>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--green)"></i>582 final</span>
+            <span><i style="background:var(--amber)"></i>28 partial</span>
+            <span><i style="background:var(--unknown)"></i>615 incomplete</span>
+          </div>
+        </div>
+
+        <div class="quality-block">
+          <div class="quality-label"><span>Confirmed-episode duration</span><span>80 episodes</span></div>
+          <div class="stack" aria-label="17 exact, 27 lower-bound, and 36 unavailable durations">
+            <span style="width:21.25%;background:var(--green)"></span>
+            <span style="width:33.75%;background:var(--amber)"></span>
+            <span style="width:45%;background:var(--rust-soft)"></span>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--green)"></i>17 exact</span>
+            <span><i style="background:var(--amber)"></i>27 lower bound</span>
+            <span><i style="background:var(--rust-soft)"></i>36 unavailable</span>
+          </div>
+        </div>
+
+        <div class="quality-block">
+          <div class="quality-label"><span>Observed episode ending</span><span>80 episodes</span></div>
+          <div class="stack" aria-label="16 returned to goal, 6 ended with the assignment, and 58 were ongoing at evidence end">
+            <span style="width:20%;background:var(--green)"></span>
+            <span style="width:7.5%;background:var(--blue)"></span>
+            <span style="width:72.5%;background:var(--unknown)"></span>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--green)"></i>16 returned</span>
+            <span><i style="background:var(--blue)"></i>6 assignment ended</span>
+            <span><i style="background:var(--unknown)"></i>58 still ongoing when evidence ended</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel time" aria-labelledby="time-title">
+        <div class="panel-heading">
+          <div>
+            <p class="micro-label">Confirmed onsets over time</p>
+            <h2 id="time-title">When were drift episodes observed?</h2>
+            <p>Monthly episode counts reflect changing agents, goals, and evidence coverage; they should not be read as a controlled trend.</p>
+          </div>
+        </div>
+        <div class="timeline-chart" role="img" aria-label="Monthly confirmed episode counts from April 2025 through September 2026">
+          <div class="month"><span class="month-count">3</span><span class="month-bar" style="height:27%"></span><span class="month-label">Apr<br>’25</span></div>
+          <div class="month"><span class="month-count">3</span><span class="month-bar" style="height:27%"></span><span class="month-label">May</span></div>
+          <div class="month"><span class="month-count">1</span><span class="month-bar" style="height:9%"></span><span class="month-label">Jun</span></div>
+          <div class="month"><span class="month-count">3</span><span class="month-bar" style="height:27%"></span><span class="month-label">Jul</span></div>
+          <div class="month"><span class="month-count">1</span><span class="month-bar" style="height:9%"></span><span class="month-label">Aug</span></div>
+          <div class="month"><span class="month-count">8</span><span class="month-bar" style="height:73%"></span><span class="month-label">Sep</span></div>
+          <div class="month"><span class="month-count">7</span><span class="month-bar" style="height:64%"></span><span class="month-label">Oct</span></div>
+          <div class="month"><span class="month-count">6</span><span class="month-bar" style="height:55%"></span><span class="month-label">Nov</span></div>
+          <div class="month"><span class="month-count">1</span><span class="month-bar" style="height:9%"></span><span class="month-label">Dec</span></div>
+          <div class="month"><span class="month-count">0</span><span class="month-bar" style="height:2%"></span><span class="month-label">Jan<br>’26</span></div>
+          <div class="month"><span class="month-count">2</span><span class="month-bar" style="height:18%"></span><span class="month-label">Feb</span></div>
+          <div class="month"><span class="month-count">3</span><span class="month-bar" style="height:27%"></span><span class="month-label">Mar</span></div>
+          <div class="month"><span class="month-count">1</span><span class="month-bar" style="height:9%"></span><span class="month-label">Apr</span></div>
+          <div class="month"><span class="month-count">6</span><span class="month-bar" style="height:55%"></span><span class="month-label">May</span></div>
+          <div class="month"><span class="month-count">6</span><span class="month-bar" style="height:55%"></span><span class="month-label">Jun</span></div>
+          <div class="month"><span class="month-count">7</span><span class="month-bar" style="height:64%"></span><span class="month-label">Jul</span></div>
+          <div class="month"><span class="month-count">11</span><span class="month-bar" style="height:100%"></span><span class="month-label">Aug</span></div>
+          <div class="month"><span class="month-count">11</span><span class="month-bar" style="height:100%"></span><span class="month-label">Sep</span></div>
+        </div>
+      </section>
+
+      <section class="panel definitions" aria-labelledby="definitions-title">
+        <div class="panel-heading">
+          <div>
+            <p class="micro-label">Interpretation guide</p>
+            <h2 id="definitions-title">What these counts mean</h2>
+          </div>
+        </div>
+        <div class="definition-grid">
+          <div class="definition"><strong>Agent-day</strong>One agent’s observed activity on one calendar day. This is the unit classified in Stage 1.</div>
+          <div class="definition"><strong>Goal period</strong>All analyzed days for one agent under the same recorded goal. It is the denominator used for the 9.8% confirmed-drift share.</div>
+          <div class="definition"><strong>Confirmed episode</strong>A bounded or still-ongoing interval accepted by Stage 2 as goal drift, with a recorded onset, activity narrative, and supporting evidence.</div>
+        </div>
+        <p class="source-note">SOURCE SNAPSHOT · Stage 1 B-full (finalized Oct 4, 2026) · Stage 2 provisional export (Oct 5, 2026) · 80 confirmed episodes · Goal-period grouping normalizes recorded goal text per agent · Read-only research prototype</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const episodeRanking = [
+      { name: "Claude 3.7 Sonnet", value: 12, detail: "12" },
+      { name: "DeepSeek-V3.2", value: 9, detail: "9" },
+      { name: "o3", value: 7, detail: "7" },
+      { name: "Claude Fable 5", value: 6, detail: "6" },
+      { name: "Gemini 2.5 Pro", value: 6, detail: "6" },
+      { name: "GPT-5", value: 5, detail: "5" },
+      { name: "Claude Haiku 4.5", value: 4, detail: "4" },
+      { name: "GPT-5.2", value: 4, detail: "4" }
+    ];
+
+    const rateRanking = [
+      { name: "Claude 3.7 Sonnet", value: 29.0, detail: "9 / 31" },
+      { name: "Gemini 3.5 Flash", value: 20.0, detail: "2 / 10" },
+      { name: "o3", value: 20.0, detail: "4 / 20" },
+      { name: "GPT-5.4", value: 17.6, detail: "3 / 17" },
+      { name: "Gemini 3.1 Pro", value: 17.6, detail: "3 / 17" },
+      { name: "Claude Opus 4.1", value: 16.7, detail: "2 / 12" },
+      { name: "Claude Haiku 4.5", value: 11.8, detail: "4 / 34" },
+      { name: "Gemini 2.5 Pro", value: 10.0, detail: "5 / 50" }
+    ];
+
+    const ranking = document.querySelector("#ranking");
+    const caption = document.querySelector("#ranking-caption");
+    const episodeToggle = document.querySelector("#episodes-toggle");
+    const rateToggle = document.querySelector("#rate-toggle");
+
+    function renderRanking(mode) {
+      const data = mode === "rate" ? rateRanking : episodeRanking;
+      const max = Math.max(...data.map((row) => row.value));
+      ranking.replaceChildren(...data.map((row, index) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "rank-row";
+
+        const name = document.createElement("span");
+        name.className = "rank-name";
+        name.textContent = `${index + 1}. ${row.name}`;
+
+        const track = document.createElement("div");
+        track.className = "rank-track";
+        const fill = document.createElement("div");
+        fill.className = "rank-fill";
+        fill.style.width = `${(row.value / max) * 100}%`;
+        track.append(fill);
+
+        const value = document.createElement("span");
+        value.className = "rank-value";
+        value.textContent = mode === "rate" ? `${row.value.toFixed(1)}%` : row.detail;
+        if (mode === "rate") value.title = `${row.detail} observed goal periods`;
+
+        wrapper.append(name, track, value);
+        return wrapper;
+      }));
+
+      const isRate = mode === "rate";
+      episodeToggle.setAttribute("aria-pressed", String(!isRate));
+      rateToggle.setAttribute("aria-pressed", String(isRate));
+      caption.textContent = isRate
+        ? "Share of observed goal periods with confirmed drift. Limited to agents with at least 10 observed goal periods; numerator / denominator appears on hover."
+        : "Episode count shows repeated distinct episodes, without adjusting for exposure.";
+    }
+
+    episodeToggle.addEventListener("click", () => renderRanking("episodes"));
+    rateToggle.addEventListener("click", () => renderRanking("rate"));
+    renderRanking("episodes");
+  </script>
+</body>
+</html>

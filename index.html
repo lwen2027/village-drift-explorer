@@ -82,6 +82,32 @@
       text-align: right;
     }
 
+    .view-tabs {
+      display: inline-flex;
+      gap: 4px;
+      margin-top: 16px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(248, 244, 233, .6);
+    }
+
+    .view-tab {
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .view-tab:hover { color: var(--ink); }
+
+    .view-tab.is-active {
+      background: var(--green);
+      color: #fffdf7;
+    }
+
     .workspace {
       display: grid;
       grid-template-columns: minmax(580px, 1fr) minmax(390px, 470px);
@@ -1131,6 +1157,10 @@
       <div>
         <p class="eyebrow">AI Village / research prototype</p>
         <h1>Agent Drift Explorer</h1>
+        <nav class="view-tabs" aria-label="Explorer views">
+          <a class="view-tab" href="overview.html">Pipeline overview</a>
+          <a class="view-tab is-active" href="index.html" aria-current="page">Episode explorer</a>
+        </nav>
       </div>
       <p class="header-note">Goal assignments are the primary unit. Drift episodes sit inside each goal period, making recurrence and timing visible while keeping each episode directly reviewable.</p>
     </header>
