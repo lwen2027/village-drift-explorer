@@ -583,6 +583,15 @@
       font-size: 9px;
     }
 
+    .selected-episode-span-note {
+      margin: 8px 0 0;
+      padding-top: 8px;
+      border-top: 1px solid rgba(163, 78, 53, .18);
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
     .unresolved-banner {
       margin-top: 12px;
       padding: 11px 13px 12px;
@@ -1480,7 +1489,42 @@
           : episode.drift_end?.ended_at
             ? "to"
             : "observed through";
-      return `${start} ${endPrefix} ${displayVillageTimestamp(endValue)}${duration === "Unavailable" ? "" : ` · ${duration}`}`;
+      return `${start} ${endPrefix} ${displayVillageTimestamp(endValue)}${duration === "Unavailable" ? "" : ` · ${duration} elapsed span`}`;
+    }
+
+    function elapsedSpanContext(episode) {
+      const measurement = episode.duration_measurement;
+      if (!measurement || measurement.kind === "unavailable" || measurement.seconds == null) {
+        return "No reliable elapsed span can be calculated from the available onset and end evidence.";
+      }
+
+      if (measurement.kind === "minimum_observed") {
+        return "This is a lower-bound wall-clock span from onset to the last observed drift—not a measure of continuous active work.";
+      }
+
+      const endValue = episode.drift_end?.ended_at;
+      const endInstant = parseInstant(endValue);
+      const driftItems = [
+        ...(episode.evidence?.transition?.items || []),
+        ...(episode.evidence?.activity?.items || [])
+      ];
+      const driftInstants = driftItems
+        .map((item) => parseInstant(item.timestamp))
+        .filter((instant) => instant && (!endInstant || instant <= endInstant));
+      const latestDriftInstant = driftInstants.length
+        ? new Date(Math.max(...driftInstants.map((instant) => instant.getTime())))
+        : null;
+
+      let explanation = "Elapsed span is wall-clock time from observed onset to observed end—not a measure of continuous active work.";
+      if (endInstant && latestDriftInstant) {
+        const gapSeconds = Math.floor((endInstant - latestDriftInstant) / 1000);
+        if (gapSeconds >= 3600) {
+          const gap = durationLabel({ kind: "exact", seconds: gapSeconds });
+          const boundary = episode.drift_end?.status === "returned_to_goal" ? "return" : "end boundary";
+          explanation += ` The last direct drift evidence is ${gap} before the observed ${boundary}.`;
+        }
+      }
+      return explanation;
     }
 
     function unresolvedInformation(episode) {
@@ -1490,9 +1534,9 @@
       };
 
       if (!episode.duration_measurement || episode.duration_measurement.kind === "unavailable" || episode.duration_measurement.seconds == null) {
-        add("Duration unavailable", episode.duration_measurement?.note);
+        add("Elapsed span unavailable", episode.duration_measurement?.note);
       } else if (episode.duration_measurement.kind === "minimum_observed") {
-        add("Duration is a lower bound", episode.duration_measurement.note);
+        add("Elapsed span is a lower bound", episode.duration_measurement.note);
       }
 
       if (episode.onset_precision && episode.onset_precision !== "timestamp") {
@@ -1888,7 +1932,7 @@
 
         const bottom = node("div", "tile-bottom");
         bottom.append(node("span", "evidence-pill", hasDrift
-          ? `${period.drifts.length} confirmed ${period.drifts.length === 1 ? "drift" : "drifts"}${unknownDurationEpisodes ? ` · ${unknownDurationEpisodes} duration unknown` : ""}`
+          ? `${period.drifts.length} confirmed ${period.drifts.length === 1 ? "drift" : "drifts"}${unknownDurationEpisodes ? ` · ${unknownDurationEpisodes} span unknown` : ""}`
           : "No confirmed drift"));
         bottom.append(node("span", "tile-index", String(index + 1).padStart(2, "0")));
 
@@ -1915,7 +1959,7 @@
               const episodeRecord = allEpisodes.find((episode) => episode.episode_id === drift.episode_id);
               const duration = durationLabel(episodeRecord?.duration_measurement);
               const outcome = String(drift.status).replaceAll("_", " ");
-              const optionMeta = [outcome, duration === "Unavailable" ? "duration unknown" : duration]
+              const optionMeta = [outcome, duration === "Unavailable" ? "span unknown" : `${duration} elapsed span`]
                 .filter(Boolean)
                 .join(" · ");
               copy.append(
@@ -1950,7 +1994,7 @@
       const entries = [
         ["Trigger evidence", episode.evidence?.trigger?.status || "Unavailable"],
         ["Onset precision", episode.onset_precision || "Unavailable"],
-        ["Observed duration", durationLabel(episode.duration_measurement)],
+        ["Elapsed episode span", durationLabel(episode.duration_measurement)],
         ["End state", String(episode.drift_end?.status || "Unavailable").replaceAll("_", " ")],
         ["Verdict confidence", episode.verdict_confidence == null ? "Unavailable" : `${Math.round(episode.verdict_confidence * 100)}%`]
       ];
@@ -1995,7 +2039,8 @@
         selectedCard.append(
           node("span", "selected-episode-kicker", `Selected drift episode ${episodeNumber} of ${period.drifts.length}`),
           node("h3", "", selectedDrift?.label || "Selected drift episode"),
-          node("span", "selected-episode-time", episodeIntervalLabel(episode))
+          node("span", "selected-episode-time", episodeIntervalLabel(episode)),
+          node("p", "selected-episode-span-note", elapsedSpanContext(episode))
         );
         hero.append(selectedCard);
         const unresolvedBanner = renderUnresolvedBanner(episode);
