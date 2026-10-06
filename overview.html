@@ -230,8 +230,7 @@
       border-radius: 50%;
       background: conic-gradient(
         var(--rust) 0 33.11%,
-        var(--green) 33.11% 68.59%,
-        var(--unknown) 68.59% 100%
+        var(--green) 33.11% 100%
       );
     }
 
@@ -427,14 +426,14 @@
         </nav>
       </div>
       <div class="header-side">
-        <p>A coverage-first view of what has been analyzed, what has been confirmed, and where the current audit still has unresolved evidence.</p>
-        <span class="snapshot">SNAPSHOT · OCT 6, 2026 · PROVISIONAL</span>
+        <p>A coverage-first view of what has been analyzed, what has been confirmed, and where evidence or temporal boundaries remain incomplete.</p>
+        <span class="snapshot">SNAPSHOT · OCT 6, 2026 · FINAL AUDIT DATA</span>
       </div>
     </header>
 
     <div class="provisional-note">
       <strong>Read first</strong>
-      <span>This is a pipeline snapshot, not a population-level model leaderboard. Agents have different amounts of exposure, and 402 of 1,225 Stage 2 windows are partial or incomplete. “No confirmed drift” therefore does not necessarily mean “confirmed non-drift.”</span>
+      <span>This is a pipeline snapshot, not a population-level model leaderboard. Agents have different amounts of exposure. Stage 2 record completeness describes the available evidence and temporal boundaries—not whether an exported episode’s drift decision was resolved.</span>
     </div>
 
     <section class="scope-grid" aria-label="Audit coverage">
@@ -464,28 +463,23 @@
       <section class="panel goal-status" aria-labelledby="goal-status-title">
         <div class="panel-heading">
           <div>
-            <p class="micro-label">Primary denominator</p>
-            <h2 id="goal-status-title">What happened across goal periods?</h2>
-            <p>Each period is one agent working under one recorded goal. Categories are mutually exclusive.</p>
+            <p class="micro-label">Final-audit outcome</p>
+            <h2 id="goal-status-title">Which goal periods contain confirmed drift?</h2>
+            <p>Each period is one agent working under one recorded goal. Categories are mutually exclusive and use the final confirmed-episode export.</p>
           </div>
         </div>
         <div class="status-layout">
-          <div class="donut" role="img" aria-label="Of 589 goal periods, 195 have confirmed drift, 209 are strict non-drift, and 185 remain unresolved."></div>
+          <div class="donut" role="img" aria-label="Of 589 goal periods, 195 contain confirmed drift and 394 contain no confirmed drift episode."></div>
           <div>
             <div class="status-row">
               <i class="status-dot" style="background:var(--rust)"></i>
-              <span class="status-name">Confirmed drift<span class="status-explain">At least one Stage 2 confirmed episode.</span></span>
+              <span class="status-name">Contains confirmed drift<span class="status-explain">At least one episode appears in the final audited export.</span></span>
               <span class="status-number"><strong>195</strong>33.1%</span>
             </div>
             <div class="status-row">
               <i class="status-dot" style="background:var(--green)"></i>
-              <span class="status-name">Strict non-drift<span class="status-explain">Every analyzed day was Stage 1 non-drift and no Stage 2 episode was confirmed.</span></span>
-              <span class="status-number"><strong>209</strong>35.5%</span>
-            </div>
-            <div class="status-row">
-              <i class="status-dot" style="background:var(--unknown)"></i>
-              <span class="status-name">Still unresolved<span class="status-explain">No confirmed episode, but at least one day was routed as drift or undefined.</span></span>
-              <span class="status-number"><strong>185</strong>31.4%</span>
+              <span class="status-name">No confirmed drift episode<span class="status-explain">No episode appears in the final audited export; this does not assert that every action was on-goal.</span></span>
+              <span class="status-number"><strong>394</strong>66.9%</span>
             </div>
           </div>
         </div>
@@ -542,13 +536,13 @@
         <div class="panel-heading">
           <div>
             <p class="micro-label">Evidence health</p>
-            <h2 id="quality-title">How resolved is the audit?</h2>
-            <p>Coverage state applies to all Stage 2 windows; elapsed-span quality applies to the 585 confirmed episodes.</p>
+            <h2 id="quality-title">How complete is the supporting evidence?</h2>
+            <p>All 585 exported episodes have a resolved confirmed-drift decision. The measures below describe record and temporal-boundary completeness.</p>
           </div>
         </div>
 
         <div class="quality-block">
-          <div class="quality-label"><span>Stage 2 window coverage</span><span>1,225 windows</span></div>
+          <div class="quality-label"><span>Stage 2 record completeness</span><span>1,225 windows</span></div>
           <div class="stack" aria-label="823 final, 26 partial, 376 incomplete Stage 2 windows">
             <span style="width:67.2%;background:var(--green)"></span>
             <span style="width:2.1%;background:var(--amber)"></span>
@@ -558,6 +552,18 @@
             <span><i style="background:var(--green)"></i>823 final</span>
             <span><i style="background:var(--amber)"></i>26 partial</span>
             <span><i style="background:var(--unknown)"></i>376 incomplete</span>
+          </div>
+        </div>
+
+        <div class="quality-block">
+          <div class="quality-label"><span>Confirmed-episode record completeness</span><span>585 episodes</span></div>
+          <div class="stack" aria-label="267 complete episodes and 318 incomplete but reusable episodes; every episode has a resolved confirmed-drift decision">
+            <span style="width:45.6%;background:var(--green)"></span>
+            <span style="width:54.4%;background:var(--amber)"></span>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--green)"></i>267 complete</span>
+            <span><i style="background:var(--amber)"></i>318 incomplete but reusable</span>
           </div>
         </div>
 
@@ -632,10 +638,10 @@
         </div>
         <div class="definition-grid">
           <div class="definition"><strong>Agent-day</strong>One agent’s observed activity on one calendar day. This is the unit classified in Stage 1.</div>
-          <div class="definition"><strong>Goal period</strong>All analyzed days for one agent under the same recorded goal. It is the denominator used for the 33.1% confirmed-drift share.</div>
+          <div class="definition"><strong>Goal period</strong>All analyzed days for one agent under the same recorded goal. It is the denominator used for the 33.1% share containing confirmed drift.</div>
           <div class="definition"><strong>Confirmed episode</strong>A bounded or still-ongoing interval accepted by Stage 2 as goal drift, with a recorded onset, activity narrative, and supporting evidence.</div>
         </div>
-        <p class="source-note">SOURCE SNAPSHOT · Stage 1 B-full (finalized Oct 4, 2026) · Final-audit checkpoint (Oct 6, 2026) · 585 confirmed episodes · Goal-period grouping normalizes recorded goal text per agent · Read-only research prototype</p>
+        <p class="source-note">SOURCE SNAPSHOT · Stage 1 B-full (finalized Oct 4, 2026) · Final audited confirmed-episode export (Oct 6, 2026) · 585 confirmed episodes · Goal-period grouping normalizes recorded goal text per agent · Read-only research prototype</p>
       </section>
     </main>
   </div>
