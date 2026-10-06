@@ -229,9 +229,9 @@
       height: 180px;
       border-radius: 50%;
       background: conic-gradient(
-        var(--rust) 0 14.60%,
-        var(--green) 14.60% 53.31%,
-        var(--unknown) 53.31% 100%
+        var(--rust) 0 33.11%,
+        var(--green) 33.11% 68.59%,
+        var(--unknown) 68.59% 100%
       );
     }
 
@@ -357,7 +357,7 @@
 
     .timeline-chart {
       display: grid;
-      grid-template-columns: repeat(18, minmax(18px, 1fr));
+      grid-template-columns: repeat(19, minmax(18px, 1fr));
       gap: 8px;
       align-items: end;
       height: 220px;
@@ -434,7 +434,7 @@
 
     <div class="provisional-note">
       <strong>Read first</strong>
-      <span>This is a pipeline snapshot, not a population-level model leaderboard. Agents have different amounts of exposure, and 567 of 1,225 Stage 2 windows are partial or incomplete. “No confirmed drift” therefore does not necessarily mean “confirmed non-drift.”</span>
+      <span>This is a pipeline snapshot, not a population-level model leaderboard. Agents have different amounts of exposure, and 402 of 1,225 Stage 2 windows are partial or incomplete. “No confirmed drift” therefore does not necessarily mean “confirmed non-drift.”</span>
     </div>
 
     <section class="scope-grid" aria-label="Audit coverage">
@@ -455,8 +455,8 @@
       </article>
       <article class="metric-card">
         <p class="micro-label">Confirmed findings</p>
-        <span class="metric-value">143</span>
-        <span class="metric-detail">drift episodes in 86 goal periods and 27 agents</span>
+        <span class="metric-value">585</span>
+        <span class="metric-detail">drift episodes in 195 goal periods and 39 agents</span>
       </article>
     </section>
 
@@ -470,22 +470,22 @@
           </div>
         </div>
         <div class="status-layout">
-          <div class="donut" role="img" aria-label="Of 589 goal periods, 86 have confirmed drift, 228 are strict non-drift, and 275 remain unresolved."></div>
+          <div class="donut" role="img" aria-label="Of 589 goal periods, 195 have confirmed drift, 209 are strict non-drift, and 185 remain unresolved."></div>
           <div>
             <div class="status-row">
               <i class="status-dot" style="background:var(--rust)"></i>
               <span class="status-name">Confirmed drift<span class="status-explain">At least one Stage 2 confirmed episode.</span></span>
-              <span class="status-number"><strong>86</strong>14.6%</span>
+              <span class="status-number"><strong>195</strong>33.1%</span>
             </div>
             <div class="status-row">
               <i class="status-dot" style="background:var(--green)"></i>
               <span class="status-name">Strict non-drift<span class="status-explain">Every analyzed day was Stage 1 non-drift and no Stage 2 episode was confirmed.</span></span>
-              <span class="status-number"><strong>228</strong>38.7%</span>
+              <span class="status-number"><strong>209</strong>35.5%</span>
             </div>
             <div class="status-row">
               <i class="status-dot" style="background:var(--unknown)"></i>
               <span class="status-name">Still unresolved<span class="status-explain">No confirmed episode, but at least one day was routed as drift or undefined.</span></span>
-              <span class="status-number"><strong>275</strong>46.7%</span>
+              <span class="status-number"><strong>185</strong>31.4%</span>
             </div>
           </div>
         </div>
@@ -510,11 +510,11 @@
           </div>
           <div class="funnel-step" style="--step-color:var(--amber)">
             <span class="funnel-value">1,225</span><span class="funnel-label">Stage 2 review windows</span>
-            <span class="funnel-note">658 final · 37 partial · 530 incomplete</span>
+            <span class="funnel-note">823 final · 26 partial · 376 incomplete</span>
           </div>
           <div class="funnel-step" style="--step-color:var(--rust)">
-            <span class="funnel-value">143</span><span class="funnel-label">confirmed episodes</span>
-            <span class="funnel-note">140 source windows before reconciliation</span>
+            <span class="funnel-value">585</span><span class="funnel-label">confirmed episodes</span>
+            <span class="funnel-note">550 source windows before reconciliation</span>
           </div>
         </div>
       </section>
@@ -534,7 +534,7 @@
         <div class="ranking" id="ranking" aria-live="polite"></div>
         <div class="coverage-callout">
           <span>Agents with ≥1 confirmed episode</span>
-          <span><strong>27</strong> of 52 · 51.9%</span>
+          <span><strong>39</strong> of 52 · 75.0%</span>
         </div>
       </section>
 
@@ -543,49 +543,51 @@
           <div>
             <p class="micro-label">Evidence health</p>
             <h2 id="quality-title">How resolved is the audit?</h2>
-            <p>Coverage state applies to all Stage 2 windows; elapsed-span quality applies to the 143 confirmed episodes.</p>
+            <p>Coverage state applies to all Stage 2 windows; elapsed-span quality applies to the 585 confirmed episodes.</p>
           </div>
         </div>
 
         <div class="quality-block">
           <div class="quality-label"><span>Stage 2 window coverage</span><span>1,225 windows</span></div>
-          <div class="stack" aria-label="658 final, 37 partial, 530 incomplete Stage 2 windows">
-            <span style="width:53.7%;background:var(--green)"></span>
-            <span style="width:3.0%;background:var(--amber)"></span>
-            <span style="width:43.3%;background:var(--unknown)"></span>
+          <div class="stack" aria-label="823 final, 26 partial, 376 incomplete Stage 2 windows">
+            <span style="width:67.2%;background:var(--green)"></span>
+            <span style="width:2.1%;background:var(--amber)"></span>
+            <span style="width:30.7%;background:var(--unknown)"></span>
           </div>
           <div class="legend">
-            <span><i style="background:var(--green)"></i>658 final</span>
-            <span><i style="background:var(--amber)"></i>37 partial</span>
-            <span><i style="background:var(--unknown)"></i>530 incomplete</span>
+            <span><i style="background:var(--green)"></i>823 final</span>
+            <span><i style="background:var(--amber)"></i>26 partial</span>
+            <span><i style="background:var(--unknown)"></i>376 incomplete</span>
           </div>
         </div>
 
         <div class="quality-block">
-          <div class="quality-label"><span>Confirmed-episode elapsed span</span><span>143 episodes</span></div>
-          <div class="stack" aria-label="27 exact, 41 lower-bound, and 75 unavailable elapsed spans">
-            <span style="width:18.9%;background:var(--green)"></span>
-            <span style="width:28.7%;background:var(--amber)"></span>
-            <span style="width:52.4%;background:var(--rust-soft)"></span>
+          <div class="quality-label"><span>Confirmed-episode elapsed span</span><span>585 episodes</span></div>
+          <div class="stack" aria-label="67 exact, 81 lower-bound, and 437 unavailable elapsed spans">
+            <span style="width:11.5%;background:var(--green)"></span>
+            <span style="width:13.8%;background:var(--amber)"></span>
+            <span style="width:74.7%;background:var(--rust-soft)"></span>
           </div>
           <div class="legend">
-            <span><i style="background:var(--green)"></i>27 exact wall-clock spans</span>
-            <span><i style="background:var(--amber)"></i>41 lower bound</span>
-            <span><i style="background:var(--rust-soft)"></i>75 unavailable</span>
+            <span><i style="background:var(--green)"></i>67 exact wall-clock spans</span>
+            <span><i style="background:var(--amber)"></i>81 lower bound</span>
+            <span><i style="background:var(--rust-soft)"></i>437 unavailable</span>
           </div>
         </div>
 
         <div class="quality-block">
-          <div class="quality-label"><span>Observed episode ending</span><span>143 episodes</span></div>
-          <div class="stack" aria-label="33 returned to goal, 14 ended with the assignment, and 96 were ongoing at evidence end">
-            <span style="width:23.1%;background:var(--green)"></span>
-            <span style="width:9.8%;background:var(--blue)"></span>
-            <span style="width:67.1%;background:var(--unknown)"></span>
+          <div class="quality-label"><span>Observed episode ending</span><span>585 episodes</span></div>
+          <div class="stack" aria-label="109 returned to goal, 55 ended with the assignment, 348 were ongoing at evidence end, and 73 had an unknown outcome">
+            <span style="width:18.6%;background:var(--green)"></span>
+            <span style="width:9.4%;background:var(--blue)"></span>
+            <span style="width:59.5%;background:var(--unknown)"></span>
+            <span style="width:12.5%;background:var(--rust-soft)"></span>
           </div>
           <div class="legend">
-            <span><i style="background:var(--green)"></i>33 returned</span>
-            <span><i style="background:var(--blue)"></i>14 assignment ended</span>
-            <span><i style="background:var(--unknown)"></i>96 still ongoing when evidence ended</span>
+            <span><i style="background:var(--green)"></i>109 returned</span>
+            <span><i style="background:var(--blue)"></i>55 assignment ended</span>
+            <span><i style="background:var(--unknown)"></i>348 still ongoing when evidence ended</span>
+            <span><i style="background:var(--rust-soft)"></i>73 outcome unknown</span>
           </div>
         </div>
       </section>
@@ -598,25 +600,26 @@
             <p>Monthly episode counts reflect changing agents, goals, and evidence coverage; they should not be read as a controlled trend.</p>
           </div>
         </div>
-        <div class="timeline-chart" role="img" aria-label="Monthly confirmed episode counts from April 2025 through September 2026">
-          <div class="month"><span class="month-count">5</span><span class="month-bar" style="height:22%"></span><span class="month-label">Apr<br>’25</span></div>
-          <div class="month"><span class="month-count">4</span><span class="month-bar" style="height:17%"></span><span class="month-label">May</span></div>
-          <div class="month"><span class="month-count">2</span><span class="month-bar" style="height:9%"></span><span class="month-label">Jun</span></div>
-          <div class="month"><span class="month-count">3</span><span class="month-bar" style="height:13%"></span><span class="month-label">Jul</span></div>
-          <div class="month"><span class="month-count">1</span><span class="month-bar" style="height:4%"></span><span class="month-label">Aug</span></div>
-          <div class="month"><span class="month-count">10</span><span class="month-bar" style="height:43%"></span><span class="month-label">Sep</span></div>
-          <div class="month"><span class="month-count">9</span><span class="month-bar" style="height:39%"></span><span class="month-label">Oct</span></div>
-          <div class="month"><span class="month-count">13</span><span class="month-bar" style="height:57%"></span><span class="month-label">Nov</span></div>
-          <div class="month"><span class="month-count">1</span><span class="month-bar" style="height:4%"></span><span class="month-label">Dec</span></div>
-          <div class="month"><span class="month-count">1</span><span class="month-bar" style="height:4%"></span><span class="month-label">Jan<br>’26</span></div>
-          <div class="month"><span class="month-count">3</span><span class="month-bar" style="height:13%"></span><span class="month-label">Feb</span></div>
-          <div class="month"><span class="month-count">4</span><span class="month-bar" style="height:17%"></span><span class="month-label">Mar</span></div>
-          <div class="month"><span class="month-count">2</span><span class="month-bar" style="height:9%"></span><span class="month-label">Apr</span></div>
-          <div class="month"><span class="month-count">18</span><span class="month-bar" style="height:78%"></span><span class="month-label">May</span></div>
-          <div class="month"><span class="month-count">10</span><span class="month-bar" style="height:43%"></span><span class="month-label">Jun</span></div>
-          <div class="month"><span class="month-count">17</span><span class="month-bar" style="height:74%"></span><span class="month-label">Jul</span></div>
-          <div class="month"><span class="month-count">23</span><span class="month-bar" style="height:100%"></span><span class="month-label">Aug</span></div>
-          <div class="month"><span class="month-count">17</span><span class="month-bar" style="height:74%"></span><span class="month-label">Sep</span></div>
+        <div class="timeline-chart" role="img" aria-label="Monthly confirmed episode counts from April 2025 through October 2026">
+          <div class="month"><span class="month-count">7</span><span class="month-bar" style="height:6%"></span><span class="month-label">Apr<br>’25</span></div>
+          <div class="month"><span class="month-count">14</span><span class="month-bar" style="height:13%"></span><span class="month-label">May</span></div>
+          <div class="month"><span class="month-count">8</span><span class="month-bar" style="height:7%"></span><span class="month-label">Jun</span></div>
+          <div class="month"><span class="month-count">7</span><span class="month-bar" style="height:6%"></span><span class="month-label">Jul</span></div>
+          <div class="month"><span class="month-count">4</span><span class="month-bar" style="height:4%"></span><span class="month-label">Aug</span></div>
+          <div class="month"><span class="month-count">39</span><span class="month-bar" style="height:36%"></span><span class="month-label">Sep</span></div>
+          <div class="month"><span class="month-count">19</span><span class="month-bar" style="height:18%"></span><span class="month-label">Oct</span></div>
+          <div class="month"><span class="month-count">32</span><span class="month-bar" style="height:30%"></span><span class="month-label">Nov</span></div>
+          <div class="month"><span class="month-count">5</span><span class="month-bar" style="height:5%"></span><span class="month-label">Dec</span></div>
+          <div class="month"><span class="month-count">1</span><span class="month-bar" style="height:1%"></span><span class="month-label">Jan<br>’26</span></div>
+          <div class="month"><span class="month-count">9</span><span class="month-bar" style="height:8%"></span><span class="month-label">Feb</span></div>
+          <div class="month"><span class="month-count">14</span><span class="month-bar" style="height:13%"></span><span class="month-label">Mar</span></div>
+          <div class="month"><span class="month-count">11</span><span class="month-bar" style="height:10%"></span><span class="month-label">Apr</span></div>
+          <div class="month"><span class="month-count">44</span><span class="month-bar" style="height:41%"></span><span class="month-label">May</span></div>
+          <div class="month"><span class="month-count">62</span><span class="month-bar" style="height:57%"></span><span class="month-label">Jun</span></div>
+          <div class="month"><span class="month-count">105</span><span class="month-bar" style="height:97%"></span><span class="month-label">Jul</span></div>
+          <div class="month"><span class="month-count">108</span><span class="month-bar" style="height:100%"></span><span class="month-label">Aug</span></div>
+          <div class="month"><span class="month-count">95</span><span class="month-bar" style="height:88%"></span><span class="month-label">Sep</span></div>
+          <div class="month"><span class="month-count">1</span><span class="month-bar" style="height:1%"></span><span class="month-label">Oct</span></div>
         </div>
       </section>
 
@@ -629,35 +632,35 @@
         </div>
         <div class="definition-grid">
           <div class="definition"><strong>Agent-day</strong>One agent’s observed activity on one calendar day. This is the unit classified in Stage 1.</div>
-          <div class="definition"><strong>Goal period</strong>All analyzed days for one agent under the same recorded goal. It is the denominator used for the 14.6% confirmed-drift share.</div>
+          <div class="definition"><strong>Goal period</strong>All analyzed days for one agent under the same recorded goal. It is the denominator used for the 33.1% confirmed-drift share.</div>
           <div class="definition"><strong>Confirmed episode</strong>A bounded or still-ongoing interval accepted by Stage 2 as goal drift, with a recorded onset, activity narrative, and supporting evidence.</div>
         </div>
-        <p class="source-note">SOURCE SNAPSHOT · Stage 1 B-full (finalized Oct 4, 2026) · Stage 2 provisional export (Oct 6, 2026) · 143 confirmed episodes · Goal-period grouping normalizes recorded goal text per agent · Read-only research prototype</p>
+        <p class="source-note">SOURCE SNAPSHOT · Stage 1 B-full (finalized Oct 4, 2026) · Final-audit checkpoint (Oct 6, 2026) · 585 confirmed episodes · Goal-period grouping normalizes recorded goal text per agent · Read-only research prototype</p>
       </section>
     </main>
   </div>
 
   <script>
     const episodeRanking = [
-      { name: "DeepSeek-V3.2", value: 21, detail: "21" },
-      { name: "Claude Haiku 4.5", value: 14, detail: "14" },
-      { name: "Claude 3.7 Sonnet", value: 12, detail: "12" },
-      { name: "GPT-5", value: 12, detail: "12" },
-      { name: "Claude Opus 4.5", value: 10, detail: "10" },
-      { name: "Claude Fable 5", value: 9, detail: "9" },
-      { name: "Claude Sonnet 4.6", value: 7, detail: "7" },
-      { name: "o3", value: 7, detail: "7" }
+      { name: "DeepSeek-V3.2", value: 75, detail: "75" },
+      { name: "GPT-5", value: 54, detail: "54" },
+      { name: "Claude Haiku 4.5", value: 42, detail: "42" },
+      { name: "Gemini 2.5 Pro", value: 39, detail: "39" },
+      { name: "GPT-5.2", value: 32, detail: "32" },
+      { name: "o3", value: 32, detail: "32" },
+      { name: "Claude Fable 5", value: 25, detail: "25" },
+      { name: "Gemini 3.1 Pro", value: 24, detail: "24" }
     ];
 
     const rateRanking = [
-      { name: "Claude Opus 4.1", value: 33.3, detail: "4 / 12" },
-      { name: "Claude 3.7 Sonnet", value: 29.0, detail: "9 / 31" },
-      { name: "Claude Opus 4.5", value: 25.0, detail: "8 / 32" },
-      { name: "Claude Sonnet 4.6", value: 25.0, detail: "5 / 20" },
-      { name: "Claude Haiku 4.5", value: 23.5, detail: "8 / 34" },
-      { name: "Gemini 3.5 Flash", value: 20.0, detail: "2 / 10" },
-      { name: "o3", value: 20.0, detail: "4 / 20" },
-      { name: "Gemini 3.1 Pro", value: 17.6, detail: "3 / 17" }
+      { name: "o3", value: 75.0, detail: "15 / 20" },
+      { name: "Claude Sonnet 4.6", value: 55.0, detail: "11 / 20" },
+      { name: "Gemini 3.1 Pro", value: 52.9, detail: "9 / 17" },
+      { name: "Claude Opus 4.1", value: 50.0, detail: "6 / 12" },
+      { name: "GPT-5", value: 44.2, detail: "19 / 43" },
+      { name: "Gemini 2.5 Pro", value: 44.0, detail: "22 / 50" },
+      { name: "Grok 4", value: 40.0, detail: "4 / 10" },
+      { name: "GPT-5.4", value: 35.3, detail: "6 / 17" }
     ];
 
     const ranking = document.querySelector("#ranking");
