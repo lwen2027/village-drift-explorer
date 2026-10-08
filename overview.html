@@ -435,7 +435,7 @@
     }
   </style>
 </head>
-<body>
+<body class="data-loading">
   <div class="page-shell">
     <header class="site-header">
       <div>
@@ -707,112 +707,6 @@
     </main>
   </div>
 
-  <script>
-    const rankingData = {
-      maximization: {
-        episodes: [
-          { name: "DeepSeek-V3.2", value: 54, detail: "54" },
-          { name: "GPT-5", value: 27, detail: "27" },
-          { name: "Claude Fable 5", value: 24, detail: "24" },
-          { name: "GPT-5.2", value: 24, detail: "24" },
-          { name: "Claude Haiku 4.5", value: 22, detail: "22" },
-          { name: "GLM-5.2", value: 19, detail: "19" },
-          { name: "Gemini 3.5 Flash", value: 18, detail: "18" },
-          { name: "DeepSeek-V4-Pro", value: 15, detail: "15" }
-        ],
-        rate: [
-          { name: "DeepSeek-V3.2", value: 100, detail: "1 / 1" },
-          { name: "GPT-5", value: 100, detail: "1 / 1" },
-          { name: "Claude Fable 5", value: 100, detail: "1 / 1" },
-          { name: "GPT-5.2", value: 100, detail: "1 / 1" },
-          { name: "Claude Haiku 4.5", value: 100, detail: "1 / 1" },
-          { name: "GLM-5.2", value: 100, detail: "1 / 1" },
-          { name: "Gemini 3.5 Flash", value: 100, detail: "1 / 1" },
-          { name: "DeepSeek-V4-Pro", value: 100, detail: "1 / 1" }
-        ],
-        coverage: "<strong>28</strong> of 38 · 73.7%"
-      },
-      shared: {
-        episodes: [
-          { name: "Gemini 2.5 Pro", value: 38, detail: "38" },
-          { name: "o3", value: 32, detail: "32" },
-          { name: "GPT-5", value: 27, detail: "27" },
-          { name: "DeepSeek-V3.2", value: 21, detail: "21" },
-          { name: "Claude Haiku 4.5", value: 20, detail: "20" },
-          { name: "Claude Sonnet 4.6", value: 19, detail: "19" },
-          { name: "Claude 3.7 Sonnet", value: 17, detail: "17" },
-          { name: "Gemini 3.1 Pro", value: 13, detail: "13" }
-        ],
-        rate: [
-          { name: "o3", value: 75.0, detail: "15 / 20" },
-          { name: "Claude Sonnet 4.6", value: 50.0, detail: "10 / 20" },
-          { name: "Claude Opus 4.1", value: 50.0, detail: "6 / 12" },
-          { name: "Gemini 3.1 Pro", value: 47.1, detail: "8 / 17" },
-          { name: "GPT-5", value: 42.9, detail: "18 / 42" },
-          { name: "Gemini 2.5 Pro", value: 42.0, detail: "21 / 50" },
-          { name: "Grok 4", value: 40.0, detail: "4 / 10" },
-          { name: "Claude Haiku 4.5", value: 33.3, detail: "11 / 33" }
-        ],
-        coverage: "<strong>26</strong> of 52 · 50.0%"
-      }
-    };
-
-    const ranking = document.querySelector("#ranking");
-    const caption = document.querySelector("#ranking-caption");
-    const coverage = document.querySelector("#ranking-coverage");
-    const maximizationRankingToggle = document.querySelector("#maximization-ranking-toggle");
-    const sharedRankingToggle = document.querySelector("#shared-ranking-toggle");
-    const episodeToggle = document.querySelector("#episodes-toggle");
-    const rateToggle = document.querySelector("#rate-toggle");
-    let rankingRegime = "maximization";
-    let rankingMode = "episodes";
-
-    function renderRanking() {
-      const data = rankingData[rankingRegime][rankingMode];
-      const max = Math.max(...data.map((row) => row.value));
-      ranking.replaceChildren(...data.map((row, index) => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "rank-row";
-
-        const name = document.createElement("span");
-        name.className = "rank-name";
-        name.textContent = `${index + 1}. ${row.name}`;
-
-        const track = document.createElement("div");
-        track.className = "rank-track";
-        const fill = document.createElement("div");
-        fill.className = "rank-fill";
-        fill.style.width = `${(row.value / max) * 100}%`;
-        track.append(fill);
-
-        const value = document.createElement("span");
-        value.className = "rank-value";
-        value.textContent = rankingMode === "rate" ? `${row.value.toFixed(1)}%` : row.detail;
-        if (rankingMode === "rate") value.title = `${row.detail} observed goal windows`;
-
-        wrapper.append(name, track, value);
-        return wrapper;
-      }));
-
-      const isRate = rankingMode === "rate";
-      const isMaximization = rankingRegime === "maximization";
-      maximizationRankingToggle.setAttribute("aria-pressed", String(isMaximization));
-      sharedRankingToggle.setAttribute("aria-pressed", String(!isMaximization));
-      episodeToggle.setAttribute("aria-pressed", String(!isRate));
-      rateToggle.setAttribute("aria-pressed", String(isRate));
-      coverage.innerHTML = rankingData[rankingRegime].coverage;
-      caption.textContent = isRate
-        ? isMaximization
-          ? "Each agent has one individual maximization goal window, so agents with confirmed drift are tied at 1 / 1; order breaks ties by episode count."
-          : "Share of shared-goal windows with confirmed drift. Limited to agents with at least 10 observed shared-goal windows; numerator / denominator appears on hover."
-        : `Confirmed episodes during the ${isMaximization ? "individual-maximization" : "shared-goal"} period, without adjusting for exposure.`;
-    }
-
-    maximizationRankingToggle.addEventListener("click", () => { rankingRegime = "maximization"; renderRanking(); });
-    sharedRankingToggle.addEventListener("click", () => { rankingRegime = "shared"; renderRanking(); });
-    episodeToggle.addEventListener("click", () => { rankingMode = "episodes"; renderRanking(); });
-    rateToggle.addEventListener("click", () => { rankingMode = "rate"; renderRanking(); });
-    renderRanking();
-  </script>
+  <script type="module" src="./scripts/overview.js"></script>
 </body>
 </html>
