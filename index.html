@@ -769,6 +769,107 @@
       background: white;
     }
 
+    .episode-review-link {
+      margin-left: 7px;
+      cursor: pointer;
+    }
+
+    .episode-review-form {
+      display: grid;
+      gap: 13px;
+    }
+
+    .episode-review-form .summary-copy {
+      margin-bottom: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .review-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .review-field label {
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .review-field select,
+    .review-field input,
+    .review-field textarea {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      outline: none;
+      background: rgba(255,255,255,.48);
+      color: var(--ink);
+      font: inherit;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .review-field select,
+    .review-field input { height: 38px; padding: 7px 9px; }
+
+    .review-field textarea {
+      min-height: 116px;
+      resize: vertical;
+      padding: 9px;
+    }
+
+    .review-field select:focus,
+    .review-field input:focus,
+    .review-field textarea:focus {
+      border-color: var(--selected-agent, var(--green));
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--selected-agent, var(--green)) 18%, transparent);
+    }
+
+    .review-target-status {
+      min-height: 16px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .review-target-status.is-error { color: var(--rust); }
+
+    .review-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .review-draft-status {
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 9px;
+    }
+
+    .review-submit {
+      min-height: 38px;
+      padding: 9px 13px;
+      border: 1px solid var(--green);
+      border-radius: 6px;
+      background: var(--green);
+      color: #fffdf7;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .review-submit:hover:not(:disabled) { background: #29483c; }
+
+    .review-submit:disabled {
+      cursor: default;
+      opacity: .42;
+    }
+
     .panel-section {
       padding: 22px 24px;
       border-bottom: 1px solid var(--line);
@@ -1257,6 +1358,9 @@
       .scope-switcher { align-items: stretch; flex-direction: column; }
       .scope-options { display: grid; grid-template-columns: 1fr 1fr; }
       .scope-button { justify-content: space-between; }
+      .episode-review-link { margin-left: 0; }
+      .review-actions { align-items: stretch; flex-direction: column; }
+      .review-submit { width: 100%; }
     }
   </style>
 </head>
@@ -1318,6 +1422,19 @@
     }
     const auditBundle = await auditBundleResponse.json();
     const episodes = auditBundle.confirmed_episodes;
+    const reviewRepository = "lwen2027/village-drift-explorer";
+    const reviewCategoryLabels = {
+      general_correction: "General correction",
+      merge_episodes: "Merge episodes",
+      split_episode: "Split episode",
+      drift_verdict: "Drift decision",
+      time_boundaries: "Timing or boundaries",
+      goal_identity: "Goal or agent identity",
+      evidence: "Evidence or citation",
+      cause_mechanism: "Cause or mechanism",
+      episode_end: "Episode ending",
+      other: "Other"
+    };
     const auditDays = auditBundle.stage1_daily_verdicts.map((row) => row.day).filter(Boolean).sort();
     const auditReferenceEnd = `${auditDays.at(-1) || new Date().toISOString().slice(0, 10)}T23:59:59Z`;
     const maximizationStartDay = auditBundle.stage1_daily_verdicts
@@ -2263,6 +2380,187 @@
       return wrapper;
     }
 
+    function reviewEpisodeSnapshot(episode) {
+      return {
+        episode_id: episode.episode_id,
+        dataset_record_id: episode.dataset_record_id || null,
+        window_id: episode.window_id || null,
+        source_record: episode.source_record || null,
+        agent: episode.agent || null,
+        period: episode.period || null,
+        assigned_goal: episode.assigned_goal || null,
+        activity_start: episode.activity_start || null,
+        onset: episode.onset || null,
+        drift_end_status: episode.drift_end?.status || null,
+        drift_ended_at: episode.drift_end?.ended_at || null,
+        last_observed_drift_at: episode.drift_end?.last_observed_drift_at || null
+      };
+    }
+
+    function episodeFromReviewReference(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return null;
+      let episodeId = raw;
+      try {
+        const url = new URL(raw, location.href);
+        if (url.hash) episodeId = url.hash.slice(1);
+      } catch {
+        episodeId = raw;
+      }
+      episodeId = canonicalEpisodeId(episodeId.replace(/^#/, ""));
+      return allEpisodes.find((candidate) => candidate.episode_id === episodeId) || null;
+    }
+
+    function reviewIssueBody(episode, period, category, notes, mergeTarget) {
+      const currentSnapshot = reviewEpisodeSnapshot(episode);
+      const targetSnapshot = mergeTarget ? reviewEpisodeSnapshot(mergeTarget) : null;
+      const explorerUrl = `${location.origin}${location.pathname}?scope=${activeScope}#${episode.episode_id}`;
+      const context = {
+        schema_version: 1,
+        review_category: category,
+        explorer_url: explorerUrl,
+        dataset_generated_at: auditBundle.metadata?.generated_at || null,
+        dataset_schema_version: auditBundle.metadata?.schema_version || null,
+        current_episode: currentSnapshot,
+        merge_target_episode: targetSnapshot
+      };
+      const targetSummary = targetSnapshot
+        ? `\n- **Merge target:** \`${targetSnapshot.episode_id}\` · ${targetSnapshot.agent || "Unknown agent"} · ${targetSnapshot.onset || targetSnapshot.activity_start || "Unknown onset"}`
+        : "";
+
+      return `## Requested change\n\n**Category:** ${reviewCategoryLabels[category]}\n\n${notes.trim()}\n\n## Episode snapshot\n\n- **Episode:** \`${currentSnapshot.episode_id}\`\n- **Agent:** ${currentSnapshot.agent || period.agent}\n- **Assigned goal:** ${currentSnapshot.assigned_goal || period.goal}\n- **Current interval:** ${currentSnapshot.onset || currentSnapshot.activity_start || "Unknown"} to ${currentSnapshot.drift_ended_at || currentSnapshot.last_observed_drift_at || "evidence boundary"}\n- **Window:** \`${currentSnapshot.window_id || "Unavailable"}\`${targetSummary}\n- **Explorer:** ${explorerUrl}\n\n## Processing\n\n- [ ] Check the request against source evidence\n- [ ] Record an adjudication without overwriting the source record\n- [ ] Regenerate and validate the final export\n- [ ] Publish the updated explorer and link the commit\n\n<details>\n<summary>Machine-readable review context</summary>\n\n\`\`\`json\n${JSON.stringify(context, null, 2)}\n\`\`\`\n\n</details>`;
+    }
+
+    function renderEpisodeReview(episode, period) {
+      const wrapper = node("section", "panel-section");
+      wrapper.id = `episode-review-${episode.episode_id}`;
+      wrapper.append(node("h3", "", "Request a data correction"));
+
+      const form = node("form", "episode-review-form");
+      const draftKey = `village-drift-review:${episode.episode_id}`;
+      let draft = {};
+      try { draft = JSON.parse(localStorage.getItem(draftKey) || "{}"); } catch { draft = {}; }
+
+      const categoryField = node("div", "review-field");
+      const categoryLabel = node("label", "", "Change type");
+      const category = node("select");
+      category.id = `review-category-${episode.episode_id}`;
+      categoryLabel.htmlFor = category.id;
+      Object.entries(reviewCategoryLabels).forEach(([value, label]) => {
+        const option = node("option", "", label);
+        option.value = value;
+        category.append(option);
+      });
+      category.value = reviewCategoryLabels[draft.category] ? draft.category : "general_correction";
+      categoryField.append(categoryLabel, category);
+
+      const mergeField = node("div", "review-field");
+      const mergeLabel = node("label", "", "Episode to merge with");
+      const mergeInput = node("input");
+      mergeInput.type = "text";
+      mergeInput.id = `review-merge-target-${episode.episode_id}`;
+      mergeInput.placeholder = "Paste an episode ID or explorer URL";
+      mergeInput.autocomplete = "off";
+      mergeInput.value = draft.mergeTarget || "";
+      const mergeOptions = node("datalist");
+      mergeOptions.id = `review-merge-options-${episode.episode_id}`;
+      mergeInput.setAttribute("list", mergeOptions.id);
+      allEpisodes
+        .filter((candidate) => candidate.episode_id !== episode.episode_id && candidate.agent === episode.agent)
+        .sort((left, right) => String(left.onset || left.activity_start || "").localeCompare(String(right.onset || right.activity_start || "")))
+        .forEach((candidate) => {
+          const option = node("option");
+          option.value = candidate.episode_id;
+          option.label = `${candidate.onset || candidate.activity_start || "Unknown onset"} · ${String(candidate.activity || "").slice(0, 80)}`;
+          mergeOptions.append(option);
+        });
+      mergeLabel.htmlFor = mergeInput.id;
+      const mergeStatus = node("span", "review-target-status");
+      mergeField.append(mergeLabel, mergeInput, mergeOptions, mergeStatus);
+
+      const notesField = node("div", "review-field");
+      const notesLabel = node("label", "", "Review comment");
+      const notes = node("textarea");
+      notes.id = `review-notes-${episode.episode_id}`;
+      notes.placeholder = "Describe what is wrong and what should change. Include any evidence or uncertainty you noticed.";
+      notes.value = draft.notes || "";
+      notesLabel.htmlFor = notes.id;
+      notesField.append(notesLabel, notes);
+
+      const actions = node("div", "review-actions");
+      const draftStatus = node("span", "review-draft-status", draft.notes || draft.mergeTarget ? "Draft restored" : "Draft saves locally");
+      const submit = node("button", "review-submit", "Open GitHub issue");
+      submit.type = "submit";
+      actions.append(draftStatus, submit);
+
+      function saveDraft() {
+        try {
+          localStorage.setItem(draftKey, JSON.stringify({
+            category: category.value,
+            mergeTarget: mergeInput.value,
+            notes: notes.value
+          }));
+          draftStatus.textContent = "Draft saved";
+        } catch {
+          draftStatus.textContent = "Local draft unavailable";
+        }
+      }
+
+      function updateReviewState() {
+        const isMerge = category.value === "merge_episodes";
+        mergeField.hidden = !isMerge;
+        const target = isMerge ? episodeFromReviewReference(mergeInput.value) : null;
+        const sameEpisode = target?.episode_id === episode.episode_id;
+        if (!isMerge) {
+          mergeStatus.textContent = "";
+          mergeStatus.classList.remove("is-error");
+        } else if (!mergeInput.value.trim()) {
+          mergeStatus.textContent = "A second episode is required.";
+          mergeStatus.classList.add("is-error");
+        } else if (!target) {
+          mergeStatus.textContent = "No episode in this dataset matches that ID or URL.";
+          mergeStatus.classList.add("is-error");
+        } else if (sameEpisode) {
+          mergeStatus.textContent = "Choose a different episode.";
+          mergeStatus.classList.add("is-error");
+        } else {
+          mergeStatus.textContent = `${target.agent || "Unknown agent"} · ${target.onset || target.activity_start || "Unknown onset"}`;
+          mergeStatus.classList.remove("is-error");
+        }
+        submit.disabled = !notes.value.trim() || (isMerge && (!target || sameEpisode));
+      }
+
+      [category, mergeInput, notes].forEach((input) => {
+        input.addEventListener("input", () => {
+          saveDraft();
+          updateReviewState();
+        });
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        updateReviewState();
+        if (submit.disabled) return;
+        const mergeTarget = category.value === "merge_episodes"
+          ? episodeFromReviewReference(mergeInput.value)
+          : null;
+        const categoryName = reviewCategoryLabels[category.value];
+        const shortId = episode.episode_id.replace(/^episode-/, "").slice(0, 16);
+        const title = `[Episode review] ${categoryName}: ${episode.agent || period.agent} · ${String(episode.onset || episode.activity_start || "unknown").slice(0, 10)} · ${shortId}`;
+        const body = reviewIssueBody(episode, period, category.value, notes.value, mergeTarget);
+        const issueUrl = new URL(`https://github.com/${reviewRepository}/issues/new`);
+        issueUrl.searchParams.set("title", title);
+        issueUrl.searchParams.set("body", body);
+        issueUrl.searchParams.set("labels", "episode-review");
+        window.open(issueUrl, "_blank", "noopener,noreferrer");
+      });
+
+      form.append(categoryField, mergeField, notesField, actions);
+      wrapper.append(form);
+      updateReviewState();
+      return wrapper;
+    }
+
     function renderPanel() {
       const period = goalPeriods[selectedIndex];
       const episode = detailedEpisodeForPeriod(period);
@@ -2317,6 +2615,14 @@
         villageLink.setAttribute("aria-label", `Open ${period.agent} near the drift onset in AI Village in a new tab`);
         hero.append(villageLink);
       }
+      if (episode) {
+        const reviewLink = node("button", "village-link episode-review-link", "Review this episode");
+        reviewLink.type = "button";
+        reviewLink.addEventListener("click", () => {
+          document.querySelector(`#episode-review-${episode.episode_id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+        hero.append(reviewLink);
+      }
       panel.append(hero);
       panel.append(renderGoalContext(period, episode));
 
@@ -2328,6 +2634,7 @@
         panel.append(renderMetadata(episode));
 
         if (episode.dissent) panel.append(section("Alternative interpretation", episode.dissent));
+        panel.append(renderEpisodeReview(episode, period));
       } else {
         panel.append(section(
           "No confirmed episode",
@@ -2390,6 +2697,7 @@
     maximizationScopeButton.addEventListener("click", () => selectScope("maximization"));
     villageScopeButton.addEventListener("click", () => selectScope("village"));
     document.addEventListener("keydown", (event) => {
+      if (event.target.closest("input, textarea, select")) return;
       if (event.key === "ArrowLeft") selectPeriod(selectedIndex - 1);
       if (event.key === "ArrowRight") selectPeriod(selectedIndex + 1);
       if (event.key === "Escape" && openMenuPeriodId) {
