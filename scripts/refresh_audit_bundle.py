@@ -11,12 +11,16 @@ import shutil
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-DEFAULT_SOURCE = (
-    ROOT.parent
-    / "spar-village-drift"
-    / "artifacts"
-    / "final"
-    / "second_audit_v2.json"
+DEFAULT_SOURCE_CANDIDATES = (
+    # Explorer cloned inside spar-village-drift/artifacts/current.
+    ROOT.parents[2] / "artifacts" / "final" / "second_audit_v2.json",
+    # Explorer and spar-village-drift checked out as siblings.
+    ROOT.parent / "spar-village-drift" / "artifacts" / "final"
+    / "second_audit_v2.json",
+)
+DEFAULT_SOURCE = next(
+    (path for path in DEFAULT_SOURCE_CANDIDATES if path.exists()),
+    DEFAULT_SOURCE_CANDIDATES[-1],
 )
 DEFAULT_OUTPUT = ROOT / "data" / "second_audit_v2.json"
 
@@ -125,9 +129,38 @@ def main() -> None:
     ]
     if None in record_ids or len(record_ids) != len(set(record_ids)):
         raise SystemExit("episode dataset_record_id values must be present and unique")
+    episode_ids = [row.get("episode_id") for row in bundle["confirmed_episodes"]]
+    if None in episode_ids or len(episode_ids) != len(set(episode_ids)):
+        raise SystemExit("episode_id values must be present and unique")
     if any(row.get("review_decision_resolved") is not True
            for row in bundle["confirmed_episodes"]):
         raise SystemExit("every exported episode must have a resolved decision")
+    if any(not row.get("agent") or not row.get("activity")
+           or not row.get("assigned_goal")
+           for row in bundle["confirmed_episodes"]):
+        raise SystemExit("every episode must identify its agent, activity, and goal")
+    if any(row.get("period") not in {"shared_goal", "goal_maximization"}
+           for row in bundle["confirmed_episodes"]):
+        raise SystemExit("every episode must have a recognized goal period")
+    repaired_ids = [
+        row["repaired_candidate_dataset_record_id"]
+        for row in bundle["confirmed_episodes"]
+        if row.get("repaired_candidate_dataset_record_id")
+    ]
+    if len(repaired_ids) != len(set(repaired_ids)) or any(
+            not value.startswith("v2-record-") for value in repaired_ids):
+        raise SystemExit("repaired candidate record ids must be valid and unique")
+    expected_counts = {
+        "stage1_daily_verdicts": len(bundle["stage1_daily_verdicts"]),
+        "window_verdicts": len(bundle["window_verdicts"]),
+        "episode_records": len(bundle["confirmed_episodes"]),
+    }
+    for field, expected in expected_counts.items():
+        if bundle["metadata"].get(field) != expected:
+            raise SystemExit(
+                f"metadata {field} does not match bundle rows: "
+                f"{bundle['metadata'].get(field)!r} != {expected}"
+            )
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = args.output.with_suffix(args.output.suffix + ".tmp")
