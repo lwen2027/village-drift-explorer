@@ -769,11 +769,6 @@
       background: white;
     }
 
-    .episode-review-link {
-      margin-left: 7px;
-      cursor: pointer;
-    }
-
     .episode-review-form {
       display: grid;
       gap: 13px;
@@ -790,7 +785,10 @@
       gap: 6px;
     }
 
-    .review-field label {
+    .review-field[hidden] { display: none; }
+
+    .review-field > label,
+    .review-field-label {
       color: var(--muted);
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 9px;
@@ -837,6 +835,70 @@
     }
 
     .review-target-status.is-error { color: var(--rust); }
+
+    .review-merge-options {
+      display: grid;
+      max-height: 230px;
+      overflow-y: auto;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background: rgba(255,255,255,.34);
+    }
+
+    .review-field .review-merge-option {
+      display: grid;
+      grid-template-columns: 17px minmax(0, 1fr);
+      align-items: start;
+      gap: 9px;
+      padding: 9px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.35;
+      text-transform: none;
+    }
+
+    .review-field .review-merge-option:last-child { border-bottom: 0; }
+    .review-field .review-merge-option:hover { background: rgba(255,255,255,.58); }
+    .review-field .review-merge-option:has(input:checked) { background: rgba(56, 90, 76, .11); }
+
+    .review-field .review-merge-option input {
+      width: 15px;
+      height: 15px;
+      margin: 1px 0 0;
+      padding: 0;
+      accent-color: var(--green);
+      box-shadow: none;
+    }
+
+    .review-merge-copy {
+      display: grid;
+      min-width: 0;
+      gap: 3px;
+    }
+
+    .review-merge-copy strong {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .review-merge-copy span {
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .review-merge-empty {
+      padding: 12px;
+      color: var(--muted);
+      font-size: 11px;
+    }
 
     .review-actions {
       display: flex;
@@ -1358,7 +1420,6 @@
       .scope-switcher { align-items: stretch; flex-direction: column; }
       .scope-options { display: grid; grid-template-columns: 1fr 1fr; }
       .scope-button { justify-content: space-between; }
-      .episode-review-link { margin-left: 0; }
       .review-actions { align-items: stretch; flex-direction: column; }
       .review-submit { width: 100%; }
     }
@@ -2397,35 +2458,21 @@
       };
     }
 
-    function episodeFromReviewReference(value) {
-      const raw = String(value || "").trim();
-      if (!raw) return null;
-      let episodeId = raw;
-      try {
-        const url = new URL(raw, location.href);
-        if (url.hash) episodeId = url.hash.slice(1);
-      } catch {
-        episodeId = raw;
-      }
-      episodeId = canonicalEpisodeId(episodeId.replace(/^#/, ""));
-      return allEpisodes.find((candidate) => candidate.episode_id === episodeId) || null;
-    }
-
-    function reviewIssueBody(episode, period, category, notes, mergeTarget) {
+    function reviewIssueBody(episode, period, category, notes, mergeTargets) {
       const currentSnapshot = reviewEpisodeSnapshot(episode);
-      const targetSnapshot = mergeTarget ? reviewEpisodeSnapshot(mergeTarget) : null;
+      const targetSnapshots = mergeTargets.map(reviewEpisodeSnapshot);
       const explorerUrl = `${location.origin}${location.pathname}?scope=${activeScope}#${episode.episode_id}`;
       const context = {
-        schema_version: 1,
+        schema_version: 2,
         review_category: category,
         explorer_url: explorerUrl,
         dataset_generated_at: auditBundle.metadata?.generated_at || null,
         dataset_schema_version: auditBundle.metadata?.schema_version || null,
         current_episode: currentSnapshot,
-        merge_target_episode: targetSnapshot
+        merge_target_episodes: targetSnapshots
       };
-      const targetSummary = targetSnapshot
-        ? `\n- **Merge target:** \`${targetSnapshot.episode_id}\` · ${targetSnapshot.agent || "Unknown agent"} · ${targetSnapshot.onset || targetSnapshot.activity_start || "Unknown onset"}`
+      const targetSummary = targetSnapshots.length
+        ? `\n- **Merge targets:**\n${targetSnapshots.map((target) => `  - \`${target.episode_id}\` · ${target.agent || "Unknown agent"} · ${target.onset || target.activity_start || "Unknown onset"}`).join("\n")}`
         : "";
 
       return `## Requested change\n\n**Category:** ${reviewCategoryLabels[category]}\n\n${notes.trim()}\n\n## Episode snapshot\n\n- **Episode:** \`${currentSnapshot.episode_id}\`\n- **Agent:** ${currentSnapshot.agent || period.agent}\n- **Assigned goal:** ${currentSnapshot.assigned_goal || period.goal}\n- **Current interval:** ${currentSnapshot.onset || currentSnapshot.activity_start || "Unknown"} to ${currentSnapshot.drift_ended_at || currentSnapshot.last_observed_drift_at || "evidence boundary"}\n- **Window:** \`${currentSnapshot.window_id || "Unavailable"}\`${targetSummary}\n- **Explorer:** ${explorerUrl}\n\n## Processing\n\n- [ ] Check the request against source evidence\n- [ ] Record an adjudication without overwriting the source record\n- [ ] Regenerate and validate the final export\n- [ ] Publish the updated explorer and link the commit\n\n<details>\n<summary>Machine-readable review context</summary>\n\n\`\`\`json\n${JSON.stringify(context, null, 2)}\n\`\`\`\n\n</details>`;
@@ -2455,28 +2502,35 @@
       categoryField.append(categoryLabel, category);
 
       const mergeField = node("div", "review-field");
-      const mergeLabel = node("label", "", "Episode to merge with");
-      const mergeInput = node("input");
-      mergeInput.type = "text";
-      mergeInput.id = `review-merge-target-${episode.episode_id}`;
-      mergeInput.placeholder = "Paste an episode ID or explorer URL";
-      mergeInput.autocomplete = "off";
-      mergeInput.value = draft.mergeTarget || "";
-      const mergeOptions = node("datalist");
-      mergeOptions.id = `review-merge-options-${episode.episode_id}`;
-      mergeInput.setAttribute("list", mergeOptions.id);
-      allEpisodes
+      const mergeLabel = node("span", "review-field-label", "Episodes to merge");
+      const mergeOptions = node("div", "review-merge-options");
+      const restoredTargetIds = new Set(Array.isArray(draft.mergeTargets) ? draft.mergeTargets : []);
+      if (draft.mergeTarget) {
+        restoredTargetIds.add(canonicalEpisodeId(String(draft.mergeTarget).split("#").at(-1)));
+      }
+      const mergeCandidates = allEpisodes
         .filter((candidate) => candidate.episode_id !== episode.episode_id && candidate.agent === episode.agent)
-        .sort((left, right) => String(left.onset || left.activity_start || "").localeCompare(String(right.onset || right.activity_start || "")))
-        .forEach((candidate) => {
-          const option = node("option");
-          option.value = candidate.episode_id;
-          option.label = `${candidate.onset || candidate.activity_start || "Unknown onset"} · ${String(candidate.activity || "").slice(0, 80)}`;
-          mergeOptions.append(option);
-        });
-      mergeLabel.htmlFor = mergeInput.id;
+        .sort((left, right) => String(left.onset || left.activity_start || "").localeCompare(String(right.onset || right.activity_start || "")));
+      mergeCandidates.forEach((candidate) => {
+        const option = node("label", "review-merge-option");
+        const checkbox = node("input");
+        checkbox.type = "checkbox";
+        checkbox.value = candidate.episode_id;
+        checkbox.checked = restoredTargetIds.has(candidate.episode_id);
+        const copy = node("span", "review-merge-copy");
+        copy.append(
+          node("strong", "", candidate.onset || candidate.activity_start || "Unknown onset"),
+          node("span", "", String(candidate.activity || candidate.episode_id).slice(0, 110))
+        );
+        option.append(checkbox, copy);
+        mergeOptions.append(option);
+      });
+      if (!mergeCandidates.length) {
+        mergeOptions.append(node("span", "review-merge-empty", "No other episodes are available for this agent."));
+      }
       const mergeStatus = node("span", "review-target-status");
-      mergeField.append(mergeLabel, mergeInput, mergeOptions, mergeStatus);
+      mergeField.append(mergeLabel, mergeOptions, mergeStatus);
+      const mergeCheckboxes = [...mergeOptions.querySelectorAll('input[type="checkbox"]')];
 
       const notesField = node("div", "review-field");
       const notesLabel = node("label", "", "Review comment");
@@ -2488,7 +2542,7 @@
       notesField.append(notesLabel, notes);
 
       const actions = node("div", "review-actions");
-      const draftStatus = node("span", "review-draft-status", draft.notes || draft.mergeTarget ? "Draft restored" : "Draft saves locally");
+      const draftStatus = node("span", "review-draft-status", draft.notes || restoredTargetIds.size ? "Draft restored" : "Draft saves locally");
       const submit = node("button", "review-submit", "Open GitHub issue");
       submit.type = "submit";
       actions.append(draftStatus, submit);
@@ -2497,7 +2551,7 @@
         try {
           localStorage.setItem(draftKey, JSON.stringify({
             category: category.value,
-            mergeTarget: mergeInput.value,
+            mergeTargets: selectedMergeTargets().map((target) => target.episode_id),
             notes: notes.value
           }));
           draftStatus.textContent = "Draft saved";
@@ -2506,31 +2560,31 @@
         }
       }
 
+      function selectedMergeTargets() {
+        const selectedIds = new Set(
+          mergeCheckboxes.filter((checkbox) => checkbox.checked).map((checkbox) => checkbox.value)
+        );
+        return mergeCandidates.filter((candidate) => selectedIds.has(candidate.episode_id));
+      }
+
       function updateReviewState() {
         const isMerge = category.value === "merge_episodes";
         mergeField.hidden = !isMerge;
-        const target = isMerge ? episodeFromReviewReference(mergeInput.value) : null;
-        const sameEpisode = target?.episode_id === episode.episode_id;
+        const targets = isMerge ? selectedMergeTargets() : [];
         if (!isMerge) {
           mergeStatus.textContent = "";
           mergeStatus.classList.remove("is-error");
-        } else if (!mergeInput.value.trim()) {
-          mergeStatus.textContent = "A second episode is required.";
-          mergeStatus.classList.add("is-error");
-        } else if (!target) {
-          mergeStatus.textContent = "No episode in this dataset matches that ID or URL.";
-          mergeStatus.classList.add("is-error");
-        } else if (sameEpisode) {
-          mergeStatus.textContent = "Choose a different episode.";
+        } else if (!targets.length) {
+          mergeStatus.textContent = "Select one or more episodes.";
           mergeStatus.classList.add("is-error");
         } else {
-          mergeStatus.textContent = `${target.agent || "Unknown agent"} · ${target.onset || target.activity_start || "Unknown onset"}`;
+          mergeStatus.textContent = `${targets.length} companion episode${targets.length === 1 ? "" : "s"} selected.`;
           mergeStatus.classList.remove("is-error");
         }
-        submit.disabled = !notes.value.trim() || (isMerge && (!target || sameEpisode));
+        submit.disabled = !notes.value.trim() || (isMerge && !targets.length);
       }
 
-      [category, mergeInput, notes].forEach((input) => {
+      [category, notes, ...mergeCheckboxes].forEach((input) => {
         input.addEventListener("input", () => {
           saveDraft();
           updateReviewState();
@@ -2541,13 +2595,11 @@
         event.preventDefault();
         updateReviewState();
         if (submit.disabled) return;
-        const mergeTarget = category.value === "merge_episodes"
-          ? episodeFromReviewReference(mergeInput.value)
-          : null;
+        const mergeTargets = category.value === "merge_episodes" ? selectedMergeTargets() : [];
         const categoryName = reviewCategoryLabels[category.value];
         const shortId = episode.episode_id.replace(/^episode-/, "").slice(0, 16);
         const title = `[Episode review] ${categoryName}: ${episode.agent || period.agent} · ${String(episode.onset || episode.activity_start || "unknown").slice(0, 10)} · ${shortId}`;
-        const body = reviewIssueBody(episode, period, category.value, notes.value, mergeTarget);
+        const body = reviewIssueBody(episode, period, category.value, notes.value, mergeTargets);
         const issueUrl = new URL(`https://github.com/${reviewRepository}/issues/new`);
         issueUrl.searchParams.set("title", title);
         issueUrl.searchParams.set("body", body);
@@ -2614,14 +2666,6 @@
         villageLink.rel = "noopener noreferrer";
         villageLink.setAttribute("aria-label", `Open ${period.agent} near the drift onset in AI Village in a new tab`);
         hero.append(villageLink);
-      }
-      if (episode) {
-        const reviewLink = node("button", "village-link episode-review-link", "Review this episode");
-        reviewLink.type = "button";
-        reviewLink.addEventListener("click", () => {
-          document.querySelector(`#episode-review-${episode.episode_id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-        hero.append(reviewLink);
       }
       panel.append(hero);
       panel.append(renderGoalContext(period, episode));
