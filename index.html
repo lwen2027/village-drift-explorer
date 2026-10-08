@@ -2139,7 +2139,10 @@
         : parseInstant(bestTimestamp);
       if (!instant) return null;
       // AI Village's own event-share links add six seconds to place the event on screen.
-      return `https://theaidigest.org/village?time=${instant.getTime() + 6000}`;
+      const url = new URL("https://theaidigest.org/village");
+      url.searchParams.set("time", String(instant.getTime() + 6000));
+      url.searchParams.set("agent", episode.agent);
+      return url.toString();
     }
 
     function renderGrid() {
