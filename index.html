@@ -1464,12 +1464,12 @@
 
       <aside class="review-panel" aria-live="polite" aria-label="Selected episode detail">
         <div class="panel-nav">
-          <button class="nav-button" id="prev-button" aria-label="Previous episode">←</button>
+          <button class="nav-button" id="prev-button" aria-label="Previous drift episode in this goal">←</button>
           <div class="review-progress">
-            <span id="progress-label">GOAL PERIOD 01 / 10</span>
+            <span id="progress-label">DRIFT EPISODE 01 / 01</span>
             <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
           </div>
-          <button class="nav-button" id="next-button" aria-label="Next episode">→</button>
+          <button class="nav-button" id="next-button" aria-label="Next drift episode in this goal">→</button>
         </div>
         <div class="panel-scroll" id="panel-scroll"></div>
       </aside>
@@ -2689,10 +2689,19 @@
       const footerId = episode ? `EPISODE ID ${episode.episode_id}` : `GOAL PERIOD ${period.id}`;
       panel.append(node("div", "panel-footer", `${footerId} · SECOND AUDIT V2 · READ-ONLY PROTOTYPE`));
 
-      document.querySelector("#progress-label").textContent = `GOAL PERIOD ${String(selectedIndex + 1).padStart(2, "0")} / ${String(goalPeriods.length).padStart(2, "0")}`;
-      document.querySelector("#progress-fill").style.width = `${((selectedIndex + 1) / goalPeriods.length) * 100}%`;
-      prevButton.disabled = selectedIndex === 0;
-      nextButton.disabled = selectedIndex === goalPeriods.length - 1;
+      const orderedDrifts = [...period.drifts]
+        .sort((a, b) => String(a.onset).localeCompare(String(b.onset)));
+      const selectedEpisodeIndex = Math.max(
+        0,
+        orderedDrifts.findIndex((drift) => drift.episode_id === selectedEpisodeId)
+      );
+      const episodePosition = orderedDrifts.length ? selectedEpisodeIndex + 1 : 0;
+      document.querySelector("#progress-label").textContent = `DRIFT EPISODE ${String(episodePosition).padStart(2, "0")} / ${String(orderedDrifts.length).padStart(2, "0")}`;
+      document.querySelector("#progress-fill").style.width = orderedDrifts.length
+        ? `${(episodePosition / orderedDrifts.length) * 100}%`
+        : "0%";
+      prevButton.disabled = selectedEpisodeIndex <= 0;
+      nextButton.disabled = !orderedDrifts.length || selectedEpisodeIndex >= orderedDrifts.length - 1;
     }
 
     function selectPeriod(index, episodeId = null) {
@@ -2722,6 +2731,24 @@
       history.replaceState(null, "", `?scope=${activeScope}#${selectedEpisodeId || period.id}`);
     }
 
+    function selectEpisodeOffset(offset) {
+      const period = goalPeriods[selectedIndex];
+      if (!period) return;
+      const orderedDrifts = [...period.drifts]
+        .sort((a, b) => String(a.onset).localeCompare(String(b.onset)));
+      const currentIndex = orderedDrifts.findIndex(
+        (drift) => drift.episode_id === selectedEpisodeId
+      );
+      const targetIndex = currentIndex + offset;
+      if (currentIndex < 0 || targetIndex < 0 || targetIndex >= orderedDrifts.length) return;
+      selectedEpisodeId = orderedDrifts[targetIndex].episode_id;
+      openMenuPeriodId = null;
+      renderGrid();
+      renderPanel();
+      panel.scrollTop = 0;
+      history.replaceState(null, "", `?scope=${activeScope}#${selectedEpisodeId}`);
+    }
+
     function selectScope(scope) {
       if (scope === activeScope) return;
       activeScope = scope;
@@ -2736,14 +2763,14 @@
       history.replaceState(null, "", `?scope=${activeScope}#${selectedEpisodeId || ""}`);
     }
 
-    prevButton.addEventListener("click", () => selectPeriod(selectedIndex - 1));
-    nextButton.addEventListener("click", () => selectPeriod(selectedIndex + 1));
+    prevButton.addEventListener("click", () => selectEpisodeOffset(-1));
+    nextButton.addEventListener("click", () => selectEpisodeOffset(1));
     maximizationScopeButton.addEventListener("click", () => selectScope("maximization"));
     villageScopeButton.addEventListener("click", () => selectScope("village"));
     document.addEventListener("keydown", (event) => {
       if (event.target.closest("input, textarea, select")) return;
-      if (event.key === "ArrowLeft") selectPeriod(selectedIndex - 1);
-      if (event.key === "ArrowRight") selectPeriod(selectedIndex + 1);
+      if (event.key === "ArrowLeft") selectEpisodeOffset(-1);
+      if (event.key === "ArrowRight") selectEpisodeOffset(1);
       if (event.key === "Escape" && openMenuPeriodId) {
         openMenuPeriodId = null;
         renderGrid();
