@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import pathlib
 import re
@@ -23,6 +24,11 @@ DEFAULT_SOURCE = next(
     DEFAULT_SOURCE_CANDIDATES[-1],
 )
 DEFAULT_OUTPUT = ROOT / "data" / "second_audit_v2.json"
+DEFAULT_WAIT_MANIFEST = (
+    ROOT.parent / "spar-village-drift" / "evaluation"
+    / "manual_review_queue_goalmax_wait_exclusions_v1_2026-10-09.json"
+)
+DEFAULT_WAIT_OUTPUT = ROOT / "data" / "manual_review_wait_exclusions_v1.json"
 
 
 def migrate_episode_page() -> None:
@@ -101,6 +107,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=pathlib.Path, default=DEFAULT_SOURCE)
     parser.add_argument("--output", type=pathlib.Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--wait-manifest", type=pathlib.Path, default=DEFAULT_WAIT_MANIFEST
+    )
+    parser.add_argument(
+        "--wait-output", type=pathlib.Path, default=DEFAULT_WAIT_OUTPUT
+    )
     args = parser.parse_args()
 
     with args.source.open(encoding="utf-8") as handle:
@@ -166,6 +178,26 @@ def main() -> None:
     temporary = args.output.with_suffix(args.output.suffix + ".tmp")
     shutil.copyfile(args.source, temporary)
     temporary.replace(args.output)
+    if args.wait_manifest.exists():
+        with args.wait_manifest.open(encoding="utf-8") as handle:
+            wait_manifest = json.load(handle)
+        wait_counts = wait_manifest.get("counts") or {}
+        if wait_manifest.get("makes_model_calls") is not False:
+            raise SystemExit("wait manifest must explicitly make no model calls")
+        if wait_counts.get("goal_maximization_episodes") != sum(
+            row.get("period") == "goal_maximization"
+            for row in bundle["confirmed_episodes"]
+        ):
+            raise SystemExit("wait manifest does not match the audit bundle")
+        source_sha256 = hashlib.sha256(args.source.read_bytes()).hexdigest()
+        if (wait_manifest.get("input") or {}).get("sha256") != source_sha256:
+            raise SystemExit("wait manifest was built from a different bundle")
+        args.wait_output.parent.mkdir(parents=True, exist_ok=True)
+        wait_temporary = args.wait_output.with_suffix(
+            args.wait_output.suffix + ".tmp"
+        )
+        shutil.copyfile(args.wait_manifest, wait_temporary)
+        wait_temporary.replace(args.wait_output)
     migrate_episode_page()
     migrate_overview_page()
     print(

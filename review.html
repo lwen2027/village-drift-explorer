@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A deterministic manual-review queue for confirmed AI Village goal-drift episodes.">
+  <title>AI Village — Manual Drift Review</title>
+  <style>
+    :root {
+      --paper: #ece5d5;
+      --paper-deep: #dfd3bc;
+      --card: #f8f4e9;
+      --card-strong: #fffdf7;
+      --ink: #26251f;
+      --muted: #706d62;
+      --line: #cec2ab;
+      --line-strong: #9e927d;
+      --green: #385a4c;
+      --green-soft: #c9d8c4;
+      --rust: #a34e35;
+      --rust-soft: #edd2c4;
+      --amber: #9a702f;
+      --amber-soft: #eadcbc;
+      --blue: #3e6f80;
+      --blue-soft: #d3e1e5;
+      --shadow: 0 16px 38px rgba(62, 48, 27, .1);
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% 8%, rgba(255,255,255,.52), transparent 26rem),
+        linear-gradient(rgba(92, 78, 52, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92, 78, 52, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: auto, 24px 24px, 24px 24px, auto;
+      color: var(--ink);
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button, select { cursor: pointer; }
+    h1, h2, h3, p { margin-top: 0; }
+
+    .page-shell {
+      width: min(1560px, calc(100% - 44px));
+      margin: 0 auto;
+      padding: 30px 0 48px;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow, .micro-label {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin-bottom: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 5vw, 62px);
+      font-weight: 500;
+      line-height: .96;
+      letter-spacing: -.04em;
+    }
+
+    .header-side {
+      max-width: 470px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+      text-align: right;
+    }
+
+    .header-side p { margin-bottom: 0; }
+
+    .view-tabs {
+      display: inline-flex;
+      gap: 4px;
+      margin-top: 16px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(248, 244, 233, .64);
+    }
+
+    .view-tab {
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .view-tab:hover { color: var(--ink); }
+    .view-tab.is-active { background: var(--green); color: #fffdf7; }
+
+    .method-note {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding: 14px 17px;
+      border: 1px solid #b8a784;
+      border-radius: 14px;
+      background: rgba(248, 244, 233, .78);
+      color: #5f594d;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .method-note strong {
+      color: var(--green);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .summary-card {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(248, 244, 233, .84);
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card span {
+      display: block;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 9px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .summary-card strong {
+      display: block;
+      margin: 7px 0 4px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      font-weight: 500;
+      line-height: .9;
+    }
+
+    .summary-card small { color: var(--muted); font-size: 10px; }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1fr 1fr auto;
+      gap: 9px;
+      align-items: end;
+      margin-bottom: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(248, 244, 233, .76);
+    }
+
+    .field label {
+      display: block;
+      margin: 0 0 5px 2px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 9px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .field input, .field select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--card-strong);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .field input, .field select { height: 38px; padding: 0 10px; }
+    .field input:focus, .field select:focus, textarea:focus { border-color: var(--green); }
+
+    .toolbar-actions { display: flex; gap: 7px; }
+
+    .utility-button, .action-button, .nav-button {
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      background: var(--card-strong);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .utility-button { height: 38px; padding: 0 12px; font-size: 11px; }
+    .utility-button:hover, .nav-button:hover { border-color: var(--green); }
+
+    .review-workspace {
+      display: grid;
+      grid-template-columns: minmax(340px, .8fr) minmax(540px, 1.55fr);
+      min-height: 720px;
+      height: calc(100vh - 330px);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(248, 244, 233, .72);
+      box-shadow: var(--shadow);
+    }
+
+    .queue-panel {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      border-right: 1px solid var(--line);
+    }
+
+    .queue-heading, .detail-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 64px;
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-deep);
+    }
+
+    .queue-heading strong { font-size: 13px; }
+    .queue-heading span { color: var(--muted); font-family: ui-monospace, monospace; font-size: 10px; }
+
+    .queue-list { overflow: auto; padding: 8px; }
+
+    .queue-item {
+      width: 100%;
+      margin: 0 0 7px;
+      padding: 13px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .queue-item:hover { background: rgba(255,255,255,.38); border-color: var(--line); }
+    .queue-item.is-selected { background: var(--card-strong); border-color: var(--green); }
+
+    .queue-item-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+    .queue-agent { font-size: 11px; font-weight: 800; letter-spacing: .035em; text-transform: uppercase; }
+    .queue-date { color: var(--muted); font-family: ui-monospace, monospace; font-size: 9px; }
+    .queue-activity {
+      display: -webkit-box;
+      overflow: hidden;
+      margin-bottom: 9px;
+      color: #4d4a41;
+      font-size: 12px;
+      line-height: 1.42;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .badges { display: flex; flex-wrap: wrap; gap: 5px; }
+    .badge {
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: #e4dccb;
+      color: #625d52;
+      font-family: ui-monospace, monospace;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: .055em;
+      text-transform: uppercase;
+    }
+
+    .badge.direct, .badge.confirmed { background: var(--green-soft); color: #294a3d; }
+    .badge.inferred, .badge.defer { background: var(--amber-soft); color: #6d4c19; }
+    .badge.unavailable, .badge.correction, .badge.not_drift { background: var(--rust-soft); color: #7c3827; }
+    .badge.routine { background: var(--blue-soft); color: #315d6c; }
+
+    .empty-state { padding: 32px 18px; color: var(--muted); text-align: center; font-size: 13px; }
+
+    .detail-panel { display: flex; min-width: 0; flex-direction: column; }
+    .detail-nav { padding: 10px 16px; }
+    .detail-nav-center { flex: 1; text-align: center; }
+    .detail-nav-center strong { display: block; font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .08em; }
+    .detail-nav-center span { color: var(--muted); font-size: 10px; }
+    .nav-button { width: 38px; height: 38px; font-size: 18px; }
+    .nav-button:disabled { cursor: default; opacity: .35; }
+
+    .detail-scroll { overflow: auto; padding: 24px 28px 36px; }
+    .detail-header { margin-bottom: 22px; }
+    .detail-kicker { color: var(--green); font-size: 12px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
+    .detail-header h2 {
+      max-width: 980px;
+      margin: 10px 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 3vw, 43px);
+      font-weight: 500;
+      line-height: 1.04;
+      letter-spacing: -.025em;
+    }
+
+    .detail-goal { max-width: 980px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .detail-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .detail-links a { color: var(--green); font-size: 11px; font-weight: 800; text-decoration: none; }
+
+    .routine-banner, .incomplete-banner {
+      margin: 0 0 16px;
+      padding: 13px 15px;
+      border-radius: 11px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .routine-banner { border: 1px solid #9db5bd; background: var(--blue-soft); color: #315d6c; }
+    .incomplete-banner { border: 1px solid #c89a83; background: #f5e4da; color: #74402f; }
+
+    .review-form {
+      margin-bottom: 20px;
+      padding: 17px;
+      border: 1px solid var(--line-strong);
+      border-radius: 13px;
+      background: var(--card-strong);
+    }
+
+    .review-form h3 { margin-bottom: 5px; font-size: 15px; }
+    .review-form > p { margin-bottom: 13px; color: var(--muted); font-size: 11px; }
+    .decision-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+    .decision-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .decision-option span {
+      display: flex;
+      min-height: 54px;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.25;
+      text-align: center;
+    }
+    .decision-option input:checked + span { border-color: var(--green); background: var(--green); color: white; }
+
+    .review-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 10px; }
+    textarea { min-height: 80px; margin-top: 10px; padding: 10px; resize: vertical; font-size: 12px; line-height: 1.45; }
+    .save-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; }
+    .save-status { color: var(--muted); font-size: 10px; }
+    .action-button { padding: 10px 15px; background: var(--green); border-color: var(--green); color: white; font-size: 11px; }
+
+    .section { margin-top: 24px; }
+    .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .section-heading h3 { margin-bottom: 0; font-size: 15px; }
+    .section-heading span { color: var(--muted); font-family: ui-monospace, monospace; font-size: 9px; text-transform: uppercase; }
+    .activity-copy { color: #454239; font-family: Georgia, "Times New Roman", serif; font-size: 20px; line-height: 1.45; }
+
+    .evidence-list { display: grid; gap: 9px; }
+    .evidence-card { padding: 13px 14px; border-left: 3px solid var(--line-strong); background: rgba(255,255,255,.32); }
+    .evidence-card.trigger { border-left-color: var(--blue); }
+    .evidence-card.transition { border-left-color: var(--rust); }
+    .evidence-card.activity { border-left-color: var(--green); }
+    .evidence-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 7px; margin-bottom: 7px; color: var(--muted); font-family: ui-monospace, monospace; font-size: 9px; }
+    .evidence-quote { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 1.48; }
+    .evidence-note { margin: 9px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+
+    .metadata-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .metadata-item { padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.25); }
+    .metadata-item span { display: block; color: var(--muted); font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+    .metadata-item strong { display: block; margin-top: 5px; overflow-wrap: anywhere; font-size: 10px; }
+
+    body.data-loading main { opacity: .35; pointer-events: none; }
+
+    @media (max-width: 1050px) {
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .toolbar { grid-template-columns: repeat(2, 1fr); }
+      .toolbar-actions { grid-column: 1 / -1; }
+      .review-workspace { grid-template-columns: minmax(300px, .72fr) minmax(440px, 1.28fr); height: calc(100vh - 410px); }
+      .decision-options { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell { width: auto; padding: 18px; }
+      .site-header { align-items: flex-start; flex-direction: column; }
+      .header-side { text-align: left; }
+      .view-tabs { flex-wrap: wrap; }
+      .summary-grid, .toolbar, .review-fields, .metadata-grid { grid-template-columns: 1fr; }
+      .toolbar-actions { grid-column: auto; }
+      .review-workspace { display: block; height: auto; min-height: 0; }
+      .queue-panel { height: 52vh; border-right: 0; border-bottom: 1px solid var(--line); }
+      .detail-panel { min-height: 70vh; }
+      .detail-scroll { padding: 20px 17px 30px; }
+    }
+  </style>
+</head>
+<body class="data-loading">
+  <div class="page-shell">
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">AI Village / goal-drift audit</p>
+        <h1>Manual Review</h1>
+        <nav class="view-tabs" aria-label="Explorer views">
+          <a class="view-tab" href="overview.html">Pipeline overview</a>
+          <a class="view-tab" href="index.html">Episode explorer</a>
+          <a class="view-tab is-active" href="review.html" aria-current="page">Manual review</a>
+        </nav>
+      </div>
+      <div class="header-side">
+        <p>Review substantive goal-maximization episodes while mechanically repetitive wait-only records stay available in a separate bucket.</p>
+      </div>
+    </header>
+
+    <div class="method-note">
+      <strong>No AI filtering</strong>
+      <span>The default queue excludes a record only when every cited transition/activity event is a literal pause, wait, or sleep/date command and at least two distinct source event IDs are present. Exclusion never changes the confirmed dataset.</span>
+    </div>
+
+    <main>
+      <section class="summary-grid" aria-label="Review queue summary">
+        <div class="summary-card"><span>Default queue</span><strong id="queue-total">—</strong><small>substantive cases</small></div>
+        <div class="summary-card"><span>Reviewed locally</span><strong id="reviewed-total">—</strong><small id="reviewed-detail">saved in this browser</small></div>
+        <div class="summary-card"><span>Remaining</span><strong id="remaining-total">—</strong><small>in the selected queue</small></div>
+        <div class="summary-card"><span>Routine waits</span><strong id="routine-total">—</strong><small>preserved outside the default queue</small></div>
+      </section>
+
+      <section class="toolbar" aria-label="Review queue controls">
+        <div class="field">
+          <label for="queue-mode">Queue</label>
+          <select id="queue-mode">
+            <option value="substantive">Substantive review queue</option>
+            <option value="routine">Routine wait-only bucket</option>
+            <option value="all">All goal-maximization episodes</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="review-status">Review status</label>
+          <select id="review-status">
+            <option value="unreviewed">Unreviewed</option>
+            <option value="attention">Needs attention</option>
+            <option value="reviewed">Reviewed</option>
+            <option value="all">All statuses</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="agent-filter">Agent</label>
+          <select id="agent-filter"><option value="all">All agents</option></select>
+        </div>
+        <div class="field">
+          <label for="search-filter">Search</label>
+          <input id="search-filter" type="search" placeholder="Activity, goal, episode ID">
+        </div>
+        <div class="toolbar-actions">
+          <button class="utility-button" id="import-button" type="button">Import</button>
+          <button class="utility-button" id="export-button" type="button">Export</button>
+          <input id="import-file" type="file" accept="application/json" hidden>
+        </div>
+      </section>
+
+      <section class="review-workspace">
+        <aside class="queue-panel" aria-label="Episode review queue">
+          <div class="queue-heading">
+            <strong id="queue-title">Substantive queue</strong>
+            <span id="visible-count">— cases</span>
+          </div>
+          <div class="queue-list" id="queue-list"></div>
+        </aside>
+
+        <article class="detail-panel" aria-live="polite">
+          <div class="detail-nav">
+            <button class="nav-button" id="previous-button" type="button" aria-label="Previous visible episode">←</button>
+            <div class="detail-nav-center">
+              <strong id="position-label">CASE — / —</strong>
+              <span>Use J/K to move through the visible queue</span>
+            </div>
+            <button class="nav-button" id="next-button" type="button" aria-label="Next visible episode">→</button>
+          </div>
+          <div class="detail-scroll" id="detail-scroll">
+            <div class="empty-state">Loading review queue…</div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./scripts/review.js"></script>
+</body>
+</html>
