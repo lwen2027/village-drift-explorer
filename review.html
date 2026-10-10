@@ -576,6 +576,7 @@
       display: grid;
       width: 100%;
       grid-template-columns: 46px minmax(0, 1fr);
+      align-items: start;
       gap: 9px;
       padding: 11px 12px;
       border: 0;
@@ -620,7 +621,9 @@
     }
 
     .tile-menu-review-state {
-      margin-left: 55px;
+      grid-column: 2;
+      justify-self: start;
+      margin: 0;
     }
 
     .review-panel {
