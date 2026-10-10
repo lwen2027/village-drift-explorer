@@ -2716,11 +2716,23 @@
       const heading = node("div", "unresolved-heading");
       const actions = node("div", "unresolved-actions");
       const count = node("span", "unresolved-count", `${limitations.length} ${limitations.length === 1 ? "note" : "notes"}`);
+      const templateLines = limitations
+        .filter((limitation) => !/^Onset has .+ precision$/i.test(limitation.label))
+        .map((limitation) => {
+          const neutralLabel = limitation.label === "End not observed"
+            ? "Drift end"
+            : limitation.label
+              .replace(/\s+is a lower bound$/i, "")
+              .replace(/\s+is inferred$/i, "")
+              .replace(/\s+not fully reconciled$/i, "")
+              .replace(/\s+(?:unavailable|missing)$/i, "");
+          return `${neutralLabel}: `;
+        });
       const copyButton = node("button", "copy-limitations-button", "Copy template");
       copyButton.type = "button";
       copyButton.setAttribute("aria-label", "Copy an editable correction template for these evidence limitations");
       copyButton.addEventListener("click", async () => {
-        const template = limitations.map((limitation) => `${limitation.label}: `).join("\n");
+        const template = templateLines.join("\n");
         try {
           if (navigator.clipboard?.writeText) {
             await navigator.clipboard.writeText(template);
@@ -2744,7 +2756,8 @@
           copyButton.textContent = "Copy failed";
         }
       });
-      actions.append(count, copyButton);
+      actions.append(count);
+      if (templateLines.length) actions.append(copyButton);
       heading.append(
         node("strong", "", "Confirmed drift · evidence limitations"),
         actions
