@@ -3039,7 +3039,7 @@
         : parseInstant(bestTimestamp);
       if (!instant) return null;
       // AI Village's own event-share links add six seconds to place the event on screen.
-      const url = new URL("https://theaidigest.org/village");
+      const url = new URL("http://localhost:3000/village");
       url.searchParams.set("time", String(instant.getTime() + 6000));
       url.searchParams.set("agent", episode.agent);
       return url.toString();
