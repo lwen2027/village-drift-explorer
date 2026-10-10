@@ -853,7 +853,6 @@
 
     .unresolved-heading {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
@@ -872,21 +871,9 @@
 
     .unresolved-heading strong { margin-right: auto; }
 
-    .unresolved-count {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 8px;
-      font-weight: 700;
-    }
-
-    .unresolved-actions {
-      display: flex;
-      flex: 0 0 auto;
-      align-items: center;
-      gap: 8px;
-      margin-left: auto;
-    }
-
     .copy-limitations-button {
+      flex: 0 0 auto;
+      margin-left: auto;
       padding: 5px 7px;
       border: 1px solid rgba(117, 89, 31, .42);
       border-radius: 6px;
@@ -2690,8 +2677,6 @@
       if (!limitations.length) return null;
       const banner = node("div", "unresolved-banner");
       const heading = node("div", "unresolved-heading");
-      const actions = node("div", "unresolved-actions");
-      const count = node("span", "unresolved-count", `${limitations.length} ${limitations.length === 1 ? "note" : "notes"}`);
       const templateLines = limitations
         .filter((limitation) => !/^Onset has .+ precision$/i.test(limitation.label))
         .map((limitation) => {
@@ -2732,12 +2717,8 @@
           copyButton.textContent = "Copy failed";
         }
       });
-      actions.append(count);
-      if (templateLines.length) actions.append(copyButton);
-      heading.append(
-        node("strong", "", "Confirmed drift · evidence limitations"),
-        actions
-      );
+      heading.append(node("strong", "", "Confirmed drift · evidence limitations"));
+      if (templateLines.length) heading.append(copyButton);
       banner.append(heading);
       const items = node("div", "unresolved-items");
       limitations.forEach((limitation) => {
