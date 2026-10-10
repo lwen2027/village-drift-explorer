@@ -862,6 +862,7 @@
 
     .unresolved-heading {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
@@ -885,6 +886,31 @@
       font-size: 8px;
       font-weight: 700;
     }
+
+    .unresolved-actions {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .copy-limitations-button {
+      padding: 5px 7px;
+      border: 1px solid rgba(117, 89, 31, .42);
+      border-radius: 6px;
+      background: rgba(255,255,255,.36);
+      color: #75591f;
+      cursor: pointer;
+      font: inherit;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .copy-limitations-button:hover { background: rgba(255,255,255,.7); }
+    .copy-limitations-button.is-copied { background: rgba(201, 216, 196, .68); }
 
     .unresolved-items {
       display: flex;
@@ -2688,9 +2714,40 @@
       if (!limitations.length) return null;
       const banner = node("div", "unresolved-banner");
       const heading = node("div", "unresolved-heading");
+      const actions = node("div", "unresolved-actions");
+      const count = node("span", "unresolved-count", `${limitations.length} ${limitations.length === 1 ? "note" : "notes"}`);
+      const copyButton = node("button", "copy-limitations-button", "Copy template");
+      copyButton.type = "button";
+      copyButton.setAttribute("aria-label", "Copy an editable correction template for these evidence limitations");
+      copyButton.addEventListener("click", async () => {
+        const template = limitations.map((limitation) => `${limitation.label}: `).join("\n");
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(template);
+          } else {
+            const fallback = node("textarea");
+            fallback.value = template;
+            fallback.style.position = "fixed";
+            fallback.style.opacity = "0";
+            document.body.append(fallback);
+            fallback.select();
+            document.execCommand("copy");
+            fallback.remove();
+          }
+          copyButton.textContent = "Copied";
+          copyButton.classList.add("is-copied");
+          setTimeout(() => {
+            copyButton.textContent = "Copy template";
+            copyButton.classList.remove("is-copied");
+          }, 1600);
+        } catch {
+          copyButton.textContent = "Copy failed";
+        }
+      });
+      actions.append(count, copyButton);
       heading.append(
         node("strong", "", "Confirmed drift · evidence limitations"),
-        node("span", "unresolved-count", `${limitations.length} ${limitations.length === 1 ? "note" : "notes"}`)
+        actions
       );
       banner.append(heading);
       const items = node("div", "unresolved-items");
