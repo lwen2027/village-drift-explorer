@@ -254,6 +254,7 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 10px;
       font-size: 11px;
     }
@@ -266,6 +267,8 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 9px;
     }
+
+    #review-sync-summary { flex-basis: 100%; }
 
     .review-overall-track {
       height: 5px;
@@ -373,6 +376,55 @@
     }
 
     .review-state-badge.is-complete::before { background: var(--green); }
+
+    .sync-state-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 7px;
+      border: 1px solid rgba(63, 105, 120, .3);
+      border-radius: 999px;
+      background: rgba(218, 232, 234, .46);
+      color: #356174;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 8px;
+      font-weight: 750;
+      letter-spacing: .025em;
+      white-space: nowrap;
+    }
+
+    .sync-state-badge::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #477b8f;
+      content: "";
+    }
+
+    .sync-state-badge.is-pending,
+    .sync-state-badge.is-modified {
+      border-color: rgba(154, 112, 47, .42);
+      background: rgba(234, 220, 188, .48);
+      color: #76571f;
+    }
+
+    .sync-state-badge.is-pending::before,
+    .sync-state-badge.is-modified::before { background: #a9792f; }
+
+    .sync-state-badge.is-conflict {
+      border-color: rgba(163, 78, 53, .48);
+      background: rgba(236, 205, 191, .52);
+      color: var(--rust);
+    }
+
+    .sync-state-badge.is-conflict::before { background: var(--rust); }
+
+    .human-review-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+    }
 
     .episode-tile.review-complete { border-color: rgba(56, 90, 76, .42); }
     .episode-tile.review-in-progress { border-color: rgba(154, 112, 47, .44); }
@@ -612,6 +664,12 @@
     }
 
     .tile-menu-review-state {
+      grid-column: 2;
+      justify-self: start;
+      margin: 0;
+    }
+
+    .tile-menu-sync-state {
       grid-column: 2;
       justify-self: start;
       margin: 0;
@@ -1811,7 +1869,7 @@
           <a class="view-tab is-active" href="review.html" aria-current="page">Manual review</a>
         </nav>
       </div>
-      <p class="header-note">The Episode Explorer interface, filtered to the 483 substantive goal-maximization episodes remaining after deterministic routine-wait filtering.</p>
+      <p class="header-note" id="review-header-note">The Episode Explorer interface, filtered to substantive goal-maximization episodes remaining after deterministic routine-wait filtering.</p>
     </header>
 
     <main class="workspace">
@@ -1837,8 +1895,9 @@
         <div class="review-dashboard" aria-label="Manual review progress and backups">
           <div class="review-dashboard-progress">
             <div class="review-dashboard-copy">
-              <strong id="review-progress-count">0 of 483 completed</strong>
+              <strong id="review-progress-count">0 completed</strong>
               <span id="review-saved-at">No local reviews yet</span>
+              <span id="review-sync-summary">No annotations awaiting integration</span>
             </div>
             <div class="review-overall-track" aria-hidden="true">
               <div class="review-overall-fill" id="review-overall-fill"></div>
@@ -1852,10 +1911,13 @@
               <option value="in_progress">Saved / in progress</option>
               <option value="completed">Completed</option>
               <option value="follow_ups">Has follow-ups</option>
+              <option value="needs_sync">Not yet integrated</option>
+              <option value="conflicts">Integration conflicts</option>
             </select>
           </div>
           <div class="review-backup-actions">
-            <button class="review-tool-button" id="review-export-json" type="button">Export JSON</button>
+            <button class="review-tool-button" id="review-export-changes" type="button">Export changes</button>
+            <button class="review-tool-button" id="review-export-json" type="button">Full backup</button>
             <button class="review-tool-button" id="review-export-csv" type="button">Export CSV</button>
             <button class="review-tool-button" id="review-import" type="button">Import backup</button>
             <input id="review-import-file" type="file" accept="application/json,.json" hidden>
@@ -1964,6 +2026,12 @@
         },
         annotations: {},
         applied_seed_ids: [],
+        sync: {
+          baseline_hashes: {},
+          conflicts: {},
+          last_exported_hashes: {},
+          last_exported_at: null
+        },
         saved_at: null
       };
     }
@@ -2002,6 +2070,33 @@
       clean.applied_seed_ids = Array.isArray(candidate.applied_seed_ids)
         ? [...new Set(candidate.applied_seed_ids.map(String))]
         : [];
+      if (candidate.sync && typeof candidate.sync === "object") {
+        const baselineHashes = candidate.sync.baseline_hashes;
+        const conflicts = candidate.sync.conflicts;
+        const exportedHashes = candidate.sync.last_exported_hashes;
+        if (baselineHashes && typeof baselineHashes === "object") {
+          Object.entries(baselineHashes).forEach(([episodeId, value]) => {
+            if (validIds.has(episodeId) && typeof value === "string") {
+              clean.sync.baseline_hashes[episodeId] = value;
+            }
+          });
+        }
+        if (conflicts && typeof conflicts === "object") {
+          Object.entries(conflicts).forEach(([episodeId, value]) => {
+            if (validIds.has(episodeId) && value && typeof value === "object") {
+              clean.sync.conflicts[episodeId] = { ...value };
+            }
+          });
+        }
+        if (exportedHashes && typeof exportedHashes === "object") {
+          Object.entries(exportedHashes).forEach(([episodeId, value]) => {
+            if (validIds.has(episodeId) && typeof value === "string") {
+              clean.sync.last_exported_hashes[episodeId] = value;
+            }
+          });
+        }
+        clean.sync.last_exported_at = candidate.sync.last_exported_at || null;
+      }
       clean.saved_at = candidate.saved_at || null;
       return clean;
     }
@@ -2050,6 +2145,76 @@
       );
     }
 
+    function annotationFingerprint(annotation) {
+      const semantic = {
+        trigger_categories: [...new Set(annotation?.trigger_categories || [])].sort(),
+        request_relationship: annotation?.request_relationship || "",
+        recovery_mechanisms: [...new Set(annotation?.recovery_mechanisms || [])].sort(),
+        notes: String(annotation?.notes || ""),
+        follow_ups: (annotation?.follow_ups || []).map((item) => ({
+          type: item?.type || "",
+          note: String(item?.note || "")
+        }))
+      };
+      const serialized = JSON.stringify(semantic);
+      let hash = 2166136261;
+      for (let index = 0; index < serialized.length; index += 1) {
+        hash ^= serialized.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+      }
+      return `annotation-v1-${(hash >>> 0).toString(16).padStart(8, "0")}`;
+    }
+
+    const committedAnnotationHashes = new Map();
+
+    function annotationSyncState(episodeId) {
+      const local = reviewLedger.annotations[episodeId];
+      const localHasContent = annotationHasContent(local || emptyAnnotation());
+      const localHash = annotationFingerprint(local || emptyAnnotation());
+      const committedHash = committedAnnotationHashes.get(episodeId) || null;
+      const baselineHash = reviewLedger.sync.baseline_hashes[episodeId] || null;
+      const exportedHash = reviewLedger.sync.last_exported_hashes[episodeId] || null;
+      if (reviewLedger.sync.conflicts[episodeId]) return "conflict";
+      if (committedHash && localHash === committedHash) return "integrated";
+      if (exportedHash && localHash === exportedHash) return "exported";
+      if (baselineHash) return "modified";
+      if (localHasContent) return "pending";
+      return "none";
+    }
+
+    function syncStateLabel(state) {
+      return ({
+        integrated: "Integrated",
+        modified: "Modified since integration",
+        pending: "Pending integration",
+        exported: "Exported · awaiting integration",
+        conflict: "Integration conflict"
+      })[state] || "";
+    }
+
+    function syncStateBadge(episodeId, compact = false) {
+      const state = annotationSyncState(episodeId);
+      if (state === "none") return null;
+      const label = compact && state === "modified"
+          ? "Modified"
+          : compact && state === "pending"
+            ? "Pending"
+            : compact && state === "exported"
+              ? "Exported"
+          : compact && state === "conflict"
+              ? "Conflict"
+              : syncStateLabel(state);
+      return node("span", `sync-state-badge is-${state}`, label);
+    }
+
+    function annotationsNeedingIntegration() {
+      return episodes.filter((episode) =>
+        ["pending", "modified", "conflict"].includes(
+          annotationSyncState(episode.episode_id)
+        )
+      );
+    }
+
     function reviewStateForEpisode(episodeId) {
       const annotation = annotationFor(episodeId);
       if (annotationIsComplete(annotation)) return "completed";
@@ -2080,6 +2245,7 @@
 
     function updateAnnotation(episodeId, updater, refreshCards = true) {
       const priorState = reviewStateForEpisode(episodeId);
+      const priorSyncState = annotationSyncState(episodeId);
       const annotation = { ...annotationFor(episodeId) };
       annotation.trigger_categories = [...(annotation.trigger_categories || [])];
       annotation.request_relationship = annotation.request_relationship || "";
@@ -2089,7 +2255,19 @@
       annotation.updated_at = new Date().toISOString();
       reviewLedger.annotations[episodeId] = annotation;
       persistReviewLedger();
-      if (refreshCards || reviewStateForEpisode(episodeId) !== priorState) renderGrid();
+      const nextSyncState = annotationSyncState(episodeId);
+      if (refreshCards || reviewStateForEpisode(episodeId) !== priorState || nextSyncState !== priorSyncState) {
+        renderGrid();
+      }
+      if (nextSyncState !== priorSyncState) {
+        const badgeContainer = document.getElementById(`human-review-${episodeId}`)
+          ?.querySelector(".human-review-badges");
+        if (badgeContainer) {
+          badgeContainer.replaceChildren(episodeReviewBadge(episodeId));
+          const badge = syncStateBadge(episodeId);
+          if (badge) badgeContainer.append(badge);
+        }
+      }
       return annotation;
     }
 
@@ -2114,50 +2292,87 @@
 
     function applyCommittedReviewSeed() {
       const seedId = committedReviewSeed?.seed_id;
-      if (!seedId || reviewLedger.applied_seed_ids.includes(seedId)) return;
+      if (!seedId) return;
       const seed = normalizeReviewLedger(committedReviewSeed);
+      let changed = false;
       ["trigger", "request_relationship", "recovery"].forEach((kind) => {
         const categories = new Map(reviewLedger.taxonomies[kind].map((item) => [item.id, item]));
         seed.taxonomies[kind].forEach((item) => {
-          if (!categories.has(item.id)) categories.set(item.id, item);
+          if (!categories.has(item.id)) {
+            categories.set(item.id, item);
+            changed = true;
+          }
         });
         reviewLedger.taxonomies[kind] = [...categories.values()];
       });
       Object.entries(seed.annotations).forEach(([episodeId, imported]) => {
+        const committedHash = annotationFingerprint(imported);
+        committedAnnotationHashes.set(episodeId, committedHash);
         const local = reviewLedger.annotations[episodeId];
+        const baselineHash = reviewLedger.sync.baseline_hashes[episodeId] || null;
+        const exportedHash = reviewLedger.sync.last_exported_hashes[episodeId] || null;
+        const localHash = annotationFingerprint(local || emptyAnnotation());
+
         if (!local) {
           reviewLedger.annotations[episodeId] = imported;
+          reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
+          delete reviewLedger.sync.conflicts[episodeId];
+          changed = true;
           return;
         }
-        const localNotes = String(local.notes || "").trim();
-        const importedNotes = String(imported.notes || "").trim();
-        reviewLedger.annotations[episodeId] = {
-          ...imported,
-          ...local,
-          trigger_categories: [...new Set([
-            ...(imported.trigger_categories || []),
-            ...(local.trigger_categories || [])
-          ])],
-          request_relationship: local.request_relationship || imported.request_relationship,
-          recovery_mechanisms: [...new Set([
-            ...(imported.recovery_mechanisms || []),
-            ...(local.recovery_mechanisms || [])
-          ])],
-          notes: localNotes && importedNotes && localNotes !== importedNotes
-            ? `${localNotes}\n\nImported manual note:\n${importedNotes}`
-            : localNotes || importedNotes,
-          follow_ups: [
-            ...(imported.follow_ups || []),
-            ...(local.follow_ups || []).filter((item) =>
-              !(imported.follow_ups || []).some((candidate) => candidate.id === item.id)
-            )
-          ],
-          provenance: local.provenance || imported.provenance,
-          updated_at: local.updated_at || imported.updated_at
+
+        if (!baselineHash) {
+          // Legacy ledgers predate per-episode integration hashes. Treat the
+          // current committed annotation as their baseline without replacing
+          // a different, newer browser-local value.
+          reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
+          delete reviewLedger.sync.conflicts[episodeId];
+          changed = true;
+          return;
+        }
+
+        if (committedHash === baselineHash) {
+          if (reviewLedger.sync.conflicts[episodeId]) {
+            delete reviewLedger.sync.conflicts[episodeId];
+            changed = true;
+          }
+          return;
+        }
+
+        if (committedHash === exportedHash) {
+          reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
+          delete reviewLedger.sync.last_exported_hashes[episodeId];
+          delete reviewLedger.sync.conflicts[episodeId];
+          if (localHash === committedHash) {
+            reviewLedger.annotations[episodeId] = imported;
+          }
+          changed = true;
+          return;
+        }
+
+        if (localHash === baselineHash || localHash === committedHash) {
+          reviewLedger.annotations[episodeId] = imported;
+          reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
+          delete reviewLedger.sync.last_exported_hashes[episodeId];
+          delete reviewLedger.sync.conflicts[episodeId];
+          changed = true;
+          return;
+        }
+
+        reviewLedger.sync.conflicts[episodeId] = {
+          base_hash: baselineHash,
+          committed_hash: committedHash,
+          local_hash: localHash,
+          detected_at: new Date().toISOString(),
+          seed_id: seedId
         };
+        changed = true;
       });
-      reviewLedger.applied_seed_ids.push(seedId);
-      persistReviewLedger();
+      if (!reviewLedger.applied_seed_ids.includes(seedId)) {
+        reviewLedger.applied_seed_ids.push(seedId);
+        changed = true;
+      }
+      if (changed) persistReviewLedger();
     }
 
     applyCommittedReviewSeed();
@@ -2372,7 +2587,7 @@
 
     const initialId = canonicalEpisodeId(location.hash.slice(1));
     const requestedReviewFilter = new URLSearchParams(location.search).get("review");
-    const initialReviewFilter = ["all", "unreviewed", "in_progress", "completed", "follow_ups"].includes(requestedReviewFilter)
+    const initialReviewFilter = ["all", "unreviewed", "in_progress", "completed", "follow_ups", "needs_sync", "conflicts"].includes(requestedReviewFilter)
       ? requestedReviewFilter
       : "all";
     const initiallyLinkedPeriod = allGoalPeriods.find((period) =>
@@ -2388,6 +2603,8 @@
       if (filter === "in_progress") return state === "in_progress";
       if (filter === "completed") return annotationIsComplete(annotation);
       if (filter === "follow_ups") return Boolean(annotation.follow_ups?.length);
+      if (filter === "needs_sync") return ["pending", "modified", "exported", "conflict"].includes(annotationSyncState(episodeId));
+      if (filter === "conflicts") return annotationSyncState(episodeId) === "conflict";
       return true;
     }
 
@@ -2443,6 +2660,7 @@
       document.querySelector("#atlas-title").textContent = "Goal-maximization review queue";
       document.querySelector("#scope-description").textContent = "Substantive episodes remaining after deterministic routine-wait filtering.";
       document.querySelector("#dataset-count").textContent = `${goalPeriods.length} goal periods · ${episodeCount} episodes to review`;
+      document.querySelector("#review-header-note").textContent = `The Episode Explorer interface, filtered to the ${episodes.length} substantive goal-maximization episodes remaining after deterministic routine-wait filtering.`;
     }
 
     function updateReviewDashboard() {
@@ -2451,8 +2669,24 @@
       const progressCount = document.querySelector("#review-progress-count");
       const progressFill = document.querySelector("#review-overall-fill");
       const savedAt = document.querySelector("#review-saved-at");
+      const syncSummary = document.querySelector("#review-sync-summary");
       if (progressCount) progressCount.textContent = `${completed} of ${episodes.length} completed`;
       if (progressFill) progressFill.style.width = `${progress}%`;
+      if (syncSummary) {
+        const counts = episodes.reduce((result, episode) => {
+          const state = annotationSyncState(episode.episode_id);
+          result[state] = (result[state] || 0) + 1;
+          return result;
+        }, {});
+        const pending = (counts.pending || 0) + (counts.modified || 0);
+        const parts = [
+          `${counts.integrated || 0} integrated`,
+          `${pending} awaiting integration`
+        ];
+        if (counts.exported) parts.push(`${counts.exported} exported`);
+        if (counts.conflict) parts.push(`${counts.conflict} conflict${counts.conflict === 1 ? "" : "s"}`);
+        syncSummary.textContent = parts.join(" · ");
+      }
       if (savedAt) {
         if (!lastReviewSaveSucceeded) {
           savedAt.textContent = "Local save failed — export a backup";
@@ -3102,6 +3336,27 @@
       return node("span", `review-state-badge ${badgeClass}`.trim(), label);
     }
 
+    function periodSyncSummary(period) {
+      const states = period.drifts.map((drift) => annotationSyncState(drift.episode_id));
+      if (states.includes("conflict")) return { state: "conflict", label: "Integration conflict" };
+      const changed = states.filter((state) => ["pending", "modified"].includes(state)).length;
+      if (changed) return {
+        state: states.includes("modified") ? "modified" : "pending",
+        label: changed === states.length ? "Changes pending" : `${changed}/${states.length} changes pending`
+      };
+      const exported = states.filter((state) => state === "exported").length;
+      if (exported) return {
+        state: "exported",
+        label: exported === states.length ? "Exported" : `${exported}/${states.length} exported`
+      };
+      const integrated = states.filter((state) => state === "integrated").length;
+      if (integrated) return {
+        state: "integrated",
+        label: integrated === states.length ? "Integrated" : `${integrated}/${states.length} integrated`
+      };
+      return null;
+    }
+
     function renderGrid() {
       grid.replaceChildren();
       goalPeriods.forEach((period, index) => {
@@ -3128,6 +3383,14 @@
           node("time", "tile-date", displayDate(period.start)),
           node("span", `review-state-badge ${reviewSummary.className}`.trim(), reviewSummary.label)
         );
+        const periodSync = periodSyncSummary(period);
+        if (periodSync) {
+          topMeta.append(node(
+            "span",
+            `sync-state-badge is-${periodSync.state}`,
+            periodSync.label
+          ));
+        }
         top.append(topMeta);
 
         const title = node("h3", "", period.goal);
@@ -3173,6 +3436,11 @@
               const reviewBadge = episodeReviewBadge(drift.episode_id, true);
               reviewBadge.classList.add("tile-menu-review-state");
               option.append(reviewBadge);
+              const syncBadge = syncStateBadge(drift.episode_id, true);
+              if (syncBadge) {
+                syncBadge.classList.add("tile-menu-sync-state");
+                option.append(syncBadge);
+              }
               option.addEventListener("click", (event) => {
                 event.stopPropagation();
                 selectPeriod(index, drift.episode_id);
@@ -3225,10 +3493,14 @@
       wrapper.id = `human-review-${episode.episode_id}`;
 
       const heading = node("div", "human-review-heading");
-      heading.append(node("h3", "", "Human review annotation"), episodeReviewBadge(episode.episode_id));
+      const badges = node("span", "human-review-badges");
+      badges.append(episodeReviewBadge(episode.episode_id));
+      const syncBadge = syncStateBadge(episode.episode_id);
+      if (syncBadge) badges.append(syncBadge);
+      heading.append(node("h3", "", "Human review annotation"), badges);
       wrapper.append(
         heading,
-        node("p", "human-review-intro", "Your research labels and notes are saved locally and kept separate from the confirmed episode record.")
+        node("p", "human-review-intro", "Your research labels and notes are saved locally. Integration badges compare this browser copy with the latest committed annotation dataset.")
       );
 
       const form = node("div", "annotation-form");
@@ -3282,7 +3554,6 @@
         field.append(labelRow, options, add);
         return field;
       }
-
       const triggerField = taxonomyField(
         "trigger",
         "Trigger classification",
@@ -3723,7 +3994,7 @@
     }
 
     function applyReviewFilter(filter, preferredEpisodeId = selectedEpisodeId) {
-      reviewFilter = ["all", "unreviewed", "in_progress", "completed", "follow_ups"].includes(filter)
+      reviewFilter = ["all", "unreviewed", "in_progress", "completed", "follow_ups", "needs_sync", "conflicts"].includes(filter)
         ? filter
         : "all";
       reviewFilterSelect.value = reviewFilter;
@@ -3758,7 +4029,7 @@
       ];
       const nextId = searchOrder.find((episodeId) => !annotationIsComplete(annotationFor(episodeId)));
       if (!nextId) {
-        window.alert("All 483 review episodes have a completed decision and trigger classification.");
+        window.alert(`All ${episodes.length} review episodes have a completed decision and trigger classification.`);
         updateReviewDashboard();
         return;
       }
@@ -3780,10 +4051,55 @@
     function exportReviewJson() {
       const payload = {
         ...reviewLedger,
+        export_kind: "full_backup",
         exported_at: new Date().toISOString()
       };
       downloadReviewFile(
         `village-drift-manual-review-${new Date().toISOString().slice(0, 10)}.json`,
+        "application/json",
+        `${JSON.stringify(payload, null, 2)}\n`
+      );
+    }
+
+    function exportReviewChangesJson() {
+      const changedEpisodes = annotationsNeedingIntegration();
+      if (!changedEpisodes.length) {
+        window.alert("There are no browser-local annotation changes awaiting integration.");
+        return;
+      }
+      const changedIds = changedEpisodes.map((episode) => episode.episode_id);
+      changedIds.forEach((episodeId) => {
+        reviewLedger.sync.last_exported_hashes[episodeId] = annotationFingerprint(
+          reviewLedger.annotations[episodeId] || emptyAnnotation()
+        );
+      });
+      reviewLedger.sync.last_exported_at = new Date().toISOString();
+      persistReviewLedger();
+      renderGrid();
+      refreshPanelAtCurrentScroll();
+      const payload = {
+        schema_version: 1,
+        export_kind: "integration_delta",
+        base_seed_id: committedReviewSeed?.seed_id || null,
+        dataset: reviewLedger.dataset,
+        taxonomies: reviewLedger.taxonomies,
+        annotations: Object.fromEntries(changedIds.map((episodeId) => [
+          episodeId,
+          reviewLedger.annotations[episodeId] || emptyAnnotation()
+        ])),
+        sync: reviewLedger.sync,
+        sync_states: Object.fromEntries(changedIds.map((episodeId) => [
+          episodeId,
+          annotationSyncState(episodeId)
+        ])),
+        review_states: Object.fromEntries(changedIds.map((episodeId) => [
+          episodeId,
+          reviewStateForEpisode(episodeId)
+        ])),
+        exported_at: reviewLedger.sync.last_exported_at
+      };
+      downloadReviewFile(
+        `village-drift-manual-review-changes-${new Date().toISOString().slice(0, 10)}.json`,
         "application/json",
         `${JSON.stringify(payload, null, 2)}\n`
       );
@@ -3844,10 +4160,29 @@
         const importedTime = Date.parse(annotation.updated_at || "") || 0;
         if (!local || importedTime >= localTime) {
           reviewLedger.annotations[episodeId] = annotation;
+          const importedBaseline = imported.sync.baseline_hashes[episodeId];
+          const importedExported = imported.sync.last_exported_hashes[episodeId];
+          const importedConflict = imported.sync.conflicts[episodeId];
+          if (importedBaseline) {
+            reviewLedger.sync.baseline_hashes[episodeId] = importedBaseline;
+          } else {
+            delete reviewLedger.sync.baseline_hashes[episodeId];
+          }
+          if (importedExported) {
+            reviewLedger.sync.last_exported_hashes[episodeId] = importedExported;
+          } else {
+            delete reviewLedger.sync.last_exported_hashes[episodeId];
+          }
+          if (importedConflict) {
+            reviewLedger.sync.conflicts[episodeId] = importedConflict;
+          } else {
+            delete reviewLedger.sync.conflicts[episodeId];
+          }
           importedCount += 1;
         }
       });
       persistReviewLedger();
+      applyCommittedReviewSeed();
       applyReviewFilter(reviewFilter, selectedEpisodeId);
       return importedCount;
     }
@@ -3917,6 +4252,7 @@
     villageScopeButton.addEventListener("click", () => selectScope("village"));
     reviewFilterSelect.value = reviewFilter;
     reviewFilterSelect.addEventListener("change", () => applyReviewFilter(reviewFilterSelect.value));
+    document.querySelector("#review-export-changes").addEventListener("click", exportReviewChangesJson);
     document.querySelector("#review-export-json").addEventListener("click", exportReviewJson);
     document.querySelector("#review-export-csv").addEventListener("click", exportReviewCsv);
     const reviewImportFile = document.querySelector("#review-import-file");
