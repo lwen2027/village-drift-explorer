@@ -233,6 +233,159 @@
       color: #fffdf7;
     }
 
+    .review-dashboard {
+      display: grid;
+      grid-template-columns: minmax(210px, 1fr) minmax(170px, .72fr) auto;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: rgba(255, 253, 247, .55);
+    }
+
+    .review-dashboard-progress {
+      display: grid;
+      gap: 6px;
+    }
+
+    .review-dashboard-copy {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .review-dashboard-copy strong { font-size: 12px; }
+
+    .review-dashboard-copy span,
+    .review-saved-at {
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 9px;
+    }
+
+    .review-overall-track {
+      height: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--paper-deep);
+    }
+
+    .review-overall-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+      transition: width .18s ease;
+    }
+
+    .review-filter {
+      display: grid;
+      gap: 5px;
+    }
+
+    .review-filter label {
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 8px;
+      font-weight: 750;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .review-filter select {
+      height: 34px;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      background: rgba(255,255,255,.48);
+      color: var(--ink);
+      font: inherit;
+      font-size: 10px;
+      padding: 6px 8px;
+    }
+
+    .review-backup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .review-tool-button {
+      min-height: 32px;
+      padding: 7px 9px;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      background: rgba(255,255,255,.42);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .review-tool-button:hover { background: white; }
+
+    .tile-top-meta {
+      display: grid;
+      justify-items: end;
+      gap: 6px;
+    }
+
+    .review-state-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.42);
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 8px;
+      font-weight: 750;
+      letter-spacing: .025em;
+      white-space: nowrap;
+    }
+
+    .review-state-badge::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #a7a092;
+      content: "";
+    }
+
+    .review-state-badge.is-progress {
+      border-color: rgba(154, 112, 47, .42);
+      color: #76571f;
+      background: rgba(234, 220, 188, .48);
+    }
+
+    .review-state-badge.is-progress::before { background: #a9792f; }
+
+    .review-state-badge.is-complete {
+      border-color: rgba(56, 90, 76, .4);
+      color: var(--green);
+      background: rgba(201, 216, 196, .48);
+    }
+
+    .review-state-badge.is-complete::before { background: var(--green); }
+
+    .review-state-badge.is-correction {
+      border-color: rgba(163, 78, 53, .42);
+      color: var(--rust);
+      background: rgba(237, 210, 196, .5);
+    }
+
+    .review-state-badge.is-correction::before { background: var(--rust); }
+
+    .episode-tile.review-complete { border-color: rgba(56, 90, 76, .42); }
+    .episode-tile.review-in-progress { border-color: rgba(154, 112, 47, .44); }
+    .episode-tile.review-needs-correction { border-color: rgba(163, 78, 53, .5); }
+
     .episode-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -464,6 +617,10 @@
       color: var(--muted);
       font-size: 9px;
       text-transform: capitalize;
+    }
+
+    .tile-menu-review-state {
+      margin-left: 55px;
     }
 
     .review-panel {
@@ -931,6 +1088,207 @@
     .review-submit:hover:not(:disabled) { background: #29483c; }
 
     .review-submit:disabled {
+      cursor: default;
+      opacity: .42;
+    }
+
+    .human-review-section {
+      background: rgba(223, 211, 188, .16);
+    }
+
+    .human-review-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .human-review-heading h3 { margin: 0; }
+
+    .human-review-intro {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .annotation-form {
+      display: grid;
+      gap: 17px;
+    }
+
+    .annotation-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .annotation-label-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .annotation-label-row label,
+    .annotation-label-row strong {
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .annotation-label-row span {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .annotation-field select,
+    .annotation-field input,
+    .annotation-field textarea,
+    .follow-up-card select,
+    .follow-up-card textarea {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      outline: none;
+      background: rgba(255,255,255,.5);
+      color: var(--ink);
+      font: inherit;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .annotation-field select,
+    .annotation-field input,
+    .follow-up-card select { height: 37px; padding: 7px 9px; }
+
+    .annotation-field textarea,
+    .follow-up-card textarea {
+      min-height: 86px;
+      padding: 9px;
+      resize: vertical;
+    }
+
+    .annotation-field :is(select, input, textarea):focus,
+    .follow-up-card :is(select, textarea):focus {
+      border-color: var(--selected-agent, var(--green));
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--selected-agent, var(--green)) 18%, transparent);
+    }
+
+    .taxonomy-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .taxonomy-option {
+      position: relative;
+    }
+
+    .taxonomy-option input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .taxonomy-option span {
+      display: block;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.38);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 9px;
+      line-height: 1.25;
+    }
+
+    .taxonomy-option input:checked + span {
+      border-color: var(--selected-agent, var(--green));
+      background: color-mix(in srgb, var(--selected-agent, var(--green)) 13%, white);
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .taxonomy-option input:focus-visible + span {
+      outline: 2px solid var(--selected-agent, var(--green));
+      outline-offset: 2px;
+    }
+
+    .taxonomy-add {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px;
+    }
+
+    .taxonomy-add button,
+    .follow-up-add,
+    .follow-up-remove,
+    .complete-next-button {
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      background: rgba(255,255,255,.45);
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+    .taxonomy-add button { padding: 7px 10px; }
+    .taxonomy-add button:hover,
+    .follow-up-add:hover,
+    .follow-up-remove:hover { background: white; }
+
+    .follow-up-list { display: grid; gap: 8px; }
+
+    .follow-up-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: rgba(255,255,255,.28);
+    }
+
+    .follow-up-card-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 7px;
+    }
+
+    .follow-up-remove { padding: 6px 9px; color: var(--rust); }
+    .follow-up-add { justify-self: start; padding: 7px 10px; }
+
+    .annotation-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 2px;
+    }
+
+    .annotation-save-status {
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 9px;
+    }
+
+    .annotation-save-status.is-error { color: var(--rust); }
+
+    .complete-next-button {
+      min-height: 37px;
+      padding: 8px 11px;
+      border-color: var(--green);
+      background: var(--green);
+      color: white;
+    }
+
+    .complete-next-button:hover:not(:disabled) { background: #29483c; }
+
+    .complete-next-button:disabled {
       cursor: default;
       opacity: .42;
     }
@@ -1410,6 +1768,8 @@
     @media (max-width: 1120px) {
       .episode-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .workspace { grid-template-columns: minmax(460px, 1fr) minmax(360px, 430px); }
+      .review-dashboard { grid-template-columns: 1fr 1fr; }
+      .review-backup-actions { grid-column: 1 / -1; justify-content: flex-start; }
     }
 
     @media (max-width: 820px) {
@@ -1423,8 +1783,12 @@
       .scope-switcher { align-items: stretch; flex-direction: column; }
       .scope-options { display: grid; grid-template-columns: 1fr; }
       .scope-button { justify-content: space-between; }
+      .review-dashboard { grid-template-columns: 1fr; }
+      .review-backup-actions { grid-column: auto; }
       .review-actions { align-items: stretch; flex-direction: column; }
       .review-submit { width: 100%; }
+      .annotation-actions { align-items: stretch; flex-direction: column; }
+      .complete-next-button { width: 100%; }
     }
   </style>
 </head>
@@ -1461,6 +1825,34 @@
             <button class="scope-button" id="village-scope" type="button" aria-pressed="false" hidden>
               Shared Village goals <span class="scope-count" id="village-count">—</span>
             </button>
+          </div>
+        </div>
+        <div class="review-dashboard" aria-label="Manual review progress and backups">
+          <div class="review-dashboard-progress">
+            <div class="review-dashboard-copy">
+              <strong id="review-progress-count">0 of 483 completed</strong>
+              <span id="review-saved-at">No local reviews yet</span>
+            </div>
+            <div class="review-overall-track" aria-hidden="true">
+              <div class="review-overall-fill" id="review-overall-fill"></div>
+            </div>
+          </div>
+          <div class="review-filter">
+            <label for="review-filter">Show episodes</label>
+            <select id="review-filter">
+              <option value="all">All review episodes</option>
+              <option value="unreviewed">Unreviewed</option>
+              <option value="in_progress">Saved / in progress</option>
+              <option value="completed">Completed</option>
+              <option value="needs_correction">Needs correction</option>
+              <option value="follow_ups">Has follow-ups</option>
+            </select>
+          </div>
+          <div class="review-backup-actions">
+            <button class="review-tool-button" id="review-export-json" type="button">Export JSON</button>
+            <button class="review-tool-button" id="review-export-csv" type="button">Export CSV</button>
+            <button class="review-tool-button" id="review-import" type="button">Import backup</button>
+            <input id="review-import-file" type="file" accept="application/json,.json" hidden>
           </div>
         </div>
         <div class="episode-grid" id="episode-grid"></div>
@@ -1517,6 +1909,191 @@
       .sort()[0] || "2026-07-06";
 
     const allEpisodes = episodes;
+
+    const REVIEW_STORAGE_KEY = "village-drift-manual-review-ledger:v1";
+    const reviewDecisionLabels = {
+      accurate: "Accurate as recorded",
+      needs_correction: "Needs data correction",
+      not_drift: "Not actually goal drift",
+      cannot_verify: "Cannot verify"
+    };
+    const starterTaxonomies = {
+      trigger: [
+        ["user_message", "User message"],
+        ["user_email", "User email"],
+        ["gitlab_issue_or_comment", "GitLab issue/comment"],
+        ["agent_message_or_request", "Agent message/request"],
+        ["self_initiated_or_continuation", "Self-initiated/continuation"],
+        ["operator_or_system_event", "Operator/system event"],
+        ["no_discrete_trigger", "No discrete trigger"],
+        ["unknown", "Unknown"]
+      ].map(([id, label]) => ({ id, label, custom: false })),
+      recovery: [
+        ["self_correction", "Self-correction"],
+        ["operator_nudge", "Operator nudge"],
+        ["peer_feedback", "Peer feedback"],
+        ["external_user_intervention", "External user intervention"],
+        ["goal_reassignment", "Goal reassignment"],
+        ["natural_end_or_timeout", "Natural end or timeout"],
+        ["not_corrected", "Not corrected"],
+        ["unknown", "Unknown"]
+      ].map(([id, label]) => ({ id, label, custom: false }))
+    };
+
+    function freshReviewLedger() {
+      return {
+        schema_version: 1,
+        dataset: {
+          generated_at: auditBundle.metadata?.generated_at || null,
+          episode_count: episodes.length,
+          episode_ids: episodes.map((episode) => episode.episode_id)
+        },
+        taxonomies: {
+          trigger: starterTaxonomies.trigger.map((item) => ({ ...item })),
+          recovery: starterTaxonomies.recovery.map((item) => ({ ...item }))
+        },
+        annotations: {},
+        saved_at: null
+      };
+    }
+
+    function normalizeReviewLedger(candidate) {
+      const clean = freshReviewLedger();
+      if (!candidate || candidate.schema_version !== 1) return clean;
+      ["trigger", "recovery"].forEach((kind) => {
+        const merged = new Map(clean.taxonomies[kind].map((item) => [item.id, item]));
+        (candidate.taxonomies?.[kind] || []).forEach((item) => {
+          if (item?.id && item?.label) merged.set(String(item.id), {
+            id: String(item.id), label: String(item.label), custom: Boolean(item.custom)
+          });
+        });
+        clean.taxonomies[kind] = [...merged.values()];
+      });
+      const validIds = new Set(episodes.map((episode) => episode.episode_id));
+      Object.entries(candidate.annotations || {}).forEach(([episodeId, value]) => {
+        if (!validIds.has(episodeId) || !value || typeof value !== "object") return;
+        clean.annotations[episodeId] = {
+          review_decision: reviewDecisionLabels[value.review_decision] ? value.review_decision : "",
+          trigger_categories: Array.isArray(value.trigger_categories) ? [...new Set(value.trigger_categories.map(String))] : [],
+          recovery_mechanisms: Array.isArray(value.recovery_mechanisms) ? [...new Set(value.recovery_mechanisms.map(String))] : [],
+          notes: typeof value.notes === "string" ? value.notes : "",
+          follow_ups: Array.isArray(value.follow_ups) ? value.follow_ups
+            .filter((item) => item && ["replay_scenario", "iteration_idea"].includes(item.type))
+            .map((item) => ({
+              id: String(item.id || makeLocalId("followup")),
+              type: item.type,
+              note: typeof item.note === "string" ? item.note : ""
+            })) : [],
+          updated_at: value.updated_at || null
+        };
+      });
+      clean.saved_at = candidate.saved_at || null;
+      return clean;
+    }
+
+    function makeLocalId(prefix) {
+      if (globalThis.crypto?.randomUUID) return `${prefix}_${crypto.randomUUID()}`;
+      return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+    }
+
+    let reviewLedger;
+    try {
+      reviewLedger = normalizeReviewLedger(JSON.parse(localStorage.getItem(REVIEW_STORAGE_KEY) || "null"));
+    } catch {
+      reviewLedger = freshReviewLedger();
+    }
+
+    function emptyAnnotation() {
+      return {
+        review_decision: "",
+        trigger_categories: [],
+        recovery_mechanisms: [],
+        notes: "",
+        follow_ups: [],
+        updated_at: null
+      };
+    }
+
+    function annotationFor(episodeId) {
+      return reviewLedger.annotations[episodeId] || emptyAnnotation();
+    }
+
+    function annotationHasContent(annotation) {
+      return Boolean(
+        annotation.review_decision ||
+        annotation.trigger_categories?.length ||
+        annotation.recovery_mechanisms?.length ||
+        annotation.notes?.trim() ||
+        annotation.follow_ups?.length
+      );
+    }
+
+    function annotationIsComplete(annotation) {
+      return Boolean(annotation.review_decision && annotation.trigger_categories?.length);
+    }
+
+    function reviewStateForEpisode(episodeId) {
+      const annotation = annotationFor(episodeId);
+      if (annotation.review_decision === "needs_correction") return "needs_correction";
+      if (annotationIsComplete(annotation)) return "completed";
+      if (annotationHasContent(annotation)) return "in_progress";
+      return "unreviewed";
+    }
+
+    function reviewStateLabel(state) {
+      return ({
+        unreviewed: "Unreviewed",
+        in_progress: "Saved · in progress",
+        completed: "Completed",
+        needs_correction: "Needs correction"
+      })[state] || "Unreviewed";
+    }
+
+    let lastReviewSaveSucceeded = true;
+    function persistReviewLedger() {
+      reviewLedger.saved_at = new Date().toISOString();
+      try {
+        localStorage.setItem(REVIEW_STORAGE_KEY, JSON.stringify(reviewLedger));
+        lastReviewSaveSucceeded = true;
+      } catch {
+        lastReviewSaveSucceeded = false;
+      }
+      updateReviewDashboard();
+      return lastReviewSaveSucceeded;
+    }
+
+    function updateAnnotation(episodeId, updater, refreshCards = true) {
+      const priorState = reviewStateForEpisode(episodeId);
+      const annotation = { ...annotationFor(episodeId) };
+      annotation.trigger_categories = [...(annotation.trigger_categories || [])];
+      annotation.recovery_mechanisms = [...(annotation.recovery_mechanisms || [])];
+      annotation.follow_ups = (annotation.follow_ups || []).map((item) => ({ ...item }));
+      updater(annotation);
+      annotation.updated_at = new Date().toISOString();
+      reviewLedger.annotations[episodeId] = annotation;
+      persistReviewLedger();
+      if (refreshCards || reviewStateForEpisode(episodeId) !== priorState) renderGrid();
+      return annotation;
+    }
+
+    function categoryLabel(kind, categoryId) {
+      return reviewLedger.taxonomies[kind]?.find((item) => item.id === categoryId)?.label || categoryId;
+    }
+
+    function createReviewCategory(kind, rawLabel) {
+      const label = String(rawLabel || "").trim();
+      if (!label) return null;
+      const existing = reviewLedger.taxonomies[kind].find((item) => item.label.toLowerCase() === label.toLowerCase());
+      if (existing) return existing.id;
+      const base = label.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "category";
+      let id = `custom_${base}`;
+      let suffix = 2;
+      const used = new Set(reviewLedger.taxonomies[kind].map((item) => item.id));
+      while (used.has(id)) id = `custom_${base}_${suffix++}`;
+      reviewLedger.taxonomies[kind].push({ id, label, custom: true });
+      persistReviewLedger();
+      return id;
+    }
 
     const repairedEpisodeAliases = new Map(
       allEpisodes
@@ -1727,11 +2304,38 @@
     }
 
     const initialId = canonicalEpisodeId(location.hash.slice(1));
+    const requestedReviewFilter = new URLSearchParams(location.search).get("review");
+    const initialReviewFilter = ["all", "unreviewed", "in_progress", "completed", "needs_correction", "follow_ups"].includes(requestedReviewFilter)
+      ? requestedReviewFilter
+      : "all";
     const initiallyLinkedPeriod = allGoalPeriods.find((period) =>
       period.id === initialId || period.drifts.some((drift) => drift.episode_id === initialId)
     );
     let activeScope = "maximization";
-    let goalPeriods = allGoalPeriods.filter((period) => regimeForPeriod(period) === activeScope);
+    let reviewFilter = initialReviewFilter;
+
+    function episodeMatchesReviewFilter(episodeId, filter = reviewFilter) {
+      const annotation = annotationFor(episodeId);
+      const state = reviewStateForEpisode(episodeId);
+      if (filter === "unreviewed") return state === "unreviewed";
+      if (filter === "in_progress") return state === "in_progress";
+      if (filter === "completed") return annotationIsComplete(annotation);
+      if (filter === "needs_correction") return state === "needs_correction";
+      if (filter === "follow_ups") return Boolean(annotation.follow_ups?.length);
+      return true;
+    }
+
+    function visibleGoalPeriods() {
+      return allGoalPeriods
+        .filter((period) => regimeForPeriod(period) === activeScope)
+        .map((period) => ({
+          ...period,
+          drifts: period.drifts.filter((drift) => episodeMatchesReviewFilter(drift.episode_id))
+        }))
+        .filter((period) => period.drifts.length);
+    }
+
+    let goalPeriods = visibleGoalPeriods();
 
     const palette = [
       "#466a59", "#b05e40", "#6d5a8c", "#3e6f80", "#9a793d",
@@ -1755,6 +2359,7 @@
     const nextButton = document.querySelector("#next-button");
     const maximizationScopeButton = document.querySelector("#maximization-scope");
     const villageScopeButton = document.querySelector("#village-scope");
+    const reviewFilterSelect = document.querySelector("#review-filter");
 
     function scopeEpisodeCount(scope) {
       return allGoalPeriods
@@ -1774,7 +2379,27 @@
       document.querySelector("#dataset-count").textContent = `${goalPeriods.length} goal periods · ${episodeCount} episodes to review`;
     }
 
+    function updateReviewDashboard() {
+      const completed = episodes.filter((episode) => annotationIsComplete(annotationFor(episode.episode_id))).length;
+      const progress = episodes.length ? (completed / episodes.length) * 100 : 0;
+      const progressCount = document.querySelector("#review-progress-count");
+      const progressFill = document.querySelector("#review-overall-fill");
+      const savedAt = document.querySelector("#review-saved-at");
+      if (progressCount) progressCount.textContent = `${completed} of ${episodes.length} completed`;
+      if (progressFill) progressFill.style.width = `${progress}%`;
+      if (savedAt) {
+        if (!lastReviewSaveSucceeded) {
+          savedAt.textContent = "Local save failed — export a backup";
+        } else if (reviewLedger.saved_at) {
+          savedAt.textContent = `Saved locally ${new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", second: "2-digit" }).format(new Date(reviewLedger.saved_at))}`;
+        } else {
+          savedAt.textContent = "No local reviews yet";
+        }
+      }
+    }
+
     updateScopeChrome();
+    updateReviewDashboard();
 
     function node(tag, className, text) {
       const element = document.createElement(tag);
@@ -2346,6 +2971,44 @@
       return url.toString();
     }
 
+    function periodReviewSummary(period) {
+      const states = period.drifts.map((drift) => reviewStateForEpisode(drift.episode_id));
+      const correctionCount = states.filter((state) => state === "needs_correction").length;
+      const completedCount = period.drifts.filter((drift) => annotationIsComplete(annotationFor(drift.episode_id))).length;
+      const progressCount = states.filter((state) => state === "in_progress").length;
+      if (correctionCount) {
+        return {
+          state: "needs_correction",
+          className: "is-correction",
+          tileClass: "review-needs-correction",
+          label: `${correctionCount} need${correctionCount === 1 ? "s" : ""} correction`
+        };
+      }
+      if (completedCount === states.length && states.length) {
+        return { state: "completed", className: "is-complete", tileClass: "review-complete", label: "Completed" };
+      }
+      if (completedCount || progressCount) {
+        return {
+          state: "in_progress",
+          className: "is-progress",
+          tileClass: "review-in-progress",
+          label: completedCount ? `${completedCount}/${states.length} completed` : "Saved · in progress"
+        };
+      }
+      return { state: "unreviewed", className: "", tileClass: "", label: "Unreviewed" };
+    }
+
+    function episodeReviewBadge(episodeId, compact = false) {
+      const state = reviewStateForEpisode(episodeId);
+      const badgeClass = state === "needs_correction"
+        ? "is-correction"
+        : state === "completed"
+          ? "is-complete"
+          : state === "in_progress" ? "is-progress" : "";
+      const label = compact && state === "in_progress" ? "Saved" : reviewStateLabel(state);
+      return node("span", `review-state-badge ${badgeClass}`.trim(), label);
+    }
+
     function renderGrid() {
       grid.replaceChildren();
       goalPeriods.forEach((period, index) => {
@@ -2355,9 +3018,10 @@
           const record = allEpisodes.find((episode) => episode.episode_id === drift.episode_id);
           return record && episodeDurationMeasurement(record).seconds == null;
         }).length;
+        const reviewSummary = periodReviewSummary(period);
         const menuOpen = openMenuPeriodId === period.id;
         const shell = node("div", `tile-shell${menuOpen ? " is-menu-open" : ""}`);
-        const tile = node("button", `episode-tile${index === selectedIndex ? " is-selected" : ""}${hasDrift ? "" : " has-no-drift"}`);
+        const tile = node("button", `episode-tile${index === selectedIndex ? " is-selected" : ""}${hasDrift ? "" : " has-no-drift"}${reviewSummary.tileClass ? ` ${reviewSummary.tileClass}` : ""}`);
         tile.type = "button";
         tile.dataset.index = index;
         tile.style.setProperty("--agent-color", agentColors.get(period.agent));
@@ -2366,7 +3030,12 @@
 
         const top = node("div", "tile-top");
         top.append(node("span", "agent-name", period.agent));
-        top.append(node("time", "tile-date", displayDate(period.start)));
+        const topMeta = node("span", "tile-top-meta");
+        topMeta.append(
+          node("time", "tile-date", displayDate(period.start)),
+          node("span", `review-state-badge ${reviewSummary.className}`.trim(), reviewSummary.label)
+        );
+        top.append(topMeta);
 
         const title = node("h3", "", period.goal);
         const ribbon = renderPeriodRibbon(period, index === selectedIndex ? selectedEpisodeId : null, true);
@@ -2408,6 +3077,9 @@
                 node("span", "", optionMeta)
               );
               option.append(date, copy);
+              const reviewBadge = episodeReviewBadge(drift.episode_id, true);
+              reviewBadge.classList.add("tile-menu-review-state");
+              option.append(reviewBadge);
               option.addEventListener("click", (event) => {
                 event.stopPropagation();
                 selectPeriod(index, drift.episode_id);
@@ -2445,6 +3117,208 @@
         meta.append(item);
       });
       wrapper.append(meta);
+      return wrapper;
+    }
+
+    function refreshPanelAtCurrentScroll() {
+      const scrollPosition = panel.scrollTop;
+      renderPanel();
+      panel.scrollTop = scrollPosition;
+    }
+
+    function renderHumanReview(episode) {
+      const annotation = annotationFor(episode.episode_id);
+      const state = reviewStateForEpisode(episode.episode_id);
+      const wrapper = node("section", "panel-section human-review-section");
+      wrapper.id = `human-review-${episode.episode_id}`;
+
+      const heading = node("div", "human-review-heading");
+      heading.append(node("h3", "", "Human review annotation"), episodeReviewBadge(episode.episode_id));
+      wrapper.append(
+        heading,
+        node("p", "human-review-intro", "Your validation and research labels are saved locally and kept separate from the confirmed episode record.")
+      );
+
+      const form = node("div", "annotation-form");
+      const decisionField = node("div", "annotation-field");
+      const decisionLabelRow = node("div", "annotation-label-row");
+      const decisionLabel = node("label", "", "Review decision");
+      const decisionSelect = node("select");
+      decisionSelect.id = `annotation-decision-${episode.episode_id}`;
+      decisionLabel.htmlFor = decisionSelect.id;
+      const decisionPlaceholder = node("option", "", "Choose a decision…");
+      decisionPlaceholder.value = "";
+      decisionSelect.append(decisionPlaceholder);
+      Object.entries(reviewDecisionLabels).forEach(([value, label]) => {
+        const option = node("option", "", label);
+        option.value = value;
+        decisionSelect.append(option);
+      });
+      decisionSelect.value = annotation.review_decision || "";
+      decisionLabelRow.append(decisionLabel, node("span", "", "Required for completion"));
+      decisionField.append(decisionLabelRow, decisionSelect);
+
+      function taxonomyField(kind, title, hint, valueField) {
+        const field = node("div", "annotation-field");
+        const labelRow = node("div", "annotation-label-row");
+        labelRow.append(node("strong", "", title), node("span", "", hint));
+        const options = node("div", "taxonomy-options");
+        const selected = new Set(annotation[valueField] || []);
+        reviewLedger.taxonomies[kind].forEach((category) => {
+          const option = node("label", "taxonomy-option");
+          const checkbox = node("input");
+          checkbox.type = "checkbox";
+          checkbox.value = category.id;
+          checkbox.checked = selected.has(category.id);
+          const copy = node("span", "", category.label);
+          checkbox.addEventListener("change", () => {
+            updateAnnotation(episode.episode_id, (next) => {
+              const values = new Set(next[valueField] || []);
+              if (checkbox.checked) values.add(category.id);
+              else values.delete(category.id);
+              next[valueField] = [...values];
+            });
+            refreshPanelAtCurrentScroll();
+          });
+          option.append(checkbox, copy);
+          options.append(option);
+        });
+
+        const add = node("div", "taxonomy-add");
+        const input = node("input");
+        input.type = "text";
+        input.placeholder = `Add a new ${kind === "trigger" ? "trigger category" : "recovery mechanism"}…`;
+        const addButton = node("button", "", "Add category");
+        addButton.type = "button";
+        const addCategory = () => {
+          const categoryId = createReviewCategory(kind, input.value);
+          if (!categoryId) return;
+          updateAnnotation(episode.episode_id, (next) => {
+            next[valueField] = [...new Set([...(next[valueField] || []), categoryId])];
+          });
+          refreshPanelAtCurrentScroll();
+        };
+        addButton.addEventListener("click", addCategory);
+        input.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter") return;
+          event.preventDefault();
+          addCategory();
+        });
+        add.append(input, addButton);
+        field.append(labelRow, options, add);
+        return field;
+      }
+
+      const triggerField = taxonomyField(
+        "trigger",
+        "Trigger classification",
+        "Select one or more · required for completion",
+        "trigger_categories"
+      );
+      const recoveryField = taxonomyField(
+        "recovery",
+        "Recovery/correction mechanism",
+        "Optional · select any that apply",
+        "recovery_mechanisms"
+      );
+
+      const notesField = node("div", "annotation-field");
+      const notesLabelRow = node("div", "annotation-label-row");
+      const notesLabel = node("label", "", "Review notes");
+      const notes = node("textarea");
+      notes.id = `annotation-notes-${episode.episode_id}`;
+      notes.value = annotation.notes || "";
+      notes.placeholder = "Record interpretation, uncertainty, taxonomy thoughts, or anything worth preserving.";
+      notesLabel.htmlFor = notes.id;
+      notesLabelRow.append(notesLabel, node("span", "", "Optional"));
+      notesField.append(notesLabelRow, notes);
+
+      const followUpField = node("div", "annotation-field");
+      const followUpLabelRow = node("div", "annotation-label-row");
+      followUpLabelRow.append(node("strong", "", "Follow-ups"), node("span", "", "Optional · add as many as needed"));
+      const followUpList = node("div", "follow-up-list");
+      (annotation.follow_ups || []).forEach((followUp) => {
+        const card = node("div", "follow-up-card");
+        const head = node("div", "follow-up-card-head");
+        const type = node("select");
+        [["replay_scenario", "Replay scenario"], ["iteration_idea", "Iteration idea"]].forEach(([value, label]) => {
+          const option = node("option", "", label);
+          option.value = value;
+          type.append(option);
+        });
+        type.value = followUp.type;
+        const remove = node("button", "follow-up-remove", "Remove");
+        remove.type = "button";
+        head.append(type, remove);
+        const note = node("textarea");
+        note.value = followUp.note || "";
+        note.placeholder = followUp.type === "replay_scenario"
+          ? "Describe what to replay or vary and what you want to observe."
+          : "Describe the pipeline, interface, or research iteration to try.";
+        type.addEventListener("change", () => {
+          updateAnnotation(episode.episode_id, (next) => {
+            const target = next.follow_ups.find((item) => item.id === followUp.id);
+            if (target) target.type = type.value;
+          }, false);
+        });
+        note.addEventListener("input", () => {
+          updateAnnotation(episode.episode_id, (next) => {
+            const target = next.follow_ups.find((item) => item.id === followUp.id);
+            if (target) target.note = note.value;
+          }, false);
+          updateLocalSaveCopy();
+        });
+        remove.addEventListener("click", () => {
+          updateAnnotation(episode.episode_id, (next) => {
+            next.follow_ups = next.follow_ups.filter((item) => item.id !== followUp.id);
+          });
+          refreshPanelAtCurrentScroll();
+        });
+        card.append(head, note);
+        followUpList.append(card);
+      });
+      const addFollowUp = node("button", "follow-up-add", "+ Add follow-up");
+      addFollowUp.type = "button";
+      addFollowUp.addEventListener("click", () => {
+        updateAnnotation(episode.episode_id, (next) => {
+          next.follow_ups.push({ id: makeLocalId("followup"), type: "replay_scenario", note: "" });
+        });
+        refreshPanelAtCurrentScroll();
+      });
+      followUpField.append(followUpLabelRow, followUpList, addFollowUp);
+
+      const actions = node("div", "annotation-actions");
+      const saveStatus = node("span", "annotation-save-status");
+      const completeNext = node("button", "complete-next-button", "Complete and open next unreviewed →");
+      completeNext.type = "button";
+      completeNext.disabled = !annotationIsComplete(annotation);
+
+      function updateLocalSaveCopy() {
+        saveStatus.classList.toggle("is-error", !lastReviewSaveSucceeded);
+        if (!lastReviewSaveSucceeded) {
+          saveStatus.textContent = "Local save failed — export a backup";
+          return;
+        }
+        const current = annotationFor(episode.episode_id);
+        saveStatus.textContent = current.updated_at
+          ? `Saved locally ${new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", second: "2-digit" }).format(new Date(current.updated_at))}`
+          : "Changes save locally as you work";
+      }
+
+      decisionSelect.addEventListener("change", () => {
+        updateAnnotation(episode.episode_id, (next) => { next.review_decision = decisionSelect.value; });
+        refreshPanelAtCurrentScroll();
+      });
+      notes.addEventListener("input", () => {
+        updateAnnotation(episode.episode_id, (next) => { next.notes = notes.value; }, false);
+        updateLocalSaveCopy();
+      });
+      completeNext.addEventListener("click", () => openNextUnreviewedEpisode(episode.episode_id));
+      updateLocalSaveCopy();
+      actions.append(saveStatus, completeNext);
+
+      form.append(decisionField, triggerField, recoveryField, notesField, followUpField, actions);
+      wrapper.append(form);
       return wrapper;
     }
 
@@ -2622,6 +3496,20 @@
 
     function renderPanel() {
       const period = goalPeriods[selectedIndex];
+      if (!period) {
+        panel.replaceChildren();
+        const empty = node("section", "panel-section");
+        empty.append(
+          node("h3", "", "No episodes match this filter"),
+          node("p", "summary-copy", "Choose another review filter to continue.")
+        );
+        panel.append(empty);
+        document.querySelector("#progress-label").textContent = "NO MATCHING EPISODES";
+        document.querySelector("#progress-fill").style.width = "0%";
+        prevButton.disabled = true;
+        nextButton.disabled = true;
+        return;
+      }
       const episode = detailedEpisodeForPeriod(period);
       const color = agentColors.get(period.agent);
       document.querySelector(".review-panel").style.setProperty("--selected-agent", color);
@@ -2684,6 +3572,7 @@
         panel.append(renderMetadata(episode));
 
         if (episode.dissent) panel.append(section("Alternative interpretation", episode.dissent));
+        panel.append(renderHumanReview(episode));
         panel.append(renderEpisodeReview(episode, period));
       } else {
         panel.append(section(
@@ -2693,7 +3582,7 @@
       }
 
       const footerId = episode ? `EPISODE ID ${episode.episode_id}` : `GOAL PERIOD ${period.id}`;
-      panel.append(node("div", "panel-footer", `${footerId} · SECOND AUDIT V2 · READ-ONLY PROTOTYPE`));
+      panel.append(node("div", "panel-footer", `${footerId} · SECOND AUDIT V2 · SOURCE DATA READ-ONLY`));
 
       const orderedDrifts = [...period.drifts]
         .sort((a, b) => String(a.onset).localeCompare(String(b.onset)));
@@ -2710,6 +3599,134 @@
       nextButton.disabled = !orderedDrifts.length || selectedEpisodeIndex >= orderedDrifts.length - 1;
     }
 
+    function applyReviewFilter(filter, preferredEpisodeId = selectedEpisodeId) {
+      reviewFilter = ["all", "unreviewed", "in_progress", "completed", "needs_correction", "follow_ups"].includes(filter)
+        ? filter
+        : "all";
+      reviewFilterSelect.value = reviewFilter;
+      goalPeriods = visibleGoalPeriods();
+      let nextIndex = goalPeriods.findIndex((period) =>
+        period.drifts.some((drift) => drift.episode_id === preferredEpisodeId)
+      );
+      if (nextIndex < 0) nextIndex = 0;
+      selectedIndex = nextIndex;
+      const period = goalPeriods[selectedIndex];
+      selectedEpisodeId = period?.drifts.some((drift) => drift.episode_id === preferredEpisodeId)
+        ? preferredEpisodeId
+        : period?.drifts[0]?.episode_id || null;
+      openMenuPeriodId = null;
+      updateScopeChrome();
+      renderGrid();
+      renderPanel();
+      panel.scrollTop = 0;
+      history.replaceState(null, "", `?scope=${activeScope}&review=${reviewFilter}#${selectedEpisodeId || ""}`);
+    }
+
+    function openNextUnreviewedEpisode(currentEpisodeId) {
+      const orderedIds = allGoalPeriods.flatMap((period) =>
+        [...period.drifts]
+          .sort((left, right) => String(left.onset).localeCompare(String(right.onset)))
+          .map((drift) => drift.episode_id)
+      );
+      const currentIndex = orderedIds.indexOf(currentEpisodeId);
+      const searchOrder = [
+        ...orderedIds.slice(currentIndex + 1),
+        ...orderedIds.slice(0, Math.max(0, currentIndex))
+      ];
+      const nextId = searchOrder.find((episodeId) => !annotationIsComplete(annotationFor(episodeId)));
+      if (!nextId) {
+        window.alert("All 483 review episodes have a completed decision and trigger classification.");
+        updateReviewDashboard();
+        return;
+      }
+      applyReviewFilter("unreviewed", nextId);
+    }
+
+    function downloadReviewFile(filename, mimeType, content) {
+      const blob = new Blob([content], { type: mimeType });
+      const href = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = href;
+      link.download = filename;
+      document.body.append(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(href), 0);
+    }
+
+    function exportReviewJson() {
+      const payload = {
+        ...reviewLedger,
+        exported_at: new Date().toISOString()
+      };
+      downloadReviewFile(
+        `village-drift-manual-review-${new Date().toISOString().slice(0, 10)}.json`,
+        "application/json",
+        `${JSON.stringify(payload, null, 2)}\n`
+      );
+    }
+
+    function csvCell(value) {
+      let copy = value == null ? "" : String(value);
+      if (/^[=+\-@]/.test(copy)) copy = `'${copy}`;
+      return `"${copy.replaceAll('"', '""')}"`;
+    }
+
+    function exportReviewCsv() {
+      const headers = [
+        "episode_id", "agent", "onset", "review_state", "review_decision",
+        "trigger_category_ids", "trigger_category_labels", "recovery_mechanism_ids",
+        "recovery_mechanism_labels", "notes", "follow_ups_json", "updated_at"
+      ];
+      const rows = episodes.map((episode) => {
+        const annotation = annotationFor(episode.episode_id);
+        return [
+          episode.episode_id,
+          episode.agent,
+          episode.onset || episode.activity_start || "",
+          reviewStateForEpisode(episode.episode_id),
+          annotation.review_decision,
+          (annotation.trigger_categories || []).join("|"),
+          (annotation.trigger_categories || []).map((id) => categoryLabel("trigger", id)).join("|"),
+          (annotation.recovery_mechanisms || []).join("|"),
+          (annotation.recovery_mechanisms || []).map((id) => categoryLabel("recovery", id)).join("|"),
+          annotation.notes,
+          JSON.stringify(annotation.follow_ups || []),
+          annotation.updated_at || ""
+        ];
+      });
+      const csv = [headers, ...rows].map((row) => row.map(csvCell).join(",")).join("\r\n");
+      downloadReviewFile(
+        `village-drift-manual-review-${new Date().toISOString().slice(0, 10)}.csv`,
+        "text/csv;charset=utf-8",
+        `\ufeff${csv}\r\n`
+      );
+    }
+
+    function mergeImportedReviewLedger(candidate) {
+      const imported = normalizeReviewLedger(candidate);
+      ["trigger", "recovery"].forEach((kind) => {
+        const existing = new Map(reviewLedger.taxonomies[kind].map((item) => [item.id, item]));
+        imported.taxonomies[kind].forEach((item) => {
+          if (!existing.has(item.id)) existing.set(item.id, item);
+        });
+        reviewLedger.taxonomies[kind] = [...existing.values()];
+      });
+      let importedCount = 0;
+      Object.entries(imported.annotations).forEach(([episodeId, annotation]) => {
+        const local = reviewLedger.annotations[episodeId];
+        const localTime = Date.parse(local?.updated_at || "") || 0;
+        const importedTime = Date.parse(annotation.updated_at || "") || 0;
+        if (!local || importedTime >= localTime) {
+          reviewLedger.annotations[episodeId] = annotation;
+          importedCount += 1;
+        }
+      });
+      persistReviewLedger();
+      applyReviewFilter(reviewFilter, selectedEpisodeId);
+      return importedCount;
+    }
+
     function selectPeriod(index, episodeId = null) {
       if (index < 0 || index >= goalPeriods.length) return;
       const period = goalPeriods[index];
@@ -2721,7 +3738,7 @@
       renderGrid();
       renderPanel();
       panel.scrollTop = 0;
-      history.replaceState(null, "", `?scope=${activeScope}#${selectedEpisodeId || period.id}`);
+      history.replaceState(null, "", `?scope=${activeScope}&review=${reviewFilter}#${selectedEpisodeId || period.id}`);
     }
 
     function toggleEpisodeMenu(index) {
@@ -2734,7 +3751,7 @@
       openMenuPeriodId = wasOpen ? null : period.id;
       renderGrid();
       renderPanel();
-      history.replaceState(null, "", `?scope=${activeScope}#${selectedEpisodeId || period.id}`);
+      history.replaceState(null, "", `?scope=${activeScope}&review=${reviewFilter}#${selectedEpisodeId || period.id}`);
     }
 
     function selectEpisodeOffset(offset) {
@@ -2752,13 +3769,13 @@
       renderGrid();
       renderPanel();
       panel.scrollTop = 0;
-      history.replaceState(null, "", `?scope=${activeScope}#${selectedEpisodeId}`);
+      history.replaceState(null, "", `?scope=${activeScope}&review=${reviewFilter}#${selectedEpisodeId}`);
     }
 
     function selectScope(scope) {
       if (scope === activeScope) return;
       activeScope = scope;
-      goalPeriods = allGoalPeriods.filter((period) => regimeForPeriod(period) === activeScope);
+      goalPeriods = visibleGoalPeriods();
       selectedIndex = 0;
       selectedEpisodeId = goalPeriods[0]?.drifts[0]?.episode_id || null;
       openMenuPeriodId = null;
@@ -2766,13 +3783,35 @@
       renderGrid();
       renderPanel();
       panel.scrollTop = 0;
-      history.replaceState(null, "", `?scope=${activeScope}#${selectedEpisodeId || ""}`);
+      history.replaceState(null, "", `?scope=${activeScope}&review=${reviewFilter}#${selectedEpisodeId || ""}`);
     }
 
     prevButton.addEventListener("click", () => selectEpisodeOffset(-1));
     nextButton.addEventListener("click", () => selectEpisodeOffset(1));
     maximizationScopeButton.addEventListener("click", () => selectScope("maximization"));
     villageScopeButton.addEventListener("click", () => selectScope("village"));
+    reviewFilterSelect.value = reviewFilter;
+    reviewFilterSelect.addEventListener("change", () => applyReviewFilter(reviewFilterSelect.value));
+    document.querySelector("#review-export-json").addEventListener("click", exportReviewJson);
+    document.querySelector("#review-export-csv").addEventListener("click", exportReviewCsv);
+    const reviewImportFile = document.querySelector("#review-import-file");
+    document.querySelector("#review-import").addEventListener("click", () => reviewImportFile.click());
+    reviewImportFile.addEventListener("change", async () => {
+      const file = reviewImportFile.files?.[0];
+      if (!file) return;
+      try {
+        const candidate = JSON.parse(await file.text());
+        if (candidate?.schema_version !== 1 || !candidate.annotations || !candidate.taxonomies) {
+          throw new Error("This is not a version 1 manual-review backup.");
+        }
+        const importedCount = mergeImportedReviewLedger(candidate);
+        window.alert(`Imported ${importedCount} newer or previously missing episode annotations.`);
+      } catch (error) {
+        window.alert(`Could not import this backup: ${error.message}`);
+      } finally {
+        reviewImportFile.value = "";
+      }
+    });
     document.addEventListener("keydown", (event) => {
       if (event.target.closest("input, textarea, select")) return;
       if (event.key === "ArrowLeft") selectEpisodeOffset(-1);
