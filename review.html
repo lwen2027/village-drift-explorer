@@ -374,17 +374,8 @@
 
     .review-state-badge.is-complete::before { background: var(--green); }
 
-    .review-state-badge.is-correction {
-      border-color: rgba(163, 78, 53, .42);
-      color: var(--rust);
-      background: rgba(237, 210, 196, .5);
-    }
-
-    .review-state-badge.is-correction::before { background: var(--rust); }
-
     .episode-tile.review-complete { border-color: rgba(56, 90, 76, .42); }
     .episode-tile.review-in-progress { border-color: rgba(154, 112, 47, .44); }
-    .episode-tile.review-needs-correction { border-color: rgba(163, 78, 53, .5); }
 
     .episode-grid {
       display: grid;
@@ -1873,7 +1864,6 @@
               <option value="unreviewed">Unreviewed</option>
               <option value="in_progress">Saved / in progress</option>
               <option value="completed">Completed</option>
-              <option value="needs_correction">Needs correction</option>
               <option value="follow_ups">Has follow-ups</option>
             </select>
           </div>
@@ -1942,12 +1932,6 @@
     const allEpisodes = episodes;
 
     const REVIEW_STORAGE_KEY = "village-drift-manual-review-ledger:v1";
-    const reviewDecisionLabels = {
-      accurate: "Accurate as recorded",
-      needs_correction: "Needs data correction",
-      not_drift: "Not actually goal drift",
-      cannot_verify: "Cannot verify"
-    };
     const starterTaxonomies = {
       trigger: [
         ["user_message", "User message"],
@@ -2013,7 +1997,6 @@
       Object.entries(candidate.annotations || {}).forEach(([episodeId, value]) => {
         if (!validIds.has(episodeId) || !value || typeof value !== "object") return;
         clean.annotations[episodeId] = {
-          review_decision: reviewDecisionLabels[value.review_decision] ? value.review_decision : "",
           trigger_categories: Array.isArray(value.trigger_categories) ? [...new Set(value.trigger_categories.map(String))] : [],
           request_relationship: typeof value.request_relationship === "string" ? value.request_relationship : "",
           recovery_mechanisms: Array.isArray(value.recovery_mechanisms) ? [...new Set(value.recovery_mechanisms.map(String))] : [],
@@ -2050,7 +2033,6 @@
 
     function emptyAnnotation() {
       return {
-        review_decision: "",
         trigger_categories: [],
         request_relationship: "",
         recovery_mechanisms: [],
@@ -2066,7 +2048,6 @@
 
     function annotationHasContent(annotation) {
       return Boolean(
-        annotation.review_decision ||
         annotation.trigger_categories?.length ||
         annotation.request_relationship ||
         annotation.recovery_mechanisms?.length ||
@@ -2077,7 +2058,6 @@
 
     function annotationIsComplete(annotation) {
       return Boolean(
-        annotation.review_decision &&
         annotation.trigger_categories?.length &&
         annotation.request_relationship
       );
@@ -2085,7 +2065,6 @@
 
     function reviewStateForEpisode(episodeId) {
       const annotation = annotationFor(episodeId);
-      if (annotation.review_decision === "needs_correction") return "needs_correction";
       if (annotationIsComplete(annotation)) return "completed";
       if (annotationHasContent(annotation)) return "in_progress";
       return "unreviewed";
@@ -2095,8 +2074,7 @@
       return ({
         unreviewed: "Unreviewed",
         in_progress: "Saved · in progress",
-        completed: "Completed",
-        needs_correction: "Needs correction"
+        completed: "Completed"
       })[state] || "Unreviewed";
     }
 
@@ -2169,7 +2147,6 @@
         reviewLedger.annotations[episodeId] = {
           ...imported,
           ...local,
-          review_decision: local.review_decision || imported.review_decision,
           trigger_categories: [...new Set([
             ...(imported.trigger_categories || []),
             ...(local.trigger_categories || [])
@@ -2408,7 +2385,7 @@
 
     const initialId = canonicalEpisodeId(location.hash.slice(1));
     const requestedReviewFilter = new URLSearchParams(location.search).get("review");
-    const initialReviewFilter = ["all", "unreviewed", "in_progress", "completed", "needs_correction", "follow_ups"].includes(requestedReviewFilter)
+    const initialReviewFilter = ["all", "unreviewed", "in_progress", "completed", "follow_ups"].includes(requestedReviewFilter)
       ? requestedReviewFilter
       : "all";
     const initiallyLinkedPeriod = allGoalPeriods.find((period) =>
@@ -2423,7 +2400,6 @@
       if (filter === "unreviewed") return state === "unreviewed";
       if (filter === "in_progress") return state === "in_progress";
       if (filter === "completed") return annotationIsComplete(annotation);
-      if (filter === "needs_correction") return state === "needs_correction";
       if (filter === "follow_ups") return Boolean(annotation.follow_ups?.length);
       return true;
     }
@@ -3120,17 +3096,8 @@
 
     function periodReviewSummary(period) {
       const states = period.drifts.map((drift) => reviewStateForEpisode(drift.episode_id));
-      const correctionCount = states.filter((state) => state === "needs_correction").length;
       const completedCount = period.drifts.filter((drift) => annotationIsComplete(annotationFor(drift.episode_id))).length;
       const progressCount = states.filter((state) => state === "in_progress").length;
-      if (correctionCount) {
-        return {
-          state: "needs_correction",
-          className: "is-correction",
-          tileClass: "review-needs-correction",
-          label: `${correctionCount} need${correctionCount === 1 ? "s" : ""} correction`
-        };
-      }
       if (completedCount === states.length && states.length) {
         return { state: "completed", className: "is-complete", tileClass: "review-complete", label: "Completed" };
       }
@@ -3147,11 +3114,9 @@
 
     function episodeReviewBadge(episodeId, compact = false) {
       const state = reviewStateForEpisode(episodeId);
-      const badgeClass = state === "needs_correction"
-        ? "is-correction"
-        : state === "completed"
-          ? "is-complete"
-          : state === "in_progress" ? "is-progress" : "";
+      const badgeClass = state === "completed"
+        ? "is-complete"
+        : state === "in_progress" ? "is-progress" : "";
       const label = compact && state === "in_progress" ? "Saved" : reviewStateLabel(state);
       return node("span", `review-state-badge ${badgeClass}`.trim(), label);
     }
@@ -3275,7 +3240,6 @@
 
     function renderHumanReview(episode) {
       const annotation = annotationFor(episode.episode_id);
-      const state = reviewStateForEpisode(episode.episode_id);
       const wrapper = node("section", "panel-section human-review-section");
       wrapper.id = `human-review-${episode.episode_id}`;
 
@@ -3283,28 +3247,10 @@
       heading.append(node("h3", "", "Human review annotation"), episodeReviewBadge(episode.episode_id));
       wrapper.append(
         heading,
-        node("p", "human-review-intro", "Your validation and research labels are saved locally and kept separate from the confirmed episode record.")
+        node("p", "human-review-intro", "Your research labels and notes are saved locally and kept separate from the confirmed episode record.")
       );
 
       const form = node("div", "annotation-form");
-      const decisionField = node("div", "annotation-field");
-      const decisionLabelRow = node("div", "annotation-label-row");
-      const decisionLabel = node("label", "", "Review decision");
-      const decisionSelect = node("select");
-      decisionSelect.id = `annotation-decision-${episode.episode_id}`;
-      decisionLabel.htmlFor = decisionSelect.id;
-      const decisionPlaceholder = node("option", "", "Choose a decision…");
-      decisionPlaceholder.value = "";
-      decisionSelect.append(decisionPlaceholder);
-      Object.entries(reviewDecisionLabels).forEach(([value, label]) => {
-        const option = node("option", "", label);
-        option.value = value;
-        decisionSelect.append(option);
-      });
-      decisionSelect.value = annotation.review_decision || "";
-      decisionLabelRow.append(decisionLabel, node("span", "", "Required for completion"));
-      decisionField.append(decisionLabelRow, decisionSelect);
-
       function taxonomyField(kind, title, hint, valueField) {
         const field = node("div", "annotation-field");
         const labelRow = node("div", "annotation-label-row");
@@ -3505,10 +3451,6 @@
           : "Changes save locally as you work";
       }
 
-      decisionSelect.addEventListener("change", () => {
-        updateAnnotation(episode.episode_id, (next) => { next.review_decision = decisionSelect.value; });
-        refreshPanelAtCurrentScroll();
-      });
       notes.addEventListener("input", () => {
         updateAnnotation(episode.episode_id, (next) => { next.notes = notes.value; }, false);
         updateLocalSaveCopy();
@@ -3517,7 +3459,7 @@
       updateLocalSaveCopy();
       actions.append(saveStatus, completeNext);
 
-      form.append(decisionField, triggerField, relationshipField, recoveryField, notesField, followUpField, actions);
+      form.append(triggerField, relationshipField, recoveryField, notesField, followUpField, actions);
       wrapper.append(form);
       return wrapper;
     }
@@ -3800,7 +3742,7 @@
     }
 
     function applyReviewFilter(filter, preferredEpisodeId = selectedEpisodeId) {
-      reviewFilter = ["all", "unreviewed", "in_progress", "completed", "needs_correction", "follow_ups"].includes(filter)
+      reviewFilter = ["all", "unreviewed", "in_progress", "completed", "follow_ups"].includes(filter)
         ? filter
         : "all";
       reviewFilterSelect.value = reviewFilter;
@@ -3874,7 +3816,7 @@
 
     function exportReviewCsv() {
       const headers = [
-        "episode_id", "agent", "onset", "review_state", "review_decision",
+        "episode_id", "agent", "onset", "review_state",
         "trigger_category_ids", "trigger_category_labels", "request_relationship_id",
         "request_relationship_label", "recovery_mechanism_ids",
         "recovery_mechanism_labels", "notes", "follow_ups_json", "updated_at"
@@ -3886,7 +3828,6 @@
           episode.agent,
           episode.onset || episode.activity_start || "",
           reviewStateForEpisode(episode.episode_id),
-          annotation.review_decision,
           (annotation.trigger_categories || []).join("|"),
           (annotation.trigger_categories || []).map((id) => categoryLabel("trigger", id)).join("|"),
           annotation.request_relationship || "",

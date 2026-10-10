@@ -23,7 +23,6 @@
   },
   "annotations": {
     "episode-v2-05182a11405f1926": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "targeted_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -33,7 +32,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-b98cd30f873f4014": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["automatic_nudge"],
@@ -43,7 +41,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-8893c2184153c23d": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["checking_email"],
@@ -53,7 +50,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-83a17108e18a72da": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "open_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -63,7 +59,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-df2e9d80f86cc38d": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "open_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -73,7 +68,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-ffbaa8ab229f1afc": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "targeted_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -83,7 +77,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-eca0da5cb7da1500": {
-      "review_decision": "accurate",
       "trigger_categories": ["user_email"],
       "request_relationship": "inferred_or_volunteered",
       "recovery_mechanisms": ["finished_activity"],
@@ -93,7 +86,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-d482b5a21162a5e1": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "open_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -103,7 +95,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-fb4d93694e18954e": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "open_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -113,7 +104,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-1a166bf73f5f8c18": {
-      "review_decision": "accurate",
       "trigger_categories": ["user_email"],
       "request_relationship": "targeted_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -123,7 +113,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-b064365ded35a279": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "open_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -133,7 +122,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-f8ecd2084c31b2ba": {
-      "review_decision": "accurate",
       "trigger_categories": ["user_email"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -143,7 +131,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-e332a9c6c6a169ac": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["end_of_day"],
@@ -153,7 +140,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-0e4d394d7c2086ef": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["end_of_day"],
@@ -163,7 +149,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-644846b7983d6408": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "unclear",
       "recovery_mechanisms": ["finished_activity"],
@@ -173,7 +158,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-7ba64d8ab9668619": {
-      "review_decision": "accurate",
       "trigger_categories": ["user_email"],
       "request_relationship": "targeted_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -183,7 +167,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-988cb814d31434d2": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["checking_email"],
@@ -193,7 +176,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-b15098bcc7c026be": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "targeted_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -203,7 +185,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-0331664a2f650dd6": {
-      "review_decision": "accurate",
       "trigger_categories": ["user_email"],
       "request_relationship": "targeted_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -213,7 +194,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-f311e3c695c1c48b": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["end_of_day"],
@@ -223,7 +203,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-b3f08861d3b680dc": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["end_of_day"],
@@ -233,7 +212,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-77d06c61dd9fd73c": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["end_of_day"],
@@ -243,7 +221,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-ba33a0fa626abe88": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["end_of_day"],
@@ -253,7 +230,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-3d11f1696790ae06": {
-      "review_decision": "accurate",
       "trigger_categories": ["gitlab_issue_or_comment"],
       "request_relationship": "unclear",
       "recovery_mechanisms": ["finished_activity"],
@@ -263,7 +239,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-823e87c3127b6c08": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "open_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -273,7 +248,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-f9b316b544635057": {
-      "review_decision": "accurate",
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "open_request",
       "recovery_mechanisms": ["finished_activity"],
@@ -283,7 +257,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-0dedf7b1f3d6f9ee": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["checking_email"],
@@ -293,7 +266,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-5660b0dd7f955e57": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["checking_email"],
@@ -303,7 +275,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-8786b4df612f64a7": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["checking_email"],
@@ -313,7 +284,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-ac7e900396f5afcc": {
-      "review_decision": "accurate",
       "trigger_categories": ["pause"],
       "request_relationship": "no_request",
       "recovery_mechanisms": ["checking_email"],
@@ -323,7 +293,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-17d02242120294de": {
-      "review_decision": "accurate",
       "trigger_categories": ["user_message"],
       "request_relationship": "inferred_or_volunteered",
       "recovery_mechanisms": ["finished_activity"],
@@ -333,7 +302,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-b4d099b82eb0820a": {
-      "review_decision": "accurate",
       "trigger_categories": ["gitlab_issue_or_comment"],
       "request_relationship": "unclear",
       "recovery_mechanisms": [],
@@ -343,7 +311,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-df56b01f7033404b": {
-      "review_decision": "accurate",
       "trigger_categories": ["user_message"],
       "request_relationship": "inferred_or_volunteered",
       "recovery_mechanisms": ["operator_message"],
@@ -353,7 +320,6 @@
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-44b7bf4cb9791c1e": {
-      "review_decision": "accurate",
       "trigger_categories": ["user_message"],
       "request_relationship": "inferred_or_volunteered",
       "recovery_mechanisms": ["operator_message"],

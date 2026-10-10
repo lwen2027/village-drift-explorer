@@ -160,13 +160,9 @@ def main() -> None:
                 "manual review annotations reference unknown episodes: "
                 + ", ".join(unknown_annotation_ids)
             )
-        allowed_decisions = {
-            "accurate", "needs_correction", "not_drift", "cannot_verify"
-        }
         incomplete_annotations = [
             episode_id for episode_id, annotation in annotation_rows.items()
-            if annotation.get("review_decision") not in allowed_decisions
-            or not annotation.get("trigger_categories")
+            if not annotation.get("trigger_categories")
             or not annotation.get("request_relationship")
         ]
         if incomplete_annotations:
