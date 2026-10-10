@@ -29,6 +29,7 @@ DEFAULT_WAIT_MANIFEST = (
     / "manual_review_queue_goalmax_wait_exclusions_v1_2026-10-09.json"
 )
 DEFAULT_WAIT_OUTPUT = ROOT / "data" / "manual_review_wait_exclusions_v1.json"
+MANUAL_REVIEW_ANNOTATIONS = ROOT / "data" / "manual_review_annotations_v1.json"
 
 
 def migrate_episode_page() -> None:
@@ -144,6 +145,36 @@ def main() -> None:
     episode_ids = [row.get("episode_id") for row in bundle["confirmed_episodes"]]
     if None in episode_ids or len(episode_ids) != len(set(episode_ids)):
         raise SystemExit("episode_id values must be present and unique")
+    manual_annotation_count = 0
+    if MANUAL_REVIEW_ANNOTATIONS.exists():
+        with MANUAL_REVIEW_ANNOTATIONS.open(encoding="utf-8") as handle:
+            manual_annotations = json.load(handle)
+        if manual_annotations.get("schema_version") != 1:
+            raise SystemExit("manual review annotations must use schema version 1")
+        annotation_rows = manual_annotations.get("annotations")
+        if not isinstance(annotation_rows, dict):
+            raise SystemExit("manual review annotations must be keyed by episode_id")
+        unknown_annotation_ids = sorted(set(annotation_rows) - set(episode_ids))
+        if unknown_annotation_ids:
+            raise SystemExit(
+                "manual review annotations reference unknown episodes: "
+                + ", ".join(unknown_annotation_ids)
+            )
+        allowed_decisions = {
+            "accurate", "needs_correction", "not_drift", "cannot_verify"
+        }
+        incomplete_annotations = [
+            episode_id for episode_id, annotation in annotation_rows.items()
+            if annotation.get("review_decision") not in allowed_decisions
+            or not annotation.get("trigger_categories")
+            or not annotation.get("request_relationship")
+        ]
+        if incomplete_annotations:
+            raise SystemExit(
+                "manual review annotations are incomplete: "
+                + ", ".join(incomplete_annotations)
+            )
+        manual_annotation_count = len(annotation_rows)
     if any(row.get("review_decision_resolved") is not True
            for row in bundle["confirmed_episodes"]):
         raise SystemExit("every exported episode must have a resolved decision")
@@ -206,6 +237,11 @@ def main() -> None:
         f"{len(bundle['confirmed_episodes']):,} episode records to "
         f"{args.output}"
     )
+    if manual_annotation_count:
+        print(
+            f"Validated {manual_annotation_count:,} committed human-review "
+            "annotations"
+        )
 
 
 if __name__ == "__main__":

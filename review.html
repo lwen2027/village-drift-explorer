@@ -1873,15 +1873,17 @@
   </div>
 
   <script type="module">
-    const [auditBundleResponse, reviewManifestResponse] = await Promise.all([
+    const [auditBundleResponse, reviewManifestResponse, reviewSeedResponse] = await Promise.all([
       fetch("./data/second_audit_v2.json"),
-      fetch("./data/manual_review_wait_exclusions_v1.json")
+      fetch("./data/manual_review_wait_exclusions_v1.json"),
+      fetch("./data/manual_review_annotations_v1.json")
     ]);
-    if (!auditBundleResponse.ok || !reviewManifestResponse.ok) {
-      throw new Error("Could not load the audit data or manual-review manifest");
+    if (!auditBundleResponse.ok || !reviewManifestResponse.ok || !reviewSeedResponse.ok) {
+      throw new Error("Could not load the audit data, manual-review manifest, or human annotations");
     }
     const auditBundle = await auditBundleResponse.json();
     const reviewManifest = await reviewManifestResponse.json();
+    const committedReviewSeed = await reviewSeedResponse.json();
     const reviewEpisodeIds = new Set(reviewManifest.default_manual_review_queue_episode_ids || []);
     const episodes = auditBundle.confirmed_episodes.filter((episode) => reviewEpisodeIds.has(episode.episode_id));
     if (episodes.length !== reviewManifest.counts.remaining_in_default_manual_queue) {
@@ -1928,6 +1930,13 @@
         ["no_discrete_trigger", "No discrete trigger"],
         ["unknown", "Unknown"]
       ].map(([id, label]) => ({ id, label, custom: false })),
+      request_relationship: [
+        ["targeted_request", "Targeted request"],
+        ["open_request", "Open request"],
+        ["inferred_or_volunteered", "Inferred or volunteered"],
+        ["no_request", "No request"],
+        ["unclear", "Unclear"]
+      ].map(([id, label]) => ({ id, label, custom: false })),
       recovery: [
         ["self_correction", "Self-correction"],
         ["operator_nudge", "Operator nudge"],
@@ -1950,9 +1959,11 @@
         },
         taxonomies: {
           trigger: starterTaxonomies.trigger.map((item) => ({ ...item })),
+          request_relationship: starterTaxonomies.request_relationship.map((item) => ({ ...item })),
           recovery: starterTaxonomies.recovery.map((item) => ({ ...item }))
         },
         annotations: {},
+        applied_seed_ids: [],
         saved_at: null
       };
     }
@@ -1960,7 +1971,7 @@
     function normalizeReviewLedger(candidate) {
       const clean = freshReviewLedger();
       if (!candidate || candidate.schema_version !== 1) return clean;
-      ["trigger", "recovery"].forEach((kind) => {
+      ["trigger", "request_relationship", "recovery"].forEach((kind) => {
         const merged = new Map(clean.taxonomies[kind].map((item) => [item.id, item]));
         (candidate.taxonomies?.[kind] || []).forEach((item) => {
           if (item?.id && item?.label) merged.set(String(item.id), {
@@ -1975,6 +1986,7 @@
         clean.annotations[episodeId] = {
           review_decision: reviewDecisionLabels[value.review_decision] ? value.review_decision : "",
           trigger_categories: Array.isArray(value.trigger_categories) ? [...new Set(value.trigger_categories.map(String))] : [],
+          request_relationship: typeof value.request_relationship === "string" ? value.request_relationship : "",
           recovery_mechanisms: Array.isArray(value.recovery_mechanisms) ? [...new Set(value.recovery_mechanisms.map(String))] : [],
           notes: typeof value.notes === "string" ? value.notes : "",
           follow_ups: Array.isArray(value.follow_ups) ? value.follow_ups
@@ -1984,9 +1996,13 @@
               type: item.type,
               note: typeof item.note === "string" ? item.note : ""
             })) : [],
+          provenance: value.provenance && typeof value.provenance === "object" ? { ...value.provenance } : null,
           updated_at: value.updated_at || null
         };
       });
+      clean.applied_seed_ids = Array.isArray(candidate.applied_seed_ids)
+        ? [...new Set(candidate.applied_seed_ids.map(String))]
+        : [];
       clean.saved_at = candidate.saved_at || null;
       return clean;
     }
@@ -2007,6 +2023,7 @@
       return {
         review_decision: "",
         trigger_categories: [],
+        request_relationship: "",
         recovery_mechanisms: [],
         notes: "",
         follow_ups: [],
@@ -2022,6 +2039,7 @@
       return Boolean(
         annotation.review_decision ||
         annotation.trigger_categories?.length ||
+        annotation.request_relationship ||
         annotation.recovery_mechanisms?.length ||
         annotation.notes?.trim() ||
         annotation.follow_ups?.length
@@ -2029,7 +2047,11 @@
     }
 
     function annotationIsComplete(annotation) {
-      return Boolean(annotation.review_decision && annotation.trigger_categories?.length);
+      return Boolean(
+        annotation.review_decision &&
+        annotation.trigger_categories?.length &&
+        annotation.request_relationship
+      );
     }
 
     function reviewStateForEpisode(episodeId) {
@@ -2066,6 +2088,7 @@
       const priorState = reviewStateForEpisode(episodeId);
       const annotation = { ...annotationFor(episodeId) };
       annotation.trigger_categories = [...(annotation.trigger_categories || [])];
+      annotation.request_relationship = annotation.request_relationship || "";
       annotation.recovery_mechanisms = [...(annotation.recovery_mechanisms || [])];
       annotation.follow_ups = (annotation.follow_ups || []).map((item) => ({ ...item }));
       updater(annotation);
@@ -2094,6 +2117,57 @@
       persistReviewLedger();
       return id;
     }
+
+    function applyCommittedReviewSeed() {
+      const seedId = committedReviewSeed?.seed_id;
+      if (!seedId || reviewLedger.applied_seed_ids.includes(seedId)) return;
+      const seed = normalizeReviewLedger(committedReviewSeed);
+      ["trigger", "request_relationship", "recovery"].forEach((kind) => {
+        const categories = new Map(reviewLedger.taxonomies[kind].map((item) => [item.id, item]));
+        seed.taxonomies[kind].forEach((item) => {
+          if (!categories.has(item.id)) categories.set(item.id, item);
+        });
+        reviewLedger.taxonomies[kind] = [...categories.values()];
+      });
+      Object.entries(seed.annotations).forEach(([episodeId, imported]) => {
+        const local = reviewLedger.annotations[episodeId];
+        if (!local) {
+          reviewLedger.annotations[episodeId] = imported;
+          return;
+        }
+        const localNotes = String(local.notes || "").trim();
+        const importedNotes = String(imported.notes || "").trim();
+        reviewLedger.annotations[episodeId] = {
+          ...imported,
+          ...local,
+          review_decision: local.review_decision || imported.review_decision,
+          trigger_categories: [...new Set([
+            ...(imported.trigger_categories || []),
+            ...(local.trigger_categories || [])
+          ])],
+          request_relationship: local.request_relationship || imported.request_relationship,
+          recovery_mechanisms: [...new Set([
+            ...(imported.recovery_mechanisms || []),
+            ...(local.recovery_mechanisms || [])
+          ])],
+          notes: localNotes && importedNotes && localNotes !== importedNotes
+            ? `${localNotes}\n\nImported manual note:\n${importedNotes}`
+            : localNotes || importedNotes,
+          follow_ups: [
+            ...(imported.follow_ups || []),
+            ...(local.follow_ups || []).filter((item) =>
+              !(imported.follow_ups || []).some((candidate) => candidate.id === item.id)
+            )
+          ],
+          provenance: local.provenance || imported.provenance,
+          updated_at: local.updated_at || imported.updated_at
+        };
+      });
+      reviewLedger.applied_seed_ids.push(seedId);
+      persistReviewLedger();
+    }
+
+    applyCommittedReviewSeed();
 
     const repairedEpisodeAliases = new Map(
       allEpisodes
@@ -3215,6 +3289,59 @@
         "Select one or more · required for completion",
         "trigger_categories"
       );
+
+      function requestRelationshipField() {
+        const field = node("div", "annotation-field");
+        const labelRow = node("div", "annotation-label-row");
+        labelRow.append(
+          node("strong", "", "Request relationship"),
+          node("span", "", "Select one · required for completion")
+        );
+        const options = node("div", "taxonomy-options");
+        reviewLedger.taxonomies.request_relationship.forEach((category) => {
+          const option = node("label", "taxonomy-option");
+          const radio = node("input");
+          radio.type = "radio";
+          radio.name = `request-relationship-${episode.episode_id}`;
+          radio.value = category.id;
+          radio.checked = annotation.request_relationship === category.id;
+          radio.addEventListener("change", () => {
+            if (!radio.checked) return;
+            updateAnnotation(episode.episode_id, (next) => {
+              next.request_relationship = category.id;
+            });
+            refreshPanelAtCurrentScroll();
+          });
+          option.append(radio, node("span", "", category.label));
+          options.append(option);
+        });
+
+        const add = node("div", "taxonomy-add");
+        const input = node("input");
+        input.type = "text";
+        input.placeholder = "Add a new request relationship…";
+        const addButton = node("button", "", "Add option");
+        addButton.type = "button";
+        const addRelationship = () => {
+          const categoryId = createReviewCategory("request_relationship", input.value);
+          if (!categoryId) return;
+          updateAnnotation(episode.episode_id, (next) => {
+            next.request_relationship = categoryId;
+          });
+          refreshPanelAtCurrentScroll();
+        };
+        addButton.addEventListener("click", addRelationship);
+        input.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter") return;
+          event.preventDefault();
+          addRelationship();
+        });
+        add.append(input, addButton);
+        field.append(labelRow, options, add);
+        return field;
+      }
+
+      const relationshipField = requestRelationshipField();
       const recoveryField = taxonomyField(
         "recovery",
         "Recovery/correction mechanism",
@@ -3317,7 +3444,7 @@
       updateLocalSaveCopy();
       actions.append(saveStatus, completeNext);
 
-      form.append(decisionField, triggerField, recoveryField, notesField, followUpField, actions);
+      form.append(decisionField, triggerField, relationshipField, recoveryField, notesField, followUpField, actions);
       wrapper.append(form);
       return wrapper;
     }
@@ -3675,7 +3802,8 @@
     function exportReviewCsv() {
       const headers = [
         "episode_id", "agent", "onset", "review_state", "review_decision",
-        "trigger_category_ids", "trigger_category_labels", "recovery_mechanism_ids",
+        "trigger_category_ids", "trigger_category_labels", "request_relationship_id",
+        "request_relationship_label", "recovery_mechanism_ids",
         "recovery_mechanism_labels", "notes", "follow_ups_json", "updated_at"
       ];
       const rows = episodes.map((episode) => {
@@ -3688,6 +3816,8 @@
           annotation.review_decision,
           (annotation.trigger_categories || []).join("|"),
           (annotation.trigger_categories || []).map((id) => categoryLabel("trigger", id)).join("|"),
+          annotation.request_relationship || "",
+          annotation.request_relationship ? categoryLabel("request_relationship", annotation.request_relationship) : "",
           (annotation.recovery_mechanisms || []).join("|"),
           (annotation.recovery_mechanisms || []).map((id) => categoryLabel("recovery", id)).join("|"),
           annotation.notes,
@@ -3705,7 +3835,7 @@
 
     function mergeImportedReviewLedger(candidate) {
       const imported = normalizeReviewLedger(candidate);
-      ["trigger", "recovery"].forEach((kind) => {
+      ["trigger", "request_relationship", "recovery"].forEach((kind) => {
         const existing = new Map(reviewLedger.taxonomies[kind].map((item) => [item.id, item]));
         imported.taxonomies[kind].forEach((item) => {
           if (!existing.has(item.id)) existing.set(item.id, item);

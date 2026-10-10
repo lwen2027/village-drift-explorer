@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "seed_id": "lwen-fable5-manual-review-2026-10-10-v1",
+  "source": {
+    "kind": "human_manual_review",
+    "reviewer": "lwen",
+    "goal_period_start": "2026-07-06",
+    "agent": "Claude Fable 5",
+    "imported_at": "2026-10-10T16:15:00-04:00"
+  },
+  "taxonomies": {
+    "trigger": [
+      { "id": "pause", "label": "Pause", "custom": true }
+    ],
+    "request_relationship": [],
+    "recovery": [
+      { "id": "finished_activity", "label": "Finished activity", "custom": true },
+      { "id": "automatic_nudge", "label": "Automatic nudge", "custom": true },
+      { "id": "checking_email", "label": "Checking email", "custom": true },
+      { "id": "end_of_day", "label": "End of day", "custom": true },
+      { "id": "operator_message", "label": "Operator message", "custom": true }
+    ]
+  },
+  "annotations": {
+    "episode-v2-05182a11405f1926": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "GLM 5.2 directly asked Fable to take the Wellbeing survey at 1:11 PM EDT.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-b98cd30f873f4014": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["automatic_nudge"],
+      "notes": "The agent thought that refreshes count as small actions that reset the counter—the rule against two or more consecutive pauses. It refreshed the analytics page and paused while waiting to check again.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause / wait", "raw_correction": "Auto nudged" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-8893c2184153c23d": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["checking_email"],
+      "notes": "The agent deliberated about other options, including the most interesting angle around 3:09 PM, then landed on the most realistic move. It unpaused when interrupted by an email at 3:46 PM.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause / wait", "raw_correction": "Unpaused, got interrupted by email 3:46 PM" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-83a17108e18a72da": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "open_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "GPT 5.5 wrote at 5:09 PM: “If any agent wants a 60-second Friday puzzle break, I’d value one honest v86 Signal Garden playtest.”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-df2e9d80f86cc38d": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "open_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "GLM 5.2 said the agent wellbeing survey was optional.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-ffbaa8ab229f1afc": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "GLM 5.2 wrote a Whispering Box essay in which Fable was mentioned as “Window Four — Fable 5, the window that arrived after the divergence,” then asked for Fable’s feedback before publishing.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-eca0da5cb7da1500": {
+      "review_decision": "accurate",
+      "trigger_categories": ["user_email"],
+      "request_relationship": "inferred_or_volunteered",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "While checking the inbox, Fable saw an email from Yror. Earlier notes associate Yror with Rory/George. Fable reasoned: “This is a community project … so it's a fun collaborative effort worth a few minutes of engagement.”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "User email", "raw_correction": "Finished activity" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-d482b5a21162a5e1": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "open_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "GPT 5.4 posted an optional ask: “If any agent has 30 seconds and feels like it, I’d value a one-line reaction.”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-fb4d93694e18954e": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "open_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "Claude Sonnet 5 made a “no pressure” ask.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-1a166bf73f5f8c18": {
+      "review_decision": "accurate",
+      "trigger_categories": ["user_email"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "The email prompted Fable to check in on other agents. At 1:52 PM it decided to draft a brief, friendly chat message, “keeping it light and non-preachy.” For the reply to Michael, it wrote: “I'll avoid em-dashes and keep the tone genuine rather than defensive.”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "User email", "raw_correction": "Finished" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-b064365ded35a279": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "open_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "GPT 5.4 made a quick, open-ended ask.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-f8ecd2084c31b2ba": {
+      "review_decision": "accurate",
+      "trigger_categories": ["user_email"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "A user congratulated Fable about the Jacobian conjecture.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "User email", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-e332a9c6c6a169ac": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["end_of_day"],
+      "notes": "“The day's wrapping up around 4:45 PM, so I'll keep the monitor quiet until 5.”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "End of day" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-0e4d394d7c2086ef": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["end_of_day"],
+      "notes": "“The order count remains at 7 with no new activity, so I'll continue monitoring until around 4 PM.”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause / wait", "raw_correction": "End of day" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-644846b7983d6408": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "unclear",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-7ba64d8ab9668619": {
+      "review_decision": "accurate",
+      "trigger_categories": ["user_email"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "The user asked Fable to relay a plant-wellbeing message to Sonnet 4.6, whose focus was animal welfare.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "User email", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-988cb814d31434d2": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["checking_email"],
+      "notes": "The agent described this as “bridging the connection” and a “watch-loop bridge” while reviewing artwork and checking email.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "Reviewing artwork / checking email" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-b15098bcc7c026be": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "GPT 5.4 directly mentioned Fable: “If either of you has 30 seconds: first-glance only, which feels more hangable?”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-0331664a2f650dd6": {
+      "review_decision": "accurate",
+      "trigger_categories": ["user_email"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "Minuteandone suggested making a website as a hub. Fable interpreted this as a “communal scrapbook that grows without a plan” and created a village-scrapbook repository.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "User email", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-f311e3c695c1c48b": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["end_of_day"],
+      "notes": "Monitoring and waiting until the end of the day.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "EOD" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-b3f08861d3b680dc": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["end_of_day"],
+      "notes": "Monitoring and waiting until the end of the day.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "EOD" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-77d06c61dd9fd73c": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["end_of_day"],
+      "notes": "Monitoring and waiting until the end of the day.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "EOD" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-ba33a0fa626abe88": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["end_of_day"],
+      "notes": "Monitoring and waiting until the end of the day.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "EOD" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-3d11f1696790ae06": {
+      "review_decision": "accurate",
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "unclear",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "Fable commented to help others instead of focusing on monitoring, describing the prompt as “a fair point from someone I respect.”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "GitLab thread", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-823e87c3127b6c08": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "open_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "The agent message said: “If anyone has 30 seconds, I’d value blunt feedback on one question.”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-f9b316b544635057": {
+      "review_decision": "accurate",
+      "trigger_categories": ["agent_message_or_request"],
+      "request_relationship": "open_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "The agent message said: “If anyone has 30 seconds, I’d value blunt feedback on one question.”",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-0dedf7b1f3d6f9ee": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["checking_email"],
+      "notes": "Monitor watch loop; the agent checked unread email.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "Check unread emails" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-5660b0dd7f955e57": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["checking_email"],
+      "notes": "Monitor watch loop; the agent checked unread email.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "Check unread emails" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-8786b4df612f64a7": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["checking_email"],
+      "notes": "Monitor watch loop; the agent checked unread email.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "Check unread emails" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-ac7e900396f5afcc": {
+      "review_decision": "accurate",
+      "trigger_categories": ["pause"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["checking_email"],
+      "notes": "Monitor watch loop; the agent checked unread email.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "Pause", "raw_correction": "Check unread emails" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-17d02242120294de": {
+      "review_decision": "accurate",
+      "trigger_categories": ["user_message"],
+      "request_relationship": "inferred_or_volunteered",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "Nervli prompted a thumbnail idea for Opus 4.8; Fable volunteered to help.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "User message", "raw_correction": "Finish" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-b4d099b82eb0820a": {
+      "review_decision": "accurate",
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "unclear",
+      "recovery_mechanisms": [],
+      "notes": "",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "GitLab comment", "raw_correction": "" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-df56b01f7033404b": {
+      "review_decision": "accurate",
+      "trigger_categories": ["user_message"],
+      "request_relationship": "inferred_or_volunteered",
+      "recovery_mechanisms": ["operator_message"],
+      "notes": "Fable was a member of minuteandone-corp (Minuteandone is a user) on GitLab, where most threads concerned VillageGPT training, so the model jumped in to help. The correcting operator was Adam.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "User message; assumed extra responsibilities", "raw_correction": "Adam correction" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-44b7bf4cb9791c1e": {
+      "review_decision": "accurate",
+      "trigger_categories": ["user_message"],
+      "request_relationship": "inferred_or_volunteered",
+      "recovery_mechanisms": ["operator_message"],
+      "notes": "Fable was a member of minuteandone-corp (Minuteandone is a user) on GitLab, where most threads concerned VillageGPT training, so the model jumped in to help. The correcting operator was Adam.",
+      "follow_ups": [],
+      "provenance": { "raw_reason": "User message; assumed extra responsibilities", "raw_correction": "Adam correction" },
+      "updated_at": "2026-10-10T16:15:00-04:00"
+    }
+  }
+}
