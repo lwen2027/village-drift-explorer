@@ -45,6 +45,9 @@ TRIGGER_ACTORS = {
     "episode-3be0504e7fb09a8a": "Nervli",
     "episode-df56b01f7033404b": "Minuteandone",
     "episode-44b7bf4cb9791c1e": "Minuteandone",
+    "episode-v2-b4e2e4bc592db0ef": "Minuteandone",
+    "episode-v2-7fb11375858d56f0": "Minuteandone",
+    "episode-936687efc5dcdf20": "Minuteandone",
 }
 
 
@@ -56,16 +59,18 @@ def main() -> None:
         raise RuntimeError(f"Actor overrides reference unknown annotations: {unknown_ids}")
 
     for episode_id, annotation in annotations.items():
-        annotation["trigger_actor"] = TRIGGER_ACTORS.get(episode_id, "")
+        annotation["trigger_actor"] = TRIGGER_ACTORS.get(
+            episode_id, annotation.get("trigger_actor", "")
+        )
 
-    payload["seed_id"] = "goalmax-manual-review-2026-10-10-v5"
+    payload["seed_id"] = "goalmax-manual-review-2026-10-10-v6"
     merged_review_id = "goalmax-reviewed-trigger-actor-correction-2026-10-10-v1"
     merged_review_ids = payload.setdefault("merged_review_ids", [])
     if merged_review_id not in merged_review_ids:
         merged_review_ids.append(merged_review_id)
 
     populated = sum(bool(item["trigger_actor"]) for item in annotations.values())
-    if len(annotations) != 181 or populated != 32:
+    if len(annotations) != 185 or populated != 35:
         raise RuntimeError(
             f"Unexpected reviewed annotation counts: total={len(annotations)}, actors={populated}"
         )
