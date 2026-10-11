@@ -81,14 +81,14 @@ def main() -> None:
             episode_id, annotation.get("trigger_actor", "")
         )
 
-    payload["seed_id"] = "goalmax-manual-review-2026-10-10-v8"
+    payload["seed_id"] = "goalmax-manual-review-2026-10-11-v21"
     merged_review_id = "goalmax-reviewed-trigger-actor-correction-2026-10-10-v2"
     merged_review_ids = payload.setdefault("merged_review_ids", [])
     if merged_review_id not in merged_review_ids:
         merged_review_ids.append(merged_review_id)
 
     populated = sum(bool(item["trigger_actor"]) for item in annotations.values())
-    if len(annotations) != 202 or populated != 53:
+    if len(annotations) != 580 or populated != 155:
         raise RuntimeError(
             f"Unexpected reviewed annotation counts: total={len(annotations)}, actors={populated}"
         )
