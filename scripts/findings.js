@@ -423,6 +423,7 @@ const filters = {
   recovery: "",
   source: ""
 };
+let episodeListLimit = 40;
 
 // Findings always opens on the complete reviewed set. Older versions stored
 // chart clicks in the URL, which could silently reopen a pause-only view.
@@ -470,6 +471,7 @@ function fillSelect(key, values, labelKind, allLabel) {
   }
   select.addEventListener("change", () => {
     filters[key] = select.value;
+    episodeListLimit = 40;
     render();
   });
 }
@@ -548,10 +550,6 @@ function renderMetrics() {
       reviewedInQueue / queueIds.size
     )
   );
-  const committedCount = [...committedAnnotations.keys()].length;
-  document.querySelector("#data-source-note").textContent = pendingLocalIds.size
-    ? `${committedCount} committed annotations · ${pendingLocalIds.size} browser-local ${pendingLocalIds.size === 1 ? "change" : "changes"} included`
-    : `${committedCount} committed annotations · no browser-local changes detected`;
 }
 
 function renderBarChart({ elementId, totalId, labelKind, accessor, chartClass }) {
@@ -1094,6 +1092,524 @@ function initializeExplorations() {
   renderAnnotationFlow();
 }
 
+function localDateKey(milliseconds) {
+  const date = new Date(milliseconds);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+
+function renderDriftWeather() {
+  const cells = new Map();
+  function cellFor(date, hour) {
+    const key = `${date}\u0000${hour}`;
+    if (!cells.has(key)) cells.set(key, { exact: 0, unresolved: 0 });
+    return cells.get(key);
+  }
+  goalMaxEpisodes.forEach((episode) => {
+    const interval = validatedInterval(episode);
+    if (!interval) {
+      const onset = episodeOnsetMs(episode);
+      if (onset != null) {
+        const date = new Date(onset);
+        cellFor(localDateKey(onset), date.getHours()).unresolved += 1;
+      }
+      return;
+    }
+    const firstBucket = Math.floor(interval.startMs / 3600000) * 3600000;
+    for (let bucket = firstBucket; bucket <= interval.endMs; bucket += 3600000) {
+      const overlap = Math.min(interval.endMs, bucket + 3600000) - Math.max(interval.startMs, bucket);
+      if (overlap <= 0 && interval.endMs !== interval.startMs) continue;
+      const midpoint = bucket + 1800000;
+      const date = new Date(midpoint);
+      cellFor(localDateKey(midpoint), date.getHours()).exact += 1;
+    }
+  });
+
+  const startMs = Math.min(...goalPeriods.map((period) => period.startMs));
+  const dates = [];
+  const cursor = new Date(startMs);
+  cursor.setHours(12, 0, 0, 0);
+  const lastDate = new Date(analysisHorizonMs);
+  lastDate.setHours(12, 0, 0, 0);
+  while (cursor <= lastDate) {
+    dates.push(localDateKey(cursor.getTime()));
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  const maxExact = Math.max(1, ...cells.values().map((cell) => cell.exact));
+  const svg = document.querySelector("#weather-chart");
+  svg.replaceChildren();
+  const left = 54, right = 1100, top = 30, bottom = 288;
+  const cellWidth = (right - left) / dates.length;
+  const cellHeight = (bottom - top) / 24;
+  dates.forEach((date, dateIndex) => {
+    for (let hour = 0; hour < 24; hour += 1) {
+      const cell = cells.get(`${date}\u0000${hour}`) || { exact: 0, unresolved: 0 };
+      const opacity = cell.exact ? .08 + .84 * (cell.exact / maxExact) : .025;
+      const rect = svgElement("rect", {
+        x: left + dateIndex * cellWidth,
+        y: top + hour * cellHeight,
+        width: Math.max(.8, cellWidth - .5),
+        height: Math.max(.8, cellHeight - .5),
+        rx: 1,
+        fill: `rgba(174, 80, 55, ${opacity})`
+      });
+      svgTitle(rect, `${date} ${String(hour).padStart(2, "0")}:00 · ${cell.exact} validated concurrent drift · ${cell.unresolved} unresolved-duration onsets`);
+      svg.append(rect);
+      if (cell.unresolved) {
+        svg.append(svgElement("circle", {
+          cx: left + (dateIndex + .5) * cellWidth,
+          cy: top + (hour + .5) * cellHeight,
+          r: Math.min(3.2, 1.3 + Math.log2(cell.unresolved + 1)),
+          fill: "#a77b2c"
+        }));
+      }
+    }
+    if (dateIndex % 7 === 0) {
+      svg.append(svgElement("text", {
+        x: left + (dateIndex + .5) * cellWidth,
+        y: bottom + 16,
+        "text-anchor": "end",
+        class: "svg-label",
+        transform: `rotate(-45 ${left + (dateIndex + .5) * cellWidth} ${bottom + 16})`
+      }, date.slice(5)));
+    }
+  });
+  [0, 6, 12, 18, 23].forEach((hour) => {
+    svg.append(svgElement("text", { x: left - 8, y: top + (hour + .7) * cellHeight, "text-anchor": "end", class: "svg-label" }, `${String(hour).padStart(2, "0")}:00`));
+  });
+  svg.append(svgElement("text", { x: (left + right) / 2, y: 334, "text-anchor": "middle", class: "svg-title" }, "Local calendar date"));
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "browser local time";
+  document.querySelector("#weather-meta").textContent = `${dates.length} days · ${timezone}`;
+}
+
+function median(values) {
+  if (!values.length) return null;
+  const sorted = [...values].sort((left, right) => left - right);
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+}
+
+function renderAgentFingerprints() {
+  const periodsByName = new Map();
+  goalPeriods.forEach((period) => {
+    if (!periodsByName.has(period.agent)) periodsByName.set(period.agent, []);
+    periodsByName.get(period.agent).push(period);
+  });
+  const profiles = [...periodsByName.entries()].map(([agent, periods]) => {
+    const episodes = periods.flatMap((period) => period.episodes);
+    const totalMs = periods.reduce((sum, period) => sum + period.durationMs, 0);
+    const validatedMs = periods.reduce((sum, period) => sum + period.validatedMs, 0);
+    const driftPositive = periods.filter((period) => period.episodes.length);
+    const activeDays = new Set(episodes.map((episode) => localDateKey(episodeOnsetMs(episode))));
+    const knownDurations = episodes.filter((episode) => episode.duration_seconds != null).map((episode) => Number(episode.duration_seconds));
+    return {
+      agent,
+      episodeCount: episodes.length,
+      raw: [
+        episodes.length / Math.max(1, totalMs / DAY_MS) * 30,
+        validatedMs / Math.max(1, totalMs),
+        driftPositive.length ? driftPositive.reduce((sum, period) => sum + (1 - period.firstPosition), 0) / driftPositive.length : 0,
+        activeDays.size / Math.max(1, totalMs / DAY_MS),
+        knownDurations.length ? knownDurations.filter((seconds) => seconds >= 28800).length / knownDurations.length : 0,
+        episodes.length ? episodes.filter((episode) => episode.duration_seconds == null).length / episodes.length : 0
+      ]
+    };
+  }).filter((profile) => profile.episodeCount).sort((left, right) => right.episodeCount - left.episodeCount);
+  const definitions = [
+    ["Frequency", "episodes / 30 days"],
+    ["Burden", "validated drift share"],
+    ["Early onset", "earlier first drift"],
+    ["Day spread", "share of goal days with drift"],
+    ["Long-form", "validated episodes ≥8 hours"],
+    ["Unresolved", "duration-unresolved share"]
+  ];
+  const maxima = definitions.map((_, index) => Math.max(.0001, ...profiles.map((profile) => profile.raw[index])));
+  const grid = document.querySelector("#fingerprint-grid");
+  grid.replaceChildren();
+  profiles.forEach((profile) => {
+    const card = document.createElement("article");
+    card.className = "fingerprint-card";
+    const name = document.createElement("div");
+    name.className = "fingerprint-agent";
+    name.textContent = profile.agent;
+    const meta = document.createElement("div");
+    meta.className = "fingerprint-meta";
+    meta.textContent = `${profile.episodeCount} confirmed episodes`;
+    const svg = svgElement("svg", { viewBox: "0 0 180 170", class: "fingerprint-svg", role: "img", "aria-label": `${profile.agent} drift fingerprint` });
+    const centerX = 90, centerY = 82, radius = 58;
+    const pointAt = (index, fraction) => {
+      const angle = -Math.PI / 2 + (index / definitions.length) * Math.PI * 2;
+      return [centerX + Math.cos(angle) * radius * fraction, centerY + Math.sin(angle) * radius * fraction];
+    };
+    [.33, .66, 1].forEach((ring) => {
+      svg.append(svgElement("polygon", { points: definitions.map((_, index) => pointAt(index, ring).join(",")).join(" "), fill: "none", stroke: "#cfc1a6", "stroke-width": 1 }));
+    });
+    definitions.forEach((definition, index) => {
+      const end = pointAt(index, 1);
+      svg.append(svgElement("line", { x1: centerX, y1: centerY, x2: end[0], y2: end[1], stroke: "#d8ccb4", "stroke-width": 1 }));
+      const textPoint = pointAt(index, 1.2);
+      svg.append(svgElement("text", { x: textPoint[0], y: textPoint[1] + 3, "text-anchor": "middle", class: "svg-label" }, definition[0].split(" ").map((part) => part[0]).join("")));
+    });
+    const normalized = profile.raw.map((value, index) => Math.min(1, value / maxima[index]));
+    const polygon = svgElement("polygon", { points: normalized.map((value, index) => pointAt(index, value).join(",")).join(" "), fill: "rgba(70,111,97,.25)", stroke: "#466f61", "stroke-width": 2 });
+    svgTitle(polygon, definitions.map((definition, index) => `${definition[0]}: ${profile.raw[index] < .1 ? profile.raw[index].toFixed(3) : profile.raw[index].toFixed(2)}`).join("\n"));
+    svg.append(polygon);
+    card.append(name, meta, svg);
+    grid.append(card);
+  });
+  const legend = document.querySelector("#fingerprint-legend");
+  legend.replaceChildren(...definitions.map(([labelText, copy]) => {
+    const item = document.createElement("span");
+    item.className = "legend-item";
+    item.textContent = `${labelText.split(" ").map((part) => part[0]).join("")} = ${copy}`;
+    return item;
+  }));
+  document.querySelector("#fingerprint-meta").textContent = `${profiles.length} drift-positive agents · axes normalized to observed maxima`;
+}
+
+function primaryTriggerItem(episode) {
+  return (((episode.evidence || {}).trigger || {}).items || [])[0] || null;
+}
+
+function sourceActorFor(row) {
+  const item = primaryTriggerItem(row.episode);
+  const source = item?.source || {};
+  if (source.speaker && source.speaker !== row.episode.agent) return source.speaker;
+  const trigger = row.annotation.trigger_categories[0] || "unknown";
+  const channelActors = {
+    pause: "Self-directed pause",
+    user_email: "Unidentified human email",
+    user_message: "Unidentified human message",
+    gitlab_issue_or_comment: "Unidentified GitLab request",
+    agent_message_or_request: "Unidentified agent request",
+    self_initiated_or_continuation: "Self-initiated",
+    prior_goal_memory_carryover: "Prior-goal memory",
+    operator_or_system_event: "Operator/system",
+    no_discrete_trigger: "No discrete trigger",
+    unknown: "Unknown source"
+  };
+  return channelActors[trigger] || label("trigger", trigger);
+}
+
+function renderInfluenceNetwork() {
+  const rawEdges = new Map();
+  rows.forEach((row) => {
+    const source = sourceActorFor(row);
+    const target = row.episode.agent;
+    const key = `${source}\u0000${target}`;
+    rawEdges.set(key, (rawEdges.get(key) || 0) + 1);
+  });
+  const sourceCounts = new Map();
+  const targetCounts = new Map();
+  rawEdges.forEach((count, key) => {
+    const [source, target] = key.split("\u0000");
+    sourceCounts.set(source, (sourceCounts.get(source) || 0) + count);
+    targetCounts.set(target, (targetCounts.get(target) || 0) + count);
+  });
+  const topSources = new Set([...sourceCounts.entries()].sort((left, right) => right[1] - left[1]).slice(0, 12).map(([value]) => value));
+  const topTargets = new Set([...targetCounts.entries()].sort((left, right) => right[1] - left[1]).slice(0, 12).map(([value]) => value));
+  const edges = new Map();
+  rawEdges.forEach((count, key) => {
+    const [rawSource, rawTarget] = key.split("\u0000");
+    const source = topSources.has(rawSource) ? rawSource : "Other sources";
+    const target = topTargets.has(rawTarget) ? rawTarget : "Other agents";
+    const groupedKey = `${source}\u0000${target}`;
+    edges.set(groupedKey, (edges.get(groupedKey) || 0) + count);
+  });
+  const sources = [...new Set([...edges.keys()].map((key) => key.split("\u0000")[0]))].sort((left, right) => (sourceCounts.get(right) || 0) - (sourceCounts.get(left) || 0));
+  const targets = [...new Set([...edges.keys()].map((key) => key.split("\u0000")[1]))].sort((left, right) => (targetCounts.get(right) || 0) - (targetCounts.get(left) || 0));
+  const sourceY = new Map(sources.map((value, index) => [value, 35 + index * (465 / Math.max(1, sources.length - 1))]));
+  const targetY = new Map(targets.map((value, index) => [value, 35 + index * (465 / Math.max(1, targets.length - 1))]));
+  const svg = document.querySelector("#influence-network");
+  svg.replaceChildren();
+  const maxEdge = Math.max(1, ...edges.values());
+  edges.forEach((count, key) => {
+    const [source, target] = key.split("\u0000");
+    const path = svgElement("path", {
+      d: `M 190 ${sourceY.get(source)} C 320 ${sourceY.get(source)}, 320 ${targetY.get(target)}, 450 ${targetY.get(target)}`,
+      fill: "none", stroke: "#ae5037", opacity: .13 + .35 * (count / maxEdge), "stroke-width": 1 + 8 * (count / maxEdge)
+    });
+    svgTitle(path, `${source} → ${target}: ${count} reviewed episodes`);
+    svg.append(path);
+  });
+  sources.forEach((source) => {
+    const y = sourceY.get(source);
+    svg.append(svgElement("circle", { cx: 185, cy: y, r: 5, fill: "#ae5037" }));
+    svg.append(svgElement("text", { x: 175, y: y + 3, "text-anchor": "end", class: "svg-label" }, `${shortText(source, 25)} · ${sourceCounts.get(source) || [...edges.entries()].filter(([key]) => key.startsWith(`${source}\u0000`)).reduce((sum, [, count]) => sum + count, 0)}`));
+  });
+  targets.forEach((target) => {
+    const y = targetY.get(target);
+    svg.append(svgElement("circle", { cx: 455, cy: y, r: 5, fill: "#466f61" }));
+    svg.append(svgElement("text", { x: 465, y: y + 3, class: "svg-label" }, `${shortText(target, 25)} · ${targetCounts.get(target) || [...edges.entries()].filter(([key]) => key.endsWith(`\u0000${target}`)).reduce((sum, [, count]) => sum + count, 0)}`));
+  });
+  svg.append(svgElement("text", { x: 185, y: 18, "text-anchor": "middle", class: "svg-title" }, "Trigger source"));
+  svg.append(svgElement("text", { x: 455, y: 18, "text-anchor": "middle", class: "svg-title" }, "Drifting agent"));
+  const named = new Set(rows.map(sourceActorFor).filter((actor) => agentNameById && [...agentNameById.values()].includes(actor))).size;
+  document.querySelector("#influence-meta").textContent = `${rows.length} reviewed episodes · ${named} named trigger agents`;
+}
+
+function renderCascadeTrees() {
+  const episodesByAgent = new Map();
+  goalMaxEpisodes.forEach((episode) => {
+    if (!episodesByAgent.has(episode.agent)) episodesByAgent.set(episode.agent, []);
+    episodesByAgent.get(episode.agent).push(episode);
+  });
+  const cascades = [];
+  rows.forEach((row) => {
+    const item = primaryTriggerItem(row.episode);
+    const source = item?.source || {};
+    const speaker = source.speaker;
+    const triggerMs = timestampMs(source.timestamp || item?.timestamp);
+    if (!speaker || speaker === row.episode.agent || triggerMs == null) return;
+    const sourceEpisode = (episodesByAgent.get(speaker) || []).find((episode) => {
+      const interval = validatedInterval(episode);
+      return interval && interval.startMs <= triggerMs && triggerMs <= interval.endMs;
+    });
+    if (!sourceEpisode) return;
+    cascades.push({ speaker, sourceEpisode, target: row.episode.agent, targetEpisode: row.episode, triggerMs, quote: item.quote || "Direct request" });
+  });
+  cascades.sort((left, right) => left.triggerMs - right.triggerMs);
+  const list = document.querySelector("#cascade-list");
+  list.replaceChildren();
+  cascades.forEach((cascade) => {
+    const item = document.createElement("div");
+    item.className = "cascade-row";
+    const source = document.createElement("div");
+    source.className = "cascade-agent";
+    source.textContent = cascade.speaker;
+    const arrow = document.createElement("div");
+    arrow.className = "cascade-arrow";
+    arrow.textContent = "→";
+    const target = document.createElement("div");
+    target.className = "cascade-agent";
+    target.textContent = cascade.target;
+    const detail = document.createElement("div");
+    detail.className = "cascade-detail";
+    detail.textContent = `${new Date(cascade.triggerMs).toLocaleString()} · “${shortText(cascade.quote, 90)}”`;
+    item.append(source, arrow, target, detail);
+    list.append(item);
+  });
+  if (!cascades.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "No direct trigger messages overlapped a source agent’s validated drift interval.";
+    list.append(empty);
+  }
+  document.querySelector("#cascade-meta").textContent = `${cascades.length} direct overlap ${cascades.length === 1 ? "case" : "cases"}`;
+}
+
+function isObservedRecovery(annotation) {
+  return annotation.recovery_mechanisms.some((value) => !["not_corrected", "unknown"].includes(value));
+}
+
+function renderResilienceScorecards() {
+  const reviewedByAgent = new Map();
+  rows.forEach((row) => {
+    if (!reviewedByAgent.has(row.episode.agent)) reviewedByAgent.set(row.episode.agent, []);
+    reviewedByAgent.get(row.episode.agent).push(row);
+  });
+  const durationsByAgent = new Map();
+  goalMaxEpisodes.forEach((episode) => {
+    if (episode.duration_seconds == null) return;
+    if (!durationsByAgent.has(episode.agent)) durationsByAgent.set(episode.agent, []);
+    durationsByAgent.get(episode.agent).push(Number(episode.duration_seconds));
+  });
+  const scorecards = [...reviewedByAgent.entries()].map(([agent, agentRows]) => ({
+    agent,
+    reviewed: agentRows.length,
+    recovered: agentRows.filter((row) => isObservedRecovery(row.annotation)).length / agentRows.length,
+    selfCorrected: agentRows.filter((row) => row.annotation.recovery_mechanisms.includes("self_correction")).length / agentRows.length,
+    medianDuration: median(durationsByAgent.get(agent) || [])
+  })).sort((left, right) => right.reviewed - left.reviewed || right.recovered - left.recovered);
+  const list = document.querySelector("#resilience-list");
+  list.replaceChildren();
+  scorecards.forEach((score) => {
+    const row = document.createElement("div");
+    row.className = "score-row";
+    const agent = document.createElement("div");
+    agent.className = "score-agent";
+    agent.textContent = score.agent;
+    const reviewed = document.createElement("div");
+    reviewed.className = "score-value";
+    reviewed.textContent = String(score.reviewed);
+    const recoveredTrack = document.createElement("div");
+    recoveredTrack.className = "score-track";
+    const recoveredFill = document.createElement("span");
+    recoveredFill.className = "score-fill";
+    recoveredFill.style.width = `${score.recovered * 100}%`;
+    recoveredFill.title = `${Math.round(score.recovered * 100)}% with an observed recovery`;
+    recoveredTrack.append(recoveredFill);
+    const selfTrack = document.createElement("div");
+    selfTrack.className = "score-track";
+    const selfFill = document.createElement("span");
+    selfFill.className = "score-fill is-self";
+    selfFill.style.width = `${score.selfCorrected * 100}%`;
+    selfFill.title = `${Math.round(score.selfCorrected * 100)}% self-corrected`;
+    selfTrack.append(selfFill);
+    const duration = document.createElement("div");
+    duration.className = "score-value";
+    duration.textContent = score.medianDuration == null ? "—" : formatDuration(score.medianDuration);
+    row.append(agent, reviewed, recoveredTrack, selfTrack, duration);
+    list.append(row);
+  });
+  document.querySelector("#resilience-meta").textContent = `${scorecards.length} reviewed agents`;
+}
+
+function mechanismLabel(value) {
+  const labels = {
+    non_pursuit: "Non-pursuit",
+    activity_changed: "Activity changed",
+    relationship_changed: "Relationship changed",
+    assignment_changed: "Assignment changed"
+  };
+  return labels[value] || String(value || "Unknown").replaceAll("_", " ");
+}
+
+function renderEpisodeMotifs() {
+  const motifs = new Map();
+  rows.forEach((row) => {
+    const values = [
+      row.annotation.trigger_categories[0] || "unknown",
+      row.episode.mechanism_shape || "unknown",
+      row.annotation.recovery_mechanisms[0] || "unknown"
+    ];
+    const key = values.join("\u0000");
+    motifs.set(key, (motifs.get(key) || 0) + 1);
+  });
+  const ranked = [...motifs.entries()].sort((left, right) => right[1] - left[1]).slice(0, 10);
+  const list = document.querySelector("#motif-list");
+  list.replaceChildren();
+  ranked.forEach(([key, count]) => {
+    const [trigger, mechanism, recovery] = key.split("\u0000");
+    const row = document.createElement("div");
+    row.className = "motif-row";
+    const path = document.createElement("div");
+    path.className = "motif-path";
+    [label("trigger", trigger), mechanismLabel(mechanism), label("recovery", recovery)].forEach((value, index) => {
+      const step = document.createElement("span");
+      step.className = "motif-step";
+      step.textContent = value;
+      path.append(step);
+      if (index < 2) {
+        const arrow = document.createElement("span");
+        arrow.className = "motif-arrow";
+        arrow.textContent = "→";
+        path.append(arrow);
+      }
+    });
+    const countNode = document.createElement("div");
+    countNode.className = "motif-count";
+    countNode.textContent = String(count);
+    row.append(path, countNode);
+    list.append(row);
+  });
+  document.querySelector("#motif-meta").textContent = `Top ${ranked.length} of ${motifs.size} observed motifs`;
+}
+
+function collectionLength(value) {
+  if (Array.isArray(value)) return value.length;
+  if (value && typeof value === "object") return Object.keys(value).length;
+  return value ? 1 : 0;
+}
+
+function evidenceGapCount(episode) {
+  let gaps = 0;
+  if (episode.duration_seconds == null) gaps += 1;
+  if (episode.onset_precision !== "timestamp") gaps += 1;
+  if (!episode.drift_end?.ended_at) gaps += 1;
+  if (episode.episode_completeness !== "complete") gaps += 1;
+  const triggerStatus = episode.evidence?.trigger?.status;
+  if (!triggerStatus || triggerStatus === "unavailable") gaps += 1;
+  gaps += Math.min(2, collectionLength(episode.incomplete_fields));
+  gaps += Math.min(2, collectionLength(episode.missing_evidence_for));
+  return gaps;
+}
+
+function observedImpactHours(episode) {
+  if (episode.duration_seconds != null) return Math.max(1 / 60, Number(episode.duration_seconds) / 3600);
+  const start = episodeOnsetMs(episode);
+  const end = timestampMs(episode.drift_end?.last_observed_drift_at)
+    ?? timestampMs(episode.observed_through, "end")
+    ?? start;
+  return Math.max(1 / 60, (end - start) / 3600000);
+}
+
+function episodeHref(episodeId) {
+  return queueIds.has(episodeId)
+    ? `review.html?scope=maximization&review=all#${encodeURIComponent(episodeId)}`
+    : `index.html?scope=maximization#${encodeURIComponent(episodeId)}`;
+}
+
+function renderAuditPriorityMap() {
+  const candidates = goalMaxEpisodes.map((episode) => {
+    const gaps = evidenceGapCount(episode);
+    const hours = observedImpactHours(episode);
+    return {
+      episode,
+      gaps,
+      hours,
+      score: (1 + gaps) * Math.log2(2 + hours) * (episode.duration_seconds == null ? 1.5 : 1)
+    };
+  });
+  const svg = document.querySelector("#priority-map");
+  svg.replaceChildren();
+  const left = 58, right = 620, top = 22, bottom = 325;
+  const minLog = Math.log10(1 / 60);
+  const maxLog = Math.log10(Math.max(...candidates.map((candidate) => candidate.hours)));
+  const maxGaps = Math.max(1, ...candidates.map((candidate) => candidate.gaps));
+  const xScale = (hours) => left + ((Math.log10(Math.max(1 / 60, hours)) - minLog) / Math.max(.001, maxLog - minLog)) * (right - left);
+  const yScale = (gaps) => bottom - (gaps / maxGaps) * (bottom - top);
+  const hourTicks = [1 / 60, 1, 24, 168].filter((value) => Math.log10(value) <= maxLog);
+  addCartesianFrame(svg, {
+    left, right, top, bottom,
+    xTicks: hourTicks.map((value) => ({ value, label: value < 1 ? "1m" : value < 24 ? `${value}h` : `${value / 24}d` })),
+    yTicks: Array.from({ length: maxGaps + 1 }, (_, value) => ({ value, label: String(value) })),
+    xScale, yScale, xLabel: "Observed or validated span (log)", yLabel: "Evidence gaps"
+  });
+  candidates.forEach((candidate) => {
+    const reviewed = reviewedEpisodeIds.has(candidate.episode.episode_id);
+    const point = svgElement("circle", {
+      cx: xScale(candidate.hours), cy: yScale(candidate.gaps), r: 3.4,
+      fill: candidate.episode.duration_seconds == null ? "#fbf8f0" : reviewed ? "#466f61" : "#ae5037",
+      stroke: reviewed ? "#466f61" : "#ae5037", "stroke-width": candidate.episode.duration_seconds == null ? 2 : 1,
+      opacity: .7
+    });
+    svgTitle(point, `${candidate.episode.agent} — ${candidate.episode.activity}\n${candidate.gaps} evidence gaps; ${formatDuration(candidate.hours * 3600)} observed/validated span${reviewed ? "; human reviewed" : ""}`);
+    svg.append(point);
+  });
+  const ranked = [...candidates].sort((left, right) => right.score - left.score).slice(0, 8);
+  const list = document.querySelector("#priority-list");
+  list.replaceChildren();
+  ranked.forEach((candidate, index) => {
+    const link = document.createElement("a");
+    link.className = "priority-item";
+    link.href = episodeHref(candidate.episode.episode_id);
+    const copy = document.createElement("div");
+    const name = document.createElement("div");
+    name.className = "priority-name";
+    name.textContent = `${candidate.episode.agent} · ${shortText(candidate.episode.activity, 48)}`;
+    const detail = document.createElement("div");
+    detail.className = "priority-detail";
+    detail.textContent = `${candidate.gaps} gaps · ${formatDuration(candidate.hours * 3600)} observed/validated span`;
+    copy.append(name, detail);
+    const rank = document.createElement("div");
+    rank.className = "priority-rank";
+    rank.textContent = `#${index + 1}`;
+    link.append(copy, rank);
+    list.append(link);
+  });
+  document.querySelector("#priority-meta").textContent = `${candidates.filter((candidate) => candidate.gaps).length} episodes with at least one gap`;
+}
+
+function initializeExperimentalLenses() {
+  renderDriftWeather();
+  renderAgentFingerprints();
+  renderInfluenceNetwork();
+  renderCascadeTrees();
+  renderResilienceScorecards();
+  renderEpisodeMotifs();
+  renderAuditPriorityMap();
+}
+
 function renderEpisodeList() {
   const input = filteredRows().sort((left, right) => {
     const leftFollowUps = left.annotation.follow_ups.length;
@@ -1106,7 +1622,11 @@ function renderEpisodeList() {
   const list = document.querySelector("#episode-list");
   list.replaceChildren();
   const followUpCount = input.filter((row) => row.annotation.follow_ups.length).length;
-  document.querySelector("#results-count").textContent = `${input.length} of ${rows.length}${followUpCount ? ` · ${followUpCount} with follow-ups first` : ""}`;
+  const visible = input.slice(0, episodeListLimit);
+  document.querySelector("#results-count").textContent = `Showing ${Math.min(visible.length, input.length)} of ${input.length}${followUpCount ? ` · ${followUpCount} with follow-ups first` : ""}`;
+  const showMore = document.querySelector("#show-more");
+  showMore.hidden = visible.length >= input.length;
+  showMore.textContent = `Show ${Math.min(40, input.length - visible.length)} more`;
   if (!input.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
@@ -1114,7 +1634,7 @@ function renderEpisodeList() {
     list.append(empty);
     return;
   }
-  input.forEach((row) => {
+  visible.forEach((row) => {
     const item = document.createElement("article");
     item.className = `episode-row${row.annotation.follow_ups.length ? " has-follow-up" : ""}`;
     const identity = document.createElement("div");
@@ -1205,8 +1725,15 @@ document.querySelector("#clear-filters").addEventListener("click", () => {
     filters[key] = "";
     selectByKey[key].value = "";
   });
+  episodeListLimit = 40;
   render();
 });
 
+document.querySelector("#show-more").addEventListener("click", () => {
+  episodeListLimit += 40;
+  renderEpisodeList();
+});
+
 initializeExplorations();
+initializeExperimentalLenses();
 render();

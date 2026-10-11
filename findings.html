@@ -160,6 +160,37 @@
     .duration-count { font: 700 11px/1 var(--mono); text-align: right; }
     .flow-wrap { overflow-x: auto; }
     .flow-chart { min-width: 940px; }
+    .weather-wrap { overflow-x: auto; padding-bottom: 5px; }
+    .weather-chart { min-width: 980px; }
+    .fingerprint-grid { display: grid; grid-template-columns: repeat(4, minmax(150px, 1fr)); gap: 10px; max-height: 620px; overflow: auto; padding-right: 4px; }
+    .fingerprint-card { min-width: 0; padding: 12px; border: 1px solid var(--line); border-radius: 13px; background: var(--card); }
+    .fingerprint-agent { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 800; }
+    .fingerprint-meta { margin-top: 2px; color: var(--muted); font: 9px/1.3 var(--mono); }
+    .fingerprint-svg { display: block; width: 100%; max-width: 180px; margin: 4px auto 0; }
+    .cascade-list, .motif-list, .priority-list, .resilience-list { display: grid; gap: 9px; }
+    .cascade-row { display: grid; grid-template-columns: minmax(120px, .8fr) 42px minmax(120px, .8fr) 1.5fr; gap: 9px; align-items: center; padding: 11px 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--card); font-size: 12px; }
+    .cascade-agent { font-weight: 800; }
+    .cascade-arrow { color: var(--rust); font: 800 18px/1 var(--mono); text-align: center; }
+    .cascade-detail { color: var(--muted); line-height: 1.4; }
+    .score-head, .score-row { display: grid; grid-template-columns: minmax(130px, 1.2fr) 80px 1.5fr 1.5fr 95px; gap: 12px; align-items: center; }
+    .score-head { padding: 0 10px 7px; color: var(--muted); font: 700 9px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .score-row { padding: 10px; border: 1px solid var(--line); border-radius: 11px; background: var(--card); font-size: 11px; }
+    .score-agent { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 800; }
+    .score-track { height: 8px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
+    .score-fill { display: block; height: 100%; border-radius: inherit; background: var(--green); }
+    .score-fill.is-self { background: var(--blue); }
+    .score-value { color: var(--muted); font: 700 10px/1 var(--mono); text-align: right; }
+    .motif-row { display: grid; grid-template-columns: 1fr 44px; gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--card); }
+    .motif-path { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+    .motif-step { padding: 5px 7px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); font-size: 10px; }
+    .motif-arrow { color: var(--muted); font-size: 11px; }
+    .motif-count { font: 800 12px/1 var(--mono); text-align: right; }
+    .priority-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(250px, .65fr); gap: 18px; align-items: start; }
+    .priority-item { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 9px 10px; border-bottom: 1px solid var(--line); text-decoration: none; }
+    .priority-item:hover { background: var(--paper); }
+    .priority-name { font-size: 11px; font-weight: 800; }
+    .priority-detail { margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.35; }
+    .priority-rank { color: var(--rust); font: 800 11px/1 var(--mono); }
 
     .filters {
       position: sticky;
@@ -293,6 +324,18 @@
     .tag.is-pause { color: var(--rust); border-color: #d9a28e; background: #fbede7; }
     .episode-link { padding: 9px 11px; border: 1px solid var(--line-strong); border-radius: 9px; text-decoration: none; font-size: 12px; font-weight: 800; white-space: nowrap; }
     .episode-link:hover { background: white; }
+    .show-more {
+      display: block;
+      margin: 18px auto 0;
+      padding: 11px 20px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: var(--card);
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .show-more:hover { background: white; }
+    .show-more[hidden] { display: none; }
     .empty-state { padding: 50px 20px; color: var(--muted); text-align: center; border: 1px dashed var(--line-strong); border-radius: 16px; }
     .load-error { margin: 40px 0; padding: 24px; border: 1px solid var(--rust); border-radius: 14px; background: var(--rust-soft); }
 
@@ -302,6 +345,8 @@
       .viz-card.is-wide { grid-column: auto; }
       .episode-row { grid-template-columns: 1fr 1.5fr; }
       .episode-link { justify-self: start; }
+      .fingerprint-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+      .priority-layout { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
       .page-shell { width: min(100% - 22px, 1500px); }
@@ -316,6 +361,12 @@
       .goal-strip-row { grid-template-columns: minmax(110px, 150px) 1fr 44px; gap: 8px; }
       .viz-heading { flex-direction: column; }
       .viz-control { width: 100%; }
+      .fingerprint-grid { grid-template-columns: 1fr; }
+      .cascade-row { grid-template-columns: 1fr 30px 1fr; }
+      .cascade-detail { grid-column: 1 / -1; }
+      .score-head { display: none; }
+      .score-row { grid-template-columns: 1fr 58px; }
+      .score-row .score-track { grid-column: 1 / -1; }
       .clear-filters { margin-left: 0; }
     }
   </style>
@@ -342,7 +393,6 @@
             <p class="section-kicker">Audit coverage</p>
             <h2 id="coverage-title">What has been reviewed so far</h2>
           </div>
-          <p id="data-source-note">Loading committed annotations and browser-local review state…</p>
         </div>
         <div class="metric-grid" id="metric-grid" aria-live="polite"></div>
       </section>
@@ -408,6 +458,61 @@
         </div>
       </section>
 
+      <section class="exploration" aria-labelledby="systems-title">
+        <div class="exploration-heading">
+          <p class="section-kicker">Experimental lenses</p>
+          <h2 id="systems-title">Rhythms, influence, resilience, and audit leverage</h2>
+          <p>These views recombine existing timestamps, direct trigger metadata, validated durations, and human annotations. They do not add model-generated classifications.</p>
+        </div>
+
+        <div class="viz-grid">
+          <article class="viz-card is-wide">
+            <div class="viz-heading"><div><h3>Village drift weather</h3><p>Concurrent validated drift and unresolved-duration onsets by local date and hour.</p></div><span class="viz-meta" id="weather-meta"></span></div>
+            <div class="weather-wrap"><svg class="svg-chart weather-chart" id="weather-chart" viewBox="0 0 1120 340" role="img" aria-label="Village drift weather heatmap"></svg></div>
+            <p class="viz-note">Times use this browser’s timezone. Darker cells indicate more simultaneous validated drift; gold dots mark unresolved-duration episode onsets.</p>
+          </article>
+
+          <article class="viz-card is-wide">
+            <div class="viz-heading"><div><h3>Agent drift fingerprints</h3><p>Comparable behavioral profiles derived from confirmed timing fields.</p></div><span class="viz-meta" id="fingerprint-meta"></span></div>
+            <div class="fingerprint-grid" id="fingerprint-grid"></div>
+            <div class="viz-legend" id="fingerprint-legend"></div>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Drift influence network</h3><p>Who or what directly triggered reviewed episodes, when source identity is available.</p></div><span class="viz-meta" id="influence-meta"></span></div>
+            <svg class="svg-chart" id="influence-network" viewBox="0 0 640 540" role="img" aria-label="Drift influence network"></svg>
+            <p class="viz-note">Named actors come only from direct trigger-source metadata. Unidentified emails, messages, and GitLab requests remain grouped by channel.</p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Drift cascade trees</h3><p>Cases where a triggering agent was itself in a validated drift interval.</p></div><span class="viz-meta" id="cascade-meta"></span></div>
+            <div class="cascade-list" id="cascade-list"></div>
+            <p class="viz-note">Interval overlap supports a temporal propagation candidate, not proof that the first drift caused the second.</p>
+          </article>
+
+          <article class="viz-card is-wide">
+            <div class="viz-heading"><div><h3>Goal resilience scorecards</h3><p>Recovery outcomes and typical episode duration by agent.</p></div><span class="viz-meta" id="resilience-meta"></span></div>
+            <div class="score-head"><span>Agent</span><span>Reviewed</span><span>Any recovery</span><span>Self-correction</span><span>Median duration</span></div>
+            <div class="resilience-list" id="resilience-list"></div>
+            <p class="viz-note">Recovery rates use human-reviewed episodes; median duration uses all confirmed episodes with validated duration.</p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Episode motifs</h3><p>Most common complete trigger-to-recovery sequences.</p></div><span class="viz-meta" id="motif-meta"></span></div>
+            <div class="motif-list" id="motif-list"></div>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Audit priority map</h3><p>Potential episode impact against missing or weak timing evidence.</p></div><span class="viz-meta" id="priority-meta"></span></div>
+            <div class="priority-layout">
+              <svg class="svg-chart" id="priority-map" viewBox="0 0 640 390" role="img" aria-label="Audit priority map"></svg>
+              <div class="priority-list" id="priority-list"></div>
+            </div>
+            <p class="viz-note">Priority is a deterministic heuristic combining observed span and evidence gaps. It is a review aid, not a revised drift judgment.</p>
+          </article>
+        </div>
+      </section>
+
       <section aria-labelledby="breakdown-title">
         <div class="section-heading">
           <div>
@@ -458,6 +563,7 @@
       <section class="results" aria-labelledby="results-title">
         <div class="results-heading"><h2 id="results-title">Reviewed episodes</h2><span class="results-count" id="results-count"></span></div>
         <div class="episode-list" id="episode-list"></div>
+        <button class="show-more" id="show-more" type="button">Show 40 more</button>
       </section>
     </main>
   </div>
