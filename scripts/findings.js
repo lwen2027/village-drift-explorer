@@ -174,6 +174,36 @@ function mergeCommittedAndLocal(committed, local) {
   };
 }
 
+function mergeSourceVerifiedAndLocal(committed, local) {
+  const cleanCommitted = normalizeAnnotation(committed);
+  const cleanLocal = normalizeAnnotation(local);
+  const notes = !cleanLocal.notes || cleanLocal.notes === cleanCommitted.notes
+    ? cleanCommitted.notes
+    : !cleanCommitted.notes
+      ? cleanLocal.notes
+      : `${cleanCommitted.notes}\n\nPreserved browser review note:\n${cleanLocal.notes}`;
+  const followUps = [];
+  const seen = new Set();
+  [...cleanCommitted.follow_ups, ...cleanLocal.follow_ups].forEach((item) => {
+    const key = `${item?.type || ""}\u0000${String(item?.note || "").trim()}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    followUps.push({ ...item });
+  });
+  return {
+    ...cleanCommitted,
+    notes,
+    follow_ups: followUps,
+    provenance: {
+      ...cleanCommitted.provenance,
+      preserved_browser_review_fields: Boolean(
+        (cleanLocal.notes && cleanLocal.notes !== cleanCommitted.notes)
+        || cleanLocal.follow_ups.length
+      )
+    }
+  };
+}
+
 function annotationSemantic(annotation) {
   const clean = normalizeAnnotation(annotation);
   const semantic = {
@@ -286,7 +316,17 @@ allAnnotationIds.forEach((episodeId) => {
   }
   if (
     sourceVerifiedUpgrade
-    || localHash === committedHash
+  ) {
+    mergedAnnotations.set(
+      episodeId,
+      mergeSourceVerifiedAndLocal(committed, local)
+    );
+    const mergedHash = annotationFingerprint(mergedAnnotations.get(episodeId));
+    if (mergedHash !== committedHash) pendingLocalIds.add(episodeId);
+    return;
+  }
+  if (
+    localHash === committedHash
     || localHash === baselineHash
     || preActorLocalHash === baselineHash
     || preAssessmentLocalHash === baselineHash

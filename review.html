@@ -2553,6 +2553,39 @@
       };
     }
 
+    function mergeSourceVerifiedAnnotationIntoLocal(local, committed) {
+      const committedNotes = String(committed?.notes || "").trim();
+      const localNotes = String(local?.notes || "").trim();
+      const notes = !localNotes || localNotes === committedNotes
+        ? committedNotes
+        : !committedNotes
+          ? localNotes
+          : `${committedNotes}\n\nPreserved browser review note:\n${localNotes}`;
+      const followUps = [];
+      const seenFollowUps = new Set();
+      [...(committed?.follow_ups || []), ...(local?.follow_ups || [])].forEach((item) => {
+        const key = `${item?.type || ""}\u0000${String(item?.note || "").trim()}`;
+        if (seenFollowUps.has(key)) return;
+        seenFollowUps.add(key);
+        followUps.push({
+          ...item,
+          id: String(item?.id || makeLocalId("followup"))
+        });
+      });
+      return {
+        ...committed,
+        notes,
+        follow_ups: followUps,
+        provenance: {
+          ...(committed?.provenance || {}),
+          preserved_browser_review_fields: Boolean(
+            (localNotes && localNotes !== committedNotes)
+            || (local?.follow_ups || []).length
+          )
+        }
+      };
+    }
+
     function applyCommittedReviewSeed() {
       const seedId = committedReviewSeed?.seed_id;
       if (!seedId) return;
@@ -2603,7 +2636,10 @@
           && !["raw_source_verified", "browser_verified"].includes(localVerification)
           && importedUpdatedAt >= localUpdatedAt
         ) {
-          reviewLedger.annotations[episodeId] = imported;
+          reviewLedger.annotations[episodeId] = mergeSourceVerifiedAnnotationIntoLocal(
+            local,
+            imported
+          );
           reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
           delete reviewLedger.sync.last_exported_hashes[episodeId];
           delete reviewLedger.sync.conflicts[episodeId];
