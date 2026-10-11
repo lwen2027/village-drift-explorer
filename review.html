@@ -4346,6 +4346,7 @@
       });
 
       issueSubmitted.addEventListener("change", () => {
+        const scrollPosition = panel.scrollTop;
         updateCorrectionRequest(episode.episode_id, (request) => {
           request.status = issueSubmitted.checked ? "pending" : null;
           request.issue_url = issueUrl.value.trim();
@@ -4353,7 +4354,13 @@
             request.submitted_at = new Date().toISOString();
           }
         });
-        applyReviewFilter(reviewFilter, episode.episode_id);
+        if (episodeMatchesReviewFilter(episode.episode_id)) {
+          renderGrid();
+          renderPanel();
+          panel.scrollTop = scrollPosition;
+        } else {
+          applyReviewFilter(reviewFilter, episode.episode_id);
+        }
       });
 
       issueUrl.addEventListener("change", () => {
