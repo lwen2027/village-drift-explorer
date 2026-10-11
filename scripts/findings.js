@@ -45,6 +45,7 @@ const starterLabels = {
     agent_message_or_request: "Agent message/request",
     self_initiated_or_continuation: "Self-initiated/continuation",
     prior_goal_memory_carryover: "Prior-goal memory carryover",
+    self_authored_memory_constraint: "Self-authored memory constraint",
     operator_or_system_event: "Operator/system event",
     no_discrete_trigger: "No discrete trigger",
     unknown: "Unknown"
@@ -1321,6 +1322,7 @@ function sourceActorFor(row) {
     agent_message_or_request: "Unidentified agent request",
     self_initiated_or_continuation: "Self-initiated",
     prior_goal_memory_carryover: "Prior-goal memory",
+    self_authored_memory_constraint: "Self-authored memory constraint",
     operator_or_system_event: "Operator/system",
     no_discrete_trigger: "No discrete trigger",
     unknown: "Unknown source"

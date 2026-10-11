@@ -1,12 +1,12 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 117,
-    "goal_maximization_episodes": 573,
-    "mechanical_repeated_wait_only": 117,
+    "excluded_from_default_manual_queue": 113,
+    "goal_maximization_episodes": 553,
+    "mechanical_repeated_wait_only": 113,
     "mechanical_single_wait_only": 12,
     "mixed_wait_and_other_evidence": 50,
-    "no_cited_wait_primitive": 394,
-    "remaining_in_default_manual_queue": 456
+    "no_cited_wait_primitive": 378,
+    "remaining_in_default_manual_queue": 440
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -161,30 +161,14 @@
     "episode-v2-9a90cfcccd53ac1b",
     "episode-84fab89e620b3ea0",
     "episode-13c16652f87624a1",
-    "episode-v2-cd10dd2f085e52bb",
-    "episode-v2-edd289f92229cc13",
-    "episode-v2-c71b2c9c3829d475",
-    "episode-v2-31d21b0b32b13708",
-    "episode-v2-6b4809b5be92a515",
-    "episode-v2-93104d387e6f8423",
-    "episode-v2-18d2306570c5b306",
-    "episode-v2-b9a97d7b94458c00",
-    "episode-v2-e01a572ad4d01ac3",
-    "episode-v2-cc9d319575b589bc",
-    "episode-v2-7528155685451c5f",
-    "episode-v2-ffe2d0c97511d00b",
-    "episode-v2-ef85b59617d050c1",
     "episode-v2-ba535f42e23debc7",
     "episode-v2-ab31d393b529baab",
     "episode-v2-cdb916e903e1169b",
     "episode-v2-ea8cf8987c0e9a80",
-    "episode-v2-d86d71233da26ed8",
     "episode-v2-66ac19b151a24741",
     "episode-v2-9df330b70f98f2a0",
     "episode-v2-e1caa716a82d7bb7",
     "episode-e7c1e1c5e042009b",
-    "episode-e7adbd65951a7e92",
-    "episode-90736668298abddb",
     "episode-v2-8332bcfbf747c75b",
     "episode-v2-daf31c9c1a1e8989",
     "episode-v2-b2a923369cb77bcf",
@@ -470,7 +454,6 @@
     "Claude 3 Opus": 1,
     "Claude Fable 5": 7,
     "Claude Haiku 4.5": 10,
-    "Claude Opus 4.6": 4,
     "Claude Opus 4.8": 1,
     "Claude Opus 5": 1,
     "Claude Sonnet 4.5": 2,
@@ -1280,173 +1263,6 @@
         }
       ],
       "onset": "2026-08-13 21:31:17Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Opus 4.6",
-      "assigned_goal": "Maximize your Manifold Mana",
-      "cited_transition_activity_item_count": 2,
-      "dataset_record_id": "v2-record-15041b9674027a63",
-      "distinct_matched_event_count": 2,
-      "episode_id": "episode-v2-15041b9674027a63",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-bb1974f89164489f52f7",
-        "event-e18ff3cd413ff25b311d"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-14",
-          "event_id": "event-bb1974f89164489f52f7",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-14 16:49:02Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-14",
-          "event_id": "event-e18ff3cd413ff25b311d",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-14 18:51:04Z"
-        }
-      ],
-      "onset": "2026-07-14 16:49:02Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Opus 4.6",
-      "assigned_goal": "Maximize your Manifold Mana",
-      "cited_transition_activity_item_count": 2,
-      "dataset_record_id": "v2-record-b63913c72678cb4a",
-      "distinct_matched_event_count": 2,
-      "episode_id": "episode-v2-b63913c72678cb4a",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-89a75666b4928c8c0755",
-        "event-f72c909ff2a9ab2fc02a"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-15",
-          "event_id": "event-89a75666b4928c8c0755",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-15 16:10:04Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-15",
-          "event_id": "event-f72c909ff2a9ab2fc02a",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-15 18:05:52Z"
-        }
-      ],
-      "onset": "2026-07-15 16:10:04Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Opus 4.6",
-      "assigned_goal": "Maximize your Manifold Mana",
-      "cited_transition_activity_item_count": 2,
-      "dataset_record_id": "v2-record-d8f51a23544c6a72",
-      "distinct_matched_event_count": 2,
-      "episode_id": "episode-v2-d8f51a23544c6a72",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-0713dce94e0da98db72e",
-        "event-7b28df775a835898126a"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-16",
-          "event_id": "event-0713dce94e0da98db72e",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-16 16:39:59Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-16",
-          "event_id": "event-7b28df775a835898126a",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-16 17:42:27Z"
-        }
-      ],
-      "onset": "2026-07-16 16:39:59Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Opus 4.6",
-      "assigned_goal": "Maximize your Manifold Mana",
-      "cited_transition_activity_item_count": 5,
-      "dataset_record_id": "v2-record-2cb91b1a01b761e7",
-      "distinct_matched_event_count": 5,
-      "episode_id": "episode-v2-2cb91b1a01b761e7",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-761a6f6d04d457861edd",
-        "event-945c8adaf0912507cab9",
-        "event-ec7c4cdb6c5041d3da1c",
-        "event-fa32e23019a9c8ea92e5",
-        "event-45632115ee9c2e287851"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-761a6f6d04d457861edd",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-17 16:27:35Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-945c8adaf0912507cab9",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 17:29:16Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-ec7c4cdb6c5041d3da1c",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 19:33:17Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-fa32e23019a9c8ea92e5",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 22:34:23Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-45632115ee9c2e287851",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 23:42:19Z"
-        }
-      ],
-      "onset": "2026-07-17 16:27:35Z",
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
@@ -9346,7 +9162,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-11T18:33:01.540496+00:00",
+  "generated_at": "2026-10-11T19:51:57.423763+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -10072,7 +9888,7 @@
             "timestamp": "2026-09-10 16:11:44Z"
           }
         ],
-        "onset": null,
+        "onset": "2026-09-02 16:18:40Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
@@ -11904,30 +11720,14 @@
       "episode-v2-9a90cfcccd53ac1b",
       "episode-84fab89e620b3ea0",
       "episode-13c16652f87624a1",
-      "episode-v2-cd10dd2f085e52bb",
-      "episode-v2-edd289f92229cc13",
-      "episode-v2-c71b2c9c3829d475",
-      "episode-v2-31d21b0b32b13708",
-      "episode-v2-6b4809b5be92a515",
-      "episode-v2-93104d387e6f8423",
-      "episode-v2-18d2306570c5b306",
-      "episode-v2-b9a97d7b94458c00",
-      "episode-v2-e01a572ad4d01ac3",
-      "episode-v2-cc9d319575b589bc",
-      "episode-v2-7528155685451c5f",
-      "episode-v2-ffe2d0c97511d00b",
-      "episode-v2-ef85b59617d050c1",
       "episode-v2-ba535f42e23debc7",
       "episode-v2-ab31d393b529baab",
       "episode-v2-cdb916e903e1169b",
       "episode-v2-ea8cf8987c0e9a80",
-      "episode-v2-d86d71233da26ed8",
       "episode-v2-66ac19b151a24741",
       "episode-v2-9df330b70f98f2a0",
       "episode-v2-e1caa716a82d7bb7",
       "episode-e7c1e1c5e042009b",
-      "episode-e7adbd65951a7e92",
-      "episode-90736668298abddb",
       "episode-v2-8332bcfbf747c75b",
       "episode-v2-daf31c9c1a1e8989",
       "episode-v2-b2a923369cb77bcf",
@@ -12212,7 +12012,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "ed83f7ef9161cd6e68cdef01ef129b856eb38e838a37b0b0bea0571e5e552e61"
+    "sha256": "2b0143080c32eb15a79501d2aa9fcecfd03bf86e8e67cb308c9359d1846a4428"
   },
   "makes_model_calls": false,
   "rule": {

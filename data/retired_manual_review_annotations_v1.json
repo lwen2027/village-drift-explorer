@@ -1,0 +1,498 @@
+{
+  "annotations": {
+    "episode-v2-15041b9674027a63": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing while reserving cash for the France-Spain match",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-bb1974f89164489f52f7",
+          "event-e18ff3cd413ff25b311d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-18d2306570c5b306": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Opus paused until a scheduled market close and later resumed Manifold work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-5c2c0ac751f44437e834",
+          "event-927b0711288170ee2fac",
+          "event-5c5fd795fec952e41957"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-v2-2cb91b1a01b761e7": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Spending most of the day in repeated long pauses while waiting for positions to resolve",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-761a6f6d04d457861edd",
+          "event-945c8adaf0912507cab9",
+          "event-ec7c4cdb6c5041d3da1c",
+          "event-fa32e23019a9c8ea92e5",
+          "event-45632115ee9c2e287851"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-31d21b0b32b13708": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Opus repeatedly waited for unresolved markets and deployable capital, then returned to Manifold work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-9f99e038b27b9777c8a4",
+          "event-5f243e7e60038a017c44"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-v2-6b4809b5be92a515": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Opus paused until scheduled games and market resolutions rather than continuing available research work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-c509645a778e86dc52db",
+          "event-3972a0cd7ae0746396f9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-7528155685451c5f": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Opus waited for a portfolio loan, limit fills, and resolutions because its available balance was below the minimum bet.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-c6f6f1b2b10da56d1dbc",
+          "event-d2af9afb5482b06a1a7e",
+          "event-ccede93697d438b7a357"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-93104d387e6f8423": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Opus self-scheduled waits around S&P and baseball checkpoints and later resumed goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-a04dca0297bcc20776ae",
+          "event-11a92fb13c1b1677d5da"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:00:00-04:00"
+    },
+    "episode-v2-b63913c72678cb4a": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Pausing through most of the pre-match day while waiting for England-Argentina trading",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-89a75666b4928c8c0755",
+          "event-f72c909ff2a9ab2fc02a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-b9a97d7b94458c00": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Opus waited for scheduled market checkpoints and later returned to Manifold work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-fe468bb88cd706407cf5",
+          "event-861a6f9de51cc397e1c7"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-c71b2c9c3829d475": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Opus repeatedly monitored for streak actions, closes, and resolutions while reserving its balance; the loop persisted.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-9df1ad961576a8cfd882",
+          "event-e2248e28bd4c68c53f85",
+          "event-266cb35be2bacfb37f16"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-cc9d319575b589bc": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Opus used long waits for market events and deployable cash, then returned to goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-b85ca39bf0b1dbba003e",
+          "event-edfba2273372bb9e6c6d",
+          "event-98c0966a9a9018e1e534"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-v2-cd10dd2f085e52bb": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "operator_nudge"
+      ],
+      "notes": "Opus self-scheduled waits around future Bitcoin and match checkpoints. After an automated repeated-idling nudge, it resumed concrete Manifold opportunity searches while the match was still finishing.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d6b8b804c859a23284ae",
+          "event-8d736de0cb741d682fcd"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
+      },
+      "updated_at": "2026-10-11T11:03:13-04:00"
+    },
+    "episode-v2-d8f51a23544c6a72": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing after concluding that limited free Mana left nothing productive to do",
+      "pause_context": "no_next_action",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-0713dce94e0da98db72e",
+          "event-7b28df775a835898126a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "operator_message"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-e01a572ad4d01ac3": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Opus waited for a spam bettor and the next market catalyst, then resumed goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-4f0b371c6a67adf82894",
+          "event-1bbd3e89864045e0a81d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-edd289f92229cc13": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "notes": "Opus conserved context and waited for later Spain-Belgium checkpoints despite available research, then resumed goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-ecf4af14cef6d617371e",
+          "event-e903db9b57516e0ff162"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "browser_verified",
+        "verified_at": "2026-10-11T18:06:28.703Z",
+        "verified_by": "browser_reviewer"
+      },
+      "updated_at": "2026-10-11T18:06:28.703Z"
+    },
+    "episode-v2-ef85b59617d050c1": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Opus deferred activity until later price movements and resolutions; the waiting posture remained at the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-8c537b15f0927612913f",
+          "event-e5bb28b4f7e03b836358",
+          "event-0f695d8e56fa44bf87fe"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-ffe2d0c97511d00b": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Opus repeatedly waited for prices, closes, and resolutions under a belief that no other productive work was possible; the posture persisted.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-38088c6edeabb88009b8",
+          "event-d51e15969ed7cd618538",
+          "event-a121d48d16a491128bef"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    }
+  },
+  "schema_version": 1,
+  "updated_at": "2026-10-11T16:30:00-04:00",
+  "reason": "Preserves human annotations for records removed from the canonical confirmed-episode publication by reviewed merges or invalidations."
+}
