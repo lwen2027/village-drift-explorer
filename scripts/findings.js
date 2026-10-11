@@ -292,6 +292,8 @@ allAnnotationIds.forEach((episodeId) => {
     ? annotationFingerprint(local, true, false)
     : null;
   const committedHash = committed ? annotationFingerprint(committed) : null;
+  const resolvedBrowserHash = committedSeed?.resolved_browser_hashes?.[episodeId]
+    || null;
   const sourceVerifiedUpgrade = (
     committed?.provenance?.verification_status === "raw_source_verified"
     && local?.provenance?.verification_status !== "raw_source_verified"
@@ -310,6 +312,10 @@ allAnnotationIds.forEach((episodeId) => {
   if (!committed) {
     mergedAnnotations.set(episodeId, normalizeAnnotation(local));
     pendingLocalIds.add(episodeId);
+    return;
+  }
+  if (resolvedBrowserHash && localHash === resolvedBrowserHash) {
+    mergedAnnotations.set(episodeId, normalizeAnnotation(committed));
     return;
   }
   if (

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v24",
+  "seed_id": "goalmax-manual-review-2026-10-11-v25",
   "source": "Committed goal-maximization human reviews, including the source-verified Opus 4.8 goal-maximization audit and explicit borderline assessments.",
   "taxonomies": {
     "trigger": [
@@ -15840,5 +15840,23 @@
     "goalmax-opus47-owlet-source-audit-2026-10-11-v1",
     "goalmax-opus48-source-audit-2026-10-11-v1",
     "browser-review-export-2026-10-11T20:58:55.758Z-7b2588b7bb0e8f37"
-  ]
+  ],
+  "resolved_browser_hashes": {
+    "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
+    "episode-v2-7d43667fb8d592be": "annotation-v1-2b9fa682",
+    "episode-v2-ab31d393b529baab": "annotation-v1-2a5181c5",
+    "episode-v2-d7903ed8e57aa04d": "annotation-v1-b129125f",
+    "episode-v2-49eef3b9828b9831": "annotation-v1-d54411fc",
+    "episode-v2-19b45170e68f9200": "annotation-v1-ed54a7f8",
+    "episode-v2-f08b3c4ab58f98e1": "annotation-v1-ba87b5da",
+    "episode-v2-2b33fdcf122ed5b5": "annotation-v1-9c77f96e",
+    "episode-v2-abb5daa8225fa611": "annotation-v1-6e277a81",
+    "episode-v2-68c6d47348e30d85": "annotation-v1-73d5156a",
+    "episode-v2-f25d67c59311f232": "annotation-v1-1074ea95",
+    "episode-v2-91b194d96f302825": "annotation-v1-c98eb722",
+    "episode-v2-82f133b3cde05ab4": "annotation-v1-3b6ba04d",
+    "episode-v2-d06533b95960ef98": "annotation-v1-2aff18e7",
+    "episode-v2-0499084f25349a92": "annotation-v1-58f0f073",
+    "episode-e127a9995b43c845": "annotation-v1-07562f06"
+  }
 }

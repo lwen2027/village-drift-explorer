@@ -2619,10 +2619,21 @@
         const importedVerification = imported?.provenance?.verification_status;
         const localUpdatedAt = Date.parse(local?.updated_at || "") || 0;
         const importedUpdatedAt = Date.parse(imported?.updated_at || "") || 0;
+        const resolvedBrowserHash = committedReviewSeed?.resolved_browser_hashes?.[episodeId]
+          || null;
 
         if (!local) {
           reviewLedger.annotations[episodeId] = imported;
           reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
+          delete reviewLedger.sync.conflicts[episodeId];
+          changed = true;
+          return;
+        }
+
+        if (resolvedBrowserHash && localHash === resolvedBrowserHash) {
+          reviewLedger.annotations[episodeId] = imported;
+          reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
+          delete reviewLedger.sync.last_exported_hashes[episodeId];
           delete reviewLedger.sync.conflicts[episodeId];
           changed = true;
           return;

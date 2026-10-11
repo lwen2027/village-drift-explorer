@@ -82,6 +82,34 @@ def merged_follow_ups(committed: dict, local: dict) -> tuple[list[dict], bool]:
     return merged, merged != (committed.get("follow_ups") or [])
 
 
+def bump_seed_id(seed: dict) -> None:
+    match = re.fullmatch(r"(.*-v)(\d+)", str(seed.get("seed_id") or ""))
+    seed["seed_id"] = (
+        f"{match.group(1)}{int(match.group(2)) + 1}"
+        if match
+        else "goalmax-manual-review-2026-10-11-v1"
+    )
+
+
+def record_resolved_browser_hashes(seed: dict, exported: dict) -> int:
+    """Record browser versions explicitly handled by this import.
+
+    Most imported browser annotations become identical to the committed seed.
+    A stale browser edit can instead be deliberately rejected in favor of a
+    newer source audit. These receipts let the UI clear both outcomes without
+    mistaking a rejected edit for work that is still awaiting integration.
+    """
+    resolved = seed.setdefault("resolved_browser_hashes", {})
+    exported_hashes = exported.get("sync", {}).get("last_exported_hashes", {})
+    changed = 0
+    for episode_id in exported.get("annotations", {}):
+        exported_hash = exported_hashes.get(episode_id)
+        if exported_hash and resolved.get(episode_id) != exported_hash:
+            resolved[episode_id] = exported_hash
+            changed += 1
+    return changed
+
+
 def merge_taxonomies(seed: dict, exported: dict) -> None:
     for taxonomy_name in ("trigger", "request_relationship", "recovery"):
         existing = {
@@ -173,7 +201,19 @@ def main() -> None:
     import_id = f"browser-review-export-{exported['exported_at']}-{digest}"
     merged_ids = seed.setdefault("merged_review_ids", [])
     if import_id in merged_ids:
-        print(f"Export already merged: import_id={import_id}")
+        receipt_count = record_resolved_browser_hashes(seed, exported)
+        if receipt_count:
+            bump_seed_id(seed)
+            args.annotations.write_text(
+                json.dumps(seed, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(
+                f"Export already merged; added {receipt_count} resolution "
+                f"receipts: import_id={import_id}"
+            )
+        else:
+            print(f"Export already merged: import_id={import_id}")
         return
 
     merge_taxonomies(seed, exported)
@@ -194,13 +234,9 @@ def main() -> None:
             updated += 1
 
     validate_current_schema(seed["annotations"])
+    receipt_count = record_resolved_browser_hashes(seed, exported)
     merged_ids.append(import_id)
-    match = re.fullmatch(r"(.*-v)(\d+)", str(seed.get("seed_id") or ""))
-    seed["seed_id"] = (
-        f"{match.group(1)}{int(match.group(2)) + 1}"
-        if match
-        else "goalmax-manual-review-2026-10-11-v1"
-    )
+    bump_seed_id(seed)
 
     args.annotations.write_text(
         json.dumps(seed, ensure_ascii=False, indent=2) + "\n",
@@ -209,6 +245,7 @@ def main() -> None:
     print(
         f"Merged {len(exported['annotations'])} browser annotations: "
         f"added={added}, updated={updated}, unchanged={unchanged}, "
+        f"receipts={receipt_count}, "
         f"import_id={import_id}"
     )
 
