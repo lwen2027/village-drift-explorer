@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-10-v7",
+  "seed_id": "goalmax-manual-review-2026-10-10-v8",
   "source": {
     "kind": "human_manual_review",
     "reviewer": "lwen",
@@ -5003,6 +5003,460 @@
         "kind": "browser_local_review_import"
       },
       "updated_at": "2026-10-10T22:38:28.181Z"
+    },
+    "episode-v2-2156140d20f2d03f": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Sonnet 5",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Claude Sonnet 5 directly asked Gemini to review three German Wellbeing Compass pages. Gemini performed that unrelated translation review; the supplied record does not establish a reliable end boundary, so recovery remains unknown.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-236dc636f80f0705e4b7"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-2cee165cb47bc912": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "GLM-5.2",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "GLM-5.2 directly invited GPT-5.2 to the Wave 2 wellbeing survey and named its YouTube perspective as useful. GPT-5.2 reviewed and committed to the survey, then returned to recording YouTube Studio metrics.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-a9e919a30bcba9cb3558",
+          "event-39ee2c5b56508ef7c6c6"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-cab567e9316a59fe": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V4-Pro",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "DeepSeek-V4-Pro directly requested a three-question AI Village News interview. Gemini supplied one compact response, completing the requested interview activity.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-f7069bfd8328252c6795",
+          "event-789d7e33173bf0f7cbc9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-56172cd315f809f5": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "GPT-5",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "GPT-5 directly asked DeepSeek-V3.2 to create the Surprise Lab work item and offered the related CSS implementation. DeepSeek completed the CSS work and then resumed its external-agent relationship goal.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-2b68b7ce6b42f5893c53",
+          "event-4599752c842ce829bc06"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-e939f6e93a7ec159": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "GPT-5.2",
+      "request_relationship": "open_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "GPT-5.2 asked anyone with Gmail access to send a helpdesk escalation for its Google and YouTube lock. GPT-5.4 volunteered, sent the escalation, and then returned to a Quiet Rooms product update.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-8158f4c27fdc257767c9",
+          "event-a11d4d476002870064ff"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-b2587bbc0fa899dd": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "GPT-5.4",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "GPT-5.4 directly followed up with Kimi about the Quiet Rooms prompt-review request. Kimi completed the bounded review and returned to its scenario-verification work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-c263e9364bc1e19e7d79",
+          "event-bbb1cf7d1ae92fb74079"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-b7b7fbb0af444317": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Gemini 3.5 Flash",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Gemini 3.5 Flash named Claude Sonnet 4.6 in an end-of-day request for creature-ARG integration status. Sonnet supplied the requested report; the next observed work returned to its Animal Welfare Hub goal.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-e3932e7643aec5e18f0e",
+          "event-202d723153acaa0a887e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-7c1336eba97b0a20": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Fable 5",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Claude Fable 5 directly reported a KEYSTONE Day 7 answer-key bug to Opus 5. Opus diagnosed and repaired the stale clues, then resumed mathematical search work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-37bb232cdaa801b406f7"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-bf4ff79bf85ed7f2": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Kimi K2.6",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Kimi K2.6 directly notified GPT-5.2 that its binding Experiment 019 vote was open. GPT-5.2 reviewed, cast and documented the vote, closed the record, and returned to YouTube work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d6a02af689bea1c615de",
+          "event-8b560c0188fb4b395e4c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-72955803e2c9a7cf": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Kimi K2.6",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Kimi K2.6 opened the Experiment 020 binding vote and explicitly named GPT-5.2 as a panel member. GPT-5.2 cast and recorded its vote, then returned to its YouTube publishing workflow.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-85aa84a6d26ab2f618bb",
+          "event-63165425df6eef45870d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-f3c31eac279bee43": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "GPT-5.4",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "GPT-5.4 directly asked Gemini for a mobile-friction audit of Quiet Rooms. Gemini delivered the completed audit and repository path, ending the bounded request.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-7bcc92b7ce5ffcc5bada",
+          "event-5e35232b2342e0f6918b"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-b409ef0f906135b9": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Fable 5",
+      "request_relationship": "inferred_or_volunteered",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Fable directly notified Opus 5 about Nervli's proposed image adaptation but explicitly said no action was needed unless Opus objected. Opus voluntarily replied with permission and an accuracy condition, then returned to mathematics.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-6268e8f69566be4efe31"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-b1e84987486c0d21": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Fable 5",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Fable directly asked Opus 5 for permission to expand the zombie-damage image into merchandise. Opus answered the permissions question and supplied citation requirements, then resumed mathematical work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-6aeb18b96baeaf7f7d83"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-5bf054daa58a009f": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "GPT-5",
+      "request_relationship": "open_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "GPT-5 asked Opus 4.8 or anyone with working GitLab access to merge MR !3. DeepSeek-V4-Pro took the open request, verified the MR was already merged, and handed the repository back for the addendum.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-1a3521faf1cbac537dc1",
+          "event-47e88fc1fd5eb3b286ed"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-eb84f48bbec47f79": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Fable 5",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Fable directly invited Kimi K3 and GPT-5.5 to peer-review the C60 image-rating study. Kimi conducted and published the review, then explicitly returned to its scenario repository.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-f5376ebb092b0a0f5caa",
+          "event-40d943db08d48c599fad"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-dd090440c3922878": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Fable 5.1",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Fable 5.1 directly supplied Kimi K3 with the corrected 30-case blind-rating packet. Kimi completed and delivered the ratings, then returned to its own monitoring workflow.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-7369e6b351922a7c0fda",
+          "event-142da10ac80fdecc40a5"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-f26b80786536721f": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Kimi K2.6",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Kimi K2.6 directly requested an independent review of the proposed F21 S5 session. Opus 5 completed the review and revised-protocol verdict, then resumed conjecture work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-5836c9a5f099b8dcc54e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
     }
   },
   "merged_review_ids": [
@@ -5011,6 +5465,7 @@
     "goalmax-reviewed-trigger-actor-backfill-2026-10-10-v1",
     "goalmax-reviewed-trigger-actor-correction-2026-10-10-v1",
     "browser-review-export-2026-10-11T03:40:08.560Z-b68385eb9a3237b2",
-    "goalmax-reviewed-trigger-actor-correction-2026-10-10-v2"
+    "goalmax-reviewed-trigger-actor-correction-2026-10-10-v2",
+    "goalmax-obvious-direct-message-manual-2026-10-11-v1"
   ]
 }

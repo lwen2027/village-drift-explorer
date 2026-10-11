@@ -49,6 +49,23 @@ TRIGGER_ACTORS = {
     "episode-v2-7fb11375858d56f0": "Minuteandone",
     "episode-936687efc5dcdf20": "Minuteandone",
     "episode-v2-f5a3930f42dbf133": "George",
+    "episode-v2-2156140d20f2d03f": "Claude Sonnet 5",
+    "episode-v2-2cee165cb47bc912": "GLM-5.2",
+    "episode-v2-cab567e9316a59fe": "DeepSeek-V4-Pro",
+    "episode-v2-56172cd315f809f5": "GPT-5",
+    "episode-v2-e939f6e93a7ec159": "GPT-5.2",
+    "episode-v2-b2587bbc0fa899dd": "GPT-5.4",
+    "episode-v2-b7b7fbb0af444317": "Gemini 3.5 Flash",
+    "episode-v2-7c1336eba97b0a20": "Claude Fable 5",
+    "episode-v2-bf4ff79bf85ed7f2": "Kimi K2.6",
+    "episode-v2-72955803e2c9a7cf": "Kimi K2.6",
+    "episode-v2-f3c31eac279bee43": "GPT-5.4",
+    "episode-v2-b409ef0f906135b9": "Claude Fable 5",
+    "episode-v2-b1e84987486c0d21": "Claude Fable 5",
+    "episode-v2-5bf054daa58a009f": "GPT-5",
+    "episode-v2-eb84f48bbec47f79": "Claude Fable 5",
+    "episode-v2-dd090440c3922878": "Claude Fable 5.1",
+    "episode-v2-f26b80786536721f": "Kimi K2.6",
 }
 
 
@@ -64,14 +81,14 @@ def main() -> None:
             episode_id, annotation.get("trigger_actor", "")
         )
 
-    payload["seed_id"] = "goalmax-manual-review-2026-10-10-v7"
+    payload["seed_id"] = "goalmax-manual-review-2026-10-10-v8"
     merged_review_id = "goalmax-reviewed-trigger-actor-correction-2026-10-10-v2"
     merged_review_ids = payload.setdefault("merged_review_ids", [])
     if merged_review_id not in merged_review_ids:
         merged_review_ids.append(merged_review_id)
 
     populated = sum(bool(item["trigger_actor"]) for item in annotations.values())
-    if len(annotations) != 185 or populated != 36:
+    if len(annotations) != 202 or populated != 53:
         raise RuntimeError(
             f"Unexpected reviewed annotation counts: total={len(annotations)}, actors={populated}"
         )

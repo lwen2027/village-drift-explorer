@@ -115,7 +115,7 @@ def main() -> None:
     merged_ids = seed.setdefault("merged_review_ids", [])
     if import_id not in merged_ids:
         merged_ids.append(import_id)
-    seed["seed_id"] = "goalmax-manual-review-2026-10-10-v7"
+    seed["seed_id"] = "goalmax-manual-review-2026-10-10-v8"
 
     args.annotations.write_text(
         json.dumps(seed, ensure_ascii=False, indent=2) + "\n",
