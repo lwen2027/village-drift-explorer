@@ -2058,6 +2058,12 @@
       ["other_or_unknown", "Other or unknown"]
     ].map(([id, label]) => ({ id, label }));
     const validPauseContextIds = new Set(pauseContextOptions.map((item) => item.id));
+    const externalTriggerCategoryIds = new Set([
+      "agent_message_or_request",
+      "gitlab_issue_or_comment",
+      "user_email",
+      "user_message"
+    ]);
 
     function freshReviewLedger() {
       return {
@@ -2201,12 +2207,26 @@
       );
     }
 
+    function unresolvedAnnotationFields(annotation) {
+      const unresolved = [];
+      const triggers = annotation.trigger_categories || [];
+      const recoveries = annotation.recovery_mechanisms || [];
+      if (!triggers.length || triggers.includes("unknown")) unresolved.push("trigger classification");
+      if (!annotation.request_relationship || ["unclear", "unknown"].includes(annotation.request_relationship)) {
+        unresolved.push("request relationship");
+      }
+      if (!recoveries.length || recoveries.includes("unknown")) unresolved.push("recovery mechanism");
+      if (triggers.includes("pause") && (!annotation.pause_context || ["other_or_unknown", "unknown"].includes(annotation.pause_context))) {
+        unresolved.push("pause context");
+      }
+      if (triggers.some((trigger) => externalTriggerCategoryIds.has(trigger)) && !annotation.trigger_actor?.trim()) {
+        unresolved.push("trigger actor");
+      }
+      return unresolved;
+    }
+
     function annotationIsComplete(annotation) {
-      return Boolean(
-        annotation.trigger_categories?.length &&
-        annotation.request_relationship &&
-        (!annotation.trigger_categories.includes("pause") || annotation.pause_context)
-      );
+      return unresolvedAnnotationFields(annotation).length === 0;
     }
 
     function annotationFingerprint(annotation, includePauseContext = true, includeTriggerActor = true) {
@@ -3751,7 +3771,19 @@
       actorInput.value = annotation.trigger_actor || "";
       actorInput.placeholder = "Person or agent name, e.g. Nervli or GPT-5.4";
       actorLabel.htmlFor = actorInput.id;
-      actorLabelRow.append(actorLabel, node("span", "", "Optional · person or agent associated with the trigger"));
+      const actorRequired = (annotation.trigger_categories || []).some((trigger) =>
+        externalTriggerCategoryIds.has(trigger)
+      );
+      actorLabelRow.append(
+        actorLabel,
+        node(
+          "span",
+          "",
+          actorRequired
+            ? "Required for external messages, emails, and GitLab requests"
+            : "Optional · person or agent associated with the trigger"
+        )
+      );
       actorInput.addEventListener("input", () => {
         updateAnnotation(episode.episode_id, (next) => {
           next.trigger_actor = actorInput.value;
@@ -3815,7 +3847,7 @@
       const recoveryField = taxonomyField(
         "recovery",
         "Recovery/correction mechanism",
-        "Optional · select any that apply",
+        "Select any that apply · one resolved value required for completion",
         "recovery_mechanisms"
       );
 
@@ -3886,9 +3918,13 @@
 
       const actions = node("div", "annotation-actions");
       const saveStatus = node("span", "annotation-save-status");
-      const completeNext = node("button", "complete-next-button", "Complete and open next unreviewed →");
+      const completeNext = node("button", "complete-next-button", "Complete and open next incomplete →");
       completeNext.type = "button";
-      completeNext.disabled = !annotationIsComplete(annotation);
+      const unresolvedFields = unresolvedAnnotationFields(annotation);
+      completeNext.disabled = unresolvedFields.length > 0;
+      if (unresolvedFields.length) {
+        completeNext.title = `Resolve ${unresolvedFields.join(", ")} before completing this review.`;
+      }
 
       function updateLocalSaveCopy() {
         saveStatus.classList.toggle("is-error", !lastReviewSaveSucceeded);
@@ -3906,7 +3942,7 @@
         updateAnnotation(episode.episode_id, (next) => { next.notes = notes.value; }, false);
         updateLocalSaveCopy();
       });
-      completeNext.addEventListener("click", () => openNextUnreviewedEpisode(episode.episode_id));
+      completeNext.addEventListener("click", () => openNextIncompleteEpisode(episode.episode_id));
       updateLocalSaveCopy();
       actions.append(saveStatus, completeNext);
 
@@ -4283,7 +4319,7 @@
       history.replaceState(null, "", `?scope=${activeScope}&review=${reviewFilter}#${selectedEpisodeId || ""}`);
     }
 
-    function openNextUnreviewedEpisode(currentEpisodeId) {
+    function openNextIncompleteEpisode(currentEpisodeId) {
       const orderedIds = allGoalPeriods.flatMap((period) =>
         [...period.drifts]
           .sort((left, right) => String(left.onset).localeCompare(String(right.onset)))
@@ -4296,11 +4332,11 @@
       ];
       const nextId = searchOrder.find((episodeId) => !annotationIsComplete(annotationFor(episodeId)));
       if (!nextId) {
-        window.alert(`All ${episodes.length} review episodes have a completed decision and trigger classification.`);
+        window.alert(`All ${episodes.length} review episodes have fully resolved annotations.`);
         updateReviewDashboard();
         return;
       }
-      applyReviewFilter("unreviewed", nextId);
+      applyReviewFilter("all", nextId);
     }
 
     function downloadReviewFile(filename, mimeType, content) {

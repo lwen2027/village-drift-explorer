@@ -84,6 +84,25 @@ const pauseLabels = {
   other_or_unknown: "Other or unknown"
 };
 
+const externalTriggerCategoryIds = new Set([
+  "agent_message_or_request",
+  "gitlab_issue_or_comment",
+  "user_email",
+  "user_message"
+]);
+
+function annotationIsFullyResolved(annotation) {
+  const clean = normalizeAnnotation(annotation);
+  if (!clean.trigger_categories.length || clean.trigger_categories.includes("unknown")) return false;
+  if (!clean.request_relationship || ["unclear", "unknown"].includes(clean.request_relationship)) return false;
+  if (!clean.recovery_mechanisms.length || clean.recovery_mechanisms.includes("unknown")) return false;
+  if (clean.trigger_categories.includes("pause")
+      && (!clean.pause_context || ["other_or_unknown", "unknown"].includes(clean.pause_context))) return false;
+  if (clean.trigger_categories.some((trigger) => externalTriggerCategoryIds.has(trigger))
+      && !clean.trigger_actor.trim()) return false;
+  return true;
+}
+
 const sourceLabels = {
   browser_local: "Browser-local edit",
   initial_human_review: "Initial human review",
@@ -254,7 +273,7 @@ function reviewSource(episodeId, annotation) {
   return "committed_review";
 }
 
-const rows = [...mergedAnnotations.entries()]
+const annotatedRows = [...mergedAnnotations.entries()]
   .map(([episodeId, annotation]) => ({
     episodeId,
     episode: episodeById.get(episodeId),
@@ -267,6 +286,8 @@ const rows = [...mergedAnnotations.entries()]
     const rightTime = right.episode.onset || right.episode.activity_start || "";
     return rightTime.localeCompare(leftTime);
   });
+
+const rows = annotatedRows.filter((row) => annotationIsFullyResolved(row.annotation));
 
 const reviewedEpisodeIds = new Set(rows.map((row) => row.episodeId));
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -545,13 +566,13 @@ function renderMetrics() {
   const grid = document.querySelector("#metric-grid");
   grid.replaceChildren(
     metricCard(
-      "Goal-max episodes reviewed",
+      "Goal-max episodes fully reviewed",
       `${rows.length} / ${goalMaxEpisodes.length}`,
       `${Math.round((rows.length / goalMaxEpisodes.length) * 100)}% of confirmed goal-maximization drift episodes`,
       rows.length / goalMaxEpisodes.length
     ),
     metricCard(
-      "Current queue reviewed",
+      "Current queue fully reviewed",
       `${reviewedInQueue} / ${queueIds.size}`,
       "Annotations completed among episodes still shown in Manual Review",
       reviewedInQueue / queueIds.size

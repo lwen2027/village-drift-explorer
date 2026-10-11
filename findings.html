@@ -451,7 +451,7 @@
           </article>
 
           <article class="viz-card is-wide">
-            <div class="viz-heading"><div><h3>Trigger → drift shape → recovery</h3><p>Primary human annotation at each stage for all reviewed goal-maximization episodes.</p></div><span class="viz-meta" id="flow-meta"></span></div>
+            <div class="viz-heading"><div><h3>Trigger → drift shape → recovery</h3><p>Primary human annotation at each stage for fully reviewed goal-maximization episodes.</p></div><span class="viz-meta" id="flow-meta"></span></div>
             <div class="flow-wrap"><svg class="svg-chart flow-chart" id="annotation-flow" viewBox="0 0 1180 620" role="img" aria-label="Trigger to drift shape to recovery flow diagram"></svg></div>
             <p class="viz-note">Multi-label annotations use the first recorded trigger and recovery so each reviewed episode contributes one path.</p>
           </article>
@@ -479,7 +479,7 @@
           </article>
 
           <article class="viz-card">
-            <div class="viz-heading"><div><h3>Drift influence network</h3><p>Who or what directly triggered reviewed episodes, when source identity is available.</p></div><span class="viz-meta" id="influence-meta"></span></div>
+            <div class="viz-heading"><div><h3>Drift influence network</h3><p>Who or what directly triggered fully reviewed episodes, when source identity is available.</p></div><span class="viz-meta" id="influence-meta"></span></div>
             <svg class="svg-chart" id="influence-network" viewBox="0 0 640 540" role="img" aria-label="Drift influence network"></svg>
             <p class="viz-note">Named actors come only from direct trigger-source metadata. Unidentified emails, messages, and GitLab requests remain grouped by channel.</p>
           </article>
@@ -517,9 +517,9 @@
         <div class="section-heading">
           <div>
             <p class="section-kicker">Annotation breakdown</p>
-            <h2 id="breakdown-title">Patterns within reviewed episodes</h2>
+            <h2 id="breakdown-title">Patterns within fully reviewed episodes</h2>
           </div>
-          <p>Charts always summarize every reviewed goal-maximization episode. Use the dropdowns to narrow only the episode list below.</p>
+          <p>Charts summarize goal-maximization episodes whose required annotation fields are resolved. Use the dropdowns to narrow only the episode list below.</p>
         </div>
 
         <div class="filters" id="filters" aria-label="Findings overview filters">
@@ -561,12 +561,12 @@
       </section>
 
       <section class="results" aria-labelledby="results-title">
-        <div class="results-heading"><h2 id="results-title">Reviewed episodes</h2><span class="results-count" id="results-count"></span></div>
+        <div class="results-heading"><h2 id="results-title">Fully reviewed episodes</h2><span class="results-count" id="results-count"></span></div>
         <div class="episode-list" id="episode-list"></div>
         <button class="show-more" id="show-more" type="button">Show 40 more</button>
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261010-trigger-actor"></script>
+  <script type="module" src="./scripts/findings.js?v=20261011-resolved-review-state"></script>
 </body>
 </html>
