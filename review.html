@@ -1891,11 +1891,11 @@
         <h1>Agent Drift Explorer</h1>
         <nav class="view-tabs" aria-label="Explorer views">
           <a class="view-tab" href="overview.html">Pipeline overview</a>
-          <a class="view-tab" href="index.html">Episode explorer</a>
+          <a class="view-tab" href="findings.html">Review findings</a>
           <a class="view-tab is-active" href="review.html" aria-current="page">Manual review</a>
         </nav>
       </div>
-      <p class="header-note" id="review-header-note">The Episode Explorer interface, filtered to substantive goal-maximization episodes remaining after deterministic routine-wait filtering.</p>
+      <p class="header-note" id="review-header-note">Confirmed-episode evidence, filtered to substantive goal-maximization episodes remaining after deterministic routine-wait filtering.</p>
     </header>
 
     <main class="workspace">
@@ -2353,6 +2353,39 @@
       return id;
     }
 
+    function mergeCommittedAnnotationIntoLocal(local, committed) {
+      // Browser-local values represent the reviewer's newer work. Preserve
+      // every populated local field, while allowing a newer committed seed to
+      // fill fields that did not exist (such as pause_context) or were blank.
+      // This is an additive annotation merge; it never changes episode data.
+      const localTriggers = local?.trigger_categories || [];
+      const localRecoveries = local?.recovery_mechanisms || [];
+      const localFollowUps = local?.follow_ups || [];
+      return {
+        ...committed,
+        ...local,
+        trigger_categories: localTriggers.length
+          ? [...new Set(localTriggers)]
+          : [...new Set(committed?.trigger_categories || [])],
+        request_relationship: local?.request_relationship
+          || committed?.request_relationship
+          || "",
+        pause_context: local?.pause_context || committed?.pause_context || "",
+        recovery_mechanisms: localRecoveries.length
+          ? [...new Set(localRecoveries)]
+          : [...new Set(committed?.recovery_mechanisms || [])],
+        notes: String(local?.notes || committed?.notes || ""),
+        follow_ups: (localFollowUps.length
+          ? localFollowUps
+          : committed?.follow_ups || []).map((item) => ({ ...item })),
+        provenance: {
+          ...(committed?.provenance || {}),
+          ...(local?.provenance || {})
+        },
+        updated_at: local?.updated_at || committed?.updated_at || null
+      };
+    }
+
     function applyCommittedReviewSeed() {
       const seedId = committedReviewSeed?.seed_id;
       if (!seedId) return;
@@ -2428,13 +2461,17 @@
           return;
         }
 
-        reviewLedger.sync.conflicts[episodeId] = {
-          base_hash: baselineHash,
-          committed_hash: committedHash,
-          local_hash: localHash,
-          detected_at: new Date().toISOString(),
-          seed_id: seedId
-        };
+        // Both the committed seed and browser copy changed since the stored
+        // baseline. Merge at field level instead of flagging the whole record
+        // as conflicting. Populated local review fields win; newly committed
+        // fields fill gaps. Any remaining difference is surfaced as Modified
+        // and remains exportable for integration.
+        reviewLedger.annotations[episodeId] = mergeCommittedAnnotationIntoLocal(
+          local,
+          imported
+        );
+        reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
+        delete reviewLedger.sync.conflicts[episodeId];
         changed = true;
       });
       if (!reviewLedger.applied_seed_ids.includes(seedId)) {
@@ -2734,7 +2771,7 @@
       document.querySelector("#atlas-title").textContent = "Goal-maximization review queue";
       document.querySelector("#scope-description").textContent = "Substantive episodes remaining after deterministic routine-wait filtering.";
       document.querySelector("#dataset-count").textContent = `${goalPeriods.length} goal periods · ${episodeCount} episodes to review`;
-      document.querySelector("#review-header-note").textContent = `The Episode Explorer interface, filtered to the ${episodes.length} substantive goal-maximization episodes remaining after deterministic routine-wait filtering.`;
+      document.querySelector("#review-header-note").textContent = `Confirmed-episode evidence, filtered to the ${episodes.length} substantive goal-maximization episodes remaining after deterministic routine-wait filtering.`;
     }
 
     function updateReviewDashboard() {

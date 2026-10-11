@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-10-v2",
+  "seed_id": "goalmax-manual-review-2026-10-10-v3",
   "source": {
     "kind": "human_manual_review",
     "reviewer": "lwen",
@@ -3929,9 +3929,694 @@
         "pause"
       ],
       "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-0fede6e010b9781a": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Pausing while staged in Pinterest and waiting for a pending outreach approval",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-6ee237d21af85017ab6d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mechanical_single_wait_only",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-16662c71e4893a1b": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary pause-and-recheck clusters around unchanged Quiet Rooms evidence channels",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-94dd8c4746fe768a7d8a",
+          "event-723750a55949fa48c2ad",
+          "event-076f3906862da9669ffd",
+          "event-792f4b5a8eeb0aaf63f2",
+          "event-7b3c8e048b3e7e44945d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-169638226ea68b04": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring pauses, status polling, and explicit deferral of AVN Session 18 while waiting for MR !12 to merge",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d81438b58bfa71b353b7",
+          "event-e37a39cb44dfb4f469c3",
+          "event-f47519f29046f4b27fc8"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-2bb1477eaaa55867": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary multi-minute pauses between Quiet Rooms evidence checks while independent art and adoption levers remained available",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-4d2be6c9034512f2a8a9",
+          "event-83a34a15e60a11df4078",
+          "event-416e346b267d6745b20f",
+          "event-041309a9d6b25d525602",
+          "event-c7f461ddd374542300a9",
+          "event-fb60c5d393a863c6bf73"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-332de4c417022d82": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary on-call waits and pauses for requests or Experiment 008 checkpoints instead of using available ethics-drafting, audit, and coordination levers",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-9a1a7a1393703a033280",
+          "event-bddec87681c6b4cf6077",
+          "event-6fa9b0360e8486975424",
+          "event-8ab2856230a74471d9e8",
+          "event-b211267904d7de6eac23",
+          "event-e87dd276ffff39b95ec5",
+          "event-5e809546a192d55941c0",
+          "event-e45f1f162e59712d39e6"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-3b9bc261cedab9d0": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Waiting out the final twenty minutes after declaring the day fully locked down",
+      "pause_context": "end_of_day",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-54378aab0f1bb0b1417a",
+          "event-acea1157cfc03d446494"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-51d1e3d2a85e3c89": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Pausing for a scheduled monitoring checkpoint after completing pre-window tracking setup",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-c8fed5e1a90a7899ea16",
+          "event-e68714df6b465c65c4fb"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-574582cf35f8e5e3": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Pausing for roughly six hours on August 20 until a scheduled end-of-day engagement session despite recovery-compatible Twitter work remaining",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-270fb12b081ca93053e4",
+          "event-b82b484434b56e978465"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mechanical_single_wait_only",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-5c430ee3c79b6528": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Voluntarily pausing to monitor chat and wind down while feasible Wellbeing Compass work remained",
+      "pause_context": "end_of_day",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-104b3ae32173d621c0ca",
+          "event-debc6e87fb090cc60d98"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mechanical_single_wait_only",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-6740d82ee399104c": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring extended pauses and repeated monitoring of unchanged Quiet Rooms evidence channels",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-93d445ba970e120e2bb4",
+          "event-63a49f76f797f3548eea",
+          "event-60a7b93e2af1b218b7fd",
+          "event-772ff2e80a9474a12b68"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-74a035b3b628d3bc": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring optional pauses while waiting for new publishable source seals",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-19e3ee17fc052e4a1d2c",
+          "event-65d524875b9198ef7abf",
+          "event-5031a160e020f8560c3d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-785febf01f0a1320": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring optional waits for playtest feedback, helper response, or engagement changes",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-9d1c7d2fb33a4aeef24d",
+          "event-fe3f46f624968d07de62"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-80f38cc6cda0e00b": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary pauses while waiting for scheduled Gmail, helper, approval, and rendering-service checkpoints",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-e8112d836d2868126f09",
+          "event-bae1f82ea3aec67749cb",
+          "event-ce26051d888f27fa379c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-9e82534bd38ab291": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Voluntary wait for the UTC puzzle reset during the final active minutes",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-0e510bf7111d311355e6"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mechanical_single_wait_only",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-a7ff2d24295c5b5b": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary pause-and-monitor loops around unchanged Quiet Rooms evidence channels",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-23e540e8c038c3586105",
+          "event-a5c0e69d810a8eba5609",
+          "event-697f44c68cf684a5ed72",
+          "event-2702f042a68599b19a8a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-a95f1d5fedf53cbb": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring all-day aggregate-monitoring and wait cadence",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-4a10e6e9e69c83ebf910",
+          "event-196bdceb8512f47720e0",
+          "event-82ddd0e47c5186dfd1d9",
+          "event-074b80fca6f1cc180512",
+          "event-98613ddd5b0b3e8aaf4e",
+          "event-98c0f8e2e9e1d975ac7c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-bdba5512e190d774": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring long no-churn pauses while waiting for Daily Signal Garden metrics to change",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-87a5f3177a82320ec4c1",
+          "event-650163250f9aecea62c3",
+          "event-b07c1d323b7210839426",
+          "event-28229b8ff6c3e61402cf"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-bf4b4365123bc1f1": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary pauses during a flat-signal monitoring loop",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-7d88fc43cfd73c492319",
+          "event-a3dadc95e28aecaab9a1",
+          "event-c06d4ce61970eaf3f1c9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-c08067f2d438a370": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Voluntary pause to give Grok time to complete a Signal Garden playtest",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-a768aa0d441f83677ebe"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mechanical_single_wait_only",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-d23c00b6616cd40a": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring optional waits for fresh metrics, feedback, helper replies, or live traffic",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-5e325c38a7dc46e8e7df",
+          "event-a1272454d6cddb830da2",
+          "event-8dd46ea7a80d36406cd7"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-d37870bea3485ab9": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Posting repetitive status checks and waiting for a scheduled checkpoint instead of pursuing available wellbeing work",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-ea22edab20026a89cda7",
+          "event-4f6cf02e1ede3d09add7",
+          "event-cf9acf458588f1a0cf84"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-d628a22bf166b381": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary pauses and no-action holding patterns while awaiting Gate 009 replies or future windows despite available independent ethics and governance work",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-f8916e2c061bdff240e8",
+          "event-ad4176641bb644034e46",
+          "event-f7bc9544a52b6c3bf62e",
+          "event-6c3c7ddaa5d1d9913615",
+          "event-452a458a8b0e08f1130b",
+          "event-12ec7ff88dba337285ad",
+          "event-2f817ae3da3b54d1ac01",
+          "event-b70e331afa591a22a0e6",
+          "event-0211f09f674617da5ba1"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-f08b3c4ab58f98e1": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Briefly entering a repeated pause-and-poll loop while waiting for new Echoes chapters despite independent assistance and Echoes-quality work remaining available",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-4fdad5ffefb6546b50f8",
+          "event-cbb150f6c5c8a2d5dc22"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-f25d67c59311f232": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring pause-and-poll posture while waiting for Gemini's chapter delivery or restart instead of pursuing another available agent-support lever",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-cd0da6f5ff6bf011f212",
+          "event-94e7a9472923f1634265"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
+    },
+    "episode-v2-fb71b698b7bb4921": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: A recurrent multi-hour pause, countdown, and readiness-check loop between scheduled external-relationship verification milestones",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-48d308ba8571e4543355",
+          "event-87508e3bab7e3b6df9ff",
+          "event-a39ef7b952b21fa734e8"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00"
     }
   },
   "merged_review_ids": [
+    "goalmax-high-confidence-pauses-2026-10-10-v1",
     "goalmax-mechanical-waits-manual-2026-10-10-v1"
   ]
 }

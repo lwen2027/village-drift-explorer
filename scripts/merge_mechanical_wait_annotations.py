@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Merge the canonical repeated-wait review into the explorer annotation seed."""
+"""Merge a canonical pause-review artifact into the explorer annotation seed."""
 
 from __future__ import annotations
 
@@ -37,8 +37,11 @@ def main() -> None:
     review = json.loads(args.review.read_text(encoding="utf-8"))
     seed = json.loads(args.annotations.read_text(encoding="utf-8"))
     imported = review.get("annotations") or {}
-    if len(imported) != 117:
-        raise SystemExit("canonical repeated-wait review must contain 117 rows")
+    expected_count = (review.get("counts") or {}).get("annotations")
+    if not imported or expected_count != len(imported):
+        raise SystemExit(
+            "canonical pause review must contain the declared annotation count"
+        )
 
     added = 0
     preserved = 0
@@ -64,7 +67,7 @@ def main() -> None:
         existing.setdefault("pause_context", annotation["pause_context"])
         preserved += 1
 
-    seed["seed_id"] = "goalmax-manual-review-2026-10-10-v2"
+    seed["seed_id"] = "goalmax-manual-review-2026-10-10-v3"
     merged_ids = set(seed.get("merged_review_ids") or [])
     merged_ids.add(review["review_id"])
     seed["merged_review_ids"] = sorted(merged_ids)
@@ -73,7 +76,7 @@ def main() -> None:
         encoding="utf-8",
     )
     print(
-        f"Merged {len(imported)} repeated-wait annotations: "
+        f"Merged {len(imported)} annotations from {review['review_id']}: "
         f"added {added}, preserved {preserved} existing human reviews."
     )
 
