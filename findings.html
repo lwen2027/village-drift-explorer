@@ -112,6 +112,55 @@
     }
     .sample-warning strong { white-space: nowrap; }
 
+    .exploration { margin: 8px 0 34px; }
+    .exploration-heading { margin-bottom: 18px; }
+    .exploration-heading p { max-width: 760px; margin: 8px 0 0; color: var(--muted); line-height: 1.5; }
+    .viz-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .viz-card {
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: rgba(251, 248, 240, .9);
+      box-shadow: var(--shadow);
+    }
+    .viz-card.is-wide { grid-column: 1 / -1; }
+    .viz-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 15px; }
+    .viz-heading p { margin: 5px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .viz-meta { flex: none; color: var(--muted); font: 700 11px/1.35 var(--mono); text-align: right; }
+    .viz-control { min-width: 190px; height: 36px; padding: 0 30px 0 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--card); }
+    .viz-note { margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .viz-legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 0; color: var(--muted); font-size: 11px; }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+    .legend-swatch { width: 18px; height: 7px; border-radius: 999px; background: var(--rust); }
+    .legend-swatch.is-point { width: 8px; height: 8px; border-radius: 1px; transform: rotate(45deg); background: var(--rust); }
+    .legend-swatch.is-reviewed { background: var(--green); }
+
+    .goal-atlas { max-height: 560px; overflow: auto; padding-right: 5px; }
+    .goal-strip-row { display: grid; grid-template-columns: minmax(150px, 230px) 1fr 58px; gap: 12px; align-items: center; min-height: 38px; border-bottom: 1px solid rgba(207, 193, 166, .5); }
+    .goal-strip-row:last-child { border-bottom: 0; }
+    .goal-strip-name { min-width: 0; }
+    .goal-strip-agent { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 800; }
+    .goal-strip-goal { margin-top: 2px; overflow: hidden; color: var(--muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+    .goal-strip-track { position: relative; height: 12px; border-radius: 999px; background: var(--paper-deep); }
+    .goal-strip-segment { position: absolute; top: 2px; height: 8px; min-width: 2px; border-radius: 999px; background: var(--rust); }
+    .goal-strip-segment.is-reviewed { box-shadow: inset 0 0 0 2px var(--green); }
+    .goal-strip-segment.is-unknown { top: 2px; width: 8px !important; min-width: 8px; height: 8px; border-radius: 1px; transform: translateX(-4px) rotate(45deg); background: var(--rust); }
+    .goal-strip-count { color: var(--muted); font: 700 10px/1.2 var(--mono); text-align: right; }
+
+    .svg-chart { display: block; width: 100%; height: auto; overflow: visible; }
+    .svg-axis { stroke: var(--line-strong); stroke-width: 1; }
+    .svg-grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 5; }
+    .svg-label { fill: var(--muted); font: 10px var(--mono); }
+    .svg-title { fill: var(--ink); font: 700 11px var(--sans); }
+    .duration-bars { display: grid; gap: 9px; }
+    .duration-row { display: grid; grid-template-columns: 76px 1fr 38px; gap: 9px; align-items: center; font-size: 12px; }
+    .duration-track { height: 12px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
+    .duration-fill { display: block; height: 100%; border-radius: inherit; background: var(--blue); }
+    .duration-count { font: 700 11px/1 var(--mono); text-align: right; }
+    .flow-wrap { overflow-x: auto; }
+    .flow-chart { min-width: 940px; }
+
     .filters {
       position: sticky;
       top: 0;
@@ -231,10 +280,14 @@
       border-radius: 14px;
       background: rgba(251, 248, 240, .88);
     }
+    .episode-row.has-follow-up { border-color: #bc9348; border-left-color: var(--gold); background: #fcf6e7; }
     .episode-agent { font-weight: 800; }
     .episode-date { margin-top: 5px; color: var(--muted); font: 12px/1.3 var(--mono); }
     .episode-activity { font-family: var(--serif); font-size: 18px; line-height: 1.25; }
     .episode-note { margin-top: 7px; color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+    .episode-followups { display: grid; gap: 6px; margin-top: 10px; }
+    .follow-up-chip { padding: 7px 9px; border: 1px solid #d2b676; border-radius: 8px; background: #f7eac8; color: #6d5422; font-size: 11px; line-height: 1.4; }
+    .follow-up-chip strong { font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
     .episode-tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag { padding: 5px 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--muted); font: 700 10px/1 var(--mono); text-transform: uppercase; }
     .tag.is-pause { color: var(--rust); border-color: #d9a28e; background: #fbede7; }
@@ -245,6 +298,8 @@
 
     @media (max-width: 1050px) {
       .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .viz-grid { grid-template-columns: 1fr; }
+      .viz-card.is-wide { grid-column: auto; }
       .episode-row { grid-template-columns: 1fr 1.5fr; }
       .episode-link { justify-self: start; }
     }
@@ -258,6 +313,9 @@
       .agent-list { grid-template-columns: 1fr; }
       .bar-row { grid-template-columns: minmax(110px, .9fr) 1.4fr 40px; }
       .episode-row { grid-template-columns: 1fr; gap: 10px; }
+      .goal-strip-row { grid-template-columns: minmax(110px, 150px) 1fr 44px; gap: 8px; }
+      .viz-heading { flex-direction: column; }
+      .viz-control { width: 100%; }
       .clear-filters { margin-left: 0; }
     }
   </style>
@@ -291,8 +349,64 @@
 
       <div class="sample-warning">
         <strong>Interpret with care</strong>
-        <span>These charts describe the reviewed sample, not the full Village population. Pause-heavy batches were intentionally prioritized, so raw shares should not be treated as population estimates.</span>
+        <span>Timing charts use all confirmed goal-maximization episodes. Annotation charts and the episode list use the human-reviewed sample, where pause-heavy batches were intentionally prioritized; their raw shares are not population estimates.</span>
       </div>
+
+      <section class="exploration" aria-labelledby="exploration-title">
+        <div class="exploration-heading">
+          <p class="section-kicker">Exploratory structure</p>
+          <h2 id="exploration-title">When, how long, and how repeatedly agents drift</h2>
+          <p>Timing views use all confirmed goal-maximization episodes so partial human-review coverage does not understate episode frequency. Validated-duration totals are lower bounds; unresolved durations remain visible as onset markers.</p>
+        </div>
+
+        <div class="viz-grid">
+          <article class="viz-card is-wide">
+            <div class="viz-heading">
+              <div><h3>Goal-window atlas</h3><p>Every goal period aligned from assignment (0%) to the audit boundary (100%).</p></div>
+              <select class="viz-control" id="goal-atlas-sort" aria-label="Sort goal-window atlas">
+                <option value="burden">Sort by validated drift share</option>
+                <option value="episodes">Sort by episode count</option>
+                <option value="first">Sort by first drift position</option>
+                <option value="agent">Sort by agent</option>
+              </select>
+            </div>
+            <div class="goal-atlas" id="goal-atlas"></div>
+            <div class="viz-legend"><span class="legend-item"><span class="legend-swatch"></span>Validated duration</span><span class="legend-item"><span class="legend-swatch is-point"></span>Duration unresolved</span><span class="legend-item"><span class="legend-swatch is-reviewed"></span>Human-reviewed episode</span></div>
+            <p class="viz-note" id="goal-atlas-note"></p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Drift burden versus frequency</h3><p>Goal periods with many short episodes separate from periods dominated by sustained drift.</p></div><span class="viz-meta" id="burden-meta"></span></div>
+            <svg class="svg-chart" id="burden-scatter" viewBox="0 0 640 360" role="img" aria-label="Drift burden versus episode frequency scatterplot"></svg>
+            <p class="viz-note">Y-axis is the minimum validated share of elapsed calendar time. Episodes without a numeric duration affect frequency but not burden.</p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Episode duration</h3><p>Validated episode spans on a logarithmic set of duration bands.</p></div><span class="viz-meta" id="duration-meta"></span></div>
+            <div class="duration-bars" id="duration-bars"></div>
+            <svg class="svg-chart" id="duration-ecdf" viewBox="0 0 640 210" role="img" aria-label="Cumulative distribution of validated episode duration"></svg>
+            <p class="viz-note" id="duration-note"></p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Recurrence after first drift</h3><p>Cumulative probability of another confirmed episode, grouped by first-drift position.</p></div><span class="viz-meta" id="recurrence-meta"></span></div>
+            <svg class="svg-chart" id="recurrence-chart" viewBox="0 0 640 350" role="img" aria-label="Recurrence after first drift survival curves"></svg>
+            <p class="viz-note">Kaplan–Meier-style censoring adjusts for unequal remaining observation time. This measures association, not whether early drift causes later drift.</p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Cumulative drift burden</h3><p>How validated drift time accumulates across one selected goal period.</p></div><select class="viz-control" id="cumulative-goal-select" aria-label="Select an agent goal period"></select></div>
+            <svg class="svg-chart" id="cumulative-chart" viewBox="0 0 640 350" role="img" aria-label="Cumulative drift burden across a goal period"></svg>
+            <p class="viz-note" id="cumulative-note"></p>
+          </article>
+
+          <article class="viz-card is-wide">
+            <div class="viz-heading"><div><h3>Trigger → drift shape → recovery</h3><p>Primary human annotation at each stage for all reviewed goal-maximization episodes.</p></div><span class="viz-meta" id="flow-meta"></span></div>
+            <div class="flow-wrap"><svg class="svg-chart flow-chart" id="annotation-flow" viewBox="0 0 1180 620" role="img" aria-label="Trigger to drift shape to recovery flow diagram"></svg></div>
+            <p class="viz-note">Multi-label annotations use the first recorded trigger and recovery so each reviewed episode contributes one path.</p>
+          </article>
+        </div>
+      </section>
 
       <section aria-labelledby="breakdown-title">
         <div class="section-heading">

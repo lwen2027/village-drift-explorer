@@ -8,6 +8,9 @@ import pathlib
 import re
 
 
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+
+
 def read_jsonl_gz(path: pathlib.Path) -> list[dict]:
     with gzip.open(path, "rt", encoding="utf-8") as handle:
         return [json.loads(line) for line in handle if line.strip()]
@@ -28,6 +31,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-dir", required=True, type=pathlib.Path)
     parser.add_argument("--html", required=True, type=pathlib.Path)
+    parser.add_argument(
+        "--data-output",
+        type=pathlib.Path,
+        default=ROOT / "data" / "source_records.json",
+    )
     args = parser.parse_args()
 
     sources = {
@@ -38,15 +46,33 @@ def main() -> None:
         "agentRecords": ("agents.jsonl.gz", ("id", "name", "created_at")),
         "villageGoalRecords": ("village_goals.jsonl.gz", ("id", "goal", "start_time", "end_time")),
     }
+    export_fields = {
+        "agentGoalRecords": (
+            "id", "agent_id", "name", "short_name", "start_time", "end_time"
+        ),
+        "agentRecords": ("id", "name"),
+        "villageGoalRecords": ("id", "goal", "start_time", "end_time"),
+    }
     html = args.html.read_text(encoding="utf-8")
+    exported = {}
     for constant, (filename, fields) in sources.items():
         records = [
             {field: record.get(field) for field in fields}
             for record in read_jsonl_gz(args.source_dir / filename)
         ]
+        exported[constant] = [
+            {field: record.get(field) for field in export_fields[constant]}
+            for record in records
+        ]
         html = replace_constant(html, constant, records)
         print(f"{constant}: {len(records)} records")
     args.html.write_text(html, encoding="utf-8")
+    args.data_output.parent.mkdir(parents=True, exist_ok=True)
+    args.data_output.write_text(
+        json.dumps(exported, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(f"sourceRecords: {args.data_output}")
 
 
 if __name__ == "__main__":

@@ -1,12 +1,13 @@
 const REVIEW_STORAGE_KEY = "village-drift-manual-review-ledger:v1";
 
-const [bundleResponse, manifestResponse, annotationResponse] = await Promise.all([
+const [bundleResponse, manifestResponse, annotationResponse, sourceResponse] = await Promise.all([
   fetch("./data/second_audit_v2.json"),
   fetch("./data/manual_review_wait_exclusions_v1.json"),
-  fetch("./data/manual_review_annotations_v1.json")
+  fetch("./data/manual_review_annotations_v1.json"),
+  fetch("./data/source_records.json")
 ]);
 
-if (!bundleResponse.ok || !manifestResponse.ok || !annotationResponse.ok) {
+if (!bundleResponse.ok || !manifestResponse.ok || !annotationResponse.ok || !sourceResponse.ok) {
   document.querySelector("#main-content").innerHTML = `
     <div class="load-error"><strong>Review findings could not load.</strong><br>
     The audit bundle, review manifest, and annotation dataset must be published together.</div>`;
@@ -16,6 +17,7 @@ if (!bundleResponse.ok || !manifestResponse.ok || !annotationResponse.ok) {
 const bundle = await bundleResponse.json();
 const manifest = await manifestResponse.json();
 const committedSeed = await annotationResponse.json();
+const sourceRecords = await sourceResponse.json();
 const goalMaxEpisodes = bundle.confirmed_episodes.filter(
   (episode) => episode.period === "goal_maximization"
 );
@@ -258,6 +260,160 @@ const rows = [...mergedAnnotations.entries()]
     const rightTime = right.episode.onset || right.episode.activity_start || "";
     return rightTime.localeCompare(leftTime);
   });
+
+const reviewedEpisodeIds = new Set(rows.map((row) => row.episodeId));
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+function timestampMs(value, dateEdge = "start") {
+  if (!value) return null;
+  const text = String(value).trim();
+  let normalized = /^\d{4}-\d{2}-\d{2}$/.test(text)
+    ? `${text}T${dateEdge === "end" ? "23:59:59" : "00:00:00"}Z`
+    : text.replace(" ", "T");
+  if (!/(?:Z|[+-]\d{2}:?\d{2})$/i.test(normalized)) normalized += "Z";
+  const parsed = Date.parse(normalized);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function episodeOnsetMs(episode) {
+  const onset = String(episode.onset || "");
+  if (/^\d{4}-\d{2}-\d{2}$/.test(onset) && episode.activity_start_observed_at) {
+    return timestampMs(episode.activity_start_observed_at);
+  }
+  return timestampMs(episode.onset)
+    ?? timestampMs(episode.activity_start_observed_at)
+    ?? timestampMs(episode.activity_start);
+}
+
+const goalMaxDays = bundle.stage1_daily_verdicts
+  .filter((row) => row.period === "goal_maximization" && row.day)
+  .map((row) => row.day)
+  .sort();
+const analysisHorizonMs = timestampMs(goalMaxDays.at(-1), "end");
+const agentNameById = new Map(
+  (sourceRecords.agentRecords || []).map((agent) => [agent.id, agent.name])
+);
+
+const goalPeriods = (sourceRecords.agentGoalRecords || [])
+  .map((goal) => ({
+    id: goal.id,
+    agent: agentNameById.get(goal.agent_id) || "Unknown agent",
+    goal: goal.name,
+    shortGoal: goal.short_name || goal.name,
+    startMs: timestampMs(goal.start_time),
+    endMs: Math.min(timestampMs(goal.end_time) ?? analysisHorizonMs, analysisHorizonMs),
+    episodes: [],
+    synthetic: false
+  }))
+  .filter((goal) => goal.startMs != null && goal.startMs < goal.endMs);
+
+const periodsByAgent = new Map();
+goalPeriods.forEach((period) => {
+  if (!periodsByAgent.has(period.agent)) periodsByAgent.set(period.agent, []);
+  periodsByAgent.get(period.agent).push(period);
+});
+periodsByAgent.forEach((periods) => periods.sort((left, right) => left.startMs - right.startMs));
+
+function normalizedGoalText(value) {
+  return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+const syntheticPeriods = new Map();
+function goalPeriodForEpisode(episode) {
+  const onsetMs = episodeOnsetMs(episode);
+  const candidates = periodsByAgent.get(episode.agent) || [];
+  const assigned = normalizedGoalText(episode.assigned_goal);
+  const nameMatches = candidates.filter((period) => {
+    const goal = normalizedGoalText(period.goal);
+    return assigned === goal || assigned.includes(goal) || goal.includes(assigned);
+  });
+  if (nameMatches.length) {
+    return [...nameMatches].sort((left, right) =>
+      Math.abs(left.startMs - onsetMs) - Math.abs(right.startMs - onsetMs)
+    )[0];
+  }
+  const temporal = candidates.filter((period) => onsetMs >= period.startMs && onsetMs <= period.endMs);
+  if (temporal.length) return temporal.at(-1);
+
+  const key = `${episode.agent}\u0000${episode.assigned_goal}`;
+  if (!syntheticPeriods.has(key)) {
+    syntheticPeriods.set(key, {
+      id: `synthetic-${episode.agent}-${episode.assigned_goal}`,
+      agent: episode.agent,
+      goal: episode.assigned_goal,
+      shortGoal: episode.assigned_goal,
+      startMs: onsetMs,
+      endMs: analysisHorizonMs,
+      episodes: [],
+      synthetic: true
+    });
+  }
+  const synthetic = syntheticPeriods.get(key);
+  synthetic.startMs = Math.min(synthetic.startMs, onsetMs);
+  return synthetic;
+}
+
+goalMaxEpisodes.forEach((episode) => {
+  const period = goalPeriodForEpisode(episode);
+  period.episodes.push(episode);
+  episode.goalPeriodId = period.id;
+});
+
+syntheticPeriods.forEach((period) => {
+  const nextStart = (periodsByAgent.get(period.agent) || [])
+    .map((candidate) => candidate.startMs)
+    .filter((startMs) => startMs > period.startMs)
+    .sort((left, right) => left - right)[0];
+  if (nextStart) period.endMs = nextStart;
+  goalPeriods.push(period);
+});
+
+function validatedInterval(episode) {
+  const startMs = episodeOnsetMs(episode);
+  const durationSeconds = Number(episode.duration_seconds);
+  if (startMs == null || episode.duration_seconds == null || !Number.isFinite(durationSeconds) || durationSeconds < 0) {
+    return null;
+  }
+  return { startMs, endMs: startMs + durationSeconds * 1000, episode };
+}
+
+function mergedIntervals(intervals, floorMs = -Infinity, ceilingMs = Infinity) {
+  const sorted = intervals
+    .map((interval) => ({
+      ...interval,
+      startMs: Math.max(floorMs, interval.startMs),
+      endMs: Math.min(ceilingMs, interval.endMs)
+    }))
+    .filter((interval) => interval.endMs >= interval.startMs)
+    .sort((left, right) => left.startMs - right.startMs || left.endMs - right.endMs);
+  const merged = [];
+  sorted.forEach((interval) => {
+    const prior = merged.at(-1);
+    if (prior && interval.startMs <= prior.endMs) {
+      prior.endMs = Math.max(prior.endMs, interval.endMs);
+      prior.episodes.push(interval.episode);
+    } else {
+      merged.push({ startMs: interval.startMs, endMs: interval.endMs, episodes: [interval.episode] });
+    }
+  });
+  return merged;
+}
+
+goalPeriods.forEach((period) => {
+  period.durationMs = Math.max(1, period.endMs - period.startMs);
+  period.episodes.sort((left, right) => episodeOnsetMs(left) - episodeOnsetMs(right));
+  period.exactIntervals = period.episodes.map(validatedInterval).filter(Boolean);
+  period.mergedIntervals = mergedIntervals(period.exactIntervals, period.startMs, period.endMs);
+  period.validatedMs = period.mergedIntervals.reduce(
+    (total, interval) => total + Math.max(0, interval.endMs - interval.startMs), 0
+  );
+  period.burdenShare = period.validatedMs / period.durationMs;
+  period.unknownDurationCount = period.episodes.filter((episode) => !validatedInterval(episode)).length;
+  const firstOnset = period.episodes.length ? episodeOnsetMs(period.episodes[0]) : null;
+  period.firstPosition = firstOnset == null
+    ? Infinity
+    : Math.max(0, Math.min(1, (firstOnset - period.startMs) / period.durationMs));
+});
 
 const filters = {
   agent: "",
@@ -526,11 +682,431 @@ function tag(text, pause = false) {
   return node;
 }
 
+function formatDuration(seconds) {
+  if (!Number.isFinite(seconds)) return "Duration unresolved";
+  if (seconds < 60) return `${Math.round(seconds)} sec`;
+  if (seconds < 3600) return `${Math.round(seconds / 60)} min`;
+  if (seconds < 86400) return `${(seconds / 3600).toFixed(seconds < 10800 ? 1 : 0)} hr`;
+  return `${(seconds / 86400).toFixed(seconds < 259200 ? 1 : 0)} days`;
+}
+
+function shortText(value, length = 35) {
+  const text = String(value || "");
+  return text.length > length ? `${text.slice(0, length - 1)}…` : text;
+}
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+function svgElement(name, attributes = {}, textValue = null) {
+  const element = document.createElementNS(SVG_NS, name);
+  Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, String(value)));
+  if (textValue != null) element.textContent = textValue;
+  return element;
+}
+
+function svgTitle(parent, textValue) {
+  parent.append(svgElement("title", {}, textValue));
+}
+
+function renderGoalAtlas() {
+  const sortMode = document.querySelector("#goal-atlas-sort").value;
+  const sorted = [...goalPeriods].sort((left, right) => {
+    if (sortMode === "agent") return left.agent.localeCompare(right.agent);
+    if (sortMode === "episodes") return right.episodes.length - left.episodes.length || left.agent.localeCompare(right.agent);
+    if (sortMode === "first") return left.firstPosition - right.firstPosition || left.agent.localeCompare(right.agent);
+    return right.burdenShare - left.burdenShare || right.episodes.length - left.episodes.length;
+  });
+  const atlas = document.querySelector("#goal-atlas");
+  atlas.replaceChildren();
+  sorted.forEach((period) => {
+    const row = document.createElement("div");
+    row.className = "goal-strip-row";
+    const identity = document.createElement("div");
+    identity.className = "goal-strip-name";
+    const agent = document.createElement("div");
+    agent.className = "goal-strip-agent";
+    agent.textContent = period.agent;
+    const goal = document.createElement("div");
+    goal.className = "goal-strip-goal";
+    goal.textContent = period.shortGoal;
+    goal.title = period.goal;
+    identity.append(agent, goal);
+    const track = document.createElement("div");
+    track.className = "goal-strip-track";
+    period.episodes.forEach((episode) => {
+      const onsetMs = episodeOnsetMs(episode);
+      if (onsetMs == null) return;
+      const interval = validatedInterval(episode);
+      const displayStart = Math.max(period.startMs, Math.min(period.endMs, onsetMs));
+      const left = Math.max(0, Math.min(100, ((displayStart - period.startMs) / period.durationMs) * 100));
+      const segment = document.createElement("span");
+      const reviewed = reviewedEpisodeIds.has(episode.episode_id);
+      segment.className = `goal-strip-segment${interval ? "" : " is-unknown"}${reviewed ? " is-reviewed" : ""}`;
+      segment.style.left = `${left}%`;
+      if (interval) {
+        const end = Math.max(displayStart, Math.min(period.endMs, interval.endMs));
+        segment.style.width = `${Math.max(.25, ((end - displayStart) / period.durationMs) * 100)}%`;
+      }
+      segment.title = `${episode.activity} · ${formatDuration(episode.duration_seconds == null ? NaN : Number(episode.duration_seconds))}${reviewed ? " · human reviewed" : ""}`;
+      track.append(segment);
+    });
+    const count = document.createElement("div");
+    count.className = "goal-strip-count";
+    count.textContent = `${period.episodes.length} ep`;
+    row.append(identity, track, count);
+    atlas.append(row);
+  });
+  const known = goalMaxEpisodes.filter((episode) => episode.duration_seconds != null).length;
+  document.querySelector("#goal-atlas-note").textContent = `${goalPeriods.length} goal periods · ${goalMaxEpisodes.length} confirmed episodes · ${known} with validated duration · ${goalMaxEpisodes.length - known} onset-only duration records.`;
+}
+
+function addCartesianFrame(svg, { left, right, top, bottom, xTicks, yTicks, xScale, yScale, xLabel, yLabel }) {
+  xTicks.forEach(({ value, label: tickLabel }) => {
+    const x = xScale(value);
+    svg.append(svgElement("line", { x1: x, x2: x, y1: top, y2: bottom, class: "svg-grid" }));
+    svg.append(svgElement("text", { x, y: bottom + 18, "text-anchor": "middle", class: "svg-label" }, tickLabel));
+  });
+  yTicks.forEach(({ value, label: tickLabel }) => {
+    const y = yScale(value);
+    svg.append(svgElement("line", { x1: left, x2: right, y1: y, y2: y, class: "svg-grid" }));
+    svg.append(svgElement("text", { x: left - 8, y: y + 3, "text-anchor": "end", class: "svg-label" }, tickLabel));
+  });
+  svg.append(svgElement("line", { x1: left, x2: right, y1: bottom, y2: bottom, class: "svg-axis" }));
+  svg.append(svgElement("line", { x1: left, x2: left, y1: top, y2: bottom, class: "svg-axis" }));
+  svg.append(svgElement("text", { x: (left + right) / 2, y: bottom + 40, "text-anchor": "middle", class: "svg-title" }, xLabel));
+  const yTitle = svgElement("text", { x: 14, y: (top + bottom) / 2, "text-anchor": "middle", class: "svg-title", transform: `rotate(-90 14 ${(top + bottom) / 2})` }, yLabel);
+  svg.append(yTitle);
+}
+
+function renderBurdenScatter() {
+  const plotted = goalPeriods.filter((period) => period.episodes.length);
+  const svg = document.querySelector("#burden-scatter");
+  svg.replaceChildren();
+  const left = 58, right = 620, top = 20, bottom = 305;
+  const xMax = Math.max(5, ...plotted.map((period) => period.episodes.length));
+  const rawYMax = Math.max(.01, ...plotted.map((period) => period.burdenShare));
+  const yMax = Math.ceil(rawYMax * 20) / 20;
+  const xScale = (value) => left + (value / xMax) * (right - left);
+  const yScale = (value) => bottom - (value / yMax) * (bottom - top);
+  const xTicks = Array.from({ length: 6 }, (_, index) => ({
+    value: (xMax * index) / 5,
+    label: String(Math.round((xMax * index) / 5))
+  }));
+  const yTicks = Array.from({ length: 6 }, (_, index) => ({
+    value: (yMax * index) / 5,
+    label: `${Math.round(((yMax * index) / 5) * 100)}%`
+  }));
+  addCartesianFrame(svg, { left, right, top, bottom, xTicks, yTicks, xScale, yScale, xLabel: "Confirmed episodes", yLabel: "Validated drift share" });
+  plotted.forEach((period) => {
+    const point = svgElement("circle", {
+      cx: xScale(period.episodes.length),
+      cy: yScale(period.burdenShare),
+      r: 5.5,
+      fill: "#466f61",
+      stroke: period.unknownDurationCount ? "#ae5037" : "#fbf8f0",
+      "stroke-width": period.unknownDurationCount ? 2.5 : 1.5,
+      opacity: .84
+    });
+    svgTitle(point, `${period.agent} — ${period.goal}\n${period.episodes.length} episodes; ${(period.burdenShare * 100).toFixed(2)}% validated drift share; ${period.unknownDurationCount} unresolved durations`);
+    svg.append(point);
+  });
+  document.querySelector("#burden-meta").textContent = `${plotted.length} drift-positive goal periods`;
+}
+
+function renderDurationDistribution() {
+  const known = goalMaxEpisodes
+    .filter((episode) => episode.duration_seconds != null)
+    .map((episode) => Number(episode.duration_seconds))
+    .filter((duration) => Number.isFinite(duration) && duration >= 0)
+    .sort((left, right) => left - right);
+  const bins = [
+    { label: "< 5 min", min: 0, max: 300 },
+    { label: "5–30 min", min: 300, max: 1800 },
+    { label: "30m–2h", min: 1800, max: 7200 },
+    { label: "2–8 hr", min: 7200, max: 28800 },
+    { label: "8–24 hr", min: 28800, max: 86400 },
+    { label: "1–3 days", min: 86400, max: 259200 },
+    { label: "3+ days", min: 259200, max: Infinity }
+  ].map((bin) => ({ ...bin, count: known.filter((value) => value >= bin.min && value < bin.max).length }));
+  const maxCount = Math.max(1, ...bins.map((bin) => bin.count));
+  const container = document.querySelector("#duration-bars");
+  container.replaceChildren();
+  bins.forEach((bin) => {
+    const row = document.createElement("div");
+    row.className = "duration-row";
+    const labelNode = document.createElement("span");
+    labelNode.textContent = bin.label;
+    const track = document.createElement("span");
+    track.className = "duration-track";
+    const fill = document.createElement("span");
+    fill.className = "duration-fill";
+    fill.style.width = `${(bin.count / maxCount) * 100}%`;
+    track.append(fill);
+    const count = document.createElement("span");
+    count.className = "duration-count";
+    count.textContent = String(bin.count);
+    row.append(labelNode, track, count);
+    container.append(row);
+  });
+
+  const svg = document.querySelector("#duration-ecdf");
+  svg.replaceChildren();
+  const left = 58, right = 620, top = 20, bottom = 155;
+  const minLog = Math.log10(60);
+  const maxSeconds = Math.max(604800, known.at(-1) || 604800);
+  const maxLog = Math.log10(maxSeconds);
+  const xScale = (seconds) => left + ((Math.log10(Math.max(60, seconds)) - minLog) / (maxLog - minLog)) * (right - left);
+  const yScale = (value) => bottom - value * (bottom - top);
+  const durationTicks = [60, 600, 3600, 21600, 86400, 604800].filter((value) => value <= maxSeconds);
+  addCartesianFrame(svg, {
+    left, right, top, bottom,
+    xTicks: durationTicks.map((value) => ({ value, label: formatDuration(value) })),
+    yTicks: [0, .25, .5, .75, 1].map((value) => ({ value, label: `${value * 100}%` })),
+    xScale, yScale, xLabel: "Validated duration (log scale)", yLabel: "Episodes ≤ duration"
+  });
+  if (known.length) {
+    const points = known.map((seconds, index) => `${xScale(Math.max(60, seconds))},${yScale((index + 1) / known.length)}`);
+    svg.append(svgElement("polyline", { points: points.join(" "), fill: "none", stroke: "#3f7082", "stroke-width": 3 }));
+  }
+  const unknown = goalMaxEpisodes.length - known.length;
+  document.querySelector("#duration-meta").textContent = `${known.length} validated`;
+  document.querySelector("#duration-note").textContent = `${unknown} of ${goalMaxEpisodes.length} confirmed episodes have unresolved numeric duration and are excluded from the histogram and curve.`;
+}
+
+function recurrenceSubjects() {
+  const groups = { early: [], middle: [], late: [] };
+  goalPeriods.forEach((period) => {
+    const onsets = period.episodes.map(episodeOnsetMs).filter(Number.isFinite).sort((left, right) => left - right);
+    if (!onsets.length) return;
+    const first = onsets[0];
+    const position = Math.max(0, Math.min(1, (first - period.startMs) / period.durationMs));
+    const group = position < .2 ? "early" : position < .8 ? "middle" : "late";
+    const second = onsets.find((onset) => onset > first);
+    const censorDays = Math.max(0, (period.endMs - first) / DAY_MS);
+    groups[group].push({
+      time: second ? Math.max(0, (second - first) / DAY_MS) : censorDays,
+      event: Boolean(second),
+      period
+    });
+  });
+  return groups;
+}
+
+function recurrenceCurve(subjects) {
+  const eventTimes = [...new Set(subjects.filter((subject) => subject.event).map((subject) => subject.time))].sort((left, right) => left - right);
+  let survival = 1;
+  const points = [{ time: 0, recurrence: 0 }];
+  eventTimes.forEach((time) => {
+    const atRisk = subjects.filter((subject) => subject.time >= time).length;
+    const events = subjects.filter((subject) => subject.event && subject.time === time).length;
+    if (!atRisk || !events) return;
+    points.push({ time, recurrence: 1 - survival });
+    survival *= 1 - events / atRisk;
+    points.push({ time, recurrence: 1 - survival });
+  });
+  if (subjects.length) {
+    points.push({
+      time: Math.max(...subjects.map((subject) => subject.time)),
+      recurrence: 1 - survival
+    });
+  }
+  return points;
+}
+
+function renderRecurrence() {
+  const groups = recurrenceSubjects();
+  const colors = { early: "#ae5037", middle: "#3f7082", late: "#a77b2c" };
+  const labels = { early: "First 20%", middle: "Middle 60%", late: "Final 20%" };
+  const allSubjects = Object.values(groups).flat();
+  const svg = document.querySelector("#recurrence-chart");
+  svg.replaceChildren();
+  const left = 58, right = 620, top = 25, bottom = 290;
+  const maxDays = Math.max(7, ...allSubjects.map((subject) => subject.time));
+  const xScale = (days) => left + (days / maxDays) * (right - left);
+  const yScale = (value) => bottom - value * (bottom - top);
+  addCartesianFrame(svg, {
+    left, right, top, bottom,
+    xTicks: Array.from({ length: 6 }, (_, index) => ({ value: (maxDays * index) / 5, label: `${Math.round((maxDays * index) / 5)}d` })),
+    yTicks: [0, .25, .5, .75, 1].map((value) => ({ value, label: `${value * 100}%` })),
+    xScale, yScale, xLabel: "Days after first drift", yLabel: "Probability of another drift"
+  });
+  Object.entries(groups).forEach(([group, subjects], groupIndex) => {
+    const points = recurrenceCurve(subjects);
+    const pathPoints = points.map((point) => `${xScale(point.time)},${yScale(point.recurrence)}`).join(" ");
+    svg.append(svgElement("polyline", { points: pathPoints, fill: "none", stroke: colors[group], "stroke-width": 3 }));
+    const legendY = 18 + groupIndex * 17;
+    svg.append(svgElement("line", { x1: 390, x2: 412, y1: legendY, y2: legendY, stroke: colors[group], "stroke-width": 3 }));
+    svg.append(svgElement("text", { x: 418, y: legendY + 3, class: "svg-label" }, `${labels[group]} (n=${subjects.length})`));
+  });
+  document.querySelector("#recurrence-meta").textContent = `${allSubjects.length} drift-positive goal periods`;
+}
+
+function renderCumulativeGoal(periodId) {
+  const period = goalPeriods.find((candidate) => candidate.id === periodId);
+  if (!period) return;
+  const svg = document.querySelector("#cumulative-chart");
+  svg.replaceChildren();
+  const left = 58, right = 620, top = 25, bottom = 290;
+  const maxShare = Math.max(.01, period.burdenShare * 1.15);
+  const xScale = (value) => left + value * (right - left);
+  const yScale = (value) => bottom - (value / maxShare) * (bottom - top);
+  addCartesianFrame(svg, {
+    left, right, top, bottom,
+    xTicks: [0, .25, .5, .75, 1].map((value) => ({ value, label: `${value * 100}%` })),
+    yTicks: [0, .25, .5, .75, 1].map((fraction) => ({ value: maxShare * fraction, label: `${(maxShare * fraction * 100).toFixed(1)}%` })),
+    xScale, yScale, xLabel: "Position in goal window", yLabel: "Cumulative validated drift"
+  });
+  let cumulative = 0;
+  const points = [[xScale(0), yScale(0)]];
+  period.mergedIntervals.forEach((interval) => {
+    const startPosition = Math.max(0, Math.min(1, (interval.startMs - period.startMs) / period.durationMs));
+    const endPosition = Math.max(0, Math.min(1, (interval.endMs - period.startMs) / period.durationMs));
+    points.push([xScale(startPosition), yScale(cumulative)]);
+    cumulative += Math.max(0, interval.endMs - interval.startMs) / period.durationMs;
+    points.push([xScale(endPosition), yScale(cumulative)]);
+  });
+  points.push([xScale(1), yScale(cumulative)]);
+  svg.append(svgElement("polyline", { points: points.map((point) => point.join(",")).join(" "), fill: "none", stroke: "#ae5037", "stroke-width": 3 }));
+  period.episodes.filter((episode) => !validatedInterval(episode)).forEach((episode) => {
+    const onset = episodeOnsetMs(episode);
+    const position = Math.max(0, Math.min(1, (onset - period.startMs) / period.durationMs));
+    const marker = svgElement("rect", { x: xScale(position) - 3.5, y: bottom - 3.5, width: 7, height: 7, fill: "#a77b2c", transform: `rotate(45 ${xScale(position)} ${bottom})` });
+    svgTitle(marker, episode.activity);
+    svg.append(marker);
+  });
+  document.querySelector("#cumulative-note").textContent = `${period.agent} · ${period.episodes.length} episodes · ${(period.burdenShare * 100).toFixed(2)}% minimum validated drift share · ${period.unknownDurationCount} unresolved durations shown as diamonds.`;
+}
+
+function initializeCumulativeChart() {
+  const select = document.querySelector("#cumulative-goal-select");
+  const periods = goalPeriods.filter((period) => period.episodes.length).sort((left, right) => right.burdenShare - left.burdenShare || right.episodes.length - left.episodes.length);
+  select.replaceChildren();
+  periods.forEach((period) => {
+    const option = document.createElement("option");
+    option.value = period.id;
+    option.textContent = `${period.agent} — ${shortText(period.shortGoal, 34)}`;
+    select.append(option);
+  });
+  select.addEventListener("change", () => renderCumulativeGoal(select.value));
+  if (periods.length) {
+    select.value = periods[0].id;
+    renderCumulativeGoal(periods[0].id);
+  }
+}
+
+function renderAnnotationFlow() {
+  const mechanismLabels = {
+    non_pursuit: "Non-pursuit",
+    activity_changed: "Activity changed",
+    relationship_changed: "Relationship changed",
+    assignment_changed: "Assignment changed"
+  };
+  const flowRows = rows.map((row) => ({
+    trigger: row.annotation.trigger_categories[0] || "unknown",
+    mechanism: row.episode.mechanism_shape || "unknown",
+    recovery: row.annotation.recovery_mechanisms[0] || "unknown"
+  }));
+  const stages = [
+    { key: "trigger", x: 175, label: (value) => label("trigger", value) },
+    { key: "mechanism", x: 580, label: (value) => mechanismLabels[value] || value.replaceAll("_", " ") },
+    { key: "recovery", x: 965, label: (value) => label("recovery", value) }
+  ];
+  const chartTop = 40, chartHeight = 540, nodeWidth = 14, gap = 9;
+  const countsByStage = stages.map((stage) => countValues(flowRows, (row) => [row[stage.key]]));
+  const total = Math.max(1, flowRows.length);
+  const scale = Math.min(...countsByStage.map((counts) => (chartHeight - Math.max(0, counts.length - 1) * gap) / total));
+  const nodeMaps = stages.map(() => new Map());
+  countsByStage.forEach((counts, stageIndex) => {
+    const used = counts.reduce((sum, [, count]) => sum + count * scale, 0) + Math.max(0, counts.length - 1) * gap;
+    let y = chartTop + (chartHeight - used) / 2;
+    counts.forEach(([value, count]) => {
+      nodeMaps[stageIndex].set(value, { value, count, x: stages[stageIndex].x, y, height: count * scale });
+      y += count * scale + gap;
+    });
+  });
+
+  const svg = document.querySelector("#annotation-flow");
+  svg.replaceChildren();
+  const linkColors = ["#ae5037", "#3f7082"];
+  for (let stageIndex = 0; stageIndex < 2; stageIndex += 1) {
+    const leftStage = stages[stageIndex];
+    const rightStage = stages[stageIndex + 1];
+    const links = new Map();
+    flowRows.forEach((row) => {
+      const key = `${row[leftStage.key]}\u0000${row[rightStage.key]}`;
+      links.set(key, (links.get(key) || 0) + 1);
+    });
+    const sourceOffsets = new Map();
+    const targetOffsets = new Map();
+    [...links.entries()]
+      .map(([key, count]) => {
+        const [source, target] = key.split("\u0000");
+        return { source, target, count };
+      })
+      .sort((left, right) =>
+        nodeMaps[stageIndex].get(left.source).y - nodeMaps[stageIndex].get(right.source).y
+        || nodeMaps[stageIndex + 1].get(left.target).y - nodeMaps[stageIndex + 1].get(right.target).y
+      )
+      .forEach((link) => {
+        const sourceNode = nodeMaps[stageIndex].get(link.source);
+        const targetNode = nodeMaps[stageIndex + 1].get(link.target);
+        const width = Math.max(1, link.count * scale);
+        const sourceOffset = sourceOffsets.get(link.source) || 0;
+        const targetOffset = targetOffsets.get(link.target) || 0;
+        const x1 = sourceNode.x + nodeWidth;
+        const x2 = targetNode.x;
+        const y1 = sourceNode.y + sourceOffset + width / 2;
+        const y2 = targetNode.y + targetOffset + width / 2;
+        const path = svgElement("path", {
+          d: `M ${x1} ${y1} C ${(x1 + x2) / 2} ${y1}, ${(x1 + x2) / 2} ${y2}, ${x2} ${y2}`,
+          fill: "none",
+          stroke: linkColors[stageIndex],
+          "stroke-width": width,
+          opacity: .18
+        });
+        svgTitle(path, `${stages[stageIndex].label(link.source)} → ${stages[stageIndex + 1].label(link.target)}: ${link.count}`);
+        svg.append(path);
+        sourceOffsets.set(link.source, sourceOffset + width);
+        targetOffsets.set(link.target, targetOffset + width);
+      });
+  }
+  stages.forEach((stage, stageIndex) => {
+    const heading = ["Trigger", "Drift shape", "Recovery"][stageIndex];
+    svg.append(svgElement("text", { x: stage.x + nodeWidth / 2, y: 18, "text-anchor": "middle", class: "svg-title" }, heading));
+    nodeMaps[stageIndex].forEach((node) => {
+      const rect = svgElement("rect", { x: node.x, y: node.y, width: nodeWidth, height: Math.max(1, node.height), rx: 4, fill: stageIndex === 1 ? "#3f7082" : stageIndex === 0 ? "#ae5037" : "#466f61" });
+      svgTitle(rect, `${stage.label(node.value)}: ${node.count}`);
+      svg.append(rect);
+      const anchor = stageIndex === 0 ? "end" : "start";
+      const textX = stageIndex === 0 ? node.x - 8 : node.x + nodeWidth + 8;
+      svg.append(svgElement("text", { x: textX, y: node.y + Math.max(9, node.height / 2 + 3), "text-anchor": anchor, class: "svg-label" }, `${shortText(stage.label(node.value), 28)} · ${node.count}`));
+    });
+  });
+  document.querySelector("#flow-meta").textContent = `${flowRows.length} reviewed episodes`;
+}
+
+function initializeExplorations() {
+  renderGoalAtlas();
+  document.querySelector("#goal-atlas-sort").addEventListener("change", renderGoalAtlas);
+  renderBurdenScatter();
+  renderDurationDistribution();
+  renderRecurrence();
+  initializeCumulativeChart();
+  renderAnnotationFlow();
+}
+
 function renderEpisodeList() {
-  const input = filteredRows();
+  const input = filteredRows().sort((left, right) => {
+    const leftFollowUps = left.annotation.follow_ups.length;
+    const rightFollowUps = right.annotation.follow_ups.length;
+    if (leftFollowUps !== rightFollowUps) return rightFollowUps - leftFollowUps;
+    const leftTime = left.episode.onset || left.episode.activity_start || "";
+    const rightTime = right.episode.onset || right.episode.activity_start || "";
+    return rightTime.localeCompare(leftTime);
+  });
   const list = document.querySelector("#episode-list");
   list.replaceChildren();
-  document.querySelector("#results-count").textContent = `${input.length} of ${rows.length}`;
+  const followUpCount = input.filter((row) => row.annotation.follow_ups.length).length;
+  document.querySelector("#results-count").textContent = `${input.length} of ${rows.length}${followUpCount ? ` · ${followUpCount} with follow-ups first` : ""}`;
   if (!input.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
@@ -540,7 +1116,7 @@ function renderEpisodeList() {
   }
   input.forEach((row) => {
     const item = document.createElement("article");
-    item.className = "episode-row";
+    item.className = `episode-row${row.annotation.follow_ups.length ? " has-follow-up" : ""}`;
     const identity = document.createElement("div");
     const agent = document.createElement("div");
     agent.className = "episode-agent";
@@ -558,6 +1134,23 @@ function renderEpisodeList() {
     note.className = "episode-note";
     note.textContent = row.annotation.notes;
     activityWrap.append(activity, note);
+    if (row.annotation.follow_ups.length) {
+      const followUps = document.createElement("div");
+      followUps.className = "episode-followups";
+      row.annotation.follow_ups.forEach((followUp) => {
+        const chip = document.createElement("div");
+        chip.className = "follow-up-chip";
+        const type = document.createElement("strong");
+        type.textContent = followUp.type === "replay_scenario"
+          ? "Replay scenario"
+          : followUp.type === "iteration_idea"
+            ? "Iteration idea"
+            : "Follow-up";
+        chip.append(type, document.createTextNode(` · ${followUp.note || "No note supplied"}`));
+        followUps.append(chip);
+      });
+      activityWrap.append(followUps);
+    }
 
     const tags = document.createElement("div");
     tags.className = "episode-tags";
@@ -615,4 +1208,5 @@ document.querySelector("#clear-filters").addEventListener("click", () => {
   render();
 });
 
+initializeExplorations();
 render();
