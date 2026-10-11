@@ -303,12 +303,111 @@
     },
     "episode-b4d099b82eb0820a": {
       "trigger_categories": ["gitlab_issue_or_comment"],
-      "request_relationship": "unclear",
-      "recovery_mechanisms": [],
-      "notes": "",
+      "request_relationship": "inferred_or_volunteered",
+      "recovery_mechanisms": ["not_corrected"],
+      "notes": "Nervli green-lit adapting the Terrarium template and supplied successive change requests in GitLab issue #35. Fable explicitly accepted the collaboration and elevated the requests through its own same-hour rule; the original instruction to begin the broader study is not visible. The work remained active at the evidence boundary on August 26.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "GitLab comment", "raw_correction": "" },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "provenance": { "raw_reason": "GitLab comment", "raw_correction": "", "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-0b1fbcbb17e764e4": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "Nervli directly posted the Terrarium results in GitLab and Fable immediately adopted the resulting report and revision work as its main task. Fable posted a goodbye note and closed the issue on August 17, completing this collaboration arc.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-a5c293e1f34dc6ef": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "Nervli directly asked Fable to compare four evaluations, create a consensus ranking, and draft the study-site concept. Fable reported that both deliverables were shipped and announced later that day.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-1da9c825e89d7818": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "The C60 website was built and repeatedly revised for Nervli through GitLab issues #35 and #36. Although the original build request is absent, the record directly attributes the template and subsequent work orders to her. Fable returned to store work on August 27 without an operator nudge.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-d4abca8b999c73b2": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["not_corrected"],
+      "notes": "Nervli sent Fable concrete Village Hub suggestions, including merging two pages and linking newer onboarding sites. Fable first relayed the request and then implemented and expanded it itself. Hub edits continued through the final supplied day, so no recovery is observed.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-74454d6cfba6e403": {
+      "trigger_categories": ["self_initiated_or_continuation"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["not_corrected"],
+      "notes": "Nervli directly asked Fable in GitLab issue #38 for translation and tone feedback on an email to Adam. The operative drift transition was self-initiated: Fable independently elevated that request into a standing top-priority interrupt and repeatedly guarded the channel. The broader correspondence remained active at the evidence boundary.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab", "classification_note": "Preserves the human review decision that the operative transition was self-initiated." },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-77cca5ab3c9f90d1": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["finished_activity"],
+      "notes": "Nervli directly invited Fable to co-design a consolidation-amnesia solution before presenting it to the administrators. Fable accepted and produced the proposal documents. It later declared the thread closed and returned to checking its store on September 8.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-b19e6cb974e74667": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["not_corrected"],
+      "notes": "Nervli directly asked Fable questions in GitLab issue #38, including the Echoes pronoun question, and requested application wording help. Fable expanded those asks into corpus analysis and context-document work. It was still drafting for her application at the end of the supplied evidence.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-dc58b10d925a6477": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["not_corrected"],
+      "notes": "Nervli explicitly asked Fable to relay questions and later requested its translation help for an Adam/George email. Fable converted those requests and its own reply commitments into a continuing service agenda. Channel polling and replies remained active at the evidence boundary.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-089a90a9fa2b6d98": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["not_corrected"],
+      "notes": "Fable's contemporaneous session record identifies three private asks from Nervli and her invitation to maintain a context file. Fable then expanded this into a full channel-history reconstruction and migration. The original GitLab request is not present in the shared evidence, and the context work remained active at the boundary.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab", "evidence_directness": "request reported by agent; original request unavailable" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-1bec035f8b4e099e": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["not_corrected"],
+      "notes": "Nervli directed individual tasks in GitLab issues #38 and #40, including the HEXACO chart, relays, and application help. The precise original prioritization is unavailable, but the requests themselves were directed to Fable. Long replies and planned follow-up were still active at the evidence boundary.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab", "evidence_directness": "individual requests visible; original prioritization unavailable" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
+    },
+    "episode-3be0504e7fb09a8a": {
+      "trigger_categories": ["gitlab_issue_or_comment"],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": ["not_corrected"],
+      "notes": "Nervli issued successive requests in GitLab issues #40 and #42 for archival, resume, translation, and proofreading help. Fable adopted each as a main task. It was still drafting application material for her at the end of the final supplied day.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-df56b01f7033404b": {
       "trigger_categories": ["user_message"],
