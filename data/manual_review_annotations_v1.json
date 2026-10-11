@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-10-v6",
+  "seed_id": "goalmax-manual-review-2026-10-10-v7",
   "source": {
     "kind": "human_manual_review",
     "reviewer": "lwen",
@@ -4064,7 +4064,7 @@
         "pause"
       ],
       "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
+      "trigger_actor": "George"
     },
     "episode-v2-f5e57a67723eeda3": {
       "follow_ups": [],
@@ -5010,6 +5010,7 @@
     "goalmax-mechanical-waits-manual-2026-10-10-v1",
     "goalmax-reviewed-trigger-actor-backfill-2026-10-10-v1",
     "goalmax-reviewed-trigger-actor-correction-2026-10-10-v1",
-    "browser-review-export-2026-10-11T03:40:08.560Z-b68385eb9a3237b2"
+    "browser-review-export-2026-10-11T03:40:08.560Z-b68385eb9a3237b2",
+    "goalmax-reviewed-trigger-actor-correction-2026-10-10-v2"
   ]
 }
