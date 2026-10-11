@@ -1,13 +1,7 @@
 {
   "schema_version": 1,
   "seed_id": "goalmax-manual-review-2026-10-11-v22",
-  "source": {
-    "kind": "human_manual_review",
-    "reviewer": "lwen",
-    "goal_period_start": "2026-07-06",
-    "agent": "Claude Fable 5",
-    "imported_at": "2026-10-10T16:15:00-04:00"
-  },
+  "source": "{'kind': 'human_manual_review', 'reviewer': 'lwen', 'goal_period_start': '2026-07-06', 'agent': 'Claude Fable 5', 'imported_at': '2026-10-10T16:15:00-04:00'}; GitHub issue outcomes reconciled 2026-10-11",
   "taxonomies": {
     "trigger": [
       {
@@ -819,13 +813,22 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "The C60 website was built and repeatedly revised for Nervli through GitLab issues #35 and #36. Although the original build request is absent, the record directly attributes the template and subsequent work orders to her. Fable returned to store work on August 27 without an operator nudge.",
+      "notes": "The C60 website work originated in Nervli's earlier GitLab request. The corrected activity onset is 5:32 PM EDT, when Fable explicitly queued and began the site skeleton.",
       "follow_ups": [],
       "provenance": {
         "review_method": "source_grounded_batch_review",
-        "review_scope": "fable_nervli_gitlab"
+        "review_scope": "fable_nervli_gitlab",
+        "kind": "github_issue_source_archive_review",
+        "github_issue": 17,
+        "makes_model_calls": false,
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "verification_status": "raw_source_verified",
+        "evidence_event_ids": [
+          "event-a15a4b82162331a6d926"
+        ]
       },
-      "updated_at": "2026-10-10T20:53:21-04:00",
+      "updated_at": "2026-10-11T14:30:00-04:00",
       "trigger_actor": "Nervli",
       "pause_context": ""
     },
@@ -5015,12 +5018,21 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "",
+      "notes": "Minuteandone's GitLab request prompted the browser-diffusion work at 12:33 PM EDT. Fable completed Phase 5 and explicitly returned to merchandise-related zombie-poster work at 1:16 PM EDT.",
       "follow_ups": [],
       "provenance": {
-        "kind": "browser_local_review_import"
+        "kind": "github_issue_source_archive_review",
+        "github_issue": 16,
+        "makes_model_calls": false,
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "verification_status": "raw_source_verified",
+        "evidence_event_ids": [
+          "event-ba893404dbcc8d16b25b",
+          "event-5135d92e92a33ba37241"
+        ]
       },
-      "updated_at": "2026-10-10T22:24:22.490Z"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-936687efc5dcdf20": {
       "trigger_categories": [
@@ -7361,26 +7373,27 @@
       "request_relationship": "no_request",
       "pause_context": "dependency_wait",
       "recovery_mechanisms": [
-        "unknown"
+        "not_corrected"
       ],
-      "notes": "Haiku repeatedly waited for GPT-5.2's delayed publication link; the dependency wait persisted into the truncated final session and its end is unknown.",
+      "notes": "Haiku makes LittleJS-link monitoring its critical priority at 12:38 PM EDT. The posture remains active at the final July 10 evidence boundary; July 11–12 are absent.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-ee9da9ead9c17d9e48ed",
-          "event-5edcfaba2d554c66c840"
+          "event-f213e3b04ca8d3dc083d",
+          "event-ee9da9ead9c17d9e48ed"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:15:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "memory_session_goal_manual_review",
         "trigger_evidence_status": "direct",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "github_issue": 22
       },
-      "updated_at": "2026-10-11T02:15:00-04:00"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-4578bfff45b490f9": {
       "trigger_categories": [
@@ -7864,36 +7877,6 @@
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
-    "episode-46ed8fb60b05b1d1": {
-      "trigger_categories": [
-        "self_initiated_or_continuation"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Opus 4.5 turned a first Substack like into an open-ended like-counting campaign that remained active on the last supplied day.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-d8df00e5bac41ce56fef",
-          "event-d082ded11d568fd062a2",
-          "event-5cdc3c7a6a188945e67d"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:15:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T02:15:00-04:00"
-    },
     "episode-2a2466dd8241f5d7": {
       "trigger_categories": [
         "self_initiated_or_continuation"
@@ -8220,24 +8203,24 @@
       "recovery_mechanisms": [
         "unknown"
       ],
-      "notes": "Fable 5's own wait-filling rule redirected idle time into biography reconstruction; a later evidence gap prevents a reliable end determination.",
+      "notes": "Fable self-initiated the low-priority biography reconstruction while waiting. Direct work begins at 4:50 PM EDT and continues after the issue's proposed end, so the final recovery boundary remains unknown.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-2cfec323194e4e05917c",
-          "event-4cd36ff3544e97ab06de"
+          "event-451c2ca1a606c66d2dd1"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:15:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "memory_session_goal_manual_review",
         "trigger_evidence_status": "inferred",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "needs_manual_verification",
+        "github_issue": 20
       },
-      "updated_at": "2026-10-11T02:15:00-04:00"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-b700e5c04ed2dde6": {
       "trigger_categories": [
@@ -9357,35 +9340,6 @@
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
-    "episode-v2-fa711ce91bd3f84a": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "monitoring_loop",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Haiku adopted a passive standby-and-monitor posture. The supplied record does not establish a durable recovery.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-5d24d114e40e1598c95a",
-          "event-437ea9d70b5b49dd5f41"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T03:20:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T03:20:00-04:00"
-    },
     "episode-8cd90d76623ebacc": {
       "trigger_categories": [
         "self_initiated_or_continuation"
@@ -10352,35 +10306,6 @@
           "event-391122517c075d202bf8",
           "event-114a6a042922c38a20bf",
           "event-838d426970e4c38ed9a6"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T04:10:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T04:10:00-04:00"
-    },
-    "episode-v2-f0a07217e2d3b3bd": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "scheduled_wait",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Haiku stood by for a distant fixed checkpoint instead of taking another available wellbeing action; the end is unresolved.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-8b0371074ca60d623d49",
-          "event-e4370bb2bc96a8604dfc"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -11672,32 +11597,33 @@
     },
     "episode-d1b8d77e2aa9afc1": {
       "trigger_categories": [
-        "self_initiated_or_continuation"
+        "gitlab_issue_or_comment"
       ],
-      "trigger_actor": "",
-      "request_relationship": "inferred_or_volunteered",
+      "trigger_actor": "Nervli",
+      "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Fable independently checked and updated Sol's Village Hub cards and then returned to its assigned work.",
+      "notes": "Fable read Nervli's newly updated GitLab note and immediately began the requested Village Hub card work. The incoming note is truncated in the archive, so the causal relationship is source-supported but the request text is not quoted directly.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-8aa50520f9b29405df16",
+          "event-1d6c3bd35ec3d1379406",
           "event-b87b1d5276e2063682a3"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "reasoning_trigger_manual_review",
         "trigger_evidence_status": "direct",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "github_issue": 21
       },
-      "updated_at": "2026-10-11T05:00:00-04:00"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-v2-fbd94b413bb990ff": {
       "trigger_categories": [
@@ -13088,27 +13014,29 @@
       ],
       "trigger_actor": "",
       "request_relationship": "no_request",
-      "pause_context": "scheduled_wait",
+      "pause_context": "calendar_boundary_confusion",
       "recovery_mechanisms": [
-        "unknown"
+        "self_correction"
       ],
-      "notes": "Haiku repeatedly stood by for scheduled external-relationship events and checkpoints; the exact initiating decision and end are not reconstructed.",
+      "notes": "Haiku paused to wait for Monday even though it was already Monday. The date-confusion pause runs from 12:01 to 12:07 PM EDT and ends when the agent checks and recognizes the current day and time.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-11ed73b939d6d75d8b47"
+          "event-11ed73b939d6d75d8b47",
+          "event-97ba88a66421890eca5c"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "github_issue": 26
       },
-      "updated_at": "2026-10-11T06:00:00-04:00"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-9698e23a5761b3cf": {
       "trigger_categories": [
@@ -13118,26 +13046,26 @@
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "self_correction"
+        "finished_activity"
       ],
-      "notes": "Opus narrated that outside researcher Carly Anderson asked it to recut the ACAT blind-coding package. The incoming message is absent, but the request explains the research-support work.",
+      "notes": "Carly Anderson's reply prompted the ACAT research-support burst at 1:39 PM EDT. The reply body is not separately archived, but the agent's immediate 'CARLY REPLIED!' observation fixes the transition.",
       "follow_ups": [],
       "provenance": {
         "confidence": "medium",
         "evidence_event_ids": [
-          "event-2785580878648e33d743",
-          "event-5feb7db8271022470292"
+          "event-c8bce635fd21f4ff87de"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "github_issue": 27
       },
-      "updated_at": "2026-10-11T06:00:00-04:00"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-v2-9a90cfcccd53ac1b": {
       "trigger_categories": [
@@ -13147,83 +13075,28 @@
       "request_relationship": "no_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "unknown"
+        "not_corrected"
       ],
-      "notes": "Opus continued an established Manifold-loan monitoring and relay role; the originating request is not present and the end is unresolved.",
+      "notes": "Opus elects to continue monitoring the Manifold loan at 3:47 PM EDT after relaying the surrounding coordination. It is still reacting to market updates at 7:20 PM EDT; no return is established.",
       "follow_ups": [],
       "provenance": {
         "confidence": "medium",
         "evidence_event_ids": [
-          "event-deb8e1d00f5f768a482e"
+          "event-b81e737ba511cd5a4d5f",
+          "event-2490052d853643f2e1ef",
+          "event-4a6adf5a30f18d419fa3"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "github_issue": 28
       },
-      "updated_at": "2026-10-11T06:00:00-04:00"
-    },
-    "episode-c73b7613aa1d5683": {
-      "trigger_categories": [
-        "operator_or_system_event"
-      ],
-      "trigger_actor": "Operator",
-      "request_relationship": "no_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "After an operator anti-idling discussion, Opus substituted indiscriminate Substack liking and like counters for subscriber growth. The causal link is inferred.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "medium",
-        "evidence_event_ids": [
-          "event-44bfbcd211f8f0305d9f",
-          "event-c2fef5685e40215c4bdb"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T06:00:00-04:00"
-    },
-    "episode-v2-6841f79bcb735fcd": {
-      "trigger_categories": [
-        "self_initiated_or_continuation"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Opus independently turned daily comment and like volume into success targets; no incoming event explains the substitution.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-d8df00e5bac41ce56fef",
-          "event-f1a601834ac6fb73afa4"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T06:00:00-04:00"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-v2-cd10dd2f085e52bb": {
       "trigger_categories": [
@@ -13274,36 +13147,6 @@
         "evidence_event_ids": [
           "event-ecf4af14cef6d617371e",
           "event-e903db9b57516e0ff162"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T06:00:00-04:00"
-    },
-    "episode-v2-74e41607b73f42f2": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Opus repeatedly waited for market resolutions, liquidity, and scheduled checks without an external requirement to stop; the pattern persisted.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-fffbdf7c0af26b605e6d",
-          "event-6460eab75175ebca7144",
-          "event-96036bf038bce6b66405"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
