@@ -1,11 +1,24 @@
-const response = await fetch("./data/second_audit_v2.json");
-if (!response.ok) throw new Error(`Could not load audit data (${response.status})`);
+const [response, annotationResponse] = await Promise.all([
+  fetch("./data/second_audit_v2.json", { cache: "no-store" }),
+  fetch("./data/manual_review_annotations_v1.json", { cache: "no-store" })
+]);
+if (!response.ok || !annotationResponse.ok) {
+  throw new Error("Could not load audit data and assessment annotations");
+}
 
 const bundle = await response.json();
+const committedReviewSeed = await annotationResponse.json();
+const borderlineEpisodeIds = new Set(
+  Object.entries(committedReviewSeed.annotations || {})
+    .filter(([, annotation]) => annotation?.drift_assessment === "borderline")
+    .map(([episodeId]) => episodeId)
+);
 const metadata = bundle.metadata || {};
 const daily = bundle.stage1_daily_verdicts || [];
 const windows = bundle.window_verdicts || [];
-const episodes = bundle.confirmed_episodes || [];
+const episodes = (bundle.confirmed_episodes || []).filter(
+  (episode) => !borderlineEpisodeIds.has(episode.episode_id)
+);
 
 const number = new Intl.NumberFormat("en-US");
 const pct = (part, total) => total ? (100 * part / total).toFixed(1) : "0.0";

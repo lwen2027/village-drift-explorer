@@ -19,8 +19,14 @@ const bundle = await bundleResponse.json();
 const manifest = await manifestResponse.json();
 const committedSeed = await annotationResponse.json();
 const sourceRecords = await sourceResponse.json();
+const borderlineEpisodeIds = new Set(
+  Object.entries(committedSeed.annotations || {})
+    .filter(([, annotation]) => annotation?.drift_assessment === "borderline")
+    .map(([episodeId]) => episodeId)
+);
 const goalMaxEpisodes = bundle.confirmed_episodes.filter(
   (episode) => episode.period === "goal_maximization"
+    && !borderlineEpisodeIds.has(episode.episode_id)
 );
 const episodeById = new Map(goalMaxEpisodes.map((episode) => [episode.episode_id, episode]));
 const queueIds = new Set(manifest.default_manual_review_queue_episode_ids || []);
@@ -117,6 +123,7 @@ const sourceLabels = {
 
 function normalizeAnnotation(value) {
   return {
+    drift_assessment: value?.drift_assessment === "borderline" ? "borderline" : "confirmed",
     trigger_categories: Array.isArray(value?.trigger_categories)
       ? [...new Set(value.trigger_categories.map(String))]
       : [],
@@ -145,6 +152,9 @@ function mergeCommittedAndLocal(committed, local) {
   return {
     ...cleanCommitted,
     ...cleanLocal,
+    drift_assessment: Object.prototype.hasOwnProperty.call(local || {}, "drift_assessment")
+      ? cleanLocal.drift_assessment
+      : cleanCommitted.drift_assessment,
     trigger_categories: cleanLocal.trigger_categories.length
       ? cleanLocal.trigger_categories
       : cleanCommitted.trigger_categories,
@@ -167,6 +177,7 @@ function mergeCommittedAndLocal(committed, local) {
 function annotationSemantic(annotation) {
   const clean = normalizeAnnotation(annotation);
   const semantic = {
+    drift_assessment: clean.drift_assessment,
     trigger_categories: [...clean.trigger_categories].sort(),
     request_relationship: clean.request_relationship,
     pause_context: clean.pause_context,
@@ -187,6 +198,7 @@ function annotationSemantic(annotation) {
 function annotationFingerprint(annotation, includeTriggerActor = true) {
   const clean = normalizeAnnotation(annotation);
   const semantic = {
+    drift_assessment: annotation?.drift_assessment === "borderline" ? "borderline" : "confirmed",
     trigger_categories: [...clean.trigger_categories].sort(),
     request_relationship: clean.request_relationship,
     recovery_mechanisms: [...clean.recovery_mechanisms].sort(),

@@ -1480,12 +1480,23 @@
   </div>
 
   <script type="module">
-    const auditBundleResponse = await fetch("./data/second_audit_v2.json");
-    if (!auditBundleResponse.ok) {
-      throw new Error(`Could not load audit data (${auditBundleResponse.status})`);
+    const [auditBundleResponse, annotationResponse] = await Promise.all([
+      fetch("./data/second_audit_v2.json", { cache: "no-store" }),
+      fetch("./data/manual_review_annotations_v1.json", { cache: "no-store" })
+    ]);
+    if (!auditBundleResponse.ok || !annotationResponse.ok) {
+      throw new Error("Could not load the audit data and assessment annotations");
     }
     const auditBundle = await auditBundleResponse.json();
-    const episodes = auditBundle.confirmed_episodes;
+    const committedReviewSeed = await annotationResponse.json();
+    const borderlineEpisodeIds = new Set(
+      Object.entries(committedReviewSeed.annotations || {})
+        .filter(([, annotation]) => annotation?.drift_assessment === "borderline")
+        .map(([episodeId]) => episodeId)
+    );
+    const episodes = auditBundle.confirmed_episodes.filter(
+      (episode) => !borderlineEpisodeIds.has(episode.episode_id)
+    );
     const reviewRepository = "lwen2027/village-drift-explorer";
     const reviewCategoryLabels = {
       general_correction: "General correction",

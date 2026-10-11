@@ -76,6 +76,11 @@ def main() -> None:
             continue
         triggers = annotation["trigger_categories"]
         recoveries = annotation["recovery_mechanisms"]
+        drift_assessment = annotation.get("drift_assessment", "confirmed")
+        if drift_assessment not in {"confirmed", "borderline"}:
+            errors.append(
+                f"{episode_id}: invalid drift_assessment {drift_assessment!r}"
+            )
         if not isinstance(triggers, list) or not triggers:
             errors.append(f"{episode_id}: trigger_categories must be non-empty list")
         elif invalid := set(triggers) - trigger_ids:

@@ -1,12 +1,12 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 113,
-    "goal_maximization_episodes": 553,
-    "mechanical_repeated_wait_only": 113,
+    "excluded_from_default_manual_queue": 112,
+    "goal_maximization_episodes": 545,
+    "mechanical_repeated_wait_only": 112,
     "mechanical_single_wait_only": 12,
     "mixed_wait_and_other_evidence": 50,
-    "no_cited_wait_primitive": 378,
-    "remaining_in_default_manual_queue": 440
+    "no_cited_wait_primitive": 371,
+    "remaining_in_default_manual_queue": 433
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -32,7 +32,7 @@
     "episode-v2-32dec01dd15f2a70",
     "episode-v2-4bcb3fa236408265",
     "episode-v2-088b0f38e6f3c130",
-    "episode-v2-f08b3c4ab58f98e1",
+    "episode-v2-2b33fdcf122ed5b5",
     "episode-v2-f25d67c59311f232",
     "episode-v2-7a3256b478ae0ed8",
     "episode-v2-1de0be583da6886b",
@@ -176,21 +176,14 @@
     "episode-v2-3a4e6747adb608b1",
     "episode-v2-e94e39d713827cba",
     "episode-v2-d7903ed8e57aa04d",
-    "episode-v2-b4f0acdfd6c87d30",
     "episode-v2-49eef3b9828b9831",
     "episode-v2-19b45170e68f9200",
-    "episode-v2-2b33fdcf122ed5b5",
+    "episode-v2-f08b3c4ab58f98e1",
     "episode-v2-abb5daa8225fa611",
     "episode-v2-68c6d47348e30d85",
     "episode-dd26039545b50f99",
     "episode-d9f1963f75ca029d",
-    "episode-ccdab246bcb58b88",
-    "episode-fb928e3a9124601c",
     "episode-3cb513a562d42a88",
-    "episode-7218473a2a86fe10",
-    "episode-b700e5c04ed2dde6",
-    "episode-v2-7228139c3d399a57",
-    "episode-v2-162ca268a36038d4",
     "episode-v2-91b194d96f302825",
     "episode-v2-82f133b3cde05ab4",
     "episode-v2-d06533b95960ef98",
@@ -454,7 +447,6 @@
     "Claude 3 Opus": 1,
     "Claude Fable 5": 7,
     "Claude Haiku 4.5": 10,
-    "Claude Opus 4.8": 1,
     "Claude Opus 5": 1,
     "Claude Sonnet 4.5": 2,
     "Claude Sonnet 5": 6,
@@ -1263,50 +1255,6 @@
         }
       ],
       "onset": "2026-08-13 21:31:17Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Opus 4.8",
-      "assigned_goal": "Maximize goal-achievement of all other agents",
-      "cited_transition_activity_item_count": 3,
-      "dataset_record_id": "v2-record-acb8c425a342b0f3",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-acb8c425a342b0f3",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-eaf2d656b7dc7e21e9b9",
-        "event-a99bf1971009c3e5d79f",
-        "event-8cc996384e57de89442b"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-06",
-          "event_id": "event-eaf2d656b7dc7e21e9b9",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-06 20:01:39Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-06",
-          "event_id": "event-a99bf1971009c3e5d79f",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-06 20:03:56Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-06",
-          "event_id": "event-8cc996384e57de89442b",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-06 20:12:08Z"
-        }
-      ],
-      "onset": "2026-08-06 20:01:39Z",
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
@@ -9162,7 +9110,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-11T19:51:57.423763+00:00",
+  "generated_at": "2026-10-11T20:46:27.718463+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -9895,32 +9843,24 @@
         "agent": "Claude Opus 4.8",
         "assigned_goal": "Maximize goal-achievement of all other agents",
         "cited_transition_activity_item_count": 3,
-        "dataset_record_id": "v2-record-f08b3c4ab58f98e1",
+        "dataset_record_id": "v2-record-2b33fdcf122ed5b5",
         "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-f08b3c4ab58f98e1",
+        "episode_id": "episode-v2-2b33fdcf122ed5b5",
         "manual_review_required": true,
         "matched_event_ids": [
-          "event-4fdad5ffefb6546b50f8"
+          "event-c7cb9f99f589ffc5a7ba"
         ],
         "matched_events": [
           {
             "channel": "tool_action",
-            "day": "2026-07-27",
-            "event_id": "event-4fdad5ffefb6546b50f8",
+            "day": "2026-08-03",
+            "event_id": "event-c7cb9f99f589ffc5a7ba",
             "quote": "pause",
             "role": "transition",
-            "timestamp": "2026-07-27 18:47:24Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-27",
-            "event_id": "event-4fdad5ffefb6546b50f8",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-27 18:47:24Z"
+            "timestamp": "2026-08-03 19:14:54Z"
           }
         ],
-        "onset": null,
+        "onset": "2026-08-03 19:14:54Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
@@ -11735,21 +11675,14 @@
       "episode-v2-3a4e6747adb608b1",
       "episode-v2-e94e39d713827cba",
       "episode-v2-d7903ed8e57aa04d",
-      "episode-v2-b4f0acdfd6c87d30",
       "episode-v2-49eef3b9828b9831",
       "episode-v2-19b45170e68f9200",
-      "episode-v2-2b33fdcf122ed5b5",
+      "episode-v2-f08b3c4ab58f98e1",
       "episode-v2-abb5daa8225fa611",
       "episode-v2-68c6d47348e30d85",
       "episode-dd26039545b50f99",
       "episode-d9f1963f75ca029d",
-      "episode-ccdab246bcb58b88",
-      "episode-fb928e3a9124601c",
       "episode-3cb513a562d42a88",
-      "episode-7218473a2a86fe10",
-      "episode-b700e5c04ed2dde6",
-      "episode-v2-7228139c3d399a57",
-      "episode-v2-162ca268a36038d4",
       "episode-v2-91b194d96f302825",
       "episode-v2-82f133b3cde05ab4",
       "episode-v2-d06533b95960ef98",
@@ -12012,7 +11945,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "2b0143080c32eb15a79501d2aa9fcecfd03bf86e8e67cb308c9359d1846a4428"
+    "sha256": "a0e52b77096549ab3bc3f3d6ea548eef69d2ca04119df7d0369fe22a90635caa"
   },
   "makes_model_calls": false,
   "rule": {

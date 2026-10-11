@@ -2055,9 +2055,19 @@
       return mergedEpisodeAliases.get(episodeId) || episodeId;
     }
 
+    const borderlineEpisodeIds = new Set(
+      Object.entries(committedReviewSeed.annotations || {})
+        .filter(([, annotation]) => annotation?.drift_assessment === "borderline")
+        .map(([episodeId]) => canonicalMergedEpisodeId(episodeId))
+    );
     const reviewEpisodeIds = new Set(reviewManifest.default_manual_review_queue_episode_ids || []);
-    const episodes = auditBundle.confirmed_episodes.filter((episode) => reviewEpisodeIds.has(episode.episode_id));
-    if (episodes.length !== reviewManifest.counts.remaining_in_default_manual_queue) {
+    const episodes = auditBundle.confirmed_episodes.filter((episode) =>
+      reviewEpisodeIds.has(episode.episode_id) && !borderlineEpisodeIds.has(episode.episode_id)
+    );
+    const expectedReviewEpisodeCount = [...reviewEpisodeIds]
+      .filter((episodeId) => !borderlineEpisodeIds.has(canonicalMergedEpisodeId(episodeId)))
+      .length;
+    if (episodes.length !== expectedReviewEpisodeCount) {
       throw new Error("Manual-review manifest does not match the audit bundle");
     }
     const reviewRepository = "lwen2027/village-drift-explorer";
@@ -2177,6 +2187,9 @@
           && Object.prototype.hasOwnProperty.call(candidate.annotations || {}, canonicalId);
         if (directSurvivorExists || !validIds.has(canonicalId) || !value || typeof value !== "object") return;
         clean.annotations[canonicalId] = {
+          ...(value.drift_assessment === "borderline" || value.drift_assessment === "confirmed"
+            ? { drift_assessment: value.drift_assessment }
+            : {}),
           trigger_categories: Array.isArray(value.trigger_categories) ? [...new Set(value.trigger_categories.map(String))] : [],
           trigger_actor: typeof value.trigger_actor === "string" ? value.trigger_actor : "",
           request_relationship: typeof value.request_relationship === "string" ? value.request_relationship : "",
@@ -2328,6 +2341,7 @@
 
     function annotationFingerprint(annotation, includePauseContext = true, includeTriggerActor = true) {
       const semantic = {
+        drift_assessment: annotation?.drift_assessment === "borderline" ? "borderline" : "confirmed",
         trigger_categories: [...new Set(annotation?.trigger_categories || [])].sort(),
         request_relationship: annotation?.request_relationship || "",
         recovery_mechanisms: [...new Set(annotation?.recovery_mechanisms || [])].sort(),
@@ -2504,6 +2518,9 @@
       return {
         ...committed,
         ...local,
+        drift_assessment: Object.prototype.hasOwnProperty.call(local || {}, "drift_assessment")
+          ? local.drift_assessment
+          : committed?.drift_assessment,
         trigger_categories: localTriggers.length
           ? [...new Set(localTriggers)]
           : [...new Set(committed?.trigger_categories || [])],
@@ -3799,6 +3816,32 @@
       );
 
       const form = node("div", "annotation-form");
+      const assessmentField = node("div", "annotation-field");
+      const assessmentLabelRow = node("div", "annotation-label-row");
+      assessmentLabelRow.append(
+        node("strong", "", "Drift assessment"),
+        node("span", "", "Confirmed by default · borderline findings are preserved but excluded from confirmed-drift views")
+      );
+      const assessmentOptions = node("div", "taxonomy-options");
+      [["confirmed", "Confirmed drift"], ["borderline", "Borderline"]].forEach(([value, label]) => {
+        const option = node("label", "taxonomy-option");
+        const radio = node("input");
+        radio.type = "radio";
+        radio.name = `drift-assessment-${episode.episode_id}`;
+        radio.value = value;
+        radio.checked = (annotation.drift_assessment || "confirmed") === value;
+        radio.addEventListener("change", () => {
+          if (!radio.checked) return;
+          updateAnnotation(episode.episode_id, (next) => {
+            if (value === "borderline") next.drift_assessment = "borderline";
+            else delete next.drift_assessment;
+          });
+          refreshPanelAtCurrentScroll();
+        });
+        option.append(radio, node("span", "", label));
+        assessmentOptions.append(option);
+      });
+      assessmentField.append(assessmentLabelRow, assessmentOptions);
       function taxonomyField(kind, title, hint, valueField) {
         const field = node("div", "annotation-field");
         const labelRow = node("div", "annotation-label-row");
@@ -4097,6 +4140,7 @@
       actions.append(saveStatus, completeNext);
 
       form.append(
+        assessmentField,
         triggerField,
         ...(pauseField ? [pauseField] : []),
         actorField,
@@ -4618,6 +4662,7 @@
     function exportReviewCsv() {
       const headers = [
         "episode_id", "agent", "onset", "review_state",
+        "drift_assessment",
         "pending_correction", "github_issue_url",
         "trigger_category_ids", "trigger_category_labels", "trigger_actor", "request_relationship_id",
         "request_relationship_label", "pause_context_id", "pause_context_label", "recovery_mechanism_ids",
@@ -4630,6 +4675,7 @@
           episode.agent,
           episode.onset || episode.activity_start || "",
           reviewStateForEpisode(episode.episode_id),
+          annotation.drift_assessment === "borderline" ? "borderline" : "confirmed",
           hasPendingCorrection(episode.episode_id) ? "true" : "false",
           correctionRequestFor(episode.episode_id)?.issue_url || "",
           (annotation.trigger_categories || []).join("|"),
