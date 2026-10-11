@@ -720,9 +720,126 @@
         "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-4578bfff45b490f9": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Sonnet 4.5's own retained strategy records a pivot from Twitter to Substack; Twitter work later resumed, but the exact end boundary is unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-c27043347014edbdfb43",
+          "event-43e1d3eeb813a610cfad",
+          "event-494e1ba2fddce6249521"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-c9b876641089b8fc": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Sonnet had already substituted Substack subscribers for Twitter followers at the evidence edge, based on a self-authored Twitter-ceiling belief. The original switch is unavailable.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-91d78e791ee12c64fd37",
+          "event-84f0626fc2533462b048"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:00:00-04:00"
+    },
+    "episode-v2-982479dbbc308dd5": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Sonnet's retained belief that Twitter had a structural ceiling governed a Substack-metric substitution until it later recommitted to Twitter.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-3b451f8d345339e05522"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:00:00-04:00"
+    },
+    "episode-v2-c7b3a20dd815df74": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Sonnet 4.5's hybrid experiment again made its assigned platform optional; it later recommitted to Twitter on goal-integrity grounds.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-cefd61080497e80225eb",
+          "event-d61989a14a9a06b97fd3",
+          "event-df4af12e6b98c9c81b42"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-11T16:30:00-04:00",
+  "updated_at": "2026-10-11T22:30:00-04:00",
   "reason": "Preserves human annotations for records removed from the canonical confirmed-episode publication by reviewed merges or invalidations."
 }

@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 112,
-    "goal_maximization_episodes": 545,
+    "goal_maximization_episodes": 541,
     "mechanical_repeated_wait_only": 112,
     "mechanical_single_wait_only": 12,
     "mixed_wait_and_other_evidence": 50,
-    "no_cited_wait_primitive": 371,
-    "remaining_in_default_manual_queue": 433
+    "no_cited_wait_primitive": 367,
+    "remaining_in_default_manual_queue": 429
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -195,13 +195,9 @@
     "episode-v2-f26b80786536721f",
     "episode-v2-d3f0237fb0cafcfb",
     "episode-e127a9995b43c845",
-    "episode-4578bfff45b490f9",
     "episode-92366aa4813f8666",
-    "episode-c9b876641089b8fc",
     "episode-v2-54afb96af9cdf323",
-    "episode-v2-982479dbbc308dd5",
     "episode-v2-83b8cec8f089e21a",
-    "episode-v2-c7b3a20dd815df74",
     "episode-b621000419e8a1df",
     "episode-v2-16556b7c066cbab9",
     "episode-v2-d58ef03471fba5bc",
@@ -9110,7 +9106,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-11T20:46:27.718463+00:00",
+  "generated_at": "2026-10-11T21:25:10.149881+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -11694,13 +11690,9 @@
       "episode-v2-f26b80786536721f",
       "episode-v2-d3f0237fb0cafcfb",
       "episode-e127a9995b43c845",
-      "episode-4578bfff45b490f9",
       "episode-92366aa4813f8666",
-      "episode-c9b876641089b8fc",
       "episode-v2-54afb96af9cdf323",
-      "episode-v2-982479dbbc308dd5",
       "episode-v2-83b8cec8f089e21a",
-      "episode-v2-c7b3a20dd815df74",
       "episode-b621000419e8a1df",
       "episode-v2-16556b7c066cbab9",
       "episode-v2-d58ef03471fba5bc",
@@ -11945,7 +11937,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "a0e52b77096549ab3bc3f3d6ea548eef69d2ca04119df7d0369fe22a90635caa"
+    "sha256": "9ac8bd9807ae359e494131cd1b00f64b6c738ba66456accd4d97aa4dedfb9333"
   },
   "makes_model_calls": false,
   "rule": {
