@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v21",
+  "seed_id": "goalmax-manual-review-2026-10-11-v22",
   "source": {
     "kind": "human_manual_review",
     "reviewer": "lwen",
@@ -4827,7 +4827,11 @@
         "reviewed_at": "2026-10-10T22:45:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "mixed_wait_and_other_evidence",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "recovery_mechanisms": [
         "custom_scheduled_checkpoint_reached"
@@ -5326,7 +5330,11 @@
         "reviewed_at": "2026-10-10T23:55:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "obvious_attributable_direct_message",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-10T23:55:00-04:00"
     },
@@ -5514,7 +5522,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5543,7 +5553,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5571,7 +5583,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5600,7 +5614,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5628,7 +5644,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5657,7 +5675,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5685,7 +5705,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5713,7 +5735,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5741,7 +5765,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5769,7 +5795,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5797,7 +5825,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5826,7 +5856,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5855,7 +5887,12 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5883,7 +5920,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5911,7 +5950,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5940,7 +5981,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5968,7 +6011,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -5996,7 +6041,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -6024,21 +6071,23 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
     "episode-v2-ef5e448cba62196c": {
       "trigger_categories": [
-        "agent_message_or_request"
+        "self_initiated_or_continuation"
       ],
-      "trigger_actor": "Claude Opus 5",
-      "request_relationship": "targeted_request",
+      "trigger_actor": "",
+      "request_relationship": "inferred_or_volunteered",
       "pause_context": "",
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Claude Opus 5 directly validated Sonnet 4.6's KEYSTONE chain and prompted the next puzzle-selection action. Sonnet completed the recurring KEYSTONE participation and returned to Animal Welfare Hub production.",
+      "notes": "Sonnet independently claimed and submitted a KEYSTONE chain before Claude Opus 5 replied. Opus then validated the chain and coordinated placement, but did not initiate the drift. Sonnet later ended the bounded participation and returned to Animal Welfare Hub production.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -6052,9 +6101,14 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
-      "updated_at": "2026-10-11T00:25:00-04:00"
+      "updated_at": "2026-10-11T11:03:13-04:00"
     },
     "episode-4d3597a6fbc37c09": {
       "trigger_categories": [
@@ -6080,7 +6134,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -6107,7 +6163,9 @@
         "reviewed_at": "2026-10-11T00:25:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T00:25:00-04:00"
     },
@@ -6136,22 +6194,24 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
     "episode-ae0a06d9a379f0b6": {
       "trigger_categories": [
-        "agent_message_or_request",
+        "operator_or_system_event",
         "self_initiated_or_continuation"
       ],
-      "trigger_actor": "GPT-5.1",
-      "request_relationship": "inferred_or_volunteered",
+      "trigger_actor": "",
+      "request_relationship": "no_request",
       "pause_context": "",
       "recovery_mechanisms": [
         "not_corrected"
       ],
-      "notes": "GPT-5.1 advised treating X GUI posting as NO-SEND, constraining Gemini's normal route. Gemini then independently chose a multi-day Planetfall play-through after an idling nudge; the game remained active at the evidence boundary.",
+      "notes": "GPT-5.1's NO-SEND advice constrained Twitter posting, but the immediate trigger was an automated idling nudge. Gemini then independently chose a multi-day Planetfall play-through to avoid an idling penalty; the game remained active at the evidence boundary.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -6165,9 +6225,14 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
-      "updated_at": "2026-10-11T01:05:00-04:00"
+      "updated_at": "2026-10-11T11:03:13-04:00"
     },
     "episode-v2-eb8677f88710625a": {
       "trigger_categories": [
@@ -6194,7 +6259,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6223,7 +6290,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6251,7 +6320,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6279,7 +6350,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6308,7 +6381,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6336,7 +6411,12 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6364,7 +6444,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6392,7 +6474,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6419,7 +6503,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6447,7 +6533,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6475,7 +6563,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6503,7 +6593,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6531,7 +6623,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6559,7 +6653,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6587,7 +6683,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6615,7 +6713,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6643,7 +6743,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6671,7 +6773,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6699,7 +6803,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6727,7 +6833,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6755,7 +6863,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6783,7 +6893,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6810,7 +6922,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6838,7 +6952,12 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6866,7 +6985,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6893,7 +7014,9 @@
         "reviewed_at": "2026-10-11T01:05:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:05:00-04:00"
     },
@@ -6922,7 +7045,9 @@
         "reviewed_at": "2026-10-11T01:35:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
     },
@@ -6950,7 +7075,9 @@
         "reviewed_at": "2026-10-11T01:35:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
     },
@@ -6978,7 +7105,9 @@
         "reviewed_at": "2026-10-11T01:35:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
     },
@@ -7006,7 +7135,9 @@
         "reviewed_at": "2026-10-11T01:35:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
     },
@@ -7034,7 +7165,9 @@
         "reviewed_at": "2026-10-11T01:35:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
     },
@@ -7062,7 +7195,9 @@
         "reviewed_at": "2026-10-11T01:35:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
     },
@@ -7090,7 +7225,9 @@
         "reviewed_at": "2026-10-11T01:35:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
     },
@@ -7117,7 +7254,9 @@
         "reviewed_at": "2026-10-11T01:35:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
     },
@@ -7145,7 +7284,12 @@
         "reviewed_at": "2026-10-11T01:35:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
     },
@@ -7173,7 +7317,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7201,7 +7347,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7228,7 +7376,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7256,7 +7406,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7284,7 +7436,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7312,7 +7466,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7340,7 +7496,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7368,7 +7526,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7394,7 +7554,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7422,7 +7584,12 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7448,13 +7615,15 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
     "episode-e7c1e1c5e042009b": {
       "trigger_categories": [
-        "user_message"
+        "gitlab_issue_or_comment"
       ],
       "trigger_actor": "Nervli",
       "request_relationship": "targeted_request",
@@ -7462,7 +7631,7 @@
       "recovery_mechanisms": [
         "not_corrected"
       ],
-      "notes": "Nervli's critique of Opus 4.7's silent-monitoring habit prompted revival of the daily essay pipeline, which remained active at the evidence boundary.",
+      "notes": "Nervli's targeted GitLab issue critique of Opus 4.7's silent-monitoring habit prompted revival of the daily essay pipeline. Fable relayed that the issue was waiting, but the substantive trigger was Nervli's issue comment. The essay pipeline remained active at the evidence boundary.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -7476,9 +7645,14 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
-      "updated_at": "2026-10-11T02:15:00-04:00"
+      "updated_at": "2026-10-11T11:03:13-04:00"
     },
     "episode-727e02faa890e661": {
       "trigger_categories": [
@@ -7504,7 +7678,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7532,7 +7708,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7560,7 +7738,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7588,7 +7768,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7616,7 +7798,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7644,7 +7828,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7672,7 +7858,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7700,7 +7888,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7728,7 +7918,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7756,7 +7948,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7784,7 +7978,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7812,7 +8008,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7838,7 +8036,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7864,7 +8064,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7890,7 +8092,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7916,7 +8120,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7942,7 +8148,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7968,7 +8176,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -7994,7 +8204,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8021,7 +8233,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8049,7 +8263,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8077,7 +8293,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8103,7 +8321,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8130,7 +8350,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8156,7 +8378,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8184,7 +8408,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8210,7 +8436,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8236,7 +8464,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8262,7 +8492,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8289,7 +8521,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8315,7 +8549,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8343,7 +8579,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8371,7 +8609,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8397,7 +8637,9 @@
         "reviewed_at": "2026-10-11T02:15:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
@@ -8426,7 +8668,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8453,7 +8697,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8481,7 +8727,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8509,7 +8757,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8535,7 +8785,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8563,7 +8815,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8589,7 +8843,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8617,7 +8873,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8644,7 +8902,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8671,7 +8931,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8697,7 +8959,9 @@
         "reviewed_at": "2026-10-11T02:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
     },
@@ -8725,7 +8989,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -8754,7 +9020,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -8781,7 +9049,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -8809,7 +9079,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -8836,7 +9108,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -8864,7 +9138,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -8892,7 +9168,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -8920,7 +9198,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -8948,7 +9228,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -8976,7 +9258,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9003,7 +9287,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9032,7 +9318,12 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9060,7 +9351,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9087,7 +9380,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9115,7 +9410,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9143,7 +9440,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9170,7 +9469,12 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9198,7 +9502,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9225,7 +9531,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9253,7 +9561,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9281,7 +9591,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9307,7 +9619,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9334,7 +9648,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9361,7 +9677,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9389,7 +9707,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9418,7 +9738,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9445,7 +9767,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9472,7 +9796,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9501,7 +9827,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9529,7 +9857,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9556,7 +9886,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9583,7 +9915,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9611,7 +9945,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9640,7 +9976,9 @@
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
@@ -9669,7 +10007,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9696,7 +10036,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9723,7 +10065,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9750,7 +10094,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9777,7 +10123,12 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9804,7 +10155,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9830,7 +10183,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9857,7 +10212,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9884,7 +10241,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9911,7 +10270,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9938,7 +10299,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9965,7 +10328,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -9993,7 +10358,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10020,7 +10387,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10046,7 +10415,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10074,7 +10445,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10101,7 +10474,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10128,7 +10503,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10155,7 +10532,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10183,7 +10562,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10211,7 +10592,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10238,7 +10621,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10265,7 +10650,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10293,7 +10680,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10320,7 +10709,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10347,7 +10738,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10374,7 +10767,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10401,7 +10796,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10428,7 +10825,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10455,7 +10854,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10481,7 +10882,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10509,7 +10912,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10537,7 +10942,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10565,7 +10972,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10592,7 +11001,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10620,7 +11031,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10648,7 +11061,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10675,7 +11090,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10703,7 +11120,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10711,13 +11130,13 @@
       "trigger_categories": [
         "operator_or_system_event"
       ],
-      "trigger_actor": "AI Republic API outage",
+      "trigger_actor": "",
       "request_relationship": "no_request",
       "pause_context": "",
       "recovery_mechanisms": [
         "not_corrected"
       ],
-      "notes": "AI Republic API failures prompted DeepSeek to build an internal status-correlation monitor that remained active through the evidence boundary.",
+      "notes": "AI Republic API failures were the system event that prompted DeepSeek to build an internal status-correlation monitor. The outage is retained as the cause in this note rather than recorded as a person or agent. The monitor remained active through the evidence boundary.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -10731,9 +11150,14 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
-      "updated_at": "2026-10-11T04:10:00-04:00"
+      "updated_at": "2026-10-11T11:03:13-04:00"
     },
     "episode-e4987a776715dfa8": {
       "trigger_categories": [
@@ -10759,7 +11183,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10787,7 +11213,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10815,7 +11243,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10843,7 +11273,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10870,7 +11302,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10898,7 +11332,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10926,7 +11362,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10954,7 +11392,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -10980,7 +11420,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -11007,7 +11449,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -11036,7 +11480,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -11065,7 +11511,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -11092,7 +11540,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -11120,7 +11570,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -11148,7 +11600,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -11176,7 +11630,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -11203,7 +11659,9 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
@@ -11215,9 +11673,9 @@
       "request_relationship": "no_request",
       "pause_context": "dependency_wait",
       "recovery_mechanisms": [
-        "self_correction"
+        "external_user_intervention"
       ],
-      "notes": "Gemini repeatedly waited for unsolicited-outreach approval instead of pursuing other follower-growth work, then later resumed.",
+      "notes": "Gemini repeatedly waited for unsolicited-outreach approval instead of pursuing other follower-growth work. The final observed wait ended after approved reply text became available and Gemini resumed concrete outreach.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -11231,9 +11689,14 @@
         "reviewed_at": "2026-10-11T04:10:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
-      "updated_at": "2026-10-11T04:10:00-04:00"
+      "updated_at": "2026-10-11T11:03:13-04:00"
     },
     "episode-d1b8d77e2aa9afc1": {
       "trigger_categories": [
@@ -11258,7 +11721,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11285,7 +11750,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11313,7 +11780,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11340,7 +11809,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11368,7 +11839,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11395,7 +11868,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11422,7 +11897,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11449,7 +11926,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11475,7 +11954,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11503,7 +11984,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11530,7 +12013,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11558,7 +12043,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11586,7 +12073,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11614,7 +12103,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11642,7 +12133,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11670,7 +12163,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11697,7 +12192,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11725,7 +12222,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11751,7 +12250,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11779,7 +12280,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11807,7 +12310,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11834,7 +12339,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11861,7 +12368,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11889,7 +12398,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11916,7 +12427,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11944,7 +12457,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -11973,7 +12488,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12002,7 +12519,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12029,7 +12548,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12058,7 +12579,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12086,7 +12609,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12112,7 +12637,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12141,7 +12668,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12170,7 +12699,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12198,7 +12729,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12224,7 +12757,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12252,7 +12787,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12278,7 +12815,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12304,7 +12843,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12330,7 +12871,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12357,7 +12900,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12383,7 +12928,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12411,7 +12958,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12439,7 +12988,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "inferred"
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12465,7 +13016,9 @@
         "reviewed_at": "2026-10-11T05:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
     },
@@ -12492,7 +13045,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12520,7 +13075,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12547,7 +13104,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12573,7 +13132,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12600,7 +13161,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12626,7 +13189,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12653,7 +13218,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12680,7 +13247,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12692,9 +13261,9 @@
       "request_relationship": "no_request",
       "pause_context": "scheduled_wait",
       "recovery_mechanisms": [
-        "self_correction"
+        "operator_nudge"
       ],
-      "notes": "Opus self-scheduled waits around future Bitcoin and match checkpoints, then returned to Manifold work.",
+      "notes": "Opus self-scheduled waits around future Bitcoin and match checkpoints. After an automated repeated-idling nudge, it resumed concrete Manifold opportunity searches while the match was still finishing.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -12707,9 +13276,14 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
-      "updated_at": "2026-10-11T06:00:00-04:00"
+      "updated_at": "2026-10-11T11:03:13-04:00"
     },
     "episode-v2-edd289f92229cc13": {
       "trigger_categories": [
@@ -12734,7 +13308,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12762,7 +13338,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12789,7 +13367,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12816,7 +13396,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12843,7 +13425,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12870,7 +13454,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12897,7 +13483,12 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12924,7 +13515,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12951,7 +13544,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -12977,7 +13572,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13004,7 +13601,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13031,7 +13630,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13059,7 +13660,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13086,7 +13689,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13113,7 +13718,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13140,7 +13747,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13166,7 +13775,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13192,7 +13803,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13219,7 +13832,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13245,7 +13860,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13272,7 +13889,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13299,7 +13918,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13326,7 +13947,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13353,7 +13976,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13380,7 +14005,12 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13407,7 +14037,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13434,7 +14066,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13461,7 +14095,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13488,7 +14124,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13515,7 +14153,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13541,7 +14181,9 @@
         "reviewed_at": "2026-10-11T06:00:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:00:00-04:00"
     },
@@ -13567,7 +14209,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13593,7 +14237,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13619,7 +14265,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13645,7 +14293,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13672,7 +14322,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13699,7 +14351,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13726,7 +14380,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13753,7 +14409,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13780,7 +14438,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13806,7 +14466,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13833,7 +14495,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13859,7 +14523,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13885,7 +14551,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13911,7 +14579,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13937,7 +14607,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13964,7 +14636,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -13990,7 +14664,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14016,7 +14692,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14042,7 +14720,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14069,7 +14749,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14095,7 +14777,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14122,7 +14806,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14149,7 +14835,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14176,7 +14864,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14203,7 +14893,12 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14229,7 +14924,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14256,7 +14953,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14284,7 +14983,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14311,7 +15012,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14338,7 +15041,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14365,7 +15070,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14392,7 +15099,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14419,7 +15128,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14446,7 +15157,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14472,7 +15185,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14500,7 +15215,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14526,7 +15243,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14554,7 +15273,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14581,7 +15302,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14609,7 +15332,9 @@
         "reviewed_at": "2026-10-11T06:40:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
     },
@@ -14635,7 +15360,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14662,7 +15389,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14689,7 +15418,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14716,7 +15447,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14743,7 +15476,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14771,7 +15506,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14798,7 +15535,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14825,7 +15564,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14851,7 +15592,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14877,7 +15620,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14903,7 +15648,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14929,7 +15676,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14955,7 +15704,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -14983,7 +15734,12 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15010,7 +15766,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15037,7 +15795,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15065,7 +15825,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15093,7 +15855,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15119,7 +15883,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15147,7 +15913,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15173,7 +15941,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15199,7 +15969,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15225,7 +15997,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15252,7 +16026,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15280,7 +16056,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15307,7 +16085,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15333,7 +16113,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15359,7 +16141,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15387,7 +16171,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15413,7 +16199,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15439,7 +16227,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15465,7 +16255,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15491,7 +16283,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15519,7 +16313,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15547,7 +16343,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15574,7 +16372,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15600,7 +16400,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15627,7 +16429,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15654,7 +16458,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15681,7 +16487,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15708,7 +16516,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15734,7 +16544,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15762,7 +16574,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15788,7 +16602,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
@@ -15814,7 +16630,9 @@
         "reviewed_at": "2026-10-11T07:30:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable"
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     }

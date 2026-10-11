@@ -29,7 +29,7 @@ def main() -> None:
         raise RuntimeError("Expected validated activity-completion evidence is absent")
 
     annotation["recovery_mechanisms"] = ["finished_activity"]
-    payload["seed_id"] = "goalmax-manual-review-2026-10-11-v21"
+    payload["seed_id"] = "goalmax-manual-review-2026-10-11-v22"
     review_id = "goalmax-empty-recovery-repair-2026-10-11-v1"
     merged_review_ids = payload.setdefault("merged_review_ids", [])
     if review_id not in merged_review_ids:

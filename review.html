@@ -2208,7 +2208,7 @@
       );
     }
 
-    function unresolvedAnnotationFields(annotation) {
+    function unresolvedAnnotationFields(annotation, includeVerification = true) {
       const unresolved = [];
       const triggers = annotation.trigger_categories || [];
       const recoveries = annotation.recovery_mechanisms || [];
@@ -2222,6 +2222,10 @@
       }
       if (triggers.some((trigger) => externalTriggerCategoryIds.has(trigger)) && !annotation.trigger_actor?.trim()) {
         unresolved.push("trigger actor");
+      }
+      if (includeVerification
+          && annotation.provenance?.verification_status === "needs_manual_verification") {
+        unresolved.push("source verification");
       }
       return unresolved;
     }
@@ -2243,6 +2247,8 @@
       };
       if (includePauseContext) semantic.pause_context = annotation?.pause_context || "";
       if (includeTriggerActor) semantic.trigger_actor = String(annotation?.trigger_actor || "");
+      const verificationStatus = annotation?.provenance?.verification_status;
+      if (verificationStatus) semantic.verification_status = verificationStatus;
       const serialized = JSON.stringify(semantic);
       let hash = 2166136261;
       for (let index = 0; index < serialized.length; index += 1) {
@@ -3497,10 +3503,14 @@
 
     function episodeReviewBadge(episodeId, compact = false) {
       const state = reviewStateForEpisode(episodeId);
+      const needsVerification = annotationFor(episodeId).provenance?.verification_status
+        === "needs_manual_verification";
       const badgeClass = state === "completed"
         ? "is-complete"
         : state === "in_progress" ? "is-progress" : "";
-      const label = compact && state === "in_progress" ? "Saved" : reviewStateLabel(state);
+      const label = needsVerification
+        ? compact ? "Verify" : "Needs verification"
+        : compact && state === "in_progress" ? "Saved" : reviewStateLabel(state);
       return node("span", `review-state-badge ${badgeClass}`.trim(), label);
     }
 
@@ -3668,7 +3678,13 @@
       heading.append(node("h3", "", "Human review annotation"), badges);
       wrapper.append(
         heading,
-        node("p", "human-review-intro", "Your research labels and notes are saved locally. Integration badges compare this browser copy with the latest committed annotation dataset.")
+        node(
+          "p",
+          "human-review-intro",
+          annotation.provenance?.verification_status === "needs_manual_verification"
+            ? "These are suggested labels derived from the compiled evidence packet. Check the source evidence, adjust any fields, then verify the annotation below. Changes save locally as you work."
+            : "Your research labels and notes are saved locally. Integration badges compare this browser copy with the latest committed annotation dataset."
+        )
       );
 
       const form = node("div", "annotation-form");
@@ -3920,9 +3936,16 @@
 
       const actions = node("div", "annotation-actions");
       const saveStatus = node("span", "annotation-save-status");
-      const completeNext = node("button", "complete-next-button", "Complete and open next incomplete →");
+      const needsSourceVerification = annotation.provenance?.verification_status === "needs_manual_verification";
+      const completeNext = node(
+        "button",
+        "complete-next-button",
+        needsSourceVerification
+          ? "Verify and open next incomplete →"
+          : "Complete and open next incomplete →"
+      );
       completeNext.type = "button";
-      const unresolvedFields = unresolvedAnnotationFields(annotation);
+      const unresolvedFields = unresolvedAnnotationFields(annotation, false);
       completeNext.disabled = unresolvedFields.length > 0;
       if (unresolvedFields.length) {
         completeNext.title = `Resolve ${unresolvedFields.join(", ")} before completing this review.`;
@@ -3944,7 +3967,19 @@
         updateAnnotation(episode.episode_id, (next) => { next.notes = notes.value; }, false);
         updateLocalSaveCopy();
       });
-      completeNext.addEventListener("click", () => openNextIncompleteEpisode(episode.episode_id));
+      completeNext.addEventListener("click", () => {
+        if (needsSourceVerification) {
+          updateAnnotation(episode.episode_id, (next) => {
+            next.provenance = {
+              ...(next.provenance || {}),
+              verification_status: "browser_verified",
+              verified_at: new Date().toISOString(),
+              verified_by: "browser_reviewer"
+            };
+          });
+        }
+        openNextIncompleteEpisode(episode.episode_id);
+      });
       updateLocalSaveCopy();
       actions.append(saveStatus, completeNext);
 

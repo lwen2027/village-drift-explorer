@@ -35,6 +35,11 @@ PAUSE_CONTEXTS = {
     "no_next_action",
     "other_or_unknown",
 }
+VERIFICATION_STATUSES = {
+    "needs_manual_verification",
+    "raw_source_verified",
+    "browser_verified",
+}
 
 
 def fail(message: str) -> None:
@@ -96,6 +101,16 @@ def main() -> None:
             errors.append(f"{episode_id}: follow_ups must be a list")
         if not isinstance(annotation["provenance"], dict):
             errors.append(f"{episode_id}: provenance must be an object")
+        else:
+            verification_status = annotation["provenance"].get(
+                "verification_status"
+            )
+            if (verification_status is not None
+                    and verification_status not in VERIFICATION_STATUSES):
+                errors.append(
+                    f"{episode_id}: invalid verification_status "
+                    f"{verification_status!r}"
+                )
     if errors:
         fail("Manual-review validation failed:\n" + "\n".join(errors))
 

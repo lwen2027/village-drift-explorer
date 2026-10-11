@@ -93,6 +93,7 @@ const externalTriggerCategoryIds = new Set([
 
 function annotationIsFullyResolved(annotation) {
   const clean = normalizeAnnotation(annotation);
+  if (clean.provenance.verification_status === "needs_manual_verification") return false;
   if (!clean.trigger_categories.length || clean.trigger_categories.includes("unknown")) return false;
   if (!clean.request_relationship || ["unclear", "unknown"].includes(clean.request_relationship)) return false;
   if (!clean.recovery_mechanisms.length || clean.recovery_mechanisms.includes("unknown")) return false;
@@ -163,7 +164,7 @@ function mergeCommittedAndLocal(committed, local) {
 
 function annotationSemantic(annotation) {
   const clean = normalizeAnnotation(annotation);
-  return JSON.stringify({
+  const semantic = {
     trigger_categories: [...clean.trigger_categories].sort(),
     request_relationship: clean.request_relationship,
     pause_context: clean.pause_context,
@@ -174,7 +175,11 @@ function annotationSemantic(annotation) {
       note: String(item?.note || "")
     })),
     trigger_actor: clean.trigger_actor
-  });
+  };
+  if (clean.provenance.verification_status) {
+    semantic.verification_status = clean.provenance.verification_status;
+  }
+  return JSON.stringify(semantic);
 }
 
 function annotationFingerprint(annotation, includeTriggerActor = true) {
@@ -191,6 +196,9 @@ function annotationFingerprint(annotation, includeTriggerActor = true) {
     pause_context: clean.pause_context
   };
   if (includeTriggerActor) semantic.trigger_actor = clean.trigger_actor;
+  if (clean.provenance.verification_status) {
+    semantic.verification_status = clean.provenance.verification_status;
+  }
   const serialized = JSON.stringify(semantic);
   let hash = 2166136261;
   for (let index = 0; index < serialized.length; index += 1) {
