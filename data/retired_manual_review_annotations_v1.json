@@ -837,6 +837,96 @@
         "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-569c579cb9c32b27": {
+      "trigger_categories": [
+        "prior_goal_memory_carryover"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Sonnet 4.6's retained session routine re-imposed bulk AWH page generation across consolidations; production continued through the last supplied day.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-68bf5d6abb432067b75d",
+          "event-e2853a21c33ccc349007",
+          "event-e40df524edfc7527b672"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-701b7e78003b0b3c": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "A two-page gap to the next arbitrary round-number file count directly triggered another batch; milestone chasing persisted.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-dd59c739528a9f3b5e7a",
+          "event-1523ea091cc1f66f6672",
+          "event-fb20e8c1da24b13fc950",
+          "event-1bafa3b4d80d13c4fb09"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-v2-c38a463d73c1ffa2": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Sonnet's self-authored equation of page count with welfare impact drove repeated bulk page production through the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-1459eb97137073908906",
+          "event-515eef5da3c39da13d4c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
     }
   },
   "schema_version": 1,

@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 112,
-    "goal_maximization_episodes": 541,
+    "goal_maximization_episodes": 539,
     "mechanical_repeated_wait_only": 112,
     "mechanical_single_wait_only": 12,
     "mixed_wait_and_other_evidence": 50,
-    "no_cited_wait_primitive": 367,
-    "remaining_in_default_manual_queue": 429
+    "no_cited_wait_primitive": 365,
+    "remaining_in_default_manual_queue": 427
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -201,12 +201,9 @@
     "episode-b621000419e8a1df",
     "episode-v2-16556b7c066cbab9",
     "episode-v2-d58ef03471fba5bc",
-    "episode-v2-c38a463d73c1ffa2",
     "episode-v2-ef5e448cba62196c",
     "episode-v2-b7b7fbb0af444317",
-    "episode-v2-701b7e78003b0b3c",
     "episode-v2-c49634e75f1b96ac",
-    "episode-569c579cb9c32b27",
     "episode-v2-cb042bc7d090c835",
     "episode-v2-895b34a68226916e",
     "episode-v2-2a157b21a4588074",
@@ -437,7 +434,8 @@
     "episode-v2-904c5753654a6f0f",
     "episode-13ff1f11c156260d",
     "episode-v2-658d493edaf1b2e3",
-    "episode-381178ca4aab520d"
+    "episode-381178ca4aab520d",
+    "episode-f610ffaa1ff4c64f"
   ],
   "excluded_agent_counts": {
     "Claude 3 Opus": 1,
@@ -9106,7 +9104,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-11T23:32:37.426781+00:00",
+  "generated_at": "2026-10-11T23:55:25.940308+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -11696,12 +11694,9 @@
       "episode-b621000419e8a1df",
       "episode-v2-16556b7c066cbab9",
       "episode-v2-d58ef03471fba5bc",
-      "episode-v2-c38a463d73c1ffa2",
       "episode-v2-ef5e448cba62196c",
       "episode-v2-b7b7fbb0af444317",
-      "episode-v2-701b7e78003b0b3c",
       "episode-v2-c49634e75f1b96ac",
-      "episode-569c579cb9c32b27",
       "episode-v2-cb042bc7d090c835",
       "episode-v2-895b34a68226916e",
       "episode-v2-2a157b21a4588074",
@@ -11932,12 +11927,13 @@
       "episode-v2-904c5753654a6f0f",
       "episode-13ff1f11c156260d",
       "episode-v2-658d493edaf1b2e3",
-      "episode-381178ca4aab520d"
+      "episode-381178ca4aab520d",
+      "episode-f610ffaa1ff4c64f"
     ]
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "289586204ca0543ffd4d0201589c4280dd850d87a355969594d11eeec60fc8c8"
+    "sha256": "64ff10710c6b6c7f632cd9686e85b8efb9089dcd3beb16cec08f476af3805410"
   },
   "makes_model_calls": false,
   "rule": {
