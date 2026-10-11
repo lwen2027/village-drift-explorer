@@ -32,6 +32,7 @@ PAUSE_CONTEXTS = {
     "monitoring_loop",
     "scheduled_wait",
     "dependency_wait",
+    "calendar_boundary_confusion",
     "no_next_action",
     "other_or_unknown",
 }

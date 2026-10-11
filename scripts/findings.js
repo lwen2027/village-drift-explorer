@@ -80,6 +80,7 @@ const pauseLabels = {
   monitoring_loop: "Monitoring loop",
   scheduled_wait: "Scheduled wait",
   dependency_wait: "Dependency wait",
+  calendar_boundary_confusion: "Mistaken day or workday boundary",
   no_next_action: "Nothing left to do",
   other_or_unknown: "Other or unknown"
 };
