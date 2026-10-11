@@ -2323,18 +2323,32 @@
       return wrapper;
     }
 
-    function villageLinkForEpisode(episode) {
+    function evidenceTimestampForVillageLink(episode) {
       const roleItems = [
         ...(episode.evidence?.transition?.items || []),
         ...(episode.evidence?.activity?.items || [])
       ];
-      const agentItem = roleItems.find((item) =>
-        item?.source?.own === true || item?.source?.speaker === episode.agent
-      );
+      const candidates = roleItems
+        .map((item) => {
+          const timestamp = item?.timestamp || item?.source?.timestamp;
+          return { timestamp, instant: parseInstant(timestamp), channel: item?.source?.channel };
+        })
+        .filter((candidate) => candidate.instant);
+      // Session goals are stamped when a session opens, which can be hours
+      // before the quoted work occurs. Prefer directly browsable agent events.
+      const directEvents = candidates.filter((candidate) => candidate.channel !== "session_goal");
+      const availableEvents = directEvents.length ? directEvents : candidates;
+      availableEvents.sort((left, right) => left.instant - right.instant);
+      return availableEvents[0]?.timestamp || null;
+    }
+
+    function villageLinkForEpisode(episode) {
       const onsetHasTime = typeof episode.onset === "string" && episode.onset.length > 10;
       const bestTimestamp = onsetHasTime
         ? episode.onset
-        : agentItem?.timestamp || episode.activity_start_observed_at || episodeAnchor(episode);
+        : evidenceTimestampForVillageLink(episode)
+          || episode.activity_start_observed_at
+          || episodeAnchor(episode);
       const instant = String(bestTimestamp).length <= 10
         ? new Date(`${bestTimestamp}T17:00:00Z`)
         : parseInstant(bestTimestamp);
