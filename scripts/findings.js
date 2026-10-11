@@ -9,7 +9,7 @@ const [bundleResponse, manifestResponse, annotationResponse, sourceResponse] = a
 
 if (!bundleResponse.ok || !manifestResponse.ok || !annotationResponse.ok || !sourceResponse.ok) {
   document.querySelector("#main-content").innerHTML = `
-    <div class="load-error"><strong>Review findings could not load.</strong><br>
+    <div class="load-error"><strong>Audit overview could not load.</strong><br>
     The audit bundle, review manifest, and annotation dataset must be published together.</div>`;
   throw new Error("Could not load review findings data");
 }
