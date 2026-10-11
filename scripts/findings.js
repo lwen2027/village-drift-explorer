@@ -97,6 +97,7 @@ function normalizeAnnotation(value) {
     trigger_categories: Array.isArray(value?.trigger_categories)
       ? [...new Set(value.trigger_categories.map(String))]
       : [],
+    trigger_actor: String(value?.trigger_actor || ""),
     request_relationship: String(value?.request_relationship || ""),
     pause_context: String(value?.pause_context || ""),
     recovery_mechanisms: Array.isArray(value?.recovery_mechanisms)
@@ -124,6 +125,7 @@ function mergeCommittedAndLocal(committed, local) {
     trigger_categories: cleanLocal.trigger_categories.length
       ? cleanLocal.trigger_categories
       : cleanCommitted.trigger_categories,
+    trigger_actor: cleanLocal.trigger_actor || cleanCommitted.trigger_actor,
     request_relationship: cleanLocal.request_relationship
       || cleanCommitted.request_relationship,
     pause_context: cleanLocal.pause_context || cleanCommitted.pause_context,
@@ -150,13 +152,14 @@ function annotationSemantic(annotation) {
     follow_ups: clean.follow_ups.map((item) => ({
       type: item?.type || "",
       note: String(item?.note || "")
-    }))
+    })),
+    trigger_actor: clean.trigger_actor
   });
 }
 
-function annotationFingerprint(annotation) {
+function annotationFingerprint(annotation, includeTriggerActor = true) {
   const clean = normalizeAnnotation(annotation);
-  const serialized = JSON.stringify({
+  const semantic = {
     trigger_categories: [...clean.trigger_categories].sort(),
     request_relationship: clean.request_relationship,
     recovery_mechanisms: [...clean.recovery_mechanisms].sort(),
@@ -166,7 +169,9 @@ function annotationFingerprint(annotation) {
       note: String(item?.note || "")
     })),
     pause_context: clean.pause_context
-  });
+  };
+  if (includeTriggerActor) semantic.trigger_actor = clean.trigger_actor;
+  const serialized = JSON.stringify(semantic);
   let hash = 2166136261;
   for (let index = 0; index < serialized.length; index += 1) {
     hash ^= serialized.charCodeAt(index);
@@ -206,6 +211,7 @@ allAnnotationIds.forEach((episodeId) => {
   const baselineHash = localLedger?.sync?.baseline_hashes?.[episodeId] || null;
   const exportedHash = localLedger?.sync?.last_exported_hashes?.[episodeId] || null;
   const localHash = local ? annotationFingerprint(local) : null;
+  const preActorLocalHash = local ? annotationFingerprint(local, false) : null;
   const committedHash = committed ? annotationFingerprint(committed) : null;
 
   // Mirror the review page's integration semantics so a newly published seed
@@ -221,7 +227,7 @@ allAnnotationIds.forEach((episodeId) => {
     pendingLocalIds.add(episodeId);
     return;
   }
-  if (localHash === committedHash || localHash === baselineHash) {
+  if (localHash === committedHash || localHash === baselineHash || preActorLocalHash === baselineHash) {
     mergedAnnotations.set(episodeId, normalizeAnnotation(committed));
     return;
   }
@@ -1271,6 +1277,7 @@ function primaryTriggerItem(episode) {
 }
 
 function sourceActorFor(row) {
+  if (row.annotation.trigger_actor.trim()) return row.annotation.trigger_actor.trim();
   const item = primaryTriggerItem(row.episode);
   const source = item?.source || {};
   if (source.speaker && source.speaker !== row.episode.agent) return source.speaker;
@@ -1677,6 +1684,7 @@ function renderEpisodeList() {
     row.annotation.trigger_categories.forEach((value) => {
       tags.append(tag(label("trigger", value), value === "pause"));
     });
+    if (row.annotation.trigger_actor) tags.append(tag(`Actor: ${row.annotation.trigger_actor}`));
     if (row.annotation.pause_context) tags.append(tag(label("pause", row.annotation.pause_context), true));
     if (row.annotation.request_relationship) tags.append(tag(label("request_relationship", row.annotation.request_relationship)));
     row.annotation.recovery_mechanisms.forEach((value) => tags.append(tag(label("recovery", value))));

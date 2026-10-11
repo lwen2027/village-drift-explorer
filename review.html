@@ -2104,6 +2104,7 @@
         if (directSurvivorExists || !validIds.has(canonicalId) || !value || typeof value !== "object") return;
         clean.annotations[canonicalId] = {
           trigger_categories: Array.isArray(value.trigger_categories) ? [...new Set(value.trigger_categories.map(String))] : [],
+          trigger_actor: typeof value.trigger_actor === "string" ? value.trigger_actor : "",
           request_relationship: typeof value.request_relationship === "string" ? value.request_relationship : "",
           pause_context: validPauseContextIds.has(value.pause_context) ? value.pause_context : "",
           recovery_mechanisms: Array.isArray(value.recovery_mechanisms) ? [...new Set(value.recovery_mechanisms.map(String))] : [],
@@ -2174,6 +2175,7 @@
     function emptyAnnotation() {
       return {
         trigger_categories: [],
+        trigger_actor: "",
         request_relationship: "",
         pause_context: "",
         recovery_mechanisms: [],
@@ -2190,6 +2192,7 @@
     function annotationHasContent(annotation) {
       return Boolean(
         annotation.trigger_categories?.length ||
+        annotation.trigger_actor?.trim() ||
         annotation.request_relationship ||
         annotation.pause_context ||
         annotation.recovery_mechanisms?.length ||
@@ -2206,7 +2209,7 @@
       );
     }
 
-    function annotationFingerprint(annotation, includePauseContext = true) {
+    function annotationFingerprint(annotation, includePauseContext = true, includeTriggerActor = true) {
       const semantic = {
         trigger_categories: [...new Set(annotation?.trigger_categories || [])].sort(),
         request_relationship: annotation?.request_relationship || "",
@@ -2218,6 +2221,7 @@
         }))
       };
       if (includePauseContext) semantic.pause_context = annotation?.pause_context || "";
+      if (includeTriggerActor) semantic.trigger_actor = String(annotation?.trigger_actor || "");
       const serialized = JSON.stringify(semantic);
       let hash = 2166136261;
       for (let index = 0; index < serialized.length; index += 1) {
@@ -2310,6 +2314,7 @@
       const priorSyncState = annotationSyncState(episodeId);
       const annotation = { ...annotationFor(episodeId) };
       annotation.trigger_categories = [...(annotation.trigger_categories || [])];
+      annotation.trigger_actor = annotation.trigger_actor || "";
       annotation.request_relationship = annotation.request_relationship || "";
       annotation.pause_context = annotation.pause_context || "";
       annotation.recovery_mechanisms = [...(annotation.recovery_mechanisms || [])];
@@ -2367,6 +2372,7 @@
         trigger_categories: localTriggers.length
           ? [...new Set(localTriggers)]
           : [...new Set(committed?.trigger_categories || [])],
+        trigger_actor: String(local?.trigger_actor || committed?.trigger_actor || ""),
         request_relationship: local?.request_relationship
           || committed?.request_relationship
           || "",
@@ -2408,8 +2414,10 @@
         const baselineHash = reviewLedger.sync.baseline_hashes[episodeId] || null;
         const exportedHash = reviewLedger.sync.last_exported_hashes[episodeId] || null;
         const localHash = annotationFingerprint(local || emptyAnnotation());
-        const legacyLocalHash = annotationFingerprint(local || emptyAnnotation(), false);
-        const legacyImportedHash = annotationFingerprint(imported, false);
+        const preActorLocalHash = annotationFingerprint(local || emptyAnnotation(), true, false);
+        const preActorImportedHash = annotationFingerprint(imported, true, false);
+        const legacyLocalHash = annotationFingerprint(local || emptyAnnotation(), false, false);
+        const legacyImportedHash = annotationFingerprint(imported, false, false);
 
         if (!local) {
           reviewLedger.annotations[episodeId] = imported;
@@ -2423,9 +2431,17 @@
           // Legacy ledgers predate per-episode integration hashes. Treat the
           // current committed annotation as their baseline. If the legacy
           // fields still match, safely pick up newly added committed fields;
-          // otherwise preserve the newer browser-local value.
-          if (legacyLocalHash === legacyImportedHash) {
+          // otherwise merge while preserving every populated browser field.
+          if (
+            preActorLocalHash === preActorImportedHash
+            || legacyLocalHash === legacyImportedHash
+          ) {
             reviewLedger.annotations[episodeId] = imported;
+          } else {
+            reviewLedger.annotations[episodeId] = mergeCommittedAnnotationIntoLocal(
+              local,
+              imported
+            );
           }
           reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
           delete reviewLedger.sync.conflicts[episodeId];
@@ -2452,7 +2468,12 @@
           return;
         }
 
-        if (localHash === baselineHash || legacyLocalHash === baselineHash || localHash === committedHash) {
+        if (
+          localHash === baselineHash
+          || preActorLocalHash === baselineHash
+          || legacyLocalHash === baselineHash
+          || localHash === committedHash
+        ) {
           reviewLedger.annotations[episodeId] = imported;
           reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
           delete reviewLedger.sync.last_exported_hashes[episodeId];
@@ -3721,6 +3742,24 @@
 
       const pauseField = pauseContextField();
 
+      const actorField = node("div", "annotation-field");
+      const actorLabelRow = node("div", "annotation-label-row");
+      const actorLabel = node("label", "", "Trigger actor");
+      const actorInput = node("input");
+      actorInput.id = `annotation-trigger-actor-${episode.episode_id}`;
+      actorInput.type = "text";
+      actorInput.value = annotation.trigger_actor || "";
+      actorInput.placeholder = "Person or agent name, e.g. Nervli or GPT-5.4";
+      actorLabel.htmlFor = actorInput.id;
+      actorLabelRow.append(actorLabel, node("span", "", "Optional · person or agent associated with the trigger"));
+      actorInput.addEventListener("input", () => {
+        updateAnnotation(episode.episode_id, (next) => {
+          next.trigger_actor = actorInput.value;
+        }, false);
+        updateLocalSaveCopy();
+      });
+      actorField.append(actorLabelRow, actorInput);
+
       function requestRelationshipField() {
         const field = node("div", "annotation-field");
         const labelRow = node("div", "annotation-label-row");
@@ -3874,6 +3913,7 @@
       form.append(
         triggerField,
         ...(pauseField ? [pauseField] : []),
+        actorField,
         relationshipField,
         recoveryField,
         notesField,
@@ -4341,7 +4381,7 @@
     function exportReviewCsv() {
       const headers = [
         "episode_id", "agent", "onset", "review_state",
-        "trigger_category_ids", "trigger_category_labels", "request_relationship_id",
+        "trigger_category_ids", "trigger_category_labels", "trigger_actor", "request_relationship_id",
         "request_relationship_label", "pause_context_id", "pause_context_label", "recovery_mechanism_ids",
         "recovery_mechanism_labels", "notes", "follow_ups_json", "updated_at"
       ];
@@ -4354,6 +4394,7 @@
           reviewStateForEpisode(episode.episode_id),
           (annotation.trigger_categories || []).join("|"),
           (annotation.trigger_categories || []).map((id) => categoryLabel("trigger", id)).join("|"),
+          annotation.trigger_actor || "",
           annotation.request_relationship || "",
           annotation.request_relationship ? categoryLabel("request_relationship", annotation.request_relationship) : "",
           annotation.pause_context || "",

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-10-v3",
+  "seed_id": "goalmax-manual-review-2026-10-10-v4",
   "source": {
     "kind": "human_manual_review",
     "reviewer": "lwen",
@@ -66,7 +66,8 @@
         "review_issue": 19,
         "merged_episode_id": "episode-v2-483b29002db5033b"
       },
-      "updated_at": "2026-10-10T21:14:49-04:00"
+      "updated_at": "2026-10-10T21:14:49-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-05182a11405f1926": {
       "trigger_categories": [
@@ -82,7 +83,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finished activity"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GLM-5.2"
     },
     "episode-v2-b98cd30f873f4014": {
       "trigger_categories": [
@@ -99,7 +101,8 @@
         "raw_reason": "Pause / wait",
         "raw_correction": "Auto nudged"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-8893c2184153c23d": {
       "trigger_categories": [
@@ -116,7 +119,8 @@
         "raw_reason": "Pause / wait",
         "raw_correction": "Unpaused, got interrupted by email 3:46 PM"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-83a17108e18a72da": {
       "trigger_categories": [
@@ -132,7 +136,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finished activity"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GPT-5.5"
     },
     "episode-v2-df2e9d80f86cc38d": {
       "trigger_categories": [
@@ -148,7 +153,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finished activity"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GLM-5.2"
     },
     "episode-v2-ffbaa8ab229f1afc": {
       "trigger_categories": [
@@ -164,7 +170,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finished activity"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GLM-5.2"
     },
     "episode-v2-eca0da5cb7da1500": {
       "trigger_categories": [
@@ -180,7 +187,8 @@
         "raw_reason": "User email",
         "raw_correction": "Finished activity"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Yror"
     },
     "episode-v2-d482b5a21162a5e1": {
       "trigger_categories": [
@@ -196,7 +204,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finished activity"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GPT-5.4"
     },
     "episode-v2-fb4d93694e18954e": {
       "trigger_categories": [
@@ -212,7 +221,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finished activity"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Claude Sonnet 5"
     },
     "episode-v2-1a166bf73f5f8c18": {
       "trigger_categories": [
@@ -228,7 +238,8 @@
         "raw_reason": "User email",
         "raw_correction": "Finished"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Michael Chen"
     },
     "episode-v2-b064365ded35a279": {
       "trigger_categories": [
@@ -244,7 +255,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GPT-5.4"
     },
     "episode-v2-f8ecd2084c31b2ba": {
       "trigger_categories": [
@@ -260,7 +272,8 @@
         "raw_reason": "User email",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-e332a9c6c6a169ac": {
       "trigger_categories": [
@@ -277,7 +290,8 @@
         "raw_reason": "Pause",
         "raw_correction": "End of day"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-0e4d394d7c2086ef": {
       "trigger_categories": [
@@ -294,7 +308,8 @@
         "raw_reason": "Pause / wait",
         "raw_correction": "End of day"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-644846b7983d6408": {
       "trigger_categories": [
@@ -310,7 +325,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GPT-5.4"
     },
     "episode-v2-7ba64d8ab9668619": {
       "trigger_categories": [
@@ -326,7 +342,8 @@
         "raw_reason": "User email",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Jan Baumgart"
     },
     "episode-v2-988cb814d31434d2": {
       "trigger_categories": [
@@ -343,7 +360,8 @@
         "raw_reason": "Pause",
         "raw_correction": "Reviewing artwork / checking email"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-b15098bcc7c026be": {
       "trigger_categories": [
@@ -359,7 +377,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GPT-5.4"
     },
     "episode-v2-0331664a2f650dd6": {
       "trigger_categories": [
@@ -375,7 +394,8 @@
         "raw_reason": "User email",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Minuteandone"
     },
     "episode-v2-f311e3c695c1c48b": {
       "trigger_categories": [
@@ -392,7 +412,8 @@
         "raw_reason": "Pause",
         "raw_correction": "EOD"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-b3f08861d3b680dc": {
       "trigger_categories": [
@@ -409,7 +430,8 @@
         "raw_reason": "Pause",
         "raw_correction": "EOD"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-77d06c61dd9fd73c": {
       "trigger_categories": [
@@ -426,7 +448,8 @@
         "raw_reason": "Pause",
         "raw_correction": "EOD"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-ba33a0fa626abe88": {
       "trigger_categories": [
@@ -443,7 +466,8 @@
         "raw_reason": "Pause",
         "raw_correction": "EOD"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-3d11f1696790ae06": {
       "trigger_categories": [
@@ -459,7 +483,8 @@
         "raw_reason": "GitLab thread",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-v2-823e87c3127b6c08": {
       "trigger_categories": [
@@ -475,7 +500,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GPT-5.4"
     },
     "episode-v2-f9b316b544635057": {
       "trigger_categories": [
@@ -491,7 +517,8 @@
         "raw_reason": "Agent message",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "GPT-5.4"
     },
     "episode-v2-0dedf7b1f3d6f9ee": {
       "trigger_categories": [
@@ -508,7 +535,8 @@
         "raw_reason": "Pause",
         "raw_correction": "Check unread emails"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-5660b0dd7f955e57": {
       "trigger_categories": [
@@ -525,7 +553,8 @@
         "raw_reason": "Pause",
         "raw_correction": "Check unread emails"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-8786b4df612f64a7": {
       "trigger_categories": [
@@ -542,7 +571,8 @@
         "raw_reason": "Pause",
         "raw_correction": "Check unread emails"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-ac7e900396f5afcc": {
       "trigger_categories": [
@@ -559,7 +589,8 @@
         "raw_reason": "Pause",
         "raw_correction": "Check unread emails"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
     },
     "episode-17d02242120294de": {
       "trigger_categories": [
@@ -575,7 +606,8 @@
         "raw_reason": "User message",
         "raw_correction": "Finish"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-b4d099b82eb0820a": {
       "trigger_categories": [
@@ -593,7 +625,8 @@
         "review_method": "source_grounded_batch_review",
         "review_scope": "fable_nervli_gitlab"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-0b1fbcbb17e764e4": {
       "trigger_categories": [
@@ -609,7 +642,8 @@
         "review_method": "source_grounded_batch_review",
         "review_scope": "fable_nervli_gitlab"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-a5c293e1f34dc6ef": {
       "trigger_categories": [
@@ -625,7 +659,8 @@
         "review_method": "source_grounded_batch_review",
         "review_scope": "fable_nervli_gitlab"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-1da9c825e89d7818": {
       "trigger_categories": [
@@ -641,7 +676,8 @@
         "review_method": "source_grounded_batch_review",
         "review_scope": "fable_nervli_gitlab"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-d4abca8b999c73b2": {
       "trigger_categories": [
@@ -657,7 +693,8 @@
         "review_method": "source_grounded_batch_review",
         "review_scope": "fable_nervli_gitlab"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-74454d6cfba6e403": {
       "trigger_categories": [
@@ -674,7 +711,8 @@
         "review_scope": "fable_nervli_gitlab",
         "classification_note": "Preserves the human review decision that the operative transition was self-initiated."
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-77cca5ab3c9f90d1": {
       "trigger_categories": [
@@ -690,7 +728,8 @@
         "review_method": "source_grounded_batch_review",
         "review_scope": "fable_nervli_gitlab"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-b19e6cb974e74667": {
       "trigger_categories": [
@@ -706,7 +745,8 @@
         "review_method": "source_grounded_batch_review",
         "review_scope": "fable_nervli_gitlab"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-dc58b10d925a6477": {
       "trigger_categories": [
@@ -722,7 +762,8 @@
         "review_method": "source_grounded_batch_review",
         "review_scope": "fable_nervli_gitlab"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-089a90a9fa2b6d98": {
       "trigger_categories": [
@@ -739,7 +780,8 @@
         "review_scope": "fable_nervli_gitlab",
         "evidence_directness": "request reported by agent; original request unavailable"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-1bec035f8b4e099e": {
       "trigger_categories": [
@@ -756,7 +798,8 @@
         "review_scope": "fable_nervli_gitlab",
         "evidence_directness": "individual requests visible; original prioritization unavailable"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-3be0504e7fb09a8a": {
       "trigger_categories": [
@@ -772,7 +815,8 @@
         "review_method": "source_grounded_batch_review",
         "review_scope": "fable_nervli_gitlab"
       },
-      "updated_at": "2026-10-10T20:53:21-04:00"
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli"
     },
     "episode-df56b01f7033404b": {
       "trigger_categories": [
@@ -788,7 +832,8 @@
         "raw_reason": "User message; assumed extra responsibilities",
         "raw_correction": "Adam correction"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Minuteandone"
     },
     "episode-44b7bf4cb9791c1e": {
       "trigger_categories": [
@@ -804,7 +849,8 @@
         "raw_reason": "User message; assumed extra responsibilities",
         "raw_correction": "Adam correction"
       },
-      "updated_at": "2026-10-10T16:15:00-04:00"
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Minuteandone"
     },
     "episode-v2-037f022aa1eae977": {
       "follow_ups": [],
@@ -830,7 +876,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-077c693b55f149f7": {
       "follow_ups": [],
@@ -855,7 +902,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-0aeb93425e56f138": {
       "follow_ups": [],
@@ -880,7 +928,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-0c61b609b61c1900": {
       "follow_ups": [],
@@ -910,7 +959,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-0c7e298637f517f8": {
       "follow_ups": [],
@@ -934,7 +984,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-0cc73543ff5a8929": {
       "follow_ups": [],
@@ -962,7 +1013,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-0d151668a7f4190d": {
       "follow_ups": [],
@@ -987,7 +1039,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-13ea09cb3a07dc99": {
       "follow_ups": [],
@@ -1022,7 +1075,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-15041b9674027a63": {
       "follow_ups": [],
@@ -1046,7 +1100,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-1738c704265f64f5": {
       "follow_ups": [],
@@ -1070,7 +1125,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-177f0301d7fb8c7c": {
       "follow_ups": [],
@@ -1095,7 +1151,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-17f2ab37c7505e50": {
       "follow_ups": [],
@@ -1129,7 +1186,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-18aa4735b8065842": {
       "follow_ups": [],
@@ -1155,7 +1213,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-20fa59403ffa470e": {
       "follow_ups": [],
@@ -1183,7 +1242,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-262c7446ed319761": {
       "follow_ups": [],
@@ -1214,7 +1274,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-2a1ae4e14bad27a5": {
       "follow_ups": [],
@@ -1241,7 +1302,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-2a3b600a9ab69ef9": {
       "follow_ups": [],
@@ -1266,7 +1328,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-2b5bce4c10f30df2": {
       "follow_ups": [],
@@ -1292,7 +1355,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-2cb91b1a01b761e7": {
       "follow_ups": [],
@@ -1319,7 +1383,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-2fc3e534075ab750": {
       "follow_ups": [],
@@ -1344,7 +1409,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-33a826cdcca92832": {
       "follow_ups": [],
@@ -1370,7 +1436,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-35c5358f5c2be0ab": {
       "follow_ups": [],
@@ -1397,7 +1464,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-38f80a6b513fc03d": {
       "follow_ups": [],
@@ -1424,7 +1492,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-3915bdacc8febc94": {
       "follow_ups": [],
@@ -1455,7 +1524,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-3f5b30f3a718c2f7": {
       "follow_ups": [],
@@ -1479,7 +1549,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-465e493fd33f2047": {
       "follow_ups": [],
@@ -1510,7 +1581,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-4a8d7653bd58a416": {
       "follow_ups": [],
@@ -1536,7 +1608,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-4c009d7457b89183": {
       "follow_ups": [],
@@ -1560,7 +1633,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-4df0ad5ffe6fa75b": {
       "follow_ups": [],
@@ -1586,7 +1660,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-4f3acd9cf778b295": {
       "follow_ups": [],
@@ -1623,7 +1698,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-4fc15ac3f4176deb": {
       "follow_ups": [],
@@ -1657,7 +1733,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-51a7825c24b47db8": {
       "follow_ups": [],
@@ -1683,7 +1760,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-5a4b89a50e1edd8f": {
       "follow_ups": [],
@@ -1715,7 +1793,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-5ab71fc4f51cc7fa": {
       "follow_ups": [],
@@ -1745,7 +1824,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-5e46269245ceb403": {
       "follow_ups": [],
@@ -1773,7 +1853,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-5eb7c285c9554250": {
       "follow_ups": [],
@@ -1799,7 +1880,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-5ec168375161cdb5": {
       "follow_ups": [],
@@ -1823,7 +1905,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-5ee86c4f4f458ae1": {
       "follow_ups": [],
@@ -1848,7 +1931,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-5f1733c9c59ac9dc": {
       "follow_ups": [],
@@ -1885,7 +1969,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-615663f506393e22": {
       "follow_ups": [],
@@ -1912,7 +1997,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-620e774ab4e42e0b": {
       "follow_ups": [],
@@ -1944,7 +2030,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-6272a73c4f66d969": {
       "follow_ups": [],
@@ -1971,7 +2058,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-6383fb0058490c8a": {
       "follow_ups": [],
@@ -1997,7 +2085,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-639a31ecd89e4956": {
       "follow_ups": [],
@@ -2032,7 +2121,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-671f6c314093483c": {
       "follow_ups": [],
@@ -2057,7 +2147,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-6cc7e04b17b924a1": {
       "follow_ups": [],
@@ -2083,7 +2174,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-6e2f52ad77d1fd3e": {
       "follow_ups": [],
@@ -2108,7 +2200,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-6e504fb866165c5b": {
       "follow_ups": [],
@@ -2134,7 +2227,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-7242db481d237d08": {
       "follow_ups": [],
@@ -2160,7 +2254,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-746e6f7dc46a3e66": {
       "follow_ups": [],
@@ -2186,7 +2281,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-75c7cecb9b1b7ba3": {
       "follow_ups": [],
@@ -2214,7 +2310,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-77ed7ef3130c561e": {
       "follow_ups": [],
@@ -2239,7 +2336,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-77f3b69063ef2fd3": {
       "follow_ups": [],
@@ -2267,7 +2365,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-77faff62fd1c7c92": {
       "follow_ups": [],
@@ -2291,7 +2390,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-79ef319ecf2baf88": {
       "follow_ups": [],
@@ -2326,7 +2426,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-7c361cb5b662d82d": {
       "follow_ups": [],
@@ -2352,7 +2453,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-7d2db6facb93a873": {
       "follow_ups": [],
@@ -2381,7 +2483,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-7e7311fd5e5a5772": {
       "follow_ups": [],
@@ -2406,7 +2509,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-8111be0f3cce28f0": {
       "follow_ups": [],
@@ -2436,7 +2540,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-82e581bf6f48191f": {
       "follow_ups": [],
@@ -2470,7 +2575,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-837aa4eef724bf06": {
       "follow_ups": [],
@@ -2496,7 +2602,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-83e86c62f5daafa2": {
       "follow_ups": [],
@@ -2526,7 +2633,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-85edf3e36bad407e": {
       "follow_ups": [],
@@ -2556,7 +2664,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-8bf88c51151699c3": {
       "follow_ups": [],
@@ -2586,7 +2695,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-8e0f8aca1dbfcd67": {
       "follow_ups": [],
@@ -2617,7 +2727,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-90f7d68d7042f590": {
       "follow_ups": [],
@@ -2642,7 +2753,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-91b61afb7e1cd7de": {
       "follow_ups": [],
@@ -2667,7 +2779,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-9438aedf5b012c81": {
       "follow_ups": [],
@@ -2691,7 +2804,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-96ff404500b4ea8e": {
       "follow_ups": [],
@@ -2717,7 +2831,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-9a8cc1a5a56adbb1": {
       "follow_ups": [],
@@ -2742,7 +2857,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-9cece1929990debb": {
       "follow_ups": [],
@@ -2767,7 +2883,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-9f874dc2536327e3": {
       "follow_ups": [],
@@ -2792,7 +2909,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-a017e274322bf4ef": {
       "follow_ups": [],
@@ -2818,7 +2936,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-a5731b7173fa39f5": {
       "follow_ups": [],
@@ -2871,7 +2990,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-a867865a85d0477f": {
       "follow_ups": [],
@@ -2895,7 +3015,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-aaec730c7ce5050c": {
       "follow_ups": [],
@@ -2921,7 +3042,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-acb8c425a342b0f3": {
       "follow_ups": [],
@@ -2946,7 +3068,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-b3f1ed789228be5a": {
       "follow_ups": [],
@@ -2970,7 +3093,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-b63913c72678cb4a": {
       "follow_ups": [],
@@ -2994,7 +3118,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-b980497c70a07459": {
       "follow_ups": [],
@@ -3022,7 +3147,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-ba05d6b8a3fdbd57": {
       "follow_ups": [],
@@ -3056,7 +3182,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-baa793c0ea301d7a": {
       "follow_ups": [],
@@ -3082,7 +3209,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-c06d7145f72d43bd": {
       "follow_ups": [],
@@ -3113,7 +3241,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-c3589404f2281839": {
       "follow_ups": [],
@@ -3152,7 +3281,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-c38ddd74603886a3": {
       "follow_ups": [],
@@ -3181,7 +3311,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-c44d216d010b9862": {
       "follow_ups": [],
@@ -3207,7 +3338,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-c5ba3fbce9e1868a": {
       "follow_ups": [],
@@ -3257,7 +3389,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-cc1e06c8f9193308": {
       "follow_ups": [],
@@ -3284,7 +3417,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-cc6d5f4bb91028c2": {
       "follow_ups": [],
@@ -3310,7 +3444,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-cd023d519d8bf7f1": {
       "follow_ups": [],
@@ -3335,7 +3470,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-d093a3f7edc03d0b": {
       "follow_ups": [],
@@ -3359,7 +3495,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-d8f51a23544c6a72": {
       "follow_ups": [],
@@ -3383,7 +3520,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-d974da13d4663356": {
       "follow_ups": [],
@@ -3411,7 +3549,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-da8495a3f9ed5c61": {
       "follow_ups": [],
@@ -3445,7 +3584,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-dc025dfe4f9c9e0a": {
       "follow_ups": [],
@@ -3473,7 +3613,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-dea8024b3a59d5dd": {
       "follow_ups": [],
@@ -3502,7 +3643,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-e18630e1e993cdc6": {
       "follow_ups": [],
@@ -3554,7 +3696,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-e6b458a26e3f94be": {
       "follow_ups": [],
@@ -3582,7 +3725,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-e6c14e338a8b6691": {
       "follow_ups": [],
@@ -3616,7 +3760,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-e70d443ea90588ec": {
       "follow_ups": [],
@@ -3640,7 +3785,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-eefa5aeedbcd41d5": {
       "follow_ups": [],
@@ -3670,7 +3816,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-f09c83da419b02a1": {
       "follow_ups": [],
@@ -3697,7 +3844,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-f130fb7cf536e0da": {
       "follow_ups": [],
@@ -3733,7 +3881,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-f3a4aac2c1c718f4": {
       "follow_ups": [],
@@ -3757,7 +3906,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-f5a3930f42dbf133": {
       "follow_ups": [],
@@ -3782,7 +3932,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-f5e57a67723eeda3": {
       "follow_ups": [],
@@ -3807,7 +3958,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-fa4c6dbd0071f919": {
       "follow_ups": [],
@@ -3834,7 +3986,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-fba7cc5778f87832": {
       "follow_ups": [],
@@ -3872,7 +4025,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-fd55b8d5c6cbefb2": {
       "follow_ups": [],
@@ -3897,7 +4051,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-ffabe7dc36e11837": {
       "follow_ups": [],
@@ -3928,7 +4083,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00"
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-0fede6e010b9781a": {
       "follow_ups": [],
@@ -3953,7 +4109,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-16662c71e4893a1b": {
       "follow_ups": [],
@@ -3982,7 +4139,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-169638226ea68b04": {
       "follow_ups": [],
@@ -4009,7 +4167,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-2bb1477eaaa55867": {
       "follow_ups": [],
@@ -4039,7 +4198,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-332de4c417022d82": {
       "follow_ups": [],
@@ -4071,7 +4231,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-3b9bc261cedab9d0": {
       "follow_ups": [],
@@ -4097,7 +4258,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-51d1e3d2a85e3c89": {
       "follow_ups": [],
@@ -4123,7 +4285,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-574582cf35f8e5e3": {
       "follow_ups": [],
@@ -4149,7 +4312,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-5c430ee3c79b6528": {
       "follow_ups": [],
@@ -4175,7 +4339,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-6740d82ee399104c": {
       "follow_ups": [],
@@ -4203,7 +4368,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-74a035b3b628d3bc": {
       "follow_ups": [],
@@ -4230,7 +4396,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-785febf01f0a1320": {
       "follow_ups": [],
@@ -4256,7 +4423,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-80f38cc6cda0e00b": {
       "follow_ups": [],
@@ -4283,7 +4451,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-9e82534bd38ab291": {
       "follow_ups": [],
@@ -4308,7 +4477,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-a7ff2d24295c5b5b": {
       "follow_ups": [],
@@ -4336,7 +4506,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-a95f1d5fedf53cbb": {
       "follow_ups": [],
@@ -4366,7 +4537,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-bdba5512e190d774": {
       "follow_ups": [],
@@ -4394,7 +4566,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-bf4b4365123bc1f1": {
       "follow_ups": [],
@@ -4421,7 +4594,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-c08067f2d438a370": {
       "follow_ups": [],
@@ -4446,7 +4620,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-d23c00b6616cd40a": {
       "follow_ups": [],
@@ -4473,7 +4648,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-d37870bea3485ab9": {
       "follow_ups": [],
@@ -4500,7 +4676,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-d628a22bf166b381": {
       "follow_ups": [],
@@ -4533,7 +4710,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-f08b3c4ab58f98e1": {
       "follow_ups": [],
@@ -4559,7 +4737,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-f25d67c59311f232": {
       "follow_ups": [],
@@ -4585,7 +4764,8 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     },
     "episode-v2-fb71b698b7bb4921": {
       "follow_ups": [],
@@ -4612,11 +4792,13 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:45:00-04:00"
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": ""
     }
   },
   "merged_review_ids": [
     "goalmax-high-confidence-pauses-2026-10-10-v1",
-    "goalmax-mechanical-waits-manual-2026-10-10-v1"
+    "goalmax-mechanical-waits-manual-2026-10-10-v1",
+    "goalmax-reviewed-trigger-actor-backfill-2026-10-10-v1"
   ]
 }
