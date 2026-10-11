@@ -377,6 +377,14 @@
 
     .review-state-badge.is-complete::before { background: var(--green); }
 
+    .review-state-badge.is-correction-pending {
+      border-color: rgba(163, 78, 53, .42);
+      color: var(--rust);
+      background: rgba(235, 207, 194, .46);
+    }
+
+    .review-state-badge.is-correction-pending::before { background: var(--rust); }
+
     .sync-state-badge {
       display: inline-flex;
       align-items: center;
@@ -1150,6 +1158,62 @@
 
     .review-draft-status.is-stale { color: var(--rust); }
 
+    .correction-tracking {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: rgba(255,255,255,.3);
+    }
+
+    .correction-tracking-toggle {
+      display: grid;
+      grid-template-columns: 17px minmax(0, 1fr);
+      align-items: start;
+      gap: 9px;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .correction-tracking-toggle input {
+      width: 15px;
+      height: 15px;
+      margin: 1px 0 0;
+      padding: 0;
+      accent-color: var(--rust);
+      box-shadow: none;
+    }
+
+    .correction-tracking-copy {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .correction-tracking-url[hidden] { display: none; }
+
+    .correction-tracking .correction-tracking-url {
+      width: 100%;
+      height: 36px;
+      padding: 7px 9px;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      outline: none;
+      background: rgba(255,255,255,.52);
+      color: var(--ink);
+      font: inherit;
+      font-size: 10px;
+    }
+
+    .correction-tracking .correction-tracking-url:focus {
+      border-color: var(--rust);
+      box-shadow: 0 0 0 2px rgba(163, 78, 53, .12);
+    }
+
     .review-rebase {
       min-height: 34px;
       padding: 7px 10px;
@@ -1921,7 +1985,7 @@
         <div class="review-dashboard" aria-label="Manual review progress and backups">
           <div class="review-dashboard-progress">
             <div class="review-dashboard-copy">
-              <strong id="review-progress-count">0 completed</strong>
+              <strong id="review-progress-count">0 verified</strong>
               <span id="review-saved-at">No local reviews yet</span>
               <span id="review-sync-summary">No annotations awaiting integration</span>
             </div>
@@ -1936,7 +2000,7 @@
               <option value="needs_review">Needs review</option>
               <option value="unreviewed">No annotation started</option>
               <option value="in_progress">Saved / unresolved</option>
-              <option value="completed">Completed</option>
+              <option value="completed">Verified / handled</option>
               <option value="follow_ups">Has follow-ups</option>
               <option value="needs_sync">Not yet integrated</option>
               <option value="conflicts">Integration conflicts</option>
@@ -2081,6 +2145,7 @@
           recovery: starterTaxonomies.recovery.map((item) => ({ ...item }))
         },
         annotations: {},
+        correction_requests: {},
         applied_seed_ids: [],
         sync: {
           baseline_hashes: {},
@@ -2126,6 +2191,19 @@
             })) : [],
           provenance: value.provenance && typeof value.provenance === "object" ? { ...value.provenance } : null,
           updated_at: value.updated_at || null
+        };
+      });
+      Object.entries(candidate.correction_requests || {}).forEach(([episodeId, value]) => {
+        const canonicalId = canonicalMergedEpisodeId(episodeId);
+        const directSurvivorExists = canonicalId !== episodeId
+          && Object.prototype.hasOwnProperty.call(candidate.correction_requests || {}, canonicalId);
+        if (directSurvivorExists || !validIds.has(canonicalId) || !value || typeof value !== "object") return;
+        if (value.status !== "pending") return;
+        clean.correction_requests[canonicalId] = {
+          status: "pending",
+          issue_url: typeof value.issue_url === "string" ? value.issue_url : "",
+          submitted_at: value.submitted_at || null,
+          updated_at: value.updated_at || value.submitted_at || null
         };
       });
       clean.applied_seed_ids = Array.isArray(candidate.applied_seed_ids)
@@ -2197,6 +2275,14 @@
       return reviewLedger.annotations[episodeId] || emptyAnnotation();
     }
 
+    function correctionRequestFor(episodeId) {
+      return reviewLedger.correction_requests[episodeId] || null;
+    }
+
+    function hasPendingCorrection(episodeId) {
+      return correctionRequestFor(episodeId)?.status === "pending";
+    }
+
     function annotationHasContent(annotation) {
       return Boolean(
         annotation.trigger_categories?.length ||
@@ -2233,6 +2319,10 @@
 
     function annotationIsComplete(annotation) {
       return unresolvedAnnotationFields(annotation).length === 0;
+    }
+
+    function episodeReviewIsHandled(episodeId) {
+      return hasPendingCorrection(episodeId) || annotationIsComplete(annotationFor(episodeId));
     }
 
     function annotationFingerprint(annotation, includePauseContext = true, includeTriggerActor = true) {
@@ -2311,6 +2401,7 @@
 
     function reviewStateForEpisode(episodeId) {
       const annotation = annotationFor(episodeId);
+      if (hasPendingCorrection(episodeId)) return "correction_pending";
       if (annotationIsComplete(annotation)) return "completed";
       if (annotationHasContent(annotation)) return "in_progress";
       return "unreviewed";
@@ -2320,7 +2411,8 @@
       return ({
         unreviewed: "Unreviewed",
         in_progress: "Saved · in progress",
-        completed: "Completed"
+        completed: "Completed",
+        correction_pending: "Verified · correction pending"
       })[state] || "Unreviewed";
     }
 
@@ -2365,6 +2457,19 @@
         }
       }
       return annotation;
+    }
+
+    function updateCorrectionRequest(episodeId, updater) {
+      const current = { ...(correctionRequestFor(episodeId) || {}) };
+      updater(current);
+      current.updated_at = new Date().toISOString();
+      if (current.status === "pending") {
+        reviewLedger.correction_requests[episodeId] = current;
+      } else {
+        delete reviewLedger.correction_requests[episodeId];
+      }
+      persistReviewLedger();
+      return current;
     }
 
     function categoryLabel(kind, categoryId) {
@@ -2759,10 +2864,10 @@
     function episodeMatchesReviewFilter(episodeId, filter = reviewFilter) {
       const annotation = annotationFor(episodeId);
       const state = reviewStateForEpisode(episodeId);
-      if (filter === "needs_review") return !annotationIsComplete(annotation);
+      if (filter === "needs_review") return !episodeReviewIsHandled(episodeId);
       if (filter === "unreviewed") return state === "unreviewed";
       if (filter === "in_progress") return state === "in_progress";
-      if (filter === "completed") return annotationIsComplete(annotation);
+      if (filter === "completed") return episodeReviewIsHandled(episodeId);
       if (filter === "follow_ups") return Boolean(annotation.follow_ups?.length);
       if (filter === "needs_sync") return ["pending", "modified", "exported", "conflict"].includes(annotationSyncState(episodeId));
       if (filter === "conflicts") return annotationSyncState(episodeId) === "conflict";
@@ -2825,13 +2930,16 @@
     }
 
     function updateReviewDashboard() {
-      const completed = episodes.filter((episode) => annotationIsComplete(annotationFor(episode.episode_id))).length;
+      const completed = episodes.filter((episode) => episodeReviewIsHandled(episode.episode_id)).length;
+      const pendingCorrections = episodes.filter((episode) => hasPendingCorrection(episode.episode_id)).length;
       const progress = episodes.length ? (completed / episodes.length) * 100 : 0;
       const progressCount = document.querySelector("#review-progress-count");
       const progressFill = document.querySelector("#review-overall-fill");
       const savedAt = document.querySelector("#review-saved-at");
       const syncSummary = document.querySelector("#review-sync-summary");
-      if (progressCount) progressCount.textContent = `${completed} of ${episodes.length} completed`;
+      if (progressCount) {
+        progressCount.textContent = `${completed} of ${episodes.length} verified${pendingCorrections ? ` · ${pendingCorrections} correction${pendingCorrections === 1 ? "" : "s"} pending` : ""}`;
+      }
       if (progressFill) progressFill.style.width = `${progress}%`;
       if (syncSummary) {
         const counts = episodes.reduce((result, episode) => {
@@ -3486,17 +3594,17 @@
 
     function periodReviewSummary(period) {
       const states = period.drifts.map((drift) => reviewStateForEpisode(drift.episode_id));
-      const completedCount = period.drifts.filter((drift) => annotationIsComplete(annotationFor(drift.episode_id))).length;
+      const completedCount = period.drifts.filter((drift) => episodeReviewIsHandled(drift.episode_id)).length;
       const progressCount = states.filter((state) => state === "in_progress").length;
       if (completedCount === states.length && states.length) {
-        return { state: "completed", className: "is-complete", tileClass: "review-complete", label: "Completed" };
+        return { state: "completed", className: "is-complete", tileClass: "review-complete", label: "Verified" };
       }
       if (completedCount || progressCount) {
         return {
           state: "in_progress",
           className: "is-progress",
           tileClass: "review-in-progress",
-          label: completedCount ? `${completedCount}/${states.length} completed` : "Saved · in progress"
+          label: completedCount ? `${completedCount}/${states.length} verified` : "Saved · in progress"
         };
       }
       return { state: "unreviewed", className: "", tileClass: "", label: "Unreviewed" };
@@ -3508,8 +3616,11 @@
         === "needs_manual_verification";
       const badgeClass = state === "completed"
         ? "is-complete"
+        : state === "correction_pending" ? "is-correction-pending"
         : state === "in_progress" ? "is-progress" : "";
-      const label = needsVerification
+      const label = state === "correction_pending"
+        ? compact ? "Correction pending" : "Verified · correction pending"
+        : needsVerification
         ? compact ? "Verify" : "Needs verification"
         : compact && state === "in_progress" ? "Saved" : reviewStateLabel(state);
       return node("span", `review-state-badge ${badgeClass}`.trim(), label);
@@ -3668,6 +3779,7 @@
 
     function renderHumanReview(episode) {
       const annotation = annotationFor(episode.episode_id);
+      const correctionPending = hasPendingCorrection(episode.episode_id);
       const wrapper = node("section", "panel-section human-review-section");
       wrapper.id = `human-review-${episode.episode_id}`;
 
@@ -3682,7 +3794,9 @@
         node(
           "p",
           "human-review-intro",
-          annotation.provenance?.verification_status === "needs_manual_verification"
+          correctionPending
+            ? "A submitted data-correction issue is pending for this episode, so its annotation review is considered handled. You can still add or revise research labels while the correction is open."
+          : annotation.provenance?.verification_status === "needs_manual_verification"
             ? "These are suggested labels derived from the compiled evidence packet. Check the source evidence, adjust any fields, then verify the annotation below. Changes save locally as you work."
             : "Your research labels and notes are saved locally. Integration badges compare this browser copy with the latest committed annotation dataset."
         )
@@ -3941,14 +4055,16 @@
       const completeNext = node(
         "button",
         "complete-next-button",
-        needsSourceVerification
+        correctionPending
+          ? "Open next episode →"
+        : needsSourceVerification
           ? "Verify and open next incomplete →"
           : "Complete and open next incomplete →"
       );
       completeNext.type = "button";
       const unresolvedFields = unresolvedAnnotationFields(annotation, false);
-      completeNext.disabled = unresolvedFields.length > 0;
-      if (unresolvedFields.length) {
+      completeNext.disabled = !correctionPending && unresolvedFields.length > 0;
+      if (!correctionPending && unresolvedFields.length) {
         completeNext.title = `Resolve ${unresolvedFields.join(", ")} before completing this review.`;
       }
 
@@ -3969,7 +4085,7 @@
         updateLocalSaveCopy();
       });
       completeNext.addEventListener("click", () => {
-        if (needsSourceVerification) {
+        if (!correctionPending && needsSourceVerification) {
           updateAnnotation(episode.episode_id, (next) => {
             next.provenance = {
               ...(next.provenance || {}),
@@ -4119,6 +4235,29 @@
       notesLabel.htmlFor = notes.id;
       notesField.append(notesLabel, notes);
 
+      const correctionTracking = node("div", "correction-tracking");
+      const correctionToggle = node("label", "correction-tracking-toggle");
+      const issueSubmitted = node("input");
+      issueSubmitted.type = "checkbox";
+      issueSubmitted.checked = hasPendingCorrection(episode.episode_id);
+      correctionToggle.append(
+        issueSubmitted,
+        node("span", "", "GitHub issue submitted — treat this episode as verified")
+      );
+      const correctionTrackingCopy = node(
+        "span",
+        "correction-tracking-copy",
+        issueSubmitted.checked
+          ? "The episode is removed from Needs review while its data correction is pending. This does not mean the correction has been applied to the dataset."
+          : "Check this only after submitting the issue on GitHub. Opening the issue composer alone does not mark the episode verified."
+      );
+      const issueUrl = node("input", "correction-tracking-url");
+      issueUrl.type = "url";
+      issueUrl.placeholder = "GitHub issue URL (optional)";
+      issueUrl.value = correctionRequestFor(episode.episode_id)?.issue_url || "";
+      issueUrl.hidden = !issueSubmitted.checked;
+      correctionTracking.append(correctionToggle, correctionTrackingCopy, issueUrl);
+
       const actions = node("div", "review-actions");
       const draftHasContent = Boolean(draft.notes?.trim() || restoredTargetIds.size);
       let draftStale = Boolean(
@@ -4206,6 +4345,26 @@
         });
       });
 
+      issueSubmitted.addEventListener("change", () => {
+        updateCorrectionRequest(episode.episode_id, (request) => {
+          request.status = issueSubmitted.checked ? "pending" : null;
+          request.issue_url = issueUrl.value.trim();
+          if (issueSubmitted.checked && !request.submitted_at) {
+            request.submitted_at = new Date().toISOString();
+          }
+        });
+        applyReviewFilter(reviewFilter, episode.episode_id);
+      });
+
+      issueUrl.addEventListener("change", () => {
+        if (!issueSubmitted.checked) return;
+        updateCorrectionRequest(episode.episode_id, (request) => {
+          request.status = "pending";
+          request.issue_url = issueUrl.value.trim();
+          request.submitted_at ||= new Date().toISOString();
+        });
+      });
+
       form.addEventListener("submit", (event) => {
         event.preventDefault();
         updateReviewState();
@@ -4220,9 +4379,10 @@
         issueUrl.searchParams.set("body", body);
         issueUrl.searchParams.set("labels", "episode-review");
         window.open(issueUrl, "_blank", "noopener,noreferrer");
+        draftStatus.textContent = "GitHub opened · after submitting, mark the issue as submitted above";
       });
 
-      form.append(categoryField, mergeField, notesField, actions);
+      form.append(categoryField, mergeField, notesField, correctionTracking, actions);
       wrapper.append(form);
       updateDraftStatus();
       updateReviewState();
@@ -4368,9 +4528,9 @@
         ...orderedIds.slice(currentIndex + 1),
         ...orderedIds.slice(0, Math.max(0, currentIndex))
       ];
-      const nextId = searchOrder.find((episodeId) => !annotationIsComplete(annotationFor(episodeId)));
+      const nextId = searchOrder.find((episodeId) => !episodeReviewIsHandled(episodeId));
       if (!nextId) {
-        window.alert(`All ${episodes.length} review episodes have fully resolved annotations.`);
+        window.alert(`All ${episodes.length} review episodes are verified or have a pending correction.`);
         updateReviewDashboard();
         return;
       }
@@ -4455,6 +4615,7 @@
     function exportReviewCsv() {
       const headers = [
         "episode_id", "agent", "onset", "review_state",
+        "pending_correction", "github_issue_url",
         "trigger_category_ids", "trigger_category_labels", "trigger_actor", "request_relationship_id",
         "request_relationship_label", "pause_context_id", "pause_context_label", "recovery_mechanism_ids",
         "recovery_mechanism_labels", "notes", "follow_ups_json", "updated_at"
@@ -4466,6 +4627,8 @@
           episode.agent,
           episode.onset || episode.activity_start || "",
           reviewStateForEpisode(episode.episode_id),
+          hasPendingCorrection(episode.episode_id) ? "true" : "false",
+          correctionRequestFor(episode.episode_id)?.issue_url || "",
           (annotation.trigger_categories || []).join("|"),
           (annotation.trigger_categories || []).map((id) => categoryLabel("trigger", id)).join("|"),
           annotation.trigger_actor || "",
@@ -4522,6 +4685,15 @@
           } else {
             delete reviewLedger.sync.conflicts[episodeId];
           }
+          importedCount += 1;
+        }
+      });
+      Object.entries(imported.correction_requests || {}).forEach(([episodeId, request]) => {
+        const local = reviewLedger.correction_requests[episodeId];
+        const localTime = Date.parse(local?.updated_at || "") || 0;
+        const importedTime = Date.parse(request.updated_at || "") || 0;
+        if (!local || importedTime >= localTime) {
+          reviewLedger.correction_requests[episodeId] = { ...request };
           importedCount += 1;
         }
       });
@@ -4610,7 +4782,7 @@
           throw new Error("This is not a version 1 manual-review backup.");
         }
         const importedCount = mergeImportedReviewLedger(candidate);
-        window.alert(`Imported ${importedCount} newer or previously missing episode annotations.`);
+        window.alert(`Imported ${importedCount} newer or previously missing review records.`);
       } catch (error) {
         window.alert(`Could not import this backup: ${error.message}`);
       } finally {
