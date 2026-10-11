@@ -2368,7 +2368,6 @@
 
     function syncStateLabel(state) {
       return ({
-        integrated: "Integrated",
         modified: "Modified since integration",
         pending: "Pending integration",
         exported: "Exported · awaiting integration",
@@ -2378,7 +2377,9 @@
 
     function syncStateBadge(episodeId, compact = false) {
       const state = annotationSyncState(episodeId);
-      if (state === "none") return null;
+      // Matching the committed seed is the normal baseline, not an actionable
+      // review state. Only surface browser-local work that still needs action.
+      if (["none", "integrated"].includes(state)) return null;
       const label = compact && state === "modified"
           ? "Modified"
           : compact && state === "pending"
@@ -2948,13 +2949,12 @@
           return result;
         }, {});
         const pending = (counts.pending || 0) + (counts.modified || 0);
-        const parts = [
-          `${counts.integrated || 0} integrated`,
-          `${pending} awaiting integration`
-        ];
+        const parts = pending ? [`${pending} awaiting integration`] : [];
         if (counts.exported) parts.push(`${counts.exported} exported`);
         if (counts.conflict) parts.push(`${counts.conflict} conflict${counts.conflict === 1 ? "" : "s"}`);
-        syncSummary.textContent = parts.join(" · ");
+        syncSummary.textContent = parts.length
+          ? parts.join(" · ")
+          : "No browser-local changes pending";
       }
       if (savedAt) {
         if (!lastReviewSaveSucceeded) {
@@ -3638,11 +3638,6 @@
       if (exported) return {
         state: "exported",
         label: exported === states.length ? "Exported" : `${exported}/${states.length} exported`
-      };
-      const integrated = states.filter((state) => state === "integrated").length;
-      if (integrated) return {
-        state: "integrated",
-        label: integrated === states.length ? "Integrated" : `${integrated}/${states.length} integrated`
       };
       return null;
     }
