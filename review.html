@@ -1933,8 +1933,9 @@
             <label for="review-filter">Show episodes</label>
             <select id="review-filter">
               <option value="all">All review episodes</option>
-              <option value="unreviewed">Unreviewed</option>
-              <option value="in_progress">Saved / in progress</option>
+              <option value="needs_review">Needs review</option>
+              <option value="unreviewed">No annotation started</option>
+              <option value="in_progress">Saved / unresolved</option>
               <option value="completed">Completed</option>
               <option value="follow_ups">Has follow-ups</option>
               <option value="needs_sync">Not yet integrated</option>
@@ -2739,7 +2740,7 @@
 
     const initialId = canonicalEpisodeId(location.hash.slice(1));
     const requestedReviewFilter = new URLSearchParams(location.search).get("review");
-    const initialReviewFilter = ["all", "unreviewed", "in_progress", "completed", "follow_ups", "needs_sync", "conflicts"].includes(requestedReviewFilter)
+    const initialReviewFilter = ["all", "needs_review", "unreviewed", "in_progress", "completed", "follow_ups", "needs_sync", "conflicts"].includes(requestedReviewFilter)
       ? requestedReviewFilter
       : "all";
     const initiallyLinkedPeriod = allGoalPeriods.find((period) =>
@@ -2751,6 +2752,7 @@
     function episodeMatchesReviewFilter(episodeId, filter = reviewFilter) {
       const annotation = annotationFor(episodeId);
       const state = reviewStateForEpisode(episodeId);
+      if (filter === "needs_review") return !annotationIsComplete(annotation);
       if (filter === "unreviewed") return state === "unreviewed";
       if (filter === "in_progress") return state === "in_progress";
       if (filter === "completed") return annotationIsComplete(annotation);
@@ -4297,7 +4299,7 @@
     }
 
     function applyReviewFilter(filter, preferredEpisodeId = selectedEpisodeId) {
-      reviewFilter = ["all", "unreviewed", "in_progress", "completed", "follow_ups", "needs_sync", "conflicts"].includes(filter)
+      reviewFilter = ["all", "needs_review", "unreviewed", "in_progress", "completed", "follow_ups", "needs_sync", "conflicts"].includes(filter)
         ? filter
         : "all";
       reviewFilterSelect.value = reviewFilter;
