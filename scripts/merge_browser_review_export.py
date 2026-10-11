@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -27,6 +29,57 @@ PAUSE_CONTEXT_BACKFILLS = {
     # late morning until close, rather than only a final end-of-day pause.
     "episode-v2-c630e8705cb4f20e": "monitoring_loop",
 }
+PRESERVED_NOTE_MARKER = "\n\nPreserved browser review note:\n"
+
+
+def parsed_timestamp(value: object) -> datetime:
+    text = str(value or "").strip()
+    if not text:
+        return datetime.min.replace(tzinfo=timezone.utc)
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(timezone.utc)
+    except ValueError:
+        return datetime.min.replace(tzinfo=timezone.utc)
+
+
+def merged_notes(committed: dict, local: dict) -> tuple[str, bool]:
+    committed_notes = str(committed.get("notes") or "").strip()
+    local_notes = str(local.get("notes") or "").strip()
+    if not local_notes or local_notes == committed_notes:
+        return committed_notes, False
+    if not committed_notes:
+        return local_notes, True
+
+    # The browser's source-audit migration writes this exact shape when it
+    # carries an older browser note across a newer canonical classification.
+    if local_notes.startswith(committed_notes + PRESERVED_NOTE_MARKER):
+        return local_notes, True
+
+    # A genuinely later browser edit owns the notes field. An older browser
+    # copy must not restore prose superseded by a newer source audit.
+    if parsed_timestamp(local.get("updated_at")) > parsed_timestamp(
+        committed.get("updated_at")
+    ):
+        return local_notes, True
+    return committed_notes, False
+
+
+def merged_follow_ups(committed: dict, local: dict) -> tuple[list[dict], bool]:
+    merged: list[dict] = []
+    seen: set[tuple[str, str]] = set()
+    for item in [
+        *(committed.get("follow_ups") or []),
+        *(local.get("follow_ups") or []),
+    ]:
+        key = (str(item.get("type") or ""), str(item.get("note") or "").strip())
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append(dict(item))
+    return merged, merged != (committed.get("follow_ups") or [])
 
 
 def merge_taxonomies(seed: dict, exported: dict) -> None:
@@ -42,7 +95,28 @@ def merge_taxonomies(seed: dict, exported: dict) -> None:
 
 def merged_annotation(episode_id: str, committed: dict | None, local: dict) -> dict:
     existing = committed or {}
-    merged = {**existing, **local}
+    committed_is_newer_source_audit = (
+        existing.get("provenance", {}).get("verification_status")
+        == "raw_source_verified"
+        and parsed_timestamp(existing.get("updated_at"))
+        >= parsed_timestamp(local.get("updated_at"))
+    )
+    merged = (
+        dict(existing)
+        if committed_is_newer_source_audit
+        else {**existing, **local}
+    )
+    notes, preserved_note = merged_notes(existing, local)
+    follow_ups, preserved_follow_ups = merged_follow_ups(existing, local)
+    merged["notes"] = notes
+    merged["follow_ups"] = follow_ups
+
+    if committed_is_newer_source_audit:
+        merged["provenance"] = dict(existing.get("provenance") or {})
+        if preserved_note or preserved_follow_ups:
+            merged["provenance"]["preserved_browser_review_fields"] = True
+        return merged
+
     merged["trigger_categories"] = list(dict.fromkeys(local.get("trigger_categories") or []))
     merged["trigger_actor"] = (
         str(local.get("trigger_actor") or "").strip()
@@ -57,7 +131,6 @@ def merged_annotation(episode_id: str, committed: dict | None, local: dict) -> d
     merged["recovery_mechanisms"] = list(
         dict.fromkeys(local.get("recovery_mechanisms") or [])
     )
-    merged["follow_ups"] = [dict(item) for item in local.get("follow_ups") or []]
     if not isinstance(local.get("provenance"), dict):
         merged["provenance"] = existing.get("provenance") or {
             "kind": "browser_local_review_import"
@@ -96,26 +169,38 @@ def main() -> None:
     if not exported.get("annotations"):
         raise RuntimeError("Browser export contains no annotations")
 
+    digest = hashlib.sha256(export_bytes).hexdigest()[:16]
+    import_id = f"browser-review-export-{exported['exported_at']}-{digest}"
+    merged_ids = seed.setdefault("merged_review_ids", [])
+    if import_id in merged_ids:
+        print(f"Export already merged: import_id={import_id}")
+        return
+
     merge_taxonomies(seed, exported)
     added = 0
     updated = 0
+    unchanged = 0
     for episode_id, local in exported["annotations"].items():
         committed = seed["annotations"].get(episode_id)
-        seed["annotations"][episode_id] = merged_annotation(
+        merged = merged_annotation(
             episode_id, committed, local
         )
+        seed["annotations"][episode_id] = merged
         if committed is None:
             added += 1
+        elif committed == merged:
+            unchanged += 1
         else:
             updated += 1
 
     validate_current_schema(seed["annotations"])
-    digest = hashlib.sha256(export_bytes).hexdigest()[:16]
-    import_id = f"browser-review-export-{exported['exported_at']}-{digest}"
-    merged_ids = seed.setdefault("merged_review_ids", [])
-    if import_id not in merged_ids:
-        merged_ids.append(import_id)
-    seed["seed_id"] = "goalmax-manual-review-2026-10-11-v22"
+    merged_ids.append(import_id)
+    match = re.fullmatch(r"(.*-v)(\d+)", str(seed.get("seed_id") or ""))
+    seed["seed_id"] = (
+        f"{match.group(1)}{int(match.group(2)) + 1}"
+        if match
+        else "goalmax-manual-review-2026-10-11-v1"
+    )
 
     args.annotations.write_text(
         json.dumps(seed, ensure_ascii=False, indent=2) + "\n",
@@ -123,7 +208,8 @@ def main() -> None:
     )
     print(
         f"Merged {len(exported['annotations'])} browser annotations: "
-        f"added={added}, updated={updated}, import_id={import_id}"
+        f"added={added}, updated={updated}, unchanged={unchanged}, "
+        f"import_id={import_id}"
     )
 
 
