@@ -294,9 +294,7 @@ allAnnotationIds.forEach((episodeId) => {
   const committedHash = committed ? annotationFingerprint(committed) : null;
   const sourceVerifiedUpgrade = (
     committed?.provenance?.verification_status === "raw_source_verified"
-    && !["raw_source_verified", "browser_verified"].includes(
-      local?.provenance?.verification_status
-    )
+    && local?.provenance?.verification_status !== "raw_source_verified"
     && (Date.parse(committed?.updated_at || "") || 0)
       >= (Date.parse(local?.updated_at || "") || 0)
   );

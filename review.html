@@ -2633,7 +2633,7 @@
         // browser edits made after the source audit.
         if (
           importedVerification === "raw_source_verified"
-          && !["raw_source_verified", "browser_verified"].includes(localVerification)
+          && localVerification !== "raw_source_verified"
           && importedUpdatedAt >= localUpdatedAt
         ) {
           reviewLedger.annotations[episodeId] = mergeSourceVerifiedAnnotationIntoLocal(
