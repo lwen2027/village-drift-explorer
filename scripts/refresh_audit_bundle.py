@@ -174,6 +174,17 @@ def main() -> None:
     if any(row.get("review_decision_resolved") is not True
            for row in bundle["confirmed_episodes"]):
         raise SystemExit("every exported episode must have a resolved decision")
+    if any("additional_goal_description" in row
+           for row in bundle["confirmed_episodes"]):
+        raise SystemExit(
+            "legacy additional_goal_description must not be published"
+        )
+    if any(
+        row.get("additional_goal_instructions") is not None
+        and not isinstance(row.get("additional_goal_instructions"), str)
+        for row in bundle["confirmed_episodes"]
+    ):
+        raise SystemExit("additional goal instructions must be text or null")
     if any(not row.get("agent") or not row.get("activity")
            or not row.get("assigned_goal")
            for row in bundle["confirmed_episodes"]):
