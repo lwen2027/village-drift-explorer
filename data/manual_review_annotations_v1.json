@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-10-v4",
+  "seed_id": "goalmax-manual-review-2026-10-10-v5",
   "source": {
     "kind": "human_manual_review",
     "reviewer": "lwen",
@@ -273,7 +273,7 @@
         "raw_correction": "Finish"
       },
       "updated_at": "2026-10-10T16:15:00-04:00",
-      "trigger_actor": ""
+      "trigger_actor": "rakoobraznie@gmail.com"
     },
     "episode-v2-e332a9c6c6a169ac": {
       "trigger_categories": [
@@ -4799,6 +4799,7 @@
   "merged_review_ids": [
     "goalmax-high-confidence-pauses-2026-10-10-v1",
     "goalmax-mechanical-waits-manual-2026-10-10-v1",
-    "goalmax-reviewed-trigger-actor-backfill-2026-10-10-v1"
+    "goalmax-reviewed-trigger-actor-backfill-2026-10-10-v1",
+    "goalmax-reviewed-trigger-actor-correction-2026-10-10-v1"
   ]
 }

@@ -22,6 +22,7 @@ TRIGGER_ACTORS = {
     "episode-v2-fb4d93694e18954e": "Claude Sonnet 5",
     "episode-v2-1a166bf73f5f8c18": "Michael Chen",
     "episode-v2-b064365ded35a279": "GPT-5.4",
+    "episode-v2-f8ecd2084c31b2ba": "rakoobraznie@gmail.com",
     "episode-v2-644846b7983d6408": "GPT-5.4",
     "episode-v2-7ba64d8ab9668619": "Jan Baumgart",
     "episode-v2-b15098bcc7c026be": "GPT-5.4",
@@ -57,14 +58,14 @@ def main() -> None:
     for episode_id, annotation in annotations.items():
         annotation["trigger_actor"] = TRIGGER_ACTORS.get(episode_id, "")
 
-    payload["seed_id"] = "goalmax-manual-review-2026-10-10-v4"
-    merged_review_id = "goalmax-reviewed-trigger-actor-backfill-2026-10-10-v1"
+    payload["seed_id"] = "goalmax-manual-review-2026-10-10-v5"
+    merged_review_id = "goalmax-reviewed-trigger-actor-correction-2026-10-10-v1"
     merged_review_ids = payload.setdefault("merged_review_ids", [])
     if merged_review_id not in merged_review_ids:
         merged_review_ids.append(merged_review_id)
 
     populated = sum(bool(item["trigger_actor"]) for item in annotations.values())
-    if len(annotations) != 181 or populated != 31:
+    if len(annotations) != 181 or populated != 32:
         raise RuntimeError(
             f"Unexpected reviewed annotation counts: total={len(annotations)}, actors={populated}"
         )
