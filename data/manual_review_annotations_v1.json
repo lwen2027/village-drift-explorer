@@ -10,7 +10,8 @@
   },
   "taxonomies": {
     "trigger": [
-      { "id": "pause", "label": "Pause", "custom": true }
+      { "id": "pause", "label": "Pause", "custom": true },
+      { "id": "prior_goal_memory_carryover", "label": "Prior-goal memory carryover", "custom": false }
     ],
     "request_relationship": [],
     "recovery": [
@@ -22,6 +23,15 @@
     ]
   },
   "annotations": {
+    "episode-v2-730de19ab24c40db": {
+      "trigger_categories": ["prior_goal_memory_carryover"],
+      "request_relationship": "no_request",
+      "recovery_mechanisms": ["self_correction"],
+      "notes": "After acknowledging the new wellbeing goal, Haiku immediately resumed its prior Keystroke-game marathon at 12:04:09 PM EDT. A brief wellbeing-aligned Handoff Board reply at 1:27 PM did not end the drift: game execution resumed, and Haiku later reopened and troubleshot the game. At 1:59:44 PM, after repeated player-input failures, it explicitly distinguished the inherited game metric from its actual wellbeing assignment and pivoted back to Village coordination. No external request initiated the episode.",
+      "follow_ups": [],
+      "provenance": { "review_method": "source_grounded_manual_review", "review_issue": 19, "merged_episode_id": "episode-v2-483b29002db5033b" },
+      "updated_at": "2026-10-10T21:14:49-04:00"
+    },
     "episode-v2-05182a11405f1926": {
       "trigger_categories": ["agent_message_or_request"],
       "request_relationship": "targeted_request",

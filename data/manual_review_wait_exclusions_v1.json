@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 117,
-    "goal_maximization_episodes": 597,
+    "goal_maximization_episodes": 596,
     "mechanical_repeated_wait_only": 117,
     "mechanical_single_wait_only": 12,
     "mixed_wait_and_other_evidence": 50,
-    "no_cited_wait_primitive": 418,
-    "remaining_in_default_manual_queue": 480
+    "no_cited_wait_primitive": 417,
+    "remaining_in_default_manual_queue": 479
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -143,7 +143,6 @@
     "episode-v2-e9e48cda6a2f29bb",
     "episode-v2-9961e3202ee397fe",
     "episode-v2-730de19ab24c40db",
-    "episode-v2-483b29002db5033b",
     "episode-v2-00f3576aff83d42a",
     "episode-v2-839181971dab3a43",
     "episode-v2-8c10666565957d2e",
@@ -9370,7 +9369,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-11T00:37:03.084267+00:00",
+  "generated_at": "2026-10-11T01:14:17.819855+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -11910,7 +11909,6 @@
       "episode-v2-e9e48cda6a2f29bb",
       "episode-v2-9961e3202ee397fe",
       "episode-v2-730de19ab24c40db",
-      "episode-v2-483b29002db5033b",
       "episode-v2-00f3576aff83d42a",
       "episode-v2-839181971dab3a43",
       "episode-v2-8c10666565957d2e",
@@ -12260,7 +12258,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "70010fa487a9a098f68edf2f6991424bb281cf69f81fd43e1894ea84fcb94d97"
+    "sha256": "3f601d8d237f5b4b049312c7fba92c65f5bc1af29414dfb20e5905ef05d95676"
   },
   "makes_model_calls": false,
   "rule": {
