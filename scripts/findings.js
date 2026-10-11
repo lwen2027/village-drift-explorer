@@ -268,10 +268,9 @@ const filters = {
   source: ""
 };
 
-const query = new URLSearchParams(location.search);
-Object.keys(filters).forEach((key) => {
-  filters[key] = query.get(key) || "";
-});
+// Findings always opens on the complete reviewed set. Older versions stored
+// chart clicks in the URL, which could silently reopen a pause-only view.
+if (location.search) history.replaceState(null, "", location.pathname);
 
 const selectByKey = {
   agent: document.querySelector("#agent-filter"),
@@ -326,23 +325,17 @@ fillSelect("request", uniqueValues((row) => [row.annotation.request_relationship
 fillSelect("recovery", uniqueValues((row) => row.annotation.recovery_mechanisms), "recovery", "All recovery mechanisms");
 fillSelect("source", uniqueValues((row) => [row.source]), "source", "All review sources");
 
-function rowMatches(row, omittedKey = "") {
-  return (!filters.agent || omittedKey === "agent" || row.episode.agent === filters.agent)
-    && (!filters.trigger || omittedKey === "trigger" || row.annotation.trigger_categories.includes(filters.trigger))
-    && (!filters.pause || omittedKey === "pause" || row.annotation.pause_context === filters.pause)
-    && (!filters.request || omittedKey === "request" || row.annotation.request_relationship === filters.request)
-    && (!filters.recovery || omittedKey === "recovery" || row.annotation.recovery_mechanisms.includes(filters.recovery))
-    && (!filters.source || omittedKey === "source" || row.source === filters.source);
+function rowMatches(row) {
+  return (!filters.agent || row.episode.agent === filters.agent)
+    && (!filters.trigger || row.annotation.trigger_categories.includes(filters.trigger))
+    && (!filters.pause || row.annotation.pause_context === filters.pause)
+    && (!filters.request || row.annotation.request_relationship === filters.request)
+    && (!filters.recovery || row.annotation.recovery_mechanisms.includes(filters.recovery))
+    && (!filters.source || row.source === filters.source);
 }
 
-function filteredRows(omittedKey = "") {
-  return rows.filter((row) => rowMatches(row, omittedKey));
-}
-
-function setFilter(key, value) {
-  filters[key] = filters[key] === value ? "" : value;
-  selectByKey[key].value = filters[key];
-  render();
+function filteredRows() {
+  return rows.filter(rowMatches);
 }
 
 function countValues(inputRows, accessor) {
@@ -405,19 +398,16 @@ function renderMetrics() {
     : `${committedCount} committed annotations · no browser-local changes detected`;
 }
 
-function renderBarChart({ elementId, totalId, key, labelKind, accessor, chartClass }) {
-  const input = filteredRows(key);
+function renderBarChart({ elementId, totalId, labelKind, accessor, chartClass }) {
+  const input = rows;
   const counts = countValues(input, accessor);
   const max = Math.max(1, ...counts.map(([, count]) => count));
   const element = document.querySelector(elementId);
   element.replaceChildren();
   counts.forEach(([value, count]) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "bar-row";
-    button.dataset.chart = chartClass;
-    button.title = `Filter by ${label(labelKind, value)}`;
-    button.addEventListener("click", () => setFilter(key, value));
+    const bar = document.createElement("div");
+    bar.className = "bar-row";
+    bar.dataset.chart = chartClass;
     const labelNode = document.createElement("span");
     labelNode.className = "bar-label";
     labelNode.textContent = label(labelKind, value);
@@ -430,14 +420,14 @@ function renderBarChart({ elementId, totalId, key, labelKind, accessor, chartCla
     const countNode = document.createElement("span");
     countNode.className = "bar-count";
     countNode.textContent = String(count);
-    button.append(labelNode, track, countNode);
-    element.append(button);
+    bar.append(labelNode, track, countNode);
+    element.append(bar);
   });
   document.querySelector(totalId).textContent = `${input.length} reviewed`;
 }
 
 function renderMatrix() {
-  const input = filteredRows().filter(
+  const input = rows.filter(
     (row) => row.annotation.trigger_categories.includes("pause")
       && row.annotation.pause_context
   );
@@ -470,19 +460,11 @@ function renderMatrix() {
     matrix.append(rowLabel);
     recoveries.forEach((recovery) => {
       const count = cellCounts.get(`${context}\u0000${recovery}`) || 0;
-      const cell = document.createElement("button");
-      cell.type = "button";
+      const cell = document.createElement("div");
       cell.className = `matrix-cell${count ? "" : " is-empty"}`;
       cell.style.setProperty("--heat", String(.06 + (count / max) * .66));
       cell.textContent = String(count);
       cell.title = `${label("pause", context)} × ${label("recovery", recovery)}: ${count}`;
-      cell.addEventListener("click", () => {
-        filters.pause = context;
-        filters.recovery = recovery;
-        selectByKey.pause.value = context;
-        selectByKey.recovery.value = recovery;
-        render();
-      });
       matrix.append(cell);
     });
   });
@@ -494,7 +476,7 @@ function renderAgentCoverage() {
   goalMaxEpisodes.forEach((episode) => {
     denominators.set(episode.agent, (denominators.get(episode.agent) || 0) + 1);
   });
-  const input = filteredRows("agent");
+  const input = rows;
   const numerators = new Map();
   input.forEach((row) => {
     numerators.set(row.episode.agent, (numerators.get(row.episode.agent) || 0) + 1);
@@ -509,10 +491,8 @@ function renderAgentCoverage() {
   agents.forEach((agent) => {
     const reviewed = numerators.get(agent);
     const total = denominators.get(agent);
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "agent-row";
-    button.addEventListener("click", () => setFilter("agent", agent));
+    const agentRow = document.createElement("div");
+    agentRow.className = "agent-row";
     const name = document.createElement("span");
     name.className = "agent-name";
     name.textContent = agent;
@@ -525,8 +505,8 @@ function renderAgentCoverage() {
     const count = document.createElement("span");
     count.className = "agent-count";
     count.textContent = `${reviewed} / ${total}`;
-    button.append(name, track, count);
-    chart.append(button);
+    agentRow.append(name, track, count);
+    chart.append(agentRow);
   });
   document.querySelector("#agent-total").textContent = `${agents.length} represented`;
 }
@@ -600,40 +580,31 @@ function renderEpisodeList() {
   });
 }
 
-function updateUrl() {
-  const params = new URLSearchParams();
-  Object.entries(filters).forEach(([key, value]) => {
-    if (value) params.set(key, value);
-  });
-  history.replaceState(null, "", `${location.pathname}${params.size ? `?${params}` : ""}`);
-}
-
 function render() {
   renderMetrics();
   renderBarChart({
-    elementId: "#trigger-chart", totalId: "#trigger-total", key: "trigger",
+    elementId: "#trigger-chart", totalId: "#trigger-total",
     labelKind: "trigger", accessor: (row) => row.annotation.trigger_categories,
     chartClass: "trigger"
   });
   renderBarChart({
-    elementId: "#pause-chart", totalId: "#pause-total", key: "pause",
+    elementId: "#pause-chart", totalId: "#pause-total",
     labelKind: "pause", accessor: (row) => row.annotation.pause_context ? [row.annotation.pause_context] : [],
     chartClass: "pause"
   });
   renderBarChart({
-    elementId: "#recovery-chart", totalId: "#recovery-total", key: "recovery",
+    elementId: "#recovery-chart", totalId: "#recovery-total",
     labelKind: "recovery", accessor: (row) => row.annotation.recovery_mechanisms,
     chartClass: "recovery"
   });
   renderBarChart({
-    elementId: "#request-chart", totalId: "#request-total", key: "request",
+    elementId: "#request-chart", totalId: "#request-total",
     labelKind: "request_relationship", accessor: (row) => row.annotation.request_relationship ? [row.annotation.request_relationship] : [],
     chartClass: "request"
   });
   renderMatrix();
   renderAgentCoverage();
   renderEpisodeList();
-  updateUrl();
 }
 
 document.querySelector("#clear-filters").addEventListener("click", () => {

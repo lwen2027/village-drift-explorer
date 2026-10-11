@@ -174,9 +174,8 @@
       border: 0;
       background: transparent;
       text-align: left;
-      cursor: pointer;
+      cursor: default;
     }
-    .bar-row:hover .bar-track { outline: 2px solid rgba(70, 111, 97, .2); }
     .bar-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
     .bar-track { height: 12px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
     .bar-fill { display: block; height: 100%; min-width: 3px; border-radius: inherit; background: var(--green); }
@@ -210,9 +209,8 @@
       border: 0;
       background: transparent;
       text-align: left;
-      cursor: pointer;
+      cursor: default;
     }
-    .agent-row:hover .agent-track { outline: 2px solid rgba(70, 111, 97, .2); }
     .agent-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
     .agent-track { height: 9px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
     .agent-fill { display: block; height: 100%; background: var(--gold); border-radius: inherit; }
@@ -302,7 +300,7 @@
             <p class="section-kicker">Annotation breakdown</p>
             <h2 id="breakdown-title">Patterns within reviewed episodes</h2>
           </div>
-          <p>Click a bar, heatmap cell, or agent row to filter every chart and the reviewed-episode list.</p>
+          <p>Charts always summarize every reviewed goal-maximization episode. Use the dropdowns to narrow only the episode list below.</p>
         </div>
 
         <div class="filters" id="filters" aria-label="Review findings filters">
