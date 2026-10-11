@@ -384,9 +384,6 @@ function metricCard(labelText, value, copy, fraction = null) {
 
 function renderMetrics() {
   const reviewedInQueue = rows.filter((row) => queueIds.has(row.episodeId)).length;
-  const reviewedExcluded = rows.filter((row) => excludedIds.has(row.episodeId)).length;
-  const representedAgents = new Set(rows.map((row) => row.episode.agent)).size;
-  const pauseEpisodes = rows.filter((row) => row.annotation.trigger_categories.includes("pause")).length;
   const grid = document.querySelector("#metric-grid");
   grid.replaceChildren(
     metricCard(
@@ -400,17 +397,6 @@ function renderMetrics() {
       `${reviewedInQueue} / ${queueIds.size}`,
       "Annotations completed among episodes still shown in Manual Review",
       reviewedInQueue / queueIds.size
-    ),
-    metricCard(
-      "Routine waits reviewed",
-      `${reviewedExcluded} / ${excludedIds.size}`,
-      "Mechanically excluded repeated-wait episodes with human annotation data",
-      excludedIds.size ? reviewedExcluded / excludedIds.size : 0
-    ),
-    metricCard(
-      "Reviewed composition",
-      `${pauseEpisodes} pauses`,
-      `${representedAgents} agents represented in the reviewed sample`
     )
   );
   const committedCount = [...committedAnnotations.keys()].length;

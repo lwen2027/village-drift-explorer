@@ -83,7 +83,7 @@
     h2 { margin: 4px 0 0; font: 500 clamp(26px, 3vw, 39px)/1.05 var(--serif); }
     h3 { margin: 0; font: 750 17px/1.2 var(--sans); }
     .coverage-heading p, .section-heading p { max-width: 650px; margin: 0; color: var(--muted); line-height: 1.5; }
-    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
     .metric-card {
       min-height: 142px;
       padding: 20px;
@@ -179,7 +179,7 @@
     .bar-row:hover .bar-track { outline: 2px solid rgba(70, 111, 97, .2); }
     .bar-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
     .bar-track { height: 12px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
-    .bar-fill { height: 100%; min-width: 3px; border-radius: inherit; background: var(--green); }
+    .bar-fill { display: block; height: 100%; min-width: 3px; border-radius: inherit; background: var(--green); }
     .bar-row[data-chart="pause"] .bar-fill { background: var(--rust); }
     .bar-row[data-chart="recovery"] .bar-fill { background: var(--blue); }
     .bar-count { text-align: right; font: 700 12px/1 var(--mono); }
@@ -215,7 +215,7 @@
     .agent-row:hover .agent-track { outline: 2px solid rgba(70, 111, 97, .2); }
     .agent-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
     .agent-track { height: 9px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
-    .agent-fill { height: 100%; background: var(--gold); border-radius: inherit; }
+    .agent-fill { display: block; height: 100%; background: var(--gold); border-radius: inherit; }
     .agent-count { color: var(--muted); text-align: right; font: 700 11px/1 var(--mono); }
 
     .results { margin-top: 28px; }
@@ -252,6 +252,7 @@
     }
     @media (max-width: 760px) {
       .page-shell { width: min(100% - 22px, 1500px); }
+      .metric-grid { grid-template-columns: 1fr; }
       .site-header, .coverage-heading, .section-heading { align-items: flex-start; flex-direction: column; }
       .header-note { max-width: none; }
       .chart-grid { grid-template-columns: 1fr; }
