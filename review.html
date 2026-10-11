@@ -1005,6 +1005,16 @@
       font-size: 12px;
     }
 
+    .review-precedence {
+      margin: -2px 0 2px;
+      padding: 9px 10px;
+      border-left: 3px solid var(--green);
+      background: rgba(56, 90, 76, .07);
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
     .review-field {
       display: grid;
       gap: 6px;
@@ -1137,6 +1147,22 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 9px;
     }
+
+    .review-draft-status.is-stale { color: var(--rust); }
+
+    .review-rebase {
+      min-height: 34px;
+      padding: 7px 10px;
+      border: 1px solid var(--rust);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--rust);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .review-rebase[hidden] { display: none; }
 
     .review-submit {
       min-height: 38px;
@@ -3733,6 +3759,19 @@
       };
     }
 
+    function reviewEpisodeRevision(episode) {
+      const boundarySnapshot = {
+        ...reviewEpisodeSnapshot(episode),
+        activity: episode.activity || null,
+        duration_seconds: episode.duration_seconds ?? null,
+        trigger_event_ids: (episode.evidence?.trigger?.items || []).map((item) => item.source?.event_id || null),
+        transition_event_ids: (episode.evidence?.transition?.items || []).map((item) => item.source?.event_id || null),
+        activity_event_ids: (episode.evidence?.activity?.items || []).map((item) => item.source?.event_id || null),
+        correction_reasons: (episode.manual_episode_corrections || []).map((item) => item.reason || null)
+      };
+      return `episode-v1-${stableId(JSON.stringify(boundarySnapshot))}`;
+    }
+
     function reviewIssueBody(episode, period, category, notes, mergeTargets) {
       const currentSnapshot = reviewEpisodeSnapshot(episode);
       const targetSnapshots = mergeTargets.map(reviewEpisodeSnapshot);
@@ -3743,6 +3782,7 @@
         explorer_url: explorerUrl,
         dataset_generated_at: auditBundle.metadata?.generated_at || null,
         dataset_schema_version: auditBundle.metadata?.schema_version || null,
+        current_episode_revision: reviewEpisodeRevision(episode),
         current_episode: currentSnapshot,
         merge_target_episodes: targetSnapshots
       };
@@ -3758,10 +3798,17 @@
       wrapper.id = `episode-review-${episode.episode_id}`;
       wrapper.append(node("h3", "", "Request a data correction"));
 
+      wrapper.append(node(
+        "p",
+        "review-precedence",
+        "Published source-grounded corrections take precedence over committed annotations, which take precedence over browser-local drafts. Local drafts never edit episode data directly."
+      ));
+
       const form = node("form", "episode-review-form");
       const draftKey = `village-drift-review:${episode.episode_id}`;
       let draft = {};
       try { draft = JSON.parse(localStorage.getItem(draftKey) || "{}"); } catch { draft = {}; }
+      const currentEpisodeRevision = reviewEpisodeRevision(episode);
 
       const categoryField = node("div", "review-field");
       const categoryLabel = node("label", "", "Change type");
@@ -3817,19 +3864,50 @@
       notesField.append(notesLabel, notes);
 
       const actions = node("div", "review-actions");
-      const draftStatus = node("span", "review-draft-status", draft.notes || restoredTargetIds.size ? "Draft restored" : "Draft saves locally");
+      const draftHasContent = Boolean(draft.notes?.trim() || restoredTargetIds.size);
+      let draftStale = Boolean(
+        draftHasContent && draft.episode_revision !== currentEpisodeRevision
+      );
+      const draftStatus = node("span", "review-draft-status");
+      const rebase = node("button", "review-rebase", "Review against current data");
+      rebase.type = "button";
       const submit = node("button", "review-submit", "Open GitHub issue");
       submit.type = "submit";
-      actions.append(draftStatus, submit);
+      actions.append(draftStatus, rebase, submit);
+
+      function updateDraftStatus(message = null) {
+        draftStatus.classList.toggle("is-stale", draftStale);
+        rebase.hidden = !draftStale;
+        draftStatus.textContent = message || (
+          draftStale
+            ? "Draft predates the current episode data · review before submitting"
+            : draftHasContent
+              ? "Draft restored against current data"
+              : "Draft saves locally"
+        );
+      }
 
       function saveDraft() {
         try {
           localStorage.setItem(draftKey, JSON.stringify({
             category: category.value,
             mergeTargets: selectedMergeTargets().map((target) => target.episode_id),
-            notes: notes.value
+            notes: notes.value,
+            episode_revision: draftStale
+              ? (draft.episode_revision || null)
+              : currentEpisodeRevision,
+            dataset_generated_at: auditBundle.metadata?.generated_at || null
           }));
-          draftStatus.textContent = "Draft saved";
+          draft = {
+            category: category.value,
+            mergeTargets: selectedMergeTargets().map((target) => target.episode_id),
+            notes: notes.value,
+            episode_revision: draftStale
+              ? (draft.episode_revision || null)
+              : currentEpisodeRevision,
+            dataset_generated_at: auditBundle.metadata?.generated_at || null
+          };
+          updateDraftStatus(draftStale ? null : "Draft saved against current data");
         } catch {
           draftStatus.textContent = "Local draft unavailable";
         }
@@ -3856,8 +3934,14 @@
           mergeStatus.textContent = `${targets.length} companion episode${targets.length === 1 ? "" : "s"} selected.`;
           mergeStatus.classList.remove("is-error");
         }
-        submit.disabled = !notes.value.trim() || (isMerge && !targets.length);
+        submit.disabled = draftStale || !notes.value.trim() || (isMerge && !targets.length);
       }
+
+      rebase.addEventListener("click", () => {
+        draftStale = false;
+        saveDraft();
+        updateReviewState();
+      });
 
       [category, notes, ...mergeCheckboxes].forEach((input) => {
         input.addEventListener("input", () => {
@@ -3884,6 +3968,7 @@
 
       form.append(categoryField, mergeField, notesField, actions);
       wrapper.append(form);
+      updateDraftStatus();
       updateReviewState();
       return wrapper;
     }

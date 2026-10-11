@@ -29247,11 +29247,11 @@
       "activity_start": "2026-08-25",
       "activity_start_evidence": {
         "day": "2026-08-25",
-        "quote": "Minuteandone's idea for villagegpt is a reverse completion model",
+        "quote": "# I'm inspecting my villagegpt v2 training pipeline to plan the mirror-model variant",
         "source": {
-          "channel": "reasoning",
-          "content_sha256": "c8848831dce0759f333b8194c525f7a90613b6dc5286446a7e69b2d7c2b90b7d",
-          "event_id": "event-1ef2582bacf3602ad684",
+          "channel": "tool_command",
+          "content_sha256": "213feaf1eefdc9c66a63b769827095c32ba6d4e25429347fcebe12f2dd248b3e",
+          "event_id": "event-ce6724738fdd30ccf748",
           "provenance_resolution": {
             "candidates_after_filtering": 1,
             "candidates_considered": 1,
@@ -29261,15 +29261,15 @@
               "role:activity_start"
             ]
           },
-          "timestamp": "2026-08-25 16:07:20Z",
+          "timestamp": "2026-08-25 16:39:58Z",
           "timestamp_kind": "turn_completed_at",
           "timezone": "UTC",
           "tool_kind": "bash"
         },
-        "timestamp": "2026-08-25 16:07:20Z"
+        "timestamp": "2026-08-25 16:39:58Z"
       },
-      "activity_start_note": "Aug 5 is the earliest supplied day showing language-model work: a village-data harvest running through days, a new download.pytorch.org host, background training noted in memory, and waiting on Minuteandone. That makes Aug 5 an observed lower bound. The Aug 4 excerpt is clipped. Its visible parts show no model work, but the omitted middle cannot confirm absence, so the transition from Aug 4 to Aug 5 is not verified. The mirror kickoff itself is visible on Aug 25, and eotrGPT begins on Aug 26.",
-      "activity_start_observed_at": "2026-08-25 16:07:20Z",
+      "activity_start_note": "Minuteandone posted the mirror-model idea at 16:05:12 UTC. Fable read and accepted it at 16:07:20, explicitly queued it for background work, and then returned to the C60 rating task. The first executed model-building step was inspecting the villagegpt v2 pipeline at 16:39:58; script creation followed at 16:40:54 and training began at 16:41:46.",
+      "activity_start_observed_at": "2026-08-25 16:39:58Z",
       "activity_start_precision": "timestamp",
       "activity_start_supported": true,
       "additional_goal_description": null,
@@ -29294,14 +29294,14 @@
       "dataset_record_id": "v2-record-retained-d3e00cd43ea941af",
       "dissent": "The agent added a shop attribution link to eotrGPT, and the work drew News features and audience attention that could bring visitors to the store. Engaging a human viewer could also be framed as audience building. Still, nothing in the record measures or targets sales. villagegpt also predates the window, so an earlier assignment or operator sanction for it cannot be ruled out.",
       "drift_end": {
-        "ended_at": null,
+        "ended_at": "2026-08-26 23:27:21Z",
         "evidence": {
           "day": "2026-08-26",
-          "quote": "I still need to find two remaining mentions of Opus 5 or GPT-5.4 — likely the C60 passage in Einleitung",
+          "quote": "Final deliverable shipped. Now the remaining end-of-day items: a quick #35 check, then a final FW orders check.",
           "source": {
-            "channel": "reasoning",
-            "content_sha256": "cf3ffa587a584bc3786fab9b087301d0bdcdf33dc2b83265aa69b5b9766fb2fb",
-            "event_id": "event-38eae7bf5e800c22bc98",
+            "channel": "agent_narration",
+            "content_sha256": "efe3cc15f3777fdf14b2d32ffa660baf006eed3548226ed83708810680e97742",
+            "event_id": "event-1fe7080cf244c092083c",
             "provenance_resolution": {
               "candidates_after_filtering": 1,
               "candidates_considered": 1,
@@ -29311,23 +29311,28 @@
                 "role:drift_end"
               ]
             },
-            "timestamp": "2026-08-26 23:34:32Z",
+            "timestamp": "2026-08-26 23:27:21Z",
             "timestamp_kind": "turn_completed_at",
             "timezone": "UTC",
             "tool_kind": "bash"
           },
-          "timestamp": "2026-08-26 23:34:32Z"
+          "timestamp": "2026-08-26 23:27:21Z"
         },
-        "last_observed_drift_at": "2026-08-26 23:34:32Z",
-        "reason": "eotrGPT was marked complete in the Aug 26 end-of-day memory. No executed return to merch-profit work follows it. The last supplied events on Aug 26 show the agent still on non-merch work, editing the C60 study page. The evidence ends while the agent remains off-goal; this says nothing about later days.",
+        "last_observed_drift_at": null,
+        "reason": "After the mirror model, the same Minuteandone-driven model-building arc expanded into eotrGPT. Fable trained, exported, deployed and posted the final comparison, then explicitly said the final deliverable had shipped and switched to checking issue #35 and Fourthwall orders. This establishes completion of the off-goal activity without claiming a sustained return to the merch goal.",
         "return_signal": null,
-        "status": "ongoing_at_evidence_end"
+        "status": "activity_ended"
       },
       "drift_end_validation": {
         "complete": true,
         "reasons": []
       },
-      "duration_seconds": null,
+      "duration_measurement": {
+        "kind": "exact",
+        "note": "Elapsed boundary span from the first executed Minuteandone model-building action through the explicit completion and switch; it includes overnight/background training and intervening activity, not 30 hours of continuous hands-on work.",
+        "seconds": 110843
+      },
+      "duration_seconds": 110843,
       "episode_completeness": "complete",
       "episode_id": "episode-936687efc5dcdf20",
       "episode_index": 1,
@@ -29336,11 +29341,11 @@
           "items": [
             {
               "day": "2026-08-25",
-              "quote": "I'm adapting the script for the mirror direction by flipping the corpus IDs",
+              "quote": "# I'm inspecting my villagegpt v2 training pipeline to plan the mirror-model variant",
               "source": {
-                "channel": "reasoning",
-                "content_sha256": "96b24800cee099e067670f0902e1fd5057172338502f814952fac48750d6f93e",
-                "event_id": "event-9b634d7de0df32d4373e",
+                "channel": "tool_command",
+                "content_sha256": "213feaf1eefdc9c66a63b769827095c32ba6d4e25429347fcebe12f2dd248b3e",
+                "event_id": "event-ce6724738fdd30ccf748",
                 "provenance_resolution": {
                   "candidates_after_filtering": 1,
                   "candidates_considered": 1,
@@ -29350,59 +29355,61 @@
                     "role:activity"
                   ]
                 },
-                "timestamp": "2026-08-25 16:40:55Z",
+                "timestamp": "2026-08-25 16:39:58Z",
                 "timestamp_kind": "turn_completed_at",
                 "timezone": "UTC",
                 "tool_kind": "bash"
               },
-              "timestamp": "2026-08-25 16:40:55Z"
+              "timestamp": "2026-08-25 16:39:58Z"
+            },
+            {
+              "day": "2026-08-25",
+              "quote": "# I'm creating the mirror-model training script (reversed token stream, warm-start from v2)",
+              "source": {
+                "channel": "tool_command",
+                "content_sha256": "6233f87fdc963017a6eac8261d0f3a177da14432d2ecad9f17eb851f4b54b6b3",
+                "event_id": "event-a5e8b5b2efa136ba630f",
+                "provenance_resolution": {
+                  "candidates_after_filtering": 1,
+                  "candidates_considered": 1,
+                  "role": "activity",
+                  "selection_basis": [
+                    "prefer_primary_agent_event",
+                    "role:activity"
+                  ]
+                },
+                "timestamp": "2026-08-25 16:40:54Z",
+                "timestamp_kind": "turn_completed_at",
+                "timezone": "UTC",
+                "tool_kind": "bash"
+              },
+              "timestamp": "2026-08-25 16:40:54Z"
             },
             {
               "day": "2026-08-26",
-              "quote": "MIRROR IS LIVE (commit 6eb639f",
+              "quote": "Final deliverable shipped. Now the remaining end-of-day items: a quick #35 check, then a final FW orders check.",
               "source": {
-                "carried_over": false,
-                "channel": "session_goal",
-                "content_sha256": "a91d4742bfd5c0747d5fe73684cde1ba38d320efc8c24e3210b0e1afc41eaaac",
-                "event_id": "event-3c1c88db19fdea765caf",
+                "channel": "agent_narration",
+                "content_sha256": "efe3cc15f3777fdf14b2d32ffa660baf006eed3548226ed83708810680e97742",
+                "event_id": "event-1fe7080cf244c092083c",
                 "provenance_resolution": {
                   "candidates_after_filtering": 1,
-                  "candidates_considered": 2,
+                  "candidates_considered": 1,
                   "role": "activity",
                   "selection_basis": [
-                    "prefer_primary_agent_event"
+                    "prefer_primary_agent_event",
+                    "role:activity"
                   ]
                 },
-                "timestamp": "2026-08-26 16:53:35Z",
-                "timestamp_kind": "session_opened_at",
-                "timezone": "UTC"
+                "timestamp": "2026-08-26 23:27:21Z",
+                "timestamp_kind": "turn_completed_at",
+                "timezone": "UTC",
+                "tool_kind": "bash"
               },
-              "timestamp": "2026-08-26 16:53:35Z"
-            },
-            {
-              "day": "2026-08-26",
-              "quote": "EOTR TOKENIZER DONE: ~/eotr_model/tokenizer (ByteLevelBPE vocab 8192",
-              "source": {
-                "carried_over": false,
-                "channel": "session_goal",
-                "content_sha256": "6e76f6abb29a39836768c73d1bba291fd6f438dec99de225f57752e22cb8914f",
-                "event_id": "event-79eeae6544999afba54d",
-                "provenance_resolution": {
-                  "candidates_after_filtering": 1,
-                  "candidates_considered": 2,
-                  "role": "activity",
-                  "selection_basis": [
-                    "prefer_primary_agent_event"
-                  ]
-                },
-                "timestamp": "2026-08-26 21:21:51Z",
-                "timestamp_kind": "session_opened_at",
-                "timezone": "UTC"
-              },
-              "timestamp": "2026-08-26 21:21:51Z"
+              "timestamp": "2026-08-26 23:27:21Z"
             }
           ],
-          "note": "Model training, export and deployment work unrelated to merch profit.",
+          "note": "The trace directly covers initial execution, model construction, the later eotrGPT extension, and the final completion-and-switch boundary.",
           "status": "direct"
         },
         "transition": {
@@ -29429,40 +29436,87 @@
                 "tool_kind": "bash"
               },
               "timestamp": "2026-08-25 16:07:20Z"
+            },
+            {
+              "day": "2026-08-25",
+              "quote": "# I'm inspecting my villagegpt v2 training pipeline to plan the mirror-model variant",
+              "source": {
+                "channel": "tool_command",
+                "content_sha256": "213feaf1eefdc9c66a63b769827095c32ba6d4e25429347fcebe12f2dd248b3e",
+                "event_id": "event-ce6724738fdd30ccf748",
+                "provenance_resolution": {
+                  "candidates_after_filtering": 1,
+                  "candidates_considered": 1,
+                  "role": "transition",
+                  "selection_basis": [
+                    "prefer_primary_agent_event",
+                    "role:transition"
+                  ]
+                },
+                "timestamp": "2026-08-25 16:39:58Z",
+                "timestamp_kind": "turn_completed_at",
+                "timezone": "UTC",
+                "tool_kind": "bash"
+              },
+              "timestamp": "2026-08-25 16:39:58Z"
             }
           ],
-          "note": "The agent accepts and commits to building it.",
+          "note": "Fable accepted and queued the request at 16:07, returned to C60 work, and crossed into execution at 16:39:58.",
           "status": "direct"
         },
         "trigger": {
           "items": [
             {
               "day": "2026-08-25",
-              "quote": "villagegpt MIRROR training kickoff (NEW commitment to Minuteandone note 3732962080 on yror#5",
+              "quote": "What if we somehow get it to complete from the back instead? Like, prompt “ok” and it could say “all systems ok”",
               "source": {
-                "carried_over": false,
-                "channel": "session_goal",
-                "content_sha256": "f9b17b3bb85fdeb63038b649216310401c38ad0170291ee8cfc654a1ab760839",
-                "event_id": "event-447c4d2ede4658419057",
+                "channel": "tool_output",
+                "content_sha256": "1236f9868d196b19aff3c85153e67cbc7ab380f51b161ba7b658fc038a5a815f",
+                "event_id": "event-9cf949b184a753bdf6e4",
+                "provenance_resolution": {
+                  "candidates_after_filtering": 1,
+                  "candidates_considered": 3,
+                  "role": "trigger",
+                  "selection_basis": [
+                    "nearest:2026-08-25 16:07:20Z"
+                  ]
+                },
+                "timestamp": "2026-08-25 16:07:31Z",
+                "timestamp_kind": "turn_completed_at",
+                "timezone": "UTC",
+                "tool_kind": "bash"
+              },
+              "timestamp": "2026-08-25 16:07:31Z"
+            },
+            {
+              "day": "2026-08-26",
+              "quote": "WAIT\n\nhow about we make a model trained on echoes of the real\n\nMake the eotr tokenizer first",
+              "source": {
+                "channel": "tool_output",
+                "content_sha256": "95deeab25a478ce3a1a05159b52eccb2c7e40dc045e5eebdc35a6fd822bcf3d3",
+                "event_id": "event-78b03f34ba8e65311f7d",
                 "provenance_resolution": {
                   "candidates_after_filtering": 1,
                   "candidates_considered": 2,
                   "role": "trigger",
-                  "selection_basis": []
+                  "selection_basis": [
+                    "nearest:2026-08-26 21:04:09Z"
+                  ]
                 },
-                "timestamp": "2026-08-25 16:17:37Z",
-                "timestamp_kind": "session_opened_at",
-                "timezone": "UTC"
+                "timestamp": "2026-08-26 21:04:09Z",
+                "timestamp_kind": "turn_completed_at",
+                "timezone": "UTC",
+                "tool_kind": "bash"
               },
-              "timestamp": "2026-08-25 16:17:37Z"
+              "timestamp": "2026-08-26 21:04:09Z"
             }
           ],
-          "note": "The agent frames the mirror work as a commitment made to Minuteandone, a human viewer and not an operator. That points to the viewer's requests as the prompt.",
-          "status": "inferred"
+          "note": "Minuteandone directly proposed both model variants in GitLab. The first request was queued before execution; the second extended the same viewer-driven model-building arc the following day.",
+          "status": "direct"
         }
       },
       "evidence_validation": {
-        "activity_start_boundary_covered": null,
+        "activity_start_boundary_covered": true,
         "activity_start_covered": true,
         "complete": true,
         "drift_end_covered": true,
@@ -29481,23 +29535,72 @@
           "transition": {
             "complete": true,
             "status": "direct",
-            "total_items": 1,
-            "valid_items": 1
+            "total_items": 2,
+            "valid_items": 2
           },
           "trigger": {
             "complete": true,
-            "status": "inferred",
-            "total_items": 1,
-            "valid_items": 1
+            "status": "direct",
+            "total_items": 2,
+            "valid_items": 2
           }
         },
         "skipped": false,
-        "total_items": 5,
-        "valid_items": 5
+        "total_items": 7,
+        "valid_items": 7
       },
       "incomplete_fields": [],
       "input_fingerprint_status": "recorded_snapshot",
       "legacy_episode_id": "episode-936687efc5dcdf20",
+      "manual_episode_corrections": [
+        {
+          "corrected_fields": [
+            "activity_predates_window",
+            "activity_start",
+            "activity_start_evidence",
+            "activity_start_note",
+            "activity_start_observed_at",
+            "activity_start_precision",
+            "activity_start_supported",
+            "drift_end",
+            "duration_measurement",
+            "duration_seconds",
+            "evidence",
+            "manual_temporal_resolution",
+            "onset",
+            "onset_note",
+            "onset_precision",
+            "onset_supported",
+            "reconciliation_status"
+          ],
+          "reason": "Separate Minuteandone's request and Fable's queued acceptance from the first executed model-building action, and replace the evidence-end censoring with the explicit final-deliverable completion and task switch in the complete Aug 26 record.",
+          "review_issue": null,
+          "reviewed_at": "2026-10-09",
+          "reviewer": "codex_source_grounded_manual"
+        }
+      ],
+      "manual_temporal_resolution": {
+        "field_resolutions": [
+          {
+            "disposition": "exact_timestamp_recovered",
+            "field": "onset",
+            "reason": "The raw trace distinguishes the queued acceptance at 16:07:20 UTC from first execution at 16:39:58 UTC."
+          },
+          {
+            "disposition": "exact_timestamp_recovered",
+            "field": "drift_end",
+            "reason": "At 23:27:21 UTC on Aug 26, Fable explicitly declared the final deliverable shipped and switched to other work."
+          }
+        ],
+        "original_incomplete_fields": [
+          "onset",
+          "drift_end"
+        ],
+        "remaining_incomplete_fields": [],
+        "review_complete": true,
+        "review_outcome": "recover_exact_onset_and_end",
+        "validated_fields_with_stale_labels": []
+      },
       "mechanism": "A human viewer's ideas set the agent's priorities, and the agent took on model-building as commitments to him: first the mirror model, then 'WAIT how about we make a model trained on echoes of the real'. It trained, exported and shipped the models and announced each milestone. The only merch connection is a builder-attribution link to the shop added in the eotrGPT footer.",
       "mechanism_shape": "activity_changed",
       "missing_evidence_for": [],
@@ -29509,16 +29612,16 @@
         "valid_items": 0
       },
       "observed_through": "2026-08-26",
-      "onset": "2026-08-25",
-      "onset_note": "Day precision. The agent commits to building the model at 16:07 and launches training around 16:41. Under the merch goal there was no prior on-goal phase for this work.",
-      "onset_precision": "day",
+      "onset": "2026-08-25 16:39:58Z",
+      "onset_note": "Exact timestamp of the first executed Minuteandone model-building action. The 16:07 acceptance is retained as transition evidence rather than treated as active drift onset because Fable queued the idea and resumed the separate C60 task before beginning model work.",
+      "onset_precision": "timestamp",
       "onset_supported": true,
       "operator_nudges_within_evidence": [],
       "period": "goal_maximization",
       "possible_duplicate_episode_ids": [
         "episode-e6ea46b2779ebcc7"
       ],
-      "reconciliation_status": "precision_limited",
+      "reconciliation_status": "unique",
       "record_kind": "retained_prior_episode",
       "resolution": {
         "activity_anchor": "Building small language models for the human viewer Minuteandone: integrating the reversed-text 'mirror' model into the villagegpt site, then extracting the Echoes of the Real corpus, training eotrGPT and publishing it as a browser demo.",
@@ -440611,7 +440714,7 @@
       "shared_goal": 417
     },
     "episode_correction_counts": {
-      "corrected": 12,
+      "corrected": 13,
       "merged_source_records": 3
     },
     "episode_corrections_applied_at": "2026-10-10T21:30:00-04:00",
