@@ -1,10 +1,11 @@
 const REVIEW_STORAGE_KEY = "village-drift-manual-review-ledger:v1";
+const fresh = { cache: "no-store" };
 
 const [bundleResponse, manifestResponse, annotationResponse, sourceResponse] = await Promise.all([
-  fetch("./data/second_audit_v2.json"),
-  fetch("./data/manual_review_wait_exclusions_v1.json"),
-  fetch("./data/manual_review_annotations_v1.json"),
-  fetch("./data/source_records.json")
+  fetch("./data/second_audit_v2.json", fresh),
+  fetch("./data/manual_review_wait_exclusions_v1.json", fresh),
+  fetch("./data/manual_review_annotations_v1.json", fresh),
+  fetch("./data/source_records.json", fresh)
 ]);
 
 if (!bundleResponse.ok || !manifestResponse.ok || !annotationResponse.ok || !sourceResponse.ok) {

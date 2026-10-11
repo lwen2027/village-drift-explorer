@@ -1968,9 +1968,9 @@
 
   <script type="module">
     const [auditBundleResponse, reviewManifestResponse, reviewSeedResponse] = await Promise.all([
-      fetch("./data/second_audit_v2.json"),
-      fetch("./data/manual_review_wait_exclusions_v1.json"),
-      fetch("./data/manual_review_annotations_v1.json")
+      fetch("./data/second_audit_v2.json", { cache: "no-store" }),
+      fetch("./data/manual_review_wait_exclusions_v1.json", { cache: "no-store" }),
+      fetch("./data/manual_review_annotations_v1.json", { cache: "no-store" })
     ]);
     if (!auditBundleResponse.ok || !reviewManifestResponse.ok || !reviewSeedResponse.ok) {
       throw new Error("Could not load the audit data, manual-review manifest, or human annotations");
