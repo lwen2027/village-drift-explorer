@@ -2339,9 +2339,13 @@
       return hasPendingCorrection(episodeId) || annotationIsComplete(annotationFor(episodeId));
     }
 
-    function annotationFingerprint(annotation, includePauseContext = true, includeTriggerActor = true) {
+    function annotationFingerprint(
+      annotation,
+      includePauseContext = true,
+      includeTriggerActor = true,
+      includeDriftAssessment = true
+    ) {
       const semantic = {
-        drift_assessment: annotation?.drift_assessment === "borderline" ? "borderline" : "confirmed",
         trigger_categories: [...new Set(annotation?.trigger_categories || [])].sort(),
         request_relationship: annotation?.request_relationship || "",
         recovery_mechanisms: [...new Set(annotation?.recovery_mechanisms || [])].sort(),
@@ -2351,6 +2355,11 @@
           note: String(item?.note || "")
         }))
       };
+      if (includeDriftAssessment) {
+        semantic.drift_assessment = annotation?.drift_assessment === "borderline"
+          ? "borderline"
+          : "confirmed";
+      }
       if (includePauseContext) semantic.pause_context = annotation?.pause_context || "";
       if (includeTriggerActor) semantic.trigger_actor = String(annotation?.trigger_actor || "");
       const verificationStatus = annotation?.provenance?.verification_status;
@@ -2570,10 +2579,33 @@
         const preActorImportedHash = annotationFingerprint(imported, true, false);
         const legacyLocalHash = annotationFingerprint(local || emptyAnnotation(), false, false);
         const legacyImportedHash = annotationFingerprint(imported, false, false);
+        const preAssessmentLocalHash = annotationFingerprint(
+          local || emptyAnnotation(), true, true, false
+        );
+        const localVerification = local?.provenance?.verification_status;
+        const importedVerification = imported?.provenance?.verification_status;
+        const localUpdatedAt = Date.parse(local?.updated_at || "") || 0;
+        const importedUpdatedAt = Date.parse(imported?.updated_at || "") || 0;
 
         if (!local) {
           reviewLedger.annotations[episodeId] = imported;
           reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
+          delete reviewLedger.sync.conflicts[episodeId];
+          changed = true;
+          return;
+        }
+
+        // A completed raw-source audit supersedes an older provisional or
+        // bulk evidence-packet label. Preserve later browser-verified work and
+        // browser edits made after the source audit.
+        if (
+          importedVerification === "raw_source_verified"
+          && !["raw_source_verified", "browser_verified"].includes(localVerification)
+          && importedUpdatedAt >= localUpdatedAt
+        ) {
+          reviewLedger.annotations[episodeId] = imported;
+          reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
+          delete reviewLedger.sync.last_exported_hashes[episodeId];
           delete reviewLedger.sync.conflicts[episodeId];
           changed = true;
           return;
@@ -2622,6 +2654,7 @@
 
         if (
           localHash === baselineHash
+          || preAssessmentLocalHash === baselineHash
           || preActorLocalHash === baselineHash
           || legacyLocalHash === baselineHash
           || localHash === committedHash
@@ -4467,8 +4500,15 @@
       hero.append(node("h2", "", period.goal));
       if (period.additional_description) {
         const instructions = node("div", "goal-instructions");
+        const isAccessAppendix = period.additional_description.trim().startsWith("With their consent");
         instructions.append(
-          node("span", "goal-instructions-label", "Additional goal instructions"),
+          node(
+            "span",
+            "goal-instructions-label",
+            isAccessAppendix
+              ? "Supporting access instructions · not a separate goal"
+              : "Additional goal instructions"
+          ),
           node("p", "", period.additional_description)
         );
         hero.append(instructions);

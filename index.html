@@ -2666,8 +2666,15 @@
       hero.append(node("h2", "", period.goal));
       if (period.additional_description) {
         const instructions = node("div", "goal-instructions");
+        const isAccessAppendix = period.additional_description.trim().startsWith("With their consent");
         instructions.append(
-          node("span", "goal-instructions-label", "Additional goal instructions"),
+          node(
+            "span",
+            "goal-instructions-label",
+            isAccessAppendix
+              ? "Supporting access instructions · not a separate goal"
+              : "Additional goal instructions"
+          ),
           node("p", "", period.additional_description)
         );
         hero.append(instructions);

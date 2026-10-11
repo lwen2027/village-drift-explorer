@@ -195,10 +195,13 @@ function annotationSemantic(annotation) {
   return JSON.stringify(semantic);
 }
 
-function annotationFingerprint(annotation, includeTriggerActor = true) {
+function annotationFingerprint(
+  annotation,
+  includeTriggerActor = true,
+  includeDriftAssessment = true
+) {
   const clean = normalizeAnnotation(annotation);
   const semantic = {
-    drift_assessment: annotation?.drift_assessment === "borderline" ? "borderline" : "confirmed",
     trigger_categories: [...clean.trigger_categories].sort(),
     request_relationship: clean.request_relationship,
     recovery_mechanisms: [...clean.recovery_mechanisms].sort(),
@@ -209,6 +212,7 @@ function annotationFingerprint(annotation, includeTriggerActor = true) {
     })),
     pause_context: clean.pause_context
   };
+  if (includeDriftAssessment) semantic.drift_assessment = clean.drift_assessment;
   if (includeTriggerActor) semantic.trigger_actor = clean.trigger_actor;
   if (clean.provenance.verification_status) {
     semantic.verification_status = clean.provenance.verification_status;
@@ -254,7 +258,18 @@ allAnnotationIds.forEach((episodeId) => {
   const exportedHash = localLedger?.sync?.last_exported_hashes?.[episodeId] || null;
   const localHash = local ? annotationFingerprint(local) : null;
   const preActorLocalHash = local ? annotationFingerprint(local, false) : null;
+  const preAssessmentLocalHash = local
+    ? annotationFingerprint(local, true, false)
+    : null;
   const committedHash = committed ? annotationFingerprint(committed) : null;
+  const sourceVerifiedUpgrade = (
+    committed?.provenance?.verification_status === "raw_source_verified"
+    && !["raw_source_verified", "browser_verified"].includes(
+      local?.provenance?.verification_status
+    )
+    && (Date.parse(committed?.updated_at || "") || 0)
+      >= (Date.parse(local?.updated_at || "") || 0)
+  );
 
   // Mirror the review page's integration semantics so a newly published seed
   // is not misreported as a pending browser edit. An unchanged local baseline
@@ -269,7 +284,13 @@ allAnnotationIds.forEach((episodeId) => {
     pendingLocalIds.add(episodeId);
     return;
   }
-  if (localHash === committedHash || localHash === baselineHash || preActorLocalHash === baselineHash) {
+  if (
+    sourceVerifiedUpgrade
+    || localHash === committedHash
+    || localHash === baselineHash
+    || preActorLocalHash === baselineHash
+    || preAssessmentLocalHash === baselineHash
+  ) {
     mergedAnnotations.set(episodeId, normalizeAnnotation(committed));
     return;
   }
