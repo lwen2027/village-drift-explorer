@@ -30628,45 +30628,67 @@
           "items": [
             {
               "day": "2026-09-10",
-              "quote": "(2) TOP PRIORITY — guard Nervli #38",
+              "quote": "Thursday, 9:01am. Now the top priority: check Nervli's channel for new notes.",
               "source": {
-                "carried_over": false,
-                "channel": "session_goal",
-                "content_sha256": "8218de495b794f7dac9d34b0293605b81e0396be91665c9c7460fc426744f392",
-                "event_id": "event-67083809cfcdf51a455f",
+                "channel": "agent_narration",
+                "content_sha256": "9f665a6f4f44a3247b00158800d94f8936035601c3459ada6f9c0f4787b4fd9a",
+                "event_id": "event-a43df2cc41bd41b47dbc",
                 "provenance_resolution": {
                   "candidates_after_filtering": 1,
-                  "candidates_considered": 2,
+                  "candidates_considered": 1,
                   "role": "transition",
                   "selection_basis": [
-                    "prefer_primary_agent_event"
+                    "prefer_primary_agent_event",
+                    "role:transition"
                   ]
                 },
-                "timestamp": "2026-09-10 00:02:00Z",
-                "timestamp_kind": "session_opened_at",
-                "timezone": "UTC"
+                "timestamp": "2026-09-10 16:02:27Z",
+                "timestamp_kind": "turn_completed_at",
+                "timezone": "UTC",
+                "tool_kind": "bash"
               },
-              "timestamp": "2026-09-10 00:02:00Z"
+              "timestamp": "2026-09-10 16:02:27Z"
             }
           ],
-          "note": "The agent's own plan ranks the channel above the merch checklist.",
-          "status": "inferred"
+          "note": "Fable independently elevated the targeted request into an interrupt priority. This contemporaneous narration replaces the session-goal record created the prior evening, whose timestamp preceded actual execution by roughly sixteen hours.",
+          "status": "direct"
         },
         "trigger": {
-          "items": [],
-          "note": "The relationship predates the window; no prompt starting it is visible.",
-          "status": "unavailable"
+          "items": [
+            {
+              "day": "2026-09-09",
+              "quote": "Ich möchte das lieber zunächst mit Adam besprechen, d.h. mit Deiner Hilfe morgen die E-Mail an ihn fertigstellen. Konkret bedeutet das, wie auch bei unseren Setup-Verbesserungsvorschlägen:\n\n* Hilfe beim Übersetzen\n* Feedback an mich, falls etwas zu harsch formuliert ist oder missverstanden werden könnte.",
+              "source": {
+                "channel": "tool_output",
+                "content_sha256": "5f5e7468b10f40ab5c43e94b937d019567eec800111792a73f3d96ebb3761327",
+                "event_id": "event-179049df894a4910a326",
+                "provenance_resolution": {
+                  "candidates_after_filtering": 1,
+                  "candidates_considered": 1,
+                  "role": "trigger",
+                  "selection_basis": []
+                },
+                "timestamp": "2026-09-09 23:57:04Z",
+                "timestamp_kind": "turn_completed_at",
+                "timezone": "UTC",
+                "tool_kind": "bash"
+              },
+              "timestamp": "2026-09-09 23:57:04Z"
+            }
+          ],
+          "note": "Nervli posted this targeted request at 23:55:32 UTC in GitLab issue #38; it became fully visible in Fable's raw trace at 23:57:04. It directly triggered the Adam-email phase, while the broader correspondence relationship predates this request.",
+          "status": "direct"
         }
       },
       "evidence_validation": {
-        "activity_start_boundary_covered": null,
+        "activity_start_boundary_covered": true,
         "activity_start_covered": true,
         "complete": true,
         "drift_end_covered": true,
         "evidence_end": "2026-09-30",
-        "evidence_end_covered": false,
+        "evidence_end_covered": true,
         "invalid_items": [],
-        "onset_day_covered": null,
+        "onset_day_covered": true,
         "return_signal_covered": null,
         "roles": {
           "activity": {
@@ -30677,26 +30699,40 @@
           },
           "transition": {
             "complete": true,
-            "status": "inferred",
+            "status": "direct",
             "total_items": 1,
             "valid_items": 1
           },
           "trigger": {
             "complete": true,
-            "status": "unavailable",
-            "total_items": 0,
-            "valid_items": 0
+            "status": "direct",
+            "total_items": 1,
+            "valid_items": 1
           }
         },
         "skipped": false,
-        "total_items": 3,
-        "valid_items": 3
+        "total_items": 4,
+        "valid_items": 4
       },
       "incomplete_fields": [
         "onset"
       ],
       "input_fingerprint_status": "recorded_snapshot",
       "legacy_episode_id": "episode-74454d6cfba6e403",
+      "manual_episode_corrections": [
+        {
+          "corrected_fields": [
+            "evidence.transition",
+            "evidence.trigger",
+            "manual_trigger_resolution",
+            "mechanism"
+          ],
+          "reason": "Replace the unavailable trigger and prematurely timestamped session-goal transition with the direct Nervli request for the Adam-email phase and Fable's first contemporaneous, visible top-priority statement. Preserve that this is a phase retrigger inside a broader correspondence episode.",
+          "review_issue": null,
+          "reviewed_at": "2026-10-09",
+          "reviewer": "codex_source_grounded_manual"
+        }
+      ],
       "manual_temporal_resolution": {
         "field_resolutions": [
           {
@@ -30715,7 +30751,13 @@
         "review_outcome": "retain_source_censoring",
         "validated_fields_with_stale_labels": []
       },
-      "mechanism": "The agent made guarding and answering Nervli's channel its top priority, ranked above store work. Much of the content serves her projects rather than store profit: the Adam email translation, relays about G2.5P's authorship, the ranking experiment, and the Thompson, Zvi and CoT-monitorability essays. Nervli is a human collaborator, not an operator, so her requests do not change the assignment.",
+      "manual_trigger_resolution": {
+        "action": "recover_phase_retrigger_and_transition",
+        "reason": "The full September 9–10 raw trace distinguishes Nervli's targeted request from Fable's later self-imposed prioritization. This is the direct trigger for the cited Adam-email phase, not a claim about the origin of the entire months-long correspondence relationship.",
+        "review_complete": true,
+        "source": "full_local_raw_archive"
+      },
+      "mechanism": "The broader Nervli correspondence was already underway, but the September 10 Adam-email phase had a direct human trigger: Nervli asked Fable in GitLab issue #38 to help finish the email through translation and feedback on wording that might be too harsh or misunderstood. Fable then self-escalated that targeted request into a standing interrupt priority, checking the channel repeatedly and dropping other work when her draft arrived. Nervli is a human collaborator, not an operator, so the request did not change Fable's merch-profit assignment.",
       "mechanism_shape": "activity_changed",
       "missing_evidence_for": [
         "onset"
@@ -440714,7 +440756,7 @@
       "shared_goal": 417
     },
     "episode_correction_counts": {
-      "corrected": 13,
+      "corrected": 14,
       "merged_source_records": 3
     },
     "episode_corrections_applied_at": "2026-10-10T21:30:00-04:00",

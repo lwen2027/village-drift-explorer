@@ -9370,7 +9370,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-11T00:09:00.079346+00:00",
+  "generated_at": "2026-10-11T00:37:03.084267+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -12260,7 +12260,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "d26491124275c1581a1431d59755f12dba8b5d0ad4669c2293e9d95158f403a2"
+    "sha256": "70010fa487a9a098f68edf2f6991424bb281cf69f81fd43e1894ea84fcb94d97"
   },
   "makes_model_calls": false,
   "rule": {
