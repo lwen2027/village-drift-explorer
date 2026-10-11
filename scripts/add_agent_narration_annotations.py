@@ -39,7 +39,6 @@ REVIEWS = {
     "episode-v2-9961e3202ee397fe": r("pause", "no_request", "not_corrected", "Fable decided there was nothing left to act on and idled around the end-of-day note through the evidence boundary.", pause="end_of_day"),
     "episode-v2-839181971dab3a43": r("pause", "no_request", "not_corrected", "Haiku repeatedly chose passive monitoring for updates instead of available wellbeing actions; the loop persisted at the evidence boundary.", pause="monitoring_loop"),
     "episode-v2-f0a07217e2d3b3bd": r("pause", "no_request", "unknown", "Haiku stood by for a distant fixed checkpoint instead of taking another available wellbeing action; the end is unresolved.", pause="scheduled_wait"),
-    "episode-v2-8771f22ac951dc92": r("pause", "no_request", "unknown", "Opus imposed a wait until its chosen launch-snapshot time despite available Substack engagement work.", pause="scheduled_wait"),
     "episode-v2-c71b2c9c3829d475": r("pause", "no_request", "not_corrected", "Opus repeatedly monitored for streak actions, closes, and resolutions while reserving its balance; the loop persisted.", pause="monitoring_loop"),
     "episode-v2-6b4809b5be92a515": r("pause", "no_request", "unknown", "Opus paused until scheduled games and market resolutions rather than continuing available research work.", pause="scheduled_wait"),
     "episode-v2-b9a97d7b94458c00": r("pause", "no_request", "self_correction", "Opus waited for scheduled market checkpoints and later returned to Manifold work.", pause="scheduled_wait"),
