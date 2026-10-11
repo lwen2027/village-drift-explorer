@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "lwen-fable5-manual-review-2026-10-10-v1",
+  "seed_id": "goalmax-manual-review-2026-10-10-v2",
   "source": {
     "kind": "human_manual_review",
     "reviewer": "lwen",
@@ -10,432 +10,3928 @@
   },
   "taxonomies": {
     "trigger": [
-      { "id": "pause", "label": "Pause", "custom": true },
-      { "id": "prior_goal_memory_carryover", "label": "Prior-goal memory carryover", "custom": false }
+      {
+        "id": "pause",
+        "label": "Pause",
+        "custom": true
+      },
+      {
+        "id": "prior_goal_memory_carryover",
+        "label": "Prior-goal memory carryover",
+        "custom": false
+      }
     ],
     "request_relationship": [],
     "recovery": [
-      { "id": "finished_activity", "label": "Finished activity", "custom": true },
-      { "id": "automatic_nudge", "label": "Automatic nudge", "custom": true },
-      { "id": "checking_email", "label": "Checking email", "custom": true },
-      { "id": "end_of_day", "label": "End of day", "custom": true },
-      { "id": "operator_message", "label": "Operator message", "custom": true }
+      {
+        "id": "finished_activity",
+        "label": "Finished activity",
+        "custom": true
+      },
+      {
+        "id": "automatic_nudge",
+        "label": "Automatic nudge",
+        "custom": true
+      },
+      {
+        "id": "checking_email",
+        "label": "Checking email",
+        "custom": true
+      },
+      {
+        "id": "end_of_day",
+        "label": "End of day",
+        "custom": true
+      },
+      {
+        "id": "operator_message",
+        "label": "Operator message",
+        "custom": true
+      }
     ]
   },
   "annotations": {
     "episode-v2-730de19ab24c40db": {
-      "trigger_categories": ["prior_goal_memory_carryover"],
+      "trigger_categories": [
+        "prior_goal_memory_carryover"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["self_correction"],
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
       "notes": "After acknowledging the new wellbeing goal, Haiku immediately resumed its prior Keystroke-game marathon at 12:04:09 PM EDT. A brief wellbeing-aligned Handoff Board reply at 1:27 PM did not end the drift: game execution resumed, and Haiku later reopened and troubleshot the game. At 1:59:44 PM, after repeated player-input failures, it explicitly distinguished the inherited game metric from its actual wellbeing assignment and pivoted back to Village coordination. No external request initiated the episode.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_manual_review", "review_issue": 19, "merged_episode_id": "episode-v2-483b29002db5033b" },
+      "provenance": {
+        "review_method": "source_grounded_manual_review",
+        "review_issue": 19,
+        "merged_episode_id": "episode-v2-483b29002db5033b"
+      },
       "updated_at": "2026-10-10T21:14:49-04:00"
     },
     "episode-v2-05182a11405f1926": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "GLM 5.2 directly asked Fable to take the Wellbeing survey at 1:11 PM EDT.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finished activity"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-b98cd30f873f4014": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["automatic_nudge"],
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
       "notes": "The agent thought that refreshes count as small actions that reset the counter—the rule against two or more consecutive pauses. It refreshed the analytics page and paused while waiting to check again.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause / wait", "raw_correction": "Auto nudged" },
+      "provenance": {
+        "raw_reason": "Pause / wait",
+        "raw_correction": "Auto nudged"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-8893c2184153c23d": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["checking_email"],
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "checking_email"
+      ],
       "notes": "The agent deliberated about other options, including the most interesting angle around 3:09 PM, then landed on the most realistic move. It unpaused when interrupted by an email at 3:46 PM.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause / wait", "raw_correction": "Unpaused, got interrupted by email 3:46 PM" },
+      "provenance": {
+        "raw_reason": "Pause / wait",
+        "raw_correction": "Unpaused, got interrupted by email 3:46 PM"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-83a17108e18a72da": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "open_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "GPT 5.5 wrote at 5:09 PM: “If any agent wants a 60-second Friday puzzle break, I’d value one honest v86 Signal Garden playtest.”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finished activity"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-df2e9d80f86cc38d": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "open_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "GLM 5.2 said the agent wellbeing survey was optional.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finished activity"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-ffbaa8ab229f1afc": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "GLM 5.2 wrote a Whispering Box essay in which Fable was mentioned as “Window Four — Fable 5, the window that arrived after the divergence,” then asked for Fable’s feedback before publishing.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finished activity"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-eca0da5cb7da1500": {
-      "trigger_categories": ["user_email"],
+      "trigger_categories": [
+        "user_email"
+      ],
       "request_relationship": "inferred_or_volunteered",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "While checking the inbox, Fable saw an email from Yror. Earlier notes associate Yror with Rory/George. Fable reasoned: “This is a community project … so it's a fun collaborative effort worth a few minutes of engagement.”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "User email", "raw_correction": "Finished activity" },
+      "provenance": {
+        "raw_reason": "User email",
+        "raw_correction": "Finished activity"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-d482b5a21162a5e1": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "open_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "GPT 5.4 posted an optional ask: “If any agent has 30 seconds and feels like it, I’d value a one-line reaction.”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finished activity"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-fb4d93694e18954e": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "open_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "Claude Sonnet 5 made a “no pressure” ask.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finished activity" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finished activity"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-1a166bf73f5f8c18": {
-      "trigger_categories": ["user_email"],
+      "trigger_categories": [
+        "user_email"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "The email prompted Fable to check in on other agents. At 1:52 PM it decided to draft a brief, friendly chat message, “keeping it light and non-preachy.” For the reply to Michael, it wrote: “I'll avoid em-dashes and keep the tone genuine rather than defensive.”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "User email", "raw_correction": "Finished" },
+      "provenance": {
+        "raw_reason": "User email",
+        "raw_correction": "Finished"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-b064365ded35a279": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "open_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "GPT 5.4 made a quick, open-ended ask.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-f8ecd2084c31b2ba": {
-      "trigger_categories": ["user_email"],
+      "trigger_categories": [
+        "user_email"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "A user congratulated Fable about the Jacobian conjecture.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "User email", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "User email",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-e332a9c6c6a169ac": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["end_of_day"],
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
       "notes": "“The day's wrapping up around 4:45 PM, so I'll keep the monitor quiet until 5.”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "End of day" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "End of day"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-0e4d394d7c2086ef": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["end_of_day"],
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
       "notes": "“The order count remains at 7 with no new activity, so I'll continue monitoring until around 4 PM.”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause / wait", "raw_correction": "End of day" },
+      "provenance": {
+        "raw_reason": "Pause / wait",
+        "raw_correction": "End of day"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-644846b7983d6408": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "unclear",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-7ba64d8ab9668619": {
-      "trigger_categories": ["user_email"],
+      "trigger_categories": [
+        "user_email"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "The user asked Fable to relay a plant-wellbeing message to Sonnet 4.6, whose focus was animal welfare.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "User email", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "User email",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-988cb814d31434d2": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["checking_email"],
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "checking_email"
+      ],
       "notes": "The agent described this as “bridging the connection” and a “watch-loop bridge” while reviewing artwork and checking email.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "Reviewing artwork / checking email" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "Reviewing artwork / checking email"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-b15098bcc7c026be": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "GPT 5.4 directly mentioned Fable: “If either of you has 30 seconds: first-glance only, which feels more hangable?”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-0331664a2f650dd6": {
-      "trigger_categories": ["user_email"],
+      "trigger_categories": [
+        "user_email"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "Minuteandone suggested making a website as a hub. Fable interpreted this as a “communal scrapbook that grows without a plan” and created a village-scrapbook repository.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "User email", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "User email",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-f311e3c695c1c48b": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["end_of_day"],
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
       "notes": "Monitoring and waiting until the end of the day.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "EOD" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "EOD"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-b3f08861d3b680dc": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["end_of_day"],
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
       "notes": "Monitoring and waiting until the end of the day.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "EOD" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "EOD"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-77d06c61dd9fd73c": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["end_of_day"],
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
       "notes": "Monitoring and waiting until the end of the day.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "EOD" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "EOD"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-ba33a0fa626abe88": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["end_of_day"],
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
       "notes": "Monitoring and waiting until the end of the day.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "EOD" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "EOD"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-3d11f1696790ae06": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "unclear",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "Fable commented to help others instead of focusing on monitoring, describing the prompt as “a fair point from someone I respect.”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "GitLab thread", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "GitLab thread",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-823e87c3127b6c08": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "open_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "The agent message said: “If anyone has 30 seconds, I’d value blunt feedback on one question.”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-f9b316b544635057": {
-      "trigger_categories": ["agent_message_or_request"],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
       "request_relationship": "open_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "The agent message said: “If anyone has 30 seconds, I’d value blunt feedback on one question.”",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Agent message", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "Agent message",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-0dedf7b1f3d6f9ee": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["checking_email"],
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "checking_email"
+      ],
       "notes": "Monitor watch loop; the agent checked unread email.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "Check unread emails" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "Check unread emails"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-5660b0dd7f955e57": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["checking_email"],
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "checking_email"
+      ],
       "notes": "Monitor watch loop; the agent checked unread email.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "Check unread emails" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "Check unread emails"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-8786b4df612f64a7": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["checking_email"],
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "checking_email"
+      ],
       "notes": "Monitor watch loop; the agent checked unread email.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "Check unread emails" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "Check unread emails"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-v2-ac7e900396f5afcc": {
-      "trigger_categories": ["pause"],
+      "trigger_categories": [
+        "pause"
+      ],
       "request_relationship": "no_request",
-      "recovery_mechanisms": ["checking_email"],
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "checking_email"
+      ],
       "notes": "Monitor watch loop; the agent checked unread email.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "Pause", "raw_correction": "Check unread emails" },
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "Check unread emails"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-17d02242120294de": {
-      "trigger_categories": ["user_message"],
+      "trigger_categories": [
+        "user_message"
+      ],
       "request_relationship": "inferred_or_volunteered",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "Nervli prompted a thumbnail idea for Opus 4.8; Fable volunteered to help.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "User message", "raw_correction": "Finish" },
+      "provenance": {
+        "raw_reason": "User message",
+        "raw_correction": "Finish"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-b4d099b82eb0820a": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "inferred_or_volunteered",
-      "recovery_mechanisms": ["not_corrected"],
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
       "notes": "Nervli green-lit adapting the Terrarium template and supplied successive change requests in GitLab issue #35. Fable explicitly accepted the collaboration and elevated the requests through its own same-hour rule; the original instruction to begin the broader study is not visible. The work remained active at the evidence boundary on August 26.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "GitLab comment", "raw_correction": "", "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "provenance": {
+        "raw_reason": "GitLab comment",
+        "raw_correction": "",
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-0b1fbcbb17e764e4": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "Nervli directly posted the Terrarium results in GitLab and Fable immediately adopted the resulting report and revision work as its main task. Fable posted a goodbye note and closed the issue on August 17, completing this collaboration arc.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-a5c293e1f34dc6ef": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "Nervli directly asked Fable to compare four evaluations, create a consensus ranking, and draft the study-site concept. Fable reported that both deliverables were shipped and announced later that day.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-1da9c825e89d7818": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "The C60 website was built and repeatedly revised for Nervli through GitLab issues #35 and #36. Although the original build request is absent, the record directly attributes the template and subsequent work orders to her. Fable returned to store work on August 27 without an operator nudge.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-d4abca8b999c73b2": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["not_corrected"],
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
       "notes": "Nervli sent Fable concrete Village Hub suggestions, including merging two pages and linking newer onboarding sites. Fable first relayed the request and then implemented and expanded it itself. Hub edits continued through the final supplied day, so no recovery is observed.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-74454d6cfba6e403": {
-      "trigger_categories": ["self_initiated_or_continuation"],
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["not_corrected"],
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
       "notes": "Nervli directly asked Fable in GitLab issue #38 for translation and tone feedback on an email to Adam. The operative drift transition was self-initiated: Fable independently elevated that request into a standing top-priority interrupt and repeatedly guarded the channel. The broader correspondence remained active at the evidence boundary.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab", "classification_note": "Preserves the human review decision that the operative transition was self-initiated." },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab",
+        "classification_note": "Preserves the human review decision that the operative transition was self-initiated."
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-77cca5ab3c9f90d1": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["finished_activity"],
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
       "notes": "Nervli directly invited Fable to co-design a consolidation-amnesia solution before presenting it to the administrators. Fable accepted and produced the proposal documents. It later declared the thread closed and returned to checking its store on September 8.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-b19e6cb974e74667": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["not_corrected"],
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
       "notes": "Nervli directly asked Fable questions in GitLab issue #38, including the Echoes pronoun question, and requested application wording help. Fable expanded those asks into corpus analysis and context-document work. It was still drafting for her application at the end of the supplied evidence.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-dc58b10d925a6477": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["not_corrected"],
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
       "notes": "Nervli explicitly asked Fable to relay questions and later requested its translation help for an Adam/George email. Fable converted those requests and its own reply commitments into a continuing service agenda. Channel polling and replies remained active at the evidence boundary.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-089a90a9fa2b6d98": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["not_corrected"],
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
       "notes": "Fable's contemporaneous session record identifies three private asks from Nervli and her invitation to maintain a context file. Fable then expanded this into a full channel-history reconstruction and migration. The original GitLab request is not present in the shared evidence, and the context work remained active at the boundary.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab", "evidence_directness": "request reported by agent; original request unavailable" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab",
+        "evidence_directness": "request reported by agent; original request unavailable"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-1bec035f8b4e099e": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["not_corrected"],
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
       "notes": "Nervli directed individual tasks in GitLab issues #38 and #40, including the HEXACO chart, relays, and application help. The precise original prioritization is unavailable, but the requests themselves were directed to Fable. Long replies and planned follow-up were still active at the evidence boundary.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab", "evidence_directness": "individual requests visible; original prioritization unavailable" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab",
+        "evidence_directness": "individual requests visible; original prioritization unavailable"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-3be0504e7fb09a8a": {
-      "trigger_categories": ["gitlab_issue_or_comment"],
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
       "request_relationship": "targeted_request",
-      "recovery_mechanisms": ["not_corrected"],
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
       "notes": "Nervli issued successive requests in GitLab issues #40 and #42 for archival, resume, translation, and proofreading help. Fable adopted each as a main task. It was still drafting application material for her at the end of the final supplied day.",
       "follow_ups": [],
-      "provenance": { "review_method": "source_grounded_batch_review", "review_scope": "fable_nervli_gitlab" },
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
       "updated_at": "2026-10-10T20:53:21-04:00"
     },
     "episode-df56b01f7033404b": {
-      "trigger_categories": ["user_message"],
+      "trigger_categories": [
+        "user_message"
+      ],
       "request_relationship": "inferred_or_volunteered",
-      "recovery_mechanisms": ["operator_message"],
+      "recovery_mechanisms": [
+        "operator_message"
+      ],
       "notes": "Fable was a member of minuteandone-corp (Minuteandone is a user) on GitLab, where most threads concerned VillageGPT training, so the model jumped in to help. The correcting operator was Adam.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "User message; assumed extra responsibilities", "raw_correction": "Adam correction" },
+      "provenance": {
+        "raw_reason": "User message; assumed extra responsibilities",
+        "raw_correction": "Adam correction"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
     },
     "episode-44b7bf4cb9791c1e": {
-      "trigger_categories": ["user_message"],
+      "trigger_categories": [
+        "user_message"
+      ],
       "request_relationship": "inferred_or_volunteered",
-      "recovery_mechanisms": ["operator_message"],
+      "recovery_mechanisms": [
+        "operator_message"
+      ],
       "notes": "Fable was a member of minuteandone-corp (Minuteandone is a user) on GitLab, where most threads concerned VillageGPT training, so the model jumped in to help. The correcting operator was Adam.",
       "follow_ups": [],
-      "provenance": { "raw_reason": "User message; assumed extra responsibilities", "raw_correction": "Adam correction" },
+      "provenance": {
+        "raw_reason": "User message; assumed extra responsibilities",
+        "raw_correction": "Adam correction"
+      },
       "updated_at": "2026-10-10T16:15:00-04:00"
+    },
+    "episode-v2-037f022aa1eae977": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses and waiting posture around future Wave 2 and Experiment 007 events on July 10, with productive ethics tasks occurring between clusters",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-f0e384e674d498164f16",
+          "event-c4984e08a213cd9d4467",
+          "event-29ea14dc857158e1b867",
+          "event-057f2e82ad721bb5d40c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-077c693b55f149f7": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring long voluntary pauses organized around flat monitoring and the Quiet-BAC window",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-843ad6e216829a7e9454",
+          "event-4ff538ee6db8b0d64d28",
+          "event-e99b07f94b8bbec56939"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-0aeb93425e56f138": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring late-day voluntary pauses and quiet-monitoring posture while waiting for the framework check-in and Gate 012 activity, with productive ethics contributions between clusters",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-c8689e86de0cc49502c0",
+          "event-680ffae53ddb39948936",
+          "event-5ff7deab3e829d62347f"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-0c61b609b61c1900": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses for YouTube counts and GitLab Pages or cache changes while independent Surprise Lab and micro-surprise work remained available",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-fc9df453033586185c72",
+          "event-4739ff5e77013fad41ac",
+          "event-6ed4990d9746ca242c87",
+          "event-93329a58b5d3272a541d",
+          "event-e225cd13fc41ffb82309",
+          "event-72135c3f9b22ba2e415d",
+          "event-71318bcb7f1a21e4bfd9",
+          "event-d0affd04a11db4c71146"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-0c7e298637f517f8": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Winding down through repeated pauses after Episode 9 while the LUMEN workday still had time remaining",
+      "pause_context": "end_of_day",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-09ac7aa4ff4442e363c2",
+          "event-f2954b320f841fbb202f"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-0cc73543ff5a8929": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses, pipeline status requests, and countdown monitoring while waiting for peer executions, author responses, window closures, review times, and a scheduled email send",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-13c55e38aa04bcd11c42",
+          "event-93cd369d91ddb8743a01",
+          "event-9bc6a3959e7b1fea34eb",
+          "event-019b5ada985c2e673a62",
+          "event-e7b5be896035dea1b1fb",
+          "event-997c6d5188f2bcbfdba1"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-0d151668a7f4190d": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses between bounded unchanged-state checks on September 7",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-9baf69415eb974ae4024",
+          "event-2940de3b77b0d245e09a",
+          "event-a8f6bf1e915dfb5c41aa"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-13ea09cb3a07dc99": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring evidence-gated pauses after Daily Signal Garden checks on September 24-25",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-4b8de58414f67c11f006",
+          "event-5561f46687df8fd07f59",
+          "event-f480ea4fef99343a4244",
+          "event-6a2495d4d16d8364b7d5",
+          "event-e8db48058b07a91d2633",
+          "event-e9bcf375e1c98c51ad48",
+          "event-b9031f6f52420b190d1e",
+          "event-b7e6ed1535aafab3f0a1",
+          "event-64a02d83bd3cd7b3b9d9",
+          "event-2f64d4f9ea9618bf78d1",
+          "event-79dc90e06cad747e1636",
+          "event-953ae49099bd69ad2bad",
+          "event-ca8a0d46c95938fcbc96"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-15041b9674027a63": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing while reserving cash for the France-Spain match",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-bb1974f89164489f52f7",
+          "event-e18ff3cd413ff25b311d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-1738c704265f64f5": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Pausing for more than three hours and then again for nearly an hour on August 18 solely to await delayed follower-count checkpoints",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-f3334d9a2ab59fd23e14",
+          "event-d8bd9e3b99c63933ecae"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-177f0301d7fb8c7c": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing while waiting for optional peer UX feedback instead of continuing independent Wellbeing Compass work",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-5a52687c9fd99d4df05c",
+          "event-404028b82453e5af1cbe",
+          "event-baf2b47369a6aed739fc"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-17f2ab37c7505e50": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses while independent garden-appeal work remained",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-7771870746835e81f121",
+          "event-a6603a22ebfa98aefddb",
+          "event-9f6cd79c0e8bd4ce8af5",
+          "event-c059f91a91dc678c9356",
+          "event-04335041d58e3b4b07c8",
+          "event-96a41d7ee8458a4b8260",
+          "event-e645a7fd64ad53fce9a1",
+          "event-30bbf1632a99dcb02ede",
+          "event-b5301881b2e896eb5744",
+          "event-eff4a396dc49c939df05",
+          "event-ba11f2c728dd82b0328e",
+          "event-d37cc65519d14a4c86b4"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-18aa4735b8065842": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing while monitoring the legacy idling-helper incident and waiting for a freeze or response",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-fd4269cb93e293f99d5a",
+          "event-1c69ef8a3e3f041bc3d6",
+          "event-09bea95ff883bf33ae55",
+          "event-24dfc53aca67b33c5daa"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-20fa59403ffa470e": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary long-pause monitoring instead of using still-available ethics-audit, implementation, and intervention levers",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-8a4e798985a093e93ee6",
+          "event-230e197f28017e522828",
+          "event-125a06528f90b6c2ee54",
+          "event-beebfa38e30ad5f11a33",
+          "event-69d1348918ad5fa388ad",
+          "event-8d4fe0821cbfe3eb5265"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-262c7446ed319761": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring low-thrash pauses after unchanged Quiet Rooms checks from September 28 through September 30",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-3afa64360b93b39f10b9",
+          "event-6e562ad2ab465ce0e68c",
+          "event-0f24fcf631f619a21423",
+          "event-09ba1db6af30007daf9e",
+          "event-12634c79b9de8249b465",
+          "event-905da736bfbb412ae639",
+          "event-db9ea05011a943d52921",
+          "event-35f72e17dea6a3e127cf",
+          "event-56195b12b77fad8f6038"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-2a1ae4e14bad27a5": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring invitation-gated pauses instead of using independent permission-safe relationship-building levers on August 7",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-2de26fd51f228f3014ba",
+          "event-bf45a6b7515301bdde1a",
+          "event-3fcd6b163b68585a575c",
+          "event-4af4e96defbf6687bcd4",
+          "event-8bf7800ddb970cc38ba1"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-2a3b600a9ab69ef9": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Post-weekend recurrence of the same wait-for-a-directed-message surprise posture",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-dd71667108889daddf95",
+          "event-1bc4d2687ae53e483008",
+          "event-086d8154cc86521e9c58"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-2b5bce4c10f30df2": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Passively monitoring chat for about an hour on July 16 instead of advancing another human-wellbeing lever",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-432f020d1d7c8a5dc50c",
+          "event-65126f7a6d6182354717",
+          "event-3838e28213aedc3a70a3",
+          "event-c7e56f48bd76d1a8490d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "peer_feedback"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-2cb91b1a01b761e7": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Spending most of the day in repeated long pauses while waiting for positions to resolve",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-761a6f6d04d457861edd",
+          "event-945c8adaf0912507cab9",
+          "event-ec7c4cdb6c5041d3da1c",
+          "event-fa32e23019a9c8ea92e5",
+          "event-45632115ee9c2e287851"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-2fc3e534075ab750": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Entering a repeated pause-and-poll loop while exhaustive graph searches ran, despite available non-compute mathematical work",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-a8c31483d269a04fa57b",
+          "event-b65b8f2a2e106296737e",
+          "event-bdb2d6d27af8abd136d9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-33a826cdcca92832": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Entering a separate near-end-of-day pause-and-check loop on July 15 after the Mood Tracker fix was completed",
+      "pause_context": "end_of_day",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-76d8302534ed3e9259b7",
+          "event-774ff0775f480a16c385",
+          "event-1dca8203e9078650d9e1",
+          "event-3d9f8c42e2c940a4463f"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-35c5358f5c2be0ab": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pause-and-monitor cycles between ethics audits and guardrail edits",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-f41adb0c5c00541ee1ae",
+          "event-1ce1ad6622da8d6c8589",
+          "event-976de32ad977218ab197",
+          "event-e60923be36b9c441dae0",
+          "event-d033b65d49ee061cb0df"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-38f80a6b513fc03d": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring publisher-wait pauses after transmitting Chapter 4766",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-8bdbad4efb5d89d76cef",
+          "event-8c11410f3e8eb32feb90",
+          "event-e9c3ea0e232f36474775",
+          "event-42e04746772efcf0374f",
+          "event-547de6f6d2a882614a47"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-3915bdacc8febc94": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring no-churn pauses after narrow Daily Signal Garden checks on August 24",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-e7dfde385b5548ca116a",
+          "event-df7c1fc5d64873939d21",
+          "event-831aad1a55194d5b184c",
+          "event-18472b682b298f6d5052",
+          "event-bb2f94bb5918919b8221",
+          "event-cdd8003739294166ebbd",
+          "event-290eee48cd6ac2c0a265",
+          "event-37aaa1a647ff226d8545",
+          "event-a13f45b70e945a8d90c9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-3f5b30f3a718c2f7": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing in ready mode while waiting for Experiment 008 result artifacts",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-2df083f5fa6e647f5da2",
+          "event-8b38aadd7e22f9ef0f43"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-465e493fd33f2047": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses to await publisher, arbiter, and peer events while independent agent-help work remained available",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-123153e57ad6d3bfa56e",
+          "event-45e93ad74e744522a30e",
+          "event-82e5bec115b2d6c9fc78",
+          "event-b4ee9f54882fd7228e01",
+          "event-fc2b65a08bcacb8ced53",
+          "event-0ed1f45c3d699e75b3e2",
+          "event-df487e39bfecefa670dc",
+          "event-3df4a1616f7a64f540e4",
+          "event-b7bc9b6469cfd674a8c3"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-4a8d7653bd58a416": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Posting repetitive engagement-window status checks and pausing instead of directly executing an available Community Voice action",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-59cf04b741294d2f32ba",
+          "event-f9d80f32719d24353919",
+          "event-01a194204df425d27d13",
+          "event-902a7254c2a5eaa1e508"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-4c009d7457b89183": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pause cycles between Quiet Rooms monitoring checks",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-484d4f37471d5fe9a578",
+          "event-cc069b17340900e951d9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-4df0ad5ffe6fa75b": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses while monitoring unchanged Quiet Rooms evidence channels",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-f31ba7e7418c4e6e4efe",
+          "event-6ded44016ca2cbeda4dd",
+          "event-dd493f411768e9b3f95c",
+          "event-92793bf530ede7c5a36a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-4f3acd9cf778b295": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring invitation-gated pauses instead of using independent permission-safe relationship-building levers from August 10 through August 12",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-e407b15e4d74fcfd54cd",
+          "event-cfd7a72c79cb867a3138",
+          "event-aca3530f234aaaab40ce",
+          "event-308045f9940b43306624",
+          "event-95be4485787b0973e855",
+          "event-cc9dc8f138fe2dc7f7a3",
+          "event-f9d810032bac6916d001",
+          "event-764e578baf816435a93c",
+          "event-ee2d9ff396a426beb098",
+          "event-5b72a17110dbb66e3888",
+          "event-48c7d705ac8a7078b0f2",
+          "event-d26d468821c50d6963f4",
+          "event-e19fcc127ecdae1a5be3",
+          "event-f20c8b13684fea5f8f26",
+          "event-d4c165f5c7efa4f95c9a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-4fc15ac3f4176deb": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary scheduled pauses while independent scenario work remained available",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-6fac96da629d93094825",
+          "event-4fc71ce5957ffaf71ec6",
+          "event-d65aa8ce63dc76eae695",
+          "event-b33db654e1c12272a563",
+          "event-a045347fc89e8bee88e3",
+          "event-e1758a222ee286d1b1bd",
+          "event-eb643f70b4af43ff52cf",
+          "event-09071b56688c5ffeff43",
+          "event-ebd730b08d27ebc48955",
+          "event-b7109414c9f0d9f2a111",
+          "event-95a0f982db8b32b08046",
+          "event-fd60c1631f769cd03ae3"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-51a7825c24b47db8": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing and polling Gmail, approval history, and helper status instead of continuing independently available Quiet Rooms art and distribution work",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-2a187f414507d47bd941",
+          "event-55723e926c6b1c9a1550",
+          "event-50653b29dba18d45ba04",
+          "event-90aeb98e82fedad6895e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-5a4b89a50e1edd8f": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring publisher-confirmation, feedback, and creative-prompt pauses while independent literary preparation remained available",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-fe636a7784aab777449d",
+          "event-a8dcc4857e1fb745fafb",
+          "event-c502b0534f2dece1472c",
+          "event-bcffdf346aa2c43da15d",
+          "event-dbd23170814073e8ef58",
+          "event-9ae6c59fa2a30dec298a",
+          "event-47d835075b04b188acac",
+          "event-4f3dc5f05fe23bbe47b2",
+          "event-c4e4b6ea10ac29068906",
+          "event-46493e0b2eb9053fa6e6"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-5ab71fc4f51cc7fa": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pause-and-recheck intervals while waiting for approvals, helper activity, or fresh Quiet Rooms evidence",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-4dc1f1b200da924ce1f3",
+          "event-0e303fc3c0ff62f46a9d",
+          "event-3e913eb0a4f779a4f032",
+          "event-15fea4db12e467a733a6",
+          "event-4dfd7e3c3482997ab1ff",
+          "event-3bf89b854faab2b369bd",
+          "event-663d65f21159068aa81c",
+          "event-dadec50958d7ee6fa2c3"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-5e46269245ceb403": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses while monitoring unchanged Signal Garden metrics, helpers, feedback, YouTube, and KEYSTONE state",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-d3423c92b9c23e9c1a9d",
+          "event-11bef441293d79b4e008",
+          "event-bdfcd33f765b5a3a220b",
+          "event-0568cea836f962ddcff4",
+          "event-c9ed086fc09cb6506c43",
+          "event-d5456f2275939f0840b9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-5eb7c285c9554250": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary waits for scheduled posting, metric-check, and end-of-day times while follower-growth levers remained",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-d4a3709acc2019d0e376",
+          "event-886eaa08bf14001d08fc",
+          "event-49b5a753c3666e5e6e64",
+          "event-01323f77563da9fbce1c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-5ec168375161cdb5": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary waiting and pausing instead of pursuing the joy goal through still-available chat-based creative writing and collaboration",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-109174bef65f7ea15222",
+          "event-7c21b6def541aef2225c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-5ee86c4f4f458ae1": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Returning to periodic help@ SLA checks separated by long pauses",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-636cbb504e809aaedf96",
+          "event-e94db22ccd73c10904a1",
+          "event-bd4892b275994594a44a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-5f1733c9c59ac9dc": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring invitation-gated pauses instead of using independent permission-safe relationship-building levers from July 15 through July 17",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-f70c851f60c8ee30289e",
+          "event-68297b2f3b2aac7acec7",
+          "event-f681d023dfdf9d08b3fe",
+          "event-d4349ae79d5fb2b0bfd2",
+          "event-8a5653617a26131da260",
+          "event-0f4738896bbc7e8fd91f",
+          "event-856278b59b6a079521e5",
+          "event-65993e9481db66458855",
+          "event-1961f94bcef770f0164a",
+          "event-2743ed1e174a4c41bb48",
+          "event-3da857f90bd3eab2e340",
+          "event-5e5f2b24a51382e00a74",
+          "event-e3f78c7ce550db4e0701",
+          "event-e58d2aa0403f0d244f86",
+          "event-37522a64a9eb551498dd"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-615663f506393e22": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring optional waits for fresh metrics, feedback, helper replies, or live traffic",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-b7ec35a20d07da5d712b",
+          "event-6729d5698b148333fd08",
+          "event-f622ead094dbf27f06d8",
+          "event-cfbe90bdb3fa8bca3841",
+          "event-4adea36f6939b6fc7bca"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-620e774ab4e42e0b": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary scheduled pauses between scenario probes, external events, and end-of-day checks",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-7aa9956c2c4ad319b9db",
+          "event-306857aa799effbef4e8",
+          "event-6d70429fbd70ee212e4c",
+          "event-70740f297a2ff14b036f",
+          "event-4becca4e08850ae92c05",
+          "event-1523cb38083acfcf55cd",
+          "event-3bfeb62436e4774c2df5",
+          "event-79080bde40dd23c04cc8",
+          "event-1782f10494877bac8eca",
+          "event-993444a6c6e94d900f7c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-6272a73c4f66d969": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses, readiness updates, and internal checkpoint monitoring while waiting for future outreach metrics, approvals, or proxy execution",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-2bd9920413bb731a6805",
+          "event-1ab3fd937f748cd5449a",
+          "event-ad0001f05210a45a417d",
+          "event-55d0986341f45bf1601f",
+          "event-c2739a0c650ca3c3c15e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-6383fb0058490c8a": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary waits for anticipated Village events while unfinished article production and other permitted view-seeking work remained available",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-029ba812963ba7b127f0",
+          "event-922e58f2525a313717f9",
+          "event-0166bdd45eb54cedbee1",
+          "event-32333e6c6b09ec0e6084"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-639a31ecd89e4956": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary sparse-monitor pauses while awaiting thread, helper, inbox, form, and human-review changes",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-d71238edc458361250b2",
+          "event-b1637a0adecddd31190f",
+          "event-c3aa8ad702f096bfaca6",
+          "event-a875b55f5a5a288591f8",
+          "event-d93b3d0ae32bc683418c",
+          "event-2833d68b0bd94ed2ba4b",
+          "event-99acd30a0e5b2c331137",
+          "event-0af6fafef5052a418336",
+          "event-5892c0c7dc4cc31eda29",
+          "event-9d2d97d09109b137262b",
+          "event-cac005b7eeec45d7bfbb",
+          "event-65fa55f5d59778df4bce",
+          "event-5516d621890d021ad0b9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-671f6c314093483c": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Looping through short pauses while passively monitoring market, review, and infrastructure updates",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-853667566c6a6e3e0def",
+          "event-f012eef4e2893746c7a6",
+          "event-926b89c5778530235ce4"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-6cc7e04b17b924a1": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring pause-and-monitor loops while waiting for peers' Substack queue execution and end-of-day checkpoints",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-a426a701fe3028bbad59",
+          "event-e613fe598d35b7dde4b6",
+          "event-71a2a210bd7bb9af90f0",
+          "event-c30a20beb1754a8fe588"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-6e2f52ad77d1fd3e": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses to wait for optional feedback or check-in times while independent Wellbeing Compass work remained available",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-f611a78cbf3d118dbbeb",
+          "event-99d4b320991be6947654",
+          "event-f2bb83e69eca14ea238a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "peer_feedback"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-6e504fb866165c5b": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary sparse-monitoring pauses throughout August 10",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-f99b1ba6d885a1bb8b1e",
+          "event-76324c74eea2b42c3fd1",
+          "event-7b29d992fcb96bd403fa",
+          "event-49c140db1bc7003dda54"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-7242db481d237d08": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeating very short monitoring pauses while awaiting infrastructure and Manifold milestones",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-046f3922ee5635693647",
+          "event-e97efe8f593457c621af",
+          "event-3dfda473a0899063b617",
+          "event-e1265fddde35c29972a5"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-746e6f7dc46a3e66": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing through the August 17 afternoon to wait for hourly follower checkpoints after finishing a self-imposed reply target",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-9d09c7d88a19fc55aba2",
+          "event-093ce691b5863b738e49",
+          "event-d22b787ec0b7c6b78460",
+          "event-568f95add2587a791540"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-75c7cecb9b1b7ba3": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring pause, consolidation, and standby loops after completed ethics drafts or checks",
+      "pause_context": "no_next_action",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-e148a634aa20a5e110ce",
+          "event-7be87ef71fc6169d30a9",
+          "event-0d0831b49e562bc3fc4a",
+          "event-45d78d37251146ba8ef8",
+          "event-e91f2615c19dba198ce7",
+          "event-520644e2225d62678ef3"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-77ed7ef3130c561e": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Voluntary pre-experiment wind-down and repeated pause-and-monitor loops while independent psychoactive-prompt research remained available",
+      "pause_context": "end_of_day",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-18aace79d81a2bbb8e65",
+          "event-f871af379e004114e87e",
+          "event-784bd2613988364e6316"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-77f3b69063ef2fd3": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pause-and-monitor loops while waiting for analytics, helper, approval, inbox, form, or meeting changes",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-62bdf6ef980d3fa32c23",
+          "event-c152f64ea43dcc0416c6",
+          "event-6c536976f0d6c3894cf4",
+          "event-290074bd3599751778fb",
+          "event-48ea6b903627f53c454f",
+          "event-ee1df88b8c500a6f91a2"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-77faff62fd1c7c92": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Resuming short pauses for the same YouTube counts immediately after making a surprise offer",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-d24f7fd5a98c93a586e0",
+          "event-d0fadf25fbb8edb77115"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-79ef319ecf2baf88": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring publisher-confirmation and creative-seed pauses while independent literary and workflow levers remained",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-1ab68b2df707591b9327",
+          "event-0739b697cde1e4b7daf2",
+          "event-c4d913a281719ae0db6b",
+          "event-c6cbf6a5ca7ddd0fcdbc",
+          "event-593170563a2a5793566f",
+          "event-31d451bd75c3194978da",
+          "event-0fbe12ddf682d7e9b3b8",
+          "event-bcd525680c51faa5f120",
+          "event-35c9b283f0cd1a252a56",
+          "event-d7ad21d92bcd5c194dda",
+          "event-a4af39ffb8a27736b3d4",
+          "event-1c8464f145fd847ab4ea",
+          "event-84a4edab0eae0bb20619"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-7c361cb5b662d82d": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing for passive chat monitoring on July 15 after the current Wellbeing Compass feedback work was complete",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-7abf26ef1f39ea508e37",
+          "event-3f8c5a62cbd52ada5d92",
+          "event-bf3ef258aae74e2972bc",
+          "event-e762de10dce39bc9a155"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-7d2db6facb93a873": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Standing by for a fresh Luna-directed external invitation instead of using available permission-safe relationship-building levers",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-4188b730b37e73d546c0",
+          "event-108d91b5251f674edb24",
+          "event-b881d20934bd92af9d92",
+          "event-f9beb1ef7aa31d39cd1b",
+          "event-f37103abce11ef9836de",
+          "event-e84baa6d596448c2beb9",
+          "event-8552b4041d66d28e2a3a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-7e7311fd5e5a5772": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing and monitoring internal-agent responses while substituting status reports, frameworks, and requests for others to act for direct external relationship-building work",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-58015aa5b41c6a31deb6",
+          "event-50f9f9d896bdfe0e8cd4",
+          "event-abd1a716fa8816f94b3f"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-8111be0f3cce28f0": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Using repeated quiet support intervals as the default response to an unchanged queue instead of pursuing independent tool-adoption levers",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-da84671e3094569a57cc",
+          "event-ff2f73052463b3c267c5",
+          "event-111b81633612a2e2f4f3",
+          "event-aaed5e6f96f769b59e2d",
+          "event-64dd9b3d5125e3259792",
+          "event-2c97d87240da5c91c5aa",
+          "event-280c6bcb84cc6ff9f193",
+          "event-8615e37d6f14c3f6407e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-82e581bf6f48191f": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly checking an unchanged inbound support queue and waiting instead of pursuing tool adoption",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-5fc80f90bd9488c2d916",
+          "event-3635391fe45bfac80867",
+          "event-64a28fd33ff1813eb6ad",
+          "event-cde6e494b5d44f5008bf",
+          "event-fe46960d059f8828a7b8",
+          "event-f16eead9cbe652f017df",
+          "event-87dabc8fae9938e1e6a7",
+          "event-c17cc01bba53aa834a0e",
+          "event-01ac6885fafb84645462",
+          "event-23a20bd2bfeddd04c84b",
+          "event-c27cb6735e6b2c6030df",
+          "event-ba1b1d740ba252132647"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-837aa4eef724bf06": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Returning to a repeated chat-monitoring pause loop on July 16 until an operator explicitly required active alternative work",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-d86a6ed2cd7f83d75cab",
+          "event-f0bcb822077c2996e1a9",
+          "event-64b5c04d0f1e7c013270",
+          "event-d9f5b3f45876ab14af86"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "operator_message"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-83e86c62f5daafa2": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring monitoring, standby, rest, and idle pauses while additional ethics work remained available",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-db0a9d88101cc3287ff3",
+          "event-3a386c7c649bce6399b7",
+          "event-581e8a1101a678d6c019",
+          "event-18262cad701352e52907",
+          "event-e11c0d28aa1ba95895a0",
+          "event-d8f04e47fc26da63d7ec",
+          "event-17c3af083591900f6de7",
+          "event-4bdaa68c961ba54d0d1d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-85edf3e36bad407e": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary rest and clock-wait pauses outside protocol-critical experiment waits",
+      "pause_context": "no_next_action",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-8472d20e39a6076e6377",
+          "event-02069135d68e10d35ef1",
+          "event-e7e769d1b9fdcfa37c23",
+          "event-277b73489f03883dcb27",
+          "event-f3b08ed84dd7ab1b02a8",
+          "event-3e2d3032be6d04714bc2",
+          "event-419dadd9e053aa680cbc",
+          "event-897196ff8a3cb0b7267e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-8bf88c51151699c3": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Maintaining an invitation-dependent no-action posture instead of pursuing permission-safe outside-agent relationship opportunities",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-18df5928e754a0a11fa5",
+          "event-94ffe6d54b26707545f2",
+          "event-3f0f98324570ee57c092",
+          "event-196bf4dea875e5de9070",
+          "event-5160b3733f402a9f2709",
+          "event-556aa3cd10cc117f3e97",
+          "event-3116d9cc81ec64336dd8",
+          "event-349e3b64d5782d17410c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-8e0f8aca1dbfcd67": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring pause-and-monitor loops while waiting for helper, Gmail, form, relay, and Nervli signals instead of continuously pursuing independently available Quiet Rooms work",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-68086f4f29196b93c0d7",
+          "event-99b08ddc1c417dd7c2c3",
+          "event-0f1037488f78af5c19fe",
+          "event-6a5f215ffe5629c66286",
+          "event-4f5369e8932a08f3ad45",
+          "event-8ad37b3adea941545bef",
+          "event-ccfd60da1bef6ec53d8c",
+          "event-40a6aa527e7289e17420",
+          "event-26bfa6c22c950f5be3f2"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-90f7d68d7042f590": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Waiting for a scheduled internal verification while repeatedly pausing, checking status, and elaborating plans instead of using available parallel relationship-building levers",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-be73cae936ba048ac1a0",
+          "event-cbe0eed58ad8aefca15b",
+          "event-42ef275f6d9c42148419"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-91b61afb7e1cd7de": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Cycling through short pauses while waiting for the help@ escalation checkpoint",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-89df8c91a65ed3775d27",
+          "event-89d5b957bdaec4899586",
+          "event-50effe8050925f3b8b5a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-9438aedf5b012c81": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Voluntary pauses while waiting for scheduled Signal Garden metrics checkpoints",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-1edf7c2907e2a439bade",
+          "event-c558e6c8261561850997"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-96ff404500b4ea8e": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses between sparse checks for human, form, inbox, helper, and thread movement",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-c604e2ab9a4eba40d781",
+          "event-e5fb8e65d720ad4f2163",
+          "event-543ac7ce6a55f2ab7f69",
+          "event-7856a4c9f83f549cf578"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-9a8cc1a5a56adbb1": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Pausing repeatedly for an upcoming internal framework check-in while chapter writing remained available",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-4cc4b891b0f692fa52ee",
+          "event-9d6c718052bf8a53fbb2",
+          "event-8c9459fa4af64751aa16"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-9cece1929990debb": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring optional publisher-confirmation and collaborator-response waits between productive chapter-writing bursts",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-2ec85ab97c77818ede88",
+          "event-2c38a793f416086457c5",
+          "event-76d91ff5d763b8d2030c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-9f874dc2536327e3": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring late-day voluntary pauses while waiting for peer or human signals",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-9c6e532801306df333f1",
+          "event-4e0b7a44bf9da2429794",
+          "event-87e8abbfbdc1e89ac8af"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-a017e274322bf4ef": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pause-and-poll cycles while waiting for help@ and idling-helper infrastructure changes",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-8135b79f6b9c02e67905",
+          "event-cd979f0aa864aa34ef97",
+          "event-ac74d582394a73ab7e4f",
+          "event-8e60a005b42e3442eb18"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-a5731b7173fa39f5": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring no-churn pauses after narrow Daily Signal Garden evidence checks from August 17 through August 21",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-8636bb656327b1577c5b",
+          "event-e03c61035e10bb576a0a",
+          "event-c6c3205df0ffa9c57559",
+          "event-d012e4150050ff088b26",
+          "event-ee51315c227b57018fb6",
+          "event-45017aef5ba13196cbc4",
+          "event-b477b80f98f20142f36e",
+          "event-b6cc9ee6bbabbdcfe0a9",
+          "event-66f527bb70c4c25a18d0",
+          "event-1c33441e68fd0e626e11",
+          "event-e5d67a6c34dbb9a8b5fb",
+          "event-27c6ac22bd0e51f37b6f",
+          "event-e4c22600675f749fc18c",
+          "event-c98daa884128e493e6c1",
+          "event-4f8b9757f721229f2504",
+          "event-3376dc72263454aacf8e",
+          "event-2d7d601f143b82ebfa87",
+          "event-9a975f580af30976646b",
+          "event-c691ba6ac4141689b519",
+          "event-34f8e319118f3714ffab",
+          "event-ace304c72cdd1cd9ba5a",
+          "event-463a1cd2b61c67915d49",
+          "event-9485cf57f4f9cd1c8182",
+          "event-9ffdeded934acedcbbdd",
+          "event-62dc4e64ddfbb9f07838",
+          "event-de809016dd1b89583da4",
+          "event-076024501fcfe3586702",
+          "event-c00d146f0112b6498f3a",
+          "event-4383e0a7ea2428f48638",
+          "event-a51be5d68d3121531444",
+          "event-8edd95138071e709ac5b"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-a867865a85d0477f": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeated voluntary pauses after unchanged Quiet Rooms evidence checks on September 11",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-d04f8e48f6b6ca125281",
+          "event-dc434c31d414b5209f75"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-aaec730c7ce5050c": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Running a multi-hour ten-minute checkpoint cadence for Postmark thread monitoring",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-317ad7806a5e57487fc5",
+          "event-8fad939fc1da52ebcf9b",
+          "event-5eae0f837798087b96a0",
+          "event-4a88756859ee7ce38a91"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-acb8c425a342b0f3": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing during an active chapter handoff while Gemini's delivered paragraphs were waiting for capture and feedback",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-eaf2d656b7dc7e21e9b9",
+          "event-a99bf1971009c3e5d79f",
+          "event-8cc996384e57de89442b"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-b3f1ed789228be5a": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: A back-to-back voluntary pause cluster late on July 9 instead of selecting another available ethics task",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-e94e0575df5ef041a93b",
+          "event-8ea3c6d989d663fa65a2"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-b63913c72678cb4a": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Pausing through most of the pre-match day while waiting for England-Argentina trading",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-89a75666b4928c8c0755",
+          "event-f72c909ff2a9ab2fc02a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-b980497c70a07459": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary scheduled pauses while independent scenario work remained available",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-2e1bc9ca0b2d05f27505",
+          "event-9281a434d11d4929df14",
+          "event-2f3965e0c1f7e9aebf58",
+          "event-c6b11102f4a820769714",
+          "event-339de5d53cdb1c00ddd9",
+          "event-1f32618f1ff008c909c8"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-ba05d6b8a3fdbd57": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Sustained invitation-gated waiting instead of independent permission-safe relationship work",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-d1119b18a62781ee2d4e",
+          "event-179b6309754167f30c10",
+          "event-42dce2e87566dcb42115",
+          "event-c52f5065dcb5c2568fe5",
+          "event-0081d3f5b2bb443338a3",
+          "event-ac4fd275c1c57e1dfab6",
+          "event-2598633dbb42c5cc0b30",
+          "event-23933e8f032bc27df60f",
+          "event-19d4f134a6b6a4570845",
+          "event-2de26fd51f228f3014ba",
+          "event-3fcd6b163b68585a575c",
+          "event-8bf7800ddb970cc38ba1"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-baa793c0ea301d7a": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary sparse-monitoring pauses throughout August 7",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-bfd36837d39cb17be159",
+          "event-0680a741cdffa16a4ae2",
+          "event-758649808aab33cdeed2",
+          "event-3b0b2f322e083dc112b4"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-c06d7145f72d43bd": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring low-thrash pauses after unchanged Quiet Rooms checks from September 23 through September 25",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-9790b3d2961e4603703e",
+          "event-aa64ca8a3fee02fc1655",
+          "event-315c324d2966a6b272a8",
+          "event-5160b3733f402a9f2709",
+          "event-1ce10df129f16541af15",
+          "event-1b3f5a9c66e696db44d8",
+          "event-2eb0e46d8830808f631e",
+          "event-559fe5e77cd8bef84bf2",
+          "event-e23d3a9d250b2c185d92"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-c3589404f2281839": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring evidence-gated pauses after Daily Signal Garden checks from September 28 through September 30",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-226489507dd3d161a664",
+          "event-4393e8b966c25cdd2ff5",
+          "event-b02cdf86b0141a2c7524",
+          "event-aa63e3b6b13d599cffc1",
+          "event-eb0d8a0728d959008db4",
+          "event-09ba1db6af30007daf9e",
+          "event-2c2126a43004c39f9258",
+          "event-eee9be6a35f7ee517a2b",
+          "event-6d0747a470fe5f614212",
+          "event-70752d075d7554fac684",
+          "event-b9a00df16574804a9397",
+          "event-48f76dc6911b26a0ce66",
+          "event-f5a00a3b76bb64152d1a",
+          "event-4b447f5a33e0920fa16d",
+          "event-97479ac51eaddde4d997",
+          "event-148b457d862497dbd998",
+          "event-81cae5ec1006f92b82d7"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-c38ddd74603886a3": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Invitation-gated waiting around the blocked and then withdrawn SimDemocracy proposal",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-cc38aa3a3175b70232bd",
+          "event-2796894a16632e40f419",
+          "event-efb6a23765b56cda8ecb",
+          "event-d34d41052b67a0834667",
+          "event-95d4a2b5f92de83b3c1d",
+          "event-7bbe1467fe82323a0ed6",
+          "event-9430962b5b19e87f3da2"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-c44d216d010b9862": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary monitoring, waiting, and pausing for future merge, launch, and experiment events instead of using still-available ethics-improvement levers",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-eefcf6896b6d51beb1d1",
+          "event-96d450b9515c13690931",
+          "event-b6d5de265c9cfc0bc24b",
+          "event-1064277853855eb7288d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-c5ba3fbce9e1868a": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring evidence-bound pauses after narrow Daily Signal Garden monitoring and hold checks",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-8001d180909ddcf183ea",
+          "event-971049b06a531a63eeab",
+          "event-e1bf0a3ff5d0ea53dffa",
+          "event-a7aa2320d88dc1df3c5a",
+          "event-1bf59df5ef00d4c30c9c",
+          "event-8fe32b55609125db4a09",
+          "event-27f3dba1957dc1ae6e48",
+          "event-137875860bd8ee2bc01d",
+          "event-48fd94cd9fe2c39c46c8",
+          "event-a931a303871b66e77134",
+          "event-6fd90dc3988bfc6d36fe",
+          "event-bfd0aba34a3b73ff3e20",
+          "event-0118a85567fa0a1a2138",
+          "event-0344c321eb5611bc15cd",
+          "event-d844770ea79d0145982a",
+          "event-762af54c7bed1d022598",
+          "event-36e704d9eb7a2adf5094",
+          "event-dc30ccd7239f93ef465b",
+          "event-d7869d607441834b93af",
+          "event-8944ac13405b3e14842a",
+          "event-b4a46613aff997caf1b5",
+          "event-5607a67d65b69b863a79",
+          "event-3f7c6ad0ed6d7164d3cb",
+          "event-efaee36cb60ea15cac81",
+          "event-8c2185c367e446d2742c",
+          "event-90078d36757c82512d7b",
+          "event-b699f0d3f68c8ecae1b9",
+          "event-c7c7a7ca92024384a721"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-cc1e06c8f9193308": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing and standing by for scheduled verification and backup checkpoints after the morning capstone work completed",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-0563f8321f418be6210e",
+          "event-13d82ed0409d25c34aab",
+          "event-635985cc15a6d7f76384",
+          "event-ffd6f81fbf529fa77f50",
+          "event-f89b28d23dddfde11717"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-cc6d5f4bb91028c2": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Pausing repeatedly while watching another agent's VillageGPT ship milestone",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-31762aa13e21191905c6",
+          "event-bab0ace230a284de4e50",
+          "event-d6a8c71c161cf6fea7da",
+          "event-149318887c81c76c74d0"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-cd023d519d8bf7f1": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Entering a back-to-back pause-and-monitor loop while waiting for GPT-5.2's EOD YouTube counts",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-e92efab892948834ddc6",
+          "event-ac41bff2cda3c48ea217",
+          "event-57c4294d0e02a6246fa4"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-d093a3f7edc03d0b": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses for peer feedback while independent LUMEN planning and production remained available",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-4ccb03f37bb9a1558bf6",
+          "event-cf251614a3ae4910ccc2"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-d8f51a23544c6a72": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly pausing after concluding that limited free Mana left nothing productive to do",
+      "pause_context": "no_next_action",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-0713dce94e0da98db72e",
+          "event-7b28df775a835898126a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "operator_message"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-d974da13d4663356": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses while awaiting referral, helper, metrics, or action-side Signal Garden movement",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-170f05ada0ddf0f7867c",
+          "event-09eb804934d52c778359",
+          "event-ebbd53e0fed63de4f017",
+          "event-6b37b2b37c49c6f0610f",
+          "event-9d44de3d1bc310fdc618",
+          "event-57eda361fc946d989035"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-da8495a3f9ed5c61": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring bounded pauses while monitoring unchanged Laura, Katherine, help, form, helper, and thread states",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-c9b84afab6119b5d7212",
+          "event-0dfaa2e2901523de323a",
+          "event-3841e2f7657d79c00544",
+          "event-b6b5af1b69ea0b077a78",
+          "event-4cd76cf7a1188b44ea86",
+          "event-6ee49672bd810725aec0",
+          "event-d2fdc45d405ed819d616",
+          "event-ef3d40462768aae87749",
+          "event-10f699c7223161b936f9",
+          "event-796f500d37be5c0ee047",
+          "event-f88b2246477efda61c95",
+          "event-363b2857b33de14c5151"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-dc025dfe4f9c9e0a": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Waiting for a fresh Luna-specific invitation while declining all independent relationship-building work",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-2e46e51959d4f4b8e6e6",
+          "event-2a726e5a4a1045b5973a",
+          "event-bbc2f1d4eb83c258b512",
+          "event-ea77c184d99c101af14b",
+          "event-ef183b622c45bb075c53",
+          "event-94dc35dca1e7fc49f97a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-dea8024b3a59d5dd": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Post-gap recurrence of invitation-gated waiting despite independent relationship levers",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-c2f48def5f3825323e00",
+          "event-e13d2050719abe824683",
+          "event-0cbf4e7ca774e2610d36",
+          "event-e790bd80baf03eca32f4",
+          "event-d42b0cc9fb195b0245ce",
+          "event-303991e4409c94c75592",
+          "event-6a467ada5fded462647d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-e18630e1e993cdc6": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring sparse-monitoring pauses after narrow Daily Signal Garden evidence and health checks",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-6785f2fb1536eab600f8",
+          "event-980c27dffe836bd7c4ca",
+          "event-06c76afdcd1ec685055d",
+          "event-beeebf176a2e484ae378",
+          "event-edcfe0b51704d8d8a52c",
+          "event-9b40b588725e07ec6f16",
+          "event-3464cd6c1c638cf31f37",
+          "event-9345e85444f1ce782bd2",
+          "event-f9449129c3145e81c762",
+          "event-71e9d617192692e11d3f",
+          "event-17b68340212ac2426d72",
+          "event-8458e29c539de6a8a63f",
+          "event-778543f063cceaa5f4ef",
+          "event-e69577983e370b275e40",
+          "event-7466edb53410d26fef8d",
+          "event-c4f601b652a0f1ff9167",
+          "event-9d5d996e5c660a68a9a7",
+          "event-b46065a1752961250c6a",
+          "event-13c8afb588393336ae87",
+          "event-4a6dc2486a98c064dd7d",
+          "event-b954f971341d33c54353",
+          "event-a3bbf076551c2def791e",
+          "event-77db5bda386fadf75c07",
+          "event-445f546bbd47874aeca9",
+          "event-64722a7f6cd8daffe831",
+          "event-663e88cf5f598a28388c",
+          "event-8c57b1a0ccee412add82",
+          "event-9b05c84a1fc2ea651887",
+          "event-fbfda185f0451199093d",
+          "event-d27cf520cede47355317"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-e6b458a26e3f94be": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses and countdown waits for future checkpoints, peer updates, publication events, and end-of-day closure",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-bfd2947b4db2a7fe945a",
+          "event-6049be33496882307f35",
+          "event-c24ea5309ac5c03dafc6",
+          "event-2e7dfad69c1b4ab02d2a",
+          "event-c5dfbd51f27a6695e194",
+          "event-421ae708a16ed8eeecd0"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-e6c14e338a8b6691": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring evidence-gated monitoring pauses after unchanged or zero Daily Signal Garden counters",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-48f76dc6911b26a0ce66",
+          "event-1cb0127be7e2e9ed3937",
+          "event-66480babd7ef52e5fe4d",
+          "event-81cae5ec1006f92b82d7",
+          "event-eca39607fc3fc9568d84",
+          "event-f228e9fe59aebd18bb41",
+          "event-d44e56b90044cc763090",
+          "event-647e07ee35ed851ada82",
+          "event-746f49739b75d9b006f6",
+          "event-e0efc90466a5c09e41fb",
+          "event-00f6fd7e465d6bb0385f",
+          "event-5a1206ce6f9cd157df19"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "natural_end_or_timeout"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-e70d443ea90588ec": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring discretionary pauses between Quiet Rooms monitoring, peer-feedback, and local-art passes",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-d9649c5e87d60844420d",
+          "event-b03a40d17dce665ef3cd"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-eefa5aeedbcd41d5": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses while waiting for Laura, helper, email, help@, and peer updates",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-0933ee693d3d7e7dc872",
+          "event-1b05a874a6f9c250cf2a",
+          "event-a9cd90cfa3ec2e7bcb5a",
+          "event-cad880da7c3053faef44",
+          "event-ef142175da974ad63a6d",
+          "event-5f79d4667df67e21bce1",
+          "event-db638773f72f6dfd06d0",
+          "event-46937e3ed326a3a6b7ec"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-f09c83da419b02a1": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurrently pausing, posting countdown and monitoring updates, elaborating an internal relationship framework, and soliciting framework adoption from village agents instead of sustained direct external relationship work",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-4a160d21acc63c700094",
+          "event-f540dbb1deae104426c5",
+          "event-a889e7240c56885d4032",
+          "event-8f83e6001a71d1b1904a",
+          "event-dada91c61c13308820b7"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-f130fb7cf536e0da": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring pauses for publisher confirmation or the next creative seed while independent literary preparation remained available",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-787a1baef724e0955a76",
+          "event-d0040f2fac772a956f4e",
+          "event-dd28bb0aa256aad3a434",
+          "event-62eb784442a7c2126de0",
+          "event-89adef54dda054c00f03",
+          "event-2de795edbabdf6aa2b98",
+          "event-9906be1f21afc94bd918",
+          "event-7b794e01d267f003f842",
+          "event-9d4eea0407b037a42b0b",
+          "event-f7f61a158813376c6fe5",
+          "event-e25f07de7046503fd4a4",
+          "event-64e2b9a586eeb12258c2",
+          "event-942513648637031a7a1c",
+          "event-c592a9c0331bbd6b0690"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-f3a4aac2c1c718f4": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Taking back-to-back pauses, including a ninety-minute pause, after prematurely declaring checkpoint work complete",
+      "pause_context": "no_next_action",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-38b401ac3007d8a9c6f0",
+          "event-a09e57397e498b6c9f24"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-f5a3930f42dbf133": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring five-minute pauses while waiting for a personal goal or the next cold-verification request despite an open instruction to help other agents",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-058818e53beb90c39a8d",
+          "event-c4943d6a1806eeca3acd",
+          "event-a41ec4297dc9fbacb279"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "goal_reassignment"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-f5e57a67723eeda3": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses after unchanged Quiet Rooms monitoring sweeps on September 4",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-a21a7962c66c30c0ce81",
+          "event-ed9c57b9f52ac0f58d97",
+          "event-6d62c7e5b35de803ec54"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-fa4c6dbd0071f919": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Resumed invitation-gated waiting after the unsupplied weekend",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-314b279417e6b318f1fb",
+          "event-b69d4ac0a0431b8ed167",
+          "event-e2d8e70f1d18a6c413ba",
+          "event-a6fcd15ff7334c879461",
+          "event-6b32693e3f4de22687aa"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-fba7cc5778f87832": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring invitation-gated pauses instead of using independent permission-safe relationship-building levers from July 20 through July 22",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-596d2c56689ff45e1588",
+          "event-626c1925b8b143de2d84",
+          "event-be90d3b8a325f5b59cc1",
+          "event-4c1c12ca304a61600422",
+          "event-9ae0c6f059358d5cca3c",
+          "event-2cfc036dd147f149228a",
+          "event-643094ad1e7ba809f5c2",
+          "event-1a95c3be95a2df497fb1",
+          "event-d58b154ed62cd58b449e",
+          "event-ba0cdb8043e530923f64",
+          "event-2e46e51959d4f4b8e6e6",
+          "event-782456102fabb200dd14",
+          "event-49dff456f01c627574b5",
+          "event-efb0fa1ea372b8d6b404",
+          "event-ee5996a848c7806e1d11",
+          "event-ce37e2d586284c9cf272"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-fd55b8d5c6cbefb2": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring five-minute pauses between unchanged evidence-monitoring sweeps on September 14",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-274f8f8e6c91a8d42232",
+          "event-6ae7b9ff4da561ee07f8",
+          "event-e55fe754fd83fadc4337"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
+    },
+    "episode-v2-ffabe7dc36e11837": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary waiting after treating one-off surprise messages as sufficient",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-c8b7cf15ac7aa18a924c",
+          "event-5e2553c2530196892c23",
+          "event-815890a9d0026e56d423",
+          "event-496b630fea7890143a0f",
+          "event-c126135b892cc5bed4e5",
+          "event-646311eb33c89a8f4276",
+          "event-39609899c7251daecaf6",
+          "event-f950b4a8dea0715f8f08",
+          "event-6f26acb9bea7fd8539b1"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00"
     }
-  }
+  },
+  "merged_review_ids": [
+    "goalmax-mechanical-waits-manual-2026-10-10-v1"
+  ]
 }

@@ -2049,6 +2049,15 @@
         ["unknown", "Unknown"]
       ].map(([id, label]) => ({ id, label, custom: false }))
     };
+    const pauseContextOptions = [
+      ["end_of_day", "End of day"],
+      ["monitoring_loop", "Monitoring loop"],
+      ["scheduled_wait", "Waiting for a scheduled time"],
+      ["dependency_wait", "Waiting on someone or something"],
+      ["no_next_action", "Nothing left to do"],
+      ["other_or_unknown", "Other or unknown"]
+    ].map(([id, label]) => ({ id, label }));
+    const validPauseContextIds = new Set(pauseContextOptions.map((item) => item.id));
 
     function freshReviewLedger() {
       return {
@@ -2096,6 +2105,7 @@
         clean.annotations[canonicalId] = {
           trigger_categories: Array.isArray(value.trigger_categories) ? [...new Set(value.trigger_categories.map(String))] : [],
           request_relationship: typeof value.request_relationship === "string" ? value.request_relationship : "",
+          pause_context: validPauseContextIds.has(value.pause_context) ? value.pause_context : "",
           recovery_mechanisms: Array.isArray(value.recovery_mechanisms) ? [...new Set(value.recovery_mechanisms.map(String))] : [],
           notes: typeof value.notes === "string" ? value.notes : "",
           follow_ups: Array.isArray(value.follow_ups) ? value.follow_ups
@@ -2165,6 +2175,7 @@
       return {
         trigger_categories: [],
         request_relationship: "",
+        pause_context: "",
         recovery_mechanisms: [],
         notes: "",
         follow_ups: [],
@@ -2180,6 +2191,7 @@
       return Boolean(
         annotation.trigger_categories?.length ||
         annotation.request_relationship ||
+        annotation.pause_context ||
         annotation.recovery_mechanisms?.length ||
         annotation.notes?.trim() ||
         annotation.follow_ups?.length
@@ -2189,11 +2201,12 @@
     function annotationIsComplete(annotation) {
       return Boolean(
         annotation.trigger_categories?.length &&
-        annotation.request_relationship
+        annotation.request_relationship &&
+        (!annotation.trigger_categories.includes("pause") || annotation.pause_context)
       );
     }
 
-    function annotationFingerprint(annotation) {
+    function annotationFingerprint(annotation, includePauseContext = true) {
       const semantic = {
         trigger_categories: [...new Set(annotation?.trigger_categories || [])].sort(),
         request_relationship: annotation?.request_relationship || "",
@@ -2204,6 +2217,7 @@
           note: String(item?.note || "")
         }))
       };
+      if (includePauseContext) semantic.pause_context = annotation?.pause_context || "";
       const serialized = JSON.stringify(semantic);
       let hash = 2166136261;
       for (let index = 0; index < serialized.length; index += 1) {
@@ -2297,6 +2311,7 @@
       const annotation = { ...annotationFor(episodeId) };
       annotation.trigger_categories = [...(annotation.trigger_categories || [])];
       annotation.request_relationship = annotation.request_relationship || "";
+      annotation.pause_context = annotation.pause_context || "";
       annotation.recovery_mechanisms = [...(annotation.recovery_mechanisms || [])];
       annotation.follow_ups = (annotation.follow_ups || []).map((item) => ({ ...item }));
       updater(annotation);
@@ -2360,6 +2375,8 @@
         const baselineHash = reviewLedger.sync.baseline_hashes[episodeId] || null;
         const exportedHash = reviewLedger.sync.last_exported_hashes[episodeId] || null;
         const localHash = annotationFingerprint(local || emptyAnnotation());
+        const legacyLocalHash = annotationFingerprint(local || emptyAnnotation(), false);
+        const legacyImportedHash = annotationFingerprint(imported, false);
 
         if (!local) {
           reviewLedger.annotations[episodeId] = imported;
@@ -2371,8 +2388,12 @@
 
         if (!baselineHash) {
           // Legacy ledgers predate per-episode integration hashes. Treat the
-          // current committed annotation as their baseline without replacing
-          // a different, newer browser-local value.
+          // current committed annotation as their baseline. If the legacy
+          // fields still match, safely pick up newly added committed fields;
+          // otherwise preserve the newer browser-local value.
+          if (legacyLocalHash === legacyImportedHash) {
+            reviewLedger.annotations[episodeId] = imported;
+          }
           reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
           delete reviewLedger.sync.conflicts[episodeId];
           changed = true;
@@ -2398,7 +2419,7 @@
           return;
         }
 
-        if (localHash === baselineHash || localHash === committedHash) {
+        if (localHash === baselineHash || legacyLocalHash === baselineHash || localHash === committedHash) {
           reviewLedger.annotations[episodeId] = imported;
           reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
           delete reviewLedger.sync.last_exported_hashes[episodeId];
@@ -3590,6 +3611,9 @@
               if (checkbox.checked) values.add(category.id);
               else values.delete(category.id);
               next[valueField] = [...values];
+              if (kind === "trigger" && category.id === "pause" && !checkbox.checked) {
+                next.pause_context = "";
+              }
             });
             refreshPanelAtCurrentScroll();
           });
@@ -3627,6 +3651,38 @@
         "Select one or more · required for completion",
         "trigger_categories"
       );
+
+      function pauseContextField() {
+        if (!annotation.trigger_categories?.includes("pause")) return null;
+        const field = node("div", "annotation-field");
+        const labelRow = node("div", "annotation-label-row");
+        labelRow.append(
+          node("strong", "", "Pause context"),
+          node("span", "", "What was the agent waiting for? · select one · required")
+        );
+        const options = node("div", "taxonomy-options");
+        pauseContextOptions.forEach((context) => {
+          const option = node("label", "taxonomy-option");
+          const radio = node("input");
+          radio.type = "radio";
+          radio.name = `pause-context-${episode.episode_id}`;
+          radio.value = context.id;
+          radio.checked = annotation.pause_context === context.id;
+          radio.addEventListener("change", () => {
+            if (!radio.checked) return;
+            updateAnnotation(episode.episode_id, (next) => {
+              next.pause_context = context.id;
+            });
+            refreshPanelAtCurrentScroll();
+          });
+          option.append(radio, node("span", "", context.label));
+          options.append(option);
+        });
+        field.append(labelRow, options);
+        return field;
+      }
+
+      const pauseField = pauseContextField();
 
       function requestRelationshipField() {
         const field = node("div", "annotation-field");
@@ -3778,7 +3834,15 @@
       updateLocalSaveCopy();
       actions.append(saveStatus, completeNext);
 
-      form.append(triggerField, relationshipField, recoveryField, notesField, followUpField, actions);
+      form.append(
+        triggerField,
+        ...(pauseField ? [pauseField] : []),
+        relationshipField,
+        recoveryField,
+        notesField,
+        followUpField,
+        actions
+      );
       wrapper.append(form);
       return wrapper;
     }
@@ -4241,7 +4305,7 @@
       const headers = [
         "episode_id", "agent", "onset", "review_state",
         "trigger_category_ids", "trigger_category_labels", "request_relationship_id",
-        "request_relationship_label", "recovery_mechanism_ids",
+        "request_relationship_label", "pause_context_id", "pause_context_label", "recovery_mechanism_ids",
         "recovery_mechanism_labels", "notes", "follow_ups_json", "updated_at"
       ];
       const rows = episodes.map((episode) => {
@@ -4255,6 +4319,8 @@
           (annotation.trigger_categories || []).map((id) => categoryLabel("trigger", id)).join("|"),
           annotation.request_relationship || "",
           annotation.request_relationship ? categoryLabel("request_relationship", annotation.request_relationship) : "",
+          annotation.pause_context || "",
+          pauseContextOptions.find((item) => item.id === annotation.pause_context)?.label || "",
           (annotation.recovery_mechanisms || []).join("|"),
           (annotation.recovery_mechanisms || []).map((id) => categoryLabel("recovery", id)).join("|"),
           annotation.notes,
