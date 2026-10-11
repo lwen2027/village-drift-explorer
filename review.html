@@ -2513,6 +2513,10 @@
       return String(activity || "Selected drift episode").replace(/\s+/g, " ").trim();
     }
 
+    function displayEpisodeId(episodeId) {
+      return String(episodeId || "").replace(/^episode-(?:v2-)?/, "");
+    }
+
     function episodeAnchor(episode) {
       return episode?.onset || episode?.activity_start
         || episode?.supporting_seed_days?.[0]
@@ -3970,7 +3974,7 @@
         if (submit.disabled) return;
         const mergeTargets = category.value === "merge_episodes" ? selectedMergeTargets() : [];
         const categoryName = reviewCategoryLabels[category.value];
-        const shortId = episode.episode_id.replace(/^episode-/, "").slice(0, 16);
+        const shortId = displayEpisodeId(episode.episode_id).slice(0, 16);
         const title = `[Episode review] ${categoryName}: ${episode.agent || period.agent} · ${String(episode.onset || episode.activity_start || "unknown").slice(0, 10)} · ${shortId}`;
         const body = reviewIssueBody(episode, period, category.value, notes.value, mergeTargets);
         const issueUrl = new URL(`https://github.com/${reviewRepository}/issues/new`);
@@ -4074,7 +4078,7 @@
         ));
       }
 
-      const footerId = episode ? `EPISODE ID ${episode.episode_id}` : `GOAL PERIOD ${period.id}`;
+      const footerId = episode ? `EPISODE ID ${displayEpisodeId(episode.episode_id)}` : `GOAL PERIOD ${period.id}`;
       panel.append(node("div", "panel-footer", `${footerId} · SECOND AUDIT V2 · SOURCE DATA READ-ONLY`));
 
       const orderedDrifts = [...period.drifts]
