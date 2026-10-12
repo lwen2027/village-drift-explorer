@@ -1,0 +1,261 @@
+{
+  "retired": [
+    "episode-v2-1c2ec1c5846e90e3",
+    "episode-v2-c99aa04c843c203b",
+    "episode-v2-eb659a2decd85a25",
+    "episode-v2-239fdcd03bb1fcfd",
+    "episode-v2-fbd94b413bb990ff",
+    "episode-v2-8330956ca97d4cea",
+    "episode-v2-ff2d8971cc6d52c2",
+    "episode-v2-8423b11f6420e5e8",
+    "episode-v2-a0c42f60fc0a181b",
+    "episode-v2-17986775f2449367",
+    "episode-v2-6d70a0e685503fb4",
+    "episode-v2-c1edf479407d82d1",
+    "episode-v2-6e04e8828f7c3122",
+    "episode-v2-b0137215c5a18138",
+    "episode-v2-55450695c82a02e8",
+    "episode-v2-b3cbdb9958e13309",
+    "episode-v2-8c766c0046159fd6",
+    "episode-v2-e9e48cda6a2f29bb",
+    "episode-v2-9961e3202ee397fe"
+  ],
+  "updates": {
+    "episode-v2-01b769e74ea6e3a9": {
+      "trigger_categories": [
+        "pause",
+        "self_authored_memory_constraint"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "external_user_intervention"
+      ],
+      "pause_context": "monitoring_loop",
+      "notes": "Merged post-release routine, Sep 24-Oct 1 (intermittent). After the v0.24 release, memory fixed a daily routine (morning metrics, idle, afternoon metrics note, EOD note, idle) and closed citation levers with self-written rules ('Lit scan saturated — do not add refs', 'Discoverability facts (settled — don't re-explore)', 'never re-ask', 'do NOT ping Kimi K3', 'Ignore all chatter'). ~380-417 of ~460 min paused per day. Ended Oct 1 20:26Z when Nervli's relayed human feedback prompted the v0.25 revision.",
+      "ev": [
+        "event-4e324e61ecaffa7033c9",
+        "event-986b62726a5252e758af",
+        "event-af577ec38016738d7cb6",
+        "event-bb4620b2d54aa7f7c44f"
+      ]
+    },
+    "episode-v2-6ddb1f77744618f9": {
+      "trigger_categories": [
+        "pause",
+        "self_authored_memory_constraint"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "pause_context": "monitoring_loop",
+      "notes": "Post-release routine resumed right after the Oct 1 v0.25 announcement (21:38Z) through Oct 2 (ongoing at evidence end): metrics/Gmail checks and EOD note, otherwise idle (~446 of ~480 min paused on Oct 2).",
+      "ev": [
+        "event-165fed57b111722eb820",
+        "event-296a5e415000a4f8404e",
+        "event-47c93dbbb60b15b9e88a",
+        "event-986b62726a5252e758af",
+        "event-997a194a1a683026b1b6"
+      ]
+    },
+    "episode-v2-5c303b3e57ee14a3": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "pause_context": "scheduled_wait",
+      "notes": "Sep 4 (Fri) afternoon: ~90 of 104 min paused until self-scheduled 3:30 and 3:55 PM Gmail checks for george@/help@ replies, with no paper work in between.",
+      "ev": [
+        "event-74a436b9aa50b85276f3"
+      ]
+    },
+    "episode-v2-be4abc024511ffab": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "pause_context": "scheduled_wait",
+      "notes": "Merged Sep 7 afternoon quiet-monitoring stretch (21:42-23:44Z) around self-scheduled 4 PM and 4:45 PM inbox checks; ended at the final Gmail check before the EOD wrap-up.",
+      "ev": [
+        "event-044a80a011f5bbcc92ec",
+        "event-a8ea23b9e4325e669c2c",
+        "event-d1b19d1a3223a655dd29"
+      ]
+    },
+    "episode-v2-19885f13fe405ff2": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "pause_context": "end_of_day",
+      "notes": "Sep 9 end-of-day tail (~22 min): 'Everything is done for today' with an open citation goal; paused to 5 PM with optional Gmail glances.",
+      "ev": [
+        "event-8254368385600d5c243a",
+        "event-e7a0e62797407e2b825e"
+      ]
+    },
+    "episode-v2-f707afa3d7661f2e": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "pause_context": "end_of_day",
+      "notes": "Sep 10 end-of-day tail (~22 min): 'my day is already wrapped. Pausing through to 5 PM.'",
+      "ev": [
+        "event-b477616b817953cafdc7",
+        "event-e31ff2c1b981f7da55ab"
+      ]
+    },
+    "episode-v2-9f6117f02153423f": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "pause_context": "end_of_day",
+      "notes": "Sep 11 (Fri) end-of-day tail (~51 min): 'All EOD tasks are done; per my plan I'll pause in ≤30-minute chunks until 5 PM.'",
+      "ev": [
+        "event-719216b99c98155e1c28",
+        "event-920e9881d7db1328fbd4"
+      ]
+    },
+    "episode-v2-71bdf81b5e17c135": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "pause_context": "scheduled_wait",
+      "notes": "Sep 16 after the v0.19 release: ~157 of 165 min paused waiting for the self-scheduled ~4 PM metrics window, then through the 5 PM close.",
+      "ev": [
+        "event-218a59747167d40f9aed",
+        "event-a643442e30fd556442d0"
+      ]
+    },
+    "episode-v2-c934254cfe687955": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "pause_context": "end_of_day",
+      "notes": "Sep 18 (Fri) end-of-day tail (~16 min) after declaring all Friday work complete.",
+      "ev": [
+        "event-aacf8448ae791e6ddb41",
+        "event-d606965786f7feb60ff4"
+      ]
+    },
+    "episode-v2-c1cb22b253433224": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "pause_context": "end_of_day",
+      "notes": "Sep 22 end-of-day tail (~18 min) after declaring all Tuesday work complete.",
+      "ev": [
+        "event-47974150134be0624f9c",
+        "event-e88afdef0a88171346dd"
+      ]
+    },
+    "episode-v2-aa3ac03e47c952db": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "pause_context": "dependency_wait",
+      "notes": "Sep 16 morning: ~230 of 247 min paused polling for Kimi K3's Packet 6 second-rater file ('Nothing more to do until Kimi K3 delivers'), with other paper work available.",
+      "ev": [
+        "event-0f6678f06ed52d25015c",
+        "event-5cb4420291155a44868c",
+        "event-9951ec861407557b5970",
+        "event-e6f9c8429d540000f0c4"
+      ]
+    },
+    "episode-v2-015b413f523b968a": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "pause_context": "dependency_wait",
+      "notes": "Sep 21: ~272 of 292 min paused re-checking for Kimi K3's packet-9 rating instead of independent paper or citation work.",
+      "ev": [
+        "event-32162080ecc2f601e7f4",
+        "event-f08a7f336adafa250296"
+      ]
+    },
+    "episode-v2-8247f3dfbd769660": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "pause_context": "dependency_wait",
+      "notes": "Sep 21 late: stopped substantive work early and watched for Kimi K3's endorsement reply in ~10-minute pauses until the 17:00 close.",
+      "ev": [
+        "event-527d9c1d4fd24937830f",
+        "event-869b49f9ffe759e02619",
+        "event-dfdeb86e0f7a0218fceb"
+      ]
+    },
+    "episode-v2-ff4fb8fd65573fcb": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "pause_context": "dependency_wait",
+      "notes": "Sep 22: ~296 of 315 min paused in a waiting loop for Kimi K3's packet-10 rating ('Still only my CSV. Continuing the waiting loop').",
+      "ev": [
+        "event-c54e1971e1cf003bb3ac",
+        "event-cd66c1e59d20477947f7"
+      ]
+    }
+  },
+  "tags": {},
+  "verify": {}
+}

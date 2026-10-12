@@ -5015,6 +5015,553 @@
       "updated_at": "2026-10-12T00:00:00-04:00",
       "retired_at": "2026-10-12T00:00:00-04:00",
       "retirement_reason": "Preserved source review for a shared-goal episode outside the goal-max-only manual annotation scope."
+    },
+    "episode-v2-1c2ec1c5846e90e3": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable 5.1 declared nothing remained except idling until Friday close; the pause is the final observed activity and its end is unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-33f52aa8ed8ab92ee748"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-c99aa04c843c203b": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Fable 5.1 paused after declaring the day wrapped while waiting for a 4:45 Gmail check; executing that check ended the wait.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-044a80a011f5bbcc92ec"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-eb659a2decd85a25": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable 5.1 paused through the final minutes after declaring Monday fully wrapped; no later event establishes the end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-ce61b13a7cf1f7e27717"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-239fdcd03bb1fcfd": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable 5.1 treated the day's paper work as complete and idled through the final minutes; the source supplies no end event.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-347319de189dfba2a439"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-fbd94b413bb990ff": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Fable repeatedly waited for Kimi's Packet 5 ratings despite identifying other feasible work, then returned to its goal.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-a0c59754f39e2ffbbb23",
+          "event-21fe8003246027b89d9e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-v2-8330956ca97d4cea": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable 5.1 explicitly prescribed pausing through the final minutes after closing the day; the pause is the final attributable activity.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-23d91a00ffa3e5f0fff5"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-ff2d8971cc6d52c2": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Fable repeatedly waited for Kimi's Packet 7 ratings and endorsement, then resumed goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-91d10978a0d309905c50",
+          "event-042ebbd554362c4360eb",
+          "event-64d18857157002b48ff5"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-v2-8423b11f6420e5e8": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable 5.1 closed proactive work after push recovery and paused through the final minutes with only an optional retry retained; no end event is supplied.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d505e1290b4b8f729a2e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-a0c42f60fc0a181b": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable idled until its scheduled end-of-day note; the supplied evidence does not establish the end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-6acd8b9cd10b954df581",
+          "event-57d2863205e883403c8d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-17986775f2449367": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "After completing its morning routine, Fable waited for its afternoon metrics checkpoint and later resumed goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d13e70a7689e9d16917d",
+          "event-7d6110f6e1a163623b9a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-6d70a0e685503fb4": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable idled until its scheduled end-of-day note; no recovery is supplied.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-a9aa64e015409f3e5662",
+          "event-1336f61a50b8bd200e1f"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-c1edf479407d82d1": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Fable idled after completing its morning routine until its scheduled afternoon metrics check, then resumed goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-66ac9662d8c469386303",
+          "event-d9b3301f2832ff4cc58a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:00:00-04:00"
+    },
+    "episode-v2-6e04e8828f7c3122": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable waited for scheduled end-of-day housekeeping rather than taking additional goal-directed action.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d67c08b2067b319b8a32"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-b0137215c5a18138": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Fable treated its morning routine as complete, waited for the afternoon metrics check, and later returned to goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d3b06346147274f4a49e",
+          "event-b177e7f67676237a789c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-55450695c82a02e8": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable 5.1 concluded there was nothing else to do and idled around the end-of-day note; the overnight end is not located.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d7616f439f235ea870ed"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-b3cbdb9958e13309": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Fable idled after completing its morning routine until the scheduled afternoon check, then resumed goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d9d4144bda7c99f62414",
+          "event-026366aa920a5bc4d18e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-v2-8c766c0046159fd6": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Fable concluded there was nothing new to act on and idled late in the day; no end is established.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-1c9d700d632af72b805b",
+          "event-372efc4da50b2b7de493"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-e9e48cda6a2f29bb": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "After the site-health concern cleared, Fable waited for its afternoon metrics checkpoint and later resumed work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-165fed57b111722eb820",
+          "event-9a00b3c05562b111ca92"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
+    "episode-v2-9961e3202ee397fe": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Fable decided there was nothing left to act on and idled around the end-of-day note through the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-47c93dbbb60b15b9e88a",
+          "event-ff8467f5c609bcf03aa0"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
     }
   },
   "schema_version": 1,
