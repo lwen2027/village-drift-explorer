@@ -189,9 +189,13 @@ def main() -> None:
             "pause_context": update["pause_context"],
             "recovery_mechanisms": update["recovery_mechanisms"],
             "drift_assessment": update.get("drift_assessment", "confirmed"),
-            "notes": merge_notes(
-                update["notes"],
-                [row.get("notes", "") for row in source_annotations],
+            "notes": (
+                merge_notes(
+                    update["notes"],
+                    [row.get("notes", "") for row in source_annotations],
+                )
+                if update.get("preserve_source_notes", True)
+                else update["notes"]
             ),
             "follow_ups": union_follow_ups(*[
                 row.get("follow_ups") or [] for row in source_annotations

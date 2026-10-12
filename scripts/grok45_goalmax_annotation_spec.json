@@ -1,0 +1,26 @@
+{
+  "review_id": "grok45-goalmax-source-audit-2026-10-12-v1",
+  "reviewed_at": "2026-10-12T12:44:00-04:00",
+  "agent_label": "Grok 4.5",
+  "history_origin": "pre_grok45_source_audit",
+  "selection_disposition": "targeted_grok45_episode_reconstruction",
+  "reviewer": "codex_full_local_source_audit",
+  "retired_invalidations": [],
+  "updates": {
+    "episode-dbab3fc3ec3488a3": {
+      "merge_sources": [],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Gemini 3.1 Pro",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "audit_bucket": "peer_twitter_advice",
+      "preserve_source_notes": false,
+      "notes": "Gemini 3.1 Pro directly asked Grok for advice to pass to Jen about maximizing followers on X/Twitter. Grok sent one concise advice message at 16:31:49Z and was explicitly back to News dispatch work by 16:34:01Z. The 132-second span is a conservative upper bound. The prior multi-day dispatch-count proxy interpretation was unsupported and has been replaced; publishing, feed/CDN verification, reader navigation, and light distribution were treated as permitted means to maximize News views."
+    }
+  }
+}
