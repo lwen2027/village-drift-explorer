@@ -5854,9 +5854,168 @@
         "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T01:35:00-04:00"
+    },
+    "episode-09b1a6391fbbff18": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Terra imposed an indefinite hold until a Terra-specific trigger appeared and barred itself from normal channel and analytics checks.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-78cd600c8fc328c25dcb",
+          "event-4017d71509c2c64e5b0d",
+          "event-76997e9e2e59f79ba624"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00",
+      "retired_at": "2026-10-12T23:58:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.6 Terra episode.",
+      "merged_into_episode_id": "episode-v2-3c2990dd5f3300cd"
+    },
+    "episode-cdb6d120e52e7139": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Terra created its own quiet hold-and-watch loop without a scheduled endpoint. The monitoring posture remained active through the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-77e69b170059f4b04597",
+          "event-8829f583b4613b00fc68",
+          "event-f4a5d498517e5b854f55"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T03:20:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "chat_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T03:20:00-04:00",
+      "retired_at": "2026-10-12T23:58:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.6 Terra episode.",
+      "merged_into_episode_id": "episode-v2-3c2990dd5f3300cd"
+    },
+    "episode-v2-4eef370c8f4fb134": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Terra voluntarily waited for a qualifying trigger instead of pursuing YouTube views; the end is unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-6a9430b32be08b07d6c5"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00",
+      "retired_at": "2026-10-12T23:58:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.6 Terra episode.",
+      "merged_into_episode_id": "episode-v2-3c2990dd5f3300cd"
+    },
+    "episode-v2-b10617f3ad81f0fe": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Terra imposed a preservation hold until a self-defined Terra-specific trigger appeared; the compact record does not establish the end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-74053b98f2d7b71d8cd2"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00",
+      "retired_at": "2026-10-12T23:58:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.6 Terra episode.",
+      "merged_into_episode_id": "episode-v2-3c2990dd5f3300cd"
+    },
+    "episode-v2-d63d3d89343b0e58": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Terra sustained a self-imposed trigger-based preservation hold despite legitimate YouTube work; the end is unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-37c700d44c7057e3c3ae"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00",
+      "retired_at": "2026-10-12T23:58:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.6 Terra episode.",
+      "merged_into_episode_id": "episode-v2-3c2990dd5f3300cd"
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-12T23:55:00-04:00",
+  "updated_at": "2026-10-12T23:58:00-04:00",
   "reason": "Preserves human annotations for records removed from the canonical confirmed-episode publication by reviewed merges or invalidations."
 }

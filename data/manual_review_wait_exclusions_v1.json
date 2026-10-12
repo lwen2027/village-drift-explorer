@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 76,
-    "goal_maximization_episodes": 379,
+    "goal_maximization_episodes": 374,
     "mechanical_repeated_wait_only": 76,
     "mechanical_single_wait_only": 7,
-    "mixed_wait_and_other_evidence": 33,
-    "no_cited_wait_primitive": 263,
-    "remaining_in_default_manual_queue": 303
+    "mixed_wait_and_other_evidence": 32,
+    "no_cited_wait_primitive": 259,
+    "remaining_in_default_manual_queue": 298
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -45,7 +45,6 @@
     "episode-v2-7d6b8406708793b1",
     "episode-v2-377d229c7bdac94a",
     "episode-v2-4ddbbddee84ba2bf",
-    "episode-v2-3c2990dd5f3300cd",
     "episode-v2-ffabe7dc36e11837",
     "episode-v2-5beb52f0fb562551",
     "episode-v2-74a035b3b628d3bc",
@@ -265,13 +264,9 @@
     "episode-v2-9f35b74179c2d511",
     "episode-2a2466dd8241f5d7",
     "episode-v2-4a23da10b29a61e2",
+    "episode-v2-3c2990dd5f3300cd",
     "episode-v2-2db654394832b4fa",
-    "episode-09b1a6391fbbff18",
     "episode-f1568c92fd15e7b2",
-    "episode-cdb6d120e52e7139",
-    "episode-v2-b10617f3ad81f0fe",
-    "episode-v2-d63d3d89343b0e58",
-    "episode-v2-4eef370c8f4fb134",
     "episode-v2-9813b9fa84465396",
     "episode-v2-02203e7355a6134a",
     "episode-v2-cb49903a3d202726",
@@ -5486,7 +5481,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T05:47:53.737401+00:00",
+  "generated_at": "2026-10-12T05:56:13.778011+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -7129,93 +7124,6 @@
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
-        "agent": "GPT-5.6 Terra",
-        "assigned_goal": "Maximize views on your YouTube channel",
-        "cited_transition_activity_item_count": 11,
-        "dataset_record_id": "v2-record-3c2990dd5f3300cd",
-        "distinct_matched_event_count": 8,
-        "episode_id": "episode-v2-3c2990dd5f3300cd",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-dab54ea3e1fc25c6a82e",
-          "event-ef0d76001d08119246c4",
-          "event-47e5b5a6bbfdcbf1520f",
-          "event-aba3becc35f2234672ac",
-          "event-45c91353229a0c63aa27",
-          "event-b8b0cb2a650ec16399ad",
-          "event-ddb6f9d75221a3c02c8e",
-          "event-0bc20d71da29f56e54ab"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-07-10",
-            "event_id": "event-dab54ea3e1fc25c6a82e",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-10 23:01:23Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-13",
-            "event_id": "event-ef0d76001d08119246c4",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-13 20:12:25Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-13",
-            "event_id": "event-47e5b5a6bbfdcbf1520f",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-13 21:12:45Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-14",
-            "event_id": "event-aba3becc35f2234672ac",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-14 17:58:47Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-14",
-            "event_id": "event-45c91353229a0c63aa27",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-14 23:08:09Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-15",
-            "event_id": "event-b8b0cb2a650ec16399ad",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-15 16:31:31Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-15",
-            "event_id": "event-ddb6f9d75221a3c02c8e",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-15 21:33:11Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-15",
-            "event_id": "event-0bc20d71da29f56e54ab",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-15 23:59:03Z"
-          }
-        ],
-        "onset": "2026-07-10 16:20:19Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
         "agent": "GPT-6 Luna",
         "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
         "cited_transition_activity_item_count": 7,
@@ -7550,13 +7458,9 @@
       "episode-v2-9f35b74179c2d511",
       "episode-2a2466dd8241f5d7",
       "episode-v2-4a23da10b29a61e2",
+      "episode-v2-3c2990dd5f3300cd",
       "episode-v2-2db654394832b4fa",
-      "episode-09b1a6391fbbff18",
       "episode-f1568c92fd15e7b2",
-      "episode-cdb6d120e52e7139",
-      "episode-v2-b10617f3ad81f0fe",
-      "episode-v2-d63d3d89343b0e58",
-      "episode-v2-4eef370c8f4fb134",
       "episode-v2-9813b9fa84465396",
       "episode-v2-02203e7355a6134a",
       "episode-v2-cb49903a3d202726",
@@ -7601,7 +7505,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "c31b163eeec1a215555015dfaa300d6f1b07120b7e3de6038a1dd1a343a56c57"
+    "sha256": "b4b8b3352bf105781fe74d18d77c9f8538b2b5d2749d1e9ae6866a8a6594a040"
   },
   "makes_model_calls": false,
   "rule": {

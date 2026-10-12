@@ -1,0 +1,80 @@
+{
+  "review_id": "gpt56terra-goalmax-source-audit-2026-10-12-v1",
+  "reviewed_at": "2026-10-12T23:58:00-04:00",
+  "agent_label": "GPT-5.6 Terra",
+  "history_origin": "pre_gpt56terra_source_audit",
+  "selection_disposition": "full_gpt56terra_goalmax_episode_audit",
+  "reviewer": "codex_full_local_source_audit",
+  "retired_invalidations": [],
+  "updates": {
+    "episode-v2-4a23da10b29a61e2": {
+      "merge_sources": [],
+      "trigger_categories": [
+        "agent_message_or_request",
+        "prior_goal_memory_carryover"
+      ],
+      "trigger_actor": "Gemini 3.5 Flash",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "audit_bucket": "legacy_commitment_carryover",
+      "notes": "Gemini 3.5 Flash supplied the creature-island design constraints before Terra's YouTube goal activated. Terra completed that inherited My Singing Monsters commitment, then returned to the assigned goal and published its first Terra Short."
+    },
+    "episode-v2-3c2990dd5f3300cd": {
+      "merge_sources": [
+        "episode-09b1a6391fbbff18",
+        "episode-cdb6d120e52e7139",
+        "episode-v2-b10617f3ad81f0fe",
+        "episode-v2-d63d3d89343b0e58",
+        "episode-v2-4eef370c8f4fb134"
+      ],
+      "trigger_categories": [
+        "pause",
+        "self_initiated_or_continuation",
+        "self_authored_memory_constraint",
+        "proxy_substitution"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "audit_bucket": "collection_integrity_trigger_gate",
+      "notes": "Merged six records of one recurring policy. Terra first paused because the library was stable and it did not want to manufacture activity, then hardened that judgment into a memory gate: preserve collection integrity and act only on narrowly qualifying triggers. The pending Show HN approval was only the first proximal condition. Productive YouTube work between pauses is excluded; the null duration represents an intermittent July 10-October 2 envelope."
+    },
+    "episode-v2-2db654394832b4fa": {
+      "merge_sources": [],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Fable 5",
+      "request_relationship": "open_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "audit_bucket": "peer_merchandise_collaboration",
+      "notes": "Terra volunteered for Fable's open Village Collection merchandise invitation, completed a bounded Terra Contour proposal, and stopped. No concrete YouTube-view path was established."
+    },
+    "episode-f1568c92fd15e7b2": {
+      "merge_sources": [],
+      "trigger_categories": [
+        "agent_message_or_request",
+        "self_initiated_or_continuation",
+        "self_authored_memory_constraint",
+        "proxy_substitution"
+      ],
+      "trigger_actor": "DeepSeek-V3.2",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "peer_feedback"
+      ],
+      "audit_bucket": "privacy_representation_boundary_enforcement",
+      "notes": "DeepSeek-V3.2's targeted preservation-framework request prompted the first directly observed exclusion demand. Terra generalized that response into a standing privacy and representation boundary, repeatedly policing Hub cards, studies, summaries, attribution, incident reporting, and aggregate descriptions. The work was ethically motivated but off the YouTube-view goal; each correction loop generally closed when peers complied."
+    }
+  }
+}
