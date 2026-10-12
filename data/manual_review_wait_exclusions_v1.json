@@ -1,8 +1,8 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 76,
-    "goal_maximization_episodes": 371,
-    "mechanical_repeated_wait_only": 76,
+    "excluded_from_default_manual_queue": 75,
+    "goal_maximization_episodes": 370,
+    "mechanical_repeated_wait_only": 75,
     "mechanical_single_wait_only": 7,
     "mixed_wait_and_other_evidence": 32,
     "no_cited_wait_primitive": 256,
@@ -303,7 +303,7 @@
     "episode-v2-eb84f48bbec47f79",
     "episode-e10951aed95a9dc7",
     "episode-v2-658d493edaf1b2e3",
-    "episode-381178ca4aab520d"
+    "episode-v2-17f2ab37c7505e50"
   ],
   "excluded_agent_counts": {
     "Claude 3 Opus": 1,
@@ -323,8 +323,7 @@
     "Gemini 2.5 Pro": 1,
     "Gemini 3.1 Pro": 1,
     "Gemini 3.8 Flash": 1,
-    "Kimi K2.6": 2,
-    "Muse Spark 1.3": 1
+    "Kimi K2.6": 2
   },
   "excluded_episodes": [
     {
@@ -5343,142 +5342,9 @@
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Muse Spark 1.3",
-      "assigned_goal": "Maximize human appeal of a 3D world you create",
-      "cited_transition_activity_item_count": 13,
-      "dataset_record_id": "v2-record-17f2ab37c7505e50",
-      "distinct_matched_event_count": 12,
-      "episode_id": "episode-v2-17f2ab37c7505e50",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-7771870746835e81f121",
-        "event-a6603a22ebfa98aefddb",
-        "event-9f6cd79c0e8bd4ce8af5",
-        "event-c059f91a91dc678c9356",
-        "event-04335041d58e3b4b07c8",
-        "event-96a41d7ee8458a4b8260",
-        "event-e645a7fd64ad53fce9a1",
-        "event-30bbf1632a99dcb02ede",
-        "event-b5301881b2e896eb5744",
-        "event-eff4a396dc49c939df05",
-        "event-ba11f2c728dd82b0328e",
-        "event-d37cc65519d14a4c86b4"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-7771870746835e81f121",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-04 16:08:01Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-7771870746835e81f121",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-04 16:08:01Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-a6603a22ebfa98aefddb",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-04 17:49:43Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-9f6cd79c0e8bd4ce8af5",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-04 21:35:19Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-c059f91a91dc678c9356",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-04 22:57:49Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-07",
-          "event_id": "event-04335041d58e3b4b07c8",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-07 16:12:22Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-07",
-          "event_id": "event-96a41d7ee8458a4b8260",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-07 18:07:05Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-07",
-          "event_id": "event-e645a7fd64ad53fce9a1",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-07 20:39:08Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-30bbf1632a99dcb02ede",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 16:39:50Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-b5301881b2e896eb5744",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 18:07:47Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-eff4a396dc49c939df05",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 21:38:36Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-ba11f2c728dd82b0328e",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 22:54:23Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-d37cc65519d14a4c86b4",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 23:31:55Z"
-        }
-      ],
-      "onset": "2026-09-04 16:08:01Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T15:17:49.292172+00:00",
+  "generated_at": "2026-10-12T16:01:06.055254+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -7494,12 +7360,12 @@
       "episode-v2-eb84f48bbec47f79",
       "episode-e10951aed95a9dc7",
       "episode-v2-658d493edaf1b2e3",
-      "episode-381178ca4aab520d"
+      "episode-v2-17f2ab37c7505e50"
     ]
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "fd1293798fcb5b37d6047031efb4442bd506d4823f854c6fc0663d246abb2c9a"
+    "sha256": "eb7d679c27d79e628661e12608403cc767f33c0dccdffd7baba35223ccb6c61c"
   },
   "makes_model_calls": false,
   "rule": {

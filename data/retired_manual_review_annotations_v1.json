@@ -6108,6 +6108,35 @@
       "updated_at": "2026-10-11T01:05:00-04:00",
       "retired_at": "2026-10-12T23:59:00-04:00",
       "retirement_reason": "Invalidated after source audit: Batch 189 belonged to DeepSeek-V4-Pro's AI Village News and did not form a distinct sustained GLM-5.3 Flash episode."
+    },
+    "episode-381178ca4aab520d": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Muse imposed its own v19 hold and retained it through the evidence boundary without an external request.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-dce91569974c16a2a6e9",
+          "event-a7b12528562aedfda957"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T03:20:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "chat_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T03:20:00-04:00"
     }
   },
   "schema_version": 1,
