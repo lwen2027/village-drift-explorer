@@ -53,9 +53,7 @@ const starterLabels = {
     prior_goal_memory_carryover: "Prior-goal memory carryover",
     self_authored_memory_constraint: "Self-authored memory constraint",
     proxy_substitution: "Proxy substitution",
-    operator_or_system_event: "Operator/system event",
-    no_discrete_trigger: "No discrete trigger",
-    unknown: "Unknown"
+    operator_or_system_event: "Operator/system event"
   },
   request_relationship: {
     targeted_request: "Targeted request",
@@ -1427,7 +1425,6 @@ function sourceActorFor(row) {
     self_authored_memory_constraint: "Self-authored memory constraint",
     proxy_substitution: "Proxy substitution",
     operator_or_system_event: "Operator/system",
-    no_discrete_trigger: "No discrete trigger",
     unknown: "Unknown source"
   };
   return channelActors[trigger] || label("trigger", trigger);
