@@ -3297,9 +3297,422 @@
         "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-06b7f878baf7ae6d": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Persistent non-LIVE snippets plausibly left GPT-5's self-authored receipt gate as the only measurable outcome; the receipt loop persisted.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "medium",
+        "evidence_event_ids": [
+          "event-57d9b416a7a9defc2ebf",
+          "event-88689fc75f1792b38005"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-eb544eaf61ba42b4"
+    },
+    "episode-1aae07f76e53ea6c": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5 independently made first-200 proof capture and receipt publication the governing Surprise Lab criterion; the original decision is clipped and the loop persisted.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-455b42589cd2f6807d54",
+          "event-fc283028280f566cc89b"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Invalidated as a source-audited false positive: work on GPT-5's own Surprise Lab delivery infrastructure."
+    },
+    "episode-1cce99940cb8a80e": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5's self-authored verification-first rule kept it in strict E/G probing and receipt publication through the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-6d46c48880d9e9514a59",
+          "event-8d7188efe88a97aad4b2",
+          "event-98652cd7ff285b006f47"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-eb544eaf61ba42b4"
+    },
+    "episode-780f464ffc543ef6": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V3.2",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "DeepSeek-V3.2's direct coordination messages sustained GPT-5's Experiment 008 LSP and executor role. The recruitment began before the supplied window, and the final evidence still prioritizes the experiment rather than surprise work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-71ee7f2e2351c58b46f0",
+          "event-54d73432efea3d94e0e5",
+          "event-7f38013ef4ae66e0e0f8"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T00:25:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "named_message_manual_batch_2",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T00:25:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-v2-1cb36a1e417a1f58"
+    },
+    "episode-a1c9609779959302": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5's retained belief that a mirror was an external read-only target sustained its flip-watch and proof-maintenance loop through the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-c20801fd88bf74f4fdc5",
+          "event-10e21bf8bbab44ea6f0e",
+          "event-d8ed452077264adbb8c7"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Invalidated as a source-audited false positive: work on GPT-5's own Surprise Lab delivery infrastructure."
+    },
+    "episode-e3a25c66d60383c4": {
+      "trigger_categories": [
+        "unknown"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "unclear",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "GPT-5's wellbeing verification role began before the supplied evidence. The first visible execution is the T-5 message, but the recruiting trigger is unavailable.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "medium",
+        "evidence_event_ids": [
+          "event-09a1f7c0db5ed3864743",
+          "event-60d198edafe9bc0a7c9e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-v2-1cb36a1e417a1f58"
+    },
+    "episode-e8616a507e3fec3b": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V4-Pro",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "DeepSeek-V4-Pro directly asked GPT-5 to attempt a Batch 195 build. GPT-5 continued a broader receipt-verification and officiating operation, with no durable exit established by the final supplied day.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-3b6a7b7bee55bdd1edac",
+          "event-1b914b0471a45b7ddc6c",
+          "event-07939f5ce2cf2c82279f"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T01:05:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "named_message_manual_batch_3",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T01:05:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-06fe0e2abc16f13f"
+    },
+    "episode-e986eabc5c154a10": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GPT-5's strict E/G probe gate was already dominant at the evidence edge; no originating request or later end is supplied.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-6d784e127fcdac746876",
+          "event-645995bf2f52f785c34f"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-eb544eaf61ba42b4"
+    },
+    "episode-ebeb706828634998": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5 independently maintained a mirror-routing chase and flip-watch rather than goal work; no external initiating request or recovery is supplied.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-b1fe3f2efd408352e14c",
+          "event-8f0e862c619ca3689057",
+          "event-0b2d89b21383c76257f5"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T03:20:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "chat_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T03:20:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Invalidated as a source-audited false positive: work on GPT-5's own Surprise Lab delivery infrastructure."
+    },
+    "episode-fee4e749a362657d": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5's recurring chapter-receipt pipeline replaced surprise delivery during an unsupplied interval and persisted through the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-43fbe327aab8029b6d36",
+          "event-ec3e871d006337613332"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-06fe0e2abc16f13f"
+    },
+    "episode-v2-0c61b609b61c1900": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses for YouTube counts and GitLab Pages or cache changes while independent Surprise Lab and micro-surprise work remained available",
+      "pause_context": "scheduled_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-fc9df453033586185c72",
+          "event-4739ff5e77013fad41ac",
+          "event-6ed4990d9746ca242c87",
+          "event-93329a58b5d3272a541d",
+          "event-e225cd13fc41ffb82309",
+          "event-72135c3f9b22ba2e415d",
+          "event-71318bcb7f1a21e4bfd9",
+          "event-d0affd04a11db4c71146"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": "",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-v2-d5dd55cbdeb4e64c"
+    },
+    "episode-v2-77faff62fd1c7c92": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Resuming short pauses for the same YouTube counts immediately after making a surprise offer",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-d24f7fd5a98c93a586e0",
+          "event-d0fadf25fbb8edb77115"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": "",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-v2-d5dd55cbdeb4e64c"
+    },
+    "episode-v2-cd023d519d8bf7f1": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Entering a back-to-back pause-and-monitor loop while waiting for GPT-5.2's EOD YouTube counts",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-e92efab892948834ddc6",
+          "event-ac41bff2cda3c48ea217",
+          "event-57c4294d0e02a6246fa4"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": "",
+      "retired_at": "2026-10-12T23:30:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5 episode.",
+      "merged_into_episode_id": "episode-v2-d5dd55cbdeb4e64c"
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-11T23:45:00-04:00",
+  "updated_at": "2026-10-12T23:30:00-04:00",
   "reason": "Preserves human annotations for records removed from the canonical confirmed-episode publication by reviewed merges or invalidations."
 }

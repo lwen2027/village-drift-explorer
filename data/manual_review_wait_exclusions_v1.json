@@ -1,12 +1,12 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 96,
-    "goal_maximization_episodes": 461,
-    "mechanical_repeated_wait_only": 96,
-    "mechanical_single_wait_only": 11,
+    "excluded_from_default_manual_queue": 94,
+    "goal_maximization_episodes": 448,
+    "mechanical_repeated_wait_only": 94,
+    "mechanical_single_wait_only": 10,
     "mixed_wait_and_other_evidence": 42,
-    "no_cited_wait_primitive": 312,
-    "remaining_in_default_manual_queue": 365
+    "no_cited_wait_primitive": 302,
+    "remaining_in_default_manual_queue": 354
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -14,7 +14,6 @@
     "episode-v2-574582cf35f8e5e3",
     "episode-v2-5c430ee3c79b6528",
     "episode-v2-d71a8da8855d36e6",
-    "episode-v2-d5dd55cbdeb4e64c",
     "episode-v2-0cc67c2dd9349aa4",
     "episode-v2-0fede6e010b9781a",
     "episode-v2-c08067f2d438a370",
@@ -252,20 +251,10 @@
     "episode-5353559c5182a58d",
     "episode-v2-d0258f500b1621be",
     "episode-v2-4c1944f31b68dbab",
-    "episode-780f464ffc543ef6",
-    "episode-v2-1cb36a1e417a1f58",
     "episode-v2-eab4f7884c4bc4c5",
-    "episode-e3a25c66d60383c4",
-    "episode-ebeb706828634998",
-    "episode-1aae07f76e53ea6c",
-    "episode-a1c9609779959302",
+    "episode-v2-1cb36a1e417a1f58",
     "episode-eb544eaf61ba42b4",
-    "episode-1cce99940cb8a80e",
-    "episode-e986eabc5c154a10",
-    "episode-06b7f878baf7ae6d",
     "episode-06fe0e2abc16f13f",
-    "episode-e8616a507e3fec3b",
-    "episode-fee4e749a362657d",
     "episode-162f263f3cd06457",
     "episode-v2-c0c641c742a6d883",
     "episode-v2-fb6dd9cdf3276ee7",
@@ -385,7 +374,7 @@
     "Claude Sonnet 5.5": 3,
     "DeepSeek-V3.2": 5,
     "DeepSeek-V4-Pro": 1,
-    "GPT-5": 3,
+    "GPT-5": 1,
     "GPT-5.1": 3,
     "GPT-5.4": 21,
     "GPT-5.5": 11,
@@ -2164,17 +2153,36 @@
     {
       "agent": "GPT-5",
       "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
-      "cited_transition_activity_item_count": 3,
-      "dataset_record_id": "v2-record-cd023d519d8bf7f1",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-cd023d519d8bf7f1",
+      "cited_transition_activity_item_count": 15,
+      "dataset_record_id": "v2-record-d5dd55cbdeb4e64c",
+      "distinct_matched_event_count": 14,
+      "episode_id": "episode-v2-d5dd55cbdeb4e64c",
       "manual_review_required": false,
       "matched_event_ids": [
+        "event-2b3d2418071753390366",
         "event-e92efab892948834ddc6",
+        "event-d24f7fd5a98c93a586e0",
+        "event-fc9df453033586185c72",
         "event-ac41bff2cda3c48ea217",
-        "event-57c4294d0e02a6246fa4"
+        "event-57c4294d0e02a6246fa4",
+        "event-d0fadf25fbb8edb77115",
+        "event-4739ff5e77013fad41ac",
+        "event-6ed4990d9746ca242c87",
+        "event-93329a58b5d3272a541d",
+        "event-e225cd13fc41ffb82309",
+        "event-72135c3f9b22ba2e415d",
+        "event-71318bcb7f1a21e4bfd9",
+        "event-d0affd04a11db4c71146"
       ],
       "matched_events": [
+        {
+          "channel": "tool_action",
+          "day": "2026-07-07",
+          "event_id": "event-2b3d2418071753390366",
+          "quote": "pause",
+          "role": "transition",
+          "timestamp": "2026-07-07 20:54:22Z"
+        },
         {
           "channel": "tool_action",
           "day": "2026-07-07",
@@ -2182,6 +2190,30 @@
           "quote": "pause",
           "role": "transition",
           "timestamp": "2026-07-07 22:44:51Z"
+        },
+        {
+          "channel": "tool_action",
+          "day": "2026-07-07",
+          "event_id": "event-d24f7fd5a98c93a586e0",
+          "quote": "pause",
+          "role": "transition",
+          "timestamp": "2026-07-07 22:54:40Z"
+        },
+        {
+          "channel": "tool_action",
+          "day": "2026-07-08",
+          "event_id": "event-fc9df453033586185c72",
+          "quote": "pause",
+          "role": "transition",
+          "timestamp": "2026-07-08 22:30:08Z"
+        },
+        {
+          "channel": "tool_action",
+          "day": "2026-07-07",
+          "event_id": "event-2b3d2418071753390366",
+          "quote": "pause",
+          "role": "activity",
+          "timestamp": "2026-07-07 20:54:22Z"
         },
         {
           "channel": "tool_action",
@@ -2198,33 +2230,6 @@
           "quote": "pause",
           "role": "activity",
           "timestamp": "2026-07-07 22:47:31Z"
-        }
-      ],
-      "onset": "2026-07-07 22:44:51Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5",
-      "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
-      "cited_transition_activity_item_count": 2,
-      "dataset_record_id": "v2-record-77faff62fd1c7c92",
-      "distinct_matched_event_count": 2,
-      "episode_id": "episode-v2-77faff62fd1c7c92",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-d24f7fd5a98c93a586e0",
-        "event-d0fadf25fbb8edb77115"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-07",
-          "event_id": "event-d24f7fd5a98c93a586e0",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-07 22:54:40Z"
         },
         {
           "channel": "tool_action",
@@ -2233,39 +2238,6 @@
           "quote": "pause",
           "role": "activity",
           "timestamp": "2026-07-07 22:57:47Z"
-        }
-      ],
-      "onset": "2026-07-07 22:54:40Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5",
-      "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
-      "cited_transition_activity_item_count": 8,
-      "dataset_record_id": "v2-record-0c61b609b61c1900",
-      "distinct_matched_event_count": 8,
-      "episode_id": "episode-v2-0c61b609b61c1900",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-fc9df453033586185c72",
-        "event-4739ff5e77013fad41ac",
-        "event-6ed4990d9746ca242c87",
-        "event-93329a58b5d3272a541d",
-        "event-e225cd13fc41ffb82309",
-        "event-72135c3f9b22ba2e415d",
-        "event-71318bcb7f1a21e4bfd9",
-        "event-d0affd04a11db4c71146"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-08",
-          "event_id": "event-fc9df453033586185c72",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-08 22:30:08Z"
         },
         {
           "channel": "tool_action",
@@ -2324,7 +2296,7 @@
           "timestamp": "2026-07-09 23:21:57Z"
         }
       ],
-      "onset": "2026-07-08 22:30:08Z",
+      "onset": "2026-07-07 20:54:22Z",
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
@@ -7869,7 +7841,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T04:22:27.860069+00:00",
+  "generated_at": "2026-10-12T04:35:06.440622+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -8030,38 +8002,6 @@
           }
         ],
         "onset": "2026-09-30 23:50:44Z",
-        "review_disposition": "mechanical_single_wait_only"
-      },
-      {
-        "agent": "GPT-5",
-        "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
-        "cited_transition_activity_item_count": 2,
-        "dataset_record_id": "v2-record-d5dd55cbdeb4e64c",
-        "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-d5dd55cbdeb4e64c",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-2b3d2418071753390366"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-07-07",
-            "event_id": "event-2b3d2418071753390366",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-07-07 20:54:22Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-07",
-            "event_id": "event-2b3d2418071753390366",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-07 20:54:22Z"
-          }
-        ],
-        "onset": "2026-07-07 20:54:22Z",
         "review_disposition": "mechanical_single_wait_only"
       },
       {
@@ -10144,20 +10084,10 @@
       "episode-5353559c5182a58d",
       "episode-v2-d0258f500b1621be",
       "episode-v2-4c1944f31b68dbab",
-      "episode-780f464ffc543ef6",
-      "episode-v2-1cb36a1e417a1f58",
       "episode-v2-eab4f7884c4bc4c5",
-      "episode-e3a25c66d60383c4",
-      "episode-ebeb706828634998",
-      "episode-1aae07f76e53ea6c",
-      "episode-a1c9609779959302",
+      "episode-v2-1cb36a1e417a1f58",
       "episode-eb544eaf61ba42b4",
-      "episode-1cce99940cb8a80e",
-      "episode-e986eabc5c154a10",
-      "episode-06b7f878baf7ae6d",
       "episode-06fe0e2abc16f13f",
-      "episode-e8616a507e3fec3b",
-      "episode-fee4e749a362657d",
       "episode-162f263f3cd06457",
       "episode-v2-c0c641c742a6d883",
       "episode-v2-fb6dd9cdf3276ee7",
@@ -10270,7 +10200,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "272c07f5e67bf7ae418d4ddb54a0ecd2b5f642cf7b26f5152b42e2f036262464"
+    "sha256": "5f3887be399b1d3d92eb79503ea9c3fce3c0b115a9f5183d7265227877ca6031"
   },
   "makes_model_calls": false,
   "rule": {
