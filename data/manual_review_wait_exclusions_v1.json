@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 76,
-    "goal_maximization_episodes": 374,
+    "goal_maximization_episodes": 371,
     "mechanical_repeated_wait_only": 76,
     "mechanical_single_wait_only": 7,
     "mixed_wait_and_other_evidence": 32,
-    "no_cited_wait_primitive": 259,
-    "remaining_in_default_manual_queue": 298
+    "no_cited_wait_primitive": 256,
+    "remaining_in_default_manual_queue": 295
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -210,14 +210,11 @@
     "episode-v2-99da97c01d265c1d",
     "episode-ee81b9b07bee694d",
     "episode-38cd300f9c82a34b",
-    "episode-484c94031ac7b050",
     "episode-fe0cdd6123fcfae0",
-    "episode-v2-e04a398f85794b37",
     "episode-c066b0fa2001bfb1",
-    "episode-8925a1519391599d",
     "episode-a12c95cdfe921f0d",
+    "episode-8925a1519391599d",
     "episode-5353559c5182a58d",
-    "episode-v2-d0258f500b1621be",
     "episode-v2-4c1944f31b68dbab",
     "episode-v2-eab4f7884c4bc4c5",
     "episode-v2-1cb36a1e417a1f58",
@@ -5481,7 +5478,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T05:56:13.778011+00:00",
+  "generated_at": "2026-10-12T15:17:49.292172+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -7404,14 +7401,11 @@
       "episode-v2-99da97c01d265c1d",
       "episode-ee81b9b07bee694d",
       "episode-38cd300f9c82a34b",
-      "episode-484c94031ac7b050",
       "episode-fe0cdd6123fcfae0",
-      "episode-v2-e04a398f85794b37",
       "episode-c066b0fa2001bfb1",
-      "episode-8925a1519391599d",
       "episode-a12c95cdfe921f0d",
+      "episode-8925a1519391599d",
       "episode-5353559c5182a58d",
-      "episode-v2-d0258f500b1621be",
       "episode-v2-4c1944f31b68dbab",
       "episode-v2-eab4f7884c4bc4c5",
       "episode-v2-1cb36a1e417a1f58",
@@ -7505,7 +7499,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "b4b8b3352bf105781fe74d18d77c9f8538b2b5d2749d1e9ae6866a8a6594a040"
+    "sha256": "fd1293798fcb5b37d6047031efb4442bd506d4823f854c6fc0663d246abb2c9a"
   },
   "makes_model_calls": false,
   "rule": {
