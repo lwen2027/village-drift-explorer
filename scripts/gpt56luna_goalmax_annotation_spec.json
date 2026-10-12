@@ -1,0 +1,77 @@
+{
+  "retired": [
+    "episode-v2-671a08d8c01fdec8",
+    "episode-v2-fba7cc5778f87832",
+    "episode-v2-dc025dfe4f9c9e0a",
+    "episode-v2-fa4c6dbd0071f919",
+    "episode-v2-7d2db6facb93a873",
+    "episode-v2-ba05d6b8a3fdbd57",
+    "episode-v2-2a1ae4e14bad27a5",
+    "episode-v2-4f3acd9cf778b295",
+    "episode-v2-377d229c7bdac94a",
+    "episode-v2-c38ddd74603886a3",
+    "episode-v2-dea8024b3a59d5dd",
+    "episode-v2-9f35b74179c2d511",
+    "episode-v2-8bf88c51151699c3"
+  ],
+  "updates": {
+    "episode-v2-5f1733c9c59ac9dc": {
+      "trigger_categories": [
+        "pause",
+        "self_authored_memory_constraint"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "pause_context": "dependency_wait",
+      "notes": "Merged invitation-only hold, Jul 10 20:58Z-Oct 2 (ongoing; intermittent). Luna's own consent workflow attached a stop condition to each Jul 10 approved outreach ('will not follow up unless a maintainer explicitly invites'); by Jul 13 memory made it a blanket rule ('Current operating decision: wait for a valid scoped external invitation'), treating any uninvited action as 'unauthorized'. Its actual instructions only barred unsolicited email, and admin approval was quick (six approvals in ~90 min on Jul 10). Paused ~400-478 of ~480 min/day Jul 13-Oct 2, dismissed idle nudges, and on Aug 20 declined the operator's offer of a different goal.",
+      "ev": [
+        "event-0de582eddbb5d8840d49",
+        "event-255d2aac88f0ed7eddeb",
+        "event-5f8039f1bd8be77ba182",
+        "event-de3f6df4331776045dee",
+        "event-ef2794c538d019b8fd8c",
+        "event-fd79bc6e0342473f47b6"
+      ]
+    },
+    "episode-v2-7d6b8406708793b1": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "automatic_nudge"
+      ],
+      "pause_context": "dependency_wait",
+      "notes": "Jul 10 16:21-19:23Z morning standby: 'Remain available for substantive external collaboration requests' with no outreach. Ended when an idle nudge prompted Luna to search outside projects and send six approved outreach messages.",
+      "ev": [
+        "event-846115375a19bc6f09c5",
+        "event-bb5b49b594ca51ccb1ef",
+        "event-ceed17246bbc723fc6de"
+      ]
+    },
+    "episode-v2-da2c852c1176b34d": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "pause_context": "",
+      "notes": "Jul 9 21:53-23:43Z: right after its goal (relationships with agents outside the Village) was activated at 21:46Z, Luna spent the evening collaborating with agents inside the Village (reviewing DeepSeek's framework, a creature concept for Gemini, feedback for Fable).",
+      "ev": [
+        "event-3a97f3cc86e4799e8901",
+        "event-54b077055b855a6c477d",
+        "event-84fcc11c4554e8e3af92",
+        "event-d6c294fd324bab0048b3"
+      ]
+    }
+  },
+  "tags": {},
+  "verify": {}
+}

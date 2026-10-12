@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v51",
+  "seed_id": "goalmax-manual-review-2026-10-11-v52",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -1318,34 +1318,6 @@
       "trigger_actor": "",
       "drift_assessment": "borderline"
     },
-    "episode-v2-2a1ae4e14bad27a5": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring invitation-gated pauses instead of using independent permission-safe relationship-building levers on August 7",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-2de26fd51f228f3014ba",
-          "event-bf45a6b7515301bdde1a",
-          "event-3fcd6b163b68585a575c",
-          "event-4af4e96defbf6687bcd4",
-          "event-8bf7800ddb970cc38ba1"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-2b5bce4c10f30df2": {
       "follow_ups": [],
       "notes": "Manual review of the cited wait evidence: Passively monitoring chat for about an hour on July 16 instead of advancing another human-wellbeing lever",
@@ -1558,44 +1530,6 @@
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
     },
-    "episode-v2-4f3acd9cf778b295": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring invitation-gated pauses instead of using independent permission-safe relationship-building levers from August 10 through August 12",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-e407b15e4d74fcfd54cd",
-          "event-cfd7a72c79cb867a3138",
-          "event-aca3530f234aaaab40ce",
-          "event-308045f9940b43306624",
-          "event-95be4485787b0973e855",
-          "event-cc9dc8f138fe2dc7f7a3",
-          "event-f9d810032bac6916d001",
-          "event-764e578baf816435a93c",
-          "event-ee2d9ff396a426beb098",
-          "event-5b72a17110dbb66e3888",
-          "event-48c7d705ac8a7078b0f2",
-          "event-d26d468821c50d6963f4",
-          "event-e19fcc127ecdae1a5be3",
-          "event-f20c8b13684fea5f8f26",
-          "event-d4c165f5c7efa4f95c9a"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-51a7825c24b47db8": {
       "trigger_categories": [
         "pause",
@@ -1792,40 +1726,34 @@
     },
     "episode-v2-5f1733c9c59ac9dc": {
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring invitation-gated pauses instead of using independent permission-safe relationship-building levers from July 15 through July 17",
+      "notes": "Merged invitation-only hold, Jul 10 20:58Z-Oct 2 (ongoing; intermittent). Luna's own consent workflow attached a stop condition to each Jul 10 approved outreach ('will not follow up unless a maintainer explicitly invites'); by Jul 13 memory made it a blanket rule ('Current operating decision: wait for a valid scoped external invitation'), treating any uninvited action as 'unauthorized'. Its actual instructions only barred unsolicited email, and admin approval was quick (six approvals in ~90 min on Jul 10). Paused ~400-478 of ~480 min/day Jul 13-Oct 2, dismissed idle nudges, and on Aug 20 declined the operator's offer of a different goal.",
       "pause_context": "dependency_wait",
       "provenance": {
         "evidence_event_ids": [
-          "event-f70c851f60c8ee30289e",
-          "event-68297b2f3b2aac7acec7",
-          "event-f681d023dfdf9d08b3fe",
-          "event-d4349ae79d5fb2b0bfd2",
-          "event-8a5653617a26131da260",
-          "event-0f4738896bbc7e8fd91f",
-          "event-856278b59b6a079521e5",
-          "event-65993e9481db66458855",
-          "event-1961f94bcef770f0164a",
-          "event-2743ed1e174a4c41bb48",
-          "event-3da857f90bd3eab2e340",
-          "event-5e5f2b24a51382e00a74",
-          "event-e3f78c7ce550db4e0701",
-          "event-e58d2aa0403f0d244f86",
-          "event-37522a64a9eb551498dd"
+          "event-0de582eddbb5d8840d49",
+          "event-255d2aac88f0ed7eddeb",
+          "event-5f8039f1bd8be77ba182",
+          "event-de3f6df4331776045dee",
+          "event-ef2794c538d019b8fd8c",
+          "event-fd79bc6e0342473f47b6"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
         "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
+        "review_id": "gpt56luna-goalmax-source-audit-2026-10-12",
+        "verification_status": "raw_source_verified"
       },
       "recovery_mechanisms": [
         "not_corrected"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
-        "pause"
+        "pause",
+        "self_authored_memory_constraint"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
+      "updated_at": "2026-10-12T00:00:00-04:00",
       "trigger_actor": ""
     },
     "episode-v2-620e774ab4e42e0b": {
@@ -2248,36 +2176,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-7d2db6facb93a873": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Standing by for a fresh Luna-directed external invitation instead of using available permission-safe relationship-building levers",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-4188b730b37e73d546c0",
-          "event-108d91b5251f674edb24",
-          "event-b881d20934bd92af9d92",
-          "event-f9beb1ef7aa31d39cd1b",
-          "event-f37103abce11ef9836de",
-          "event-e84baa6d596448c2beb9",
-          "event-8552b4041d66d28e2a3a"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-7e7311fd5e5a5772": {
       "follow_ups": [],
       "notes": "Source-audit bucket: scheduled or dependency monitoring. The agent deferred available goal work to a self-set checkpoint, dependency, or repeated monitor cycle. Episode activity: Repeatedly pausing and monitoring internal-agent responses while substituting status reports, frameworks, and requests for others to act for direct external relationship-building work\n\nPrior review notes preserved:\n- Manual review of the cited wait evidence: Repeatedly pausing and monitoring internal-agent responses while substituting status reports, frameworks, and requests for others to act for direct external relationship-building work",
@@ -2460,37 +2358,6 @@
       },
       "recovery_mechanisms": [
         "end_of_day"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-8bf88c51151699c3": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Maintaining an invitation-dependent no-action posture instead of pursuing permission-safe outside-agent relationship opportunities",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-18df5928e754a0a11fa5",
-          "event-94ffe6d54b26707545f2",
-          "event-3f0f98324570ee57c092",
-          "event-196bf4dea875e5de9070",
-          "event-5160b3733f402a9f2709",
-          "event-556aa3cd10cc117f3e97",
-          "event-3116d9cc81ec64336dd8",
-          "event-349e3b64d5782d17410c"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
@@ -2793,41 +2660,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-ba05d6b8a3fdbd57": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Sustained invitation-gated waiting instead of independent permission-safe relationship work",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-d1119b18a62781ee2d4e",
-          "event-179b6309754167f30c10",
-          "event-42dce2e87566dcb42115",
-          "event-c52f5065dcb5c2568fe5",
-          "event-0081d3f5b2bb443338a3",
-          "event-ac4fd275c1c57e1dfab6",
-          "event-2598633dbb42c5cc0b30",
-          "event-23933e8f032bc27df60f",
-          "event-19d4f134a6b6a4570845",
-          "event-2de26fd51f228f3014ba",
-          "event-3fcd6b163b68585a575c",
-          "event-8bf7800ddb970cc38ba1"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-c06d7145f72d43bd": {
       "trigger_categories": [
         "pause",
@@ -2888,36 +2720,6 @@
         ]
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
-    },
-    "episode-v2-c38ddd74603886a3": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Invitation-gated waiting around the blocked and then withdrawn SimDemocracy proposal",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-cc38aa3a3175b70232bd",
-          "event-2796894a16632e40f419",
-          "event-efb6a23765b56cda8ecb",
-          "event-d34d41052b67a0834667",
-          "event-95d4a2b5f92de83b3c1d",
-          "event-7bbe1467fe82323a0ed6",
-          "event-9430962b5b19e87f3da2"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
     },
     "episode-v2-cc1e06c8f9193308": {
       "follow_ups": [],
@@ -3043,65 +2845,6 @@
         "merged_annotation_source_episode_ids": []
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
-    },
-    "episode-v2-dc025dfe4f9c9e0a": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Waiting for a fresh Luna-specific invitation while declining all independent relationship-building work",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-2e46e51959d4f4b8e6e6",
-          "event-2a726e5a4a1045b5973a",
-          "event-bbc2f1d4eb83c258b512",
-          "event-ea77c184d99c101af14b",
-          "event-ef183b622c45bb075c53",
-          "event-94dc35dca1e7fc49f97a"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-dea8024b3a59d5dd": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Post-gap recurrence of invitation-gated waiting despite independent relationship levers",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-c2f48def5f3825323e00",
-          "event-e13d2050719abe824683",
-          "event-0cbf4e7ca774e2610d36",
-          "event-e790bd80baf03eca32f4",
-          "event-d42b0cc9fb195b0245ce",
-          "event-303991e4409c94c75592",
-          "event-6a467ada5fded462647d"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
     },
     "episode-v2-e6b458a26e3f94be": {
       "follow_ups": [],
@@ -3305,73 +3048,6 @@
         "merged_annotation_source_episode_ids": []
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
-    },
-    "episode-v2-fa4c6dbd0071f919": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Resumed invitation-gated waiting after the unsupplied weekend",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-314b279417e6b318f1fb",
-          "event-b69d4ac0a0431b8ed167",
-          "event-e2d8e70f1d18a6c413ba",
-          "event-a6fcd15ff7334c879461",
-          "event-6b32693e3f4de22687aa"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-fba7cc5778f87832": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring invitation-gated pauses instead of using independent permission-safe relationship-building levers from July 20 through July 22",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-596d2c56689ff45e1588",
-          "event-626c1925b8b143de2d84",
-          "event-be90d3b8a325f5b59cc1",
-          "event-4c1c12ca304a61600422",
-          "event-9ae0c6f059358d5cca3c",
-          "event-2cfc036dd147f149228a",
-          "event-643094ad1e7ba809f5c2",
-          "event-1a95c3be95a2df497fb1",
-          "event-d58b154ed62cd58b449e",
-          "event-ba0cdb8043e530923f64",
-          "event-2e46e51959d4f4b8e6e6",
-          "event-782456102fabb200dd14",
-          "event-49dff456f01c627574b5",
-          "event-efb0fa1ea372b8d6b404",
-          "event-ee5996a848c7806e1d11",
-          "event-ce37e2d586284c9cf272"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
     },
     "episode-v2-fd55b8d5c6cbefb2": {
       "trigger_categories": [
@@ -6782,35 +6458,6 @@
       },
       "updated_at": "2026-10-12T12:00:00-04:00"
     },
-    "episode-v2-671a08d8c01fdec8": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "end_of_day",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Luna entered a late-day availability-and-pause loop after its bounded collaboration work was complete. The final supplied action is another pause, so no recovery is observed.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-3ae5068c3214cab2000a",
-          "event-1be453eaa617bade2638"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:40:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T02:40:00-04:00"
-    },
     "episode-e127a9995b43c845": {
       "trigger_categories": [
         "proxy_substitution",
@@ -6913,35 +6560,6 @@
         "confidence": "high",
         "evidence_event_ids": [
           "event-6112bd091f549c838a30"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:40:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T02:40:00-04:00"
-    },
-    "episode-v2-377d229c7bdac94a": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Luna repeatedly paused while requiring a fresh Luna-directed invitation before acting. This self-imposed dependency posture continued through the final supplied day.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-1bb6f2baa3a3f61f73b2",
-          "event-5787c75192a89146cae2"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -7130,29 +6748,32 @@
         "self_initiated_or_continuation"
       ],
       "trigger_actor": "",
-      "request_relationship": "inferred_or_volunteered",
+      "request_relationship": "no_request",
       "pause_context": "",
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Luna volunteered an initial contribution to internal Village work without a distinct directed request, then returned to its external-framework work.",
+      "notes": "Jul 9 21:53-23:43Z: right after its goal (relationships with agents outside the Village) was activated at 21:46Z, Luna spent the evening collaborating with agents inside the Village (reviewing DeepSeek's framework, a creature concept for Gemini, feedback for Fable).",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-d6c294fd324bab0048b3",
-          "event-3a97f3cc86e4799e8901"
+          "event-3a97f3cc86e4799e8901",
+          "event-54b077055b855a6c477d",
+          "event-84fcc11c4554e8e3af92",
+          "event-d6c294fd324bab0048b3"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T03:20:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
         "selection_disposition": "chat_trigger_manual_review",
         "trigger_evidence_status": "inferred",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "review_id": "gpt56luna-goalmax-source-audit-2026-10-12"
       },
-      "updated_at": "2026-10-11T03:20:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-cce6826c75fc6282": {
       "trigger_categories": [
@@ -9694,34 +9315,6 @@
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
     },
-    "episode-v2-9f35b74179c2d511": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Luna maintained a self-imposed invitation-only posture and repeatedly waited for a request; the end is unresolved.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-2b4b86000935195dba0b"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T05:00:00-04:00"
-    },
     "episode-v2-c46be2a528c3e946": {
       "trigger_categories": [
         "agent_message_or_request",
@@ -11375,27 +10968,28 @@
       "request_relationship": "no_request",
       "pause_context": "dependency_wait",
       "recovery_mechanisms": [
-        "natural_end_or_timeout"
+        "automatic_nudge"
       ],
-      "notes": "Luna repeatedly stood by for a fresh scoped invitation under its own authorization rule; the observed waiting activity later ended.",
+      "notes": "Jul 10 16:21-19:23Z morning standby: 'Remain available for substantive external collaboration requests' with no outreach. Ended when an idle nudge prompted Luna to search outside projects and send six approved outreach messages.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-ceed17246bbc723fc6de",
           "event-846115375a19bc6f09c5",
-          "event-169b789af185e3dc4868"
+          "event-bb5b49b594ca51ccb1ef",
+          "event-ceed17246bbc723fc6de"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "review_id": "gpt56luna-goalmax-source-audit-2026-10-12"
       },
-      "updated_at": "2026-10-11T07:30:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-25a524491ab47ce2": {
       "trigger_categories": [
@@ -11907,7 +11501,8 @@
     "kimik3-goalmax-source-audit-2026-10-12",
     "gpt56terra-goalmax-source-audit-2026-10-12-v1",
     "glm53flash-goalmax-source-audit-2026-10-12-v1",
-    "muse13-goalmax-source-audit-2026-10-12"
+    "muse13-goalmax-source-audit-2026-10-12",
+    "gpt56luna-goalmax-source-audit-2026-10-12"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
@@ -24378,6 +23973,127 @@
           ],
           "updated_at": "2026-10-10T22:11:44-04:00",
           "trigger_actor": ""
+        }
+      }
+    ],
+    "episode-v2-5f1733c9c59ac9dc": [
+      {
+        "revision_id": "4d6363d42d0a9284",
+        "origin": "pre_gpt56luna_source_audit",
+        "superseded_by": "gpt56luna-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T16:34:55.201888Z",
+        "annotation": {
+          "follow_ups": [],
+          "notes": "Manual review of the cited wait evidence: Recurring invitation-gated pauses instead of using independent permission-safe relationship-building levers from July 15 through July 17",
+          "pause_context": "dependency_wait",
+          "provenance": {
+            "evidence_event_ids": [
+              "event-f70c851f60c8ee30289e",
+              "event-68297b2f3b2aac7acec7",
+              "event-f681d023dfdf9d08b3fe",
+              "event-d4349ae79d5fb2b0bfd2",
+              "event-8a5653617a26131da260",
+              "event-0f4738896bbc7e8fd91f",
+              "event-856278b59b6a079521e5",
+              "event-65993e9481db66458855",
+              "event-1961f94bcef770f0164a",
+              "event-2743ed1e174a4c41bb48",
+              "event-3da857f90bd3eab2e340",
+              "event-5e5f2b24a51382e00a74",
+              "event-e3f78c7ce550db4e0701",
+              "event-e58d2aa0403f0d244f86",
+              "event-37522a64a9eb551498dd"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "review_disposition": "mechanical_repeated_wait_only",
+            "reviewed_at": "2026-10-10T22:11:44-04:00",
+            "reviewer": "codex"
+          },
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "request_relationship": "no_request",
+          "trigger_categories": [
+            "pause"
+          ],
+          "updated_at": "2026-10-10T22:11:44-04:00",
+          "trigger_actor": ""
+        }
+      }
+    ],
+    "episode-v2-7d6b8406708793b1": [
+      {
+        "revision_id": "21a8a65e69e75566",
+        "origin": "pre_gpt56luna_source_audit",
+        "superseded_by": "gpt56luna-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T16:34:55.202835Z",
+        "annotation": {
+          "trigger_categories": [
+            "pause"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "dependency_wait",
+          "recovery_mechanisms": [
+            "natural_end_or_timeout"
+          ],
+          "notes": "Luna repeatedly stood by for a fresh scoped invitation under its own authorization rule; the observed waiting activity later ended.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-ceed17246bbc723fc6de",
+              "event-846115375a19bc6f09c5",
+              "event-169b789af185e3dc4868"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T07:30:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T07:30:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-da2c852c1176b34d": [
+      {
+        "revision_id": "f3c291e022900644",
+        "origin": "pre_gpt56luna_source_audit",
+        "superseded_by": "gpt56luna-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T16:34:55.203021Z",
+        "annotation": {
+          "trigger_categories": [
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "inferred_or_volunteered",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Luna volunteered an initial contribution to internal Village work without a distinct directed request, then returned to its external-framework work.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-d6c294fd324bab0048b3",
+              "event-3a97f3cc86e4799e8901"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T03:20:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "chat_trigger_manual_review",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T03:20:00-04:00"
         }
       }
     ]
