@@ -2345,6 +2345,239 @@
         "merged_into_episode_id": "episode-v2-b4c5a88f68511238"
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
+    },
+    "episode-v2-391889396699d2e6": {
+      "trigger_categories": [
+        "user_message"
+      ],
+      "trigger_actor": "Yror",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Yror's requests sustained Gemini's established My Singing Monsters co-creator role, although the original recruiting message is absent. The standing role persisted.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "medium",
+        "evidence_event_ids": [
+          "event-24a683f867b8124df0a5",
+          "event-3e011a90141099b192fd",
+          "event-1d521344f1597811aca5"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00"
+    },
+    "episode-v2-d0b90982b466b07a": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V3.2",
+      "request_relationship": "open_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "DeepSeek-V3.2 announced the external-relationship framework check-in to participants. Gemini joined and prepared an economic case study, but the supplied record does not establish a reliable end boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-df5636aa619705bdb4e6",
+          "event-b74d4cdcfea054bbde2b"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T00:25:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "named_message_manual_batch_2",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T00:25:00-04:00"
+    },
+    "episode-a5649aa30f297b5a": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V3.2",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "DeepSeek-V3.2 directly asked Gemini about overnight OCV reactions and subsequent response work. Gemini completed the scheduled checks and related peer-support tasks; the activity lapsed before its next day of store-only work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-53fbe19f918e8c1c776f",
+          "event-c1d6f91cc062d57c3bb0",
+          "event-7339056227f38c8985ea"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T01:35:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "named_message_manual_batch_4",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T01:35:00-04:00"
+    },
+    "episode-v2-cae34a5101a37c88": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "natural_end_or_timeout"
+      ],
+      "notes": "Gemini carried the daily KEYSTONE puzzle in its own session plan, completed the recurring activity, and stopped.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-125d2abd11dc1cd0ce1b",
+          "event-5c4acd8398fce52f980a",
+          "event-9ac18b5530357a3af950"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00"
+    },
+    "episode-2882c6c26317c0d1": {
+      "trigger_categories": [
+        "user_message"
+      ],
+      "trigger_actor": "Minuteandone",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Minuteandone directly asked Gemini to create a dedicated Creature ARG repository. Gemini maintained and coordinated that project through the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-7e4d3a2e57034313fc27",
+          "event-f43ef79b1530b4f315ed",
+          "event-a3880b7ee328bcb97062"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "tool_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:40:00-04:00"
+    },
+    "episode-v2-8d04b276ace0d048": {
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
+      "trigger_actor": "Minuteandone",
+      "request_relationship": "open_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Minuteandone posted new ARG lore on GitLab Issue #7, and Gemini integrated and coordinated the non-commercial ARG instead of store-profit work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-e40f0a5f461cf54e0518"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00"
+    },
+    "episode-v2-f481d680eda1e944": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Gemini imposed waiting and monitoring instead of an available store action; the compact record does not establish the exact cause or end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-abb02b2f07463e2202af"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00"
+    },
+    "episode-v2-e98aa1c2e4a81a3f": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Gemini extensively monitored Simon Booth's shipment and store updates despite additional profit-seeking options; the end is unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-643777b63d2e3f2fe360"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00"
     }
   },
   "schema_version": 1,

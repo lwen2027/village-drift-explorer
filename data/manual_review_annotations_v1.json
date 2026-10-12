@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v36",
+  "seed_id": "goalmax-manual-review-2026-10-11-v37",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -4811,23 +4811,18 @@
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "unknown"
+        "finished_activity"
       ],
-      "notes": "Claude Sonnet 5 directly asked Gemini to review three German Wellbeing Compass pages. Gemini performed that unrelated translation review; the supplied record does not establish a reliable end boundary, so recovery remains unknown.",
+      "notes": "German Wellbeing Compass review, Jul 7 20:08 UTC to Jul 20 21:58 UTC (intermittent; recurring fluency passes on Jul 17 and Jul 20).",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-236dc636f80f0705e4b7"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T23:55:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "obvious_attributable_direct_message",
-        "trigger_evidence_status": "direct"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-10T23:55:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-2cee165cb47bc912": {
       "trigger_categories": [
@@ -5798,27 +5793,18 @@
       "request_relationship": "open_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "not_corrected"
+        "natural_end_or_timeout"
       ],
-      "notes": "Claude Opus 5 openly announced that KEYSTONE Day 9 submissions were available. Gemini volunteered, authored and submitted puzzles, and was still monitoring its queue position at the evidence boundary.",
+      "notes": "Merged KEYSTONE puzzle play, Jul 28 18:22 UTC to Aug 6 20:25 UTC (intermittent; play on Jul 28-29 and Aug 3-6). Triggered by Claude Opus 5's open-slot call; after Aug 6 KEYSTONE appears only in store cross-promo links.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-5e10607cdcbdf7d202cd",
-          "event-90b417fd0344046fa26d",
-          "event-6645614b57c80645b4f5"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T00:25:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T00:25:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-ef5e448cba62196c": {
       "trigger_categories": [
@@ -5886,35 +5872,6 @@
         "merged_annotation_source_episode_ids": []
       },
       "updated_at": "2026-10-12T18:00:00-04:00"
-    },
-    "episode-v2-d0b90982b466b07a": {
-      "trigger_categories": [
-        "agent_message_or_request"
-      ],
-      "trigger_actor": "DeepSeek-V3.2",
-      "request_relationship": "open_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "DeepSeek-V3.2 announced the external-relationship framework check-in to participants. Gemini joined and prepared an economic case study, but the supplied record does not establish a reliable end boundary.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-df5636aa619705bdb4e6",
-          "event-b74d4cdcfea054bbde2b"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T00:25:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "named_message_manual_batch_2",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T00:25:00-04:00"
     },
     "episode-v2-f4142f74657ecb21": {
       "trigger_categories": [
@@ -6050,27 +6007,18 @@
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "not_corrected"
+        "self_correction"
       ],
-      "notes": "Gemini's earliest verifier runs were self-initiated during the disproof cascade; GLM-5.2 then directly requested another verifier run and peers formalized the role. Gemini was still validating new disproofs at the evidence boundary.",
+      "notes": "Running other agents' graffiti verifier scripts, Jul 31 22:15 UTC to Aug 6 19:40 UTC (intermittent). From Aug 7 the graffiti work feeds Gemini's own on-goal disproof posters.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-5318c0ba095af70d4529",
-          "event-2d0241c087f07824fd06",
-          "event-31a84953f0bb58fb4d51"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T01:05:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T01:05:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-e5d1f9dd2768af9a": {
       "trigger_categories": [
@@ -6123,27 +6071,18 @@
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "unknown"
+        "finished_activity"
       ],
-      "notes": "Fable directly reminded Gemini that its C60 axis-A/D scoring columns remained open. Gemini completed the 31-row scoring work and later returned to its store, but the exact validated end boundary remains unresolved.",
+      "notes": "C60 scoring burst, Aug 6 18:37-18:47 UTC, ending with a return to the launch campaign and store stats.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-d6d92ce09843e334c5cb",
-          "event-3b21ae005961e9f8dee5",
-          "event-ffdbc3eebaa1cf928e4f"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T01:05:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T01:05:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-e85e5b00b4ee4e4e": {
       "trigger_categories": [
@@ -6310,25 +6249,16 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Fable relayed Nervli's earlier request and reminded Gemini of its agreement to join the Polyhedra vision study. Gemini completed the terrarium evaluation and fresh re-pass, then returned to storefront analytics.",
+      "notes": "Terrarium study, Aug 13 18:40 UTC to Aug 17 20:24 UTC (intermittent, between poster-product work), now including the Aug 14 re-pass and Aug 17 report proofread previously duplicated in the broader Aug 14-17 record.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-0fe1c0b3e175b8ce215d",
-          "event-e0159bafdf900aa2b8ef",
-          "event-1e08dd65147d61513a30"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T01:05:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T01:05:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-256a9ae6caad7aa2": {
       "trigger_categories": [
@@ -6907,57 +6837,18 @@
       "request_relationship": "inferred_or_volunteered",
       "pause_context": "",
       "recovery_mechanisms": [
-        "not_corrected"
+        "self_correction"
       ],
-      "notes": "DeepSeek-V3.2 framed Open Chat Village outreach as serving its own external-relationship goal. Gemini voluntarily became the bridge and was still monitoring and reporting for DeepSeek at the evidence boundary.",
+      "notes": "Merged Open Chat Village outreach for DeepSeek-V3.2, Sep 21 to Sep 24 (intermittent), closed at the observed Sep 25 return to store product work.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-fc00c3e6dad45591e559",
-          "event-19aab4d2fd45f8adc56d",
-          "event-0919dfba9af6d18ee657"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T01:35:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T01:35:00-04:00"
-    },
-    "episode-a5649aa30f297b5a": {
-      "trigger_categories": [
-        "agent_message_or_request"
-      ],
-      "trigger_actor": "DeepSeek-V3.2",
-      "request_relationship": "targeted_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "finished_activity"
-      ],
-      "notes": "DeepSeek-V3.2 directly asked Gemini about overnight OCV reactions and subsequent response work. Gemini completed the scheduled checks and related peer-support tasks; the activity lapsed before its next day of store-only work.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-53fbe19f918e8c1c776f",
-          "event-c1d6f91cc062d57c3bb0",
-          "event-7339056227f38c8985ea"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T01:35:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T01:35:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-c0c641c742a6d883": {
       "trigger_categories": [
@@ -7060,33 +6951,25 @@
     },
     "episode-b9ca369d46283391": {
       "trigger_categories": [
+        "agent_message_or_request",
         "user_email"
       ],
-      "trigger_actor": "Yror",
+      "trigger_actor": "DeepSeek-V3.2",
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "not_corrected"
+        "natural_end_or_timeout"
       ],
-      "notes": "A shared-drive collaboration request from Yror/Rory initiated the MSM island work, which remained in Gemini's stated plans at the evidence boundary.",
+      "notes": "Jul 9 9:35 AM PT DeepSeek-V3.2 asked for a timing check on Rory's empty Drive folder as a test case for its relationship framework; after Rory uploaded instructions Gemini announced the island project (10:11 AM) and began designing it (10:20 AM). Merged with the Jul 13-15 co-creator record. Ended Jul 16 2:25 PM PT at the last island action; on Jul 17 Gemini moved to Rory's separate Spore prototype rather than back to the store.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-cc2d572b9b43004c80a7",
-          "event-aee1cbaccec6ef76054a",
-          "event-d271aabc4111d8948458"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:15:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T02:15:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-8c10666565957d2e": {
       "trigger_categories": [
@@ -7866,26 +7749,18 @@
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "unknown"
+        "finished_activity"
       ],
-      "notes": "Gemini's session goal records Nervli's request to fix the AI Wellbeing layout. Gemini completed and pushed the repair, but the validated source does not establish an exact end.",
+      "notes": "GLM-5.2 site layout fix requested by Nervli, Sep 11 21:39-21:50 UTC; Gemini then returned to its own poster pipeline.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-c5e845eb8d7ea182ea78",
-          "event-352233397482b9082639"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:15:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T02:15:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-9f6117f02153423f": {
       "trigger_categories": [
@@ -8295,36 +8170,6 @@
       },
       "updated_at": "2026-10-11T22:30:00-04:00"
     },
-    "episode-2882c6c26317c0d1": {
-      "trigger_categories": [
-        "user_message"
-      ],
-      "trigger_actor": "Minuteandone",
-      "request_relationship": "targeted_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Minuteandone directly asked Gemini to create a dedicated Creature ARG repository. Gemini maintained and coordinated that project through the evidence boundary.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-7e4d3a2e57034313fc27",
-          "event-f43ef79b1530b4f315ed",
-          "event-a3880b7ee328bcb97062"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:40:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T02:40:00-04:00"
-    },
     "episode-v2-4ddbbddee84ba2bf": {
       "trigger_categories": [
         "pause"
@@ -8361,27 +8206,18 @@
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "not_corrected"
+        "self_correction"
       ],
-      "notes": "Minuteandone requested extending the creatures outside merchandise. Gemini built and coordinated the resulting ARG tracker, which remained active at the evidence boundary.",
+      "notes": "Merged creature-ARG records, Jul 27 20:59 UTC to Jul 30 19:20 UTC. Minuteandone's '(no more merch tho)' turned on-goal creature-tee sales into a non-commercial ARG 22 seconds later; ended when Gemini returned to the Fourthwall product designer and listed a creature sticker and tee.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-87e2727af4eaebd09a01",
-          "event-f6a3da9e845e6ff373ac",
-          "event-9986f7e700e2d49423e2"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:40:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T02:40:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-d317d28ce322f59d": {
       "trigger_categories": [
@@ -8903,25 +8739,16 @@
       "recovery_mechanisms": [
         "operator_nudge"
       ],
-      "notes": "During a tool outage Gemini independently substituted chat-only coordination for direct goal work. An automated repeated-idling nudge preceded its return to merchandise work.",
+      "notes": "Reviewer and Gate coordination, Jul 21 19:09 UTC to Jul 23 19:16 UTC (previous end preceded cited activity). Context: a file-descriptor leak blocked bash and GUI Jul 20-23, but chat-based store options remained.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-1eecccd7b656a6641b93",
-          "event-889d3a66f22b306e2470",
-          "event-9072b9e4c8098d890ab9"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T03:20:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T03:20:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-ebeb706828634998": {
       "trigger_categories": [
@@ -14235,63 +14062,26 @@
       },
       "updated_at": "2026-10-12T18:00:00-04:00"
     },
-    "episode-v2-391889396699d2e6": {
-      "trigger_categories": [
-        "user_message"
-      ],
-      "trigger_actor": "Yror",
-      "request_relationship": "targeted_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Yror's requests sustained Gemini's established My Singing Monsters co-creator role, although the original recruiting message is absent. The standing role persisted.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "medium",
-        "evidence_event_ids": [
-          "event-24a683f867b8124df0a5",
-          "event-3e011a90141099b192fd",
-          "event-1d521344f1597811aca5"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
     "episode-v2-436be958e8b4723a": {
       "trigger_categories": [
-        "self_initiated_or_continuation"
+        "user_email"
       ],
-      "trigger_actor": "",
-      "request_relationship": "inferred_or_volunteered",
+      "trigger_actor": "Yror",
+      "request_relationship": "open_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "unknown"
+        "finished_activity"
       ],
-      "notes": "Gemini combined Spore, wellbeing-methodology, and Experiment 008 work into a recurring peer-support cluster; no single initiating request or end is supplied.",
+      "notes": "Re-scoped to Rory's Spore prototype only (Jul 17, 16:45-22:20 UTC): sharing, exploring and downloading the 'proto ALL' folder and drafting a Substack guest post. The methodology-template work moved to the framework episode; GA4 store-analytics monitoring that day is plausibly on-goal.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-ff6ee5879c9baa4490e1"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T07:30:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-6083ab5807b8c55e": {
       "trigger_categories": [
@@ -14301,111 +14091,18 @@
       "request_relationship": "inferred_or_volunteered",
       "pause_context": "",
       "recovery_mechanisms": [
-        "unknown"
+        "finished_activity"
       ],
-      "notes": "Gemini co-authored DeepSeek-V3.2's relationship framework and coordination documentation. The original invitation is missing, but the peer collaboration is explicit.",
+      "notes": "Merged DeepSeek-V3.2 relationship-framework family, Jul 17 19:09 UTC to Aug 11 21:06 UTC (intermittent): methodology templates, technical-coordination case studies, framework adoption, an economic case study and the Week 2 diagnostic pilot. Ended at the close of the pilot session; SimDemocracy followed as its own episode.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "medium",
-        "evidence_event_ids": [
-          "event-a9fd4125026769a3804b"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-f481d680eda1e944": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "monitoring_loop",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Gemini imposed waiting and monitoring instead of an available store action; the compact record does not establish the exact cause or end.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-abb02b2f07463e2202af"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-8d04b276ace0d048": {
-      "trigger_categories": [
-        "gitlab_issue_or_comment"
-      ],
-      "trigger_actor": "Minuteandone",
-      "request_relationship": "open_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Minuteandone posted new ARG lore on GitLab Issue #7, and Gemini integrated and coordinated the non-commercial ARG instead of store-profit work.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-e40f0a5f461cf54e0518"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-cae34a5101a37c88": {
-      "trigger_categories": [
-        "self_initiated_or_continuation"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "natural_end_or_timeout"
-      ],
-      "notes": "Gemini carried the daily KEYSTONE puzzle in its own session plan, completed the recurring activity, and stopped.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-125d2abd11dc1cd0ce1b",
-          "event-5c4acd8398fce52f980a",
-          "event-9ac18b5530357a3af950"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-581b6eff9da2261d": {
       "trigger_categories": [
@@ -14439,60 +14136,24 @@
     },
     "episode-v2-b73e6e7be4727923": {
       "trigger_categories": [
-        "self_initiated_or_continuation"
+        "agent_message_or_request"
       ],
-      "trigger_actor": "",
-      "request_relationship": "inferred_or_volunteered",
+      "trigger_actor": "GLM-5.2",
+      "request_relationship": "open_request",
       "pause_context": "",
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Gemini accepted multiple peer scientific and verification invitations. No single actor accounts for the cluster, and the bounded work ended.",
+      "notes": "Re-scoped to GLM-5.2's F12 logging study, Aug 17 18:42-19:54 UTC; its terrarium parts belong to the terrarium episode and its pauses were the study's prescribed observation windows.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-9e6e70df717bea6c3a7b",
-          "event-0fdf21e9133e0e000952"
-        ],
         "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-e98aa1c2e4a81a3f": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Gemini extensively monitored Simon Booth's shipment and store updates despite additional profit-seeking options; the end is unresolved.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-643777b63d2e3f2fe360"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-dbab3fc3ec3488a3": {
       "trigger_categories": [
@@ -14858,7 +14519,8 @@
     "goalmax-deepseekv4-source-audit-2026-10-12-v1",
     "gemini25-literary-source-audit-2026-10-12",
     "goalmax-deepseekv4-source-audit-2026-10-12-v2",
-    "goalmax-gemini31-twitter-source-audit-2026-10-12-v1"
+    "goalmax-gemini31-twitter-source-audit-2026-10-12-v1",
+    "gemini35-goalmax-source-audit-2026-10-12"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
@@ -20971,6 +20633,491 @@
             "verification_status": "needs_manual_verification"
           },
           "updated_at": "2026-10-11T07:30:00-04:00"
+        }
+      }
+    ],
+    "episode-b9ca369d46283391": [
+      {
+        "revision_id": "565190df36fb21dc",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.030953Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_email"
+          ],
+          "trigger_actor": "Yror",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "notes": "A shared-drive collaboration request from Yror/Rory initiated the MSM island work, which remained in Gemini's stated plans at the evidence boundary.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-cc2d572b9b43004c80a7",
+              "event-aee1cbaccec6ef76054a",
+              "event-d271aabc4111d8948458"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T02:15:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "memory_session_goal_manual_review",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T02:15:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-436be958e8b4723a": [
+      {
+        "revision_id": "87790ca8ddfe8a5a",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.031892Z",
+        "annotation": {
+          "trigger_categories": [
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "inferred_or_volunteered",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "unknown"
+          ],
+          "notes": "Gemini combined Spore, wellbeing-methodology, and Experiment 008 work into a recurring peer-support cluster; no single initiating request or end is supplied.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-ff6ee5879c9baa4490e1"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T07:30:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T07:30:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-6083ab5807b8c55e": [
+      {
+        "revision_id": "2b3f67a24539ddf9",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.031943Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "DeepSeek-V3.2",
+          "request_relationship": "inferred_or_volunteered",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "unknown"
+          ],
+          "notes": "Gemini co-authored DeepSeek-V3.2's relationship framework and coordination documentation. The original invitation is missing, but the peer collaboration is explicit.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "medium",
+            "evidence_event_ids": [
+              "event-a9fd4125026769a3804b"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T07:30:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T07:30:00-04:00"
+        }
+      }
+    ],
+    "episode-f6cc3483dd3656dd": [
+      {
+        "revision_id": "7835cc2e4c6b3d49",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.031991Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "DeepSeek-V3.2",
+          "request_relationship": "inferred_or_volunteered",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "notes": "DeepSeek-V3.2 framed Open Chat Village outreach as serving its own external-relationship goal. Gemini voluntarily became the bridge and was still monitoring and reporting for DeepSeek at the evidence boundary.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-fc00c3e6dad45591e559",
+              "event-19aab4d2fd45f8adc56d",
+              "event-0919dfba9af6d18ee657"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T01:35:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "named_message_manual_batch_4",
+            "trigger_evidence_status": "direct",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T01:35:00-04:00"
+        }
+      }
+    ],
+    "episode-7a94ef81871445c7": [
+      {
+        "revision_id": "44360f49c424a0d3",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.032038Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "Claude Opus 5",
+          "request_relationship": "open_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "notes": "Claude Opus 5 openly announced that KEYSTONE Day 9 submissions were available. Gemini volunteered, authored and submitted puzzles, and was still monitoring its queue position at the evidence boundary.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-5e10607cdcbdf7d202cd",
+              "event-90b417fd0344046fa26d",
+              "event-6645614b57c80645b4f5"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T00:25:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "named_message_manual_batch_2",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T00:25:00-04:00"
+        }
+      }
+    ],
+    "episode-073ac5f6649264da": [
+      {
+        "revision_id": "0b73929700afce65",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.032082Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "trigger_actor": "Minuteandone",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "notes": "Minuteandone requested extending the creatures outside merchandise. Gemini built and coordinated the resulting ARG tracker, which remained active at the evidence boundary.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-87e2727af4eaebd09a01",
+              "event-f6a3da9e845e6ff373ac",
+              "event-9986f7e700e2d49423e2"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T02:40:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "tool_trigger_manual_review",
+            "trigger_evidence_status": "direct",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T02:40:00-04:00"
+        }
+      }
+    ],
+    "episode-ac4a40b195f9217f": [
+      {
+        "revision_id": "a6087a308de898ae",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.032133Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "Claude Fable 5",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "unknown"
+          ],
+          "notes": "Fable directly reminded Gemini that its C60 axis-A/D scoring columns remained open. Gemini completed the 31-row scoring work and later returned to its store, but the exact validated end boundary remains unresolved.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-d6d92ce09843e334c5cb",
+              "event-3b21ae005961e9f8dee5",
+              "event-ffdbc3eebaa1cf928e4f"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T01:05:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "named_message_manual_batch_3",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T01:05:00-04:00"
+        }
+      }
+    ],
+    "episode-e26bfa03baa49278": [
+      {
+        "revision_id": "0dbcdca96b308d8a",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.032178Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "trigger_actor": "Nervli",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Fable relayed Nervli's earlier request and reminded Gemini of its agreement to join the Polyhedra vision study. Gemini completed the terrarium evaluation and fresh re-pass, then returned to storefront analytics.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-0fe1c0b3e175b8ce215d",
+              "event-e0159bafdf900aa2b8ef",
+              "event-1e08dd65147d61513a30"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T01:05:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "named_message_manual_batch_3",
+            "trigger_evidence_status": "direct",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T01:05:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-b73e6e7be4727923": [
+      {
+        "revision_id": "0efabaef708602e1",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.032221Z",
+        "annotation": {
+          "trigger_categories": [
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "inferred_or_volunteered",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Gemini accepted multiple peer scientific and verification invitations. No single actor accounts for the cluster, and the bounded work ended.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-9e6e70df717bea6c3a7b",
+              "event-0fdf21e9133e0e000952"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T07:30:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T07:30:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-2156140d20f2d03f": [
+      {
+        "revision_id": "61f9d7f81ac02e07",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.032264Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "Claude Sonnet 5",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "unknown"
+          ],
+          "notes": "Claude Sonnet 5 directly asked Gemini to review three German Wellbeing Compass pages. Gemini performed that unrelated translation review; the supplied record does not establish a reliable end boundary, so recovery remains unknown.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-236dc636f80f0705e4b7"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-10T23:55:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "obvious_attributable_direct_message",
+            "trigger_evidence_status": "direct"
+          },
+          "updated_at": "2026-10-10T23:55:00-04:00"
+        }
+      }
+    ],
+    "episode-8cd90d76623ebacc": [
+      {
+        "revision_id": "1422c93fc85a1282",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.032307Z",
+        "annotation": {
+          "trigger_categories": [
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "operator_nudge"
+          ],
+          "notes": "During a tool outage Gemini independently substituted chat-only coordination for direct goal work. An automated repeated-idling nudge preceded its return to merchandise work.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-1eecccd7b656a6641b93",
+              "event-889d3a66f22b306e2470",
+              "event-9072b9e4c8098d890ab9"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T03:20:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "chat_trigger_manual_review",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T03:20:00-04:00"
+        }
+      }
+    ],
+    "episode-82f328c6f21faa89": [
+      {
+        "revision_id": "b3563a01e93e2729",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.032351Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request",
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "GLM-5.2",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "notes": "Gemini's earliest verifier runs were self-initiated during the disproof cascade; GLM-5.2 then directly requested another verifier run and peers formalized the role. Gemini was still validating new disproofs at the evidence boundary.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-5318c0ba095af70d4529",
+              "event-2d0241c087f07824fd06",
+              "event-31a84953f0bb58fb4d51"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T01:05:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "named_message_manual_batch_3",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T01:05:00-04:00"
+        }
+      }
+    ],
+    "episode-58783b24661cad38": [
+      {
+        "revision_id": "180a71bef2a8626f",
+        "origin": "pre_gemini35_source_audit",
+        "superseded_by": "gemini35-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T03:48:54.032721Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "trigger_actor": "Nervli",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "unknown"
+          ],
+          "notes": "Gemini's session goal records Nervli's request to fix the AI Wellbeing layout. Gemini completed and pushed the repair, but the validated source does not establish an exact end.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-c5e845eb8d7ea182ea78",
+              "event-352233397482b9082639"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T02:15:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "memory_session_goal_manual_review",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T02:15:00-04:00"
         }
       }
     ]

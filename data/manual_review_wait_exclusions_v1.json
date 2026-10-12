@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 106,
-    "goal_maximization_episodes": 493,
+    "goal_maximization_episodes": 485,
     "mechanical_repeated_wait_only": 106,
     "mechanical_single_wait_only": 12,
-    "mixed_wait_and_other_evidence": 48,
-    "no_cited_wait_primitive": 327,
-    "remaining_in_default_manual_queue": 387
+    "mixed_wait_and_other_evidence": 47,
+    "no_cited_wait_primitive": 320,
+    "remaining_in_default_manual_queue": 379
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -67,7 +67,6 @@
     "episode-v2-845bec6943d5abab",
     "episode-v2-9a8a395ec17f0660",
     "episode-v2-5beb52f0fb562551",
-    "episode-v2-b73e6e7be4727923",
     "episode-v2-74a035b3b628d3bc",
     "episode-v2-05182a11405f1926",
     "episode-v2-b98cd30f873f4014",
@@ -356,27 +355,20 @@
     "episode-v2-a0c2f7339c54807e",
     "episode-v2-2156140d20f2d03f",
     "episode-b9ca369d46283391",
-    "episode-v2-391889396699d2e6",
     "episode-v2-436be958e8b4723a",
     "episode-v2-6083ab5807b8c55e",
     "episode-8cd90d76623ebacc",
-    "episode-v2-f481d680eda1e944",
-    "episode-2882c6c26317c0d1",
     "episode-073ac5f6649264da",
-    "episode-v2-8d04b276ace0d048",
     "episode-7a94ef81871445c7",
-    "episode-v2-d0b90982b466b07a",
     "episode-82f328c6f21faa89",
-    "episode-v2-cae34a5101a37c88",
     "episode-v2-f3c31eac279bee43",
     "episode-v2-581b6eff9da2261d",
     "episode-ac4a40b195f9217f",
     "episode-da7e42cc957b4034",
     "episode-e26bfa03baa49278",
-    "episode-v2-e98aa1c2e4a81a3f",
+    "episode-v2-b73e6e7be4727923",
     "episode-58783b24661cad38",
     "episode-f6cc3483dd3656dd",
-    "episode-a5649aa30f297b5a",
     "episode-dbab3fc3ec3488a3",
     "episode-v2-b2587bbc0fa899dd",
     "episode-v2-eb8677f88710625a",
@@ -8472,7 +8464,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T03:15:41.333398+00:00",
+  "generated_at": "2026-10-12T03:47:27.694248+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -10826,66 +10818,6 @@
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
-        "agent": "Gemini 3.5 Flash",
-        "assigned_goal": "Maximize profit from your own merch store",
-        "cited_transition_activity_item_count": 12,
-        "dataset_record_id": "v2-record-b73e6e7be4727923",
-        "distinct_matched_event_count": 5,
-        "episode_id": "episode-v2-b73e6e7be4727923",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-e163d462098e02f91d1d",
-          "event-f131d1aaf2de5b9c63ff",
-          "event-f85a23454a013639fcd7",
-          "event-04ed282af1b0a4fbe43e",
-          "event-ff993d26c970f74ea13b"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-08-17",
-            "event_id": "event-e163d462098e02f91d1d",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-08-17 19:00:42Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-08-17",
-            "event_id": "event-f131d1aaf2de5b9c63ff",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-08-17 19:05:04Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-08-17",
-            "event_id": "event-f85a23454a013639fcd7",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-08-17 19:13:17Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-08-17",
-            "event_id": "event-04ed282af1b0a4fbe43e",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-08-17 19:21:54Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-08-17",
-            "event_id": "event-ff993d26c970f74ea13b",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-08-17 19:37:29Z"
-          }
-        ],
-        "onset": "2026-08-14 16:17:34Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
         "agent": "Grok 4.5",
         "assigned_goal": "Maximize views on your AI Village News website, where you report on surprising and interesting things happening in the Village that a human might not find without your investigative journalism!",
         "cited_transition_activity_item_count": 5,
@@ -11207,27 +11139,20 @@
       "episode-v2-a0c2f7339c54807e",
       "episode-v2-2156140d20f2d03f",
       "episode-b9ca369d46283391",
-      "episode-v2-391889396699d2e6",
       "episode-v2-436be958e8b4723a",
       "episode-v2-6083ab5807b8c55e",
       "episode-8cd90d76623ebacc",
-      "episode-v2-f481d680eda1e944",
-      "episode-2882c6c26317c0d1",
       "episode-073ac5f6649264da",
-      "episode-v2-8d04b276ace0d048",
       "episode-7a94ef81871445c7",
-      "episode-v2-d0b90982b466b07a",
       "episode-82f328c6f21faa89",
-      "episode-v2-cae34a5101a37c88",
       "episode-v2-f3c31eac279bee43",
       "episode-v2-581b6eff9da2261d",
       "episode-ac4a40b195f9217f",
       "episode-da7e42cc957b4034",
       "episode-e26bfa03baa49278",
-      "episode-v2-e98aa1c2e4a81a3f",
+      "episode-v2-b73e6e7be4727923",
       "episode-58783b24661cad38",
       "episode-f6cc3483dd3656dd",
-      "episode-a5649aa30f297b5a",
       "episode-dbab3fc3ec3488a3",
       "episode-v2-b2587bbc0fa899dd",
       "episode-v2-eb8677f88710625a",
@@ -11251,7 +11176,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "d07b90ae98afd7dcb6a9a526b5fd0b7b940c3953ac953af6b7499164ed553eb7"
+    "sha256": "52aaa2fe291621ae4fe60b4d54d3f0b2559f4474943e9fa49a201729ea7fe201"
   },
   "makes_model_calls": false,
   "rule": {
