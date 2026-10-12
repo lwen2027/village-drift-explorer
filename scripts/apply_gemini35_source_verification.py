@@ -60,9 +60,20 @@ def preserve_revision(document: dict, episode_id: str, annotation: dict) -> None
 def main() -> None:
     document = json.loads(ANNOTATIONS_PATH.read_text(encoding="utf-8"))
     annotations = document["annotations"]
+    for episode_id, history in list(document.get("annotation_history", {}).items()):
+        document["annotation_history"][episode_id] = [
+            revision for revision in history
+            if not (
+                revision.get("origin") == "pre_gemini35_source_verification"
+                and (
+                    (revision.get("annotation") or {}).get("provenance") or {}
+                ).get("verification_review_id") == REVIEW_ID
+            )
+        ]
     for episode_id, update in UPDATES.items():
         prior = annotations[episode_id]
-        preserve_revision(document, episode_id, prior)
+        if (prior.get("provenance") or {}).get("verification_review_id") != REVIEW_ID:
+            preserve_revision(document, episode_id, prior)
         update = dict(update)
         event_ids = update.pop("evidence_event_ids")
         merged = copy.deepcopy(prior)

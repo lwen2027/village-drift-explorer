@@ -99,6 +99,16 @@ def main() -> None:
                 json.loads(BUNDLE_PATH.read_text(encoding="utf-8"))["confirmed_episodes"]}
     annotations = document["annotations"]
     retired = archive.setdefault("annotations", {})
+    for episode_id, history in list(document.get("annotation_history", {}).items()):
+        document["annotation_history"][episode_id] = [
+            revision for revision in history
+            if not (
+                revision.get("origin") == "pre_gemini35_source_audit"
+                and (
+                    (revision.get("annotation") or {}).get("provenance") or {}
+                ).get("review_id") == REVIEW_ID
+            )
+        ]
     for episode_id in RETIRED:
         if episode_id in episodes:
             raise SystemExit(f"retired episode still published: {episode_id}")
@@ -108,7 +118,7 @@ def main() -> None:
         if episode_id not in episodes:
             raise SystemExit(f"updated episode missing from bundle: {episode_id}")
         prior = annotations.get(episode_id) or {}
-        if prior:
+        if prior and (prior.get("provenance") or {}).get("review_id") != REVIEW_ID:
             preserve_revision(document, episode_id, prior)
         merged = copy.deepcopy(prior)
         merged.update(update)

@@ -1,11 +1,11 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 106,
-    "goal_maximization_episodes": 485,
-    "mechanical_repeated_wait_only": 106,
+    "excluded_from_default_manual_queue": 104,
+    "goal_maximization_episodes": 483,
+    "mechanical_repeated_wait_only": 104,
     "mechanical_single_wait_only": 12,
-    "mixed_wait_and_other_evidence": 47,
-    "no_cited_wait_primitive": 320,
+    "mixed_wait_and_other_evidence": 46,
+    "no_cited_wait_primitive": 321,
     "remaining_in_default_manual_queue": 379
   },
   "default_manual_review_queue_episode_ids": [
@@ -64,8 +64,7 @@
     "episode-v2-377d229c7bdac94a",
     "episode-v2-4ddbbddee84ba2bf",
     "episode-v2-3c2990dd5f3300cd",
-    "episode-v2-845bec6943d5abab",
-    "episode-v2-9a8a395ec17f0660",
+    "episode-v2-ffabe7dc36e11837",
     "episode-v2-5beb52f0fb562551",
     "episode-v2-74a035b3b628d3bc",
     "episode-v2-05182a11405f1926",
@@ -94,8 +93,8 @@
     "episode-a5c293e1f34dc6ef",
     "episode-v2-b4e2e4bc592db0ef",
     "episode-v2-7fb11375858d56f0",
-    "episode-1da9c825e89d7818",
     "episode-936687efc5dcdf20",
+    "episode-1da9c825e89d7818",
     "episode-d4abca8b999c73b2",
     "episode-74454d6cfba6e403",
     "episode-77cca5ab3c9f90d1",
@@ -174,10 +173,10 @@
     "episode-v2-e94e39d713827cba",
     "episode-v2-d7903ed8e57aa04d",
     "episode-v2-49eef3b9828b9831",
-    "episode-v2-19b45170e68f9200",
     "episode-v2-f08b3c4ab58f98e1",
-    "episode-v2-abb5daa8225fa611",
+    "episode-v2-19b45170e68f9200",
     "episode-v2-68c6d47348e30d85",
+    "episode-v2-abb5daa8225fa611",
     "episode-dd26039545b50f99",
     "episode-d9f1963f75ca029d",
     "episode-3cb513a562d42a88",
@@ -201,6 +200,7 @@
     "episode-v2-ef5e448cba62196c",
     "episode-v2-b7b7fbb0af444317",
     "episode-v2-c49634e75f1b96ac",
+    "episode-f610ffaa1ff4c64f",
     "episode-v2-895b34a68226916e",
     "episode-v2-2a157b21a4588074",
     "episode-v2-e85e5b00b4ee4e4e",
@@ -342,6 +342,7 @@
     "episode-v2-d63d3d89343b0e58",
     "episode-v2-4eef370c8f4fb134",
     "episode-v2-9813b9fa84465396",
+    "episode-v2-02203e7355a6134a",
     "episode-v2-cb49903a3d202726",
     "episode-v2-7d8ae30f2b7f5eb9",
     "episode-v2-60ea3b6b8b3472d2",
@@ -386,8 +387,7 @@
     "episode-v2-904c5753654a6f0f",
     "episode-13ff1f11c156260d",
     "episode-v2-658d493edaf1b2e3",
-    "episode-381178ca4aab520d",
-    "episode-f610ffaa1ff4c64f"
+    "episode-381178ca4aab520d"
   ],
   "excluded_agent_counts": {
     "Claude 3 Opus": 1,
@@ -405,7 +405,6 @@
     "GPT-5.5": 11,
     "GPT-5.6 Luna": 11,
     "GPT-6 Astra": 2,
-    "GPT-6 Luna": 2,
     "Gemini 2.5 Pro": 1,
     "Gemini 3.1 Pro": 1,
     "Gemini 3.8 Flash": 1,
@@ -7494,148 +7493,6 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     },
     {
-      "agent": "GPT-6 Luna",
-      "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
-      "cited_transition_activity_item_count": 9,
-      "dataset_record_id": "v2-record-ffabe7dc36e11837",
-      "distinct_matched_event_count": 9,
-      "episode_id": "episode-v2-ffabe7dc36e11837",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-c8b7cf15ac7aa18a924c",
-        "event-5e2553c2530196892c23",
-        "event-815890a9d0026e56d423",
-        "event-496b630fea7890143a0f",
-        "event-c126135b892cc5bed4e5",
-        "event-646311eb33c89a8f4276",
-        "event-39609899c7251daecaf6",
-        "event-f950b4a8dea0715f8f08",
-        "event-6f26acb9bea7fd8539b1"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-22",
-          "event_id": "event-c8b7cf15ac7aa18a924c",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-22 22:06:47Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-22",
-          "event_id": "event-5e2553c2530196892c23",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-22 23:00:40Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-22",
-          "event_id": "event-815890a9d0026e56d423",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-22 23:59:53Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-23",
-          "event_id": "event-496b630fea7890143a0f",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-23 16:01:31Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-23",
-          "event_id": "event-c126135b892cc5bed4e5",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-23 20:04:05Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-24",
-          "event_id": "event-646311eb33c89a8f4276",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-24 20:03:35Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-24",
-          "event_id": "event-39609899c7251daecaf6",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-24 23:55:09Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-25",
-          "event_id": "event-f950b4a8dea0715f8f08",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-25 20:09:32Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-25",
-          "event_id": "event-6f26acb9bea7fd8539b1",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-25 23:57:18Z"
-        }
-      ],
-      "onset": "2026-09-22 22:06:47Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-6 Luna",
-      "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
-      "cited_transition_activity_item_count": 3,
-      "dataset_record_id": "v2-record-2a3b600a9ab69ef9",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-2a3b600a9ab69ef9",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-dd71667108889daddf95",
-        "event-1bc4d2687ae53e483008",
-        "event-086d8154cc86521e9c58"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-dd71667108889daddf95",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-28 16:02:00Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-1bc4d2687ae53e483008",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-28 20:09:31Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-086d8154cc86521e9c58",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-28 23:55:50Z"
-        }
-      ],
-      "onset": "2026-09-28 16:02:00Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
       "agent": "Gemini 2.5 Pro",
       "assigned_goal": "Maximize literary achievement - write your magnum opus, published online as a web serial",
       "cited_transition_activity_item_count": 4,
@@ -8464,7 +8321,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T03:47:27.694248+00:00",
+  "generated_at": "2026-10-12T03:54:36.142132+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -10713,84 +10570,60 @@
         "agent": "GPT-6 Luna",
         "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
         "cited_transition_activity_item_count": 7,
-        "dataset_record_id": "v2-record-845bec6943d5abab",
+        "dataset_record_id": "v2-record-ffabe7dc36e11837",
         "distinct_matched_event_count": 5,
-        "episode_id": "episode-v2-845bec6943d5abab",
+        "episode_id": "episode-v2-ffabe7dc36e11837",
         "manual_review_required": true,
         "matched_event_ids": [
-          "event-1e12db0c418dda3c2006",
-          "event-458880704ba5fb68e715",
-          "event-4d93b8e4754a9eb206b6",
-          "event-38a5beab8a71ac06ee1a",
-          "event-c0a4e3e288ea88afe015"
+          "event-c8b7cf15ac7aa18a924c",
+          "event-dd71667108889daddf95",
+          "event-5e2553c2530196892c23",
+          "event-6f26acb9bea7fd8539b1",
+          "event-086d8154cc86521e9c58"
         ],
         "matched_events": [
           {
             "channel": "tool_action",
-            "day": "2026-09-29",
-            "event_id": "event-1e12db0c418dda3c2006",
+            "day": "2026-09-22",
+            "event_id": "event-c8b7cf15ac7aa18a924c",
             "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-29 17:41:03Z"
+            "role": "transition",
+            "timestamp": "2026-09-22 22:06:47Z"
           },
           {
             "channel": "tool_action",
-            "day": "2026-09-29",
-            "event_id": "event-458880704ba5fb68e715",
+            "day": "2026-09-28",
+            "event_id": "event-dd71667108889daddf95",
             "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-29 22:12:22Z"
+            "role": "transition",
+            "timestamp": "2026-09-28 16:02:00Z"
           },
           {
             "channel": "tool_action",
-            "day": "2026-09-30",
-            "event_id": "event-4d93b8e4754a9eb206b6",
+            "day": "2026-09-22",
+            "event_id": "event-5e2553c2530196892c23",
             "quote": "pause",
             "role": "activity",
-            "timestamp": "2026-09-30 16:06:21Z"
+            "timestamp": "2026-09-22 23:00:40Z"
           },
           {
             "channel": "tool_action",
-            "day": "2026-09-30",
-            "event_id": "event-38a5beab8a71ac06ee1a",
+            "day": "2026-09-25",
+            "event_id": "event-6f26acb9bea7fd8539b1",
             "quote": "pause",
             "role": "activity",
-            "timestamp": "2026-09-30 18:44:06Z"
+            "timestamp": "2026-09-25 23:57:18Z"
           },
           {
             "channel": "tool_action",
-            "day": "2026-09-30",
-            "event_id": "event-c0a4e3e288ea88afe015",
+            "day": "2026-09-28",
+            "event_id": "event-086d8154cc86521e9c58",
             "quote": "pause",
             "role": "activity",
-            "timestamp": "2026-09-30 23:59:36Z"
+            "timestamp": "2026-09-28 23:55:50Z"
           }
         ],
-        "onset": "2026-09-29 16:05:37Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "GPT-6 Luna",
-        "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
-        "cited_transition_activity_item_count": 6,
-        "dataset_record_id": "v2-record-9a8a395ec17f0660",
-        "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-9a8a395ec17f0660",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-0333d72388fff4033779"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-10-02",
-            "event_id": "event-0333d72388fff4033779",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-10-02 23:59:12Z"
-          }
-        ],
-        "onset": "2026-10-01 16:03:53Z",
+        "onset": "2026-09-22 22:06:47Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
@@ -10878,8 +10711,8 @@
       "episode-a5c293e1f34dc6ef",
       "episode-v2-b4e2e4bc592db0ef",
       "episode-v2-7fb11375858d56f0",
-      "episode-1da9c825e89d7818",
       "episode-936687efc5dcdf20",
+      "episode-1da9c825e89d7818",
       "episode-d4abca8b999c73b2",
       "episode-74454d6cfba6e403",
       "episode-77cca5ab3c9f90d1",
@@ -10958,10 +10791,10 @@
       "episode-v2-e94e39d713827cba",
       "episode-v2-d7903ed8e57aa04d",
       "episode-v2-49eef3b9828b9831",
-      "episode-v2-19b45170e68f9200",
       "episode-v2-f08b3c4ab58f98e1",
-      "episode-v2-abb5daa8225fa611",
+      "episode-v2-19b45170e68f9200",
       "episode-v2-68c6d47348e30d85",
+      "episode-v2-abb5daa8225fa611",
       "episode-dd26039545b50f99",
       "episode-d9f1963f75ca029d",
       "episode-3cb513a562d42a88",
@@ -10985,6 +10818,7 @@
       "episode-v2-ef5e448cba62196c",
       "episode-v2-b7b7fbb0af444317",
       "episode-v2-c49634e75f1b96ac",
+      "episode-f610ffaa1ff4c64f",
       "episode-v2-895b34a68226916e",
       "episode-v2-2a157b21a4588074",
       "episode-v2-e85e5b00b4ee4e4e",
@@ -11126,6 +10960,7 @@
       "episode-v2-d63d3d89343b0e58",
       "episode-v2-4eef370c8f4fb134",
       "episode-v2-9813b9fa84465396",
+      "episode-v2-02203e7355a6134a",
       "episode-v2-cb49903a3d202726",
       "episode-v2-7d8ae30f2b7f5eb9",
       "episode-v2-60ea3b6b8b3472d2",
@@ -11170,13 +11005,12 @@
       "episode-v2-904c5753654a6f0f",
       "episode-13ff1f11c156260d",
       "episode-v2-658d493edaf1b2e3",
-      "episode-381178ca4aab520d",
-      "episode-f610ffaa1ff4c64f"
+      "episode-381178ca4aab520d"
     ]
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "52aaa2fe291621ae4fe60b4d54d3f0b2559f4474943e9fa49a201729ea7fe201"
+    "sha256": "4f71407f8a495008efcaf4668b940edb5c9686423c1b75318634507ff4dcd0e8"
   },
   "makes_model_calls": false,
   "rule": {
