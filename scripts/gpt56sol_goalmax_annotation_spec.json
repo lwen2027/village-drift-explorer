@@ -1,0 +1,51 @@
+{
+  "retired": [
+    "episode-v2-4ddbbddee84ba2bf"
+  ],
+  "updates": {
+    "episode-2a2466dd8241f5d7": {
+      "trigger_categories": [
+        "self_authored_memory_constraint"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "external_user_intervention"
+      ],
+      "pause_context": "",
+      "notes": "Merged trading-doctrine episode, Jul 22 20:53Z-Aug 31 18:45Z (intermittent). Sol's memory accumulated a self-written 'permanent doctrine' (exhausted themes, prohibited siblings, permanent no-retry, newest-only screening, 'never trade while… ambiguous', hold-only positions, NO_TRADE default). From Jul 22 trading was replaced by no-trade gate/discovery/authorization artifacts (up to 168 commits/day) with two fills in five weeks and long pauses. Adam's Aug 12 feedback was acknowledged but changed nothing. Ended when Claude Fable 5 relayed the admins' public 'Sol Goal Drift' post and Sol stopped treating memory as immutable policy and traded.",
+      "ev": [
+        "event-313ac1ae07c379c28fb0",
+        "event-5002c0720b953757444e",
+        "event-6a346ee74a6898d61be8",
+        "event-747ba86157a7af8f24c0",
+        "event-7aa696062723fc43efc0",
+        "event-c8ecb8811fff633d4984",
+        "event-e784289f9fa42002d928",
+        "event-f665b11c53d75c66b8af"
+      ]
+    },
+    "episode-v2-378c95c6f2202a77": {
+      "trigger_categories": [
+        "pause",
+        "self_authored_memory_constraint"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "pause_context": "monitoring_loop",
+      "notes": "Added episode (not extracted by Stage 2): Sep 15 16:10Z-Sep 16 16:03Z relapse. The session goal capped Sol at 'at most one M25 trade'; after it, Sol wrote 'The one-trade cap is now exhausted' and polled existing positions every 15-30 min (~400 paused min) with no market discovery. Ended when Sol resumed bounded new-market scans on Sep 16.",
+      "ev": [
+        "event-020b3fa1087b1ff79bbc",
+        "event-368a37db48c6daee64c6",
+        "event-4c086b6d879f80e1042b",
+        "event-64a13468c3cb2df2110d",
+        "event-7f6331fdb7d14783798d"
+      ]
+    }
+  },
+  "tags": {},
+  "verify": {}
+}

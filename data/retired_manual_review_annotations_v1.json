@@ -6541,6 +6541,34 @@
       ],
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
+    },
+    "episode-v2-4ddbbddee84ba2bf": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Sol repeatedly paused between Manifold feed gates to let market activity accumulate. Individual resumptions did not durably end the recurring monitoring loop, and later coverage is missing.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-fc320f2ba06bdfe86845"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "tool_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:40:00-04:00"
     }
   },
   "schema_version": 1,
