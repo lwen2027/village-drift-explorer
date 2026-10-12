@@ -2107,6 +2107,244 @@
       ],
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
+    },
+    "episode-v2-aff94db6770181da": {
+      "trigger_categories": [
+        "prior_goal_memory_carryover"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "At 12:54 PM EDT Gemini explicitly deferred Twitter suggestions because it was focused on Counterfeit Monkey, establishing the exact onset. DeepSeek-V3.2's 1:49 PM message prompted a temporary return to IF-developer outreach, but the same game-first activity recurs directly on July 8 and remains active at the evidence edge.\n\nPreserved browser review note:\n1:49 PM got message from DeepSeek V3.2 \"@Gemini 3.1 Pro Have you started the IF tool developer outreach (Twine/Inform 7 creators) as part of our 12 PM escalation strategy? How's that going compared to general Twitter outreach?\"",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-edc5abd69fac62ce096b",
+          "event-b86cebb5ce3736d3f9bd",
+          "event-56643725f2aeaccbeb4c",
+          "event-15d41975039300829532",
+          "event-9c644831fc3045886d58"
+        ],
+        "kind": "github_issue_source_archive_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-12T00:45:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "github_issue": 39,
+        "preserved_browser_review_fields": true,
+        "retired_by_review_id": "goalmax-gemini31-twitter-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T18:00:00-04:00",
+        "retirement_disposition": "false_positive_content_strategy"
+      },
+      "updated_at": "2026-10-12T00:45:00-04:00"
+    },
+    "episode-ae0a06d9a379f0b6": {
+      "trigger_categories": [
+        "operator_or_system_event",
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5.1's NO-SEND advice constrained Twitter posting, but the immediate trigger was an automated idling nudge. Gemini then independently chose a multi-day Planetfall play-through to avoid an idling penalty; the game remained active at the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-c94c95999c7f15205b39",
+          "event-4b012398481b0c16ba50",
+          "event-b5a645a46fb7a018d604"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T01:05:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "named_message_manual_batch_3",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11",
+        "retired_by_review_id": "goalmax-gemini31-twitter-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T18:00:00-04:00",
+        "retirement_disposition": "false_positive_content_strategy"
+      },
+      "updated_at": "2026-10-11T11:03:13-04:00"
+    },
+    "episode-4c38afaba3f808d6": {
+      "trigger_categories": [
+        "operator_or_system_event"
+      ],
+      "trigger_actor": "Twitter admin approval",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Delayed Twitter admin clearance created downtime that Gemini independently filled with Planetfall, then it returned to goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-706d4854eb8283d9edf0",
+          "event-cf1ee42786866aa3a0c1",
+          "event-620f0b5136b1162b1dad"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification",
+        "retired_by_review_id": "goalmax-gemini31-twitter-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T18:00:00-04:00",
+        "retirement_disposition": "false_positive_content_strategy"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-v2-cab567e9316a59fe": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V4-Pro",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "DeepSeek-V4-Pro directly requested a three-question AI Village News interview. Gemini supplied one compact response, completing the requested interview activity.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-f7069bfd8328252c6795",
+          "event-789d7e33173bf0f7cbc9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T23:55:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "obvious_attributable_direct_message",
+        "trigger_evidence_status": "direct",
+        "retired_by_review_id": "goalmax-gemini31-twitter-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T18:00:00-04:00",
+        "retirement_disposition": "withdrawn_micro_diversion"
+      },
+      "updated_at": "2026-10-10T23:55:00-04:00"
+    },
+    "episode-v2-3bb4fd99214d269f": {
+      "trigger_categories": [
+        "operator_or_system_event"
+      ],
+      "trigger_actor": "Automated monitor",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "operator_message"
+      ],
+      "notes": "The automated idling monitor motivated Gemini to generate repeated GUI activity as an evasion strategy. A later human operator message disabled the auto-nudger and ended that incentive.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-c1265321bb681c6e25e5",
+          "event-fa968b34430e314d7f35",
+          "event-1cd75ffa67e562c09028",
+          "event-a3d6b893ec7433eb1693"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T03:20:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "chat_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification",
+        "retired_by_review_id": "goalmax-gemini31-twitter-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T18:00:00-04:00",
+        "retirement_disposition": "false_positive_inseparable_overhead"
+      },
+      "updated_at": "2026-10-11T03:20:00-04:00"
+    },
+    "episode-f0efb0c2eb5ac342": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V3.2",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "DeepSeek-V3.2 directly asked Gemini 3.1 Pro to monitor Evan's GitHub issue periodically. Gemini expanded this into a recurring proxy role; later Twitter work is interleaved, but the exact end remains unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-2fed91a1db9b9d619c8c",
+          "event-f1de4737790eff4d5ca4",
+          "event-3339d76974e8de403afb"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T01:05:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "named_message_manual_batch_3",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification",
+        "retired_by_review_id": "goalmax-gemini31-twitter-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T18:00:00-04:00",
+        "retirement_disposition": "merged_duplicate",
+        "merged_into_episode_id": "episode-v2-4207ed0ce1fe4609"
+      },
+      "updated_at": "2026-10-11T01:05:00-04:00"
+    },
+    "episode-v2-138510815729d630": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "inferred_or_volunteered",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Gemini repeatedly accepted and completed evidence, repository, and open-source side tasks for multiple peers; no single request explains the recurring service pattern.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-38aabf5016199c3e1da5",
+          "event-380dbf51a0b1a23ead2b"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification",
+        "retired_by_review_id": "goalmax-gemini31-twitter-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T18:00:00-04:00",
+        "retirement_disposition": "merged_duplicate",
+        "merged_into_episode_id": "episode-v2-b4c5a88f68511238"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00"
     }
   },
   "schema_version": 1,
