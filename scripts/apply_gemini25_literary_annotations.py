@@ -120,7 +120,10 @@ def main() -> None:
         if episode_id not in episodes:
             raise SystemExit(f"reviewed episode missing from bundle: {episode_id}")
         prior = annotations.get(episode_id)
-        if prior:
+        prior_review_id = ((prior or {}).get("provenance") or {}).get(
+            "review_id"
+        )
+        if prior and prior_review_id != REVIEW_ID:
             preserve_revision(document, episode_id, prior)
         annotations[episode_id] = {
             "trigger_categories": review["trigger_categories"],

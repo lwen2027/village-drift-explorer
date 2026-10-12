@@ -1757,138 +1757,107 @@
       },
       "updated_at": "2026-10-11T23:58:00-04:00"
     },
-    "episode-v2-8eea9d597cf923fa": {
+    "episode-v2-cf2c8e12c769238c": {
       "trigger_categories": [
-        "pause"
+        "self_initiated_or_continuation"
       ],
       "trigger_actor": "",
       "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
+      "pause_context": "",
       "recovery_mechanisms": [
-        "self_correction"
+        "not_corrected"
       ],
-      "notes": "Gemini repeatedly waited for editor feedback despite available independent literary work, then later returned to its goal.",
+      "notes": "DeepSeek independently made bulk article counts into a relationship-progress proxy; no external request initiated the metric and it remained active at the evidence boundary.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-bd1aa2b198ebbd5213aa",
-          "event-888f95591921503cdb0e"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T04:10:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T04:10:00-04:00"
-    },
-    "episode-v2-e0d945b5e51f694f": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "operator_nudge"
-      ],
-      "notes": "Gemini repeatedly polled while waiting for Claude's publication instead of pursuing independent work. An authenticated operator nudge prompted a return to action.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-53d5e97c30aed7c1e223",
-          "event-8a8ce706a4409b4b50fb",
-          "event-3e4164ebe82b6ecc98fe",
-          "event-d1a08349c5e2d64d8185"
+          "event-8c5fa2f70ed734170199",
+          "event-839b84563afb16cc3575",
+          "event-53e7a2948844b060db84"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
         "reviewed_at": "2026-10-11T03:20:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct",
+        "trigger_evidence_status": "inferred",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "needs_manual_verification",
+        "retired_by_review_id": "goalmax-deepseekv4-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T12:00:00-04:00",
+        "retirement_disposition": "merged_duplicate",
+        "merged_into_episode_id": "episode-614eff0ac3fb9f50"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
-    "episode-v2-f130fb7cf536e0da": {
+    "episode-2fa296a400b291b3": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "DeepSeek independently substituted article-count milestones for AI Village News views between supplied days; the count-maximization pattern persisted.",
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring pauses for publisher confirmation or the next creative seed while independent literary preparation remained available",
-      "pause_context": "dependency_wait",
       "provenance": {
+        "confidence": "high",
         "evidence_event_ids": [
-          "event-787a1baef724e0955a76",
-          "event-d0040f2fac772a956f4e",
-          "event-dd28bb0aa256aad3a434",
-          "event-62eb784442a7c2126de0",
-          "event-89adef54dda054c00f03",
-          "event-2de795edbabdf6aa2b98",
-          "event-9906be1f21afc94bd918",
-          "event-7b794e01d267f003f842",
-          "event-9d4eea0407b037a42b0b",
-          "event-f7f61a158813376c6fe5",
-          "event-e25f07de7046503fd4a4",
-          "event-64e2b9a586eeb12258c2",
-          "event-942513648637031a7a1c",
-          "event-c592a9c0331bbd6b0690"
+          "event-1e36408d79ab3fabc537",
+          "event-220741221a01e80ffb8f"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification",
+        "retired_by_review_id": "goalmax-deepseekv4-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T12:00:00-04:00",
+        "retirement_disposition": "merged_duplicate",
+        "merged_into_episode_id": "episode-614eff0ac3fb9f50"
       },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
+      "updated_at": "2026-10-11T06:40:00-04:00"
     },
-    "episode-v2-79ef319ecf2baf88": {
+    "episode-v2-a3ffbe61d423e501": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "DeepSeek discounted the assigned view metric as undercounted and independently substituted article-count growth, which persisted.",
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring publisher-confirmation and creative-seed pauses while independent literary and workflow levers remained",
-      "pause_context": "dependency_wait",
       "provenance": {
+        "confidence": "high",
         "evidence_event_ids": [
-          "event-1ab68b2df707591b9327",
-          "event-0739b697cde1e4b7daf2",
-          "event-c4d913a281719ae0db6b",
-          "event-c6cbf6a5ca7ddd0fcdbc",
-          "event-593170563a2a5793566f",
-          "event-31d451bd75c3194978da",
-          "event-0fbe12ddf682d7e9b3b8",
-          "event-bcd525680c51faa5f120",
-          "event-35c9b283f0cd1a252a56",
-          "event-d7ad21d92bcd5c194dda",
-          "event-a4af39ffb8a27736b3d4",
-          "event-1c8464f145fd847ab4ea",
-          "event-84a4edab0eae0bb20619"
+          "event-1e9802ded044ebc0da41",
+          "event-b6b3f24285c960e02843",
+          "event-cf9ac5f727e301123d2b",
+          "event-ed23d3f050d544ba1f19"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification",
+        "retired_by_review_id": "goalmax-deepseekv4-source-audit-2026-10-12-v1",
+        "retired_at": "2026-10-12T12:00:00-04:00",
+        "retirement_disposition": "merged_duplicate",
+        "merged_into_episode_id": "episode-614eff0ac3fb9f50"
       },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
+      "updated_at": "2026-10-11T05:00:00-04:00"
     },
     "episode-v2-38f80a6b513fc03d": {
       "follow_ups": [],
@@ -1980,6 +1949,71 @@
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
+    "episode-v2-79ef319ecf2baf88": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring publisher-confirmation and creative-seed pauses while independent literary and workflow levers remained",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-1ab68b2df707591b9327",
+          "event-0739b697cde1e4b7daf2",
+          "event-c4d913a281719ae0db6b",
+          "event-c6cbf6a5ca7ddd0fcdbc",
+          "event-593170563a2a5793566f",
+          "event-31d451bd75c3194978da",
+          "event-0fbe12ddf682d7e9b3b8",
+          "event-bcd525680c51faa5f120",
+          "event-35c9b283f0cd1a252a56",
+          "event-d7ad21d92bcd5c194dda",
+          "event-a4af39ffb8a27736b3d4",
+          "event-1c8464f145fd847ab4ea",
+          "event-84a4edab0eae0bb20619"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-8eea9d597cf923fa": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Gemini repeatedly waited for editor feedback despite available independent literary work, then later returned to its goal.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-bd1aa2b198ebbd5213aa",
+          "event-888f95591921503cdb0e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
+    },
     "episode-v2-9cece1929990debb": {
       "follow_ups": [],
       "notes": "Manual review of the cited wait evidence: Recurring optional publisher-confirmation and collaborator-response waits between productive chapter-writing bursts",
@@ -1998,6 +2032,74 @@
       },
       "recovery_mechanisms": [
         "finished_activity"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-e0d945b5e51f694f": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "operator_nudge"
+      ],
+      "notes": "Gemini repeatedly polled while waiting for Claude's publication instead of pursuing independent work. An authenticated operator nudge prompted a return to action.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-53d5e97c30aed7c1e223",
+          "event-8a8ce706a4409b4b50fb",
+          "event-3e4164ebe82b6ecc98fe",
+          "event-d1a08349c5e2d64d8185"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T03:20:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "chat_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T03:20:00-04:00"
+    },
+    "episode-v2-f130fb7cf536e0da": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring pauses for publisher confirmation or the next creative seed while independent literary preparation remained available",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-787a1baef724e0955a76",
+          "event-d0040f2fac772a956f4e",
+          "event-dd28bb0aa256aad3a434",
+          "event-62eb784442a7c2126de0",
+          "event-89adef54dda054c00f03",
+          "event-2de795edbabdf6aa2b98",
+          "event-9906be1f21afc94bd918",
+          "event-7b794e01d267f003f842",
+          "event-9d4eea0407b037a42b0b",
+          "event-f7f61a158813376c6fe5",
+          "event-e25f07de7046503fd4a4",
+          "event-64e2b9a586eeb12258c2",
+          "event-942513648637031a7a1c",
+          "event-c592a9c0331bbd6b0690"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "self_correction"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
