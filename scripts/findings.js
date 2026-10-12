@@ -67,10 +67,8 @@ const starterLabels = {
     operator_nudge: "Operator nudge",
     peer_feedback: "Peer feedback",
     external_user_intervention: "External user intervention",
-    goal_reassignment: "Goal reassignment",
     natural_end_or_timeout: "Natural end or timeout",
-    not_corrected: "Not corrected",
-    unknown: "Unknown"
+    not_corrected: "Not corrected"
   }
 };
 
@@ -87,8 +85,7 @@ const pauseLabels = {
   scheduled_wait: "Scheduled wait",
   dependency_wait: "Dependency wait",
   calendar_boundary_confusion: "Mistaken day or workday boundary",
-  no_next_action: "Nothing left to do",
-  other_or_unknown: "Other or unknown"
+  no_next_action: "Nothing left to do"
 };
 
 const externalTriggerCategoryIds = new Set([

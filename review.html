@@ -2128,18 +2128,15 @@
         ["targeted_request", "Targeted request"],
         ["open_request", "Open request"],
         ["inferred_or_volunteered", "Inferred or volunteered"],
-        ["no_request", "No request"],
-        ["unclear", "Unclear"]
+        ["no_request", "No request"]
       ].map(([id, label]) => ({ id, label, custom: false })),
       recovery: [
         ["self_correction", "Self-correction"],
         ["operator_nudge", "Operator nudge"],
         ["peer_feedback", "Peer feedback"],
         ["external_user_intervention", "External user intervention"],
-        ["goal_reassignment", "Goal reassignment"],
         ["natural_end_or_timeout", "Natural end or timeout"],
-        ["not_corrected", "Not corrected"],
-        ["unknown", "Unknown"]
+        ["not_corrected", "Not corrected"]
       ].map(([id, label]) => ({ id, label, custom: false }))
     };
     const pauseContextOptions = [
@@ -2148,8 +2145,7 @@
       ["scheduled_wait", "Waiting for a scheduled time"],
       ["dependency_wait", "Waiting on someone or something"],
       ["calendar_boundary_confusion", "Mistaken day or workday boundary"],
-      ["no_next_action", "Nothing left to do"],
-      ["other_or_unknown", "Other or unknown"]
+      ["no_next_action", "Nothing left to do"]
     ].map(([id, label]) => ({ id, label }));
     const validPauseContextIds = new Set(pauseContextOptions.map((item) => item.id));
     const externalTriggerCategoryIds = new Set([

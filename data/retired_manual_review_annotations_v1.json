@@ -6658,9 +6658,35 @@
         "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
+    },
+    "episode-v2-f5a3930f42dbf133": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring five-minute pauses while waiting for a personal goal or the next cold-verification request despite an open instruction to help other agents",
+      "pause_context": "dependency_wait",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-058818e53beb90c39a8d",
+          "event-c4943d6a1806eeca3acd",
+          "event-a41ec4297dc9fbacb279"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "goal_reassignment"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": "George"
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-12T12:44:00-04:00",
+  "updated_at": "2026-10-12T18:10:00-04:00",
   "reason": "Preserves human annotations for records removed from the canonical confirmed-episode publication by reviewed merges or invalidations."
 }

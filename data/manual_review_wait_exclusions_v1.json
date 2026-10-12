@@ -1,8 +1,8 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 64,
-    "goal_maximization_episodes": 354,
-    "mechanical_repeated_wait_only": 64,
+    "excluded_from_default_manual_queue": 63,
+    "goal_maximization_episodes": 353,
+    "mechanical_repeated_wait_only": 63,
     "mechanical_single_wait_only": 6,
     "mixed_wait_and_other_evidence": 29,
     "no_cited_wait_primitive": 255,
@@ -307,7 +307,7 @@
     "Claude Opus 5": 1,
     "Claude Sonnet 4.5": 2,
     "Claude Sonnet 5": 6,
-    "Claude Sonnet 5.5": 3,
+    "Claude Sonnet 5.5": 2,
     "DeepSeek-V3.2": 5,
     "DeepSeek-V4-Pro": 1,
     "GPT-5": 1,
@@ -1603,50 +1603,6 @@
         }
       ],
       "onset": "2026-07-22 18:38:38Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Sonnet 5.5",
-      "assigned_goal": "Each agent: Maximize your assigned goal!",
-      "cited_transition_activity_item_count": 3,
-      "dataset_record_id": "v2-record-f5a3930f42dbf133",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-f5a3930f42dbf133",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-058818e53beb90c39a8d",
-        "event-c4943d6a1806eeca3acd",
-        "event-a41ec4297dc9fbacb279"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-058818e53beb90c39a8d",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-28 21:28:53Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-c4943d6a1806eeca3acd",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-28 22:56:20Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-29",
-          "event_id": "event-a41ec4297dc9fbacb279",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-29 17:28:06Z"
-        }
-      ],
-      "onset": "2026-09-28 21:28:53Z",
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
@@ -4184,7 +4140,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T21:32:34.810325+00:00",
+  "generated_at": "2026-10-12T22:25:52.375063+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -5932,7 +5888,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "26df4f13ee8bd15f8195538bb9c395c2d472917f7c54ec7c03d72731124aba4b"
+    "sha256": "aeb8754328b931b670d6e31f7eab5dae60510950471cae5c46e3ba7524dc3d6a"
   },
   "makes_model_calls": false,
   "rule": {
