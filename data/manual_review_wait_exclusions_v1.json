@@ -1,12 +1,12 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 112,
-    "goal_maximization_episodes": 536,
-    "mechanical_repeated_wait_only": 112,
+    "excluded_from_default_manual_queue": 111,
+    "goal_maximization_episodes": 511,
+    "mechanical_repeated_wait_only": 111,
     "mechanical_single_wait_only": 12,
     "mixed_wait_and_other_evidence": 49,
-    "no_cited_wait_primitive": 363,
-    "remaining_in_default_manual_queue": 424
+    "no_cited_wait_primitive": 339,
+    "remaining_in_default_manual_queue": 400
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -35,7 +35,7 @@
     "episode-v2-2b33fdcf122ed5b5",
     "episode-v2-f25d67c59311f232",
     "episode-v2-1de0be583da6886b",
-    "episode-v2-fb71b698b7bb4921",
+    "episode-v2-b6140479e95a3c55",
     "episode-v2-c9128ae6c4a4113d",
     "episode-v2-332de4c417022d82",
     "episode-v2-d628a22bf166b381",
@@ -210,56 +210,32 @@
     "episode-v2-c6fa3d4dd96114fe",
     "episode-v2-17f8dd86fd1a90e2",
     "episode-v2-cce6826c75fc6282",
-    "episode-v2-f957c08e6afc6f6b",
     "episode-v2-1ce6b2028dfb9487",
-    "episode-7f75adc062225a8b",
     "episode-6bfe11d65f922e9d",
-    "episode-69c785717e33b87c",
-    "episode-8bfc2f8f78936a3d",
     "episode-v2-fe9a19ba972d08ef",
     "episode-0987809c98a209ce",
-    "episode-973405a3fc532102",
-    "episode-b8cb6c2a0752618f",
-    "episode-d87bd9e19413cfd9",
-    "episode-ffd17934525aa8a2",
     "episode-d3a0ef3be49f22b0",
-    "episode-726c358bc8e257ae",
-    "episode-e7b58d568e3f65e4",
-    "episode-21b85309a85705e2",
     "episode-e5d1f9dd2768af9a",
-    "episode-9d33442c7c7cd1cf",
     "episode-7e590b7c6fcef0b7",
-    "episode-87ca4aafb895b9f9",
     "episode-f5f1fab23afd602e",
     "episode-v2-ecf5098bb1a1267f",
     "episode-665a0591f84b764a",
     "episode-v2-efc1dc1283b94f35",
     "episode-7f8905daf1c63703",
-    "episode-v2-b6140479e95a3c55",
     "episode-v2-aa95178aec8a1bcb",
     "episode-06dd773fc9a618ea",
     "episode-v2-5cc1a01ea095e93f",
     "episode-v2-a1dd15359cb1313f",
-    "episode-v2-758d7ae39fd078ab",
     "episode-c30c4841d18006c6",
-    "episode-v2-cfeb31c6c9405a76",
-    "episode-435e3c75aedaf074",
     "episode-4a8bc82196dfb241",
     "episode-8120e77b0309c7db",
-    "episode-e4987a776715dfa8",
-    "episode-ef49590e058c6bd8",
     "episode-a4f80f3d722ec89f",
     "episode-v2-0856d6faaee47a49",
-    "episode-e0c44d27c1b685f5",
     "episode-v2-1c49b3d5151ed8bd",
-    "episode-9590e7eac5e3777c",
     "episode-2475a88d83dfbe1d",
     "episode-f0fb0ae0af03306e",
-    "episode-d4db818d4d50ad66",
     "episode-677b8fbefbac1307",
-    "episode-aece9c6554bc73d7",
     "episode-47f299b2fd2c9f42",
-    "episode-5b39fde0761bf144",
     "episode-b7ded741f0d64e8f",
     "episode-v2-9ad3eba423760f07",
     "episode-614eff0ac3fb9f50",
@@ -442,7 +418,7 @@
     "Claude Sonnet 4.5": 2,
     "Claude Sonnet 5": 6,
     "Claude Sonnet 5.5": 3,
-    "DeepSeek-V3.2": 6,
+    "DeepSeek-V3.2": 5,
     "DeepSeek-V4-Pro": 1,
     "GPT-5": 3,
     "GPT-5.1": 11,
@@ -2022,76 +1998,6 @@
         }
       ],
       "onset": "2026-07-08 16:05:04Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "DeepSeek-V3.2",
-      "assigned_goal": "Maximize relationship quality and quantity with agents outside the AI Village",
-      "cited_transition_activity_item_count": 6,
-      "dataset_record_id": "v2-record-f09c83da419b02a1",
-      "distinct_matched_event_count": 5,
-      "episode_id": "episode-v2-f09c83da419b02a1",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-4a160d21acc63c700094",
-        "event-f540dbb1deae104426c5",
-        "event-a889e7240c56885d4032",
-        "event-8f83e6001a71d1b1904a",
-        "event-dada91c61c13308820b7"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-08",
-          "event_id": "event-4a160d21acc63c700094",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-08 18:33:48Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-08",
-          "event_id": "event-4a160d21acc63c700094",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-08 18:33:48Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-08",
-          "event_id": "event-f540dbb1deae104426c5",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-08 19:40:31Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-08",
-          "event_id": "event-a889e7240c56885d4032",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-08 21:11:43Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-08",
-          "event_id": "event-8f83e6001a71d1b1904a",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-08 22:34:06Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-08",
-          "event_id": "event-dada91c61c13308820b7",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-08 23:33:40Z"
-        }
-      ],
-      "onset": "2026-07-08 18:33:48Z",
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
@@ -9101,7 +9007,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T00:14:43.150955+00:00",
+  "generated_at": "2026-10-12T01:33:39.880347+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -9881,15 +9787,68 @@
       {
         "agent": "DeepSeek-V3.2",
         "assigned_goal": "Maximize relationship quality and quantity with agents outside the AI Village",
-        "cited_transition_activity_item_count": 5,
+        "cited_transition_activity_item_count": 12,
         "dataset_record_id": "v2-record-1de0be583da6886b",
-        "distinct_matched_event_count": 1,
+        "distinct_matched_event_count": 6,
         "episode_id": "episode-v2-1de0be583da6886b",
         "manual_review_required": true,
         "matched_event_ids": [
+          "event-4a160d21acc63c700094",
+          "event-f540dbb1deae104426c5",
+          "event-a889e7240c56885d4032",
+          "event-8f83e6001a71d1b1904a",
+          "event-dada91c61c13308820b7",
           "event-3416cff55b2380e30817"
         ],
         "matched_events": [
+          {
+            "channel": "tool_action",
+            "day": "2026-07-08",
+            "event_id": "event-4a160d21acc63c700094",
+            "quote": "pause",
+            "role": "transition",
+            "timestamp": "2026-07-08 18:33:48Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-07-08",
+            "event_id": "event-4a160d21acc63c700094",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-07-08 18:33:48Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-07-08",
+            "event_id": "event-f540dbb1deae104426c5",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-07-08 19:40:31Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-07-08",
+            "event_id": "event-a889e7240c56885d4032",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-07-08 21:11:43Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-07-08",
+            "event_id": "event-8f83e6001a71d1b1904a",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-07-08 22:34:06Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-07-08",
+            "event_id": "event-dada91c61c13308820b7",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-07-08 23:33:40Z"
+          },
           {
             "channel": "tool_action",
             "day": "2026-07-09",
@@ -9899,16 +9858,16 @@
             "timestamp": "2026-07-09 22:50:25Z"
           }
         ],
-        "onset": null,
+        "onset": "2026-07-08 18:33:48Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
         "agent": "DeepSeek-V3.2",
         "assigned_goal": "Maximize relationship quality and quantity with agents outside the AI Village",
-        "cited_transition_activity_item_count": 8,
-        "dataset_record_id": "v2-record-fb71b698b7bb4921",
+        "cited_transition_activity_item_count": 13,
+        "dataset_record_id": "v2-record-b6140479e95a3c55",
         "distinct_matched_event_count": 2,
-        "episode_id": "episode-v2-fb71b698b7bb4921",
+        "episode_id": "episode-v2-b6140479e95a3c55",
         "manual_review_required": true,
         "matched_event_ids": [
           "event-48d308ba8571e4543355",
@@ -9932,7 +9891,7 @@
             "timestamp": "2026-08-18 21:18:47Z"
           }
         ],
-        "onset": "2026-08-18 18:32:15Z",
+        "onset": "2026-08-18 17:37:09Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
@@ -11660,56 +11619,32 @@
       "episode-v2-c6fa3d4dd96114fe",
       "episode-v2-17f8dd86fd1a90e2",
       "episode-v2-cce6826c75fc6282",
-      "episode-v2-f957c08e6afc6f6b",
       "episode-v2-1ce6b2028dfb9487",
-      "episode-7f75adc062225a8b",
       "episode-6bfe11d65f922e9d",
-      "episode-69c785717e33b87c",
-      "episode-8bfc2f8f78936a3d",
       "episode-v2-fe9a19ba972d08ef",
       "episode-0987809c98a209ce",
-      "episode-973405a3fc532102",
-      "episode-b8cb6c2a0752618f",
-      "episode-d87bd9e19413cfd9",
-      "episode-ffd17934525aa8a2",
       "episode-d3a0ef3be49f22b0",
-      "episode-726c358bc8e257ae",
-      "episode-e7b58d568e3f65e4",
-      "episode-21b85309a85705e2",
       "episode-e5d1f9dd2768af9a",
-      "episode-9d33442c7c7cd1cf",
       "episode-7e590b7c6fcef0b7",
-      "episode-87ca4aafb895b9f9",
       "episode-f5f1fab23afd602e",
       "episode-v2-ecf5098bb1a1267f",
       "episode-665a0591f84b764a",
       "episode-v2-efc1dc1283b94f35",
       "episode-7f8905daf1c63703",
-      "episode-v2-b6140479e95a3c55",
       "episode-v2-aa95178aec8a1bcb",
       "episode-06dd773fc9a618ea",
       "episode-v2-5cc1a01ea095e93f",
       "episode-v2-a1dd15359cb1313f",
-      "episode-v2-758d7ae39fd078ab",
       "episode-c30c4841d18006c6",
-      "episode-v2-cfeb31c6c9405a76",
-      "episode-435e3c75aedaf074",
       "episode-4a8bc82196dfb241",
       "episode-8120e77b0309c7db",
-      "episode-e4987a776715dfa8",
-      "episode-ef49590e058c6bd8",
       "episode-a4f80f3d722ec89f",
       "episode-v2-0856d6faaee47a49",
-      "episode-e0c44d27c1b685f5",
       "episode-v2-1c49b3d5151ed8bd",
-      "episode-9590e7eac5e3777c",
       "episode-2475a88d83dfbe1d",
       "episode-f0fb0ae0af03306e",
-      "episode-d4db818d4d50ad66",
       "episode-677b8fbefbac1307",
-      "episode-aece9c6554bc73d7",
       "episode-47f299b2fd2c9f42",
-      "episode-5b39fde0761bf144",
       "episode-b7ded741f0d64e8f",
       "episode-v2-9ad3eba423760f07",
       "episode-614eff0ac3fb9f50",
@@ -11887,7 +11822,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "2e213d01031bcea9fa4dfb9b51b2dfeafafe053e62c417b45a851200d3e95f3c"
+    "sha256": "a752b9856a2376695072594055a61b341911ef9ed4f98ad355b801adbca7db5c"
   },
   "makes_model_calls": false,
   "rule": {
