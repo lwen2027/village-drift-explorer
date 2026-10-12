@@ -2394,7 +2394,12 @@
           archived,
           committed
         );
-        return annotationFingerprint(sourceMerged) === localHash;
+        if (annotationFingerprint(sourceMerged) === localHash) return true;
+        const fieldMerged = mergeCommittedAnnotationIntoLocal(
+          archived,
+          committed
+        );
+        return annotationFingerprint(fieldMerged) === localHash;
       });
     }
 

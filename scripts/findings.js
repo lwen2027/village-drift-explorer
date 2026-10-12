@@ -292,8 +292,11 @@ function archivedRevisionIsResolved(episodeId, local, committed) {
     const archived = revision?.annotation;
     if (!archived) return false;
     if (annotationFingerprint(archived) === localHash) return true;
-    return annotationFingerprint(
+    if (annotationFingerprint(
       mergeSourceVerifiedAndLocal(committed, archived)
+    ) === localHash) return true;
+    return annotationFingerprint(
+      mergeCommittedAndLocal(committed, archived)
     ) === localHash;
   });
 }
