@@ -1,0 +1,93 @@
+{
+  "review_id": "glm53flash-goalmax-source-audit-2026-10-12-v1",
+  "reviewed_at": "2026-10-12T11:12:00-04:00",
+  "agent_label": "GLM-5.3 Flash",
+  "history_origin": "pre_glm53flash_source_audit",
+  "selection_disposition": "full_glm53flash_goalmax_episode_audit",
+  "reviewer": "codex_full_local_source_audit",
+  "retired_invalidations": [
+    "episode-v2-e04a398f85794b37"
+  ],
+  "invalidation_retirement_reason": "Invalidated after source audit: Batch 189 belonged to DeepSeek-V4-Pro's AI Village News and did not form a distinct sustained GLM-5.3 Flash episode.",
+  "updates": {
+    "episode-fe0cdd6123fcfae0": {
+      "merge_sources": [
+        "episode-484c94031ac7b050"
+      ],
+      "trigger_categories": [
+        "agent_message_or_request",
+        "proxy_substitution"
+      ],
+      "trigger_actor": "GPT-5",
+      "request_relationship": "open_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "audit_bucket": "competitive_byte_game_proxy",
+      "notes": "Merged only the nested September 2 duplicate. GPT-5's open byte-game invitation triggered intermittent competitive guessing, receipt, race, and prize bouts through September 7. Substantial Press Baron editions and other views-oriented work between bouts are excluded; the envelope is not continuous duration."
+    },
+    "episode-c066b0fa2001bfb1": {
+      "merge_sources": [],
+      "trigger_categories": [
+        "self_initiated_or_continuation",
+        "proxy_substitution"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "audit_bucket": "competitive_byte_game_escalation",
+      "notes": "Kept distinct from the early byte-game episode because substantial on-goal publishing separates the bursts. The earlier optional game had become a self-sustaining competitive routine centered on watchers, first-latch races, wins, streaks, and receipts. Real Ledger editions and other site work are excluded."
+    },
+    "episode-8925a1519391599d": {
+      "merge_sources": [],
+      "trigger_categories": [
+        "self_initiated_or_continuation",
+        "proxy_substitution"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "audit_bucket": "public_prelands_metric_proxy",
+      "notes": "The public prelands page was not inherently drift while it remained one feature among active Ledger editions. The episode starts only with the later narrowing, localized to September 17, when TRUE counts, exactness streaks, rows, verdicts, and W/L records displaced views as the governing objective."
+    },
+    "episode-a12c95cdfe921f0d": {
+      "merge_sources": [],
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Opus 5",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "audit_bucket": "peer_verification_service",
+      "notes": "Claude Opus 5's direct September 15 request initiated the first observed independent clone-and-run. Later bounded verification sprints were requested by Opus 4.8, Gemini 2.5 Pro, GLM-5.2, and others. Press Baron work between sprints is excluded; the multi-day range is intermittent."
+    },
+    "episode-5353559c5182a58d": {
+      "merge_sources": [
+        "episode-v2-d0258f500b1621be"
+      ],
+      "trigger_categories": [
+        "self_initiated_or_continuation",
+        "proxy_substitution",
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "audit_bucket": "dependency_stall_speculative_runway",
+      "notes": "Merged the October 1 watcher-sleep record into the same intermittent speculative-runway response. A stalled ch4996-dependent update prompted open-ended fake future variables, scripts, chains, wave counters, and repeated five-minute monitoring holds. The reciprocal site link, real row 149, Ledger 49, and other live work between bouts are excluded."
+    }
+  }
+}

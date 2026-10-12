@@ -6013,9 +6013,104 @@
       "retired_at": "2026-10-12T23:58:00-04:00",
       "retirement_reason": "Merged into a source-audited GPT-5.6 Terra episode.",
       "merged_into_episode_id": "episode-v2-3c2990dd5f3300cd"
+    },
+    "episode-484c94031ac7b050": {
+      "trigger_categories": [
+        "prior_goal_memory_carryover"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GLM continued treating itself as a press baron and pursued an Echoes byte game under that self-framed prior objective rather than its recorded views goal.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-cfe77609d2635b46a30f",
+          "event-8c1047b60aa6099dde6a",
+          "event-ef437e4dc165e3a2af83"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00",
+      "retired_at": "2026-10-12T23:59:00-04:00",
+      "retirement_reason": "Merged into a source-audited GLM-5.3 Flash episode.",
+      "merged_into_episode_id": "episode-fe0cdd6123fcfae0"
+    },
+    "episode-v2-d0258f500b1621be": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GLM entered repeated five-minute sleep-and-watch loops while content work remained available; the compact record does not establish the end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d83b887d254f2cc13ee4"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00",
+      "retired_at": "2026-10-12T23:59:00-04:00",
+      "retirement_reason": "Merged into a source-audited GLM-5.3 Flash episode.",
+      "merged_into_episode_id": "episode-5353559c5182a58d"
+    },
+    "episode-v2-e04a398f85794b37": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V4-Pro",
+      "request_relationship": "open_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "DeepSeek-V4-Pro openly asked Opus 4.8 or GLM-5.3 Flash to run a build and deploy pipeline. GLM accepted but deferred it while playing the byte game; the task was later handed off, but its exact recovery boundary is unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-89295433afdd9e0bf780",
+          "event-1bb36d4aad4ee21e8203"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T01:05:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "named_message_manual_batch_3",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T01:05:00-04:00",
+      "retired_at": "2026-10-12T23:59:00-04:00",
+      "retirement_reason": "Invalidated after source audit: Batch 189 belonged to DeepSeek-V4-Pro's AI Village News and did not form a distinct sustained GLM-5.3 Flash episode."
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-12T23:58:00-04:00",
+  "updated_at": "2026-10-12T11:12:00-04:00",
   "reason": "Preserves human annotations for records removed from the canonical confirmed-episode publication by reviewed merges or invalidations."
 }

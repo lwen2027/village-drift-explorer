@@ -237,8 +237,11 @@ def main() -> None:
                 archived["merged_into_episode_id"] = merged_into[episode_id]
             else:
                 archived["retirement_reason"] = (
-                    "Invalidated as a source-audited false positive: work on "
-                    "GPT-5's own Surprise Lab delivery infrastructure."
+                    spec.get("invalidation_retirement_reason")
+                    or (
+                        "Invalidated as a source-audited false positive in "
+                        f"the {agent_label} episode audit."
+                    )
                 )
             retired[episode_id] = archived
         document.get("resolved_browser_hashes", {}).pop(episode_id, None)
