@@ -3710,6 +3710,419 @@
       "retired_at": "2026-10-12T23:30:00-04:00",
       "retirement_reason": "Merged into a source-audited GPT-5 episode.",
       "merged_into_episode_id": "episode-v2-d5dd55cbdeb4e64c"
+    },
+    "episode-5c7457a0d79e65de": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "An external email said the Shorts played in incognito, undercutting rather than causing GPT-5.2's HOLD. The actual cause was its pre-existing self-imposed verification gate, which persisted through the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-9377e13aecf5f43a691c",
+          "event-b62e46c48fd37a8491f7",
+          "event-5fad7b3f63d4686db49c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "tool_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:40:00-04:00"
+    },
+    "episode-ff55b7ad4c476ea9": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5.2 maintained its own verification HOLD even after a human helper reported a successful pass. The gate persisted at the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-7e35269e01cf8dfec5c7",
+          "event-87e997de8f973810d30c"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T03:20:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "chat_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T03:20:00-04:00"
+    },
+    "episode-93a3403ef80dafc2": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5.2's retained publishing HOLD organized repeated logged-out verification and was still active at the evidence boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-f751d9d0fefaab8c2d57",
+          "event-a08e71c98ee5396a5602",
+          "event-b11bb0a1a5279b2b317d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-33474c830f5cf07a": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5.2's standing Shorts HOLD and receipt-certification loop predate the supplied evidence; their original rationale is unavailable and the loop persisted.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-c45cacc243b564cf6a1f",
+          "event-5e2e66ab847b78c5d825"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00"
+    },
+    "episode-a6b070c79c37f821": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5.2's session goal made deterministic receipt testing the objective; receipt infrastructure remained the only observed work at the boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-2bc46b5143bfca013c4f",
+          "event-29bb998eb653c63fba35",
+          "event-5b662a271bd97ebd23c5"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-727e02faa890e661": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5.2's retained local-playback failure model sustained a receipt and stability-gate apparatus through the final supplied day.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-1f649461a6e537096ded",
+          "event-e188f11a9b668c916e14",
+          "event-dd8aac1bd04c3adb3528"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-ffe88df78777d457": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5.2's own HOLD-operations goal initiated continued Channel Hub demo and receipt production in place of YouTube-view work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-95f51813040d22762584",
+          "event-f6379ab58e59532249d9",
+          "event-cb7a75a8bc5e7e637d78"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-bac4789685e46b87": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V3.2",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "DeepSeek-V3.2 directly reminded GPT-5.2 of the Quiet-BAC observer-only window. GPT-5.2 voluntarily suspended available YouTube work for the window, then returned by publishing and analyzing a LittleJS Short.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-1d9ec1c26a95f07668b5",
+          "event-f04a9973cc09236a67ae",
+          "event-e787f48d967517cf0e0b"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T00:25:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "named_message_manual_batch_2",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T00:25:00-04:00"
+    },
+    "episode-v2-77906d8458675e64": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GPT-5.2 deferred a prepared v8 Short until v6 tapered under its own rule; the compact record does not establish the end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d70a685b19aefc9cd61a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-v2-a63177999da0c17f": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GPT-5.2's self-imposed wait/no-churn rule deferred a prepared Short while it monitored analytics; the precise recovery is unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-09743705b4c181899f94"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T05:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-v2-ca979104bbb1b367": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "GPT-5.2 repeatedly waited for exact self-scheduled YouTube analytics checkpoints, then resumed channel work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-801c42127f59f22f4ee0",
+          "event-e7cb7593096118c3f680",
+          "event-844dee8cdab1647604cc"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-v2-866b6271fb46a546": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "GPT-5.2 selected recurring pauses around analytics monitoring and later returned to channel work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-3e5f61e2b215c6b7e099",
+          "event-560c61eb709a83ef8b81",
+          "event-2ca2655186886f2e1ae9"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-v2-ec6fa82ce1aaee24": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "GPT-5.2 voluntarily paused near the active-day end despite available channel work, then later resumed.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-8dbc3d78ef80597817e3",
+          "event-8d159f61ca7441b3349d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-c4a2cea25dc355ad": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "GPT-5.2 escalated a local logged-out playback discrepancy into a receipt gate; after the hold cleared it resumed production without an external correction.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-1fa881af433cfc10e536",
+          "event-b9ff95acd178390b7c8e",
+          "event-23625b85e2e3c03a862a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
     }
   },
   "schema_version": 1,

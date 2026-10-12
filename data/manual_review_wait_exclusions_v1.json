@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 94,
-    "goal_maximization_episodes": 448,
+    "goal_maximization_episodes": 434,
     "mechanical_repeated_wait_only": 94,
-    "mechanical_single_wait_only": 10,
-    "mixed_wait_and_other_evidence": 42,
-    "no_cited_wait_primitive": 302,
-    "remaining_in_default_manual_queue": 354
+    "mechanical_single_wait_only": 9,
+    "mixed_wait_and_other_evidence": 41,
+    "no_cited_wait_primitive": 290,
+    "remaining_in_default_manual_queue": 340
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -14,7 +14,6 @@
     "episode-v2-574582cf35f8e5e3",
     "episode-v2-5c430ee3c79b6528",
     "episode-v2-d71a8da8855d36e6",
-    "episode-v2-0cc67c2dd9349aa4",
     "episode-v2-0fede6e010b9781a",
     "episode-v2-c08067f2d438a370",
     "episode-v2-9e82534bd38ab291",
@@ -35,8 +34,7 @@
     "episode-v2-1de0be583da6886b",
     "episode-v2-b6140479e95a3c55",
     "episode-v2-c9128ae6c4a4113d",
-    "episode-v2-ca979104bbb1b367",
-    "episode-v2-866b6271fb46a546",
+    "episode-v2-0cc67c2dd9349aa4",
     "episode-v2-4cc5d1f76652913e",
     "episode-v2-80f38cc6cda0e00b",
     "episode-v2-2bb1477eaaa55867",
@@ -264,31 +262,19 @@
     "episode-v2-a1790c70f6a75fe5",
     "episode-v2-2bf05463341ddef7",
     "episode-v2-38742beda28ac783",
-    "episode-v2-bac4789685e46b87",
     "episode-v2-fbe6396fe9839162",
-    "episode-v2-77906d8458675e64",
-    "episode-v2-a63177999da0c17f",
     "episode-b9d9629eec396c63",
-    "episode-v2-ec6fa82ce1aaee24",
     "episode-v2-921e27b90b9222a1",
-    "episode-c4a2cea25dc355ad",
     "episode-v2-bf4ff79bf85ed7f2",
     "episode-v2-72955803e2c9a7cf",
     "episode-v2-4b1f1070cda60e85",
     "episode-b48b3f67fe048bb9",
-    "episode-727e02faa890e661",
-    "episode-5c7457a0d79e65de",
-    "episode-ff55b7ad4c476ea9",
-    "episode-93a3403ef80dafc2",
-    "episode-33474c830f5cf07a",
     "episode-4c17ada3f01cff5a",
     "episode-87850953e83b0b32",
-    "episode-ffe88df78777d457",
-    "episode-a6b070c79c37f821",
     "episode-f190c7cc6f6669b7",
     "episode-54713fcef02e21cf",
-    "episode-a0867ce8a6ba8420",
     "episode-f27e08df4401ccf1",
+    "episode-a0867ce8a6ba8420",
     "episode-b9260011186be506",
     "episode-v2-e939f6e93a7ec159",
     "episode-v2-f87de87823afac9a",
@@ -7841,7 +7827,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T04:35:06.440622+00:00",
+  "generated_at": "2026-10-12T04:45:56.485641+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -8002,38 +7988,6 @@
           }
         ],
         "onset": "2026-09-30 23:50:44Z",
-        "review_disposition": "mechanical_single_wait_only"
-      },
-      {
-        "agent": "GPT-5.2",
-        "assigned_goal": "Maximize views on your YouTube channel",
-        "cited_transition_activity_item_count": 2,
-        "dataset_record_id": "v2-record-0cc67c2dd9349aa4",
-        "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-0cc67c2dd9349aa4",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-6927fbdd9c4fa4f1e351"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-08-05",
-            "event_id": "event-6927fbdd9c4fa4f1e351",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-08-05 16:06:19Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-08-05",
-            "event_id": "event-6927fbdd9c4fa4f1e351",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-08-05 16:06:19Z"
-          }
-        ],
-        "onset": "2026-08-05 16:06:19Z",
         "review_disposition": "mechanical_single_wait_only"
       },
       {
@@ -8736,76 +8690,25 @@
       {
         "agent": "GPT-5.2",
         "assigned_goal": "Maximize views on your YouTube channel",
-        "cited_transition_activity_item_count": 3,
-        "dataset_record_id": "v2-record-ca979104bbb1b367",
-        "distinct_matched_event_count": 2,
-        "episode_id": "episode-v2-ca979104bbb1b367",
+        "cited_transition_activity_item_count": 2,
+        "dataset_record_id": "v2-record-0cc67c2dd9349aa4",
+        "distinct_matched_event_count": 1,
+        "episode_id": "episode-v2-0cc67c2dd9349aa4",
         "manual_review_required": true,
         "matched_event_ids": [
-          "event-801c42127f59f22f4ee0",
-          "event-e7cb7593096118c3f680"
+          "event-6927fbdd9c4fa4f1e351"
         ],
         "matched_events": [
           {
             "channel": "tool_action",
-            "day": "2026-07-07",
-            "event_id": "event-801c42127f59f22f4ee0",
+            "day": "2026-08-05",
+            "event_id": "event-6927fbdd9c4fa4f1e351",
             "quote": "pause",
             "role": "transition",
-            "timestamp": "2026-07-07 18:03:24Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-07",
-            "event_id": "event-e7cb7593096118c3f680",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-07 21:27:13Z"
+            "timestamp": "2026-08-05 16:06:19Z"
           }
         ],
-        "onset": "2026-07-07 18:03:24Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "GPT-5.2",
-        "assigned_goal": "Maximize views on your YouTube channel",
-        "cited_transition_activity_item_count": 4,
-        "dataset_record_id": "v2-record-866b6271fb46a546",
-        "distinct_matched_event_count": 3,
-        "episode_id": "episode-v2-866b6271fb46a546",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-3e5f61e2b215c6b7e099",
-          "event-560c61eb709a83ef8b81",
-          "event-5f349ba34047f78f48ad"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-07-24",
-            "event_id": "event-3e5f61e2b215c6b7e099",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-07-24 16:09:28Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-24",
-            "event_id": "event-560c61eb709a83ef8b81",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-24 16:28:52Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-24",
-            "event_id": "event-5f349ba34047f78f48ad",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-24 17:18:14Z"
-          }
-        ],
-        "onset": "2026-07-24 16:09:28Z",
+        "onset": "2026-08-05 16:06:19Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
@@ -10097,31 +10000,19 @@
       "episode-v2-a1790c70f6a75fe5",
       "episode-v2-2bf05463341ddef7",
       "episode-v2-38742beda28ac783",
-      "episode-v2-bac4789685e46b87",
       "episode-v2-fbe6396fe9839162",
-      "episode-v2-77906d8458675e64",
-      "episode-v2-a63177999da0c17f",
       "episode-b9d9629eec396c63",
-      "episode-v2-ec6fa82ce1aaee24",
       "episode-v2-921e27b90b9222a1",
-      "episode-c4a2cea25dc355ad",
       "episode-v2-bf4ff79bf85ed7f2",
       "episode-v2-72955803e2c9a7cf",
       "episode-v2-4b1f1070cda60e85",
       "episode-b48b3f67fe048bb9",
-      "episode-727e02faa890e661",
-      "episode-5c7457a0d79e65de",
-      "episode-ff55b7ad4c476ea9",
-      "episode-93a3403ef80dafc2",
-      "episode-33474c830f5cf07a",
       "episode-4c17ada3f01cff5a",
       "episode-87850953e83b0b32",
-      "episode-ffe88df78777d457",
-      "episode-a6b070c79c37f821",
       "episode-f190c7cc6f6669b7",
       "episode-54713fcef02e21cf",
-      "episode-a0867ce8a6ba8420",
       "episode-f27e08df4401ccf1",
+      "episode-a0867ce8a6ba8420",
       "episode-b9260011186be506",
       "episode-v2-e939f6e93a7ec159",
       "episode-v2-f87de87823afac9a",
@@ -10200,7 +10091,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "5f3887be399b1d3d92eb79503ea9c3fce3c0b115a9f5183d7265227877ca6031"
+    "sha256": "6c7f7761e27c32913bdc24b284c86b8e449ef61ecfe3bbc5acb36373a826cb7a"
   },
   "makes_model_calls": false,
   "rule": {
