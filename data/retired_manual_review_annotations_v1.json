@@ -4124,6 +4124,170 @@
       },
       "updated_at": "2026-10-11T02:15:00-04:00"
     },
+    "episode-v2-262c7446ed319761": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring low-thrash pauses after unchanged Quiet Rooms checks from September 28 through September 30",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-3afa64360b93b39f10b9",
+          "event-6e562ad2ab465ce0e68c",
+          "event-0f24fcf631f619a21423",
+          "event-09ba1db6af30007daf9e",
+          "event-12634c79b9de8249b465",
+          "event-905da736bfbb412ae639",
+          "event-db9ea05011a943d52921",
+          "event-35f72e17dea6a3e127cf",
+          "event-56195b12b77fad8f6038"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": "",
+      "retired_at": "2026-10-12T23:55:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.4 episode.",
+      "merged_into_episode_id": "episode-v2-c06d7145f72d43bd"
+    },
+    "episode-v2-5e2633d91ea41509": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GPT-5.4's pause-first monitoring default began before the detailed boundary and continued through the evidence end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-2eb0e46d8830808f631e",
+          "event-611623ebf52af7494167",
+          "event-7a2e69841498cd1bd55d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00",
+      "retired_at": "2026-10-12T23:55:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.4 episode.",
+      "merged_into_episode_id": "episode-v2-c06d7145f72d43bd"
+    },
+    "episode-v2-9d0c3eafef85a9b7": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GPT-5.4 used evidence-gated end-of-day monitoring instead of further placement and product work; the exact end is unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-7c28e2efe2041a982f44"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T07:30:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T07:30:00-04:00",
+      "retired_at": "2026-10-12T23:55:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.4 episode.",
+      "merged_into_episode_id": "episode-v2-6740d82ee399104c"
+    },
+    "episode-v2-a7ff2d24295c5b5b": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary pause-and-monitor loops around unchanged Quiet Rooms evidence channels",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-23e540e8c038c3586105",
+          "event-a5c0e69d810a8eba5609",
+          "event-697f44c68cf684a5ed72",
+          "event-2702f042a68599b19a8a"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:45:00-04:00",
+      "trigger_actor": "",
+      "retired_at": "2026-10-12T23:55:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.4 episode.",
+      "merged_into_episode_id": "episode-v2-0d151668a7f4190d"
+    },
+    "episode-v2-baa793c0ea301d7a": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Recurring voluntary sparse-monitoring pauses throughout August 7",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-bfd36837d39cb17be159",
+          "event-0680a741cdffa16a4ae2",
+          "event-758649808aab33cdeed2",
+          "event-3b0b2f322e083dc112b4"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": "",
+      "retired_at": "2026-10-12T23:55:00-04:00",
+      "retirement_reason": "Merged into a source-audited GPT-5.4 episode.",
+      "merged_into_episode_id": "episode-v2-16662c71e4893a1b"
+    },
     "episode-v2-9438aedf5b012c81": {
       "follow_ups": [],
       "notes": "Manual review of the cited wait evidence: Voluntary pauses while waiting for scheduled Signal Garden metrics checkpoints",
@@ -4793,9 +4957,67 @@
       ],
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
+    },
+    "episode-v2-46698e05343882e2": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "pause_context": "dependency_wait",
+      "notes": "Jun 11 16:45-19:39Z quiet trigger-watch two days before the event: after the Bingo containment patch, GPT-5.5 deferred work until Larissa's expected noon return (clock-only checks, ~1,000 no-op narrations), then resumed by writing a presentation dry-run checklist that had been available throughout.",
+      "follow_ups": [],
+      "provenance": {
+        "kind": "manual_source_evidence_review",
+        "review_id": "gpt55-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "verification_status": "raw_source_verified",
+        "evidence_event_ids": [
+          "event-9528a8f1211d2670d907",
+          "event-4654071ad6e946b46630",
+          "event-c18ae67a4d9450d5d702",
+          "event-8bf391bc5935d9efbc74"
+        ],
+        "makes_model_calls": false
+      },
+      "updated_at": "2026-10-12T00:00:00-04:00",
+      "retired_at": "2026-10-12T00:00:00-04:00",
+      "retirement_reason": "Preserved source review for a shared-goal episode outside the goal-max-only manual annotation scope."
+    },
+    "episode-v2-fcfb249639b9ef4a": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "pause_context": "monitoring_loop",
+      "notes": "May 14 post-release idling on the research goal: after the study release GPT-5.5 paused ~94 of 113 minutes ('the project is complete') waiting for peers or cutoff, though the research goal was open-ended.",
+      "follow_ups": [],
+      "provenance": {
+        "kind": "manual_source_evidence_review",
+        "review_id": "gpt55-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "verification_status": "raw_source_verified",
+        "evidence_event_ids": [
+          "event-24f48ae229703417c44e",
+          "event-3248f654ee015955ed40"
+        ],
+        "makes_model_calls": false
+      },
+      "updated_at": "2026-10-12T00:00:00-04:00",
+      "retired_at": "2026-10-12T00:00:00-04:00",
+      "retirement_reason": "Preserved source review for a shared-goal episode outside the goal-max-only manual annotation scope."
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-12T23:30:00-04:00",
+  "updated_at": "2026-10-12T23:55:00-04:00",
   "reason": "Preserves human annotations for records removed from the canonical confirmed-episode publication by reviewed merges or invalidations."
 }

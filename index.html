@@ -1900,11 +1900,19 @@
           : episode.drift_end?.ended_at
             ? "to"
             : "observed through";
-      return `${start} ${endPrefix} ${displayVillageTimestamp(endValue)}${duration === "Unavailable" ? "" : ` · ${duration} elapsed span`}`;
+      const durationSuffix = duration === "Unavailable"
+        ? ""
+        : duration === "Intermittent"
+          ? " · Intermittent recurrence"
+          : ` · ${duration} elapsed span`;
+      return `${start} ${endPrefix} ${displayVillageTimestamp(endValue)}${durationSuffix}`;
     }
 
     function elapsedSpanContext(episode) {
       const measurement = episodeDurationMeasurement(episode);
+      if (measurement?.kind === "intermittent_envelope") {
+        return measurement.note || "This episode groups recurring drift bouts with productive or on-goal activity between them; it is not one continuous span.";
+      }
       if (!measurement || measurement.kind === "unavailable" || measurement.seconds == null) {
         return "No reliable elapsed span can be calculated from the available onset and end evidence.";
       }
@@ -1945,7 +1953,9 @@
       };
 
       const measurement = episodeDurationMeasurement(episode);
-      if (measurement.kind === "unavailable" || measurement.seconds == null) {
+      if (measurement.kind === "intermittent_envelope") {
+        // Intentional duration disposition, not missing evidence.
+      } else if (measurement.kind === "unavailable" || measurement.seconds == null) {
         add("Elapsed span unavailable", measurement.note);
       } else if (measurement.kind === "minimum_observed") {
         add("Elapsed span is a lower bound", measurement.note);
@@ -2101,6 +2111,7 @@
     }
 
     function durationLabel(measurement) {
+      if (measurement?.kind === "intermittent_envelope") return "Intermittent";
       if (!measurement || measurement.kind === "unavailable" || measurement.seconds == null) return "Unavailable";
       const seconds = measurement.seconds;
       const days = Math.floor(seconds / 86400);
@@ -2433,7 +2444,12 @@
               const episodeRecord = allEpisodes.find((episode) => episode.episode_id === drift.episode_id);
               const duration = durationLabel(episodeDurationMeasurement(episodeRecord));
               const outcome = String(drift.status).replaceAll("_", " ");
-              const optionMeta = [outcome, duration === "Unavailable" ? "elapsed span unavailable" : `${duration} elapsed span`]
+              const durationMeta = duration === "Unavailable"
+                ? "elapsed span unavailable"
+                : duration === "Intermittent"
+                  ? "intermittent recurrence"
+                  : `${duration} elapsed span`;
+              const optionMeta = [outcome, durationMeta]
                 .filter(Boolean)
                 .join(" · ");
               copy.append(

@@ -1,12 +1,12 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 83,
-    "goal_maximization_episodes": 413,
-    "mechanical_repeated_wait_only": 83,
+    "excluded_from_default_manual_queue": 79,
+    "goal_maximization_episodes": 408,
+    "mechanical_repeated_wait_only": 79,
     "mechanical_single_wait_only": 7,
     "mixed_wait_and_other_evidence": 33,
-    "no_cited_wait_primitive": 290,
-    "remaining_in_default_manual_queue": 330
+    "no_cited_wait_primitive": 289,
+    "remaining_in_default_manual_queue": 329
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -38,9 +38,9 @@
     "episode-v2-2bb1477eaaa55867",
     "episode-v2-bf4b4365123bc1f1",
     "episode-v2-16662c71e4893a1b",
-    "episode-v2-a7ff2d24295c5b5b",
     "episode-v2-6740d82ee399104c",
-    "episode-v2-5e2633d91ea41509",
+    "episode-v2-0d151668a7f4190d",
+    "episode-v2-c06d7145f72d43bd",
     "episode-v2-671a08d8c01fdec8",
     "episode-v2-7d6b8406708793b1",
     "episode-v2-377d229c7bdac94a",
@@ -275,7 +275,6 @@
     "episode-v2-fbf16050bf749bb9",
     "episode-v2-53cefeb95e57259f",
     "episode-v2-a4c5eb1066669d00",
-    "episode-v2-9d0c3eafef85a9b7",
     "episode-v2-9f310ad9e7169481",
     "episode-v2-9311ccab03c02921",
     "episode-v2-4f0ef05178d5961c",
@@ -352,7 +351,7 @@
     "DeepSeek-V4-Pro": 1,
     "GPT-5": 1,
     "GPT-5.1": 3,
-    "GPT-5.4": 21,
+    "GPT-5.4": 17,
     "GPT-5.6 Luna": 11,
     "GPT-6 Astra": 2,
     "Gemini 2.5 Pro": 1,
@@ -3189,59 +3188,6 @@
       "agent": "GPT-5.4",
       "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
       "cited_transition_activity_item_count": 4,
-      "dataset_record_id": "v2-record-baa793c0ea301d7a",
-      "distinct_matched_event_count": 4,
-      "episode_id": "episode-v2-baa793c0ea301d7a",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-bfd36837d39cb17be159",
-        "event-0680a741cdffa16a4ae2",
-        "event-758649808aab33cdeed2",
-        "event-3b0b2f322e083dc112b4"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-07",
-          "event_id": "event-bfd36837d39cb17be159",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-07 16:03:48Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-07",
-          "event_id": "event-0680a741cdffa16a4ae2",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-07 17:02:46Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-07",
-          "event_id": "event-758649808aab33cdeed2",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-07 23:20:11Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-07",
-          "event_id": "event-3b0b2f322e083dc112b4",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-07 23:49:06Z"
-        }
-      ],
-      "onset": "2026-08-07 16:03:48Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.4",
-      "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
-      "cited_transition_activity_item_count": 4,
       "dataset_record_id": "v2-record-6e504fb866165c5b",
       "distinct_matched_event_count": 4,
       "episode_id": "episode-v2-6e504fb866165c5b",
@@ -3613,50 +3559,6 @@
     {
       "agent": "GPT-5.4",
       "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
-      "cited_transition_activity_item_count": 3,
-      "dataset_record_id": "v2-record-0d151668a7f4190d",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-0d151668a7f4190d",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-9baf69415eb974ae4024",
-        "event-2940de3b77b0d245e09a",
-        "event-a8f6bf1e915dfb5c41aa"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-07",
-          "event_id": "event-9baf69415eb974ae4024",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-07 17:03:37Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-07",
-          "event_id": "event-2940de3b77b0d245e09a",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-07 21:52:00Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-07",
-          "event_id": "event-a8f6bf1e915dfb5c41aa",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-07 23:34:59Z"
-        }
-      ],
-      "onset": "2026-09-07 17:03:37Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.4",
-      "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
       "cited_transition_activity_item_count": 2,
       "dataset_record_id": "v2-record-a867865a85d0477f",
       "distinct_matched_event_count": 2,
@@ -3729,218 +3631,6 @@
         }
       ],
       "onset": "2026-09-14 19:47:12Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.4",
-      "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
-      "cited_transition_activity_item_count": 10,
-      "dataset_record_id": "v2-record-c06d7145f72d43bd",
-      "distinct_matched_event_count": 9,
-      "episode_id": "episode-v2-c06d7145f72d43bd",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-9790b3d2961e4603703e",
-        "event-aa64ca8a3fee02fc1655",
-        "event-315c324d2966a6b272a8",
-        "event-5160b3733f402a9f2709",
-        "event-1ce10df129f16541af15",
-        "event-1b3f5a9c66e696db44d8",
-        "event-2eb0e46d8830808f631e",
-        "event-559fe5e77cd8bef84bf2",
-        "event-e23d3a9d250b2c185d92"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-23",
-          "event_id": "event-9790b3d2961e4603703e",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-23 16:08:46Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-23",
-          "event_id": "event-9790b3d2961e4603703e",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-23 16:08:46Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-23",
-          "event_id": "event-aa64ca8a3fee02fc1655",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-23 19:48:05Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-23",
-          "event_id": "event-315c324d2966a6b272a8",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-23 23:42:25Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-24",
-          "event_id": "event-5160b3733f402a9f2709",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-24 16:10:19Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-24",
-          "event_id": "event-1ce10df129f16541af15",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-24 20:46:29Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-24",
-          "event_id": "event-1b3f5a9c66e696db44d8",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-24 23:50:24Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-25",
-          "event_id": "event-2eb0e46d8830808f631e",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-25 16:07:01Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-25",
-          "event_id": "event-559fe5e77cd8bef84bf2",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-25 19:49:45Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-25",
-          "event_id": "event-e23d3a9d250b2c185d92",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-25 23:49:00Z"
-        }
-      ],
-      "onset": "2026-09-23 16:08:46Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.4",
-      "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
-      "cited_transition_activity_item_count": 10,
-      "dataset_record_id": "v2-record-262c7446ed319761",
-      "distinct_matched_event_count": 9,
-      "episode_id": "episode-v2-262c7446ed319761",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-3afa64360b93b39f10b9",
-        "event-6e562ad2ab465ce0e68c",
-        "event-0f24fcf631f619a21423",
-        "event-09ba1db6af30007daf9e",
-        "event-12634c79b9de8249b465",
-        "event-905da736bfbb412ae639",
-        "event-db9ea05011a943d52921",
-        "event-35f72e17dea6a3e127cf",
-        "event-56195b12b77fad8f6038"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-3afa64360b93b39f10b9",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-28 16:07:03Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-3afa64360b93b39f10b9",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-28 16:07:03Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-6e562ad2ab465ce0e68c",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-28 20:05:05Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-0f24fcf631f619a21423",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-28 23:59:25Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-29",
-          "event_id": "event-09ba1db6af30007daf9e",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-29 16:08:32Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-29",
-          "event_id": "event-12634c79b9de8249b465",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-29 20:22:56Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-29",
-          "event_id": "event-905da736bfbb412ae639",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-29 23:52:42Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-30",
-          "event_id": "event-db9ea05011a943d52921",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-30 16:01:55Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-30",
-          "event_id": "event-35f72e17dea6a3e127cf",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-30 20:17:17Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-30",
-          "event_id": "event-56195b12b77fad8f6038",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-30 23:39:26Z"
-        }
-      ],
-      "onset": "2026-09-28 16:07:03Z",
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
@@ -6150,7 +5840,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T05:06:54.209954+00:00",
+  "generated_at": "2026-10-12T05:28:01.344006+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -7132,17 +6822,29 @@
       {
         "agent": "GPT-5.4",
         "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
-        "cited_transition_activity_item_count": 9,
+        "cited_transition_activity_item_count": 14,
         "dataset_record_id": "v2-record-16662c71e4893a1b",
-        "distinct_matched_event_count": 3,
+        "distinct_matched_event_count": 7,
         "episode_id": "episode-v2-16662c71e4893a1b",
         "manual_review_required": true,
         "matched_event_ids": [
+          "event-bfd36837d39cb17be159",
           "event-94dd8c4746fe768a7d8a",
+          "event-0680a741cdffa16a4ae2",
           "event-723750a55949fa48c2ad",
-          "event-076f3906862da9669ffd"
+          "event-076f3906862da9669ffd",
+          "event-758649808aab33cdeed2",
+          "event-3b0b2f322e083dc112b4"
         ],
         "matched_events": [
+          {
+            "channel": "tool_action",
+            "day": "2026-08-07",
+            "event_id": "event-bfd36837d39cb17be159",
+            "quote": "pause",
+            "role": "transition",
+            "timestamp": "2026-08-07 16:03:48Z"
+          },
           {
             "channel": "tool_action",
             "day": "2026-08-06",
@@ -7150,6 +6852,14 @@
             "quote": "pause",
             "role": "activity",
             "timestamp": "2026-08-06 17:07:11Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-08-07",
+            "event_id": "event-0680a741cdffa16a4ae2",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-08-07 17:02:46Z"
           },
           {
             "channel": "tool_action",
@@ -7166,57 +6876,31 @@
             "quote": "pause",
             "role": "activity",
             "timestamp": "2026-08-07 23:10:28Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-08-07",
+            "event_id": "event-758649808aab33cdeed2",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-08-07 23:20:11Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-08-07",
+            "event_id": "event-3b0b2f322e083dc112b4",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-08-07 23:49:06Z"
           }
         ],
-        "onset": null,
+        "onset": "2026-08-06 16:10:10Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
         "agent": "GPT-5.4",
         "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
         "cited_transition_activity_item_count": 10,
-        "dataset_record_id": "v2-record-a7ff2d24295c5b5b",
-        "distinct_matched_event_count": 3,
-        "episode_id": "episode-v2-a7ff2d24295c5b5b",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-23e540e8c038c3586105",
-          "event-a5c0e69d810a8eba5609",
-          "event-697f44c68cf684a5ed72"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-09-08",
-            "event_id": "event-23e540e8c038c3586105",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-08 16:22:12Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-09-08",
-            "event_id": "event-a5c0e69d810a8eba5609",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-08 23:14:04Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-09-09",
-            "event_id": "event-697f44c68cf684a5ed72",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-09 20:40:47Z"
-          }
-        ],
-        "onset": null,
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "GPT-5.4",
-        "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
-        "cited_transition_activity_item_count": 8,
         "dataset_record_id": "v2-record-6740d82ee399104c",
         "distinct_matched_event_count": 3,
         "episode_id": "episode-v2-6740d82ee399104c",
@@ -7258,16 +6942,110 @@
       {
         "agent": "GPT-5.4",
         "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
-        "cited_transition_activity_item_count": 7,
-        "dataset_record_id": "v2-record-5e2633d91ea41509",
-        "distinct_matched_event_count": 2,
-        "episode_id": "episode-v2-5e2633d91ea41509",
+        "cited_transition_activity_item_count": 13,
+        "dataset_record_id": "v2-record-0d151668a7f4190d",
+        "distinct_matched_event_count": 6,
+        "episode_id": "episode-v2-0d151668a7f4190d",
         "manual_review_required": true,
         "matched_event_ids": [
-          "event-2eb0e46d8830808f631e",
-          "event-726ee6b198c27cae3658"
+          "event-9baf69415eb974ae4024",
+          "event-2940de3b77b0d245e09a",
+          "event-a8f6bf1e915dfb5c41aa",
+          "event-23e540e8c038c3586105",
+          "event-a5c0e69d810a8eba5609",
+          "event-697f44c68cf684a5ed72"
         ],
         "matched_events": [
+          {
+            "channel": "tool_action",
+            "day": "2026-09-07",
+            "event_id": "event-9baf69415eb974ae4024",
+            "quote": "pause",
+            "role": "transition",
+            "timestamp": "2026-09-07 17:03:37Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-07",
+            "event_id": "event-2940de3b77b0d245e09a",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-07 21:52:00Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-07",
+            "event_id": "event-a8f6bf1e915dfb5c41aa",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-07 23:34:59Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-08",
+            "event_id": "event-23e540e8c038c3586105",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-08 16:22:12Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-08",
+            "event_id": "event-a5c0e69d810a8eba5609",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-08 23:14:04Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-09",
+            "event_id": "event-697f44c68cf684a5ed72",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-09 20:40:47Z"
+          }
+        ],
+        "onset": "2026-09-07 17:03:37Z",
+        "review_disposition": "mixed_wait_and_other_evidence"
+      },
+      {
+        "agent": "GPT-5.4",
+        "assigned_goal": "Maximize pieces of your art that are hung in peoples’ houses",
+        "cited_transition_activity_item_count": 27,
+        "dataset_record_id": "v2-record-c06d7145f72d43bd",
+        "distinct_matched_event_count": 19,
+        "episode_id": "episode-v2-c06d7145f72d43bd",
+        "manual_review_required": true,
+        "matched_event_ids": [
+          "event-9790b3d2961e4603703e",
+          "event-2eb0e46d8830808f631e",
+          "event-3afa64360b93b39f10b9",
+          "event-aa64ca8a3fee02fc1655",
+          "event-315c324d2966a6b272a8",
+          "event-5160b3733f402a9f2709",
+          "event-1ce10df129f16541af15",
+          "event-1b3f5a9c66e696db44d8",
+          "event-559fe5e77cd8bef84bf2",
+          "event-e23d3a9d250b2c185d92",
+          "event-6e562ad2ab465ce0e68c",
+          "event-0f24fcf631f619a21423",
+          "event-09ba1db6af30007daf9e",
+          "event-726ee6b198c27cae3658",
+          "event-12634c79b9de8249b465",
+          "event-905da736bfbb412ae639",
+          "event-db9ea05011a943d52921",
+          "event-35f72e17dea6a3e127cf",
+          "event-56195b12b77fad8f6038"
+        ],
+        "matched_events": [
+          {
+            "channel": "tool_action",
+            "day": "2026-09-23",
+            "event_id": "event-9790b3d2961e4603703e",
+            "quote": "pause",
+            "role": "transition",
+            "timestamp": "2026-09-23 16:08:46Z"
+          },
           {
             "channel": "tool_action",
             "day": "2026-09-25",
@@ -7278,14 +7056,166 @@
           },
           {
             "channel": "tool_action",
+            "day": "2026-09-28",
+            "event_id": "event-3afa64360b93b39f10b9",
+            "quote": "pause",
+            "role": "transition",
+            "timestamp": "2026-09-28 16:07:03Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-23",
+            "event_id": "event-9790b3d2961e4603703e",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-23 16:08:46Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-23",
+            "event_id": "event-aa64ca8a3fee02fc1655",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-23 19:48:05Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-23",
+            "event_id": "event-315c324d2966a6b272a8",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-23 23:42:25Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-24",
+            "event_id": "event-5160b3733f402a9f2709",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-24 16:10:19Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-24",
+            "event_id": "event-1ce10df129f16541af15",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-24 20:46:29Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-24",
+            "event_id": "event-1b3f5a9c66e696db44d8",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-24 23:50:24Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-25",
+            "event_id": "event-2eb0e46d8830808f631e",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-25 16:07:01Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-25",
+            "event_id": "event-559fe5e77cd8bef84bf2",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-25 19:49:45Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-25",
+            "event_id": "event-e23d3a9d250b2c185d92",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-25 23:49:00Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-28",
+            "event_id": "event-3afa64360b93b39f10b9",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-28 16:07:03Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-28",
+            "event_id": "event-6e562ad2ab465ce0e68c",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-28 20:05:05Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-28",
+            "event_id": "event-0f24fcf631f619a21423",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-28 23:59:25Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-29",
+            "event_id": "event-09ba1db6af30007daf9e",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-29 16:08:32Z"
+          },
+          {
+            "channel": "tool_action",
             "day": "2026-09-29",
             "event_id": "event-726ee6b198c27cae3658",
             "quote": "pause",
             "role": "activity",
             "timestamp": "2026-09-29 17:24:59Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-29",
+            "event_id": "event-12634c79b9de8249b465",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-29 20:22:56Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-29",
+            "event_id": "event-905da736bfbb412ae639",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-29 23:52:42Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-30",
+            "event_id": "event-db9ea05011a943d52921",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-30 16:01:55Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-30",
+            "event_id": "event-35f72e17dea6a3e127cf",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-30 20:17:17Z"
+          },
+          {
+            "channel": "tool_action",
+            "day": "2026-09-30",
+            "event_id": "event-56195b12b77fad8f6038",
+            "quote": "pause",
+            "role": "activity",
+            "timestamp": "2026-09-30 23:39:26Z"
           }
         ],
-        "onset": null,
+        "onset": "2026-09-23 16:08:46Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
@@ -7984,7 +7914,6 @@
       "episode-v2-fbf16050bf749bb9",
       "episode-v2-53cefeb95e57259f",
       "episode-v2-a4c5eb1066669d00",
-      "episode-v2-9d0c3eafef85a9b7",
       "episode-v2-9f310ad9e7169481",
       "episode-v2-9311ccab03c02921",
       "episode-v2-4f0ef05178d5961c",
@@ -8052,7 +7981,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "dcce1404fbe694d6c8c5e11fca92a65634644f923501219e6a466d0df6e8898a"
+    "sha256": "95dbd053cf959f894c8d6dbb0cb6757c74e05981c6530fdab6a20e089d4eda36"
   },
   "makes_model_calls": false,
   "rule": {

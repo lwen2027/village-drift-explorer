@@ -44,8 +44,10 @@ def main() -> None:
     spec = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
     document = json.loads(ANNOTATIONS_PATH.read_text(encoding="utf-8"))
     archive = json.loads(ARCHIVE_PATH.read_text(encoding="utf-8"))
-    episodes = {row["episode_id"] for row in
-                json.loads(BUNDLE_PATH.read_text(encoding="utf-8"))["confirmed_episodes"]}
+    episodes = {
+        row["episode_id"]: row for row in
+        json.loads(BUNDLE_PATH.read_text(encoding="utf-8"))["confirmed_episodes"]
+    }
     if MEMORY_TRIGGER not in {row["id"] for row in document["taxonomies"]["trigger"]}:
         raise SystemExit(f"{MEMORY_TRIGGER} taxonomy is missing")
     annotations = document["annotations"]
@@ -103,6 +105,21 @@ def main() -> None:
         merged["provenance"] = provenance
         merged["updated_at"] = REVIEWED_AT
         annotations[episode_id] = merged
+    out_of_scope = [
+        episode_id for episode_id in spec["updates"]
+        if episodes[episode_id].get("period") != "goal_maximization"
+    ]
+    for episode_id in out_of_scope:
+        annotation = annotations.pop(episode_id, None)
+        if not annotation:
+            continue
+        archived = copy.deepcopy(annotation)
+        archived["retired_at"] = REVIEWED_AT
+        archived["retirement_reason"] = (
+            "Preserved source review for a shared-goal episode outside the "
+            "goal-max-only manual annotation scope."
+        )
+        retired[episode_id] = archived
     if REVIEW_ID not in document.setdefault("merged_review_ids", []):
         document["merged_review_ids"].append(REVIEW_ID)
         seed = str(document.get("seed_id") or "")
@@ -111,7 +128,8 @@ def main() -> None:
     ANNOTATIONS_PATH.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     ARCHIVE_PATH.write_text(json.dumps(archive, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Retired {len(spec['retired'])}, updated {len(spec['updates'])}, "
-          f"tagged {len(spec['tags'])} annotations")
+          f"tagged {len(spec['tags'])}, archived {len(out_of_scope)} "
+          "out-of-scope annotations")
 
 
 if __name__ == "__main__":

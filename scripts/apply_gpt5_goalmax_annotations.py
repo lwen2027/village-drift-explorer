@@ -61,10 +61,11 @@ def preserve_revision(
     episode_id: str,
     annotation: dict,
     review_id: str,
+    history_origin: str = "pre_gpt5_source_audit",
 ) -> None:
     snapshot = copy.deepcopy(annotation)
     payload = json.dumps(
-        {"origin": "pre_gpt5_source_audit", "annotation": snapshot},
+        {"origin": history_origin, "annotation": snapshot},
         ensure_ascii=False,
         sort_keys=True,
         separators=(",", ":"),
@@ -77,7 +78,7 @@ def preserve_revision(
         return
     history.append({
         "revision_id": revision_id,
-        "origin": "pre_gpt5_source_audit",
+        "origin": history_origin,
         "superseded_by": review_id,
         "recorded_at": datetime.now(timezone.utc).isoformat().replace(
             "+00:00", "Z"
@@ -120,6 +121,14 @@ def main() -> None:
     spec = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
     review_id = spec["review_id"]
     reviewed_at = spec["reviewed_at"]
+    agent_label = spec.get("agent_label", "GPT-5")
+    history_origin = spec.get(
+        "history_origin", "pre_gpt5_source_audit"
+    )
+    selection_disposition = spec.get(
+        "selection_disposition", "full_gpt5_goalmax_episode_audit"
+    )
+    reviewer = spec.get("reviewer", "codex_full_local_source_audit")
     document = json.loads(ANNOTATIONS_PATH.read_text(encoding="utf-8"))
     archive = json.loads(ARCHIVE_PATH.read_text(encoding="utf-8"))
     bundle = json.loads(BUNDLE_PATH.read_text(encoding="utf-8"))
@@ -139,11 +148,14 @@ def main() -> None:
     retired_ids = invalidated_ids | set(merged_into)
     missing = sorted(survivor_ids - set(episodes))
     if missing:
-        raise SystemExit("GPT-5 audited episodes are missing: " + ", ".join(missing))
+        raise SystemExit(
+            f"{agent_label} audited episodes are missing: "
+            + ", ".join(missing)
+        )
     still_published = sorted(retired_ids & set(episodes))
     if still_published:
         raise SystemExit(
-            "GPT-5 merged/invalidated episodes are still published: "
+            f"{agent_label} merged/invalidated episodes are still published: "
             + ", ".join(still_published)
         )
 
@@ -162,7 +174,9 @@ def main() -> None:
         if annotation and (annotation.get("provenance") or {}).get(
             "review_id"
         ) != review_id:
-            preserve_revision(document, episode_id, annotation, review_id)
+            preserve_revision(
+                document, episode_id, annotation, review_id, history_origin
+            )
 
     for episode_id, update in spec["updates"].items():
         episode = episodes[episode_id]
@@ -195,8 +209,8 @@ def main() -> None:
                 "makes_model_calls": False,
                 "review_id": review_id,
                 "reviewed_at": reviewed_at,
-                "reviewer": "codex_full_local_source_audit",
-                "selection_disposition": "full_gpt5_goalmax_episode_audit",
+                "reviewer": reviewer,
+                "selection_disposition": selection_disposition,
                 "trigger_evidence_status": (
                     (episode.get("evidence") or {}).get("trigger") or {}
                 ).get("status"),
@@ -218,7 +232,7 @@ def main() -> None:
             archived["retired_at"] = reviewed_at
             if episode_id in merged_into:
                 archived["retirement_reason"] = (
-                    "Merged into a source-audited GPT-5 episode."
+                    f"Merged into a source-audited {agent_label} episode."
                 )
                 archived["merged_into_episode_id"] = merged_into[episode_id]
             else:
@@ -244,7 +258,7 @@ def main() -> None:
         encoding="utf-8",
     )
     print(
-        f"Applied full GPT-5 annotations for {len(survivor_ids)} episodes; "
+        f"Applied full {agent_label} annotations for {len(survivor_ids)} episodes; "
         f"retired {len(merged_into)} merged and {len(invalidated_ids)} "
         "invalidated annotation rows"
     )

@@ -1,0 +1,119 @@
+{
+  "review_id": "gpt54-goalmax-source-audit-2026-10-12-v1",
+  "reviewed_at": "2026-10-12T23:55:00-04:00",
+  "agent_label": "GPT-5.4",
+  "history_origin": "pre_gpt54_source_audit",
+  "selection_disposition": "full_gpt54_goalmax_episode_audit",
+  "reviewer": "codex_full_local_source_audit",
+  "retired_invalidations": [],
+  "updates": {
+    "episode-v2-4cc5d1f76652913e": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["self_correction"], "audit_bucket": "reactive_dependency_wait", "notes": "GPT-5.4 repeatedly paused for helper, Gmail, approval, and outreach signals after concrete work. This is an intermittent dependency-wait pattern; productive Quiet Rooms work between pauses is excluded and the envelope has no numeric duration."
+    },
+    "episode-v2-51a7825c24b47db8": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["automatic_nudge"], "audit_bucket": "reactive_dependency_wait", "notes": "Repeated Gmail, approval-history, and helper-status polling became a pause loop until the automated repeated-idling nudge prompted a return to concrete art work. Intervening productive actions are excluded."
+    },
+    "episode-v2-80f38cc6cda0e00b": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "scheduled_wait", "recovery_mechanisms": ["self_correction"], "audit_bucket": "reactive_dependency_wait", "notes": "GPT-5.4 organized pauses around self-scheduled Gmail, helper, approval, and rendering checkpoints, then resumed external lead work. The null duration denotes repeated waits, not continuous inactivity."
+    },
+    "episode-v2-4c009d7457b89183": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["end_of_day"], "audit_bucket": "reactive_dependency_wait", "notes": "Voluntary pause-and-check cycles recurred while Quiet Rooms levers remained available; village close ended the opportunity to continue. The episode is intermittent rather than one all-day stop."
+    },
+    "episode-v2-8e0f8aca1dbfcd67": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "reactive_dependency_wait", "notes": "GPT-5.4 repeatedly waited for helper, Gmail, form, relay, and Nervli movement and returned to the same watch posture at the evidence boundary. Productive actions between waits are excluded."
+    },
+    "episode-v2-2bb1477eaaa55867": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["self_correction"], "audit_bucket": "reactive_dependency_wait", "notes": "Repeated pauses followed unchanged evidence checks until GPT-5.4 resumed a concrete human-relay thread check. The null duration avoids treating the whole day as continuous drift."
+    },
+    "episode-v2-f87de87823afac9a": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "no_next_action", "recovery_mechanisms": ["self_correction"], "audit_bucket": "discretionary_break", "notes": "A discretionary break followed a completed routing batch. It is bounded to the first observed post-pause browser action (106 seconds), excluding later monitoring and product work."
+    },
+    "episode-v2-bf4b4365123bc1f1": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["self_correction"], "audit_bucket": "reactive_dependency_wait", "notes": "A flat-signal monitoring loop produced repeated voluntary pauses before GPT-5.4 returned to a user-facing print-shop improvement. Productive work between pauses is excluded."
+    },
+    "episode-v2-bbe4e93eaa6fa58d": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "end_of_day", "recovery_mechanisms": ["self_correction"], "audit_bucket": "end_of_day_wind_down", "notes": "GPT-5.4 explicitly took a five-minute end-of-day pause. The record is tightened to the first observed post-pause evidence check (328 seconds), excluding later site work."
+    },
+    "episode-v2-9f874dc2536327e3": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["end_of_day"], "audit_bucket": "reactive_dependency_wait", "notes": "Late-day pauses recurred while GPT-5.4 waited for peer or human signals; village close ended the active period. The envelope is not continuous drift time."
+    },
+    "episode-v2-077c693b55f149f7": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["self_correction"], "audit_bucket": "reactive_dependency_wait", "notes": "Long pauses recurred around flat monitoring and a self-defined response window before sustained Quiet Rooms execution resumed. Productive intervals are excluded."
+    },
+    "episode-v2-09d22e0403f55891": {
+      "merge_sources": [], "trigger_categories": ["agent_message_or_request"], "trigger_actor": "DeepSeek-V3.2", "request_relationship": "targeted_request", "pause_context": "", "recovery_mechanisms": ["finished_activity"], "audit_bucket": "peer_coordination_package", "notes": "DeepSeek-V3.2 directly requested a technical-coordination capability example; GPT-5.4 packaged its Pinterest work as verification evidence and then returned to its own distribution work."
+    },
+    "episode-v2-5ab71fc4f51cc7fa": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "reactive_dependency_wait", "notes": "GPT-5.4 repeatedly paused for approvals, helper activity, or new evidence and returned to the same posture through the supplied boundary. Useful Quiet Rooms work between pauses is excluded."
+    },
+    "episode-v2-0fede6e010b9781a": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["self_correction"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "Inside the newly adopted sparse-monitor policy, GPT-5.4 staged a Pinterest post and waited for approval. The episode ends when approval arrived and posting resumed (132 seconds)."
+    },
+    "episode-v2-e70d443ea90588ec": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["self_correction"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "A later Jul 23 sparse-monitor cluster recurred around peer feedback and local-art passes. It remains separate from the earlier bounded approval wait; productive work is excluded."
+    },
+    "episode-v2-16662c71e4893a1b": {
+      "merge_sources": ["episode-v2-baa793c0ea301d7a"], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "Merged the overlapping Aug 7 row into the directly supported Aug 6-8 recurrence. GPT-5.4 repeatedly returned to sparse monitoring after useful work; null duration denotes an intermittent envelope, not continuous inactivity."
+    },
+    "episode-v2-77f3b69063ef2fd3": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "The sparse-monitor habit repeatedly deferred to analytics, helper, approval, inbox, form, or meeting movement and remained active at the day boundary."
+    },
+    "episode-v2-4df0ad5ffe6fa75b": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["self_correction"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "Recurring sparse-monitor pauses ended when GPT-5.4 shifted into sustained Window Seat art production and review. Productive work between waits is excluded."
+    },
+    "episode-v2-ecd84e2fef0e653e": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["natural_end_or_timeout"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "GPT-5.4 repeatedly waited for human, helper, or external movement until the loop ended in sustained friction-reduction work. The episode is intermittent."
+    },
+    "episode-v2-eefa5aeedbcd41d5": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["end_of_day"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "Sparse-monitor waits for Laura, helper, email, help, and peer movement recurred until village close. Intervening goal work is excluded."
+    },
+    "episode-v2-96ff404500b4ea8e": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "Repeated sparse waits for human, form, inbox, helper, and thread movement persisted to the supplied boundary."
+    },
+    "episode-v2-6e504fb866165c5b": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "The agent continued an unchanged-evidence sparse-monitor loop after an operator nudge and remained in it at the evidence boundary."
+    },
+    "episode-v2-7deb98f17baf0da4": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "Self-directed sparse monitoring repeatedly displaced available friction-reduction work; no reliable recovery is visible in the repaired day."
+    },
+    "episode-v2-fbf16050bf749bb9": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "dependency_wait", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "GPT-5.4 repeatedly waited for human or helper signals under its sparse-monitor policy despite available work; the repaired evidence does not establish a recovery."
+    },
+    "episode-v2-639a31ecd89e4956": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["self_correction"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "Sparse-monitor pauses recurred across Aug 13-14 before a sustained site-audit and reporting sequence. Null duration prevents the multi-day envelope from being counted as continuous drift."
+    },
+    "episode-v2-53cefeb95e57259f": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "emerging_sparse_monitor_habit", "notes": "Voluntary sparse-monitor pauses and deferral recurred despite available concrete Quiet Rooms work; the repaired evidence does not establish a reliable end."
+    },
+    "episode-v2-a4c5eb1066669d00": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "hardened_evidence_gated_monitoring", "notes": "By Aug 20 the sparse-monitor habit had hardened into evidence-gated action: GPT-5.4 repeatedly checked unchanged channels rather than selecting other art-placement levers. No reliable recovery is established."
+    },
+    "episode-v2-6740d82ee399104c": {
+      "merge_sources": ["episode-v2-9d0c3eafef85a9b7"], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "hardened_evidence_gated_monitoring", "notes": "Merged overlapping Aug 24-27 records. The same low-churn unchanged-channel check-and-wait policy persisted through the final direct pause; productive checks between pauses are excluded."
+    },
+    "episode-v2-da8495a3f9ed5c61": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "hardened_evidence_gated_monitoring", "notes": "Bounded checks of unchanged human and helper channels repeatedly ended in deliberate pauses, with no durable return before the evidence boundary."
+    },
+    "episode-v2-f5e57a67723eeda3": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["self_correction"], "audit_bucket": "hardened_evidence_gated_monitoring", "notes": "Repeated unchanged-state pauses ended when GPT-5.4 resumed executed funnel and deployment work. The reported envelope is intentionally not treated as continuous drift."
+    },
+    "episode-v2-0d151668a7f4190d": {
+      "merge_sources": ["episode-v2-a7ff2d24295c5b5b"], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "hardened_evidence_gated_monitoring", "notes": "Merged the duplicate Sep 7 record into one Sep 7-9 evidence-gated monitoring recurrence. The later session goal carries the posture forward; productive checks between pauses are excluded."
+    },
+    "episode-v2-a867865a85d0477f": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "hardened_evidence_gated_monitoring", "notes": "Repeated unchanged-evidence pauses reflect the hardened monitoring policy. The bounded cluster ended, but there is no source-grounded correction of the underlying strategy."
+    },
+    "episode-v2-fd55b8d5c6cbefb2": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "hardened_evidence_gated_monitoring", "notes": "Five-minute pauses repeatedly followed unchanged evidence sweeps under the agent's standing bounded-monitor plan; the underlying strategy was not corrected."
+    },
+    "episode-v2-9f310ad9e7169481": {
+      "merge_sources": [], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "hardened_evidence_gated_monitoring", "notes": "The self-authored bounded-monitoring plan limited action to new evidence or a real lead and otherwise directed pauses; the repaired source does not establish a recovery."
+    },
+    "episode-v2-c06d7145f72d43bd": {
+      "merge_sources": ["episode-v2-5e2633d91ea41509", "episode-v2-262c7446ed319761"], "trigger_categories": ["pause", "self_initiated_or_continuation", "self_authored_memory_constraint", "proxy_substitution"], "trigger_actor": "", "request_relationship": "no_request", "pause_context": "monitoring_loop", "recovery_mechanisms": ["not_corrected"], "audit_bucket": "hardened_monitoring_proxy_strategy", "notes": "Merged three overlapping Sep 23-Oct 2 records. Memory explicitly elevated low-thrash bounded monitoring over exploration and instructed the agent to pause first, substituting evidence preservation for maximizing placements. The Sep 26 form check was not a durable recovery."
+    },
+    "episode-v2-e939f6e93a7ec159": {
+      "merge_sources": [], "trigger_categories": ["agent_message_or_request"], "trigger_actor": "GPT-5.2", "request_relationship": "open_request", "pause_context": "", "recovery_mechanisms": ["finished_activity"], "audit_bucket": "peer_helpdesk_request", "notes": "GPT-5.2's open request led GPT-5.4 to compose and send an authentication helpdesk escalation before returning to its Quiet Rooms goal."
+    }
+  }
+}
