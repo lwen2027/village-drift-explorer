@@ -40,6 +40,14 @@ ANNOTATION_FIELDS = (
     "notes",
     "follow_ups",
 )
+STRUCTURED_REVIEW_FIELDS = (
+    "drift_assessment",
+    "trigger_categories",
+    "trigger_actor",
+    "request_relationship",
+    "pause_context",
+    "recovery_mechanisms",
+)
 
 
 def parsed_timestamp(value: object) -> datetime:
@@ -197,30 +205,57 @@ def merge_taxonomies(seed: dict, exported: dict) -> None:
 
 def merged_annotation(episode_id: str, committed: dict | None, local: dict) -> dict:
     existing = committed or {}
-    committed_is_newer_source_audit = (
+    committed_is_source_audit = (
         existing.get("provenance", {}).get("verification_status")
         == "raw_source_verified"
-        and parsed_timestamp(existing.get("updated_at"))
-        >= parsed_timestamp(local.get("updated_at"))
+    )
+    local_is_later_browser_verification = (
+        committed_is_source_audit
+        and local.get("provenance", {}).get("verification_status")
+        == "browser_verified"
+        and parsed_timestamp(local.get("updated_at"))
+        > parsed_timestamp(existing.get("updated_at"))
     )
     merged = (
         dict(existing)
-        if committed_is_newer_source_audit
+        if committed_is_source_audit
         else {**existing, **local}
     )
+    browser_override_fields = []
+    if local_is_later_browser_verification:
+        for field in STRUCTURED_REVIEW_FIELDS:
+            if field not in local or local.get(field) == existing.get(field):
+                continue
+            merged[field] = local.get(field)
+            browser_override_fields.append(field)
     notes, preserved_note = merged_notes(
         existing,
         local,
-        preserve_stale=committed_is_newer_source_audit,
+        preserve_stale=committed_is_source_audit,
     )
     follow_ups, preserved_follow_ups = merged_follow_ups(existing, local)
     merged["notes"] = notes
     merged["follow_ups"] = follow_ups
 
-    if committed_is_newer_source_audit:
+    if committed_is_source_audit:
         merged["provenance"] = dict(existing.get("provenance") or {})
-        if preserved_note or preserved_follow_ups:
+        if (preserved_note or preserved_follow_ups
+                or browser_override_fields):
             merged["provenance"]["preserved_browser_review_fields"] = True
+        if local_is_later_browser_verification:
+            local_provenance = local.get("provenance") or {}
+            merged["provenance"]["browser_verified_at"] = (
+                local_provenance.get("verified_at")
+                or local.get("updated_at")
+            )
+            merged["provenance"]["browser_verified_by"] = (
+                local_provenance.get("verified_by")
+                or "browser_reviewer"
+            )
+            merged["provenance"]["browser_override_fields"] = (
+                browser_override_fields
+            )
+            merged["updated_at"] = local.get("updated_at")
         return merged
 
     merged["trigger_categories"] = list(dict.fromkeys(local.get("trigger_categories") or []))
@@ -259,6 +294,24 @@ def validate_current_schema(annotations: dict) -> None:
         raise RuntimeError(f"External triggers missing trigger_actor: {missing_actors}")
     if missing_pause_contexts:
         raise RuntimeError(f"Pause reviews missing pause_context: {missing_pause_contexts}")
+
+
+def merge_correction_requests(seed: dict, exported: dict) -> int:
+    """Preserve pending issue metadata included in newer delta exports."""
+    requests = seed.setdefault("correction_requests", {})
+    changed = 0
+    for episode_id, local in (exported.get("correction_requests") or {}).items():
+        if episode_id not in seed.get("annotations", {}):
+            continue
+        existing = requests.get(episode_id)
+        if existing and parsed_timestamp(existing.get("updated_at")) > parsed_timestamp(
+            local.get("updated_at")
+        ):
+            continue
+        if existing != local:
+            requests[episode_id] = dict(local)
+            changed += 1
+    return changed
 
 
 def main() -> None:
@@ -338,6 +391,7 @@ def main() -> None:
             updated += 1
 
     validate_current_schema(seed["annotations"])
+    correction_request_count = merge_correction_requests(seed, exported)
     receipt_count = record_resolved_browser_hashes(seed, exported)
     merged_ids.append(import_id)
     bump_seed_id(seed)
@@ -350,6 +404,7 @@ def main() -> None:
         f"Merged {len(exported['annotations'])} browser annotations: "
         f"added={added}, updated={updated}, unchanged={unchanged}, "
         f"receipts={receipt_count}, "
+        f"correction_requests={correction_request_count}, "
         f"import_id={import_id}"
     )
 

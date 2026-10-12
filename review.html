@@ -2756,6 +2756,19 @@
         delete reviewLedger.sync.conflicts[episodeId];
         changed = true;
       });
+      Object.entries(seed.correction_requests || {}).forEach(([episodeId, imported]) => {
+        const local = reviewLedger.correction_requests[episodeId];
+        const localUpdatedAt = Date.parse(local?.updated_at || local?.submitted_at || "") || 0;
+        const importedUpdatedAt = Date.parse(
+          imported?.updated_at || imported?.submitted_at || ""
+        ) || 0;
+        if (!local || importedUpdatedAt >= localUpdatedAt) {
+          if (JSON.stringify(local || null) !== JSON.stringify(imported)) {
+            reviewLedger.correction_requests[episodeId] = { ...imported };
+            changed = true;
+          }
+        }
+      });
       if (!reviewLedger.applied_seed_ids.includes(seedId)) {
         reviewLedger.applied_seed_ids.push(seedId);
         changed = true;
@@ -4771,6 +4784,12 @@
           episodeId,
           reviewLedger.annotations[episodeId] || emptyAnnotation()
         ])),
+        correction_requests: Object.fromEntries(changedIds
+          .filter((episodeId) => reviewLedger.correction_requests[episodeId])
+          .map((episodeId) => [
+            episodeId,
+            reviewLedger.correction_requests[episodeId]
+          ])),
         sync: reviewLedger.sync,
         sync_states: Object.fromEntries(changedIds.map((episodeId) => [
           episodeId,
