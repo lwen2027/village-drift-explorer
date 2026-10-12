@@ -2061,14 +2061,32 @@
         .map(([episodeId]) => canonicalMergedEpisodeId(episodeId))
     );
     const reviewEpisodeIds = new Set(reviewManifest.default_manual_review_queue_episode_ids || []);
-    const episodes = auditBundle.confirmed_episodes.filter((episode) =>
-      reviewEpisodeIds.has(episode.episode_id) && !borderlineEpisodeIds.has(episode.episode_id)
+    const availableEpisodeIds = new Set(
+      auditBundle.confirmed_episodes.map((episode) => episode.episode_id)
     );
-    const expectedReviewEpisodeCount = [...reviewEpisodeIds]
-      .filter((episodeId) => !borderlineEpisodeIds.has(canonicalMergedEpisodeId(episodeId)))
-      .length;
-    if (episodes.length !== expectedReviewEpisodeCount) {
-      throw new Error("Manual-review manifest does not match the audit bundle");
+    // GitHub Pages can briefly serve these independently fetched JSON files
+    // from adjacent deployments. Resolve merged aliases and render the safe
+    // intersection instead of making the entire review page blank.
+    const effectiveReviewEpisodeIds = new Set(
+      [...reviewEpisodeIds]
+        .map(canonicalMergedEpisodeId)
+        .filter((episodeId) =>
+          availableEpisodeIds.has(episodeId) && !borderlineEpisodeIds.has(episodeId)
+        )
+    );
+    const unavailableReviewEpisodeIds = [...reviewEpisodeIds]
+      .map(canonicalMergedEpisodeId)
+      .filter((episodeId) =>
+        !availableEpisodeIds.has(episodeId) && !borderlineEpisodeIds.has(episodeId)
+      );
+    const episodes = auditBundle.confirmed_episodes.filter((episode) =>
+      effectiveReviewEpisodeIds.has(episode.episode_id)
+    );
+    if (unavailableReviewEpisodeIds.length) {
+      console.warn(
+        "Manual-review data files are temporarily out of sync; rendering available episodes.",
+        unavailableReviewEpisodeIds
+      );
     }
     const reviewRepository = "lwen2027/village-drift-explorer";
     const reviewCategoryLabels = {
@@ -3071,7 +3089,10 @@
       document.querySelector("#atlas-title").textContent = "Goal-maximization review queue";
       document.querySelector("#scope-description").textContent = "Substantive episodes remaining after deterministic routine-wait filtering.";
       document.querySelector("#dataset-count").textContent = `${goalPeriods.length} goal periods · ${episodeCount} episodes to review`;
-      document.querySelector("#review-header-note").textContent = `Confirmed-episode evidence, filtered to the ${episodes.length} substantive goal-maximization episodes remaining after deterministic routine-wait filtering.`;
+      const refreshWarning = unavailableReviewEpisodeIds.length
+        ? ` ${unavailableReviewEpisodeIds.length} queue ${unavailableReviewEpisodeIds.length === 1 ? "entry is" : "entries are"} temporarily unavailable while the published data refreshes.`
+        : "";
+      document.querySelector("#review-header-note").textContent = `Confirmed-episode evidence, filtered to the ${episodes.length} substantive goal-maximization episodes remaining after deterministic routine-wait filtering.${refreshWarning}`;
     }
 
     function updateReviewDashboard() {
