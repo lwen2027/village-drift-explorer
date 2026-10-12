@@ -284,6 +284,19 @@ function browserHashIsResolved(episodeId, localHash) {
   const history = committedSeed?.resolved_browser_hash_history?.[episodeId] || [];
   return localHash === latest || history.includes(localHash);
 }
+
+function archivedRevisionIsResolved(episodeId, local, committed) {
+  if (!local || !committed) return false;
+  const localHash = annotationFingerprint(local);
+  return (committedSeed?.annotation_history?.[episodeId] || []).some((revision) => {
+    const archived = revision?.annotation;
+    if (!archived) return false;
+    if (annotationFingerprint(archived) === localHash) return true;
+    return annotationFingerprint(
+      mergeSourceVerifiedAndLocal(committed, archived)
+    ) === localHash;
+  });
+}
 const allAnnotationIds = new Set([
   ...committedAnnotations.keys(),
   ...localAnnotations.keys()
@@ -320,7 +333,10 @@ allAnnotationIds.forEach((episodeId) => {
     pendingLocalIds.add(episodeId);
     return;
   }
-  if (browserHashIsResolved(episodeId, localHash)) {
+  if (
+    browserHashIsResolved(episodeId, localHash)
+    || archivedRevisionIsResolved(episodeId, local, committed)
+  ) {
     mergedAnnotations.set(episodeId, normalizeAnnotation(committed));
     return;
   }

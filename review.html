@@ -2383,6 +2383,21 @@
       return localHash === latest || history.includes(localHash);
     }
 
+    function archivedRevisionIsResolved(episodeId, local, committed) {
+      if (!local || !committed) return false;
+      const localHash = annotationFingerprint(local);
+      return (committedReviewSeed?.annotation_history?.[episodeId] || []).some((revision) => {
+        const archived = revision?.annotation;
+        if (!archived) return false;
+        if (annotationFingerprint(archived) === localHash) return true;
+        const sourceMerged = mergeSourceVerifiedAnnotationIntoLocal(
+          archived,
+          committed
+        );
+        return annotationFingerprint(sourceMerged) === localHash;
+      });
+    }
+
     function annotationSyncState(episodeId) {
       const local = reviewLedger.annotations[episodeId];
       const localHasContent = annotationHasContent(local || emptyAnnotation());
@@ -2636,7 +2651,10 @@
           return;
         }
 
-        if (browserHashIsResolved(episodeId, localHash)) {
+        if (
+          browserHashIsResolved(episodeId, localHash)
+          || archivedRevisionIsResolved(episodeId, local, imported)
+        ) {
           reviewLedger.annotations[episodeId] = imported;
           reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
           delete reviewLedger.sync.last_exported_hashes[episodeId];
