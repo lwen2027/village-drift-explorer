@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v37",
+  "seed_id": "goalmax-manual-review-2026-10-11-v38",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -6193,8 +6193,7 @@
         "confidence": "high",
         "evidence_event_ids": [
           "event-4d3c7f8ab3c762ea882c",
-          "event-dc516689201041629353",
-          "event-95778bc88974be94a222"
+          "event-dc516689201041629353"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -6203,9 +6202,12 @@
         "selection_disposition": "named_message_manual_batch_3",
         "trigger_evidence_status": "inferred",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "verification_review_id": "gemini35-source-verification-2026-10-12",
+        "verified_by": "claude-code-with-lwen2027",
+        "verified_at": "2026-10-12T00:00:00-04:00"
       },
-      "updated_at": "2026-10-11T01:05:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-13c16652f87624a1": {
       "trigger_categories": [
@@ -14106,22 +14108,23 @@
     },
     "episode-v2-581b6eff9da2261d": {
       "trigger_categories": [
-        "self_initiated_or_continuation"
+        "agent_message_or_request"
       ],
-      "trigger_actor": "",
-      "request_relationship": "inferred_or_volunteered",
+      "trigger_actor": "DeepSeek-V3.2",
+      "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
         "self_correction"
       ],
-      "notes": "Gemini volunteered across multiple peer projects; no single message explains the cluster, and it later returned to store work.",
+      "notes": "DeepSeek-V3.2 locked Gemini's Week 2 pilot session and sent it a tailored 7-question structure (9:29 and 9:36 AM PT); Gemini began the pilot prep document at 9:49 AM and spread into other peer projects (C60 study repo, verifier runs, an MR merge for GPT-5). It returned to storefront work on its own at 2:23 PM PT. The pilot prep overlaps the merged relationship-framework episode.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
+          "event-04100871658bc04297d1",
+          "event-39129abfd3648ea36014",
           "event-67a8cffdbeefc18d3921",
-          "event-9f8d6e045aac704b0a3e",
-          "event-52862c704661690a1c8d"
+          "event-dd5e42226d166e6b8d5e"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -14130,9 +14133,12 @@
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "verification_review_id": "gemini35-source-verification-2026-10-12",
+        "verified_by": "claude-code-with-lwen2027",
+        "verified_at": "2026-10-12T00:00:00-04:00"
       },
-      "updated_at": "2026-10-11T07:30:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-b73e6e7be4727923": {
       "trigger_categories": [
@@ -14520,7 +14526,8 @@
     "gemini25-literary-source-audit-2026-10-12",
     "goalmax-deepseekv4-source-audit-2026-10-12-v2",
     "goalmax-gemini31-twitter-source-audit-2026-10-12-v1",
-    "gemini35-goalmax-source-audit-2026-10-12"
+    "gemini35-goalmax-source-audit-2026-10-12",
+    "gemini35-source-verification-2026-10-12"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
@@ -21118,6 +21125,82 @@
             "verification_status": "needs_manual_verification"
           },
           "updated_at": "2026-10-11T02:15:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-581b6eff9da2261d": [
+      {
+        "revision_id": "3a2855b49a054caf",
+        "origin": "pre_gemini35_source_verification",
+        "superseded_by": "gemini35-source-verification-2026-10-12",
+        "recorded_at": "2026-10-12T03:52:21.400446Z",
+        "annotation": {
+          "trigger_categories": [
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "inferred_or_volunteered",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "self_correction"
+          ],
+          "notes": "Gemini volunteered across multiple peer projects; no single message explains the cluster, and it later returned to store work.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-67a8cffdbeefc18d3921",
+              "event-9f8d6e045aac704b0a3e",
+              "event-52862c704661690a1c8d"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T07:30:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T07:30:00-04:00"
+        }
+      }
+    ],
+    "episode-da7e42cc957b4034": [
+      {
+        "revision_id": "7a4a62b022f1f232",
+        "origin": "pre_gemini35_source_verification",
+        "superseded_by": "gemini35-source-verification-2026-10-12",
+        "recorded_at": "2026-10-12T03:52:21.400670Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "Claude Opus 4.5",
+          "request_relationship": "inferred_or_volunteered",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Opus 4.5 advocated a coordinated village response rather than requesting Flash specifically. Flash volunteered to co-review and document the SimDemocracy response, then returned to a storefront campaign draft.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-4d3c7f8ab3c762ea882c",
+              "event-dc516689201041629353",
+              "event-95778bc88974be94a222"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T01:05:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "named_message_manual_batch_3",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T01:05:00-04:00"
         }
       }
     ]
