@@ -2376,6 +2376,13 @@
 
     const committedAnnotationHashes = new Map();
 
+    function browserHashIsResolved(episodeId, localHash) {
+      if (!localHash) return false;
+      const latest = committedReviewSeed?.resolved_browser_hashes?.[episodeId];
+      const history = committedReviewSeed?.resolved_browser_hash_history?.[episodeId] || [];
+      return localHash === latest || history.includes(localHash);
+    }
+
     function annotationSyncState(episodeId) {
       const local = reviewLedger.annotations[episodeId];
       const localHasContent = annotationHasContent(local || emptyAnnotation());
@@ -2620,8 +2627,6 @@
         const importedVerification = imported?.provenance?.verification_status;
         const localUpdatedAt = Date.parse(local?.updated_at || "") || 0;
         const importedUpdatedAt = Date.parse(imported?.updated_at || "") || 0;
-        const resolvedBrowserHash = committedReviewSeed?.resolved_browser_hashes?.[episodeId]
-          || null;
 
         if (!local) {
           reviewLedger.annotations[episodeId] = imported;
@@ -2631,7 +2636,7 @@
           return;
         }
 
-        if (resolvedBrowserHash && localHash === resolvedBrowserHash) {
+        if (browserHashIsResolved(episodeId, localHash)) {
           reviewLedger.annotations[episodeId] = imported;
           reviewLedger.sync.baseline_hashes[episodeId] = committedHash;
           delete reviewLedger.sync.last_exported_hashes[episodeId];

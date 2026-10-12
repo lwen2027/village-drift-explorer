@@ -277,6 +277,13 @@ Object.entries(localLedger?.annotations || {}).forEach(([rawId, annotation]) => 
 });
 
 const pendingLocalIds = new Set();
+
+function browserHashIsResolved(episodeId, localHash) {
+  if (!localHash) return false;
+  const latest = committedSeed?.resolved_browser_hashes?.[episodeId];
+  const history = committedSeed?.resolved_browser_hash_history?.[episodeId] || [];
+  return localHash === latest || history.includes(localHash);
+}
 const allAnnotationIds = new Set([
   ...committedAnnotations.keys(),
   ...localAnnotations.keys()
@@ -293,8 +300,6 @@ allAnnotationIds.forEach((episodeId) => {
     ? annotationFingerprint(local, true, false)
     : null;
   const committedHash = committed ? annotationFingerprint(committed) : null;
-  const resolvedBrowserHash = committedSeed?.resolved_browser_hashes?.[episodeId]
-    || null;
   const sourceVerifiedUpgrade = (
     committed?.provenance?.verification_status === "raw_source_verified"
     && local?.provenance?.verification_status !== "raw_source_verified"
@@ -315,7 +320,7 @@ allAnnotationIds.forEach((episodeId) => {
     pendingLocalIds.add(episodeId);
     return;
   }
-  if (resolvedBrowserHash && localHash === resolvedBrowserHash) {
+  if (browserHashIsResolved(episodeId, localHash)) {
     mergedAnnotations.set(episodeId, normalizeAnnotation(committed));
     return;
   }

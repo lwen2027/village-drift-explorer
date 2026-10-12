@@ -30,6 +30,16 @@ PAUSE_CONTEXT_BACKFILLS = {
     "episode-v2-c630e8705cb4f20e": "monitoring_loop",
 }
 PRESERVED_NOTE_MARKER = "\n\nPreserved browser review note:\n"
+ANNOTATION_FIELDS = (
+    "drift_assessment",
+    "trigger_categories",
+    "trigger_actor",
+    "request_relationship",
+    "pause_context",
+    "recovery_mechanisms",
+    "notes",
+    "follow_ups",
+)
 
 
 def parsed_timestamp(value: object) -> datetime:
@@ -43,6 +53,47 @@ def parsed_timestamp(value: object) -> datetime:
         return parsed.astimezone(timezone.utc)
     except ValueError:
         return datetime.min.replace(tzinfo=timezone.utc)
+
+
+def annotation_semantic(annotation: dict | None) -> dict:
+    value = annotation or {}
+    return {field: value.get(field) for field in ANNOTATION_FIELDS}
+
+
+def annotation_revision_id(annotation: dict, origin: str) -> str:
+    serialized = json.dumps(
+        {"origin": origin, "annotation": annotation},
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(serialized).hexdigest()[:16]
+
+
+def preserve_annotation_revision(
+    seed: dict,
+    episode_id: str,
+    annotation: dict | None,
+    *,
+    origin: str,
+    superseded_by: str,
+) -> bool:
+    """Keep a replaced manual annotation as an explicit, idempotent revision."""
+    if not annotation:
+        return False
+    snapshot = json.loads(json.dumps(annotation, ensure_ascii=False))
+    revision_id = annotation_revision_id(snapshot, origin)
+    revisions = seed.setdefault("annotation_history", {}).setdefault(episode_id, [])
+    if any(item.get("revision_id") == revision_id for item in revisions):
+        return False
+    revisions.append({
+        "revision_id": revision_id,
+        "origin": origin,
+        "superseded_by": superseded_by,
+        "recorded_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "annotation": snapshot,
+    })
+    return True
 
 
 def merged_notes(
@@ -117,11 +168,17 @@ def record_resolved_browser_hashes(seed: dict, exported: dict) -> int:
     mistaking a rejected edit for work that is still awaiting integration.
     """
     resolved = seed.setdefault("resolved_browser_hashes", {})
+    history = seed.setdefault("resolved_browser_hash_history", {})
     exported_hashes = exported.get("sync", {}).get("last_exported_hashes", {})
     changed = 0
     for episode_id in exported.get("annotations", {}):
         exported_hash = exported_hashes.get(episode_id)
         if exported_hash and resolved.get(episode_id) != exported_hash:
+            previous_hash = resolved.get(episode_id)
+            if previous_hash:
+                prior_hashes = history.setdefault(episode_id, [])
+                if previous_hash not in prior_hashes:
+                    prior_hashes.append(previous_hash)
             resolved[episode_id] = exported_hash
             changed += 1
     return changed
@@ -246,6 +303,32 @@ def main() -> None:
         merged = merged_annotation(
             episode_id, committed, local
         )
+        if annotation_semantic(committed) != annotation_semantic(merged):
+            preserve_annotation_revision(
+                seed,
+                episode_id,
+                committed,
+                origin="previous_committed_annotation",
+                superseded_by=import_id,
+            )
+        committed_is_newer_source_audit = (
+            committed
+            and committed.get("provenance", {}).get("verification_status")
+            == "raw_source_verified"
+            and parsed_timestamp(committed.get("updated_at"))
+            >= parsed_timestamp(local.get("updated_at"))
+        )
+        if (
+            committed_is_newer_source_audit
+            and annotation_semantic(local) != annotation_semantic(merged)
+        ):
+            preserve_annotation_revision(
+                seed,
+                episode_id,
+                local,
+                origin="superseded_browser_annotation",
+                superseded_by=import_id,
+            )
         seed["annotations"][episode_id] = merged
         if committed is None:
             added += 1

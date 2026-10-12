@@ -120,11 +120,65 @@ def main() -> None:
     if errors:
         fail("Manual-review validation failed:\n" + "\n".join(errors))
 
+    history = payload.get("annotation_history", {})
+    if not isinstance(history, dict):
+        fail("annotation_history must be an object")
+    history_errors = []
+    revision_ids = set()
+    for episode_id, revisions in history.items():
+        if not isinstance(revisions, list) or not revisions:
+            history_errors.append(f"{episode_id}: history must be a non-empty list")
+            continue
+        for revision in revisions:
+            revision_id = revision.get("revision_id")
+            if not revision_id:
+                history_errors.append(f"{episode_id}: history revision missing id")
+            elif revision_id in revision_ids:
+                history_errors.append(f"duplicate history revision {revision_id}")
+            else:
+                revision_ids.add(revision_id)
+            if not isinstance(revision.get("annotation"), dict):
+                history_errors.append(
+                    f"{episode_id}: history revision missing annotation snapshot"
+                )
+            if not revision.get("origin") or not revision.get("superseded_by"):
+                history_errors.append(
+                    f"{episode_id}: history revision missing audit provenance"
+                )
+    if history_errors:
+        fail("Annotation-history validation failed:\n" + "\n".join(history_errors))
+
+    resolved_hashes = payload.get("resolved_browser_hashes", {})
+    resolved_history = payload.get("resolved_browser_hash_history", {})
+    if not isinstance(resolved_hashes, dict) or not isinstance(
+        resolved_history, dict
+    ):
+        fail("Resolved browser hashes and their history must be objects")
+    receipt_errors = []
+    for episode_id, hashes in resolved_history.items():
+        if not isinstance(hashes, list) or not all(
+            isinstance(value, str) and value for value in hashes
+        ):
+            receipt_errors.append(
+                f"{episode_id}: resolved browser hash history must be strings"
+            )
+        if len(hashes) != len(set(hashes)):
+            receipt_errors.append(
+                f"{episode_id}: duplicate resolved browser hash history"
+            )
+        if resolved_hashes.get(episode_id) in hashes:
+            receipt_errors.append(
+                f"{episode_id}: latest resolved hash duplicated in history"
+            )
+    if receipt_errors:
+        fail("Browser-receipt validation failed:\n" + "\n".join(receipt_errors))
+
     actor_count = sum(bool(str(item["trigger_actor"]).strip()) for item in annotations.values())
     pause_count = sum("pause" in item["trigger_categories"] for item in annotations.values())
     print(
         f"Validated {len(annotations)} goal-max annotations: "
-        f"actors={actor_count}, pauses={pause_count}, seed={payload['seed_id']}"
+        f"actors={actor_count}, pauses={pause_count}, "
+        f"history={len(revision_ids)}, seed={payload['seed_id']}"
     )
 
 

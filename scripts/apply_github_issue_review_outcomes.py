@@ -4,11 +4,23 @@
 from __future__ import annotations
 
 import json
+import hashlib
+from datetime import datetime, timezone
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "data" / "manual_review_annotations_v1.json"
+ANNOTATION_FIELDS = (
+    "drift_assessment",
+    "trigger_categories",
+    "trigger_actor",
+    "request_relationship",
+    "pause_context",
+    "recovery_mechanisms",
+    "notes",
+    "follow_ups",
+)
 
 INVALIDATED = {
     "episode-v2-74e41607b73f42f2": 33,
@@ -80,7 +92,10 @@ UPDATES = {
             "waiting. Direct work begins at 4:50 PM EDT and continues after the "
             "issue's proposed end, so the final recovery boundary remains unknown."
         ),
-        "verification_status": "needs_manual_verification",
+        # The source audit resolved the annotation even though the episode's
+        # final recovery boundary remains unknown. Evidence uncertainty is not
+        # the same thing as an unfinished human review.
+        "verification_status": "raw_source_verified",
         "reviewed_at": "2026-10-11T14:30:00-04:00",
     },
     "episode-d1b8d77e2aa9afc1": {
@@ -163,6 +178,40 @@ UPDATES = {
 }
 
 
+def annotation_semantic(annotation: dict) -> dict:
+    return {field: annotation.get(field) for field in ANNOTATION_FIELDS}
+
+
+def preserve_annotation_revision(
+    payload: dict,
+    episode_id: str,
+    annotation: dict,
+    issue: int,
+) -> None:
+    snapshot = json.loads(json.dumps(annotation, ensure_ascii=False))
+    serialized = json.dumps(
+        {"origin": "pre_github_issue_reconciliation", "annotation": snapshot},
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    revision_id = hashlib.sha256(serialized).hexdigest()[:16]
+    revisions = payload.setdefault("annotation_history", {}).setdefault(
+        episode_id, []
+    )
+    if any(item.get("revision_id") == revision_id for item in revisions):
+        return
+    revisions.append({
+        "revision_id": revision_id,
+        "origin": "pre_github_issue_reconciliation",
+        "superseded_by": f"github_issue_{issue}",
+        "recorded_at": datetime.now(timezone.utc).isoformat().replace(
+            "+00:00", "Z"
+        ),
+        "annotation": snapshot,
+    })
+
+
 def main() -> None:
     payload = json.loads(PATH.read_text(encoding="utf-8"))
     annotations = payload["annotations"]
@@ -188,6 +237,7 @@ def main() -> None:
             continue
         issue = patch["issue"]
         status = patch["verification_status"]
+        before = json.loads(json.dumps(annotation, ensure_ascii=False))
         for field in (
             "trigger_categories",
             "trigger_actor",
@@ -209,6 +259,8 @@ def main() -> None:
             "evidence_event_ids": patch["evidence_event_ids"],
         })
         annotation["updated_at"] = reviewed_at
+        if annotation_semantic(before) != annotation_semantic(annotation):
+            preserve_annotation_revision(payload, episode_id, before, issue)
         updated += 1
 
     source_note = "GitHub issue outcomes reconciled through 2026-10-12"
