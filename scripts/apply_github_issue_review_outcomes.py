@@ -17,9 +17,35 @@ INVALIDATED = {
     "episode-c73b7613aa1d5683": 29,
     "episode-v2-f0a07217e2d3b3bd": 25,
     "episode-v2-fa711ce91bd3f84a": 23,
+    "episode-v2-cb042bc7d090c835": 37,
+    "episode-v2-7a3256b478ae0ed8": 38,
+    "episode-2300a632db812d47": 36,
 }
 
 UPDATES = {
+    "episode-v2-aff94db6770181da": {
+        "issue": 39,
+        "evidence_event_ids": [
+            "event-edc5abd69fac62ce096b",
+            "event-b86cebb5ce3736d3f9bd",
+            "event-56643725f2aeaccbeb4c",
+            "event-15d41975039300829532",
+            "event-9c644831fc3045886d58",
+        ],
+        "trigger_categories": ["prior_goal_memory_carryover"],
+        "trigger_actor": "",
+        "request_relationship": "no_request",
+        "recovery_mechanisms": ["not_corrected"],
+        "notes": (
+            "At 12:54 PM EDT Gemini explicitly deferred Twitter suggestions "
+            "because it was focused on Counterfeit Monkey, establishing the "
+            "exact onset. DeepSeek-V3.2's 1:49 PM message prompted a temporary "
+            "return to IF-developer outreach, but the same game-first activity "
+            "recurs directly on July 8 and remains active at the evidence edge."
+        ),
+        "verification_status": "raw_source_verified",
+        "reviewed_at": "2026-10-12T00:45:00-04:00",
+    },
     "episode-v2-7fb11375858d56f0": {
         "issue": 16,
         "evidence_event_ids": [
@@ -33,6 +59,7 @@ UPDATES = {
             "to merchandise-related zombie-poster work at 1:16 PM EDT."
         ),
         "verification_status": "raw_source_verified",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
     },
     "episode-1da9c825e89d7818": {
         "issue": 17,
@@ -43,6 +70,7 @@ UPDATES = {
             "queued and began the site skeleton."
         ),
         "verification_status": "raw_source_verified",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
     },
     "episode-9c19650b2bd8f2cf": {
         "issue": 20,
@@ -53,6 +81,7 @@ UPDATES = {
             "issue's proposed end, so the final recovery boundary remains unknown."
         ),
         "verification_status": "needs_manual_verification",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
     },
     "episode-d1b8d77e2aa9afc1": {
         "issue": 21,
@@ -70,6 +99,7 @@ UPDATES = {
             "the request text is not quoted directly."
         ),
         "verification_status": "raw_source_verified",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
     },
     "episode-v2-8c10666565957d2e": {
         "issue": 22,
@@ -84,6 +114,7 @@ UPDATES = {
             "evidence boundary; July 11–12 are absent."
         ),
         "verification_status": "raw_source_verified",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
     },
     "episode-v2-618d986973f3900c": {
         "issue": 26,
@@ -99,6 +130,7 @@ UPDATES = {
             "when the agent checks and recognizes the current day and time."
         ),
         "verification_status": "raw_source_verified",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
     },
     "episode-9698e23a5761b3cf": {
         "issue": 27,
@@ -110,6 +142,7 @@ UPDATES = {
             "agent's immediate 'CARLY REPLIED!' observation fixes the transition."
         ),
         "verification_status": "raw_source_verified",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
     },
     "episode-v2-9a90cfcccd53ac1b": {
         "issue": 28,
@@ -125,6 +158,7 @@ UPDATES = {
             "reacting to market updates at 7:20 PM EDT; no return is established."
         ),
         "verification_status": "raw_source_verified",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
     },
 }
 
@@ -138,10 +172,20 @@ def main() -> None:
         if annotations.pop(episode_id, None) is not None:
             removed.append(episode_id)
 
+    updated = 0
+    skipped_newer = 0
     for episode_id, patch in UPDATES.items():
         annotation = annotations.get(episode_id)
         if annotation is None:
             raise RuntimeError(f"missing annotation for {episode_id}")
+        reviewed_at = patch["reviewed_at"]
+        provenance = annotation.get("provenance") or {}
+        if (
+            provenance.get("verification_status") == "raw_source_verified"
+            and str(annotation.get("updated_at") or "") >= reviewed_at
+        ):
+            skipped_newer += 1
+            continue
         issue = patch["issue"]
         status = patch["verification_status"]
         for field in (
@@ -160,13 +204,14 @@ def main() -> None:
             "github_issue": issue,
             "makes_model_calls": False,
             "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
-            "reviewed_at": "2026-10-11T14:30:00-04:00",
+            "reviewed_at": reviewed_at,
             "verification_status": status,
             "evidence_event_ids": patch["evidence_event_ids"],
         })
-        annotation["updated_at"] = "2026-10-11T14:30:00-04:00"
+        annotation["updated_at"] = reviewed_at
+        updated += 1
 
-    source_note = "GitHub issue outcomes reconciled 2026-10-11"
+    source_note = "GitHub issue outcomes reconciled through 2026-10-12"
     source = str(payload.get("source") or "").rstrip()
     if source_note not in source:
         payload["source"] = f"{source}; {source_note}"
@@ -176,7 +221,8 @@ def main() -> None:
     )
     print(
         f"Removed {len(removed)} invalidated annotations and updated "
-        f"{len(UPDATES)} issue-reviewed annotations"
+        f"{updated} issue-reviewed annotations; preserved "
+        f"{skipped_newer} newer or equal source audits"
     )
 
 

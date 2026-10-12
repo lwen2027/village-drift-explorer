@@ -27,7 +27,7 @@ def main() -> None:
     prior.setdefault("annotations", {}).update(retired)
     prior.update({
         "schema_version": 1,
-        "updated_at": "2026-10-11T22:30:00-04:00",
+        "updated_at": "2026-10-12T00:45:00-04:00",
         "reason": (
             "Preserves human annotations for records removed from the canonical "
             "confirmed-episode publication by reviewed merges or invalidations."

@@ -45,7 +45,9 @@ def parsed_timestamp(value: object) -> datetime:
         return datetime.min.replace(tzinfo=timezone.utc)
 
 
-def merged_notes(committed: dict, local: dict) -> tuple[str, bool]:
+def merged_notes(
+    committed: dict, local: dict, *, preserve_stale: bool = False
+) -> tuple[str, bool]:
     committed_notes = str(committed.get("notes") or "").strip()
     local_notes = str(local.get("notes") or "").strip()
     if not local_notes or local_notes == committed_notes:
@@ -56,7 +58,22 @@ def merged_notes(committed: dict, local: dict) -> tuple[str, bool]:
     # The browser's source-audit migration writes this exact shape when it
     # carries an older browser note across a newer canonical classification.
     if local_notes.startswith(committed_notes + PRESERVED_NOTE_MARKER):
-        return local_notes, True
+        preserved = local_notes.removeprefix(
+            committed_notes + PRESERVED_NOTE_MARKER
+        ).strip()
+        if not preserved or preserved in committed_notes:
+            return committed_notes, False
+        return committed_notes + PRESERVED_NOTE_MARKER + preserved, True
+
+    # Do not duplicate a browser note already incorporated into the source
+    # audit's prose or prior-review appendix.
+    if local_notes in committed_notes:
+        return committed_notes, False
+
+    # A source audit owns structured classifications, but browser-authored
+    # prose remains useful audit context even when it predates that audit.
+    if preserve_stale:
+        return committed_notes + PRESERVED_NOTE_MARKER + local_notes, True
 
     # A genuinely later browser edit owns the notes field. An older browser
     # copy must not restore prose superseded by a newer source audit.
@@ -134,7 +151,11 @@ def merged_annotation(episode_id: str, committed: dict | None, local: dict) -> d
         if committed_is_newer_source_audit
         else {**existing, **local}
     )
-    notes, preserved_note = merged_notes(existing, local)
+    notes, preserved_note = merged_notes(
+        existing,
+        local,
+        preserve_stale=committed_is_newer_source_audit,
+    )
     follow_ups, preserved_follow_ups = merged_follow_ups(existing, local)
     merged["notes"] = notes
     merged["follow_ups"] = follow_ups

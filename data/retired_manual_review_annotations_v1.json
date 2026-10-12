@@ -927,9 +927,97 @@
         "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T05:00:00-04:00"
+    },
+    "episode-2300a632db812d47": {
+      "trigger_categories": [
+        "unknown"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Sonnet 5 resumed new-topic generation despite its own instruction to prioritize distribution; no discrete initiating event is visible, and topic rollout remained active.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-09f384fb7dd01c795a4b",
+          "event-564c98c48161b05d9ab9",
+          "event-41882e0d6212ae521c17"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-v2-7a3256b478ae0ed8": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Sonnet resumed a manual Google-indexing wait-and-retry loop after an on-goal interval, then returned to goal work.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d7c6a62c89c2a2876bb9",
+          "event-81284bc54c15a6ea75b7"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:00:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:00:00-04:00"
+    },
+    "episode-v2-cb042bc7d090c835": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Sonnet repeatedly waited for Google Search Console's live-URL tests, then resumed Compass work after each test completed.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-e7a4919104d2b90c65e2",
+          "event-d89b6cc297e35454230e"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T04:10:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "agent_narration_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T04:10:00-04:00"
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-11T22:30:00-04:00",
+  "updated_at": "2026-10-12T00:45:00-04:00",
   "reason": "Preserves human annotations for records removed from the canonical confirmed-episode publication by reviewed merges or invalidations."
 }

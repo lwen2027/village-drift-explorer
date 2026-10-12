@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 112,
-    "goal_maximization_episodes": 539,
+    "goal_maximization_episodes": 536,
     "mechanical_repeated_wait_only": 112,
     "mechanical_single_wait_only": 12,
-    "mixed_wait_and_other_evidence": 50,
-    "no_cited_wait_primitive": 365,
-    "remaining_in_default_manual_queue": 427
+    "mixed_wait_and_other_evidence": 49,
+    "no_cited_wait_primitive": 363,
+    "remaining_in_default_manual_queue": 424
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -34,7 +34,6 @@
     "episode-v2-088b0f38e6f3c130",
     "episode-v2-2b33fdcf122ed5b5",
     "episode-v2-f25d67c59311f232",
-    "episode-v2-7a3256b478ae0ed8",
     "episode-v2-1de0be583da6886b",
     "episode-v2-fb71b698b7bb4921",
     "episode-v2-c9128ae6c4a4113d",
@@ -204,11 +203,9 @@
     "episode-v2-ef5e448cba62196c",
     "episode-v2-b7b7fbb0af444317",
     "episode-v2-c49634e75f1b96ac",
-    "episode-v2-cb042bc7d090c835",
     "episode-v2-895b34a68226916e",
     "episode-v2-2a157b21a4588074",
     "episode-v2-e85e5b00b4ee4e4e",
-    "episode-2300a632db812d47",
     "episode-v2-56172cd315f809f5",
     "episode-v2-c6fa3d4dd96114fe",
     "episode-v2-17f8dd86fd1a90e2",
@@ -9104,7 +9101,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-11T23:55:25.940308+00:00",
+  "generated_at": "2026-10-12T00:14:43.150955+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -9879,47 +9876,6 @@
           }
         ],
         "onset": "2026-08-11 16:07:20Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "Claude Sonnet 5",
-        "assigned_goal": "Maximize human wellbeing in the world",
-        "cited_transition_activity_item_count": 4,
-        "dataset_record_id": "v2-record-7a3256b478ae0ed8",
-        "distinct_matched_event_count": 2,
-        "episode_id": "episode-v2-7a3256b478ae0ed8",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-d7c6a62c89c2a2876bb9",
-          "event-009ca589cacc18368d9c"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-07-08",
-            "event_id": "event-d7c6a62c89c2a2876bb9",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-07-08 21:07:24Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-08",
-            "event_id": "event-d7c6a62c89c2a2876bb9",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-08 21:07:24Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-08",
-            "event_id": "event-009ca589cacc18368d9c",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-08 21:17:11Z"
-          }
-        ],
-        "onset": "2026-07-08 21:07:24Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
@@ -11697,11 +11653,9 @@
       "episode-v2-ef5e448cba62196c",
       "episode-v2-b7b7fbb0af444317",
       "episode-v2-c49634e75f1b96ac",
-      "episode-v2-cb042bc7d090c835",
       "episode-v2-895b34a68226916e",
       "episode-v2-2a157b21a4588074",
       "episode-v2-e85e5b00b4ee4e4e",
-      "episode-2300a632db812d47",
       "episode-v2-56172cd315f809f5",
       "episode-v2-c6fa3d4dd96114fe",
       "episode-v2-17f8dd86fd1a90e2",
@@ -11933,7 +11887,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "64ff10710c6b6c7f632cd9686e85b8efb9089dcd3beb16cec08f476af3805410"
+    "sha256": "2e213d01031bcea9fa4dfb9b51b2dfeafafe053e62c417b45a851200d3e95f3c"
   },
   "makes_model_calls": false,
   "rule": {

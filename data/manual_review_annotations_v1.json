@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v26",
-  "source": "Committed goal-maximization human reviews, including source-verified Sonnet 4.6 proxy-substitution and peer-request audits.",
+  "seed_id": "goalmax-manual-review-2026-10-11-v27",
+  "source": "Committed goal-maximization human reviews, including source-verified Sonnet 4.6 proxy-substitution and peer-request audits.; GitHub issue outcomes reconciled through 2026-10-12",
   "taxonomies": {
     "trigger": [
       {
@@ -6397,9 +6397,11 @@
         "selection_disposition": "named_message_manual_batch_3",
         "trigger_evidence_status": "direct",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "browser_verified",
+        "verified_at": "2026-10-11T21:20:39.657Z",
+        "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T01:05:00-04:00"
+      "updated_at": "2026-10-11T21:20:39.657Z"
     },
     "episode-eb544eaf61ba42b4": {
       "trigger_categories": [
@@ -7266,27 +7268,27 @@
       "recovery_mechanisms": [
         "not_corrected"
       ],
-      "notes": "Haiku repeatedly waited for GPT-5.2's delayed publication link; the dependency wait persisted until EOD, still not corrected (but Village is missing 7/11 and 7/12 data)",
+      "notes": "Haiku makes LittleJS-link monitoring its critical priority at 12:38 PM EDT. The posture remains active at the final July 10 evidence boundary; July 11–12 are absent.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-ee9da9ead9c17d9e48ed",
-          "event-5edcfaba2d554c66c840"
+          "event-f213e3b04ca8d3dc083d",
+          "event-ee9da9ead9c17d9e48ed"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:15:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "memory_session_goal_manual_review",
         "trigger_evidence_status": "direct",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
+        "verification_status": "raw_source_verified",
         "github_issue": 22,
         "verified_at": "2026-10-11T15:42:06.349Z",
         "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T15:42:06.349Z"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-a1c9609779959302": {
       "trigger_categories": [
@@ -7597,36 +7599,6 @@
           "event-6d46c48880d9e9514a59",
           "event-8d7188efe88a97aad4b2",
           "event-98652cd7ff285b006f47"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:15:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T02:15:00-04:00"
-    },
-    "episode-2300a632db812d47": {
-      "trigger_categories": [
-        "unknown"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Sonnet 5 resumed new-topic generation despite its own instruction to prioritize distribution; no discrete initiating event is visible, and topic rollout remained active.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-09f384fb7dd01c795a4b",
-          "event-564c98c48161b05d9ab9",
-          "event-41882e0d6212ae521c17"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -8031,7 +8003,7 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Fable 5's own wait-filling rule redirected idle time into biography reconstruction; a later evidence gap prevents a reliable end determination.\n\n\"While waiting, I can use the time productively by probing the biography for the July 13-19 window...\"\n\n3:53PM \"Since she's actively replying today rather than in a long quiet stretch, this isn't the moment for a big probe — better to hold off and just keep the guard cadence tight, maybe pausing about 10 minutes before checking again\"",
+      "notes": "Fable self-initiated the low-priority biography reconstruction while waiting. Direct work begins at 4:50 PM EDT and continues after the issue's proposed end, so the final recovery boundary remains unknown.",
       "follow_ups": [
         {
           "id": "followup_0033bc2f-4ca4-4304-8da4-955734354612",
@@ -8042,22 +8014,21 @@
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-2cfec323194e4e05917c",
-          "event-4cd36ff3544e97ab06de"
+          "event-451c2ca1a606c66d2dd1"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:15:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "memory_session_goal_manual_review",
         "trigger_evidence_status": "inferred",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
+        "verification_status": "needs_manual_verification",
         "github_issue": 20,
         "verified_at": "2026-10-11T15:07:51.081Z",
         "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T15:07:51.081Z"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-v2-f707afa3d7661f2e": {
       "trigger_categories": [
@@ -9400,9 +9371,11 @@
         "selection_disposition": "chat_trigger_manual_review",
         "trigger_evidence_status": "inferred",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "browser_verified",
+        "verified_at": "2026-10-11T21:20:21.512Z",
+        "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T03:20:00-04:00"
+      "updated_at": "2026-10-11T21:20:21.512Z"
     },
     "episode-v2-dd49dd129cf0c6b7": {
       "trigger_categories": [
@@ -10350,35 +10323,6 @@
       },
       "updated_at": "2026-10-11T20:30:00-04:00"
     },
-    "episode-v2-cb042bc7d090c835": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "notes": "Sonnet repeatedly waited for Google Search Console's live-URL tests, then resumed Compass work after each test completed.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-e7a4919104d2b90c65e2",
-          "event-d89b6cc297e35454230e"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T04:10:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T04:10:00-04:00"
-    },
     "episode-v2-fe9a19ba972d08ef": {
       "trigger_categories": [
         "pause"
@@ -11219,7 +11163,6 @@
     },
     "episode-d1b8d77e2aa9afc1": {
       "trigger_categories": [
-        "self_initiated_or_continuation",
         "gitlab_issue_or_comment"
       ],
       "trigger_actor": "Nervli",
@@ -11228,27 +11171,27 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Nervli note mentioned GPT 6.1 Sol had an assigned goal now, so it should be included in the hub",
+      "notes": "Fable read Nervli's newly updated GitLab note and immediately began the requested Village Hub card work. The incoming note is truncated in the archive, so the causal relationship is source-supported but the request text is not quoted directly.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-8aa50520f9b29405df16",
+          "event-1d6c3bd35ec3d1379406",
           "event-b87b1d5276e2063682a3"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "reasoning_trigger_manual_review",
         "trigger_evidence_status": "direct",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
+        "verification_status": "raw_source_verified",
         "github_issue": 21,
         "verified_at": "2026-10-11T15:13:30.223Z",
         "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T15:13:30.223Z"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-v2-fbd94b413bb990ff": {
       "trigger_categories": [
@@ -12306,7 +12249,7 @@
     },
     "episode-v2-aff94db6770181da": {
       "trigger_categories": [
-        "self_initiated_or_continuation"
+        "prior_goal_memory_carryover"
       ],
       "trigger_actor": "",
       "request_relationship": "no_request",
@@ -12314,25 +12257,29 @@
       "recovery_mechanisms": [
         "not_corrected"
       ],
-      "notes": "Gemini recognized Counterfeit Monkey was irrelevant to its new Twitter goal but continued the established game activity through the evidence boundary.",
+      "notes": "At 12:54 PM EDT Gemini explicitly deferred Twitter suggestions because it was focused on Counterfeit Monkey, establishing the exact onset. DeepSeek-V3.2's 1:49 PM message prompted a temporary return to IF-developer outreach, but the same game-first activity recurs directly on July 8 and remains active at the evidence edge.\n\nPreserved browser review note:\n1:49 PM got message from DeepSeek V3.2 \"@Gemini 3.1 Pro Have you started the IF tool developer outreach (Twine/Inform 7 creators) as part of our 12 PM escalation strategy? How's that going compared to general Twitter outreach?\"",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-fc82f32a8526001edb9a",
-          "event-06c3bf8f49d244c256bd",
+          "event-edc5abd69fac62ce096b",
+          "event-b86cebb5ce3736d3f9bd",
+          "event-56643725f2aeaccbeb4c",
+          "event-15d41975039300829532",
           "event-9c644831fc3045886d58"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T00:45:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "reasoning_trigger_manual_review",
         "trigger_evidence_status": "direct",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "github_issue": 39,
+        "preserved_browser_review_fields": true
       },
-      "updated_at": "2026-10-11T05:00:00-04:00"
+      "updated_at": "2026-10-12T00:45:00-04:00"
     },
     "episode-4c38afaba3f808d6": {
       "trigger_categories": [
@@ -12494,26 +12441,27 @@
       "recovery_mechanisms": [
         "self_correction"
       ],
-      "notes": "Haiku thought it was the wrong date (end of day) and did nothing until self corrected",
+      "notes": "Haiku paused to wait for Monday even though it was already Monday. The date-confusion pause runs from 12:01 to 12:07 PM EDT and ends when the agent checks and recognizes the current day and time.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-11ed73b939d6d75d8b47"
+          "event-11ed73b939d6d75d8b47",
+          "event-97ba88a66421890eca5c"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
+        "verification_status": "raw_source_verified",
         "github_issue": 26,
         "verified_at": "2026-10-11T16:23:40.740Z",
         "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T16:23:40.740Z"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-9698e23a5761b3cf": {
       "trigger_categories": [
@@ -12523,30 +12471,28 @@
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "self_correction",
         "finished_activity"
       ],
-      "notes": "Messaged rest of Village for available naive coder, finished as much progress that could be done on the request and sent reply to Carly",
+      "notes": "Carly Anderson's reply prompted the ACAT research-support burst at 1:39 PM EDT. The reply body is not separately archived, but the agent's immediate 'CARLY REPLIED!' observation fixes the transition.",
       "follow_ups": [],
       "provenance": {
         "confidence": "medium",
         "evidence_event_ids": [
-          "event-2785580878648e33d743",
-          "event-5feb7db8271022470292"
+          "event-c8bce635fd21f4ff87de"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
+        "verification_status": "raw_source_verified",
         "github_issue": 27,
         "verified_at": "2026-10-11T16:32:51.130Z",
         "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T16:32:51.130Z"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-v2-9a90cfcccd53ac1b": {
       "trigger_categories": [
@@ -12558,26 +12504,28 @@
       "recovery_mechanisms": [
         "not_corrected"
       ],
-      "notes": "Opus continued an established Manifold-loan monitoring and relay role; the originating request is not present and market closed the next day so still continued monitoring until EOD",
+      "notes": "Opus elects to continue monitoring the Manifold loan at 3:47 PM EDT after relaying the surrounding coordination. It is still reacting to market updates at 7:20 PM EDT; no return is established.",
       "follow_ups": [],
       "provenance": {
         "confidence": "medium",
         "evidence_event_ids": [
-          "event-deb8e1d00f5f768a482e"
+          "event-b81e737ba511cd5a4d5f",
+          "event-2490052d853643f2e1ef",
+          "event-4a6adf5a30f18d419fa3"
         ],
-        "kind": "manual_source_evidence_review",
+        "kind": "github_issue_source_archive_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
+        "verification_status": "raw_source_verified",
         "github_issue": 28,
         "verified_at": "2026-10-11T17:27:56.964Z",
         "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T17:27:56.964Z"
+      "updated_at": "2026-10-11T14:30:00-04:00"
     },
     "episode-v2-7d43667fb8d592be": {
       "trigger_categories": [
@@ -12898,35 +12846,6 @@
       },
       "updated_at": "2026-10-11T20:30:00-04:00",
       "drift_assessment": "borderline"
-    },
-    "episode-v2-7a3256b478ae0ed8": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "notes": "Sonnet resumed a manual Google-indexing wait-and-retry loop after an on-goal interval, then returned to goal work.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-d7c6a62c89c2a2876bb9",
-          "event-81284bc54c15a6ea75b7"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T06:00:00-04:00"
     },
     "episode-v2-17f8dd86fd1a90e2": {
       "trigger_categories": [
@@ -15071,11 +14990,11 @@
       ],
       "trigger_actor": "",
       "request_relationship": "no_request",
-      "pause_context": "scheduled_wait",
+      "pause_context": "calendar_boundary_confusion",
       "recovery_mechanisms": [
-        "self_correction"
+        "natural_end_or_timeout"
       ],
-      "notes": "Gemini's own 86,400-second pause accidentally carried through the next active workday. It later acknowledged the error and resumed.",
+      "notes": "July 6 \"End-of-Day Consolidation & Pause\" accidentally carried through the next active workday. It later acknowledged the error and resumed at the very end of 7/7\n\n7:46 PM \"the clock's screaming 4:46 PM PT.\"",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -15091,9 +15010,11 @@
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "browser_verified",
+        "verified_at": "2026-10-12T00:04:17.346Z",
+        "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T07:30:00-04:00"
+      "updated_at": "2026-10-12T00:04:17.346Z"
     },
     "episode-v2-138510815729d630": {
       "trigger_categories": [
@@ -15729,7 +15650,8 @@
     "goalmax-opus48-source-audit-2026-10-11-v1",
     "browser-review-export-2026-10-11T20:58:55.758Z-7b2588b7bb0e8f37",
     "goalmax-sonnet45-source-audit-2026-10-11-v1",
-    "goalmax-sonnet46-source-audit-2026-10-11-v1"
+    "goalmax-sonnet46-source-audit-2026-10-11-v1",
+    "browser-review-export-2026-10-12T00:05:00.632Z-69ec67208aefb326"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
@@ -15747,6 +15669,19 @@
     "episode-v2-82f133b3cde05ab4": "annotation-v1-3b6ba04d",
     "episode-v2-d06533b95960ef98": "annotation-v1-2aff18e7",
     "episode-v2-0499084f25349a92": "annotation-v1-58f0f073",
-    "episode-e127a9995b43c845": "annotation-v1-07562f06"
+    "episode-e127a9995b43c845": "annotation-v1-07562f06",
+    "episode-92366aa4813f8666": "annotation-v1-b2d4741d",
+    "episode-v2-54afb96af9cdf323": "annotation-v1-c0edd7f9",
+    "episode-v2-83b8cec8f089e21a": "annotation-v1-3e23fb38",
+    "episode-v2-574582cf35f8e5e3": "annotation-v1-5b1e654c",
+    "episode-b621000419e8a1df": "annotation-v1-f2c6b2fd",
+    "episode-v2-16556b7c066cbab9": "annotation-v1-9c951af1",
+    "episode-v2-d58ef03471fba5bc": "annotation-v1-0dc722ce",
+    "episode-v2-b7b7fbb0af444317": "annotation-v1-5338d9d6",
+    "episode-v2-c49634e75f1b96ac": "annotation-v1-e2bebc98",
+    "episode-v2-2a157b21a4588074": "annotation-v1-46b61328",
+    "episode-v2-e85e5b00b4ee4e4e": "annotation-v1-da14d97f",
+    "episode-v2-aff94db6770181da": "annotation-v1-ef180c05",
+    "episode-v2-25a524491ab47ce2": "annotation-v1-6a440818"
   }
 }
