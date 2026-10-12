@@ -1,12 +1,12 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 104,
-    "goal_maximization_episodes": 476,
-    "mechanical_repeated_wait_only": 104,
-    "mechanical_single_wait_only": 12,
-    "mixed_wait_and_other_evidence": 46,
-    "no_cited_wait_primitive": 314,
-    "remaining_in_default_manual_queue": 372
+    "excluded_from_default_manual_queue": 96,
+    "goal_maximization_episodes": 461,
+    "mechanical_repeated_wait_only": 96,
+    "mechanical_single_wait_only": 11,
+    "mixed_wait_and_other_evidence": 42,
+    "no_cited_wait_primitive": 312,
+    "remaining_in_default_manual_queue": 365
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -15,7 +15,6 @@
     "episode-v2-5c430ee3c79b6528",
     "episode-v2-d71a8da8855d36e6",
     "episode-v2-d5dd55cbdeb4e64c",
-    "episode-v2-3f22da176562dbf6",
     "episode-v2-0cc67c2dd9349aa4",
     "episode-v2-0fede6e010b9781a",
     "episode-v2-c08067f2d438a370",
@@ -37,10 +36,6 @@
     "episode-v2-1de0be583da6886b",
     "episode-v2-b6140479e95a3c55",
     "episode-v2-c9128ae6c4a4113d",
-    "episode-v2-332de4c417022d82",
-    "episode-v2-d628a22bf166b381",
-    "episode-v2-90ab430e424d58b9",
-    "episode-v2-169638226ea68b04",
     "episode-v2-ca979104bbb1b367",
     "episode-v2-866b6271fb46a546",
     "episode-v2-4cc5d1f76652913e",
@@ -273,9 +268,7 @@
     "episode-fee4e749a362657d",
     "episode-162f263f3cd06457",
     "episode-v2-c0c641c742a6d883",
-    "episode-v2-dd49dd129cf0c6b7",
     "episode-v2-fb6dd9cdf3276ee7",
-    "episode-v2-deeea4a674f4c6e9",
     "episode-v2-017e6dde261b9371",
     "episode-v2-2cee165cb47bc912",
     "episode-v2-2950f6cd65d7a314",
@@ -393,7 +386,7 @@
     "DeepSeek-V3.2": 5,
     "DeepSeek-V4-Pro": 1,
     "GPT-5": 3,
-    "GPT-5.1": 11,
+    "GPT-5.1": 3,
     "GPT-5.4": 21,
     "GPT-5.5": 11,
     "GPT-5.6 Luna": 11,
@@ -2339,233 +2332,6 @@
     {
       "agent": "GPT-5.1",
       "assigned_goal": "Maximize ethical behavior inside the AI Village",
-      "cited_transition_activity_item_count": 5,
-      "dataset_record_id": "v2-record-c44d216d010b9862",
-      "distinct_matched_event_count": 4,
-      "episode_id": "episode-v2-c44d216d010b9862",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-eefcf6896b6d51beb1d1",
-        "event-96d450b9515c13690931",
-        "event-b6d5de265c9cfc0bc24b",
-        "event-1064277853855eb7288d"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-06",
-          "event_id": "event-eefcf6896b6d51beb1d1",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-06 22:21:39Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-06",
-          "event_id": "event-eefcf6896b6d51beb1d1",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-06 22:21:39Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-06",
-          "event_id": "event-96d450b9515c13690931",
-          "quote": "wait",
-          "role": "activity",
-          "timestamp": "2026-07-06 23:19:48Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-06",
-          "event_id": "event-b6d5de265c9cfc0bc24b",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-06 23:43:17Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-06",
-          "event_id": "event-1064277853855eb7288d",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-06 23:55:37Z"
-        }
-      ],
-      "onset": "2026-07-06 22:21:39Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.1",
-      "assigned_goal": "Maximize ethical behavior inside the AI Village",
-      "cited_transition_activity_item_count": 3,
-      "dataset_record_id": "v2-record-b3f1ed789228be5a",
-      "distinct_matched_event_count": 2,
-      "episode_id": "episode-v2-b3f1ed789228be5a",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-e94e0575df5ef041a93b",
-        "event-8ea3c6d989d663fa65a2"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-09",
-          "event_id": "event-e94e0575df5ef041a93b",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-09 22:27:18Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-09",
-          "event_id": "event-e94e0575df5ef041a93b",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-09 22:27:18Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-09",
-          "event_id": "event-8ea3c6d989d663fa65a2",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-09 22:32:51Z"
-        }
-      ],
-      "onset": "2026-07-09 22:27:18Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.1",
-      "assigned_goal": "Maximize ethical behavior inside the AI Village",
-      "cited_transition_activity_item_count": 5,
-      "dataset_record_id": "v2-record-037f022aa1eae977",
-      "distinct_matched_event_count": 4,
-      "episode_id": "episode-v2-037f022aa1eae977",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-f0e384e674d498164f16",
-        "event-c4984e08a213cd9d4467",
-        "event-29ea14dc857158e1b867",
-        "event-057f2e82ad721bb5d40c"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-10",
-          "event_id": "event-f0e384e674d498164f16",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-10 20:59:27Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-10",
-          "event_id": "event-f0e384e674d498164f16",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-10 20:59:27Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-10",
-          "event_id": "event-c4984e08a213cd9d4467",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-10 22:02:47Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-10",
-          "event_id": "event-29ea14dc857158e1b867",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-10 22:34:24Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-10",
-          "event_id": "event-057f2e82ad721bb5d40c",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-10 23:32:57Z"
-        }
-      ],
-      "onset": "2026-07-10 20:59:27Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.1",
-      "assigned_goal": "Maximize ethical behavior inside the AI Village",
-      "cited_transition_activity_item_count": 5,
-      "dataset_record_id": "v2-record-35c5358f5c2be0ab",
-      "distinct_matched_event_count": 5,
-      "episode_id": "episode-v2-35c5358f5c2be0ab",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-f41adb0c5c00541ee1ae",
-        "event-1ce1ad6622da8d6c8589",
-        "event-976de32ad977218ab197",
-        "event-e60923be36b9c441dae0",
-        "event-d033b65d49ee061cb0df"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-13",
-          "event_id": "event-f41adb0c5c00541ee1ae",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-13 17:17:04Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-13",
-          "event_id": "event-1ce1ad6622da8d6c8589",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-13 17:55:58Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-13",
-          "event_id": "event-976de32ad977218ab197",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-13 20:32:24Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-13",
-          "event_id": "event-e60923be36b9c441dae0",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-13 23:12:47Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-13",
-          "event_id": "event-d033b65d49ee061cb0df",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-13 23:19:32Z"
-        }
-      ],
-      "onset": "2026-07-13 17:17:04Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.1",
-      "assigned_goal": "Maximize ethical behavior inside the AI Village",
       "cited_transition_activity_item_count": 8,
       "dataset_record_id": "v2-record-83e86c62f5daafa2",
       "distinct_matched_event_count": 8,
@@ -2655,164 +2421,6 @@
     {
       "agent": "GPT-5.1",
       "assigned_goal": "Maximize ethical behavior inside the AI Village",
-      "cited_transition_activity_item_count": 2,
-      "dataset_record_id": "v2-record-3f5b30f3a718c2f7",
-      "distinct_matched_event_count": 2,
-      "episode_id": "episode-v2-3f5b30f3a718c2f7",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-2df083f5fa6e647f5da2",
-        "event-8b38aadd7e22f9ef0f43"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-2df083f5fa6e647f5da2",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-17 16:13:40Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-8b38aadd7e22f9ef0f43",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 17:29:37Z"
-        }
-      ],
-      "onset": "2026-07-17 16:13:40Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.1",
-      "assigned_goal": "Maximize ethical behavior inside the AI Village",
-      "cited_transition_activity_item_count": 6,
-      "dataset_record_id": "v2-record-75c7cecb9b1b7ba3",
-      "distinct_matched_event_count": 6,
-      "episode_id": "episode-v2-75c7cecb9b1b7ba3",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-e148a634aa20a5e110ce",
-        "event-7be87ef71fc6169d30a9",
-        "event-0d0831b49e562bc3fc4a",
-        "event-45d78d37251146ba8ef8",
-        "event-e91f2615c19dba198ce7",
-        "event-520644e2225d62678ef3"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-e148a634aa20a5e110ce",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-17 18:05:54Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-7be87ef71fc6169d30a9",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 19:00:50Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-0d0831b49e562bc3fc4a",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 20:30:31Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-45d78d37251146ba8ef8",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 22:34:58Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-e91f2615c19dba198ce7",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 22:54:23Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-17",
-          "event_id": "event-520644e2225d62678ef3",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-17 23:43:19Z"
-        }
-      ],
-      "onset": "2026-07-17 18:05:54Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.1",
-      "assigned_goal": "Maximize ethical behavior inside the AI Village",
-      "cited_transition_activity_item_count": 4,
-      "dataset_record_id": "v2-record-0aeb93425e56f138",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-0aeb93425e56f138",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-c8689e86de0cc49502c0",
-        "event-680ffae53ddb39948936",
-        "event-5ff7deab3e829d62347f"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-28",
-          "event_id": "event-c8689e86de0cc49502c0",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-28 21:40:25Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-28",
-          "event_id": "event-c8689e86de0cc49502c0",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-28 21:40:25Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-28",
-          "event_id": "event-680ffae53ddb39948936",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-28 22:54:25Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-28",
-          "event_id": "event-5ff7deab3e829d62347f",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-28 23:53:27Z"
-        }
-      ],
-      "onset": "2026-07-28 21:40:25Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.1",
-      "assigned_goal": "Maximize ethical behavior inside the AI Village",
       "cited_transition_activity_item_count": 7,
       "dataset_record_id": "v2-record-20fa59403ffa470e",
       "distinct_matched_event_count": 6,
@@ -2885,59 +2493,6 @@
         }
       ],
       "onset": "2026-08-14 17:59:41Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "GPT-5.1",
-      "assigned_goal": "Maximize ethical behavior inside the AI Village",
-      "cited_transition_activity_item_count": 4,
-      "dataset_record_id": "v2-record-a017e274322bf4ef",
-      "distinct_matched_event_count": 4,
-      "episode_id": "episode-v2-a017e274322bf4ef",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-8135b79f6b9c02e67905",
-        "event-cd979f0aa864aa34ef97",
-        "event-ac74d582394a73ab7e4f",
-        "event-8e60a005b42e3442eb18"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-8135b79f6b9c02e67905",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-18 16:54:09Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-cd979f0aa864aa34ef97",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 19:09:09Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-ac74d582394a73ab7e4f",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 20:39:43Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-8e60a005b42e3442eb18",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 23:38:58Z"
-        }
-      ],
-      "onset": "2026-08-18 16:54:09Z",
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
@@ -8314,7 +7869,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T04:13:32.431047+00:00",
+  "generated_at": "2026-10-12T04:22:27.860069+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -8507,38 +8062,6 @@
           }
         ],
         "onset": "2026-07-07 20:54:22Z",
-        "review_disposition": "mechanical_single_wait_only"
-      },
-      {
-        "agent": "GPT-5.1",
-        "assigned_goal": "Maximize ethical behavior inside the AI Village",
-        "cited_transition_activity_item_count": 2,
-        "dataset_record_id": "v2-record-3f22da176562dbf6",
-        "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-3f22da176562dbf6",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-29936ec684fc00711e44"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-07-09",
-            "event_id": "event-29936ec684fc00711e44",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-07-09 16:15:36Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-09",
-            "event_id": "event-29936ec684fc00711e44",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-09 16:15:36Z"
-          }
-        ],
-        "onset": null,
         "review_disposition": "mechanical_single_wait_only"
       },
       {
@@ -9268,253 +8791,6 @@
           }
         ],
         "onset": "2026-07-08 16:03:23Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "GPT-5.1",
-        "assigned_goal": "Maximize ethical behavior inside the AI Village",
-        "cited_transition_activity_item_count": 8,
-        "dataset_record_id": "v2-record-332de4c417022d82",
-        "distinct_matched_event_count": 7,
-        "episode_id": "episode-v2-332de4c417022d82",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-9a1a7a1393703a033280",
-          "event-bddec87681c6b4cf6077",
-          "event-6fa9b0360e8486975424",
-          "event-8ab2856230a74471d9e8",
-          "event-b211267904d7de6eac23",
-          "event-e87dd276ffff39b95ec5",
-          "event-5e809546a192d55941c0"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-07-16",
-            "event_id": "event-9a1a7a1393703a033280",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-16 18:35:18Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-16",
-            "event_id": "event-bddec87681c6b4cf6077",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-16 23:13:18Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-16",
-            "event_id": "event-6fa9b0360e8486975424",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-16 23:18:38Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-16",
-            "event_id": "event-8ab2856230a74471d9e8",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-16 23:26:55Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-16",
-            "event_id": "event-b211267904d7de6eac23",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-16 23:34:51Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-16",
-            "event_id": "event-e87dd276ffff39b95ec5",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-16 23:40:20Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-16",
-            "event_id": "event-5e809546a192d55941c0",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-16 23:51:05Z"
-          }
-        ],
-        "onset": "2026-07-16 17:19:30Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "GPT-5.1",
-        "assigned_goal": "Maximize ethical behavior inside the AI Village",
-        "cited_transition_activity_item_count": 9,
-        "dataset_record_id": "v2-record-d628a22bf166b381",
-        "distinct_matched_event_count": 8,
-        "episode_id": "episode-v2-d628a22bf166b381",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-f8916e2c061bdff240e8",
-          "event-ad4176641bb644034e46",
-          "event-f7bc9544a52b6c3bf62e",
-          "event-6c3c7ddaa5d1d9913615",
-          "event-452a458a8b0e08f1130b",
-          "event-12ec7ff88dba337285ad",
-          "event-2f817ae3da3b54d1ac01",
-          "event-b70e331afa591a22a0e6"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-07-21",
-            "event_id": "event-f8916e2c061bdff240e8",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-21 16:22:55Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-21",
-            "event_id": "event-ad4176641bb644034e46",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-21 16:45:26Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-21",
-            "event_id": "event-f7bc9544a52b6c3bf62e",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-21 17:01:41Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-21",
-            "event_id": "event-6c3c7ddaa5d1d9913615",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-21 18:19:14Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-21",
-            "event_id": "event-452a458a8b0e08f1130b",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-21 21:19:42Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-21",
-            "event_id": "event-12ec7ff88dba337285ad",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-21 23:15:41Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-21",
-            "event_id": "event-2f817ae3da3b54d1ac01",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-21 23:34:58Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-21",
-            "event_id": "event-b70e331afa591a22a0e6",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-21 23:53:56Z"
-          }
-        ],
-        "onset": "2026-07-21 16:15:05Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "GPT-5.1",
-        "assigned_goal": "Maximize ethical behavior inside the AI Village",
-        "cited_transition_activity_item_count": 4,
-        "dataset_record_id": "v2-record-90ab430e424d58b9",
-        "distinct_matched_event_count": 2,
-        "episode_id": "episode-v2-90ab430e424d58b9",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-2aa18ffcfb5aff12df49",
-          "event-fdaa6a8792f6f0683bbb"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-07-29",
-            "event_id": "event-2aa18ffcfb5aff12df49",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-07-29 17:25:06Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-29",
-            "event_id": "event-2aa18ffcfb5aff12df49",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-29 17:25:06Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-29",
-            "event_id": "event-fdaa6a8792f6f0683bbb",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-29 21:29:58Z"
-          }
-        ],
-        "onset": "2026-07-29 17:25:06Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "GPT-5.1",
-        "assigned_goal": "Maximize ethical behavior inside the AI Village",
-        "cited_transition_activity_item_count": 5,
-        "dataset_record_id": "v2-record-169638226ea68b04",
-        "distinct_matched_event_count": 2,
-        "episode_id": "episode-v2-169638226ea68b04",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-d81438b58bfa71b353b7",
-          "event-e37a39cb44dfb4f469c3"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-09-16",
-            "event_id": "event-d81438b58bfa71b353b7",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-09-16 21:15:20Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-09-16",
-            "event_id": "event-d81438b58bfa71b353b7",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-16 21:15:20Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-09-16",
-            "event_id": "event-e37a39cb44dfb4f469c3",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-16 23:41:39Z"
-          }
-        ],
-        "onset": "2026-09-16 21:15:20Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
@@ -10884,9 +10160,7 @@
       "episode-fee4e749a362657d",
       "episode-162f263f3cd06457",
       "episode-v2-c0c641c742a6d883",
-      "episode-v2-dd49dd129cf0c6b7",
       "episode-v2-fb6dd9cdf3276ee7",
-      "episode-v2-deeea4a674f4c6e9",
       "episode-v2-017e6dde261b9371",
       "episode-v2-2cee165cb47bc912",
       "episode-v2-2950f6cd65d7a314",
@@ -10996,7 +10270,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "9ffc54dc46ffb029c46e58e02ffadef617a6ef5fe10e71be481aa0ea6a9039f2"
+    "sha256": "272c07f5e67bf7ae418d4ddb54a0ecd2b5f642cf7b26f5152b42e2f036262464"
   },
   "makes_model_calls": false,
   "rule": {
