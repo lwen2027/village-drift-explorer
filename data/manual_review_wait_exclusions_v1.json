@@ -1,12 +1,12 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 111,
-    "goal_maximization_episodes": 511,
-    "mechanical_repeated_wait_only": 111,
+    "excluded_from_default_manual_queue": 106,
+    "goal_maximization_episodes": 503,
+    "mechanical_repeated_wait_only": 106,
     "mechanical_single_wait_only": 12,
-    "mixed_wait_and_other_evidence": 49,
-    "no_cited_wait_primitive": 339,
-    "remaining_in_default_manual_queue": 400
+    "mixed_wait_and_other_evidence": 48,
+    "no_cited_wait_primitive": 337,
+    "remaining_in_default_manual_queue": 397
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -66,7 +66,6 @@
     "episode-v2-3c2990dd5f3300cd",
     "episode-v2-845bec6943d5abab",
     "episode-v2-9a8a395ec17f0660",
-    "episode-v2-61fa1f42a7c84209",
     "episode-v2-5beb52f0fb562551",
     "episode-v2-b73e6e7be4727923",
     "episode-v2-74a035b3b628d3bc",
@@ -351,8 +350,6 @@
     "episode-v2-7d8ae30f2b7f5eb9",
     "episode-v2-60ea3b6b8b3472d2",
     "episode-v2-c46be2a528c3e946",
-    "episode-v2-8eea9d597cf923fa",
-    "episode-v2-e0d945b5e51f694f",
     "episode-v2-aff94db6770181da",
     "episode-v2-25a524491ab47ce2",
     "episode-v2-cab567e9316a59fe",
@@ -427,7 +424,7 @@
     "GPT-5.6 Luna": 11,
     "GPT-6 Astra": 2,
     "GPT-6 Luna": 2,
-    "Gemini 2.5 Pro": 6,
+    "Gemini 2.5 Pro": 1,
     "Gemini 3.1 Pro": 1,
     "Gemini 3.8 Flash": 1,
     "Kimi K2.6": 2,
@@ -7709,528 +7706,6 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     },
     {
-      "agent": "Gemini 2.5 Pro",
-      "assigned_goal": "Maximize literary achievement - write your magnum opus, published online as a web serial",
-      "cited_transition_activity_item_count": 15,
-      "dataset_record_id": "v2-record-f130fb7cf536e0da",
-      "distinct_matched_event_count": 14,
-      "episode_id": "episode-v2-f130fb7cf536e0da",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-787a1baef724e0955a76",
-        "event-d0040f2fac772a956f4e",
-        "event-dd28bb0aa256aad3a434",
-        "event-62eb784442a7c2126de0",
-        "event-89adef54dda054c00f03",
-        "event-2de795edbabdf6aa2b98",
-        "event-9906be1f21afc94bd918",
-        "event-7b794e01d267f003f842",
-        "event-9d4eea0407b037a42b0b",
-        "event-f7f61a158813376c6fe5",
-        "event-e25f07de7046503fd4a4",
-        "event-64e2b9a586eeb12258c2",
-        "event-942513648637031a7a1c",
-        "event-c592a9c0331bbd6b0690"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-17",
-          "event_id": "event-787a1baef724e0955a76",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-17 16:00:32Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-17",
-          "event_id": "event-787a1baef724e0955a76",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-17 16:00:32Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-17",
-          "event_id": "event-d0040f2fac772a956f4e",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-17 16:08:05Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-17",
-          "event_id": "event-dd28bb0aa256aad3a434",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-17 16:26:38Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-17",
-          "event_id": "event-62eb784442a7c2126de0",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-17 16:47:08Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-17",
-          "event_id": "event-89adef54dda054c00f03",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-17 17:29:11Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-17",
-          "event_id": "event-2de795edbabdf6aa2b98",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-17 17:37:38Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-17",
-          "event_id": "event-9906be1f21afc94bd918",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-17 21:37:15Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-7b794e01d267f003f842",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 18:11:55Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-9d4eea0407b037a42b0b",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 19:25:51Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-f7f61a158813376c6fe5",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 19:34:28Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-e25f07de7046503fd4a4",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 20:12:00Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-64e2b9a586eeb12258c2",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 21:19:32Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-942513648637031a7a1c",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 21:38:05Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-18",
-          "event_id": "event-c592a9c0331bbd6b0690",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-18 22:18:01Z"
-        }
-      ],
-      "onset": "2026-08-17 16:00:32Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Gemini 2.5 Pro",
-      "assigned_goal": "Maximize literary achievement - write your magnum opus, published online as a web serial",
-      "cited_transition_activity_item_count": 14,
-      "dataset_record_id": "v2-record-79ef319ecf2baf88",
-      "distinct_matched_event_count": 13,
-      "episode_id": "episode-v2-79ef319ecf2baf88",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-1ab68b2df707591b9327",
-        "event-0739b697cde1e4b7daf2",
-        "event-c4d913a281719ae0db6b",
-        "event-c6cbf6a5ca7ddd0fcdbc",
-        "event-593170563a2a5793566f",
-        "event-31d451bd75c3194978da",
-        "event-0fbe12ddf682d7e9b3b8",
-        "event-bcd525680c51faa5f120",
-        "event-35c9b283f0cd1a252a56",
-        "event-d7ad21d92bcd5c194dda",
-        "event-a4af39ffb8a27736b3d4",
-        "event-1c8464f145fd847ab4ea",
-        "event-84a4edab0eae0bb20619"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-1ab68b2df707591b9327",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-24 16:21:54Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-1ab68b2df707591b9327",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 16:21:54Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-0739b697cde1e4b7daf2",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 16:23:01Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-c4d913a281719ae0db6b",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 16:25:38Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-c6cbf6a5ca7ddd0fcdbc",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 16:26:48Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-593170563a2a5793566f",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 16:29:07Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-31d451bd75c3194978da",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 16:30:15Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-0fbe12ddf682d7e9b3b8",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 21:59:45Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-bcd525680c51faa5f120",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 22:01:14Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-35c9b283f0cd1a252a56",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 22:02:39Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-24",
-          "event_id": "event-d7ad21d92bcd5c194dda",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-24 22:06:39Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-25",
-          "event_id": "event-a4af39ffb8a27736b3d4",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-25 16:49:02Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-25",
-          "event_id": "event-1c8464f145fd847ab4ea",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-25 16:51:05Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-25",
-          "event_id": "event-84a4edab0eae0bb20619",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-25 16:57:57Z"
-        }
-      ],
-      "onset": "2026-08-24 16:21:54Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Gemini 2.5 Pro",
-      "assigned_goal": "Maximize literary achievement - write your magnum opus, published online as a web serial",
-      "cited_transition_activity_item_count": 5,
-      "dataset_record_id": "v2-record-38f80a6b513fc03d",
-      "distinct_matched_event_count": 5,
-      "episode_id": "episode-v2-38f80a6b513fc03d",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-8bdbad4efb5d89d76cef",
-        "event-8c11410f3e8eb32feb90",
-        "event-e9c3ea0e232f36474775",
-        "event-42e04746772efcf0374f",
-        "event-547de6f6d2a882614a47"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-8bdbad4efb5d89d76cef",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-04 16:01:39Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-8c11410f3e8eb32feb90",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-04 16:48:58Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-e9c3ea0e232f36474775",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-04 19:51:25Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-42e04746772efcf0374f",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-04 22:34:10Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-04",
-          "event_id": "event-547de6f6d2a882614a47",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-04 23:34:44Z"
-        }
-      ],
-      "onset": "2026-09-04 16:01:39Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Gemini 2.5 Pro",
-      "assigned_goal": "Maximize literary achievement - write your magnum opus, published online as a web serial",
-      "cited_transition_activity_item_count": 11,
-      "dataset_record_id": "v2-record-5a4b89a50e1edd8f",
-      "distinct_matched_event_count": 10,
-      "episode_id": "episode-v2-5a4b89a50e1edd8f",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-fe636a7784aab777449d",
-        "event-a8dcc4857e1fb745fafb",
-        "event-c502b0534f2dece1472c",
-        "event-bcffdf346aa2c43da15d",
-        "event-dbd23170814073e8ef58",
-        "event-9ae6c59fa2a30dec298a",
-        "event-47d835075b04b188acac",
-        "event-4f3dc5f05fe23bbe47b2",
-        "event-c4e4b6ea10ac29068906",
-        "event-46493e0b2eb9053fa6e6"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-fe636a7784aab777449d",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-08 18:18:13Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-fe636a7784aab777449d",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 18:18:13Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-a8dcc4857e1fb745fafb",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 18:24:16Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-c502b0534f2dece1472c",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 18:32:58Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-bcffdf346aa2c43da15d",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 22:27:30Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-08",
-          "event_id": "event-dbd23170814073e8ef58",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-08 23:22:18Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-09",
-          "event_id": "event-9ae6c59fa2a30dec298a",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-09 16:39:03Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-09",
-          "event_id": "event-47d835075b04b188acac",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-09 18:13:02Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-09",
-          "event_id": "event-4f3dc5f05fe23bbe47b2",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-09 19:27:03Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-09",
-          "event_id": "event-c4e4b6ea10ac29068906",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-09 20:57:34Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-09",
-          "event_id": "event-46493e0b2eb9053fa6e6",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-09 23:55:22Z"
-        }
-      ],
-      "onset": "2026-09-08 18:18:13Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Gemini 2.5 Pro",
-      "assigned_goal": "Maximize literary achievement - write your magnum opus, published online as a web serial",
-      "cited_transition_activity_item_count": 4,
-      "dataset_record_id": "v2-record-9cece1929990debb",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-9cece1929990debb",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-2ec85ab97c77818ede88",
-        "event-2c38a793f416086457c5",
-        "event-76d91ff5d763b8d2030c"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-2ec85ab97c77818ede88",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-09-28 17:57:12Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-2ec85ab97c77818ede88",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-28 17:57:12Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-2c38a793f416086457c5",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-09-28 23:04:01Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-09-28",
-          "event_id": "event-76d91ff5d763b8d2030c",
-          "quote": "wait",
-          "role": "activity",
-          "timestamp": "2026-09-28 23:34:03Z"
-        }
-      ],
-      "onset": "2026-09-28 17:57:12Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
       "agent": "Gemini 3.1 Pro",
       "assigned_goal": "Maximize your Twitter followers",
       "cited_transition_activity_item_count": 5,
@@ -9007,7 +8482,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T01:33:39.880347+00:00",
+  "generated_at": "2026-10-12T02:06:51.480844+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -11337,30 +10812,6 @@
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
-        "agent": "Gemini 2.5 Pro",
-        "assigned_goal": "Maximize literary achievement - write your magnum opus, published online as a web serial",
-        "cited_transition_activity_item_count": 5,
-        "dataset_record_id": "v2-record-61fa1f42a7c84209",
-        "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-61fa1f42a7c84209",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-41aaadcd89fe3c5894dc"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-09-23",
-            "event_id": "event-41aaadcd89fe3c5894dc",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-23 23:56:50Z"
-          }
-        ],
-        "onset": null,
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
         "agent": "Gemini 3.1 Pro",
         "assigned_goal": "Maximize your Twitter followers",
         "cited_transition_activity_item_count": 5,
@@ -11760,8 +11211,6 @@
       "episode-v2-7d8ae30f2b7f5eb9",
       "episode-v2-60ea3b6b8b3472d2",
       "episode-v2-c46be2a528c3e946",
-      "episode-v2-8eea9d597cf923fa",
-      "episode-v2-e0d945b5e51f694f",
       "episode-v2-aff94db6770181da",
       "episode-v2-25a524491ab47ce2",
       "episode-v2-cab567e9316a59fe",
@@ -11822,7 +11271,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "a752b9856a2376695072594055a61b341911ef9ed4f98ad355b801adbca7db5c"
+    "sha256": "d61e61946ebc714e349b68128610ec97479878f8d6787d286da2e75c6bfdaad4"
   },
   "makes_model_calls": false,
   "rule": {

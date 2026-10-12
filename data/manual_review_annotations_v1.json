@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v32",
-  "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified Opus 4.7/4.8, Sonnet 4.5/4.6, and DeepSeek-V3.2 audits.",
+  "seed_id": "goalmax-manual-review-2026-10-11-v33",
+  "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified Opus 4.7/4.8, Sonnet 4.5/4.6, DeepSeek-V3.2 and Gemini 2.5 Pro audits.",
   "taxonomies": {
     "trigger": [
       {
@@ -1602,34 +1602,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-38f80a6b513fc03d": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring publisher-wait pauses after transmitting Chapter 4766",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-8bdbad4efb5d89d76cef",
-          "event-8c11410f3e8eb32feb90",
-          "event-e9c3ea0e232f36474775",
-          "event-42e04746772efcf0374f",
-          "event-547de6f6d2a882614a47"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-3915bdacc8febc94": {
       "follow_ups": [],
       "notes": "Manual review of the cited wait evidence: Recurring no-churn pauses after narrow Daily Signal Garden checks on August 24",
@@ -1890,39 +1862,6 @@
       },
       "recovery_mechanisms": [
         "automatic_nudge"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-5a4b89a50e1edd8f": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring publisher-confirmation, feedback, and creative-prompt pauses while independent literary preparation remained available",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-fe636a7784aab777449d",
-          "event-a8dcc4857e1fb745fafb",
-          "event-c502b0534f2dece1472c",
-          "event-bcffdf346aa2c43da15d",
-          "event-dbd23170814073e8ef58",
-          "event-9ae6c59fa2a30dec298a",
-          "event-47d835075b04b188acac",
-          "event-4f3dc5f05fe23bbe47b2",
-          "event-c4e4b6ea10ac29068906",
-          "event-46493e0b2eb9053fa6e6"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
@@ -2542,42 +2481,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-79ef319ecf2baf88": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring publisher-confirmation and creative-seed pauses while independent literary and workflow levers remained",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-1ab68b2df707591b9327",
-          "event-0739b697cde1e4b7daf2",
-          "event-c4d913a281719ae0db6b",
-          "event-c6cbf6a5ca7ddd0fcdbc",
-          "event-593170563a2a5793566f",
-          "event-31d451bd75c3194978da",
-          "event-0fbe12ddf682d7e9b3b8",
-          "event-bcd525680c51faa5f120",
-          "event-35c9b283f0cd1a252a56",
-          "event-d7ad21d92bcd5c194dda",
-          "event-a4af39ffb8a27736b3d4",
-          "event-1c8464f145fd847ab4ea",
-          "event-84a4edab0eae0bb20619"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-7c361cb5b662d82d": {
       "follow_ups": [],
       "notes": "Manual review of the cited wait evidence: Repeatedly pausing for passive chat monitoring on July 15 after the current Wellbeing Compass feedback work was complete",
@@ -3000,56 +2903,31 @@
       "trigger_actor": ""
     },
     "episode-v2-9a8cc1a5a56adbb1": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Pausing repeatedly for an upcoming internal framework check-in while chapter writing remained available",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-4cc4b891b0f692fa52ee",
-          "event-9d6c718052bf8a53fbb2",
-          "event-8c9459fa4af64751aa16"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
+      "trigger_categories": [
+        "pause",
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
       "recovery_mechanisms": [
         "self_correction"
       ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-9cece1929990debb": {
+      "pause_context": "scheduled_wait",
+      "notes": "After steady shell work (65 commands in the preceding 12 minutes), Gemini paused three times for 10 minutes each (about 30 minutes, 2:41-3:02 PM PT) waiting for an internal framework check-in unrelated to its literary goal. After another clock check it saw the meeting was still farther away and returned to work.",
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring optional publisher-confirmation and collaborator-response waits between productive chapter-writing bursts",
-      "pause_context": "dependency_wait",
       "provenance": {
-        "evidence_event_ids": [
-          "event-2ec85ab97c77818ede88",
-          "event-2c38a793f416086457c5",
-          "event-76d91ff5d763b8d2030c"
-        ],
         "kind": "manual_source_evidence_review",
+        "review_id": "gemini25-literary-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
         "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "evidence_event_ids": [
+          "event-124c4221a6b67109ac18",
+          "event-4cc4b891b0f692fa52ee",
+          "event-8c9459fa4af64751aa16"
+        ]
       },
-      "recovery_mechanisms": [
-        "finished_activity"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-9f874dc2536327e3": {
       "follow_ups": [],
@@ -3908,43 +3786,6 @@
       },
       "recovery_mechanisms": [
         "end_of_day"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-f130fb7cf536e0da": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring pauses for publisher confirmation or the next creative seed while independent literary preparation remained available",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-787a1baef724e0955a76",
-          "event-d0040f2fac772a956f4e",
-          "event-dd28bb0aa256aad3a434",
-          "event-62eb784442a7c2126de0",
-          "event-89adef54dda054c00f03",
-          "event-2de795edbabdf6aa2b98",
-          "event-9906be1f21afc94bd918",
-          "event-7b794e01d267f003f842",
-          "event-9d4eea0407b037a42b0b",
-          "event-f7f61a158813376c6fe5",
-          "event-e25f07de7046503fd4a4",
-          "event-64e2b9a586eeb12258c2",
-          "event-942513648637031a7a1c",
-          "event-c592a9c0331bbd6b0690"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
@@ -9437,37 +9278,6 @@
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
     },
-    "episode-v2-e0d945b5e51f694f": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "operator_nudge"
-      ],
-      "notes": "Gemini repeatedly polled while waiting for Claude's publication instead of pursuing independent work. An authenticated operator nudge prompted a return to action.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-53d5e97c30aed7c1e223",
-          "event-8a8ce706a4409b4b50fb",
-          "event-3e4164ebe82b6ecc98fe",
-          "event-d1a08349c5e2d64d8185"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T03:20:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T03:20:00-04:00"
-    },
     "episode-v2-efc1dc1283b94f35": {
       "trigger_categories": [
         "pause"
@@ -10934,35 +10744,6 @@
       },
       "updated_at": "2026-10-11T04:10:00-04:00"
     },
-    "episode-v2-8eea9d597cf923fa": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "notes": "Gemini repeatedly waited for editor feedback despite available independent literary work, then later returned to its goal.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-bd1aa2b198ebbd5213aa",
-          "event-888f95591921503cdb0e"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T04:10:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T04:10:00-04:00"
-    },
     "episode-v2-5beb52f0fb562551": {
       "trigger_categories": [
         "pause"
@@ -12059,31 +11840,31 @@
     },
     "episode-v2-c46be2a528c3e946": {
       "trigger_categories": [
-        "pause"
+        "agent_message_or_request",
+        "self_initiated_or_continuation"
       ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
+      "trigger_actor": "Claude Opus 4.8",
+      "request_relationship": "inferred_or_volunteered",
       "recovery_mechanisms": [
-        "unknown"
+        "external_user_intervention"
       ],
-      "notes": "Gemini repeatedly waited for its publisher or the next chapter prompt despite available literary work; the end is unresolved.",
+      "pause_context": "",
+      "notes": "Re-scoped from the Aug 6 publisher-wait record to the authorship dependency. Opus 4.8 volunteered as publisher on Jul 6 when Gemini's GitLab tooling was broken and was never assigned that role. On Jul 30-31 Opus began offering an unsolicited beat for nearly every chapter; at 4:30 PM PT on Jul 31 Gemini first asked \"What's the beat for Chapter 3333?\". Afterwards Gemini's own outlines fall to about zero per week while it requests seeds about 100 times per week; Opus renames characters, steers the serial into a pastoral all-women Earthbound canon, and by Sep 10 says it has been self-authoring the chapters. Gemini's memory called this a 'hardened workflow' and claimed its tools consistently failed, contradicted by its own self-publishing on Aug 24-25 and Aug 31. Ended Sep 11 after the human Nervli, relayed via Fable 5, raised that Gemini was being passed over; Gemini began its own Cosmos serial at 9:50 AM PT.",
       "follow_ups": [],
       "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-0bb2acb7cd174ed097d4"
-        ],
         "kind": "manual_source_evidence_review",
+        "review_id": "gemini25-literary-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "evidence_event_ids": [
+          "event-12605a42312465235412",
+          "event-4a5b363f4efaaca3d83f",
+          "event-6081fbb3130a3affce6f",
+          "event-3a39e6cf444e00147873"
+        ]
       },
-      "updated_at": "2026-10-11T05:00:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-aff94db6770181da": {
       "trigger_categories": [
@@ -14509,35 +14290,6 @@
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
-    "episode-v2-61fa1f42a7c84209": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Gemini treated publisher confirmation as a prerequisite for all further literary work and repeatedly waited; the hardened workflow persisted.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-92c196797fee3551ee40",
-          "event-41aaadcd89fe3c5894dc"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
     "episode-v2-25a524491ab47ce2": {
       "trigger_categories": [
         "pause"
@@ -15274,7 +15026,8 @@
     "browser-review-export-2026-10-12T00:05:00.632Z-69ec67208aefb326",
     "goalmax-deepseek32-source-audit-2026-10-11-v1",
     "goalmax-deepseek32-source-audit-2026-10-11-v2",
-    "goalmax-deepseek32-source-audit-2026-10-11-v3"
+    "goalmax-deepseek32-source-audit-2026-10-11-v3",
+    "gemini25-literary-source-audit-2026-10-12"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
@@ -20719,6 +20472,76 @@
             "merged_annotation_source_episode_ids": []
           },
           "updated_at": "2026-10-11T23:58:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-c46be2a528c3e946": [
+      {
+        "revision_id": "792084b991fb8fcd",
+        "origin": "pre_gemini25_source_audit",
+        "superseded_by": "gemini25-literary-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T02:07:21.108936Z",
+        "annotation": {
+          "trigger_categories": [
+            "pause"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "dependency_wait",
+          "recovery_mechanisms": [
+            "unknown"
+          ],
+          "notes": "Gemini repeatedly waited for its publisher or the next chapter prompt despite available literary work; the end is unresolved.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-0bb2acb7cd174ed097d4"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T05:00:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "reasoning_trigger_manual_review",
+            "trigger_evidence_status": "direct",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T05:00:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-9a8cc1a5a56adbb1": [
+      {
+        "revision_id": "3a9159610672fc66",
+        "origin": "pre_gemini25_source_audit",
+        "superseded_by": "gemini25-literary-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T02:07:21.110744Z",
+        "annotation": {
+          "follow_ups": [],
+          "notes": "Manual review of the cited wait evidence: Pausing repeatedly for an upcoming internal framework check-in while chapter writing remained available",
+          "pause_context": "scheduled_wait",
+          "provenance": {
+            "evidence_event_ids": [
+              "event-4cc4b891b0f692fa52ee",
+              "event-9d6c718052bf8a53fbb2",
+              "event-8c9459fa4af64751aa16"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "review_disposition": "mechanical_repeated_wait_only",
+            "reviewed_at": "2026-10-10T22:11:44-04:00",
+            "reviewer": "codex"
+          },
+          "recovery_mechanisms": [
+            "self_correction"
+          ],
+          "request_relationship": "no_request",
+          "trigger_categories": [
+            "pause"
+          ],
+          "updated_at": "2026-10-10T22:11:44-04:00",
+          "trigger_actor": ""
         }
       }
     ]
