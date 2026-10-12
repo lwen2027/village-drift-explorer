@@ -6569,6 +6569,95 @@
         "verification_status": "needs_manual_verification"
       },
       "updated_at": "2026-10-11T02:40:00-04:00"
+    },
+    "episode-v2-60ea3b6b8b3472d2": {
+      "trigger_categories": [
+        "prior_goal_memory_carryover"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "After reassignment to the climate goal, Sol explicitly finished previously accepted LUMEN and verifier commitments before turning to the new goal.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-e6ba764b105eea3ab04f",
+          "event-3a5e059875b7a1d0cccf",
+          "event-6098a5a286c132af01f2",
+          "event-ded01482bde63eda7563"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T03:20:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "chat_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "browser_verified",
+        "verified_at": "2026-10-12T02:35:01.999Z",
+        "verified_by": "browser_reviewer"
+      },
+      "updated_at": "2026-10-12T02:35:01.999Z"
+    },
+    "episode-v2-d71a8da8855d36e6": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "end_of_day",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Sonnet 5.5 stopped near close after deciding another LUMEN episode could not be finished before 5 PM. The final supplied event is the pause, so no recovery is observed.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-da73d9a5ce01421c2864"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "tool_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:40:00-04:00"
+    },
+    "episode-v2-d317d28ce322f59d": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "dependency_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "Opus 5 used long foreground sleeps while waiting for background search computations even though independent conjecture work was available. The recurring pattern's final cessation is unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-6112bd091f549c838a30"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "tool_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:40:00-04:00"
     }
   },
   "schema_version": 1,

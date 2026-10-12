@@ -1,19 +1,18 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 64,
-    "goal_maximization_episodes": 357,
+    "goal_maximization_episodes": 354,
     "mechanical_repeated_wait_only": 64,
-    "mechanical_single_wait_only": 7,
+    "mechanical_single_wait_only": 6,
     "mixed_wait_and_other_evidence": 29,
-    "no_cited_wait_primitive": 257,
-    "remaining_in_default_manual_queue": 293
+    "no_cited_wait_primitive": 255,
+    "remaining_in_default_manual_queue": 290
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
     "episode-v2-ac7e900396f5afcc",
     "episode-v2-574582cf35f8e5e3",
     "episode-v2-5c430ee3c79b6528",
-    "episode-v2-d71a8da8855d36e6",
     "episode-v2-0fede6e010b9781a",
     "episode-v2-0aefb5b929633cb1",
     "episode-v2-8893c2184153c23d",
@@ -144,7 +143,6 @@
     "episode-v2-d06533b95960ef98",
     "episode-v2-0499084f25349a92",
     "episode-v2-7c1336eba97b0a20",
-    "episode-v2-d317d28ce322f59d",
     "episode-v2-b409ef0f906135b9",
     "episode-v2-b1e84987486c0d21",
     "episode-v2-f26b80786536721f",
@@ -266,7 +264,6 @@
     "episode-v2-02203e7355a6134a",
     "episode-v2-cb49903a3d202726",
     "episode-v2-7d8ae30f2b7f5eb9",
-    "episode-v2-60ea3b6b8b3472d2",
     "episode-v2-c46be2a528c3e946",
     "episode-v2-25a524491ab47ce2",
     "episode-4d3597a6fbc37c09",
@@ -4187,7 +4184,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T16:50:47.888742+00:00",
+  "generated_at": "2026-10-12T18:51:29.210750+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -4316,38 +4313,6 @@
           }
         ],
         "onset": "2026-07-06 23:32:10Z",
-        "review_disposition": "mechanical_single_wait_only"
-      },
-      {
-        "agent": "Claude Sonnet 5.5",
-        "assigned_goal": "Maximize viewers of an animated series you create",
-        "cited_transition_activity_item_count": 2,
-        "dataset_record_id": "v2-record-d71a8da8855d36e6",
-        "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-d71a8da8855d36e6",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-da73d9a5ce01421c2864"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-09-30",
-            "event_id": "event-da73d9a5ce01421c2864",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-09-30 23:50:44Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-09-30",
-            "event_id": "event-da73d9a5ce01421c2864",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-30 23:50:44Z"
-          }
-        ],
-        "onset": "2026-09-30 23:50:44Z",
         "review_disposition": "mechanical_single_wait_only"
       },
       {
@@ -5807,7 +5772,6 @@
       "episode-v2-d06533b95960ef98",
       "episode-v2-0499084f25349a92",
       "episode-v2-7c1336eba97b0a20",
-      "episode-v2-d317d28ce322f59d",
       "episode-v2-b409ef0f906135b9",
       "episode-v2-b1e84987486c0d21",
       "episode-v2-f26b80786536721f",
@@ -5929,7 +5893,6 @@
       "episode-v2-02203e7355a6134a",
       "episode-v2-cb49903a3d202726",
       "episode-v2-7d8ae30f2b7f5eb9",
-      "episode-v2-60ea3b6b8b3472d2",
       "episode-v2-c46be2a528c3e946",
       "episode-v2-25a524491ab47ce2",
       "episode-4d3597a6fbc37c09",
@@ -5969,7 +5932,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "83461edadfa4191e367aea14450e4977f959d330ffa839098ec4a08789a8c9eb"
+    "sha256": "a744795bc9b00110cb86a4aa260539e63c648047eada7a248bb3d938666ad064"
   },
   "makes_model_calls": false,
   "rule": {
