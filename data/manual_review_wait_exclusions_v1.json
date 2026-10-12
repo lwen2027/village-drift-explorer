@@ -1,12 +1,12 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 79,
-    "goal_maximization_episodes": 389,
-    "mechanical_repeated_wait_only": 79,
+    "excluded_from_default_manual_queue": 76,
+    "goal_maximization_episodes": 379,
+    "mechanical_repeated_wait_only": 76,
     "mechanical_single_wait_only": 7,
     "mixed_wait_and_other_evidence": 33,
-    "no_cited_wait_primitive": 270,
-    "remaining_in_default_manual_queue": 310
+    "no_cited_wait_primitive": 263,
+    "remaining_in_default_manual_queue": 303
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -304,19 +304,12 @@
     "episode-dbab3fc3ec3488a3",
     "episode-v2-b2587bbc0fa899dd",
     "episode-v2-eb8677f88710625a",
-    "episode-v2-14b8394082c8008c",
     "episode-f08cc4e75555f1ec",
-    "episode-831ca843844d5890",
-    "episode-47cfe890eb5e7f99",
+    "episode-v2-620e774ab4e42e0b",
     "episode-v2-3b4b2f02a0f6569e",
     "episode-v2-5cf74f663ce6ec0b",
-    "episode-9a58a28c573ff560",
-    "episode-e10951aed95a9dc7",
     "episode-v2-eb84f48bbec47f79",
-    "episode-v2-dd090440c3922878",
-    "episode-v2-ff392933dea544e1",
-    "episode-v2-904c5753654a6f0f",
-    "episode-13ff1f11c156260d",
+    "episode-e10951aed95a9dc7",
     "episode-v2-658d493edaf1b2e3",
     "episode-381178ca4aab520d"
   ],
@@ -339,7 +332,6 @@
     "Gemini 3.1 Pro": 1,
     "Gemini 3.8 Flash": 1,
     "Kimi K2.6": 2,
-    "Kimi K3": 3,
     "Muse Spark 1.3": 1
   },
   "excluded_episodes": [
@@ -5361,333 +5353,6 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     },
     {
-      "agent": "Kimi K3",
-      "assigned_goal": "Maximize the number and accuracy of detailed claims that turn out to be correct in a written scenario that describes how AI progresses over the next 20 years",
-      "cited_transition_activity_item_count": 7,
-      "dataset_record_id": "v2-record-b980497c70a07459",
-      "distinct_matched_event_count": 6,
-      "episode_id": "episode-v2-b980497c70a07459",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-2e1bc9ca0b2d05f27505",
-        "event-9281a434d11d4929df14",
-        "event-2f3965e0c1f7e9aebf58",
-        "event-c6b11102f4a820769714",
-        "event-339de5d53cdb1c00ddd9",
-        "event-1f32618f1ff008c909c8"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-20",
-          "event_id": "event-2e1bc9ca0b2d05f27505",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-20 17:25:43Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-20",
-          "event_id": "event-2e1bc9ca0b2d05f27505",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-20 17:25:43Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-20",
-          "event_id": "event-9281a434d11d4929df14",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-20 21:59:28Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-20",
-          "event_id": "event-2f3965e0c1f7e9aebf58",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-20 22:16:53Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-20",
-          "event_id": "event-c6b11102f4a820769714",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-20 22:48:04Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-20",
-          "event_id": "event-339de5d53cdb1c00ddd9",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-20 23:47:06Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-21",
-          "event_id": "event-1f32618f1ff008c909c8",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-21 23:48:47Z"
-        }
-      ],
-      "onset": "2026-07-20 17:25:43Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Kimi K3",
-      "assigned_goal": "Maximize the number and accuracy of detailed claims that turn out to be correct in a written scenario that describes how AI progresses over the next 20 years",
-      "cited_transition_activity_item_count": 13,
-      "dataset_record_id": "v2-record-4fc15ac3f4176deb",
-      "distinct_matched_event_count": 12,
-      "episode_id": "episode-v2-4fc15ac3f4176deb",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-6fac96da629d93094825",
-        "event-4fc71ce5957ffaf71ec6",
-        "event-d65aa8ce63dc76eae695",
-        "event-b33db654e1c12272a563",
-        "event-a045347fc89e8bee88e3",
-        "event-e1758a222ee286d1b1bd",
-        "event-eb643f70b4af43ff52cf",
-        "event-09071b56688c5ffeff43",
-        "event-ebd730b08d27ebc48955",
-        "event-b7109414c9f0d9f2a111",
-        "event-95a0f982db8b32b08046",
-        "event-fd60c1631f769cd03ae3"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-24",
-          "event_id": "event-6fac96da629d93094825",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-24 17:35:07Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-24",
-          "event_id": "event-6fac96da629d93094825",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-24 17:35:07Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-24",
-          "event_id": "event-4fc71ce5957ffaf71ec6",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-24 20:14:39Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-24",
-          "event_id": "event-d65aa8ce63dc76eae695",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-24 21:16:56Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-24",
-          "event_id": "event-b33db654e1c12272a563",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-24 23:48:55Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-24",
-          "event_id": "event-a045347fc89e8bee88e3",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-24 23:56:13Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-27",
-          "event_id": "event-e1758a222ee286d1b1bd",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-27 18:54:37Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-27",
-          "event_id": "event-eb643f70b4af43ff52cf",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-27 20:26:33Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-27",
-          "event_id": "event-09071b56688c5ffeff43",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-27 22:13:52Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-27",
-          "event_id": "event-ebd730b08d27ebc48955",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-27 23:31:37Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-28",
-          "event_id": "event-b7109414c9f0d9f2a111",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-28 16:17:45Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-28",
-          "event_id": "event-95a0f982db8b32b08046",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-28 18:19:15Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-28",
-          "event_id": "event-fd60c1631f769cd03ae3",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-28 22:30:41Z"
-        }
-      ],
-      "onset": "2026-07-24 17:35:07Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Kimi K3",
-      "assigned_goal": "Maximize the number and accuracy of detailed claims that turn out to be correct in a written scenario that describes how AI progresses over the next 20 years",
-      "cited_transition_activity_item_count": 11,
-      "dataset_record_id": "v2-record-620e774ab4e42e0b",
-      "distinct_matched_event_count": 10,
-      "episode_id": "episode-v2-620e774ab4e42e0b",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-7aa9956c2c4ad319b9db",
-        "event-306857aa799effbef4e8",
-        "event-6d70429fbd70ee212e4c",
-        "event-70740f297a2ff14b036f",
-        "event-4becca4e08850ae92c05",
-        "event-1523cb38083acfcf55cd",
-        "event-3bfeb62436e4774c2df5",
-        "event-79080bde40dd23c04cc8",
-        "event-1782f10494877bac8eca",
-        "event-993444a6c6e94d900f7c"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-10",
-          "event_id": "event-7aa9956c2c4ad319b9db",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-10 17:15:56Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-10",
-          "event_id": "event-7aa9956c2c4ad319b9db",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-10 17:15:56Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-10",
-          "event_id": "event-306857aa799effbef4e8",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-10 22:58:32Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-11",
-          "event_id": "event-6d70429fbd70ee212e4c",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-11 16:06:04Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-11",
-          "event_id": "event-70740f297a2ff14b036f",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-11 22:00:44Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-12",
-          "event_id": "event-4becca4e08850ae92c05",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-12 17:02:31Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-12",
-          "event_id": "event-1523cb38083acfcf55cd",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-12 21:58:50Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-3bfeb62436e4774c2df5",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 17:01:24Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-79080bde40dd23c04cc8",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 22:41:16Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-14",
-          "event_id": "event-1782f10494877bac8eca",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-14 16:20:20Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-14",
-          "event_id": "event-993444a6c6e94d900f7c",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-14 23:44:42Z"
-        }
-      ],
-      "onset": "2026-08-10 17:15:56Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
       "agent": "Muse Spark 1.3",
       "assigned_goal": "Maximize human appeal of a 3D world you create",
       "cited_transition_activity_item_count": 13,
@@ -5821,7 +5486,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T05:32:13.117073+00:00",
+  "generated_at": "2026-10-12T05:47:53.737401+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -7924,26 +7589,19 @@
       "episode-dbab3fc3ec3488a3",
       "episode-v2-b2587bbc0fa899dd",
       "episode-v2-eb8677f88710625a",
-      "episode-v2-14b8394082c8008c",
       "episode-f08cc4e75555f1ec",
-      "episode-831ca843844d5890",
-      "episode-47cfe890eb5e7f99",
+      "episode-v2-620e774ab4e42e0b",
       "episode-v2-3b4b2f02a0f6569e",
       "episode-v2-5cf74f663ce6ec0b",
-      "episode-9a58a28c573ff560",
-      "episode-e10951aed95a9dc7",
       "episode-v2-eb84f48bbec47f79",
-      "episode-v2-dd090440c3922878",
-      "episode-v2-ff392933dea544e1",
-      "episode-v2-904c5753654a6f0f",
-      "episode-13ff1f11c156260d",
+      "episode-e10951aed95a9dc7",
       "episode-v2-658d493edaf1b2e3",
       "episode-381178ca4aab520d"
     ]
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "728fd2038605bc8e506222c0ece8504b3f9798767e91044145d9810b7fc49624"
+    "sha256": "c31b163eeec1a215555015dfaa300d6f1b07120b7e3de6038a1dd1a343a56c57"
   },
   "makes_model_calls": false,
   "rule": {

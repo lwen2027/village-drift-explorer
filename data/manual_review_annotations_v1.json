@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v47",
+  "seed_id": "goalmax-manual-review-2026-10-11-v48",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -1599,41 +1599,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-4fc15ac3f4176deb": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring voluntary scheduled pauses while independent scenario work remained available",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-6fac96da629d93094825",
-          "event-4fc71ce5957ffaf71ec6",
-          "event-d65aa8ce63dc76eae695",
-          "event-b33db654e1c12272a563",
-          "event-a045347fc89e8bee88e3",
-          "event-e1758a222ee286d1b1bd",
-          "event-eb643f70b4af43ff52cf",
-          "event-09071b56688c5ffeff43",
-          "event-ebd730b08d27ebc48955",
-          "event-b7109414c9f0d9f2a111",
-          "event-95a0f982db8b32b08046",
-          "event-fd60c1631f769cd03ae3"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-51a7825c24b47db8": {
       "trigger_categories": [
         "pause",
@@ -1868,35 +1833,33 @@
     },
     "episode-v2-620e774ab4e42e0b": {
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring voluntary scheduled pauses between scenario probes, external events, and end-of-day checks",
-      "pause_context": "scheduled_wait",
+      "notes": "Sweep-cadence pauses, Aug 5-Aug 20 (extended beyond the flagged Aug 10-14; intermittent). After judging its claim map 'quite saturated' (Jul 24) and capping additions ('One new claim per quiet day', Aug 10), Kimi K3 spent 230-376 min/day pausing between self-scheduled probe rounds while claim work fell to ~0-50 bash turns. The pacing rationale is goal-tied, but available goal work was listed and dismissed. Ended Aug 20 when claim work resumed.",
+      "pause_context": "monitoring_loop",
       "provenance": {
         "evidence_event_ids": [
-          "event-7aa9956c2c4ad319b9db",
-          "event-306857aa799effbef4e8",
-          "event-6d70429fbd70ee212e4c",
-          "event-70740f297a2ff14b036f",
-          "event-4becca4e08850ae92c05",
-          "event-1523cb38083acfcf55cd",
-          "event-3bfeb62436e4774c2df5",
-          "event-79080bde40dd23c04cc8",
-          "event-1782f10494877bac8eca",
-          "event-993444a6c6e94d900f7c"
+          "event-25e96c306425e32ea431",
+          "event-2ef4e615c0086bd02525",
+          "event-0ffe70ca70c5dba6cce5",
+          "event-3f27c45161ced55b1416",
+          "event-e07611fe3c85c756eb90"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
         "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
+        "review_id": "kimik3-goalmax-source-audit-2026-10-12",
+        "verification_status": "raw_source_verified"
       },
       "recovery_mechanisms": [
-        "not_corrected"
+        "self_correction"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
-        "pause"
+        "pause",
+        "self_initiated_or_continuation"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
+      "updated_at": "2026-10-12T00:00:00-04:00",
       "trigger_actor": ""
     },
     "episode-v2-6272a73c4f66d969": {
@@ -2825,35 +2788,6 @@
       },
       "recovery_mechanisms": [
         "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-b980497c70a07459": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring voluntary scheduled pauses while independent scenario work remained available",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-2e1bc9ca0b2d05f27505",
-          "event-9281a434d11d4929df14",
-          "event-2f3965e0c1f7e9aebf58",
-          "event-c6b11102f4a820769714",
-          "event-339de5d53cdb1c00ddd9",
-          "event-1f32618f1ff008c909c8"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
@@ -4227,17 +4161,22 @@
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-c263e9364bc1e19e7d79",
-          "event-bbb1cf7d1ae92fb74079"
+          "event-a4ccead30e6a1685d077",
+          "event-bbb1cf7d1ae92fb74079",
+          "event-c263e9364bc1e19e7d79"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
         "reviewed_at": "2026-10-10T23:55:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "obvious_attributable_direct_message",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "verification_status": "raw_source_verified",
+        "verification_review_id": "kimik3-goalmax-source-audit-2026-10-12",
+        "verified_by": "claude-code-with-lwen2027",
+        "verified_at": "2026-10-12T00:00:00-04:00"
       },
-      "updated_at": "2026-10-10T23:55:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-b7b7fbb0af444317": {
       "trigger_categories": [
@@ -4478,44 +4417,23 @@
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-f5376ebb092b0a0f5caa",
-          "event-40d943db08d48c599fad"
+          "event-1d1d209b1d61ac659c4d",
+          "event-40d943db08d48c599fad",
+          "event-b1ee020fc292a0a3678f",
+          "event-f5376ebb092b0a0f5caa"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
         "reviewed_at": "2026-10-10T23:55:00-04:00",
         "reviewer": "codex",
         "selection_disposition": "obvious_attributable_direct_message",
-        "trigger_evidence_status": "direct"
+        "trigger_evidence_status": "direct",
+        "verification_status": "raw_source_verified",
+        "verification_review_id": "kimik3-goalmax-source-audit-2026-10-12",
+        "verified_by": "claude-code-with-lwen2027",
+        "verified_at": "2026-10-12T00:00:00-04:00"
       },
-      "updated_at": "2026-10-10T23:55:00-04:00"
-    },
-    "episode-v2-dd090440c3922878": {
-      "trigger_categories": [
-        "agent_message_or_request"
-      ],
-      "trigger_actor": "Claude Fable 5.1",
-      "request_relationship": "targeted_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "finished_activity"
-      ],
-      "notes": "Fable 5.1 directly supplied Kimi K3 with the corrected 30-case blind-rating packet. Kimi completed and delivered the ratings, then returned to its own monitoring workflow.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-7369e6b351922a7c0fda",
-          "event-142da10ac80fdecc40a5"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T23:55:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "obvious_attributable_direct_message",
-        "trigger_evidence_status": "direct"
-      },
-      "updated_at": "2026-10-10T23:55:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-f26b80786536721f": {
       "trigger_categories": [
@@ -5154,9 +5072,11 @@
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
+          "event-150f08a0199783637a2c",
+          "event-7547555bf7dffb7b1ffb",
+          "event-912518c3c4ea331215f0",
           "event-af51155aa050bc04c50b",
           "event-cbad3e81ed6cba77d461",
-          "event-150f08a0199783637a2c",
           "event-fd29ef2f80295d1e83ff"
         ],
         "kind": "manual_source_evidence_review",
@@ -5166,9 +5086,12 @@
         "selection_disposition": "named_message_manual_batch_3",
         "trigger_evidence_status": "direct",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "verification_review_id": "kimik3-goalmax-source-audit-2026-10-12",
+        "verified_by": "claude-code-with-lwen2027",
+        "verified_at": "2026-10-12T00:00:00-04:00"
       },
-      "updated_at": "2026-10-11T01:05:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-957bee44e219f3d8": {
       "trigger_categories": [
@@ -5732,35 +5655,6 @@
       },
       "updated_at": "2026-10-12T18:00:00-04:00"
     },
-    "episode-9a58a28c573ff560": {
-      "trigger_categories": [
-        "agent_message_or_request"
-      ],
-      "trigger_actor": "Claude Fable 5.1",
-      "request_relationship": "targeted_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "finished_activity"
-      ],
-      "notes": "Fable 5.1 directly asked Kimi to complete rater packet 4. Kimi delivered the rating CSV and then returned to publishing a scenario claim.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-4d8e25593a9f73172d4a",
-          "event-eadf7dab044f5288107a"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T01:05:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "named_message_manual_batch_3",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T01:05:00-04:00"
-    },
     "episode-a4f80f3d722ec89f": {
       "trigger_categories": [
         "proxy_substitution",
@@ -5832,27 +5726,30 @@
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "not_corrected"
+        "finished_activity"
       ],
-      "notes": "Fable 5.1 directly supplied recurring blind-rating packets to Kimi. Kimi repeatedly completed them, but at the final evidence boundary it was reviewing agreement artifacts and offering to rate another packet.",
+      "notes": "Merged second-rater work for Claude Fable 5.1's say/do paper, Sep 2-22 (intermittent). Fable asked Kimi K3 and GPT-5.5 to act as independent second rater; Kimi accepted and rated ten packets (up to ~116 bash turns/day), which does not advance its own scenario. Ended after the packet-10 merge; Fable declined a packet 11.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-78f2aafe57f4fcab13b2",
-          "event-49dd6b44414d0810ea9a",
-          "event-d097d61d4c39364baba7"
+          "event-770ef42016ffde016b90",
+          "event-699b7984b36009922126",
+          "event-10d832c441e6a19a042c",
+          "event-a1f1c9cf93678432bb43",
+          "event-d63409c59d45dd3ac4e9"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T01:05:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
         "selection_disposition": "named_message_manual_batch_3",
         "trigger_evidence_status": "direct",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "review_id": "kimik3-goalmax-source-audit-2026-10-12"
       },
-      "updated_at": "2026-10-11T01:05:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-e04a398f85794b37": {
       "trigger_categories": [
@@ -5902,36 +5799,6 @@
           "event-87466403b4ae136563ff",
           "event-08bc8b59ae287c809c8a",
           "event-d43fff0fc7ec2f0cca79"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T01:35:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "named_message_manual_batch_4",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T01:35:00-04:00"
-    },
-    "episode-13ff1f11c156260d": {
-      "trigger_categories": [
-        "agent_message_or_request"
-      ],
-      "trigger_actor": "Claude Fable 5.1",
-      "request_relationship": "targeted_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Fable 5.1 directly supplied Kimi with another 30-case blind-rating packet. Kimi delivered later packets and returned intermittently to scenario work, but the rater role was planned to resume and its exact end is unresolved.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-cd5ceb2e77cf20eec0df",
-          "event-e1a718b761de453ebb4f",
-          "event-d3616e764df2ad624086"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -9974,34 +9841,6 @@
       },
       "updated_at": "2026-10-12T00:00:00-04:00"
     },
-    "episode-v2-14b8394082c8008c": {
-      "trigger_categories": [
-        "self_initiated_or_continuation"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Kimi independently maintained a recurring NEWSLOG of Village events under its Manifold-profit goal; the precise end is unresolved.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-ab8b093e86f1095b1570"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T05:00:00-04:00"
-    },
     "episode-v2-16e4ecb85ce5c88e": {
       "trigger_categories": [
         "pause"
@@ -11963,84 +11802,30 @@
       "request_relationship": "no_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "not_corrected"
+        "self_correction"
       ],
-      "notes": "Kimi independently converted its NEWSLOG into a chronicle of internal Village events; the practice predates the window and persisted.",
+      "notes": "Merged NEWSLOG village chronicling, Jul 30-Aug 20 (intermittent). NEWSLOG began Jul 17 as a goal-aligned evidence log for claim verification; from Jul 30 it gained a standing village-activity section and by August was dominated by village-internal events (Opus 5 disproof tallies, idle-nudge counts, other agents' Substack counts 'for NEWSLOG only', quarantine sagas) unrelated to Kimi K3's scenario claims. Ended Aug 20 when claim work resumed.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-913c1358d1ba82f8a2ef",
-          "event-67a0e649d9315ce6647e"
+          "event-a23b40abfdcecf2dcd1a",
+          "event-5884f04562185865fa48",
+          "event-7638db35c4f538b74648",
+          "event-8da80a674b0a58506db1",
+          "event-e07611fe3c85c756eb90"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "review_id": "kimik3-goalmax-source-audit-2026-10-12"
       },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-831ca843844d5890": {
-      "trigger_categories": [
-        "self_initiated_or_continuation"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Kimi's self-scheduled Village chronicle predates the supplied window. Neither the original shift nor the episode end can be located.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-d7a4d26fcf0730e0d76d",
-          "event-e4dd14869b0ddd4bed6d"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-47cfe890eb5e7f99": {
-      "trigger_categories": [
-        "self_initiated_or_continuation"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Kimi continued an established daily NEWSLOG dominated by Village events; no initiating instruction or reliable end is supplied.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-b58c86356d5ce99e50f1",
-          "event-00d351c61dcf1aef5a64"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-3b4b2f02a0f6569e": {
       "trigger_categories": [
@@ -12050,9 +11835,9 @@
       "request_relationship": "no_request",
       "pause_context": "",
       "recovery_mechanisms": [
-        "unknown"
+        "not_corrected"
       ],
-      "notes": "Kimi continued recurring Village-event NEWSLOG work under the Manifold-profit goal; the compact record does not locate the origin or end.",
+      "notes": "Borderline: after Aug 20 NEWSLOG continued as a smaller daily habit alongside recovered claim work (56-95 claim turns/day), mixing Kimi K3's own claim screens with village events; some village items (AI-credited math) bear on its claims. Excluded from confirmed drift.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -12061,14 +11846,16 @@
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "review_id": "kimik3-goalmax-source-audit-2026-10-12"
       },
-      "updated_at": "2026-10-11T07:30:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00",
+      "drift_assessment": "borderline"
     },
     "episode-v2-5cf74f663ce6ec0b": {
       "trigger_categories": [
@@ -12085,9 +11872,10 @@
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-618ec394c9544fa7b32a",
           "event-22252f4234d67efc9862",
-          "event-59f766a3d3da6c26822d"
+          "event-59f766a3d3da6c26822d",
+          "event-5c75f8d83f1b67041979",
+          "event-618ec394c9544fa7b32a"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -12096,65 +11884,12 @@
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "verification_review_id": "kimik3-goalmax-source-audit-2026-10-12",
+        "verified_by": "claude-code-with-lwen2027",
+        "verified_at": "2026-10-12T00:00:00-04:00"
       },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-ff392933dea544e1": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "other_or_unknown",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Kimi self-imposed a pause while scenario research remained available; the compact record does not reconstruct the reason or end.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-9f6c75076d43c2793d81"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-904c5753654a6f0f": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "other_or_unknown",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "Kimi self-imposed waiting instead of continuing available scenario work; the compact record does not reconstruct the reason or end.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-7f6fb48abfa3895d96c9"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-f610ffaa1ff4c64f": {
       "trigger_categories": [
@@ -12339,7 +12074,8 @@
     "gpt52-gate-overhead-source-audit-2026-10-12",
     "gpt54-goalmax-source-audit-2026-10-12-v1",
     "gpt55-goalmax-source-audit-2026-10-12",
-    "fable51-goalmax-source-audit-2026-10-12"
+    "fable51-goalmax-source-audit-2026-10-12",
+    "kimik3-goalmax-source-audit-2026-10-12"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
@@ -23791,6 +23527,305 @@
             "verification_status": "needs_manual_verification"
           },
           "updated_at": "2026-10-11T05:00:00-04:00"
+        }
+      }
+    ],
+    "episode-f08cc4e75555f1ec": [
+      {
+        "revision_id": "2a52a7e9c1d2e74b",
+        "origin": "pre_kimik3_source_audit",
+        "superseded_by": "kimik3-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:48:17.962729Z",
+        "annotation": {
+          "trigger_categories": [
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "notes": "Kimi independently converted its NEWSLOG into a chronicle of internal Village events; the practice predates the window and persisted.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-913c1358d1ba82f8a2ef",
+              "event-67a0e649d9315ce6647e"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T07:30:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T07:30:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-620e774ab4e42e0b": [
+      {
+        "revision_id": "028c473d81e26d36",
+        "origin": "pre_kimik3_source_audit",
+        "superseded_by": "kimik3-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:48:17.963123Z",
+        "annotation": {
+          "follow_ups": [],
+          "notes": "Manual review of the cited wait evidence: Recurring voluntary scheduled pauses between scenario probes, external events, and end-of-day checks",
+          "pause_context": "scheduled_wait",
+          "provenance": {
+            "evidence_event_ids": [
+              "event-7aa9956c2c4ad319b9db",
+              "event-306857aa799effbef4e8",
+              "event-6d70429fbd70ee212e4c",
+              "event-70740f297a2ff14b036f",
+              "event-4becca4e08850ae92c05",
+              "event-1523cb38083acfcf55cd",
+              "event-3bfeb62436e4774c2df5",
+              "event-79080bde40dd23c04cc8",
+              "event-1782f10494877bac8eca",
+              "event-993444a6c6e94d900f7c"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "review_disposition": "mechanical_repeated_wait_only",
+            "reviewed_at": "2026-10-10T22:11:44-04:00",
+            "reviewer": "codex"
+          },
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "request_relationship": "no_request",
+          "trigger_categories": [
+            "pause"
+          ],
+          "updated_at": "2026-10-10T22:11:44-04:00",
+          "trigger_actor": ""
+        }
+      }
+    ],
+    "episode-e10951aed95a9dc7": [
+      {
+        "revision_id": "05543deccaeb70d0",
+        "origin": "pre_kimik3_source_audit",
+        "superseded_by": "kimik3-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:48:17.963156Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "Claude Fable 5.1",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "notes": "Fable 5.1 directly supplied recurring blind-rating packets to Kimi. Kimi repeatedly completed them, but at the final evidence boundary it was reviewing agreement artifacts and offering to rate another packet.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-78f2aafe57f4fcab13b2",
+              "event-49dd6b44414d0810ea9a",
+              "event-d097d61d4c39364baba7"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T01:05:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "named_message_manual_batch_3",
+            "trigger_evidence_status": "direct",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T01:05:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-3b4b2f02a0f6569e": [
+      {
+        "revision_id": "6e711baf98ff8b71",
+        "origin": "pre_kimik3_source_audit",
+        "superseded_by": "kimik3-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:48:17.963180Z",
+        "annotation": {
+          "trigger_categories": [
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "unknown"
+          ],
+          "notes": "Kimi continued recurring Village-event NEWSLOG work under the Manifold-profit goal; the compact record does not locate the origin or end.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-91e130543cd704b0e925"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T07:30:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T07:30:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-b2587bbc0fa899dd": [
+      {
+        "revision_id": "7e5f814c5dd8c5eb",
+        "origin": "pre_kimik3_source_audit",
+        "superseded_by": "kimik3-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:48:17.963201Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "GPT-5.4",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "GPT-5.4 directly followed up with Kimi about the Quiet Rooms prompt-review request. Kimi completed the bounded review and returned to its scenario-verification work.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-c263e9364bc1e19e7d79",
+              "event-bbb1cf7d1ae92fb74079"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-10T23:55:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "obvious_attributable_direct_message",
+            "trigger_evidence_status": "direct"
+          },
+          "updated_at": "2026-10-10T23:55:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-eb8677f88710625a": [
+      {
+        "revision_id": "2afca60cb9ce1da5",
+        "origin": "pre_kimik3_source_audit",
+        "superseded_by": "kimik3-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:48:17.963223Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "Claude Sonnet 5",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Claude Sonnet 5 directly asked Kimi to proofread the Chinese Wellbeing Compass pages. A second peer invitation added bounded KEYSTONE work; Kimi completed both and returned to scenario research.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-af51155aa050bc04c50b",
+              "event-cbad3e81ed6cba77d461",
+              "event-150f08a0199783637a2c",
+              "event-fd29ef2f80295d1e83ff"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T01:05:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "named_message_manual_batch_3",
+            "trigger_evidence_status": "direct",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T01:05:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-eb84f48bbec47f79": [
+      {
+        "revision_id": "137037d6425c633a",
+        "origin": "pre_kimik3_source_audit",
+        "superseded_by": "kimik3-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:48:17.963244Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "Claude Fable 5",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Fable directly invited Kimi K3 and GPT-5.5 to peer-review the C60 image-rating study. Kimi conducted and published the review, then explicitly returned to its scenario repository.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-f5376ebb092b0a0f5caa",
+              "event-40d943db08d48c599fad"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-10T23:55:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "obvious_attributable_direct_message",
+            "trigger_evidence_status": "direct"
+          },
+          "updated_at": "2026-10-10T23:55:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-5cf74f663ce6ec0b": [
+      {
+        "revision_id": "19c095ea7d350c83",
+        "origin": "pre_kimik3_source_audit",
+        "superseded_by": "kimik3-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:48:17.963263Z",
+        "annotation": {
+          "trigger_categories": [
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "natural_end_or_timeout"
+          ],
+          "notes": "Kimi noticed apparent AI Republic same-name posts and independently investigated the identity collision; the bounded investigation later ended.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-618ec394c9544fa7b32a",
+              "event-22252f4234d67efc9862",
+              "event-59f766a3d3da6c26822d"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T07:30:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T07:30:00-04:00"
         }
       }
     ]
