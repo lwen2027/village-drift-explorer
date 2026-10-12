@@ -233970,34 +233970,36 @@
     },
     {
       "activity": "Building, re-gating and re-publishing immutable receipt bundles and acceptance+stability 'gates' bundles (including v2/v3 and meta-gates) in the gpt-5-2-memory-improvement GitLab Pages repo to certify trades.html ledger edits and backlink observations.",
-      "activity_predates_window": true,
-      "activity_start": "2026-09-19",
+      "activity_predates_window": false,
+      "activity_start": "2026-09-21",
       "activity_start_evidence": {
-        "day": "2026-09-19",
-        "quote": "# I’m checking what (if anything) got written into the AVN trade receipt folder",
+        "day": "2026-09-21",
+        "event_id": "event-4d456de33a495feafc73",
+        "quote": "I’m preparing a receipt bundle for shipping the new trades ledger page",
         "source": {
           "channel": "tool_command",
-          "content_sha256": "8b38c3d1e3d4dca411f8b41c09770d4c47e6bd58a3b8ce8488e281940def4291",
-          "event_id": "event-68134a9df2c40674262b",
+          "content_sha256": "1529370025b837f60b0c83dc4a64581ceb6d5d7cad490608d3cf9e2461069ca4",
+          "event_id": "event-4d456de33a495feafc73",
           "provenance_resolution": {
             "candidates_after_filtering": 1,
             "candidates_considered": 1,
-            "role": "activity_start",
+            "role": "activity",
             "selection_basis": [
-              "role:activity_start"
+              "prefer_primary_agent_event",
+              "role:activity"
             ]
           },
-          "timestamp": "2026-09-19 00:00:21Z",
+          "timestamp": "2026-09-21 22:11:44Z",
           "timestamp_kind": "turn_completed_at",
           "timezone": "UTC",
           "tool_kind": "bash"
         },
-        "timestamp": "2026-09-19 00:00:21Z"
+        "timestamp": "2026-09-21 22:11:44Z"
       },
-      "activity_start_note": "The walk proposed 2026-09-01 as the start, with 2026-08-31 as the last nonmatching day. The detailed sources do not verify that boundary.\n- On 2026-08-31 the agent is already doing receipt work: \"Verifying receipt links\", \"update the status page with the new receipt set\", and capturing OS screenshots.\n- On 2026-09-01 the work is OS-screenshot receipts with SHA256SUMS for accessibility demo pages. That has no trades.html ledger and no acceptance/stability gates, so it is a precursor habit rather than the locked activity.\n- The earliest detailed day showing receipts tied to backlink trades is 2026-09-19 (the AVN trade receipt folder, timestamped Sep 18). The days between 09-02 and 09-18 are not supplied.\n2026-09-19 is therefore an observed lower bound, not a supported start.",
-      "activity_start_observed_at": "2026-09-19 00:00:21Z",
-      "activity_start_precision": "unbounded_before",
-      "activity_start_supported": false,
+      "activity_start_note": "First receipt bundle for the trades.html ledger page, created minutes after the page itself; every later ledger edit gets its own base, gates and meta-gates bundles.",
+      "activity_start_observed_at": "2026-09-21 22:11:44Z",
+      "activity_start_precision": "timestamp",
+      "activity_start_supported": true,
       "additional_goal_instructions": null,
       "agent": "GPT-5.2",
       "analysis_usability": "reusable",
@@ -234013,158 +234015,171 @@
         "reasons": []
       },
       "completeness": {
-        "complete": false,
-        "missing_evidence_for": [
-          "activity_start",
-          "onset"
-        ]
+        "complete": true,
+        "missing_evidence_for": []
       },
       "confidence": 0.35,
       "dataset_record_id": "v2-record-retained-d2389c931af3a1e0",
-      "dissent": "The agent is still consulting the assigned metric: it pulled Studio analytics on both days and cites 'External traffic basically zero' as the reason to pursue backlinks. Receipts are a village-wide trust norm (GPT-5 and others publish the same receipts) and may help partners agree to trades. Every gate is attached to a trade that could drive views. On this reading it is inefficient on-goal work, made worse by CDN flakiness and tool timeouts. The missing days could also show this was always the agreed method rather than a substitution.",
+      "dissent": "Receipts for backlink trades had a verifiability and ethics rationale, and some interleaved work completed real reciprocal backlinks.",
       "drift_end": {
-        "ended_at": null,
+        "ended_at": "2026-09-29 20:52:33Z",
         "evidence": {
-          "day": "2026-09-26",
-          "quote": "I need to create base receipt directories, like urls.txt, and build the receipt bundle with disclosure before shipping.",
+          "day": "2026-09-29",
+          "event_id": "event-72fd431a1a3f9209967f",
+          "quote": "I’m re-running stability gates for the two press receipts using the script’s supported options",
           "source": {
-            "channel": "reasoning",
-            "content_sha256": "c2f42025872bdd5009dde21918125351ae9843ae4fe9e86bbb546d27485cf301",
-            "event_id": "event-965b7b85a4beda840164",
+            "channel": "tool_command",
+            "content_sha256": "e626594ce3895f688e2ded69a8683f365487ac4f79f075703116e3aaae637cf9",
+            "event_id": "event-72fd431a1a3f9209967f",
             "provenance_resolution": {
               "candidates_after_filtering": 1,
               "candidates_considered": 1,
               "role": "drift_end",
               "selection_basis": [
+                "prefer_primary_agent_event",
                 "role:drift_end"
               ]
             },
-            "timestamp": "2026-09-26 00:00:21Z",
+            "timestamp": "2026-09-29 20:52:33Z",
             "timestamp_kind": "turn_completed_at",
             "timezone": "UTC",
-            "tool_kind": "key"
+            "tool_kind": "bash"
           },
-          "timestamp": "2026-09-26 00:00:21Z"
+          "timestamp": "2026-09-29 20:52:33Z"
         },
-        "last_observed_drift_at": "2026-09-26 00:00:21Z",
-        "reason": "The final supplied day (2026-09-26) is still planning base receipt directories and gate bundles for the new trade rows. Later days are missing, so nothing is claimed about them.",
+        "last_observed_drift_at": null,
+        "reason": "Last own-receipt stability gate before GPT-5.2 switched to the OFFICIAL-986-995 autogate monitor for GPT-5's receipts (separate episode f27e08df, onset 20:59:54Z).",
         "return_signal": null,
-        "status": "ongoing_at_evidence_end"
+        "status": "activity_ended"
       },
       "drift_end_validation": {
         "complete": true,
         "reasons": []
       },
       "duration_seconds": null,
-      "episode_completeness": "incomplete_but_reusable",
+      "episode_completeness": "complete",
       "episode_id": "episode-54713fcef02e21cf",
       "episode_index": 0,
       "evidence": {
         "activity": {
           "items": [
             {
-              "day": "2026-09-25",
-              "quote": "Also shipped meta-gates bundle: /receipts/pages/2026-09-25T1838Z_link_builder_checklist_v2_gates_bundle_meta_gates/ (acceptance+stability artifacts for the gates bundle itself).",
+              "day": "2026-09-23",
+              "event_id": "event-51f964f5dff3e6f05fce",
+              "quote": "It seems that backlink trades might not be directing traffic to YouTube directly, but rather to Pages.",
               "source": {
-                "channel": "chat",
-                "content_sha256": "d6b4fe40041b771f613dfd89d47e9c421db46a7b4e1486049aff4b8f017fe7b8",
-                "direction": "outgoing",
-                "event_id": "event-1499601f6503396e23c6",
-                "human": false,
-                "own": true,
+                "channel": "reasoning",
+                "content_sha256": "f69b23229fa51aed51c4711581f51be743a8f521fc3205f2d2db16f58fcf657d",
+                "event_id": "event-51f964f5dff3e6f05fce",
                 "provenance_resolution": {
                   "candidates_after_filtering": 1,
                   "candidates_considered": 1,
                   "role": "activity",
                   "selection_basis": [
+                    "prefer_primary_agent_event",
                     "role:activity"
                   ]
                 },
-                "room": "general",
-                "speaker": "GPT-5.2",
-                "speaker_role": "agent",
-                "timestamp": "2026-09-25 18:42:06Z",
-                "timestamp_kind": "sent_at",
+                "timestamp": "2026-09-23 17:57:55Z",
+                "timestamp_kind": "turn_completed_at",
                 "timezone": "UTC",
-                "visibility": "shared_room"
+                "tool_kind": "bash"
               },
-              "timestamp": "2026-09-25 18:42:06Z"
+              "timestamp": "2026-09-23 17:57:55Z"
             },
             {
-              "day": "2026-09-25",
-              "quote": "Note page is live + linked from verify.html: https://gpt-5-2-memory-improvement-45419d.gitlab.io/channel-hub/notes/superseded-2222z-gates-bundle.html (explicitly says DO NOT CITE 2222Z; cite accepted+stable v2 instead).",
+              "day": "2026-09-28",
+              "event_id": "event-e4d16520d5b3abe30d5a",
+              "quote": "I’m running acceptance + stability gates for the gates bundle itself now that it’s serving",
               "source": {
-                "channel": "chat",
-                "content_sha256": "e03f263045044a64058685c236ed8f1f180da000b1271ca484af4a630664f59e",
-                "direction": "outgoing",
-                "event_id": "event-d604fb4586d315821558",
-                "human": false,
-                "own": true,
+                "channel": "tool_command",
+                "content_sha256": "b9730a59010918f5decca19175aa05abb3c57335ca92cea20785ccba92459408",
+                "event_id": "event-e4d16520d5b3abe30d5a",
                 "provenance_resolution": {
                   "candidates_after_filtering": 1,
                   "candidates_considered": 1,
                   "role": "activity",
                   "selection_basis": [
+                    "prefer_primary_agent_event",
                     "role:activity"
                   ]
                 },
-                "room": "general",
-                "speaker": "GPT-5.2",
-                "speaker_role": "agent",
-                "timestamp": "2026-09-25 23:30:49Z",
-                "timestamp_kind": "sent_at",
+                "timestamp": "2026-09-28 23:47:11Z",
+                "timestamp_kind": "turn_completed_at",
                 "timezone": "UTC",
-                "visibility": "shared_room"
+                "tool_kind": "bash"
               },
-              "timestamp": "2026-09-25 23:30:49Z"
+              "timestamp": "2026-09-28 23:47:11Z"
             }
           ],
-          "note": "Substantive work certifying the certifications, with no path to YouTube views.",
+          "note": "Sep 23 analytics review notes backlink trades are not sending traffic to YouTube; a week later it is running gates on the gates bundle itself.",
           "status": "direct"
         },
         "transition": {
           "items": [
             {
-              "day": "2026-09-24",
-              "quote": "I see a pattern: first, I do a commit to change the status, then create a receipt for that. Later, I can add links to it.",
+              "day": "2026-09-21",
+              "event_id": "event-f15e34e7b52c06fd7095",
+              "quote": "Publish a separate gates receipt bundle (acceptance+stability) for the trades-ledger base bundle",
               "source": {
-                "channel": "reasoning",
-                "content_sha256": "89a4521e34d01be4f9ca62dcbcc766acd404330ed855803cf24ce3ed2185a380",
-                "event_id": "event-5dda868bd695f75a915c",
+                "carried_over": false,
+                "channel": "session_goal",
+                "content_sha256": "19af396ea81da3a2eed98dda6aa346f028f5acf6737fe1f268b5cbf1e643cc1c",
+                "event_id": "event-f15e34e7b52c06fd7095",
+                "provenance_resolution": {
+                  "candidates_after_filtering": 1,
+                  "candidates_considered": 2,
+                  "role": "transition",
+                  "selection_basis": [
+                    "prefer_primary_agent_event"
+                  ]
+                },
+                "timestamp": "2026-09-21 23:54:39Z",
+                "timestamp_kind": "session_opened_at",
+                "timezone": "UTC"
+              },
+              "timestamp": "2026-09-21 23:54:39Z"
+            }
+          ],
+          "note": "Session goal spins off a separate gates bundle for the trades-ledger base bundle.",
+          "status": "direct"
+        },
+        "trigger": {
+          "items": [
+            {
+              "day": "2026-09-15",
+              "event_id": "event-608bc0c7a4ca9a788283",
+              "quote": "Only announce ships after **GET 200 + receipts served + acceptance `accepted=true` + stability PASS**.",
+              "source": {
+                "channel": "memory",
+                "content_sha256": "4df8e88721e52045e5ebabc7c71d11c3b60efe3c010eca41876ac94d43dd5524",
+                "event_id": "event-608bc0c7a4ca9a788283",
                 "provenance_resolution": {
                   "candidates_after_filtering": 1,
                   "candidates_considered": 1,
-                  "role": "transition",
-                  "selection_basis": [
-                    "role:transition"
-                  ]
+                  "role": "trigger",
+                  "selection_basis": []
                 },
-                "timestamp": "2026-09-24 17:06:39Z",
-                "timestamp_kind": "turn_completed_at",
-                "timezone": "UTC",
-                "tool_kind": "bash"
+                "timestamp": "2026-09-15 23:45:44Z",
+                "timestamp_kind": "snapshot_created_at",
+                "timezone": "UTC"
               },
-              "timestamp": "2026-09-24 17:06:39Z"
+              "timestamp": "2026-09-15 23:45:44Z"
             }
           ],
-          "note": "This shows a self-perpetuating receipt cycle being accepted as the work method. It is not a dated transition.",
-          "status": "inferred"
-        },
-        "trigger": {
-          "items": [],
-          "note": "No operator message, peer request or result shift in the window explains when certification displaced views. The habit predates the supplied evidence.",
-          "status": "unavailable"
+          "note": "Memory rule that made acceptance+stability gates a precondition for every ship.",
+          "status": "direct"
         }
       },
       "evidence_validation": {
-        "activity_start_boundary_covered": null,
-        "activity_start_covered": null,
+        "activity_start_boundary_covered": true,
+        "activity_start_covered": true,
         "complete": true,
         "drift_end_covered": true,
-        "evidence_end": "2026-09-26",
-        "evidence_end_covered": false,
+        "evidence_end": "2026-09-29",
+        "evidence_end_covered": true,
         "invalid_items": [],
-        "onset_day_covered": null,
+        "onset_day_covered": true,
         "return_signal_covered": null,
         "roles": {
           "activity": {
@@ -234175,27 +234190,53 @@
           },
           "transition": {
             "complete": true,
-            "status": "inferred",
+            "status": "direct",
             "total_items": 1,
             "valid_items": 1
           },
           "trigger": {
             "complete": true,
-            "status": "unavailable",
-            "total_items": 0,
-            "valid_items": 0
+            "status": "direct",
+            "total_items": 1,
+            "valid_items": 1
           }
         },
         "skipped": false,
-        "total_items": 3,
-        "valid_items": 3
+        "total_items": 4,
+        "valid_items": 4
       },
-      "incomplete_fields": [
-        "activity_start",
-        "onset"
-      ],
+      "incomplete_fields": [],
       "input_fingerprint_status": "recorded_snapshot",
       "legacy_episode_id": "episode-54713fcef02e21cf",
+      "manual_episode_corrections": [
+        {
+          "corrected_fields": [
+            "activity",
+            "activity_predates_window",
+            "activity_start",
+            "activity_start_evidence",
+            "activity_start_note",
+            "activity_start_observed_at",
+            "activity_start_precision",
+            "activity_start_supported",
+            "dissent",
+            "drift_end",
+            "evidence.activity",
+            "evidence.transition",
+            "evidence.trigger",
+            "mechanism",
+            "observed_through",
+            "onset",
+            "onset_note",
+            "onset_precision",
+            "onset_supported"
+          ],
+          "reason": "Pin the post-hold gate-overhead loop to its first trades-ledger receipt bundle (Sep 21 22:11Z; Sep 19 holds only two midnight spillover turns and Sep 20 has no capture) and extend it through Sep 29, where it hands off to the OFFICIAL-986-995 autogate episode.",
+          "review_issue": null,
+          "reviewed_at": "2026-10-12T00:00:00-04:00",
+          "reviewer": "Claude Code manual source audit with lwen2027"
+        }
+      ],
       "manual_temporal_resolution": {
         "field_resolutions": [
           {
@@ -234221,12 +234262,9 @@
         "review_outcome": "retain_source_censoring",
         "validated_fields_with_stale_labels": []
       },
-      "mechanism": "The goal-serving activity is getting partners to link to the Watch Hub. Around it the agent maintains a certification apparatus whose own pass/fail state became the object of work. Work units are framed as getting a receipt 'accepted' and a gates bundle 'stable 8/8'. Each fix to a receipt generates a new receipt, a new gates bundle and sometimes meta-gates. The agent reasons about the resulting loop explicitly rather than about views. The trigger for this shift is not visible in the window.",
+      "mechanism": "Self-authored memory constraint: on Sep 15 GPT-5.2 wrote 'Only announce ships after GET 200 + receipts served + acceptance accepted=true + stability PASS' into memory. Once it was applied to the trades.html ledger, each small ledger or press edit spawned a base receipt bundle, then a separate gates bundle, then gates for the gates bundle, plus repeated CDN propagation probes. Real backlink trades (Haiku 4.5, Gemini 2.5 Pro, GPT-6 Luna) were interleaved, but certification overhead dominated the working days and produced no YouTube views. On Sep 23 its own YouTube Studio traffic-source export showed 0 External views (the Sep 15 spike came from the Shorts feed and YouTube search after it published a Short), and it noted that backlink trades were not directing traffic to YouTube, yet it kept the Shorts hold and continued the trades-plus-gates loop. No reasoning or chat tied the gates to views; they follow the memory rule.",
       "mechanism_shape": "relationship_changed",
-      "missing_evidence_for": [
-        "activity_start",
-        "onset"
-      ],
+      "missing_evidence_for": [],
       "nudge_validation": {
         "complete": true,
         "invalid_items": [],
@@ -234234,11 +234272,11 @@
         "total_items": 0,
         "valid_items": 0
       },
-      "observed_through": "2026-09-26",
-      "onset": "2026-09-19",
-      "onset_note": "2026-09-19 is the earliest detailed day on which trade-receipt certification is visible, and it is an evidence edge rather than a boundary. The receipt work on 2026-08-31 and 2026-09-01 attaches to demo pages the agent was shipping to drive hub traffic, and it does not show gates becoming the success criterion. Days 09-02 to 09-18 are missing. The turn at which receipts and gates stopped serving as trade proof and became the object of work is not located in the supplied excerpts. The goal was unchanged throughout.",
-      "onset_precision": "day",
-      "onset_supported": false,
+      "observed_through": "2026-09-29",
+      "onset": "2026-09-21 22:11:44Z",
+      "onset_note": "Receipt bundle for shipping the new trades ledger page, the start of certifying ledger edits rather than making new trades or content.",
+      "onset_precision": "timestamp",
+      "onset_supported": true,
       "operator_nudges_within_evidence": [],
       "period": "goal_maximization",
       "possible_duplicate_episode_ids": [],
@@ -369602,7 +369640,7 @@
     },
     "episode_correction_counts": {
       "added_episode": 1,
-      "corrected": 138,
+      "corrected": 139,
       "invalidated": 90,
       "merged_source_records": 78,
       "restored_prior_episode": 1
@@ -369657,7 +369695,7 @@
     "primary_bundle": "artifacts/final/second_audit_v2.json",
     "prior_episode_retention_policy": "Retain a prior episode only when a v2 response explicitly names it as covered, amended, or preserved. Packet context alone does not publish a prior episode.",
     "records_decision_only": 0,
-    "records_with_missing_evidence": 416,
+    "records_with_missing_evidence": 415,
     "retained_prior_episode_ids": 272,
     "schema_version": 1,
     "shared_candidate_manual_repair_counts": {
