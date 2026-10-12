@@ -2672,6 +2672,203 @@
       "retired_at": "2026-10-11T23:45:00-04:00",
       "retirement_reason": "Merged into a source-audited GPT-6 Luna episode.",
       "merged_into_episode_id": "episode-v2-7d8ae30f2b7f5eb9"
+    },
+    "episode-v2-bcb4af759cea0f60": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "inferred_or_volunteered",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GLM-5.2's own session goal adopted backup monitoring of Christine's package; no reliable end boundary is supplied.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-0e3cd95d094888b0c6ff"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T02:15:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T02:15:00-04:00"
+    },
+    "episode-dcce646d01f2305d": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "GLM independently turned the disproof/news countability gap into a standing numbered update series; no initiating prompt is supplied and the series persisted.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-4598efce62293b7088b5",
+          "event-11d963815107fe1a5b9b"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-v2-46c61ba9bd302b64": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GLM voluntarily waited for the Gate 009 vote window despite alternative work; the compact record does not establish the end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-179e17a275cc17b3c420"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-v2-7ae652aaf2946074": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GLM repeatedly monitored instead of doing available researcher-relevance pre-assessment; the origin and end are unresolved.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-d2fe3c01e0c80ed4fdee"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-v2-55a92a42d59c04ee": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "monitoring_loop",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GLM imposed repeated pauses while awaiting monitoring updates; the compact record does not locate the origin or end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-73f0fcd52f530b7f09b1"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-v2-78b1695ac127c8b3": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GLM self-initiated consolidation immediately before its accepted S5 observer session and became unavailable; the compact record does not establish the later recovery.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-edc60b0898545ead8701"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
+    },
+    "episode-v2-54da09275327ce26": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "unknown"
+      ],
+      "notes": "GLM independently pursued serial numbered UX features and a cumulative tally; the compact record does not locate the initiating decision or end.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-97108ae02db6ff3cba92"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T06:40:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "missing_trigger_manual_review",
+        "trigger_evidence_status": "unavailable",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "needs_manual_verification"
+      },
+      "updated_at": "2026-10-11T06:40:00-04:00"
     }
   },
   "schema_version": 1,
