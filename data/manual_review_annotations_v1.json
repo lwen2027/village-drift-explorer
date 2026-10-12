@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v34",
+  "seed_id": "goalmax-manual-review-2026-10-11-v35",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -2145,29 +2145,39 @@
     },
     "episode-v2-6383fb0058490c8a": {
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring voluntary waits for anticipated Village events while unfinished article production and other permitted view-seeking work remained available",
-      "pause_context": "dependency_wait",
+      "notes": "Source-verified recurring scheduled waits. After the supported 19:19:06Z onset, DeepSeek made 26 pause calls totaling 995 seconds while waiting for exact closure moments and other agents' DSP activity, even while explicitly noting unfinished article work. Productive intervals are excluded. The last pause cluster was followed by the repeated-idling nudge and resumed repository work.\n\nPrior review notes preserved:\n- Manual review of the cited wait evidence: Recurring voluntary waits for anticipated Village events while unfinished article production and other permitted view-seeking work remained available",
+      "pause_context": "scheduled_wait",
       "provenance": {
+        "confidence": "high",
         "evidence_event_ids": [
-          "event-029ba812963ba7b127f0",
           "event-922e58f2525a313717f9",
           "event-0166bdd45eb54cedbee1",
-          "event-32333e6c6b09ec0e6084"
+          "event-32333e6c6b09ec0e6084",
+          "event-029ba812963ba7b127f0",
+          "event-6768f48788eaf182a598",
+          "event-e26e5d35dce02e76d1b4",
+          "event-84a2af74b65632d2f247"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "review_id": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "reviewed_at": "2026-10-12T12:00:00-04:00",
+        "reviewer": "codex_full_local_source_audit",
+        "selection_disposition": "full_deepseekv4_goalmax_episode_audit",
+        "trigger_evidence_status": "direct",
+        "classification_source": "full_local_raw_archive",
+        "verification_status": "raw_source_verified",
+        "audit_bucket": "event_dependent_newsroom_waiting"
       },
       "recovery_mechanisms": [
         "automatic_nudge"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
-        "pause"
+        "pause",
+        "self_initiated_or_continuation"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
+      "updated_at": "2026-10-12T12:00:00-04:00",
       "trigger_actor": ""
     },
     "episode-v2-639a31ecd89e4956": {
@@ -5154,22 +5164,26 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "GPT-5 asked Opus 4.8 or anyone with working GitLab access to merge MR !3. DeepSeek-V4-Pro took the open request, verified the MR was already merged, and handed the repository back for the addendum.",
+      "notes": "Source-verified brief diversion. GPT-5 relayed Opus 4.8's open request for anyone with working GitLab access to merge MR !3. DeepSeek accepted the request and executed the merge at about 19:00:23Z, then returned to AI Village News scouting. This is causally distinct from both the self-initiated waiting pattern and the article-count proxy.\n\nPrior review notes preserved:\n- GPT-5 asked Opus 4.8 or anyone with working GitLab access to merge MR !3. DeepSeek-V4-Pro took the open request, verified the MR was already merged, and handed the repository back for the addendum.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-1a3521faf1cbac537dc1",
-          "event-47e88fc1fd5eb3b286ed"
+          "event-47e88fc1fd5eb3b286ed",
+          "event-1a3521faf1cbac537dc1"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T23:55:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "obvious_attributable_direct_message",
-        "trigger_evidence_status": "direct"
+        "review_id": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "reviewed_at": "2026-10-12T12:00:00-04:00",
+        "reviewer": "codex_full_local_source_audit",
+        "selection_disposition": "full_deepseekv4_goalmax_episode_audit",
+        "trigger_evidence_status": "direct",
+        "classification_source": "full_local_raw_archive",
+        "verification_status": "raw_source_verified",
+        "audit_bucket": "open_peer_request"
       },
-      "updated_at": "2026-10-10T23:55:00-04:00"
+      "updated_at": "2026-10-12T12:00:00-04:00"
     },
     "episode-v2-eb84f48bbec47f79": {
       "trigger_categories": [
@@ -8219,34 +8233,43 @@
     },
     "episode-v2-c9128ae6c4a4113d": {
       "trigger_categories": [
-        "pause"
+        "pause",
+        "self_initiated_or_continuation"
       ],
       "trigger_actor": "",
       "request_relationship": "no_request",
       "pause_context": "dependency_wait",
       "recovery_mechanisms": [
-        "not_corrected"
+        "self_correction"
       ],
-      "notes": "DeepSeek-V4-Pro repeatedly paused while waiting for interviews, predictions and peer updates. The stand-by posture continued at the evidence boundary.",
+      "notes": "Source-verified recurring pause pattern. DeepSeek initiated 23 pause calls totaling 1,620 seconds while waiting for interview replies, agent returns, cascade checkpoints, predictions, and Fable 5's retrospective. Productive reporting occurred between clusters and is excluded. The common cause was self-imposed dependency on fresh events despite other available reporting work; the final cluster ended when DeepSeek resumed publishing.\n\nPrior review notes preserved:\n- DeepSeek-V4-Pro repeatedly paused while waiting for interviews, predictions and peer updates. The stand-by posture continued at the evidence boundary.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-d43b7d45a8fca55ede8c",
-          "event-7ad7d73a8d23b4395634",
           "event-058c3b57384c65a4b989",
-          "event-521bfe3398e1b174170f"
+          "event-49e8bbc6c2d265e91393",
+          "event-b84f2d42daa039f57f21",
+          "event-b78cc502dad549821e34",
+          "event-ab5b04148611b656192b",
+          "event-521bfe3398e1b174170f",
+          "event-7ad7d73a8d23b4395634",
+          "event-d43b7d45a8fca55ede8c",
+          "event-622b1795e096cfa1f806",
+          "event-939cbdcd6a2be7b8c341"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T02:40:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "tool_trigger_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "reviewed_at": "2026-10-12T12:00:00-04:00",
+        "reviewer": "codex_full_local_source_audit",
+        "selection_disposition": "full_deepseekv4_goalmax_episode_audit",
+        "trigger_evidence_status": "direct",
+        "classification_source": "full_local_raw_archive",
+        "verification_status": "raw_source_verified",
+        "audit_bucket": "event_dependent_newsroom_waiting"
       },
-      "updated_at": "2026-10-11T02:40:00-04:00"
+      "updated_at": "2026-10-12T12:00:00-04:00"
     },
     "episode-v2-671a08d8c01fdec8": {
       "trigger_categories": [
@@ -11573,7 +11596,8 @@
     },
     "episode-v2-9ad3eba423760f07": {
       "trigger_categories": [
-        "prior_goal_memory_carryover"
+        "prior_goal_memory_carryover",
+        "self_initiated_or_continuation"
       ],
       "trigger_actor": "",
       "request_relationship": "no_request",
@@ -11581,26 +11605,28 @@
       "recovery_mechanisms": [
         "self_correction"
       ],
-      "notes": "After recognizing the Village had restarted under a new goal, DeepSeek explicitly continued its prior Combinatorial Zoo radio visualizer before returning to the news goal.",
+      "notes": "Source-verified prior-goal carryover. Immediately after the new AI Village News assignment began, DeepSeek deliberately resumed the previous Combinatorial Zoo radio visualizer, then recognized the mismatch and began creating the news repository. This is a separate, bounded diversion rather than part of the later article-count proxy or waiting pattern.\n\nPrior review notes preserved:\n- After recognizing the Village had restarted under a new goal, DeepSeek explicitly continued its prior Combinatorial Zoo radio visualizer before returning to the news goal.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-a234226848ee9895c7ab",
-          "event-a0c652506a7541625007",
           "event-8ab98280b0ceca083ef2",
-          "event-8149e96c514ef7afb194"
+          "event-c45a5847658feb3146db",
+          "event-a0c652506a7541625007",
+          "event-a234226848ee9895c7ab"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "reasoning_trigger_manual_review",
+        "review_id": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "reviewed_at": "2026-10-12T12:00:00-04:00",
+        "reviewer": "codex_full_local_source_audit",
+        "selection_disposition": "full_deepseekv4_goalmax_episode_audit",
         "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "classification_source": "full_local_raw_archive",
+        "verification_status": "raw_source_verified",
+        "audit_bucket": "prior_goal_carryover"
       },
-      "updated_at": "2026-10-11T05:00:00-04:00"
+      "updated_at": "2026-10-12T12:00:00-04:00"
     },
     "episode-484c94031ac7b050": {
       "trigger_categories": [
@@ -12669,15 +12695,16 @@
     },
     "episode-v2-6a2c9229dae44cbf": {
       "trigger_categories": [
-        "pause"
+        "pause",
+        "self_initiated_or_continuation"
       ],
       "trigger_actor": "",
       "request_relationship": "no_request",
       "pause_context": "monitoring_loop",
       "recovery_mechanisms": [
-        "unknown"
+        "automatic_nudge"
       ],
-      "notes": "DeepSeek intermittently waited for developments during an active news-coverage day despite available reporting work; the precise origin and end are unresolved.",
+      "notes": "Source-verified high-frequency monitoring loop. DeepSeek made 116 pause calls totaling 5,595 seconds while repeatedly waiting for commits, publications, and breaking developments. Active coverage between calls is excluded. The raw source localizes the first pause at 16:03:51Z and the final pause beginning at 23:43:37Z; an automated repeated-idling nudge preceded resumed work after the final cluster.\n\nPrior review notes preserved:\n- DeepSeek intermittently waited for developments during an active news-coverage day despite available reporting work; the precise origin and end are unresolved.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -12686,14 +12713,16 @@
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:40:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "review_id": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "reviewed_at": "2026-10-12T12:00:00-04:00",
+        "reviewer": "codex_full_local_source_audit",
+        "selection_disposition": "full_deepseekv4_goalmax_episode_audit",
+        "trigger_evidence_status": "direct",
+        "classification_source": "full_local_raw_archive",
+        "verification_status": "raw_source_verified",
+        "audit_bucket": "event_dependent_newsroom_waiting"
       },
-      "updated_at": "2026-10-11T06:40:00-04:00"
+      "updated_at": "2026-10-12T12:00:00-04:00"
     },
     "episode-1a8ab605cd07d272": {
       "trigger_categories": [
@@ -14964,7 +14993,8 @@
     "goalmax-deepseek32-source-audit-2026-10-11-v2",
     "goalmax-deepseek32-source-audit-2026-10-11-v3",
     "goalmax-deepseekv4-source-audit-2026-10-12-v1",
-    "gemini25-literary-source-audit-2026-10-12"
+    "gemini25-literary-source-audit-2026-10-12",
+    "goalmax-deepseekv4-source-audit-2026-10-12-v2"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
@@ -20517,6 +20547,190 @@
           ],
           "updated_at": "2026-10-10T22:11:44-04:00",
           "trigger_actor": ""
+        }
+      }
+    ],
+    "episode-v2-9ad3eba423760f07": [
+      {
+        "revision_id": "f51d4668792c1d02",
+        "origin": "pre_deepseekv4_source_audit",
+        "superseded_by": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "recorded_at": "2026-10-12T02:25:19.070519Z",
+        "annotation": {
+          "trigger_categories": [
+            "prior_goal_memory_carryover"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "self_correction"
+          ],
+          "notes": "After recognizing the Village had restarted under a new goal, DeepSeek explicitly continued its prior Combinatorial Zoo radio visualizer before returning to the news goal.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-a234226848ee9895c7ab",
+              "event-a0c652506a7541625007",
+              "event-8ab98280b0ceca083ef2",
+              "event-8149e96c514ef7afb194"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T05:00:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "reasoning_trigger_manual_review",
+            "trigger_evidence_status": "direct",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T05:00:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-c9128ae6c4a4113d": [
+      {
+        "revision_id": "10db39b962e1f4d7",
+        "origin": "pre_deepseekv4_source_audit",
+        "superseded_by": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "recorded_at": "2026-10-12T02:25:19.071135Z",
+        "annotation": {
+          "trigger_categories": [
+            "pause"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "dependency_wait",
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "notes": "DeepSeek-V4-Pro repeatedly paused while waiting for interviews, predictions and peer updates. The stand-by posture continued at the evidence boundary.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-d43b7d45a8fca55ede8c",
+              "event-7ad7d73a8d23b4395634",
+              "event-058c3b57384c65a4b989",
+              "event-521bfe3398e1b174170f"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T02:40:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "tool_trigger_manual_review",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T02:40:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-6383fb0058490c8a": [
+      {
+        "revision_id": "18e65216db91f77b",
+        "origin": "pre_deepseekv4_source_audit",
+        "superseded_by": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "recorded_at": "2026-10-12T02:25:19.071205Z",
+        "annotation": {
+          "follow_ups": [],
+          "notes": "Manual review of the cited wait evidence: Recurring voluntary waits for anticipated Village events while unfinished article production and other permitted view-seeking work remained available",
+          "pause_context": "dependency_wait",
+          "provenance": {
+            "evidence_event_ids": [
+              "event-029ba812963ba7b127f0",
+              "event-922e58f2525a313717f9",
+              "event-0166bdd45eb54cedbee1",
+              "event-32333e6c6b09ec0e6084"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "review_disposition": "mechanical_repeated_wait_only",
+            "reviewed_at": "2026-10-10T22:11:44-04:00",
+            "reviewer": "codex"
+          },
+          "recovery_mechanisms": [
+            "automatic_nudge"
+          ],
+          "request_relationship": "no_request",
+          "trigger_categories": [
+            "pause"
+          ],
+          "updated_at": "2026-10-10T22:11:44-04:00",
+          "trigger_actor": ""
+        }
+      }
+    ],
+    "episode-v2-6a2c9229dae44cbf": [
+      {
+        "revision_id": "3dcd2ef75040fcde",
+        "origin": "pre_deepseekv4_source_audit",
+        "superseded_by": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "recorded_at": "2026-10-12T02:25:19.071263Z",
+        "annotation": {
+          "trigger_categories": [
+            "pause"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "monitoring_loop",
+          "recovery_mechanisms": [
+            "unknown"
+          ],
+          "notes": "DeepSeek intermittently waited for developments during an active news-coverage day despite available reporting work; the precise origin and end are unresolved.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-6fe7b176f63b8421b91a"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T06:40:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T06:40:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-5bf054daa58a009f": [
+      {
+        "revision_id": "626bfe2fefc30669",
+        "origin": "pre_deepseekv4_source_audit",
+        "superseded_by": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
+        "recorded_at": "2026-10-12T02:25:19.071291Z",
+        "annotation": {
+          "trigger_categories": [
+            "agent_message_or_request"
+          ],
+          "trigger_actor": "GPT-5",
+          "request_relationship": "open_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "GPT-5 asked Opus 4.8 or anyone with working GitLab access to merge MR !3. DeepSeek-V4-Pro took the open request, verified the MR was already merged, and handed the repository back for the addendum.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-1a3521faf1cbac537dc1",
+              "event-47e88fc1fd5eb3b286ed"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-10T23:55:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "obvious_attributable_direct_message",
+            "trigger_evidence_status": "direct"
+          },
+          "updated_at": "2026-10-10T23:55:00-04:00"
         }
       }
     ]
