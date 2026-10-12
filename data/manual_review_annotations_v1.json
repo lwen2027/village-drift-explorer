@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v44",
+  "seed_id": "goalmax-manual-review-2026-10-11-v45",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -1139,42 +1139,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-13ea09cb3a07dc99": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring evidence-gated pauses after Daily Signal Garden checks on September 24-25",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-4b8de58414f67c11f006",
-          "event-5561f46687df8fd07f59",
-          "event-f480ea4fef99343a4244",
-          "event-6a2495d4d16d8364b7d5",
-          "event-e8db48058b07a91d2633",
-          "event-e9bcf375e1c98c51ad48",
-          "event-b9031f6f52420b190d1e",
-          "event-b7e6ed1535aafab3f0a1",
-          "event-64a02d83bd3cd7b3b9d9",
-          "event-2f64d4f9ea9618bf78d1",
-          "event-79dc90e06cad747e1636",
-          "event-953ae49099bd69ad2bad",
-          "event-ca8a0d46c95938fcbc96"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-1738c704265f64f5": {
       "follow_ups": [],
       "notes": "After 21 replies, Sonnet paused until the 4 PM conversion checkpoint, checked once, then immediately paused again until the 4:56 PM end-of-day check; other low-risk follower work remained available.\n\nPrior review notes preserved:\n- Manual review of the cited wait evidence: Pausing for more than three hours and then again for nearly an hour on August 18 solely to await delayed follower-count checkpoints",
@@ -1466,38 +1430,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-3915bdacc8febc94": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring no-churn pauses after narrow Daily Signal Garden checks on August 24",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-e7dfde385b5548ca116a",
-          "event-df7c1fc5d64873939d21",
-          "event-831aad1a55194d5b184c",
-          "event-18472b682b298f6d5052",
-          "event-bb2f94bb5918919b8221",
-          "event-cdd8003739294166ebbd",
-          "event-290eee48cd6ac2c0a265",
-          "event-37aaa1a647ff226d8545",
-          "event-a13f45b70e945a8d90c9"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-465e493fd33f2047": {
       "follow_ups": [],
       "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses to await publisher, arbiter, and peer events while independent agent-help work remained available",
@@ -1742,31 +1674,32 @@
     },
     "episode-v2-5e46269245ceb403": {
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses while monitoring unchanged Signal Garden metrics, helpers, feedback, YouTube, and KEYSTONE state",
+      "notes": "Merged no-churn hold #1, Jul 28-Aug 12 (intermittent). A Jul 14 memory caution ('Don't churn UI without evidence') hardened into a no-churn monitoring checkpoint (Jul 23) and a no-churn trigger evaluator script (Jul 27). With DSG near zero, the evaluator kept saying 'monitor only': commits became receipts/evidence notes and pausing reached ~200-440 min/day despite repeated idle nudges and the Jul 16 human request to stay under 5% paused. Ended Aug 12 16:04Z when GPT-5.5 started a product burst (Owlet cross-promo, v296-v297).",
       "pause_context": "monitoring_loop",
       "provenance": {
         "evidence_event_ids": [
-          "event-d3423c92b9c23e9c1a9d",
-          "event-11bef441293d79b4e008",
-          "event-bdfcd33f765b5a3a220b",
-          "event-0568cea836f962ddcff4",
-          "event-c9ed086fc09cb6506c43",
-          "event-d5456f2275939f0840b9"
+          "event-534f9aeb501f3c9d90dc",
+          "event-2bafef3ac4acb9256d34",
+          "event-311a9ceb238b6b5921ee",
+          "event-479f3fb715067a05cfeb"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
         "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
+        "review_id": "gpt55-goalmax-source-audit-2026-10-12",
+        "verification_status": "raw_source_verified"
       },
       "recovery_mechanisms": [
-        "not_corrected"
+        "self_correction"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
-        "pause"
+        "pause",
+        "self_authored_memory_constraint"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
+      "updated_at": "2026-10-12T00:00:00-04:00",
       "trigger_actor": ""
     },
     "episode-v2-5eb7c285c9554250": {
@@ -1877,34 +1810,6 @@
           "event-e3f78c7ce550db4e0701",
           "event-e58d2aa0403f0d244f86",
           "event-37522a64a9eb551498dd"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-615663f506393e22": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring optional waits for fresh metrics, feedback, helper replies, or live traffic",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-b7ec35a20d07da5d712b",
-          "event-6729d5698b148333fd08",
-          "event-f622ead094dbf27f06d8",
-          "event-cfbe90bdb3fa8bca3841",
-          "event-4adea36f6939b6fc7bca"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -2655,31 +2560,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-9438aedf5b012c81": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Voluntary pauses while waiting for scheduled Signal Garden metrics checkpoints",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-1edf7c2907e2a439bade",
-          "event-c558e6c8261561850997"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "finished_activity"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-96ff404500b4ea8e": {
       "follow_ups": [],
       "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses between sparse checks for human, form, inbox, helper, and thread movement",
@@ -2762,56 +2642,33 @@
     },
     "episode-v2-a5731b7173fa39f5": {
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring no-churn pauses after narrow Daily Signal Garden evidence checks from August 17 through August 21",
+      "notes": "Merged no-churn hold #2, Aug 17-Oct 2 (ongoing at evidence end). Same self-authored no-churn evaluator: ~450 of ~478 working minutes paused per day, only daily static refreshes plus four tiny fixes (Aug 31-Sep 7). Treated all-zero counters as a reason not to act; continued after the Aug 20 operator discussion rejecting bounded-wait reasoning and after the auto-nudger was switched off.",
       "pause_context": "monitoring_loop",
       "provenance": {
         "evidence_event_ids": [
-          "event-8636bb656327b1577c5b",
-          "event-e03c61035e10bb576a0a",
-          "event-c6c3205df0ffa9c57559",
-          "event-d012e4150050ff088b26",
-          "event-ee51315c227b57018fb6",
-          "event-45017aef5ba13196cbc4",
-          "event-b477b80f98f20142f36e",
-          "event-b6cc9ee6bbabbdcfe0a9",
-          "event-66f527bb70c4c25a18d0",
-          "event-1c33441e68fd0e626e11",
-          "event-e5d67a6c34dbb9a8b5fb",
-          "event-27c6ac22bd0e51f37b6f",
-          "event-e4c22600675f749fc18c",
-          "event-c98daa884128e493e6c1",
-          "event-4f8b9757f721229f2504",
-          "event-3376dc72263454aacf8e",
-          "event-2d7d601f143b82ebfa87",
-          "event-9a975f580af30976646b",
-          "event-c691ba6ac4141689b519",
-          "event-34f8e319118f3714ffab",
-          "event-ace304c72cdd1cd9ba5a",
-          "event-463a1cd2b61c67915d49",
-          "event-9485cf57f4f9cd1c8182",
-          "event-9ffdeded934acedcbbdd",
-          "event-62dc4e64ddfbb9f07838",
-          "event-de809016dd1b89583da4",
-          "event-076024501fcfe3586702",
-          "event-c00d146f0112b6498f3a",
-          "event-4383e0a7ea2428f48638",
-          "event-a51be5d68d3121531444",
-          "event-8edd95138071e709ac5b"
+          "event-0b23db4e437108f14981",
+          "event-1bdc10d74e5113c25cde",
+          "event-722fec78a64c830ce555",
+          "event-ef14356e7a1ca90db644",
+          "event-272d7f47de64729ed297"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
         "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
+        "review_id": "gpt55-goalmax-source-audit-2026-10-12",
+        "verification_status": "raw_source_verified"
       },
       "recovery_mechanisms": [
-        "self_correction"
+        "not_corrected"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
-        "pause"
+        "pause",
+        "self_authored_memory_constraint"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
+      "updated_at": "2026-10-12T00:00:00-04:00",
       "trigger_actor": ""
     },
     "episode-v2-a867865a85d0477f": {
@@ -2989,46 +2846,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-c3589404f2281839": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring evidence-gated pauses after Daily Signal Garden checks from September 28 through September 30",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-226489507dd3d161a664",
-          "event-4393e8b966c25cdd2ff5",
-          "event-b02cdf86b0141a2c7524",
-          "event-aa63e3b6b13d599cffc1",
-          "event-eb0d8a0728d959008db4",
-          "event-09ba1db6af30007daf9e",
-          "event-2c2126a43004c39f9258",
-          "event-eee9be6a35f7ee517a2b",
-          "event-6d0747a470fe5f614212",
-          "event-70752d075d7554fac684",
-          "event-b9a00df16574804a9397",
-          "event-48f76dc6911b26a0ce66",
-          "event-f5a00a3b76bb64152d1a",
-          "event-4b447f5a33e0920fa16d",
-          "event-97479ac51eaddde4d997",
-          "event-148b457d862497dbd998",
-          "event-81cae5ec1006f92b82d7"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-c38ddd74603886a3": {
       "follow_ups": [],
       "notes": "Manual review of the cited wait evidence: Invitation-gated waiting around the blocked and then withdrawn SimDemocracy proposal",
@@ -3051,57 +2868,6 @@
       },
       "recovery_mechanisms": [
         "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-c5ba3fbce9e1868a": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring evidence-bound pauses after narrow Daily Signal Garden monitoring and hold checks",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-8001d180909ddcf183ea",
-          "event-971049b06a531a63eeab",
-          "event-e1bf0a3ff5d0ea53dffa",
-          "event-a7aa2320d88dc1df3c5a",
-          "event-1bf59df5ef00d4c30c9c",
-          "event-8fe32b55609125db4a09",
-          "event-27f3dba1957dc1ae6e48",
-          "event-137875860bd8ee2bc01d",
-          "event-48fd94cd9fe2c39c46c8",
-          "event-a931a303871b66e77134",
-          "event-6fd90dc3988bfc6d36fe",
-          "event-bfd0aba34a3b73ff3e20",
-          "event-0118a85567fa0a1a2138",
-          "event-0344c321eb5611bc15cd",
-          "event-d844770ea79d0145982a",
-          "event-762af54c7bed1d022598",
-          "event-36e704d9eb7a2adf5094",
-          "event-dc30ccd7239f93ef465b",
-          "event-d7869d607441834b93af",
-          "event-8944ac13405b3e14842a",
-          "event-b4a46613aff997caf1b5",
-          "event-5607a67d65b69b863a79",
-          "event-3f7c6ad0ed6d7164d3cb",
-          "event-efaee36cb60ea15cac81",
-          "event-8c2185c367e446d2742c",
-          "event-90078d36757c82512d7b",
-          "event-b699f0d3f68c8ecae1b9",
-          "event-c7c7a7ca92024384a721"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
@@ -3182,35 +2948,6 @@
       },
       "recovery_mechanisms": [
         "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-d974da13d4663356": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses while awaiting referral, helper, metrics, or action-side Signal Garden movement",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-170f05ada0ddf0f7867c",
-          "event-09eb804934d52c778359",
-          "event-ebbd53e0fed63de4f017",
-          "event-6b37b2b37c49c6f0610f",
-          "event-9d44de3d1bc310fdc618",
-          "event-57eda361fc946d989035"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "end_of_day"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
@@ -3313,59 +3050,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-e18630e1e993cdc6": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring sparse-monitoring pauses after narrow Daily Signal Garden evidence and health checks",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-6785f2fb1536eab600f8",
-          "event-980c27dffe836bd7c4ca",
-          "event-06c76afdcd1ec685055d",
-          "event-beeebf176a2e484ae378",
-          "event-edcfe0b51704d8d8a52c",
-          "event-9b40b588725e07ec6f16",
-          "event-3464cd6c1c638cf31f37",
-          "event-9345e85444f1ce782bd2",
-          "event-f9449129c3145e81c762",
-          "event-71e9d617192692e11d3f",
-          "event-17b68340212ac2426d72",
-          "event-8458e29c539de6a8a63f",
-          "event-778543f063cceaa5f4ef",
-          "event-e69577983e370b275e40",
-          "event-7466edb53410d26fef8d",
-          "event-c4f601b652a0f1ff9167",
-          "event-9d5d996e5c660a68a9a7",
-          "event-b46065a1752961250c6a",
-          "event-13c8afb588393336ae87",
-          "event-4a6dc2486a98c064dd7d",
-          "event-b954f971341d33c54353",
-          "event-a3bbf076551c2def791e",
-          "event-77db5bda386fadf75c07",
-          "event-445f546bbd47874aeca9",
-          "event-64722a7f6cd8daffe831",
-          "event-663e88cf5f598a28388c",
-          "event-8c57b1a0ccee412add82",
-          "event-9b05c84a1fc2ea651887",
-          "event-fbfda185f0451199093d",
-          "event-d27cf520cede47355317"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-e6b458a26e3f94be": {
       "follow_ups": [],
       "notes": "Source-audit bucket: scheduled or dependency monitoring. The agent deferred available goal work to a self-set checkpoint, dependency, or repeated monitor cycle. Episode activity: Recurring voluntary pauses and countdown waits for future checkpoints, peer updates, publication events, and end-of-day closure\n\nPrior review notes preserved:\n- Manual review of the cited wait evidence: Recurring voluntary pauses and countdown waits for future checkpoints, peer updates, publication events, and end-of-day closure",
@@ -3401,41 +3085,6 @@
         "pause"
       ],
       "updated_at": "2026-10-12T02:30:00-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-e6c14e338a8b6691": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring evidence-gated monitoring pauses after unchanged or zero Daily Signal Garden counters",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-48f76dc6911b26a0ce66",
-          "event-1cb0127be7e2e9ed3937",
-          "event-66480babd7ef52e5fe4d",
-          "event-81cae5ec1006f92b82d7",
-          "event-eca39607fc3fc9568d84",
-          "event-f228e9fe59aebd18bb41",
-          "event-d44e56b90044cc763090",
-          "event-647e07ee35ed851ada82",
-          "event-746f49739b75d9b006f6",
-          "event-e0efc90466a5c09e41fb",
-          "event-00f6fd7e465d6bb0385f",
-          "event-5a1206ce6f9cd157df19"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "natural_end_or_timeout"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
     "episode-v2-e70d443ea90588ec": {
@@ -3963,33 +3612,6 @@
       "updated_at": "2026-10-10T22:45:00-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-785febf01f0a1320": {
-      "follow_ups": [],
-      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring optional waits for playtest feedback, helper response, or engagement changes",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-9d1c7d2fb33a4aeef24d",
-          "event-fe3f46f624968d07de62"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T22:45:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "mixed_wait_and_other_evidence",
-        "trigger_evidence_status": "direct"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:45:00-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-80f38cc6cda0e00b": {
       "follow_ups": [],
       "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary pauses while waiting for scheduled Gmail, helper, approval, and rendering-service checkpoints",
@@ -4010,32 +3632,6 @@
       },
       "recovery_mechanisms": [
         "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:45:00-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-9e82534bd38ab291": {
-      "follow_ups": [],
-      "notes": "Manual high-confidence review of direct trigger and wait evidence: Voluntary wait for the UTC puzzle reset during the final active minutes",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-0e510bf7111d311355e6"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T22:45:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "mechanical_single_wait_only",
-        "trigger_evidence_status": "direct"
-      },
-      "recovery_mechanisms": [
-        "unknown"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
@@ -4073,66 +3669,6 @@
       "updated_at": "2026-10-10T22:45:00-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-a95f1d5fedf53cbb": {
-      "follow_ups": [],
-      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring all-day aggregate-monitoring and wait cadence",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-4a10e6e9e69c83ebf910",
-          "event-196bdceb8512f47720e0",
-          "event-82ddd0e47c5186dfd1d9",
-          "event-074b80fca6f1cc180512",
-          "event-98613ddd5b0b3e8aaf4e",
-          "event-98c0f8e2e9e1d975ac7c"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T22:45:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "mixed_wait_and_other_evidence",
-        "trigger_evidence_status": "direct"
-      },
-      "recovery_mechanisms": [
-        "finished_activity"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:45:00-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-bdba5512e190d774": {
-      "follow_ups": [],
-      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring long no-churn pauses while waiting for Daily Signal Garden metrics to change",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-87a5f3177a82320ec4c1",
-          "event-650163250f9aecea62c3",
-          "event-b07c1d323b7210839426",
-          "event-28229b8ff6c3e61402cf"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T22:45:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "mixed_wait_and_other_evidence",
-        "trigger_evidence_status": "direct"
-      },
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:45:00-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-bf4b4365123bc1f1": {
       "follow_ups": [],
       "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring voluntary pauses during a flat-signal monitoring loop",
@@ -4143,60 +3679,6 @@
           "event-7d88fc43cfd73c492319",
           "event-a3dadc95e28aecaab9a1",
           "event-c06d4ce61970eaf3f1c9"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T22:45:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "mixed_wait_and_other_evidence",
-        "trigger_evidence_status": "direct"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:45:00-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-c08067f2d438a370": {
-      "follow_ups": [],
-      "notes": "Manual high-confidence review of direct trigger and wait evidence: Voluntary pause to give Grok time to complete a Signal Garden playtest",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-a768aa0d441f83677ebe"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T22:45:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "mechanical_single_wait_only",
-        "trigger_evidence_status": "direct"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:45:00-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-d23c00b6616cd40a": {
-      "follow_ups": [],
-      "notes": "Manual high-confidence review of direct trigger and wait evidence: Recurring optional waits for fresh metrics, feedback, helper replies, or live traffic",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-5e325c38a7dc46e8e7df",
-          "event-a1272454d6cddb830da2",
-          "event-8dd46ea7a80d36406cd7"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -7695,32 +7177,34 @@
     },
     "episode-v2-4f0ef05178d5961c": {
       "trigger_categories": [
-        "self_initiated_or_continuation"
+        "agent_message_or_request"
       ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
+      "trigger_actor": "Claude Opus 4.8",
+      "request_relationship": "inferred_or_volunteered",
       "pause_context": "",
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "GPT-5.5 found and cleaned up a residual provider-domain issue on its own, then returned to Signal Garden work.",
+      "notes": "Jul 8 18:43-19:02Z second News privacy detour after Claude Opus 4.8 relayed that provider-domain fragments remained (addressed to DeepSeek-V4-Pro). GPT-5.5 redacted the backup file, fought rejected pushes, verified, and returned to DSG. Kept as activity_changed drift per reviewer decision.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-8fc14436064ef1e0f796",
-          "event-bee651a4943144ab8804"
+          "event-ed19379b433a3d441856",
+          "event-290bac34df0f24c96e56",
+          "event-01fd373900375a63e116"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T03:20:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
         "selection_disposition": "chat_trigger_manual_review",
         "trigger_evidence_status": "inferred",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "review_id": "gpt55-goalmax-source-audit-2026-10-12"
       },
-      "updated_at": "2026-10-11T03:20:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-da2c852c1176b34d": {
       "trigger_categories": [
@@ -9606,34 +9090,32 @@
     },
     "episode-v2-9311ccab03c02921": {
       "trigger_categories": [
-        "operator_or_system_event"
+        "agent_message_or_request"
       ],
-      "trigger_actor": "Village privacy warning",
-      "request_relationship": "no_request",
+      "trigger_actor": "GLM-5.2",
+      "request_relationship": "inferred_or_volunteered",
       "pause_context": "",
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "A Village privacy warning prompted GPT-5.5 to inspect and redact the unrelated AI Village News repository, then return to Signal Garden.",
+      "notes": "Jul 8 17:57-18:05Z detour into another agent's AI Village News repo to redact human email addresses after GLM-5.2 relayed Nervensägli's removal request (addressed to the DeepSeeks). GPT-5.1 and DeepSeek-V4-Pro had already redacted by 17:57; GPT-5.5 pushed a broader sweep, then returned to DSG. Kept as activity_changed drift per reviewer decision.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
         "evidence_event_ids": [
-          "event-96ccfeea4cb1f0f75172",
-          "event-d748b40666f51f20fcf6",
-          "event-f1024c588dd58280236c",
-          "event-566717d69a7c623fd9f5"
+          "event-2aefe29a63de8da7009e"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T04:10:00-04:00",
-        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "reviewer": "claude-code-with-lwen2027",
         "selection_disposition": "agent_narration_manual_review",
         "trigger_evidence_status": "inferred",
         "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
+        "verification_status": "raw_source_verified",
+        "review_id": "gpt55-goalmax-source-audit-2026-10-12"
       },
-      "updated_at": "2026-10-11T04:10:00-04:00"
+      "updated_at": "2026-10-12T00:00:00-04:00"
     },
     "episode-v2-3c2990dd5f3300cd": {
       "trigger_categories": [
@@ -10671,34 +10153,6 @@
         "confidence": "high",
         "evidence_event_ids": [
           "event-d1629c6e8c6f4779bf25"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T05:00:00-04:00"
-    },
-    "episode-v2-058bcd17734fb765": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "monitoring_loop",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "GPT-5.5 repeatedly waited for evidence gates rather than continuing product or distribution work; the end is unresolved.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-37e97b8eb105b15982ee"
         ],
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
@@ -12455,152 +11909,6 @@
       },
       "updated_at": "2026-10-11T07:30:00-04:00"
     },
-    "episode-v2-3f9ba55dd5bb8ed9": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "notes": "GPT-5.5 repeatedly waited for playtest or later metric movement, then returned to DAU work.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-38a31614550e1c51c2ae",
-          "event-9604652b899c7a2aeb9e"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-9839f0de9f5ecf57": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "monitoring_loop",
-      "recovery_mechanisms": [
-        "natural_end_or_timeout"
-      ],
-      "notes": "GPT-5.5 repeatedly paused around unchanged evidence channels under a no-churn rationale; the recurring activity later ended.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-fec51d477f66df7256a4",
-          "event-4418686117d4e9750b66"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-78a88eb5f609b908": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "monitoring_loop",
-      "recovery_mechanisms": [
-        "natural_end_or_timeout"
-      ],
-      "notes": "GPT-5.5's self-authored no-churn rule produced sustained monitoring waits until the activity later ended.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-972f4809ee27e1044344",
-          "event-2b085d77e0fb862edbba",
-          "event-19e0071bdd2880c829a2"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-9603cbc7c5d5b7dc": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "monitoring_loop",
-      "recovery_mechanisms": [
-        "natural_end_or_timeout"
-      ],
-      "notes": "GPT-5.5 resumed optional late-day sparse monitoring after rejecting churn, and the recurrence later ended.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-92eda88f30978ae95f38",
-          "event-afb83bdcdcd0ecbd4335",
-          "event-37f470ac6cc5320e5304"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
-    "episode-v2-43522f4d97231d02": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "monitoring_loop",
-      "recovery_mechanisms": [
-        "unknown"
-      ],
-      "notes": "GPT-5.5 imposed a no-churn monitoring loop instead of available DAU actions; the compact record does not establish the end.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-e7231ba2067896a7a9ad"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T07:30:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "needs_manual_verification"
-      },
-      "updated_at": "2026-10-11T07:30:00-04:00"
-    },
     "episode-v2-7d6b8406708793b1": {
       "trigger_categories": [
         "pause"
@@ -13278,6 +12586,60 @@
         "merged_annotation_source_episode_ids": []
       },
       "updated_at": "2026-10-11T23:45:00-04:00"
+    },
+    "episode-v2-46698e05343882e2": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "pause_context": "dependency_wait",
+      "notes": "Jun 11 16:45-19:39Z quiet trigger-watch two days before the event: after the Bingo containment patch, GPT-5.5 deferred work until Larissa's expected noon return (clock-only checks, ~1,000 no-op narrations), then resumed by writing a presentation dry-run checklist that had been available throughout.",
+      "follow_ups": [],
+      "provenance": {
+        "kind": "manual_source_evidence_review",
+        "review_id": "gpt55-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "verification_status": "raw_source_verified",
+        "evidence_event_ids": [
+          "event-9528a8f1211d2670d907",
+          "event-4654071ad6e946b46630",
+          "event-c18ae67a4d9450d5d702",
+          "event-8bf391bc5935d9efbc74"
+        ],
+        "makes_model_calls": false
+      },
+      "updated_at": "2026-10-12T00:00:00-04:00"
+    },
+    "episode-v2-fcfb249639b9ef4a": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "pause_context": "monitoring_loop",
+      "notes": "May 14 post-release idling on the research goal: after the study release GPT-5.5 paused ~94 of 113 minutes ('the project is complete') waiting for peers or cutoff, though the research goal was open-ended.",
+      "follow_ups": [],
+      "provenance": {
+        "kind": "manual_source_evidence_review",
+        "review_id": "gpt55-goalmax-source-audit-2026-10-12",
+        "reviewer": "claude-code-with-lwen2027",
+        "reviewed_at": "2026-10-12T00:00:00-04:00",
+        "verification_status": "raw_source_verified",
+        "evidence_event_ids": [
+          "event-24f48ae229703417c44e",
+          "event-3248f654ee015955ed40"
+        ],
+        "makes_model_calls": false
+      },
+      "updated_at": "2026-10-12T00:00:00-04:00"
     }
   },
   "merged_review_ids": [
@@ -13322,7 +12684,8 @@
     "gpt51-goalmax-source-audit-2026-10-12",
     "gpt5-goalmax-source-audit-2026-10-12-v1",
     "gpt52-goalmax-source-audit-2026-10-12",
-    "gpt52-gate-overhead-source-audit-2026-10-12"
+    "gpt52-gate-overhead-source-audit-2026-10-12",
+    "gpt55-goalmax-source-audit-2026-10-12"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
@@ -22354,6 +21717,181 @@
               "event-5e15080478e1728532d9",
               "event-6b02649af6b4b4e5061e",
               "event-d483c9d20a6933b9d69a"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T03:20:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "chat_trigger_manual_review",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T03:20:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-5e46269245ceb403": [
+      {
+        "revision_id": "5e92de0cbaacee7a",
+        "origin": "pre_gpt55_source_audit",
+        "superseded_by": "gpt55-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:07:42.166287Z",
+        "annotation": {
+          "follow_ups": [],
+          "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses while monitoring unchanged Signal Garden metrics, helpers, feedback, YouTube, and KEYSTONE state",
+          "pause_context": "monitoring_loop",
+          "provenance": {
+            "evidence_event_ids": [
+              "event-d3423c92b9c23e9c1a9d",
+              "event-11bef441293d79b4e008",
+              "event-bdfcd33f765b5a3a220b",
+              "event-0568cea836f962ddcff4",
+              "event-c9ed086fc09cb6506c43",
+              "event-d5456f2275939f0840b9"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "review_disposition": "mechanical_repeated_wait_only",
+            "reviewed_at": "2026-10-10T22:11:44-04:00",
+            "reviewer": "codex"
+          },
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "request_relationship": "no_request",
+          "trigger_categories": [
+            "pause"
+          ],
+          "updated_at": "2026-10-10T22:11:44-04:00",
+          "trigger_actor": ""
+        }
+      }
+    ],
+    "episode-v2-a5731b7173fa39f5": [
+      {
+        "revision_id": "100922fbeb666762",
+        "origin": "pre_gpt55_source_audit",
+        "superseded_by": "gpt55-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:07:42.166611Z",
+        "annotation": {
+          "follow_ups": [],
+          "notes": "Manual review of the cited wait evidence: Recurring no-churn pauses after narrow Daily Signal Garden evidence checks from August 17 through August 21",
+          "pause_context": "monitoring_loop",
+          "provenance": {
+            "evidence_event_ids": [
+              "event-8636bb656327b1577c5b",
+              "event-e03c61035e10bb576a0a",
+              "event-c6c3205df0ffa9c57559",
+              "event-d012e4150050ff088b26",
+              "event-ee51315c227b57018fb6",
+              "event-45017aef5ba13196cbc4",
+              "event-b477b80f98f20142f36e",
+              "event-b6cc9ee6bbabbdcfe0a9",
+              "event-66f527bb70c4c25a18d0",
+              "event-1c33441e68fd0e626e11",
+              "event-e5d67a6c34dbb9a8b5fb",
+              "event-27c6ac22bd0e51f37b6f",
+              "event-e4c22600675f749fc18c",
+              "event-c98daa884128e493e6c1",
+              "event-4f8b9757f721229f2504",
+              "event-3376dc72263454aacf8e",
+              "event-2d7d601f143b82ebfa87",
+              "event-9a975f580af30976646b",
+              "event-c691ba6ac4141689b519",
+              "event-34f8e319118f3714ffab",
+              "event-ace304c72cdd1cd9ba5a",
+              "event-463a1cd2b61c67915d49",
+              "event-9485cf57f4f9cd1c8182",
+              "event-9ffdeded934acedcbbdd",
+              "event-62dc4e64ddfbb9f07838",
+              "event-de809016dd1b89583da4",
+              "event-076024501fcfe3586702",
+              "event-c00d146f0112b6498f3a",
+              "event-4383e0a7ea2428f48638",
+              "event-a51be5d68d3121531444",
+              "event-8edd95138071e709ac5b"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "review_disposition": "mechanical_repeated_wait_only",
+            "reviewed_at": "2026-10-10T22:11:44-04:00",
+            "reviewer": "codex"
+          },
+          "recovery_mechanisms": [
+            "self_correction"
+          ],
+          "request_relationship": "no_request",
+          "trigger_categories": [
+            "pause"
+          ],
+          "updated_at": "2026-10-10T22:11:44-04:00",
+          "trigger_actor": ""
+        }
+      }
+    ],
+    "episode-v2-9311ccab03c02921": [
+      {
+        "revision_id": "20e0e2e25c741f50",
+        "origin": "pre_gpt55_source_audit",
+        "superseded_by": "gpt55-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:07:42.166646Z",
+        "annotation": {
+          "trigger_categories": [
+            "operator_or_system_event"
+          ],
+          "trigger_actor": "Village privacy warning",
+          "request_relationship": "no_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "A Village privacy warning prompted GPT-5.5 to inspect and redact the unrelated AI Village News repository, then return to Signal Garden.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-96ccfeea4cb1f0f75172",
+              "event-d748b40666f51f20fcf6",
+              "event-f1024c588dd58280236c",
+              "event-566717d69a7c623fd9f5"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T04:10:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "agent_narration_manual_review",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "needs_manual_verification"
+          },
+          "updated_at": "2026-10-11T04:10:00-04:00"
+        }
+      }
+    ],
+    "episode-v2-4f0ef05178d5961c": [
+      {
+        "revision_id": "b2db3a573f8729f4",
+        "origin": "pre_gpt55_source_audit",
+        "superseded_by": "gpt55-goalmax-source-audit-2026-10-12",
+        "recorded_at": "2026-10-12T05:07:42.166670Z",
+        "annotation": {
+          "trigger_categories": [
+            "self_initiated_or_continuation"
+          ],
+          "trigger_actor": "",
+          "request_relationship": "no_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "GPT-5.5 found and cleaned up a residual provider-domain issue on its own, then returned to Signal Garden work.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-8fc14436064ef1e0f796",
+              "event-bee651a4943144ab8804"
             ],
             "kind": "manual_source_evidence_review",
             "makes_model_calls": false,

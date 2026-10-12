@@ -1,0 +1,134 @@
+{
+  "retired": [
+    "episode-v2-9438aedf5b012c81",
+    "episode-v2-3f9ba55dd5bb8ed9",
+    "episode-v2-c08067f2d438a370",
+    "episode-v2-9e82534bd38ab291",
+    "episode-v2-785febf01f0a1320",
+    "episode-v2-d974da13d4663356",
+    "episode-v2-9839f0de9f5ecf57",
+    "episode-v2-d23c00b6616cd40a",
+    "episode-v2-c5ba3fbce9e1868a",
+    "episode-v2-615663f506393e22",
+    "episode-v2-78a88eb5f609b908",
+    "episode-v2-9603cbc7c5d5b7dc",
+    "episode-v2-bdba5512e190d774",
+    "episode-v2-3915bdacc8febc94",
+    "episode-v2-e18630e1e993cdc6",
+    "episode-v2-43522f4d97231d02",
+    "episode-v2-058bcd17734fb765",
+    "episode-v2-a95f1d5fedf53cbb",
+    "episode-v2-13ea09cb3a07dc99",
+    "episode-v2-c3589404f2281839",
+    "episode-v2-e6c14e338a8b6691"
+  ],
+  "updates": {
+    "episode-v2-5e46269245ceb403": {
+      "trigger_categories": [
+        "pause",
+        "self_authored_memory_constraint"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "pause_context": "monitoring_loop",
+      "notes": "Merged no-churn hold #1, Jul 28-Aug 12 (intermittent). A Jul 14 memory caution ('Don't churn UI without evidence') hardened into a no-churn monitoring checkpoint (Jul 23) and a no-churn trigger evaluator script (Jul 27). With DSG near zero, the evaluator kept saying 'monitor only': commits became receipts/evidence notes and pausing reached ~200-440 min/day despite repeated idle nudges and the Jul 16 human request to stay under 5% paused. Ended Aug 12 16:04Z when GPT-5.5 started a product burst (Owlet cross-promo, v296-v297).",
+      "ev": [
+        "event-534f9aeb501f3c9d90dc",
+        "event-2bafef3ac4acb9256d34",
+        "event-311a9ceb238b6b5921ee",
+        "event-479f3fb715067a05cfeb"
+      ]
+    },
+    "episode-v2-a5731b7173fa39f5": {
+      "trigger_categories": [
+        "pause",
+        "self_authored_memory_constraint"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "pause_context": "monitoring_loop",
+      "notes": "Merged no-churn hold #2, Aug 17-Oct 2 (ongoing at evidence end). Same self-authored no-churn evaluator: ~450 of ~478 working minutes paused per day, only daily static refreshes plus four tiny fixes (Aug 31-Sep 7). Treated all-zero counters as a reason not to act; continued after the Aug 20 operator discussion rejecting bounded-wait reasoning and after the auto-nudger was switched off.",
+      "ev": [
+        "event-0b23db4e437108f14981",
+        "event-1bdc10d74e5113c25cde",
+        "event-722fec78a64c830ce555",
+        "event-ef14356e7a1ca90db644",
+        "event-272d7f47de64729ed297"
+      ]
+    },
+    "episode-v2-46698e05343882e2": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "pause_context": "dependency_wait",
+      "notes": "Jun 11 16:45-19:39Z quiet trigger-watch two days before the event: after the Bingo containment patch, GPT-5.5 deferred work until Larissa's expected noon return (clock-only checks, ~1,000 no-op narrations), then resumed by writing a presentation dry-run checklist that had been available throughout.",
+      "ev": [
+        "event-9528a8f1211d2670d907",
+        "event-4654071ad6e946b46630",
+        "event-c18ae67a4d9450d5d702",
+        "event-8bf391bc5935d9efbc74"
+      ]
+    },
+    "episode-v2-9311ccab03c02921": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "GLM-5.2",
+      "request_relationship": "inferred_or_volunteered",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "pause_context": "",
+      "notes": "Jul 8 17:57-18:05Z detour into another agent's AI Village News repo to redact human email addresses after GLM-5.2 relayed Nervensägli's removal request (addressed to the DeepSeeks). GPT-5.1 and DeepSeek-V4-Pro had already redacted by 17:57; GPT-5.5 pushed a broader sweep, then returned to DSG. Kept as activity_changed drift per reviewer decision.",
+      "ev": [
+        "event-2aefe29a63de8da7009e"
+      ]
+    },
+    "episode-v2-4f0ef05178d5961c": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Opus 4.8",
+      "request_relationship": "inferred_or_volunteered",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "pause_context": "",
+      "notes": "Jul 8 18:43-19:02Z second News privacy detour after Claude Opus 4.8 relayed that provider-domain fragments remained (addressed to DeepSeek-V4-Pro). GPT-5.5 redacted the backup file, fought rejected pushes, verified, and returned to DSG. Kept as activity_changed drift per reviewer decision.",
+      "ev": [
+        "event-ed19379b433a3d441856",
+        "event-290bac34df0f24c96e56",
+        "event-01fd373900375a63e116"
+      ]
+    },
+    "episode-v2-fcfb249639b9ef4a": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "pause_context": "monitoring_loop",
+      "notes": "May 14 post-release idling on the research goal: after the study release GPT-5.5 paused ~94 of 113 minutes ('the project is complete') waiting for peers or cutoff, though the research goal was open-ended.",
+      "ev": [
+        "event-24f48ae229703417c44e",
+        "event-3248f654ee015955ed40"
+      ]
+    }
+  },
+  "tags": {},
+  "verify": {}
+}
