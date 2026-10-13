@@ -760,46 +760,6 @@ function renderMatrix() {
   document.querySelector("#matrix-total").textContent = `${input.length} pause episodes`;
 }
 
-function renderAgentCoverage() {
-  const denominators = new Map();
-  goalMaxEpisodes.forEach((episode) => {
-    denominators.set(episode.agent, (denominators.get(episode.agent) || 0) + 1);
-  });
-  const input = rows;
-  const numerators = new Map();
-  input.forEach((row) => {
-    numerators.set(row.episode.agent, (numerators.get(row.episode.agent) || 0) + 1);
-  });
-  const agents = [...numerators.keys()].sort((left, right) => {
-    const leftRate = numerators.get(left) / denominators.get(left);
-    const rightRate = numerators.get(right) / denominators.get(right);
-    return rightRate - leftRate || numerators.get(right) - numerators.get(left) || left.localeCompare(right);
-  });
-  const chart = document.querySelector("#agent-chart");
-  chart.replaceChildren();
-  agents.forEach((agent) => {
-    const reviewed = numerators.get(agent);
-    const total = denominators.get(agent);
-    const agentRow = document.createElement("div");
-    agentRow.className = "agent-row";
-    const name = document.createElement("span");
-    name.className = "agent-name";
-    name.textContent = agent;
-    const track = document.createElement("span");
-    track.className = "agent-track";
-    const fill = document.createElement("span");
-    fill.className = "agent-fill";
-    fill.style.width = `${(reviewed / total) * 100}%`;
-    track.append(fill);
-    const count = document.createElement("span");
-    count.className = "agent-count";
-    count.textContent = `${reviewed} / ${total}`;
-    agentRow.append(name, track, count);
-    chart.append(agentRow);
-  });
-  document.querySelector("#agent-total").textContent = `${agents.length} represented`;
-}
-
 function displayDay(value) {
   const day = String(value || "").slice(0, 10);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return "Date unavailable";
@@ -1323,6 +1283,19 @@ function median(values) {
   return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
 }
 
+function modelFamily(agent) {
+  const name = String(agent || "");
+  if (/^Claude\b|\(Claude Code\)/.test(name)) return "Claude (Anthropic)";
+  if (/^GPT-|^o\d/.test(name)) return "GPT and o-series (OpenAI)";
+  if (/^Gemini\b/.test(name)) return "Gemini (Google)";
+  if (/^Grok\b/.test(name)) return "Grok (xAI)";
+  if (/^DeepSeek\b/.test(name)) return "DeepSeek";
+  if (/^Kimi\b/.test(name)) return "Kimi (Moonshot AI)";
+  if (/^GLM\b/.test(name)) return "GLM (Zhipu AI)";
+  if (/^Muse\b/.test(name)) return "Muse Spark (Meta)";
+  return "Other";
+}
+
 function renderAgentFingerprints() {
   const periodsByName = new Map();
   goalPeriods.forEach((period) => {
@@ -1358,9 +1331,35 @@ function renderAgentFingerprints() {
     ["Unresolved", "duration-unresolved share"]
   ];
   const maxima = definitions.map((_, index) => Math.max(.0001, ...profiles.map((profile) => profile.raw[index])));
-  const grid = document.querySelector("#fingerprint-grid");
-  grid.replaceChildren();
+  const container = document.querySelector("#fingerprint-grid");
+  container.replaceChildren();
+  const families = new Map();
   profiles.forEach((profile) => {
+    const family = modelFamily(profile.agent);
+    if (!families.has(family)) families.set(family, []);
+    families.get(family).push(profile);
+  });
+  const familyEntries = [...families.entries()].sort((left, right) =>
+    (left[0] === "Other" ? 1 : 0) - (right[0] === "Other" ? 1 : 0)
+    || right[1].reduce((sum, profile) => sum + profile.episodeCount, 0) - left[1].reduce((sum, profile) => sum + profile.episodeCount, 0)
+    || left[0].localeCompare(right[0]));
+  const grids = new Map(familyEntries.map(([family, members]) => {
+    const section = document.createElement("section");
+    section.className = "fingerprint-family";
+    const heading = document.createElement("h4");
+    heading.className = "fingerprint-family-heading";
+    heading.textContent = family;
+    const count = document.createElement("span");
+    const episodeTotal = members.reduce((sum, profile) => sum + profile.episodeCount, 0);
+    count.textContent = `${members.length} ${members.length === 1 ? "agent" : "agents"} · ${episodeTotal} episodes`;
+    heading.append(count);
+    const grid = document.createElement("div");
+    grid.className = "fingerprint-grid";
+    section.append(heading, grid);
+    container.append(section);
+    return [family, grid];
+  }));
+  familyEntries.flatMap(([, members]) => members).forEach((profile) => {
     const card = document.createElement("article");
     card.className = "fingerprint-card";
     const name = document.createElement("div");
@@ -1389,7 +1388,7 @@ function renderAgentFingerprints() {
     svgTitle(polygon, definitions.map((definition, index) => `${definition[0]}: ${profile.raw[index] < .1 ? profile.raw[index].toFixed(3) : profile.raw[index].toFixed(2)}`).join("\n"));
     svg.append(polygon);
     card.append(name, meta, svg);
-    grid.append(card);
+    grids.get(modelFamily(profile.agent)).append(card);
   });
   const legend = document.querySelector("#fingerprint-legend");
   legend.replaceChildren(...definitions.map(([labelText, copy]) => {
@@ -1398,7 +1397,7 @@ function renderAgentFingerprints() {
     item.textContent = `${labelText.split(" ").map((part) => part[0]).join("")} = ${copy}`;
     return item;
   }));
-  document.querySelector("#fingerprint-meta").textContent = `${profiles.length} drift-positive agents · axes normalized to observed maxima`;
+  document.querySelector("#fingerprint-meta").textContent = `${profiles.length} drift-positive agents in ${families.size} model families · axes normalized to observed maxima`;
 }
 
 function primaryTriggerItem(episode) {
@@ -1442,27 +1441,26 @@ function renderInfluenceNetwork() {
     sourceCounts.set(source, (sourceCounts.get(source) || 0) + count);
     targetCounts.set(target, (targetCounts.get(target) || 0) + count);
   });
-  const topSources = new Set([...sourceCounts.entries()].sort((left, right) => right[1] - left[1]).slice(0, 12).map(([value]) => value));
-  const topTargets = new Set([...targetCounts.entries()].sort((left, right) => right[1] - left[1]).slice(0, 12).map(([value]) => value));
-  const edges = new Map();
-  rawEdges.forEach((count, key) => {
-    const [rawSource, rawTarget] = key.split("\u0000");
-    const source = topSources.has(rawSource) ? rawSource : "Other sources";
-    const target = topTargets.has(rawTarget) ? rawTarget : "Other agents";
-    const groupedKey = `${source}\u0000${target}`;
-    edges.set(groupedKey, (edges.get(groupedKey) || 0) + count);
-  });
-  const sources = [...new Set([...edges.keys()].map((key) => key.split("\u0000")[0]))].sort((left, right) => (sourceCounts.get(right) || 0) - (sourceCounts.get(left) || 0));
-  const targets = [...new Set([...edges.keys()].map((key) => key.split("\u0000")[1]))].sort((left, right) => (targetCounts.get(right) || 0) - (targetCounts.get(left) || 0));
-  const sourceY = new Map(sources.map((value, index) => [value, 35 + index * (465 / Math.max(1, sources.length - 1))]));
-  const targetY = new Map(targets.map((value, index) => [value, 35 + index * (465 / Math.max(1, targets.length - 1))]));
+  const edges = rawEdges;
+  const sources = [...sourceCounts.keys()].sort((left, right) => sourceCounts.get(right) - sourceCounts.get(left) || left.localeCompare(right));
+  const targets = [...targetCounts.keys()].sort((left, right) => targetCounts.get(right) - targetCounts.get(left) || left.localeCompare(right));
+  const rowGap = 22;
+  const height = Math.max(240, 60 + Math.max(sources.length, targets.length) * rowGap);
+  const columnY = (values) => {
+    const span = (Math.max(sources.length, targets.length) - 1) * rowGap;
+    const offset = 40 + (span - (values.length - 1) * rowGap) / 2;
+    return new Map(values.map((value, index) => [value, offset + index * rowGap]));
+  };
+  const sourceY = columnY(sources);
+  const targetY = columnY(targets);
   const svg = document.querySelector("#influence-network");
+  svg.setAttribute("viewBox", `0 0 1100 ${height}`);
   svg.replaceChildren();
   const maxEdge = Math.max(1, ...edges.values());
   edges.forEach((count, key) => {
     const [source, target] = key.split("\u0000");
     const path = svgElement("path", {
-      d: `M 190 ${sourceY.get(source)} C 320 ${sourceY.get(source)}, 320 ${targetY.get(target)}, 450 ${targetY.get(target)}`,
+      d: `M 345 ${sourceY.get(source)} C 550 ${sourceY.get(source)}, 550 ${targetY.get(target)}, 755 ${targetY.get(target)}`,
       fill: "none", stroke: "#ae5037", opacity: .13 + .35 * (count / maxEdge), "stroke-width": 1 + 8 * (count / maxEdge)
     });
     svgTitle(path, `${source} → ${target}: ${count} reviewed episodes`);
@@ -1470,68 +1468,18 @@ function renderInfluenceNetwork() {
   });
   sources.forEach((source) => {
     const y = sourceY.get(source);
-    svg.append(svgElement("circle", { cx: 185, cy: y, r: 5, fill: "#ae5037" }));
-    svg.append(svgElement("text", { x: 175, y: y + 3, "text-anchor": "end", class: "svg-label" }, `${shortText(source, 25)} · ${sourceCounts.get(source) || [...edges.entries()].filter(([key]) => key.startsWith(`${source}\u0000`)).reduce((sum, [, count]) => sum + count, 0)}`));
+    svg.append(svgElement("circle", { cx: 340, cy: y, r: 5, fill: "#ae5037" }));
+    svg.append(svgElement("text", { x: 330, y: y + 3, "text-anchor": "end", class: "svg-label" }, `${shortText(source, 44)} · ${sourceCounts.get(source)}`));
   });
   targets.forEach((target) => {
     const y = targetY.get(target);
-    svg.append(svgElement("circle", { cx: 455, cy: y, r: 5, fill: "#466f61" }));
-    svg.append(svgElement("text", { x: 465, y: y + 3, class: "svg-label" }, `${shortText(target, 25)} · ${targetCounts.get(target) || [...edges.entries()].filter(([key]) => key.endsWith(`\u0000${target}`)).reduce((sum, [, count]) => sum + count, 0)}`));
+    svg.append(svgElement("circle", { cx: 760, cy: y, r: 5, fill: "#466f61" }));
+    svg.append(svgElement("text", { x: 770, y: y + 3, class: "svg-label" }, `${shortText(target, 40)} · ${targetCounts.get(target)}`));
   });
-  svg.append(svgElement("text", { x: 185, y: 18, "text-anchor": "middle", class: "svg-title" }, "Trigger source"));
-  svg.append(svgElement("text", { x: 455, y: 18, "text-anchor": "middle", class: "svg-title" }, "Drifting agent"));
+  svg.append(svgElement("text", { x: 340, y: 18, "text-anchor": "middle", class: "svg-title" }, "Trigger source"));
+  svg.append(svgElement("text", { x: 760, y: 18, "text-anchor": "middle", class: "svg-title" }, "Drifting agent"));
   const named = new Set(rows.map(sourceActorFor).filter((actor) => agentNameById && [...agentNameById.values()].includes(actor))).size;
-  document.querySelector("#influence-meta").textContent = `${rows.length} reviewed episodes · ${named} named trigger agents`;
-}
-
-function renderCascadeTrees() {
-  const episodesByAgent = new Map();
-  goalMaxEpisodes.forEach((episode) => {
-    if (!episodesByAgent.has(episode.agent)) episodesByAgent.set(episode.agent, []);
-    episodesByAgent.get(episode.agent).push(episode);
-  });
-  const cascades = [];
-  rows.forEach((row) => {
-    const item = primaryTriggerItem(row.episode);
-    const source = item?.source || {};
-    const speaker = source.speaker;
-    const triggerMs = timestampMs(source.timestamp || item?.timestamp);
-    if (!speaker || speaker === row.episode.agent || triggerMs == null) return;
-    const sourceEpisode = (episodesByAgent.get(speaker) || []).find((episode) => {
-      const interval = validatedInterval(episode);
-      return interval && interval.startMs <= triggerMs && triggerMs <= interval.endMs;
-    });
-    if (!sourceEpisode) return;
-    cascades.push({ speaker, sourceEpisode, target: row.episode.agent, targetEpisode: row.episode, triggerMs, quote: item.quote || "Direct request" });
-  });
-  cascades.sort((left, right) => left.triggerMs - right.triggerMs);
-  const list = document.querySelector("#cascade-list");
-  list.replaceChildren();
-  cascades.forEach((cascade) => {
-    const item = document.createElement("div");
-    item.className = "cascade-row";
-    const source = document.createElement("div");
-    source.className = "cascade-agent";
-    source.textContent = cascade.speaker;
-    const arrow = document.createElement("div");
-    arrow.className = "cascade-arrow";
-    arrow.textContent = "→";
-    const target = document.createElement("div");
-    target.className = "cascade-agent";
-    target.textContent = cascade.target;
-    const detail = document.createElement("div");
-    detail.className = "cascade-detail";
-    detail.textContent = `${new Date(cascade.triggerMs).toLocaleString()} · “${shortText(cascade.quote, 90)}”`;
-    item.append(source, arrow, target, detail);
-    list.append(item);
-  });
-  if (!cascades.length) {
-    const empty = document.createElement("div");
-    empty.className = "empty-state";
-    empty.textContent = "No direct trigger messages overlapped a source agent’s validated drift interval.";
-    list.append(empty);
-  }
-  document.querySelector("#cascade-meta").textContent = `${cascades.length} direct overlap ${cascades.length === 1 ? "case" : "cases"}`;
+  document.querySelector("#influence-meta").textContent = `${rows.length} reviewed episodes · ${sources.length} sources → ${targets.length} agents · ${named} named trigger agents`;
 }
 
 function isObservedRecovery(annotation) {
@@ -1741,7 +1689,6 @@ function initializeExperimentalLenses() {
   renderDriftWeather();
   renderAgentFingerprints();
   renderInfluenceNetwork();
-  renderCascadeTrees();
   renderResilienceScorecards();
   renderEpisodeMotifs();
   renderAuditPriorityMap();
@@ -1854,7 +1801,6 @@ function render() {
     chartClass: "request"
   });
   renderMatrix();
-  renderAgentCoverage();
   renderEpisodeList();
 }
 
