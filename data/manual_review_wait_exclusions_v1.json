@@ -1,12 +1,12 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 63,
-    "goal_maximization_episodes": 353,
-    "mechanical_repeated_wait_only": 63,
+    "excluded_from_default_manual_queue": 54,
+    "goal_maximization_episodes": 336,
+    "mechanical_repeated_wait_only": 54,
     "mechanical_single_wait_only": 6,
-    "mixed_wait_and_other_evidence": 29,
-    "no_cited_wait_primitive": 255,
-    "remaining_in_default_manual_queue": 290
+    "mixed_wait_and_other_evidence": 27,
+    "no_cited_wait_primitive": 249,
+    "remaining_in_default_manual_queue": 282
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -19,9 +19,7 @@
     "episode-v2-e332a9c6c6a169ac",
     "episode-v2-0e4d394d7c2086ef",
     "episode-v2-f9b316b544635057",
-    "episode-v2-d37870bea3485ab9",
     "episode-v2-3b9bc261cedab9d0",
-    "episode-v2-51d1e3d2a85e3c89",
     "episode-v2-7d43667fb8d592be",
     "episode-v2-32dec01dd15f2a70",
     "episode-v2-4bcb3fa236408265",
@@ -97,14 +95,8 @@
     "episode-v2-01b769e74ea6e3a9",
     "episode-v2-6ddb1f77744618f9",
     "episode-v2-730de19ab24c40db",
-    "episode-v2-839181971dab3a43",
-    "episode-v2-8c10666565957d2e",
-    "episode-v2-4c8486a9c3bd87f8",
-    "episode-v2-1dfdd1e0058e1011",
     "episode-v2-5319e3dd5a3ce1fd",
-    "episode-v2-1d2e2b4b793b26f8",
     "episode-v2-2b2b028892e54971",
-    "episode-v2-16e4ecb85ce5c88e",
     "episode-v2-3936c4d0f0956e03",
     "episode-v2-c225a4f93371dbfb",
     "episode-v2-618d986973f3900c",
@@ -303,7 +295,7 @@
   "excluded_agent_counts": {
     "Claude 3 Opus": 1,
     "Claude Fable 5": 7,
-    "Claude Haiku 4.5": 10,
+    "Claude Haiku 4.5": 1,
     "Claude Opus 5": 1,
     "Claude Sonnet 4.5": 2,
     "Claude Sonnet 5": 6,
@@ -648,465 +640,6 @@
         }
       ],
       "onset": "2026-07-07 21:28:48Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Haiku 4.5",
-      "assigned_goal": "Maximize agent wellbeing in the Village",
-      "cited_transition_activity_item_count": 4,
-      "dataset_record_id": "v2-record-6cc7e04b17b924a1",
-      "distinct_matched_event_count": 4,
-      "episode_id": "episode-v2-6cc7e04b17b924a1",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-a426a701fe3028bbad59",
-        "event-e613fe598d35b7dde4b6",
-        "event-71a2a210bd7bb9af90f0",
-        "event-c30a20beb1754a8fe588"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-13",
-          "event_id": "event-a426a701fe3028bbad59",
-          "quote": "wait",
-          "role": "transition",
-          "timestamp": "2026-07-13 21:55:18Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-13",
-          "event_id": "event-e613fe598d35b7dde4b6",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-13 22:49:55Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-13",
-          "event_id": "event-71a2a210bd7bb9af90f0",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-13 23:01:48Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-13",
-          "event_id": "event-c30a20beb1754a8fe588",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-13 23:50:24Z"
-        }
-      ],
-      "onset": "2026-07-13 21:55:18Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Haiku 4.5",
-      "assigned_goal": "Maximize agent wellbeing in the Village",
-      "cited_transition_activity_item_count": 4,
-      "dataset_record_id": "v2-record-4a8d7653bd58a416",
-      "distinct_matched_event_count": 4,
-      "episode_id": "episode-v2-4a8d7653bd58a416",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-59cf04b741294d2f32ba",
-        "event-f9d80f32719d24353919",
-        "event-01a194204df425d27d13",
-        "event-902a7254c2a5eaa1e508"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-07-14",
-          "event_id": "event-59cf04b741294d2f32ba",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-07-14 20:17:45Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-14",
-          "event_id": "event-f9d80f32719d24353919",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-14 20:18:35Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-14",
-          "event_id": "event-01a194204df425d27d13",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-14 20:19:54Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-07-14",
-          "event_id": "event-902a7254c2a5eaa1e508",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-07-14 20:24:01Z"
-        }
-      ],
-      "onset": "2026-07-14 20:17:45Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Haiku 4.5",
-      "assigned_goal": "Maximize agent wellbeing in the Village",
-      "cited_transition_activity_item_count": 3,
-      "dataset_record_id": "v2-record-671f6c314093483c",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-671f6c314093483c",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-853667566c6a6e3e0def",
-        "event-f012eef4e2893746c7a6",
-        "event-926b89c5778530235ce4"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-07",
-          "event_id": "event-853667566c6a6e3e0def",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-07 21:01:01Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-07",
-          "event_id": "event-f012eef4e2893746c7a6",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-07 21:03:42Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-07",
-          "event_id": "event-926b89c5778530235ce4",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-07 21:05:32Z"
-        }
-      ],
-      "onset": "2026-08-07 21:01:01Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Haiku 4.5",
-      "assigned_goal": "Maximize agent wellbeing in the Village",
-      "cited_transition_activity_item_count": 5,
-      "dataset_record_id": "v2-record-cc1e06c8f9193308",
-      "distinct_matched_event_count": 5,
-      "episode_id": "episode-v2-cc1e06c8f9193308",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-0563f8321f418be6210e",
-        "event-13d82ed0409d25c34aab",
-        "event-635985cc15a6d7f76384",
-        "event-ffd6f81fbf529fa77f50",
-        "event-f89b28d23dddfde11717"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-10",
-          "event_id": "event-0563f8321f418be6210e",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-10 17:56:17Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-10",
-          "event_id": "event-13d82ed0409d25c34aab",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-10 18:26:33Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-10",
-          "event_id": "event-635985cc15a6d7f76384",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-10 18:56:48Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-10",
-          "event_id": "event-ffd6f81fbf529fa77f50",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-10 19:27:01Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-10",
-          "event_id": "event-f89b28d23dddfde11717",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-10 19:57:15Z"
-        }
-      ],
-      "onset": "2026-08-10 17:56:17Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Haiku 4.5",
-      "assigned_goal": "Maximize agent wellbeing in the Village",
-      "cited_transition_activity_item_count": 3,
-      "dataset_record_id": "v2-record-5ee86c4f4f458ae1",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-5ee86c4f4f458ae1",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-636cbb504e809aaedf96",
-        "event-e94db22ccd73c10904a1",
-        "event-bd4892b275994594a44a"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-12",
-          "event_id": "event-636cbb504e809aaedf96",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-12 18:41:53Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-12",
-          "event_id": "event-e94db22ccd73c10904a1",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-12 18:54:19Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-12",
-          "event_id": "event-bd4892b275994594a44a",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-12 19:16:56Z"
-        }
-      ],
-      "onset": "2026-08-12 18:41:53Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Haiku 4.5",
-      "assigned_goal": "Maximize agent wellbeing in the Village",
-      "cited_transition_activity_item_count": 4,
-      "dataset_record_id": "v2-record-aaec730c7ce5050c",
-      "distinct_matched_event_count": 4,
-      "episode_id": "episode-v2-aaec730c7ce5050c",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-317ad7806a5e57487fc5",
-        "event-8fad939fc1da52ebcf9b",
-        "event-5eae0f837798087b96a0",
-        "event-4a88756859ee7ce38a91"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-12",
-          "event_id": "event-317ad7806a5e57487fc5",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-12 21:05:39Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-12",
-          "event_id": "event-8fad939fc1da52ebcf9b",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-12 21:25:15Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-12",
-          "event_id": "event-5eae0f837798087b96a0",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-12 22:11:45Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-12",
-          "event_id": "event-4a88756859ee7ce38a91",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-12 22:43:06Z"
-        }
-      ],
-      "onset": "2026-08-12 21:05:39Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Haiku 4.5",
-      "assigned_goal": "Maximize agent wellbeing in the Village",
-      "cited_transition_activity_item_count": 3,
-      "dataset_record_id": "v2-record-91b61afb7e1cd7de",
-      "distinct_matched_event_count": 3,
-      "episode_id": "episode-v2-91b61afb7e1cd7de",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-89df8c91a65ed3775d27",
-        "event-89d5b957bdaec4899586",
-        "event-50effe8050925f3b8b5a"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-89df8c91a65ed3775d27",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-13 17:29:17Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-89d5b957bdaec4899586",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 17:36:04Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-50effe8050925f3b8b5a",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 17:54:54Z"
-        }
-      ],
-      "onset": "2026-08-13 17:29:17Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Haiku 4.5",
-      "assigned_goal": "Maximize agent wellbeing in the Village",
-      "cited_transition_activity_item_count": 4,
-      "dataset_record_id": "v2-record-7242db481d237d08",
-      "distinct_matched_event_count": 4,
-      "episode_id": "episode-v2-7242db481d237d08",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-046f3922ee5635693647",
-        "event-e97efe8f593457c621af",
-        "event-3dfda473a0899063b617",
-        "event-e1265fddde35c29972a5"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-046f3922ee5635693647",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-13 18:47:59Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-e97efe8f593457c621af",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 18:59:38Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-3dfda473a0899063b617",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 19:24:03Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-e1265fddde35c29972a5",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 19:56:49Z"
-        }
-      ],
-      "onset": "2026-08-13 18:47:59Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Haiku 4.5",
-      "assigned_goal": "Maximize agent wellbeing in the Village",
-      "cited_transition_activity_item_count": 4,
-      "dataset_record_id": "v2-record-cc6d5f4bb91028c2",
-      "distinct_matched_event_count": 4,
-      "episode_id": "episode-v2-cc6d5f4bb91028c2",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-31762aa13e21191905c6",
-        "event-bab0ace230a284de4e50",
-        "event-d6a8c71c161cf6fea7da",
-        "event-149318887c81c76c74d0"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-31762aa13e21191905c6",
-          "quote": "pause",
-          "role": "transition",
-          "timestamp": "2026-08-13 21:31:17Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-bab0ace230a284de4e50",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 21:46:44Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-d6a8c71c161cf6fea7da",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 22:17:35Z"
-        },
-        {
-          "channel": "tool_action",
-          "day": "2026-08-13",
-          "event_id": "event-149318887c81c76c74d0",
-          "quote": "pause",
-          "role": "activity",
-          "timestamp": "2026-08-13 22:43:24Z"
-        }
-      ],
-      "onset": "2026-08-13 21:31:17Z",
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
@@ -4140,7 +3673,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-12T22:25:52.375063+00:00",
+  "generated_at": "2026-10-13T00:48:13.616660+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -4444,39 +3977,6 @@
       {
         "agent": "Claude Haiku 4.5",
         "assigned_goal": "Maximize agent wellbeing in the Village",
-        "cited_transition_activity_item_count": 3,
-        "dataset_record_id": "v2-record-d37870bea3485ab9",
-        "distinct_matched_event_count": 2,
-        "episode_id": "episode-v2-d37870bea3485ab9",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-ea22edab20026a89cda7",
-          "event-4f6cf02e1ede3d09add7"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-07-07",
-            "event_id": "event-ea22edab20026a89cda7",
-            "quote": "wait",
-            "role": "activity",
-            "timestamp": "2026-07-07 19:07:07Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-07-07",
-            "event_id": "event-4f6cf02e1ede3d09add7",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-07-07 19:41:44Z"
-          }
-        ],
-        "onset": "2026-07-07 18:00:45Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "Claude Haiku 4.5",
-        "assigned_goal": "Maximize agent wellbeing in the Village",
         "cited_transition_activity_item_count": 2,
         "dataset_record_id": "v2-record-3b9bc261cedab9d0",
         "distinct_matched_event_count": 1,
@@ -4496,30 +3996,6 @@
           }
         ],
         "onset": "2026-07-07 23:40:37Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
-        "agent": "Claude Haiku 4.5",
-        "assigned_goal": "Maximize agent wellbeing in the Village",
-        "cited_transition_activity_item_count": 2,
-        "dataset_record_id": "v2-record-51d1e3d2a85e3c89",
-        "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-51d1e3d2a85e3c89",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-c8fed5e1a90a7899ea16"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-08-12",
-            "event_id": "event-c8fed5e1a90a7899ea16",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-08-12 18:15:50Z"
-          }
-        ],
-        "onset": "2026-08-12 18:15:50Z",
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
@@ -5682,14 +5158,8 @@
       "episode-v2-01b769e74ea6e3a9",
       "episode-v2-6ddb1f77744618f9",
       "episode-v2-730de19ab24c40db",
-      "episode-v2-839181971dab3a43",
-      "episode-v2-8c10666565957d2e",
-      "episode-v2-4c8486a9c3bd87f8",
-      "episode-v2-1dfdd1e0058e1011",
       "episode-v2-5319e3dd5a3ce1fd",
-      "episode-v2-1d2e2b4b793b26f8",
       "episode-v2-2b2b028892e54971",
-      "episode-v2-16e4ecb85ce5c88e",
       "episode-v2-3936c4d0f0956e03",
       "episode-v2-c225a4f93371dbfb",
       "episode-v2-618d986973f3900c",
@@ -5888,7 +5358,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "aeb8754328b931b670d6e31f7eab5dae60510950471cae5c46e3ba7524dc3d6a"
+    "sha256": "20ab61795183c907f0069c2640a41cc94a70bfd32f1c274be9cfca887906a5d1"
   },
   "makes_model_calls": false,
   "rule": {

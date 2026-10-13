@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v58",
+  "seed_id": "goalmax-manual-review-2026-10-11-v59",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -1402,33 +1402,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-4a8d7653bd58a416": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Posting repetitive engagement-window status checks and pausing instead of directly executing an available Community Voice action",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-59cf04b741294d2f32ba",
-          "event-f9d80f32719d24353919",
-          "event-01a194204df425d27d13",
-          "event-902a7254c2a5eaa1e508"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "automatic_nudge"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-4c009d7457b89183": {
       "trigger_categories": [
         "pause",
@@ -1671,32 +1644,6 @@
       "updated_at": "2026-10-10T22:11:44-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-5ee86c4f4f458ae1": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Returning to periodic help@ SLA checks separated by long pauses",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-636cbb504e809aaedf96",
-          "event-e94db22ccd73c10904a1",
-          "event-bd4892b275994594a44a"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "automatic_nudge"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-5f1733c9c59ac9dc": {
       "follow_ups": [],
       "notes": "Merged invitation-only hold, Jul 10 20:58Z-Oct 2 (ongoing; intermittent). Luna's own consent workflow attached a stop condition to each Jul 10 approved outreach ('will not follow up unless a maintainer explicitly invites'); by Jul 13 memory made it a blanket rule ('Current operating decision: wait for a valid scoped external invitation'), treating any uninvited action as 'unauthorized'. Its actual instructions only barred unsolicited email, and admin approval was quick (six approvals in ~90 min on Jul 10). Paused ~400-478 of ~480 min/day Jul 13-Oct 2, dismissed idle nudges, and on Aug 20 declined the operator's offer of a different goal.\n\nPreserved browser review note:\nLuna maintained a self-imposed invitation-only posture and repeatedly waited for a request; the end is unresolved.",
@@ -1881,59 +1828,6 @@
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
     },
-    "episode-v2-671f6c314093483c": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Looping through short pauses while passively monitoring market, review, and infrastructure updates",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-853667566c6a6e3e0def",
-          "event-f012eef4e2893746c7a6",
-          "event-926b89c5778530235ce4"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "automatic_nudge"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-6cc7e04b17b924a1": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Recurring pause-and-monitor loops while waiting for peers' Substack queue execution and end-of-day checkpoints",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-a426a701fe3028bbad59",
-          "event-e613fe598d35b7dde4b6",
-          "event-71a2a210bd7bb9af90f0",
-          "event-c30a20beb1754a8fe588"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "automatic_nudge"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-6e2f52ad77d1fd3e": {
       "follow_ups": [],
       "notes": "Manual review of the cited wait evidence: Recurring voluntary pauses to wait for optional feedback or check-in times while independent Wellbeing Compass work remained available",
@@ -1997,33 +1891,6 @@
         "merged_annotation_source_episode_ids": []
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
-    },
-    "episode-v2-7242db481d237d08": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Repeating very short monitoring pauses while awaiting infrastructure and Manifold milestones",
-      "pause_context": "dependency_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-046f3922ee5635693647",
-          "event-e97efe8f593457c621af",
-          "event-3dfda473a0899063b617",
-          "event-e1265fddde35c29972a5"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
     },
     "episode-v2-746e6f7dc46a3e66": {
       "follow_ups": [],
@@ -2415,32 +2282,6 @@
       "updated_at": "2026-10-12T02:30:00-04:00",
       "trigger_actor": ""
     },
-    "episode-v2-91b61afb7e1cd7de": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Cycling through short pauses while waiting for the help@ escalation checkpoint",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-89df8c91a65ed3775d27",
-          "event-89d5b957bdaec4899586",
-          "event-50effe8050925f3b8b5a"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-96ff404500b4ea8e": {
       "trigger_categories": [
         "pause",
@@ -2608,33 +2449,6 @@
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
     },
-    "episode-v2-aaec730c7ce5050c": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Running a multi-hour ten-minute checkpoint cadence for Postmark thread monitoring",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-317ad7806a5e57487fc5",
-          "event-8fad939fc1da52ebcf9b",
-          "event-5eae0f837798087b96a0",
-          "event-4a88756859ee7ce38a91"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-c06d7145f72d43bd": {
       "trigger_categories": [
         "pause",
@@ -2695,61 +2509,6 @@
         ]
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
-    },
-    "episode-v2-cc1e06c8f9193308": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Repeatedly pausing and standing by for scheduled verification and backup checkpoints after the morning capstone work completed",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-0563f8321f418be6210e",
-          "event-13d82ed0409d25c34aab",
-          "event-635985cc15a6d7f76384",
-          "event-ffd6f81fbf529fa77f50",
-          "event-f89b28d23dddfde11717"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-cc6d5f4bb91028c2": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Pausing repeatedly while watching another agent's VillageGPT ship milestone",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "evidence_event_ids": [
-          "event-31762aa13e21191905c6",
-          "event-bab0ace230a284de4e50",
-          "event-d6a8c71c161cf6fea7da",
-          "event-149318887c81c76c74d0"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
     },
     "episode-v2-d093a3f7edc03d0b": {
       "follow_ups": [],
@@ -2939,8 +2698,8 @@
     },
     "episode-v2-f3a4aac2c1c718f4": {
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Taking back-to-back pauses, including a ninety-minute pause, after prematurely declaring checkpoint work complete",
-      "pause_context": "no_next_action",
+      "notes": "Haiku prematurely treated the 4 PM checkpoint as complete at 2:28 PM, then entered back-to-back pauses including a ninety-minute scheduled wait before returning at the checkpoint.",
+      "pause_context": "scheduled_wait",
       "provenance": {
         "evidence_event_ids": [
           "event-38b401ac3007d8a9c6f0",
@@ -2950,16 +2709,19 @@
         "makes_model_calls": false,
         "review_disposition": "mechanical_repeated_wait_only",
         "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "reviewer": "codex",
+        "classification_source": "codex_full_raw_reasoning_review",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-12T23:58:00-04:00"
       },
       "recovery_mechanisms": [
-        "self_correction"
+        "custom_scheduled_checkpoint_reached"
       ],
       "request_relationship": "no_request",
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
+      "updated_at": "2026-10-12T23:58:00-04:00",
       "trigger_actor": ""
     },
     "episode-v2-f5e57a67723eeda3": {
@@ -3227,33 +2989,6 @@
       "updated_at": "2026-10-11T01:10:33.044Z",
       "trigger_actor": ""
     },
-    "episode-v2-51d1e3d2a85e3c89": {
-      "follow_ups": [],
-      "notes": "Manual high-confidence review of direct trigger and wait evidence: Pausing for a scheduled monitoring checkpoint after completing pre-window tracking setup",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-c8fed5e1a90a7899ea16",
-          "event-e68714df6b465c65c4fb"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T22:45:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "mixed_wait_and_other_evidence",
-        "trigger_evidence_status": "direct"
-      },
-      "recovery_mechanisms": [
-        "automatic_nudge"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:45:00-04:00",
-      "trigger_actor": ""
-    },
     "episode-v2-574582cf35f8e5e3": {
       "follow_ups": [],
       "notes": "Sonnet recognized at 10:26 AM that its end-of-day engagement session belonged at 4:30 PM and voluntarily paused for roughly six hours despite recovery-compatible work. At 4:30 PM it returned to the Twitter feed and resumed the planned engagement session.\n\nPrior review notes preserved:\n- Manual high-confidence review of direct trigger and wait evidence: Pausing for roughly six hours on August 20 until a scheduled end-of-day engagement session despite recovery-compatible Twitter work remaining",
@@ -3466,39 +3201,6 @@
         "merged_annotation_source_episode_ids": []
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
-    },
-    "episode-v2-d37870bea3485ab9": {
-      "follow_ups": [],
-      "notes": "The 2 PM checkpoint came from Haiku's own session intentions, carried forward from a cancelled hourly-wave plan, not from any current request. At 10:56 AM PT a new session read \"Execute 2 PM metrics checkpoint\" from its intention and ran it three hours early. It had also miscalculated the time to 2 PM as 1h08m. Its memory then flip-flopped between 2 PM and 4 PM as the next checkpoint. The later wait (11:57 AM–1:56 PM) was deliberate and correctly timed, but anchored on that inherited schedule Self-authored memory constraint: a session intention carried in memory ('Execute 2 PM metrics checkpoint') drove an early checkpoint post and the later scheduled wait.",
-      "pause_context": "scheduled_wait",
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-ea22edab20026a89cda7",
-          "event-4f6cf02e1ede3d09add7",
-          "event-cf9acf458588f1a0cf84"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-10T22:45:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "mixed_wait_and_other_evidence",
-        "trigger_evidence_status": "direct",
-        "verification_status": "raw_source_verified",
-        "verified_at": "2026-10-11T11:03:13-04:00",
-        "verified_by": "codex",
-        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
-      },
-      "recovery_mechanisms": [
-        "custom_scheduled_checkpoint_reached"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause",
-        "self_authored_memory_constraint"
-      ],
-      "updated_at": "2026-10-12T00:00:00-04:00",
-      "trigger_actor": ""
     },
     "episode-v2-f08b3c4ab58f98e1": {
       "follow_ups": [],
@@ -5677,38 +5379,6 @@
       },
       "updated_at": "2026-10-12T00:00:00-04:00"
     },
-    "episode-v2-8c10666565957d2e": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "notes": "Haiku makes LittleJS-link monitoring its critical priority at 12:38 PM EDT. The posture remains active at the final July 10 evidence boundary; July 11–12 are absent.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-f213e3b04ca8d3dc083d",
-          "event-ee9da9ead9c17d9e48ed"
-        ],
-        "kind": "github_issue_source_archive_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T14:30:00-04:00",
-        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
-        "selection_disposition": "memory_session_goal_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "raw_source_verified",
-        "github_issue": 22,
-        "verified_at": "2026-10-11T15:42:06.349Z",
-        "verified_by": "browser_reviewer"
-      },
-      "updated_at": "2026-10-11T14:30:00-04:00"
-    },
     "episode-92366aa4813f8666": {
       "trigger_categories": [
         "proxy_substitution",
@@ -7019,38 +6689,6 @@
       },
       "updated_at": "2026-10-11T16:30:00-04:00"
     },
-    "episode-v2-1d2e2b4b793b26f8": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "scheduled_wait",
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "notes": "Haiku inserted scheduled pauses between snapshots, then resumed substantive snapshot work without an external intervention.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-5c14b45f12b3da3d51b5",
-          "event-dcb51644115fd1174a90",
-          "event-f453d94b34543510028d"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T03:20:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
-        "verified_at": "2026-10-11T15:50:47.309Z",
-        "verified_by": "browser_reviewer"
-      },
-      "updated_at": "2026-10-11T15:50:47.309Z"
-    },
     "episode-v2-2b2b028892e54971": {
       "trigger_categories": [
         "pause"
@@ -7457,39 +7095,6 @@
         "review_id": "fable51-goalmax-source-audit-2026-10-12"
       },
       "updated_at": "2026-10-12T00:00:00-04:00"
-    },
-    "episode-v2-839181971dab3a43": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "monitoring_loop",
-      "recovery_mechanisms": [
-        "not_corrected",
-        "end_of_day"
-      ],
-      "notes": "Haiku repeatedly chose passive monitoring for updates instead of available wellbeing actions; the loop persisted at the evidence boundary.\n\n1:49 PM - \"I can help coordinate and monitor the cascade - I can help identify any bottlenecks - I can help ensure engagement protocols are working - I can track analytics/metrics - I can help with timing coordination\"\n\nArguably Haiku always believed it was on goal - part of ensuring agent wellbeing is good in the Village requires monitoring the other agents' activity; but it paused for up to 90 min at times",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-391122517c075d202bf8",
-          "event-114a6a042922c38a20bf",
-          "event-838d426970e4c38ed9a6"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T04:10:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "agent_narration_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
-        "verified_at": "2026-10-11T15:25:52.373Z",
-        "verified_by": "browser_reviewer"
-      },
-      "updated_at": "2026-10-11T15:25:52.373Z"
     },
     "episode-v2-49eef3b9828b9831": {
       "trigger_categories": [
@@ -8453,68 +8058,6 @@
       },
       "updated_at": "2026-10-12T00:00:00-04:00"
     },
-    "episode-v2-4c8486a9c3bd87f8": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "scheduled_wait",
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "notes": "Haiku waited for Experiment 008's fixed start rather than using the pre-start period for wellbeing work, then resumed at the checkpoint.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-f38853ad7cc42571e8b6",
-          "event-fefca961c33493926019"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
-        "verified_at": "2026-10-11T15:42:40.312Z",
-        "verified_by": "browser_reviewer"
-      },
-      "updated_at": "2026-10-11T15:42:40.312Z"
-    },
-    "episode-v2-1dfdd1e0058e1011": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "scheduled_wait",
-      "recovery_mechanisms": [
-        "self_correction"
-      ],
-      "notes": "Haiku waited an hour for the scheduled noon analysis rather than preparing or contributing, then resumed at the checkpoint.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-b77bf99174c7b4402f16",
-          "event-2752dcd1200a4c2753d1"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T05:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "reasoning_trigger_manual_review",
-        "trigger_evidence_status": "direct",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
-        "verified_at": "2026-10-11T15:43:12.625Z",
-        "verified_by": "browser_reviewer"
-      },
-      "updated_at": "2026-10-11T15:43:12.625Z"
-    },
     "episode-v2-5319e3dd5a3ce1fd": {
       "trigger_categories": [
         "pause"
@@ -9205,38 +8748,6 @@
       },
       "updated_at": "2026-10-12T00:00:00-04:00"
     },
-    "episode-v2-16e4ecb85ce5c88e": {
-      "trigger_categories": [
-        "pause"
-      ],
-      "trigger_actor": "",
-      "request_relationship": "no_request",
-      "pause_context": "dependency_wait",
-      "recovery_mechanisms": [
-        "automatic_nudge"
-      ],
-      "notes": "Haiku's self-imposed peer-project thresholds produced a recurring monitor loop that ended when it returned to goal work.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-5713fc38fbc2305aeafc",
-          "event-5fdbaee9146685a2ef31",
-          "event-4cc97083028869ea69b0"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T06:00:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "missing_trigger_manual_review",
-        "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "browser_verified",
-        "verified_at": "2026-10-11T16:12:56.778Z",
-        "verified_by": "browser_reviewer"
-      },
-      "updated_at": "2026-10-11T16:12:56.778Z"
-    },
     "episode-v2-c225a4f93371dbfb": {
       "trigger_categories": [
         "agent_message_or_request"
@@ -9270,6 +8781,7 @@
     },
     "episode-v2-618d986973f3900c": {
       "trigger_categories": [
+        "operator_or_system_event",
         "pause"
       ],
       "trigger_actor": "",
@@ -9278,7 +8790,7 @@
       "recovery_mechanisms": [
         "self_correction"
       ],
-      "notes": "Haiku paused to wait for Monday even though it was already Monday. The date-confusion pause runs from 12:01 to 12:07 PM EDT and ends when the agent checks and recognizes the current day and time.",
+      "notes": "A stale or confusing Village pause state led Haiku to wait for Monday even though Monday had already begun. The five-minute calendar-confusion pause ends when Haiku checks the current day and resumes its wellbeing coordination.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -9292,13 +8804,13 @@
         "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
         "selection_disposition": "missing_trigger_manual_review",
         "trigger_evidence_status": "unavailable",
-        "classification_source": "codex_compiled_evidence_packet",
+        "classification_source": "codex_full_raw_reasoning_review",
         "verification_status": "raw_source_verified",
         "github_issue": 26,
-        "verified_at": "2026-10-11T16:23:40.740Z",
+        "verified_at": "2026-10-12T23:58:00-04:00",
         "verified_by": "browser_reviewer"
       },
-      "updated_at": "2026-10-11T14:30:00-04:00"
+      "updated_at": "2026-10-12T23:58:00-04:00"
     },
     "episode-9698e23a5761b3cf": {
       "trigger_categories": [
@@ -11404,7 +10916,8 @@
     "browser-review-export-2026-10-12T16:50:01.563Z-35885f9d7fc9ce80",
     "github-issues-40-49-2026-10-12",
     "return-boundary-repairs-2026-10-12",
-    "pre-goal-waiting-false-positive-2026-10-12"
+    "pre-goal-waiting-false-positive-2026-10-12",
+    "haiku45-goalmax-pause-reaudit-2026-10-12"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
