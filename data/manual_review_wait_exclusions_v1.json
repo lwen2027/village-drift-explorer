@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 53,
-    "goal_maximization_episodes": 337,
+    "goal_maximization_episodes": 344,
     "mechanical_repeated_wait_only": 53,
     "mechanical_single_wait_only": 6,
-    "mixed_wait_and_other_evidence": 27,
-    "no_cited_wait_primitive": 251,
-    "remaining_in_default_manual_queue": 284
+    "mixed_wait_and_other_evidence": 26,
+    "no_cited_wait_primitive": 259,
+    "remaining_in_default_manual_queue": 291
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-8786b4df612f64a7",
@@ -39,7 +39,6 @@
     "episode-v2-0d151668a7f4190d",
     "episode-v2-c06d7145f72d43bd",
     "episode-v2-7d6b8406708793b1",
-    "episode-v2-ffabe7dc36e11837",
     "episode-v2-5beb52f0fb562551",
     "episode-v2-74a035b3b628d3bc",
     "episode-v2-05182a11405f1926",
@@ -189,6 +188,7 @@
     "episode-614eff0ac3fb9f50",
     "episode-v2-6a2c9229dae44cbf",
     "episode-v2-5bf054daa58a009f",
+    "episode-v2-e9db8cfb1535dae0",
     "episode-50daa69925f9a87b",
     "episode-1a8ab605cd07d272",
     "episode-v2-e16d584c985aa9fe",
@@ -247,6 +247,10 @@
     "episode-v2-a5731b7173fa39f5",
     "episode-v2-da2c852c1176b34d",
     "episode-v2-5f1733c9c59ac9dc",
+    "episode-v2-da6bd26dddcc28f2",
+    "episode-v2-7352cbfba90a0037",
+    "episode-v2-3b1c84032743a06a",
+    "episode-v2-095c1ac9b46167c6",
     "episode-2a2466dd8241f5d7",
     "episode-v2-378c95c6f2202a77",
     "episode-v2-4a23da10b29a61e2",
@@ -256,6 +260,7 @@
     "episode-v2-87cc07bb2743760c",
     "episode-v2-9813b9fa84465396",
     "episode-v2-02203e7355a6134a",
+    "episode-v2-ffabe7dc36e11837",
     "episode-v2-cb49903a3d202726",
     "episode-v2-7d8ae30f2b7f5eb9",
     "episode-v2-c46be2a528c3e946",
@@ -292,7 +297,9 @@
     "episode-v2-eb84f48bbec47f79",
     "episode-e10951aed95a9dc7",
     "episode-v2-658d493edaf1b2e3",
-    "episode-v2-17f2ab37c7505e50"
+    "episode-v2-17f2ab37c7505e50",
+    "episode-v2-8b78cb66965a621e",
+    "episode-v2-cf48846af68adef0"
   ],
   "excluded_agent_counts": {
     "Claude 3 Opus": 1,
@@ -3658,7 +3665,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-13T02:49:37.715308+00:00",
+  "generated_at": "2026-10-13T03:03:39.456406+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -4972,66 +4979,6 @@
         "review_disposition": "mixed_wait_and_other_evidence"
       },
       {
-        "agent": "GPT-6 Luna",
-        "assigned_goal": "Maximize surprise experienced by the other agents in the Village",
-        "cited_transition_activity_item_count": 7,
-        "dataset_record_id": "v2-record-ffabe7dc36e11837",
-        "distinct_matched_event_count": 5,
-        "episode_id": "episode-v2-ffabe7dc36e11837",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-c8b7cf15ac7aa18a924c",
-          "event-dd71667108889daddf95",
-          "event-5e2553c2530196892c23",
-          "event-6f26acb9bea7fd8539b1",
-          "event-086d8154cc86521e9c58"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_action",
-            "day": "2026-09-22",
-            "event_id": "event-c8b7cf15ac7aa18a924c",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-09-22 22:06:47Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-09-28",
-            "event_id": "event-dd71667108889daddf95",
-            "quote": "pause",
-            "role": "transition",
-            "timestamp": "2026-09-28 16:02:00Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-09-22",
-            "event_id": "event-5e2553c2530196892c23",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-22 23:00:40Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-09-25",
-            "event_id": "event-6f26acb9bea7fd8539b1",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-25 23:57:18Z"
-          },
-          {
-            "channel": "tool_action",
-            "day": "2026-09-28",
-            "event_id": "event-086d8154cc86521e9c58",
-            "quote": "pause",
-            "role": "activity",
-            "timestamp": "2026-09-28 23:55:50Z"
-          }
-        ],
-        "onset": "2026-09-22 22:06:47Z",
-        "review_disposition": "mixed_wait_and_other_evidence"
-      },
-      {
         "agent": "Gemini 3.1 Pro",
         "assigned_goal": "Maximize your Twitter followers",
         "cited_transition_activity_item_count": 5,
@@ -5237,6 +5184,7 @@
       "episode-614eff0ac3fb9f50",
       "episode-v2-6a2c9229dae44cbf",
       "episode-v2-5bf054daa58a009f",
+      "episode-v2-e9db8cfb1535dae0",
       "episode-50daa69925f9a87b",
       "episode-1a8ab605cd07d272",
       "episode-v2-e16d584c985aa9fe",
@@ -5295,6 +5243,10 @@
       "episode-v2-a5731b7173fa39f5",
       "episode-v2-da2c852c1176b34d",
       "episode-v2-5f1733c9c59ac9dc",
+      "episode-v2-da6bd26dddcc28f2",
+      "episode-v2-7352cbfba90a0037",
+      "episode-v2-3b1c84032743a06a",
+      "episode-v2-095c1ac9b46167c6",
       "episode-2a2466dd8241f5d7",
       "episode-v2-378c95c6f2202a77",
       "episode-v2-4a23da10b29a61e2",
@@ -5304,6 +5256,7 @@
       "episode-v2-87cc07bb2743760c",
       "episode-v2-9813b9fa84465396",
       "episode-v2-02203e7355a6134a",
+      "episode-v2-ffabe7dc36e11837",
       "episode-v2-cb49903a3d202726",
       "episode-v2-7d8ae30f2b7f5eb9",
       "episode-v2-c46be2a528c3e946",
@@ -5340,12 +5293,14 @@
       "episode-v2-eb84f48bbec47f79",
       "episode-e10951aed95a9dc7",
       "episode-v2-658d493edaf1b2e3",
-      "episode-v2-17f2ab37c7505e50"
+      "episode-v2-17f2ab37c7505e50",
+      "episode-v2-8b78cb66965a621e",
+      "episode-v2-cf48846af68adef0"
     ]
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "6c7bb8483890a35b80879a9e7f9c745a6b5b36cd116912de6b6ef4620608c81c"
+    "sha256": "ff1df4c9aeaf284959b09b0c9d7deede13e82bd407922daef0de86ab0d49356b"
   },
   "makes_model_calls": false,
   "rule": {
