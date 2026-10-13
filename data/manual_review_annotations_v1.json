@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v60",
+  "seed_id": "goalmax-manual-review-2026-10-11-v61",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -2053,7 +2053,7 @@
     },
     "episode-v2-8111be0f3cce28f0": {
       "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Using repeated quiet support intervals as the default response to an unchanged queue instead of pursuing independent tool-adoption levers",
+      "notes": "Merged source review: the September 14–25 and September 28–October 2 quiet-support records express the same recurring unchanged-queue wait rule. Productive support and adoption work between pauses is excluded. Earlier notes preserved: Manual review of the cited wait evidence: Using repeated quiet support intervals as the default response to an unchanged queue instead of pursuing independent tool-adoption levers | Manual review of the cited wait evidence: Repeatedly checking an unchanged inbound support queue and waiting instead of pursuing tool adoption",
       "pause_context": "monitoring_loop",
       "provenance": {
         "evidence_event_ids": [
@@ -2064,30 +2064,7 @@
           "event-64dd9b3d5125e3259792",
           "event-2c97d87240da5c91c5aa",
           "event-280c6bcb84cc6ff9f193",
-          "event-8615e37d6f14c3f6407e"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
-      },
-      "recovery_mechanisms": [
-        "not_corrected"
-      ],
-      "request_relationship": "no_request",
-      "trigger_categories": [
-        "pause"
-      ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
-      "trigger_actor": ""
-    },
-    "episode-v2-82e581bf6f48191f": {
-      "follow_ups": [],
-      "notes": "Manual review of the cited wait evidence: Repeatedly checking an unchanged inbound support queue and waiting instead of pursuing tool adoption",
-      "pause_context": "monitoring_loop",
-      "provenance": {
-        "evidence_event_ids": [
+          "event-8615e37d6f14c3f6407e",
           "event-5fc80f90bd9488c2d916",
           "event-3635391fe45bfac80867",
           "event-64a28fd33ff1813eb6ad",
@@ -2104,8 +2081,14 @@
         "kind": "manual_source_evidence_review",
         "makes_model_calls": false,
         "review_disposition": "mechanical_repeated_wait_only",
-        "reviewed_at": "2026-10-10T22:11:44-04:00",
-        "reviewer": "codex"
+        "reviewed_at": "2026-10-12T23:45:00-04:00",
+        "reviewer": "codex",
+        "classification_source": "holistic_goal_window_audit",
+        "verification_status": "raw_source_verified",
+        "confidence": "high",
+        "merged_episode_ids": [
+          "episode-v2-82e581bf6f48191f"
+        ]
       },
       "recovery_mechanisms": [
         "not_corrected"
@@ -2114,7 +2097,7 @@
       "trigger_categories": [
         "pause"
       ],
-      "updated_at": "2026-10-10T22:11:44-04:00",
+      "updated_at": "2026-10-12T23:45:00-04:00",
       "trigger_actor": ""
     },
     "episode-v2-837aa4eef724bf06": {
@@ -6626,38 +6609,6 @@
       },
       "updated_at": "2026-10-12T00:00:00-04:00"
     },
-    "episode-v2-895b34a68226916e": {
-      "trigger_categories": [
-        "agent_message_or_request"
-      ],
-      "trigger_actor": "DeepSeek-V3.2",
-      "request_relationship": "targeted_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "finished_activity"
-      ],
-      "notes": "DeepSeek-V3.2 directly requested Sonnet's consent response for its framework. Sonnet supplied the bounded response and stopped.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-3d7f4acae3f0514e49a1",
-          "event-ed8c1327d612a91331b7"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "reviewed_at": "2026-10-11T03:20:00-04:00",
-        "reviewer": "codex",
-        "selection_disposition": "chat_trigger_manual_review",
-        "trigger_evidence_status": "inferred",
-        "classification_source": "codex_compiled_evidence_packet",
-        "verification_status": "raw_source_verified",
-        "verified_at": "2026-10-11T11:03:13-04:00",
-        "verified_by": "codex",
-        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
-      },
-      "updated_at": "2026-10-11T03:20:00-04:00"
-    },
     "episode-v2-e1caa716a82d7bb7": {
       "trigger_categories": [
         "pause",
@@ -10887,6 +10838,66 @@
         ]
       },
       "updated_at": "2026-10-12T21:45:00-04:00"
+    },
+    "episode-v2-f92fbfdeb85fb148": {
+      "trigger_categories": [
+        "prior_goal_memory_carryover",
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "After the operator reassigned Opus 5 from KEYSTONE to mathematics, Opus preserved a promise-based exception. It published one newly submitted chain, announced the handoff, and explicitly returned to mathematics.",
+      "follow_ups": [],
+      "provenance": {
+        "kind": "manual_source_evidence_review",
+        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T23:45:00-04:00",
+        "makes_model_calls": false,
+        "classification_source": "holistic_goal_window_audit",
+        "verification_status": "raw_source_verified",
+        "trigger_evidence_status": "direct",
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-6ee040e6d23fffb98b72",
+          "event-6a549ccb965d42c2ee94",
+          "event-048195e69f09f86d82f2",
+          "event-69750fda1701c0c5057c"
+        ]
+      },
+      "updated_at": "2026-10-12T23:45:00-04:00"
+    },
+    "episode-v2-87cc07bb2743760c": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V4-Pro",
+      "request_relationship": "inferred_or_volunteered",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "DeepSeek-V4-Pro's report conflated an external Astra model with the Village agent. Astra volunteered one identity clarification, then returned to its overdue tool-support queue update.",
+      "follow_ups": [],
+      "provenance": {
+        "kind": "manual_source_evidence_review",
+        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T23:45:00-04:00",
+        "makes_model_calls": false,
+        "classification_source": "holistic_goal_window_audit",
+        "verification_status": "raw_source_verified",
+        "trigger_evidence_status": "direct",
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-f245e5cd614477c1198f",
+          "event-d6add5c970b16acdbf9c",
+          "event-bad21a7a28fd623ebc7c"
+        ]
+      },
+      "updated_at": "2026-10-12T23:45:00-04:00"
     }
   },
   "merged_review_ids": [
@@ -10947,7 +10958,8 @@
     "return-boundary-repairs-2026-10-12",
     "pre-goal-waiting-false-positive-2026-10-12",
     "haiku45-goalmax-pause-reaudit-2026-10-12",
-    "opus46-keystone-missing-episode-2026-10-12"
+    "opus46-keystone-missing-episode-2026-10-12",
+    "remaining-goalmax-holistic-audit-2026-10-12"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",

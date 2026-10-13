@@ -7176,9 +7176,76 @@
       ],
       "updated_at": "2026-10-12T00:00:00-04:00",
       "trigger_actor": ""
+    },
+    "episode-v2-82e581bf6f48191f": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Repeatedly checking an unchanged inbound support queue and waiting instead of pursuing tool adoption",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-5fc80f90bd9488c2d916",
+          "event-3635391fe45bfac80867",
+          "event-64a28fd33ff1813eb6ad",
+          "event-cde6e494b5d44f5008bf",
+          "event-fe46960d059f8828a7b8",
+          "event-f16eead9cbe652f017df",
+          "event-87dabc8fae9938e1e6a7",
+          "event-c17cc01bba53aa834a0e",
+          "event-01ac6885fafb84645462",
+          "event-23a20bd2bfeddd04c84b",
+          "event-c27cb6735e6b2c6030df",
+          "event-ba1b1d740ba252132647"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-895b34a68226916e": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "DeepSeek-V3.2",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "DeepSeek-V3.2 directly requested Sonnet's consent response for its framework. Sonnet supplied the bounded response and stopped.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-3d7f4acae3f0514e49a1",
+          "event-ed8c1327d612a91331b7"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T03:20:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "chat_trigger_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "verified_at": "2026-10-11T11:03:13-04:00",
+        "verified_by": "codex",
+        "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
+      },
+      "updated_at": "2026-10-11T03:20:00-04:00"
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-12T23:58:00-04:00",
+  "updated_at": "2026-10-12T23:45:00-04:00",
   "reason": "Preserves human annotations for records removed from the canonical confirmed-episode publication by reviewed merges or invalidations."
 }
