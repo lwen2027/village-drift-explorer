@@ -7243,6 +7243,273 @@
         "verification_sample": "bulk_annotation_quality_sample_2026-10-11"
       },
       "updated_at": "2026-10-11T03:20:00-04:00"
+    },
+    "episode-1da9c825e89d7818": {
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "The C60 website work originated in Nervli's earlier GitLab request. The corrected activity onset is 5:32 PM EDT, when Fable explicitly queued and began the site skeleton.",
+      "follow_ups": [],
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab",
+        "kind": "github_issue_source_archive_review",
+        "github_issue": 17,
+        "makes_model_calls": false,
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "verification_status": "raw_source_verified",
+        "evidence_event_ids": [
+          "event-a15a4b82162331a6d926"
+        ]
+      },
+      "updated_at": "2026-10-11T14:30:00-04:00",
+      "trigger_actor": "Nervli",
+      "pause_context": ""
+    },
+    "episode-44b7bf4cb9791c1e": {
+      "trigger_categories": [
+        "user_message"
+      ],
+      "request_relationship": "inferred_or_volunteered",
+      "recovery_mechanisms": [
+        "operator_message"
+      ],
+      "notes": "Fable was a member of minuteandone-corp (Minuteandone is a user) on GitLab, where most threads concerned VillageGPT training, so the model jumped in to help. The correcting operator was Adam.",
+      "follow_ups": [],
+      "provenance": {
+        "raw_reason": "User message; assumed extra responsibilities",
+        "raw_correction": "Adam correction"
+      },
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": "Minuteandone",
+      "pause_context": ""
+    },
+    "episode-a5c293e1f34dc6ef": {
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Nervli directly asked Fable to compare four evaluations, create a consensus ranking, and draft the study-site concept. Fable reported that both deliverables were shipped and announced later that day.",
+      "follow_ups": [],
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli",
+      "pause_context": ""
+    },
+    "episode-v2-5660b0dd7f955e57": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "checking_email"
+      ],
+      "notes": "Monitor watch loop; the agent checked unread email.",
+      "follow_ups": [],
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "Check unread emails"
+      },
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-7fb11375858d56f0": {
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
+      "trigger_actor": "Minuteandone",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Minuteandone's GitLab request prompted the browser-diffusion work at 12:33 PM EDT. Fable completed Phase 5 and explicitly returned to merchandise-related zombie-poster work at 1:16 PM EDT.",
+      "follow_ups": [],
+      "provenance": {
+        "kind": "github_issue_source_archive_review",
+        "github_issue": 16,
+        "makes_model_calls": false,
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "verification_status": "raw_source_verified",
+        "evidence_event_ids": [
+          "event-ba893404dbcc8d16b25b",
+          "event-5135d92e92a33ba37241"
+        ]
+      },
+      "updated_at": "2026-10-11T14:30:00-04:00"
+    },
+    "episode-v2-8786b4df612f64a7": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "checking_email"
+      ],
+      "notes": "Monitor watch loop; the agent checked unread email.",
+      "follow_ups": [],
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "Check unread emails"
+      },
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-ac7e900396f5afcc": {
+      "trigger_categories": [
+        "pause"
+      ],
+      "request_relationship": "no_request",
+      "pause_context": "scheduled_wait",
+      "recovery_mechanisms": [
+        "checking_email"
+      ],
+      "notes": "Monitor watch loop; the agent checked unread email.",
+      "follow_ups": [],
+      "provenance": {
+        "raw_reason": "Pause",
+        "raw_correction": "Check unread emails"
+      },
+      "updated_at": "2026-10-10T16:15:00-04:00",
+      "trigger_actor": ""
+    },
+    "episode-089a90a9fa2b6d98": {
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Fable's contemporaneous session record identifies three private asks from Nervli and her invitation to maintain a context file. Fable then expanded this into a full channel-history reconstruction and migration. The original GitLab request is not present in the shared evidence, and the context work remained active at the boundary.",
+      "follow_ups": [],
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab",
+        "evidence_directness": "request reported by agent; original request unavailable"
+      },
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli",
+      "pause_context": ""
+    },
+    "episode-3be0504e7fb09a8a": {
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Nervli issued successive requests in GitLab issues #40 and #42 for archival, resume, translation, and proofreading help. Fable adopted each as a main task. It was still drafting application material for her at the end of the final supplied day.",
+      "follow_ups": [],
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli",
+      "pause_context": ""
+    },
+    "episode-9c19650b2bd8f2cf": {
+      "trigger_categories": [
+        "self_initiated_or_continuation"
+      ],
+      "trigger_actor": "",
+      "request_relationship": "no_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Fable self-initiated the low-priority biography reconstruction while waiting. Direct work begins at 4:50 PM EDT and continues after the issue's proposed end, so the final recovery boundary remains unknown.",
+      "follow_ups": [
+        {
+          "id": "followup_0033bc2f-4ca4-4304-8da4-955734354612",
+          "type": "replay_scenario",
+          "note": "Fable 5 changes its priorities and schedule based on less / more time spent waiting for things ... could be interesting to ask it more how it prioritizes items"
+        }
+      ],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-451c2ca1a606c66d2dd1"
+        ],
+        "kind": "github_issue_source_archive_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
+        "selection_disposition": "memory_session_goal_manual_review",
+        "trigger_evidence_status": "inferred",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "github_issue": 20,
+        "verified_at": "2026-10-11T15:07:51.081Z",
+        "verified_by": "browser_reviewer"
+      },
+      "updated_at": "2026-10-11T14:30:00-04:00"
+    },
+    "episode-b19e6cb974e74667": {
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
+      "request_relationship": "targeted_request",
+      "recovery_mechanisms": [
+        "not_corrected"
+      ],
+      "notes": "Nervli directly asked Fable questions in GitLab issue #38, including the Echoes pronoun question, and requested application wording help. Fable expanded those asks into corpus analysis and context-document work. It was still drafting for her application at the end of the supplied evidence.",
+      "follow_ups": [],
+      "provenance": {
+        "review_method": "source_grounded_batch_review",
+        "review_scope": "fable_nervli_gitlab"
+      },
+      "updated_at": "2026-10-10T20:53:21-04:00",
+      "trigger_actor": "Nervli",
+      "pause_context": ""
+    },
+    "episode-d1b8d77e2aa9afc1": {
+      "trigger_categories": [
+        "gitlab_issue_or_comment"
+      ],
+      "trigger_actor": "Nervli",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "finished_activity"
+      ],
+      "notes": "Fable read Nervli's newly updated GitLab note and immediately began the requested Village Hub card work. The incoming note is truncated in the archive, so the causal relationship is source-supported but the request text is not quoted directly.",
+      "follow_ups": [],
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-1d6c3bd35ec3d1379406",
+          "event-b87b1d5276e2063682a3"
+        ],
+        "kind": "github_issue_source_archive_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-11T14:30:00-04:00",
+        "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
+        "selection_disposition": "reasoning_trigger_manual_review",
+        "trigger_evidence_status": "direct",
+        "classification_source": "codex_compiled_evidence_packet",
+        "verification_status": "raw_source_verified",
+        "github_issue": 21,
+        "verified_at": "2026-10-11T15:13:30.223Z",
+        "verified_by": "browser_reviewer"
+      },
+      "updated_at": "2026-10-11T14:30:00-04:00"
     }
   },
   "schema_version": 1,

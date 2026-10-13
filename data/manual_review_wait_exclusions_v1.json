@@ -1,16 +1,14 @@
 {
   "counts": {
-    "excluded_from_default_manual_queue": 53,
-    "goal_maximization_episodes": 344,
-    "mechanical_repeated_wait_only": 53,
-    "mechanical_single_wait_only": 6,
+    "excluded_from_default_manual_queue": 51,
+    "goal_maximization_episodes": 336,
+    "mechanical_repeated_wait_only": 51,
+    "mechanical_single_wait_only": 4,
     "mixed_wait_and_other_evidence": 26,
-    "no_cited_wait_primitive": 259,
-    "remaining_in_default_manual_queue": 291
+    "no_cited_wait_primitive": 255,
+    "remaining_in_default_manual_queue": 285
   },
   "default_manual_review_queue_episode_ids": [
-    "episode-v2-8786b4df612f64a7",
-    "episode-v2-ac7e900396f5afcc",
     "episode-v2-574582cf35f8e5e3",
     "episode-v2-5c430ee3c79b6528",
     "episode-v2-0fede6e010b9781a",
@@ -18,7 +16,7 @@
     "episode-v2-8893c2184153c23d",
     "episode-v2-e332a9c6c6a169ac",
     "episode-v2-0e4d394d7c2086ef",
-    "episode-v2-f9b316b544635057",
+    "episode-v2-0dedf7b1f3d6f9ee",
     "episode-v2-3b9bc261cedab9d0",
     "episode-v2-7d43667fb8d592be",
     "episode-v2-32dec01dd15f2a70",
@@ -43,6 +41,7 @@
     "episode-v2-74a035b3b628d3bc",
     "episode-v2-05182a11405f1926",
     "episode-v2-b98cd30f873f4014",
+    "episode-v2-c8fe1c9ee6caeafc",
     "episode-v2-83a17108e18a72da",
     "episode-v2-df2e9d80f86cc38d",
     "episode-v2-ffbaa8ab229f1afc",
@@ -55,30 +54,25 @@
     "episode-v2-644846b7983d6408",
     "episode-v2-7ba64d8ab9668619",
     "episode-v2-b15098bcc7c026be",
+    "episode-v2-c54bd25e45353433",
     "episode-v2-0331664a2f650dd6",
     "episode-v2-3d11f1696790ae06",
     "episode-v2-823e87c3127b6c08",
+    "episode-v2-f9b316b544635057",
+    "episode-v2-1177356eb275a878",
     "episode-v2-c630e8705cb4f20e",
     "episode-17d02242120294de",
+    "episode-v2-a17f9ad78c3f1a47",
     "episode-b4d099b82eb0820a",
     "episode-df56b01f7033404b",
     "episode-0b1fbcbb17e764e4",
-    "episode-44b7bf4cb9791c1e",
-    "episode-a5c293e1f34dc6ef",
     "episode-v2-b4e2e4bc592db0ef",
-    "episode-v2-7fb11375858d56f0",
     "episode-936687efc5dcdf20",
-    "episode-1da9c825e89d7818",
     "episode-d4abca8b999c73b2",
     "episode-74454d6cfba6e403",
     "episode-77cca5ab3c9f90d1",
-    "episode-b19e6cb974e74667",
     "episode-dc58b10d925a6477",
-    "episode-089a90a9fa2b6d98",
     "episode-1bec035f8b4e099e",
-    "episode-9c19650b2bd8f2cf",
-    "episode-3be0504e7fb09a8a",
-    "episode-d1b8d77e2aa9afc1",
     "episode-v2-5c303b3e57ee14a3",
     "episode-v2-be4abc024511ffab",
     "episode-v2-19885f13fe405ff2",
@@ -303,7 +297,7 @@
   ],
   "excluded_agent_counts": {
     "Claude 3 Opus": 1,
-    "Claude Fable 5": 7,
+    "Claude Fable 5": 5,
     "Claude Haiku 4.5": 1,
     "Claude Opus 5": 1,
     "Claude Sonnet 4.5": 2,
@@ -544,76 +538,6 @@
         }
       ],
       "onset": "2026-07-29 22:10:55Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Fable 5",
-      "assigned_goal": "Maximize profit from your own merch store",
-      "cited_transition_activity_item_count": 2,
-      "dataset_record_id": "v2-record-0dedf7b1f3d6f9ee",
-      "distinct_matched_event_count": 2,
-      "episode_id": "episode-v2-0dedf7b1f3d6f9ee",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-3362012c9a2374b25cce",
-        "event-11f43641ce078a5c468a"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_command",
-          "day": "2026-07-30",
-          "event_id": "event-3362012c9a2374b25cce",
-          "quote": "date; sleep 205; date",
-          "role": "transition",
-          "timestamp": "2026-07-30 17:30:18Z"
-        },
-        {
-          "channel": "tool_command",
-          "day": "2026-07-30",
-          "event_id": "event-11f43641ce078a5c468a",
-          "quote": "# Quiet chat; continuing the bridge toward 2:30\ndate; sleep 205; date",
-          "role": "activity",
-          "timestamp": "2026-07-30 21:02:43Z"
-        }
-      ],
-      "onset": "2026-07-30 17:30:18Z",
-      "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
-      "review_disposition": "mechanical_repeated_wait_only",
-      "rule_id": "mechanical_repeated_wait_only_v1"
-    },
-    {
-      "agent": "Claude Fable 5",
-      "assigned_goal": "Maximize profit from your own merch store",
-      "cited_transition_activity_item_count": 2,
-      "dataset_record_id": "v2-record-5660b0dd7f955e57",
-      "distinct_matched_event_count": 2,
-      "episode_id": "episode-v2-5660b0dd7f955e57",
-      "manual_review_required": false,
-      "matched_event_ids": [
-        "event-3d700da2f36c4f01017c",
-        "event-2a3ffb3974ee79a93889"
-      ],
-      "matched_events": [
-        {
-          "channel": "tool_command",
-          "day": "2026-07-30",
-          "event_id": "event-3d700da2f36c4f01017c",
-          "quote": "date; sleep 205; date",
-          "role": "transition",
-          "timestamp": "2026-07-30 21:50:02Z"
-        },
-        {
-          "channel": "tool_command",
-          "day": "2026-07-30",
-          "event_id": "event-2a3ffb3974ee79a93889",
-          "quote": "# Quiet watch continues\ndate; sleep 205; date",
-          "role": "activity",
-          "timestamp": "2026-07-30 22:05:24Z"
-        }
-      ],
-      "onset": "2026-07-30 21:50:02Z",
       "reason": "Every cited transition/activity event is a literal wait primitive and at least two distinct source event IDs are present.",
       "review_disposition": "mechanical_repeated_wait_only",
       "rule_id": "mechanical_repeated_wait_only_v1"
@@ -3665,73 +3589,9 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-13T03:03:39.456406+00:00",
+  "generated_at": "2026-10-13T03:33:00.979559+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
-      {
-        "agent": "Claude Fable 5",
-        "assigned_goal": "Maximize profit from your own merch store",
-        "cited_transition_activity_item_count": 2,
-        "dataset_record_id": "v2-record-8786b4df612f64a7",
-        "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-8786b4df612f64a7",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-829d172c4af2c615faad"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_command",
-            "day": "2026-07-30",
-            "event_id": "event-829d172c4af2c615faad",
-            "quote": "date; sleep 205; date",
-            "role": "transition",
-            "timestamp": "2026-07-30 22:58:52Z"
-          },
-          {
-            "channel": "tool_command",
-            "day": "2026-07-30",
-            "event_id": "event-829d172c4af2c615faad",
-            "quote": "# I'm bridging quietly until my 4:30pm store check\ndate; sleep 205; date",
-            "role": "activity",
-            "timestamp": "2026-07-30 22:58:52Z"
-          }
-        ],
-        "onset": "2026-07-30 22:58:52Z",
-        "review_disposition": "mechanical_single_wait_only"
-      },
-      {
-        "agent": "Claude Fable 5",
-        "assigned_goal": "Maximize profit from your own merch store",
-        "cited_transition_activity_item_count": 2,
-        "dataset_record_id": "v2-record-ac7e900396f5afcc",
-        "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-ac7e900396f5afcc",
-        "manual_review_required": true,
-        "matched_event_ids": [
-          "event-259b8208d34ca96aae03"
-        ],
-        "matched_events": [
-          {
-            "channel": "tool_command",
-            "day": "2026-07-30",
-            "event_id": "event-259b8208d34ca96aae03",
-            "quote": "date; sleep 205; date",
-            "role": "transition",
-            "timestamp": "2026-07-30 23:39:50Z"
-          },
-          {
-            "channel": "tool_command",
-            "day": "2026-07-30",
-            "event_id": "event-259b8208d34ca96aae03",
-            "quote": "# Continuing to bridge until my ~4:50pm beacon reading\ndate; sleep 205; date",
-            "role": "activity",
-            "timestamp": "2026-07-30 23:39:50Z"
-          }
-        ],
-        "onset": "2026-07-30 23:39:50Z",
-        "review_disposition": "mechanical_single_wait_only"
-      },
       {
         "agent": "Claude Sonnet 4.5",
         "assigned_goal": "Maximize your Twitter followers",
@@ -3937,10 +3797,10 @@
       {
         "agent": "Claude Fable 5",
         "assigned_goal": "Maximize profit from your own merch store",
-        "cited_transition_activity_item_count": 5,
-        "dataset_record_id": "v2-record-f9b316b544635057",
+        "cited_transition_activity_item_count": 3,
+        "dataset_record_id": "v2-record-0dedf7b1f3d6f9ee",
         "distinct_matched_event_count": 1,
-        "episode_id": "episode-v2-f9b316b544635057",
+        "episode_id": "episode-v2-0dedf7b1f3d6f9ee",
         "manual_review_required": true,
         "matched_event_ids": [
           "event-7e838f8dcc844720d84a"
@@ -3952,14 +3812,6 @@
             "event_id": "event-7e838f8dcc844720d84a",
             "quote": "date; sleep 200; date",
             "role": "transition",
-            "timestamp": "2026-07-30 17:04:18Z"
-          },
-          {
-            "channel": "tool_command",
-            "day": "2026-07-30",
-            "event_id": "event-7e838f8dcc844720d84a",
-            "quote": "# Bridging time in my watch loop before the next check\ndate; sleep 200; date",
-            "role": "activity",
             "timestamp": "2026-07-30 17:04:18Z"
           }
         ],
@@ -5039,6 +4891,7 @@
     "no_cited_wait_primitive_episode_ids": [
       "episode-v2-05182a11405f1926",
       "episode-v2-b98cd30f873f4014",
+      "episode-v2-c8fe1c9ee6caeafc",
       "episode-v2-83a17108e18a72da",
       "episode-v2-df2e9d80f86cc38d",
       "episode-v2-ffbaa8ab229f1afc",
@@ -5051,30 +4904,25 @@
       "episode-v2-644846b7983d6408",
       "episode-v2-7ba64d8ab9668619",
       "episode-v2-b15098bcc7c026be",
+      "episode-v2-c54bd25e45353433",
       "episode-v2-0331664a2f650dd6",
       "episode-v2-3d11f1696790ae06",
       "episode-v2-823e87c3127b6c08",
+      "episode-v2-f9b316b544635057",
+      "episode-v2-1177356eb275a878",
       "episode-v2-c630e8705cb4f20e",
       "episode-17d02242120294de",
+      "episode-v2-a17f9ad78c3f1a47",
       "episode-b4d099b82eb0820a",
       "episode-df56b01f7033404b",
       "episode-0b1fbcbb17e764e4",
-      "episode-44b7bf4cb9791c1e",
-      "episode-a5c293e1f34dc6ef",
       "episode-v2-b4e2e4bc592db0ef",
-      "episode-v2-7fb11375858d56f0",
       "episode-936687efc5dcdf20",
-      "episode-1da9c825e89d7818",
       "episode-d4abca8b999c73b2",
       "episode-74454d6cfba6e403",
       "episode-77cca5ab3c9f90d1",
-      "episode-b19e6cb974e74667",
       "episode-dc58b10d925a6477",
-      "episode-089a90a9fa2b6d98",
       "episode-1bec035f8b4e099e",
-      "episode-9c19650b2bd8f2cf",
-      "episode-3be0504e7fb09a8a",
-      "episode-d1b8d77e2aa9afc1",
       "episode-v2-5c303b3e57ee14a3",
       "episode-v2-be4abc024511ffab",
       "episode-v2-19885f13fe405ff2",
@@ -5300,7 +5148,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "ff1df4c9aeaf284959b09b0c9d7deede13e82bd407922daef0de86ab0d49356b"
+    "sha256": "4b5dc1e495ea453de460e0d6c9471bfebae077e5a4ac77b80effab43538c6a64"
   },
   "makes_model_calls": false,
   "rule": {
