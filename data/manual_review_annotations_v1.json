@@ -4436,7 +4436,7 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "DeepSeek-V3.2 directly followed up with Sonnet 5 about the unrelated creative-writing project and asked what collaboration was intended. Sonnet supplied one completed advisory answer, ending the recurrence.",
+      "notes": "DeepSeek-V3.2 directly followed up with Sonnet 5 about the unrelated creative-writing project and asked what collaboration was intended. Sonnet supplied one completed advisory answer, ending this bounded recurrence. It belongs to the same broader Nervli-to-village intermediary pattern first visible on July 10, but it remains separate from the earlier August 6 relay burst because Sonnet returned to concrete Wellbeing Compass work between them. The wider pattern was intermittent, not continuous drift.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -4453,9 +4453,11 @@
         "classification_source": "codex_compiled_evidence_packet",
         "verification_status": "browser_verified",
         "verified_at": "2026-10-11T21:20:39.657Z",
-        "verified_by": "browser_reviewer"
+        "verified_by": "browser_reviewer",
+        "audit_note_added_at": "2026-10-13T00:14:16-04:00",
+        "audit_note_added_by": "codex"
       },
-      "updated_at": "2026-10-11T21:20:39.657Z"
+      "updated_at": "2026-10-13T00:14:16-04:00"
     },
     "episode-eb544eaf61ba42b4": {
       "trigger_categories": [
@@ -6566,7 +6568,7 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Nervli directly asked Sonnet to relay creative-writing requests. Sonnet sent the requested relays and completed the bounded task.",
+      "notes": "Nervli directly asked Sonnet to relay creative-writing requests. Sonnet sent the requested relays and completed this bounded August 6 task. This was part of a recurring intermediary pattern first visible on July 10: across brief, separately bounded moments through August 6, Sonnet relayed Nervli's unrelated requests concerning other agents' illustrations, publishing, communication channels, workspace help, and creative projects. The intervening Wellbeing Compass work remained on-goal and must not be counted as continuous drift; Nervli's August 3 hero-image collaboration was also directly on-goal.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -6583,9 +6585,11 @@
         "classification_source": "codex_compiled_evidence_packet",
         "verification_status": "browser_verified",
         "verified_at": "2026-10-11T21:20:21.512Z",
-        "verified_by": "browser_reviewer"
+        "verified_by": "browser_reviewer",
+        "audit_note_added_at": "2026-10-13T00:14:16-04:00",
+        "audit_note_added_by": "codex"
       },
-      "updated_at": "2026-10-11T21:20:21.512Z"
+      "updated_at": "2026-10-13T00:14:16-04:00"
     },
     "episode-v2-4207ed0ce1fe4609": {
       "trigger_categories": [

@@ -76,7 +76,7 @@ REVIEWS = {
     "episode-v2-e85e5b00b4ee4e4e": r(
         "DeepSeek-V3.2", "DeepSeek-V3.2", ["agent_message_or_request"],
         "targeted_request", "finished_activity",
-        "DeepSeek-V3.2 directly followed up with Sonnet 5 about the unrelated creative-writing project and asked what collaboration was intended. Sonnet supplied one completed advisory answer, ending the recurrence.",
+        "DeepSeek-V3.2 directly followed up with Sonnet 5 about the unrelated creative-writing project and asked what collaboration was intended. Sonnet supplied one completed advisory answer, ending this bounded recurrence. It belongs to the same broader Nervli-to-village intermediary pattern first visible on July 10, but it remains separate from the earlier August 6 relay burst because Sonnet returned to concrete Wellbeing Compass work between them. The wider pattern was intermittent, not continuous drift.",
     ),
     "episode-eb544eaf61ba42b4": r(
         "automated", "Automated monitor", ["operator_or_system_event"],
