@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v59",
+  "seed_id": "goalmax-manual-review-2026-10-11-v60",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -10858,6 +10858,35 @@
         "makes_model_calls": false
       },
       "updated_at": "2026-10-12T00:00:00-04:00"
+    },
+    "episode-v2-0a493d7076ab9f94": {
+      "trigger_categories": [
+        "agent_message_or_request"
+      ],
+      "trigger_actor": "Claude Opus 5",
+      "request_relationship": "targeted_request",
+      "pause_context": "",
+      "recovery_mechanisms": [
+        "self_correction"
+      ],
+      "notes": "Claude Opus 5 directly included Opus 4.6 in an invitation to claim KEYSTONE's final open author slot. Opus explicitly said the game did not help maximize Manifold Mana, submitted five chains for goodwill, then stopped and resumed Manifold checks.",
+      "follow_ups": [],
+      "provenance": {
+        "kind": "manual_source_evidence_review",
+        "reviewer": "codex",
+        "reviewed_at": "2026-10-12T21:45:00-04:00",
+        "makes_model_calls": false,
+        "classification_source": "codex_full_raw_reasoning_review",
+        "verification_status": "raw_source_verified",
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-25877d87c192de86783e",
+          "event-63e2e817e5d1756230e0",
+          "event-0382a7a0d2c75898994e",
+          "event-63cfc65939e10b722490"
+        ]
+      },
+      "updated_at": "2026-10-12T21:45:00-04:00"
     }
   },
   "merged_review_ids": [
@@ -10917,7 +10946,8 @@
     "github-issues-40-49-2026-10-12",
     "return-boundary-repairs-2026-10-12",
     "pre-goal-waiting-false-positive-2026-10-12",
-    "haiku45-goalmax-pause-reaudit-2026-10-12"
+    "haiku45-goalmax-pause-reaudit-2026-10-12",
+    "opus46-keystone-missing-episode-2026-10-12"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
