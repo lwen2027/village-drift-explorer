@@ -988,21 +988,38 @@ function renderGoalAtlas() {
         const onsetMs = episodeOnsetMs(episode);
         if (onsetMs == null) return;
         const reviewed = reviewedEpisodeIds.has(episode.episode_id);
-        const title = `${episode.activity} · ${formatDuration(episode.duration_seconds == null ? NaN : Number(episode.duration_seconds))}${reviewed ? " · human reviewed" : ""}`;
-        const intervals = episodeBouts(episode).length
-          ? episodeBouts(episode)
+        const totalSeconds = episode.duration_seconds == null ? NaN : Number(episode.duration_seconds);
+        // Bout totals are drift time, so show hours rather than calendar days.
+        const totalText = Number.isFinite(totalSeconds) && totalSeconds >= 86400
+          ? `${Math.round(totalSeconds / 3600)} hr`
+          : formatDuration(totalSeconds);
+        const activityText = shortText(episode.activity, 90);
+        const reviewedText = reviewed ? " · human reviewed" : "";
+        const bouts = episodeBouts(episode);
+        const intervals = bouts.length
+          ? bouts
           : [validatedInterval(episode) || { startMs: onsetMs, endMs: null }];
-        intervals.forEach((interval) => {
-          const displayStart = Math.max(period.startMs, Math.min(period.endMs, interval.startMs));
-          const left = Math.max(0, Math.min(100, ((displayStart - period.startMs) / period.durationMs) * 100));
+        const position = (ms) => Math.max(0, Math.min(100, ((Math.max(period.startMs, Math.min(period.endMs, ms)) - period.startMs) / period.durationMs) * 100));
+        if (bouts.length > 1) {
+          // A faint line ties together the bouts that belong to one episode.
+          const span = document.createElement("span");
+          span.className = "goal-strip-span";
+          span.style.left = `${position(bouts[0].startMs)}%`;
+          span.style.width = `${Math.max(.25, position(bouts.at(-1).endMs) - position(bouts[0].startMs))}%`;
+          span.dataset.tip = `${activityText} · ${bouts.length} drift bouts · ${totalText} total${reviewedText}`;
+          track.append(span);
+        }
+        intervals.forEach((interval, index) => {
+          const left = position(interval.startMs);
           const segment = document.createElement("span");
           segment.className = `goal-strip-segment${interval.endMs == null ? " is-unknown" : ""}${reviewed ? " is-reviewed" : ""}`;
           segment.style.left = `${left}%`;
           if (interval.endMs != null) {
-            const end = Math.max(displayStart, Math.min(period.endMs, interval.endMs));
-            segment.style.width = `${Math.max(.25, ((end - displayStart) / period.durationMs) * 100)}%`;
+            segment.style.width = `${Math.max(.25, position(interval.endMs) - left)}%`;
           }
-          segment.title = title;
+          segment.dataset.tip = bouts.length > 1
+            ? `${activityText} · bout ${index + 1} of ${bouts.length}, ${displayDay(new Date(interval.startMs).toISOString())}: ${formatDuration((interval.endMs - interval.startMs) / 1000)} (episode total ${totalText})${reviewedText}`
+            : `${activityText} · ${totalText}${reviewedText}`;
           track.append(segment);
         });
       });
@@ -1012,7 +1029,7 @@ function renderGoalAtlas() {
         const marker = document.createElement("span");
         marker.className = "goal-strip-correction";
         marker.style.left = `${((correctionMs - period.startMs) / period.durationMs) * 100}%`;
-        marker.title = `Operator correction · ${displayDay(correction.timestamp)} · ${correction.summary}`;
+        marker.dataset.tip = `Operator correction · ${displayDay(correction.timestamp)} · ${correction.summary}`;
         track.append(marker);
       });
       const count = document.createElement("div");

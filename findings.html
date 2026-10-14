@@ -161,6 +161,7 @@
     .goal-strip-agent { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 800; }
     .goal-strip-goal { margin-top: 2px; overflow: hidden; color: var(--muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
     .goal-strip-track { position: relative; height: 12px; border-radius: 999px; background: var(--paper-deep); }
+    .goal-strip-span { position: absolute; top: 5px; height: 2px; border-radius: 999px; background: var(--rust); opacity: .35; }
     .goal-strip-segment { position: absolute; top: 2px; height: 8px; min-width: 2px; border-radius: 999px; background: var(--rust); }
     .goal-strip-segment.is-reviewed { box-shadow: inset 0 0 0 2px var(--green); }
     .goal-strip-segment.is-unknown { top: 2px; width: 8px !important; min-width: 8px; height: 8px; border-radius: 1px; transform: translateX(-4px) rotate(45deg); background: var(--rust); }
@@ -621,6 +622,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-substack-message"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-bout-spans"></script>
 </body>
 </html>
