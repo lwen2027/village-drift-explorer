@@ -138,6 +138,16 @@
     .legend-swatch.is-circle { width: 10px; height: 10px; border-radius: 50%; }
     .legend-swatch.is-point { width: 8px; height: 8px; border-radius: 1px; transform: rotate(45deg); background: var(--rust); }
     .legend-swatch.is-reviewed { background: var(--green); }
+    .burden-filter-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-top: 10px; }
+    .burden-filter-row .viz-legend { flex: 1; margin-top: 0; }
+    .burden-filter-chip { padding: 5px 8px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font: inherit; }
+    .burden-filter-chip[aria-pressed="true"] { border-color: var(--ink-soft); background: var(--paper-deep); color: var(--ink); }
+    .burden-filter-chip[aria-pressed="false"] { opacity: .48; text-decoration: line-through; }
+    .burden-filter-chip:focus-visible, .burden-filter-button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .burden-filter-actions { display: flex; flex: none; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 7px; }
+    .burden-filter-button { padding: 4px 7px; border: 1px solid var(--line); border-radius: 7px; background: var(--card); color: var(--muted); cursor: pointer; font: 700 10px/1.2 var(--mono); text-transform: uppercase; }
+    .burden-filter-button:disabled { cursor: default; opacity: .4; }
+    .burden-context-toggle { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font: 700 10px/1.2 var(--mono); white-space: nowrap; }
 
     .goal-atlas { max-height: 560px; overflow: auto; padding-right: 5px; }
     .goal-atlas-group { position: sticky; top: 0; z-index: 1; padding: 12px 0 8px; border-bottom: 1px solid var(--line); background: var(--card); }
@@ -353,6 +363,8 @@
       .viz-controls { align-items: stretch; width: 100%; }
       .viz-control-label { justify-content: space-between; }
       .viz-control { width: 100%; }
+      .burden-filter-row { flex-direction: column; }
+      .burden-filter-actions { justify-content: flex-start; }
       .fingerprint-grid { grid-template-columns: 1fr; }
       .score-head { display: none; }
       .score-row { grid-template-columns: 1fr 58px; }
@@ -431,7 +443,14 @@
               </div>
             </div>
             <svg class="svg-chart" id="burden-scatter" viewBox="0 0 640 360" role="img" aria-label="Drift burden versus episode frequency scatterplot"></svg>
-            <div class="viz-legend" id="burden-legend"></div>
+            <div class="burden-filter-row">
+              <div class="viz-legend" id="burden-legend" aria-label="Scatterplot filters"></div>
+              <div class="burden-filter-actions">
+                <button class="burden-filter-button" id="burden-select-all" type="button">All</button>
+                <button class="burden-filter-button" id="burden-clear" type="button">Clear</button>
+                <label class="burden-context-toggle"><input id="burden-show-context" type="checkbox" checked> Show excluded</label>
+              </div>
+            </div>
             <p class="viz-note">Y-axis is the minimum validated share of elapsed calendar time. Episodes without a numeric duration affect frequency but not burden; a red outline marks goal periods containing one or more such episodes.</p>
           </article>
 
@@ -562,6 +581,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261013-burden-highlights"></script>
+  <script type="module" src="./scripts/findings.js?v=20261013-burden-filters"></script>
 </body>
 </html>

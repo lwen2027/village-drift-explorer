@@ -943,6 +943,7 @@ function addCartesianFrame(svg, { left, right, top, bottom, xTicks, yTicks, xSca
 }
 
 const burdenColors = ["#3f7082", "#ae5037", "#a77b2c", "#466f61", "#74578f", "#bd6f3b", "#657a3d", "#8a5961", "#5b6f9e", "#8d734e"];
+const burdenSelectionsByMode = new Map();
 
 function dominantMechanism(period) {
   const counts = new Map();
@@ -981,16 +982,31 @@ function orderedBurdenGroups(plotted, mode) {
   return [...present.values()].sort((left, right) => left.label.localeCompare(right.label));
 }
 
-function renderBurdenLegend(groups, colorByKey) {
+function burdenSelection(mode, groups) {
+  if (!burdenSelectionsByMode.has(mode)) {
+    burdenSelectionsByMode.set(mode, new Set(groups.map((group) => group.key)));
+  }
+  return burdenSelectionsByMode.get(mode);
+}
+
+function renderBurdenLegend(groups, colorByKey, selectedKeys, groupCounts) {
   const legend = document.querySelector("#burden-legend");
   legend.replaceChildren();
   groups.forEach((group) => {
-    const item = document.createElement("span");
-    item.className = "legend-item";
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "legend-item burden-filter-chip";
+    item.setAttribute("aria-pressed", String(selectedKeys.has(group.key)));
+    item.title = `${selectedKeys.has(group.key) ? "Exclude" : "Include"} ${group.label}`;
     const swatch = document.createElement("span");
     swatch.className = "legend-swatch is-circle";
     swatch.style.background = colorByKey.get(group.key);
-    item.append(swatch, document.createTextNode(group.label));
+    item.append(swatch, document.createTextNode(`${group.label} · ${groupCounts.get(group.key) || 0}`));
+    item.addEventListener("click", () => {
+      if (selectedKeys.has(group.key)) selectedKeys.delete(group.key);
+      else selectedKeys.add(group.key);
+      renderBurdenScatter();
+    });
     legend.append(item);
   });
 }
@@ -1000,6 +1016,13 @@ function renderBurdenScatter() {
   const mode = document.querySelector("#burden-color-mode").value;
   const groups = orderedBurdenGroups(plotted, mode);
   const colorByKey = new Map(groups.map((group, index) => [group.key, burdenColors[index % burdenColors.length]]));
+  const selectedKeys = burdenSelection(mode, groups);
+  const groupCounts = new Map(groups.map((group) => [group.key, 0]));
+  plotted.forEach((period) => {
+    const key = burdenGrouping(period, mode).key;
+    groupCounts.set(key, (groupCounts.get(key) || 0) + 1);
+  });
+  const showContext = document.querySelector("#burden-show-context").checked;
   const svg = document.querySelector("#burden-scatter");
   svg.replaceChildren();
   const left = 58, right = 620, top = 20, bottom = 305;
@@ -1017,22 +1040,32 @@ function renderBurdenScatter() {
     label: `${Math.round(((yMax * index) / 5) * 100)}%`
   }));
   addCartesianFrame(svg, { left, right, top, bottom, xTicks, yTicks, xScale, yScale, xLabel: "Confirmed episodes", yLabel: "Validated drift share" });
-  plotted.forEach((period) => {
+  const orderedPoints = [...plotted].sort((leftPeriod, rightPeriod) => {
+    const leftSelected = selectedKeys.has(burdenGrouping(leftPeriod, mode).key);
+    const rightSelected = selectedKeys.has(burdenGrouping(rightPeriod, mode).key);
+    return Number(leftSelected) - Number(rightSelected);
+  });
+  orderedPoints.forEach((period) => {
     const grouping = burdenGrouping(period, mode);
+    const selected = selectedKeys.has(grouping.key);
+    if (!selected && !showContext) return;
     const point = svgElement("circle", {
       cx: xScale(period.episodes.length),
       cy: yScale(period.burdenShare),
-      r: 5.5,
-      fill: colorByKey.get(grouping.key) || "#8d8678",
-      stroke: period.unknownDurationCount ? "#ae5037" : "#fbf8f0",
-      "stroke-width": period.unknownDurationCount ? 2.5 : 1.5,
-      opacity: .84
+      r: selected ? 6 : 4.5,
+      fill: selected ? (colorByKey.get(grouping.key) || "#8d8678") : "#aaa294",
+      stroke: selected && period.unknownDurationCount ? "#ae5037" : "#fbf8f0",
+      "stroke-width": selected && period.unknownDurationCount ? 2.5 : 1.5,
+      opacity: selected ? .9 : .13
     });
-    svgTitle(point, `${period.agent} — ${period.goal}\n${grouping.label}\n${period.episodes.length} episodes; ${(period.burdenShare * 100).toFixed(2)}% validated drift share; ${period.unknownDurationCount} unresolved durations`);
+    svgTitle(point, `${selected ? "" : "Excluded · "}${period.agent} — ${period.goal}\n${grouping.label}\n${period.episodes.length} episodes; ${(period.burdenShare * 100).toFixed(2)}% validated drift share; ${period.unknownDurationCount} unresolved durations`);
     svg.append(point);
   });
-  renderBurdenLegend(groups, colorByKey);
-  document.querySelector("#burden-meta").textContent = `${plotted.length} drift-positive goal periods`;
+  renderBurdenLegend(groups, colorByKey, selectedKeys, groupCounts);
+  const selectedCount = plotted.filter((period) => selectedKeys.has(burdenGrouping(period, mode).key)).length;
+  document.querySelector("#burden-meta").textContent = `${selectedCount} of ${plotted.length} goal periods`;
+  document.querySelector("#burden-select-all").disabled = selectedKeys.size === groups.length;
+  document.querySelector("#burden-clear").disabled = selectedKeys.size === 0;
 }
 
 function renderDurationDistribution() {
@@ -1312,6 +1345,17 @@ function initializeExplorations() {
   document.querySelector("#goal-atlas-sort").addEventListener("change", renderGoalAtlas);
   renderBurdenScatter();
   document.querySelector("#burden-color-mode").addEventListener("change", renderBurdenScatter);
+  document.querySelector("#burden-select-all").addEventListener("click", () => {
+    const mode = document.querySelector("#burden-color-mode").value;
+    const groups = orderedBurdenGroups(goalPeriods.filter((period) => period.episodes.length), mode);
+    burdenSelectionsByMode.set(mode, new Set(groups.map((group) => group.key)));
+    renderBurdenScatter();
+  });
+  document.querySelector("#burden-clear").addEventListener("click", () => {
+    burdenSelectionsByMode.set(document.querySelector("#burden-color-mode").value, new Set());
+    renderBurdenScatter();
+  });
+  document.querySelector("#burden-show-context").addEventListener("change", renderBurdenScatter);
   renderDurationDistribution();
   renderRecurrence();
   initializeCumulativeChart();
