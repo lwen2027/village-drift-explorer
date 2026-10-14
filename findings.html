@@ -471,6 +471,12 @@
           </article>
 
           <article class="viz-card">
+            <div class="viz-heading"><div><h3>Cumulative drift burden</h3><p>How validated drift time accumulates across one selected goal period.</p></div><select class="viz-control" id="cumulative-goal-select" aria-label="Select an agent goal period"></select></div>
+            <svg class="svg-chart" id="cumulative-chart" viewBox="0 0 640 350" role="img" aria-label="Cumulative drift burden across a goal period"></svg>
+            <p class="viz-note" id="cumulative-note"></p>
+          </article>
+
+          <article class="viz-card">
             <div class="viz-heading"><div><h3>Episode duration</h3><p>How long confirmed drift episodes lasted, grouped into readable time ranges.</p></div><span class="viz-meta" id="duration-meta"></span></div>
             <div class="duration-bars" id="duration-bars"></div>
             <p class="viz-note" id="duration-note"></p>
@@ -480,12 +486,6 @@
             <div class="viz-heading"><div><h3>Recurrence after first drift</h3><p>How many goal periods had another confirmed episode after their first drift.</p></div><span class="viz-meta" id="recurrence-meta"></span></div>
             <div class="recurrence-bars" id="recurrence-bars" role="img" aria-label="Observed recurrence after first drift by first-drift position"></div>
             <p class="viz-note">A recurrence means a later confirmed episode in the same goal period. These are observed proportions, not causal estimates; very small cohorts are labeled rather than treated as reliable comparisons.</p>
-          </article>
-
-          <article class="viz-card">
-            <div class="viz-heading"><div><h3>Cumulative drift burden</h3><p>How validated drift time accumulates across one selected goal period.</p></div><select class="viz-control" id="cumulative-goal-select" aria-label="Select an agent goal period"></select></div>
-            <svg class="svg-chart" id="cumulative-chart" viewBox="0 0 640 350" role="img" aria-label="Cumulative drift burden across a goal period"></svg>
-            <p class="viz-note" id="cumulative-note"></p>
           </article>
 
           <article class="viz-card is-wide">
