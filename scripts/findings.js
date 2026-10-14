@@ -669,7 +669,12 @@ function metricCard(labelText, value, copy, fraction = null) {
 }
 
 function renderMetrics() {
-  const reviewedInQueue = rows.filter((row) => queueIds.has(row.episodeId)).length;
+  // Borderline episodes are left out of the goal-max rows but stay in the review queue.
+  const reviewedInQueue = [...queueIds].filter((episodeId) => {
+    const annotation = mergedAnnotations.get(episodeId)
+      || committedSeed.annotations?.[episodeId];
+    return annotation && annotationIsFullyResolved(annotation);
+  }).length;
   const grid = document.querySelector("#metric-grid");
   grid.replaceChildren(
     metricCard(
