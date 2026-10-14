@@ -1413,7 +1413,39 @@ function localDateKey(milliseconds) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
+const VILLAGE_TIME_ZONE = "America/Los_Angeles";
+const VILLAGE_ACTIVE_START_HOUR = 9;
+const VILLAGE_ACTIVE_END_HOUR = 17;
+const villageClock = new Intl.DateTimeFormat("en-CA", {
+  timeZone: VILLAGE_TIME_ZONE,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  hourCycle: "h23"
+});
+
+function villageDateAndHour(milliseconds) {
+  const parts = Object.fromEntries(
+    villageClock.formatToParts(new Date(milliseconds))
+      .filter((part) => part.type !== "literal")
+      .map((part) => [part.type, part.value])
+  );
+  return {
+    date: `${parts.year}-${parts.month}-${parts.day}`,
+    hour: Number(parts.hour)
+  };
+}
+
+function villageHourLabel(hour) {
+  if (hour === 12) return "12 PM";
+  if (hour > 12) return `${hour - 12} PM`;
+  return `${hour} AM`;
+}
+
 function renderDriftWeather() {
+  const dates = [...new Set(goalMaxDays)];
+  const activeDateSet = new Set(dates);
   const cells = new Map();
   function cellFor(date, hour) {
     const key = `${date}\u0000${hour}`;
@@ -1425,8 +1457,10 @@ function renderDriftWeather() {
     if (!interval) {
       const onset = episodeOnsetMs(episode);
       if (onset != null) {
-        const date = new Date(onset);
-        cellFor(localDateKey(onset), date.getHours()).unresolved += 1;
+        const { date, hour } = villageDateAndHour(onset);
+        if (activeDateSet.has(date) && hour >= VILLAGE_ACTIVE_START_HOUR && hour < VILLAGE_ACTIVE_END_HOUR) {
+          cellFor(date, hour).unresolved += 1;
+        }
       }
       return;
     }
@@ -1435,45 +1469,37 @@ function renderDriftWeather() {
       const overlap = Math.min(interval.endMs, bucket + 3600000) - Math.max(interval.startMs, bucket);
       if (overlap <= 0 && interval.endMs !== interval.startMs) continue;
       const midpoint = bucket + 1800000;
-      const date = new Date(midpoint);
-      cellFor(localDateKey(midpoint), date.getHours()).exact += 1;
+      const { date, hour } = villageDateAndHour(midpoint);
+      if (!activeDateSet.has(date) || hour < VILLAGE_ACTIVE_START_HOUR || hour >= VILLAGE_ACTIVE_END_HOUR) continue;
+      cellFor(date, hour).exact += 1;
     }
   });
 
-  const startMs = Math.min(...goalPeriods.map((period) => period.startMs));
-  const dates = [];
-  const cursor = new Date(startMs);
-  cursor.setHours(12, 0, 0, 0);
-  const lastDate = new Date(analysisHorizonMs);
-  lastDate.setHours(12, 0, 0, 0);
-  while (cursor <= lastDate) {
-    dates.push(localDateKey(cursor.getTime()));
-    cursor.setDate(cursor.getDate() + 1);
-  }
   const maxExact = Math.max(1, ...cells.values().map((cell) => cell.exact));
   const svg = document.querySelector("#weather-chart");
   svg.replaceChildren();
   const left = 54, right = 1100, top = 30, bottom = 288;
   const cellWidth = (right - left) / dates.length;
-  const cellHeight = (bottom - top) / 24;
+  const activeHours = VILLAGE_ACTIVE_END_HOUR - VILLAGE_ACTIVE_START_HOUR;
+  const cellHeight = (bottom - top) / activeHours;
   dates.forEach((date, dateIndex) => {
-    for (let hour = 0; hour < 24; hour += 1) {
+    for (let hour = VILLAGE_ACTIVE_START_HOUR; hour < VILLAGE_ACTIVE_END_HOUR; hour += 1) {
       const cell = cells.get(`${date}\u0000${hour}`) || { exact: 0, unresolved: 0 };
       const opacity = cell.exact ? .08 + .84 * (cell.exact / maxExact) : .025;
       const rect = svgElement("rect", {
         x: left + dateIndex * cellWidth,
-        y: top + hour * cellHeight,
+        y: top + (hour - VILLAGE_ACTIVE_START_HOUR) * cellHeight,
         width: Math.max(.8, cellWidth - .5),
         height: Math.max(.8, cellHeight - .5),
         rx: 1,
         fill: `rgba(174, 80, 55, ${opacity})`
       });
-      svgTitle(rect, `${date} ${String(hour).padStart(2, "0")}:00 · ${cell.exact} validated concurrent drift · ${cell.unresolved} unresolved-duration onsets`);
+      svgTitle(rect, `${date} ${villageHourLabel(hour)} PT · ${cell.exact} validated concurrent drift · ${cell.unresolved} unresolved-duration onsets`);
       svg.append(rect);
       if (cell.unresolved) {
         svg.append(svgElement("circle", {
           cx: left + (dateIndex + .5) * cellWidth,
-          cy: top + (hour + .5) * cellHeight,
+          cy: top + (hour - VILLAGE_ACTIVE_START_HOUR + .5) * cellHeight,
           r: Math.min(3.2, 1.3 + Math.log2(cell.unresolved + 1)),
           fill: "#a77b2c"
         }));
@@ -1489,12 +1515,11 @@ function renderDriftWeather() {
       }, date.slice(5)));
     }
   });
-  [0, 6, 12, 18, 23].forEach((hour) => {
-    svg.append(svgElement("text", { x: left - 8, y: top + (hour + .7) * cellHeight, "text-anchor": "end", class: "svg-label" }, `${String(hour).padStart(2, "0")}:00`));
+  [9, 11, 13, 15, 17].forEach((hour) => {
+    svg.append(svgElement("text", { x: left - 8, y: top + (hour - VILLAGE_ACTIVE_START_HOUR) * cellHeight + 3, "text-anchor": "end", class: "svg-label" }, villageHourLabel(hour)));
   });
-  svg.append(svgElement("text", { x: (left + right) / 2, y: 334, "text-anchor": "middle", class: "svg-title" }, "Local calendar date"));
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "browser local time";
-  document.querySelector("#weather-meta").textContent = `${dates.length} days · ${timezone}`;
+  svg.append(svgElement("text", { x: (left + right) / 2, y: 334, "text-anchor": "middle", class: "svg-title" }, "Village run date (Pacific Time)"));
+  document.querySelector("#weather-meta").textContent = `${dates.length} Village days · 9 AM–5 PM PT`;
 }
 
 function median(values) {
