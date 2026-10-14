@@ -182,6 +182,16 @@
     .duration-track { height: 12px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
     .duration-fill { display: block; height: 100%; border-radius: inherit; background: var(--blue); }
     .duration-count { font: 700 11px/1 var(--mono); text-align: right; }
+    .recurrence-bars { display: grid; gap: 13px; }
+    .recurrence-row { display: grid; gap: 6px; }
+    .recurrence-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-size: 12px; }
+    .recurrence-label { font-weight: 800; }
+    .recurrence-value { color: var(--muted); font: 700 11px/1.2 var(--mono); text-align: right; }
+    .recurrence-track { height: 14px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
+    .recurrence-fill { display: block; height: 100%; border-radius: inherit; background: var(--rust); }
+    .recurrence-row.is-small .recurrence-fill { background: var(--blue); }
+    .recurrence-row.is-empty .recurrence-track { background: repeating-linear-gradient(135deg, var(--paper-deep), var(--paper-deep) 6px, rgba(207, 193, 166, .42) 6px, rgba(207, 193, 166, .42) 12px); }
+    .recurrence-detail { color: var(--muted); font-size: 11px; line-height: 1.35; }
     .flow-wrap { overflow-x: auto; }
     .flow-chart { min-width: 940px; }
     .weather-wrap { overflow-x: auto; padding-bottom: 5px; }
@@ -467,9 +477,9 @@
           </article>
 
           <article class="viz-card">
-            <div class="viz-heading"><div><h3>Recurrence after first drift</h3><p>Cumulative probability of another confirmed episode, grouped by first-drift position.</p></div><span class="viz-meta" id="recurrence-meta"></span></div>
-            <svg class="svg-chart" id="recurrence-chart" viewBox="0 0 640 350" role="img" aria-label="Recurrence after first drift survival curves"></svg>
-            <p class="viz-note">Kaplan–Meier-style censoring adjusts for unequal remaining observation time. This measures association, not whether early drift causes later drift.</p>
+            <div class="viz-heading"><div><h3>Recurrence after first drift</h3><p>How many goal periods had another confirmed episode after their first drift.</p></div><span class="viz-meta" id="recurrence-meta"></span></div>
+            <div class="recurrence-bars" id="recurrence-bars" role="img" aria-label="Observed recurrence after first drift by first-drift position"></div>
+            <p class="viz-note">A recurrence means a later confirmed episode in the same goal period. These are observed proportions, not causal estimates; very small cohorts are labeled rather than treated as reliable comparisons.</p>
           </article>
 
           <article class="viz-card">
@@ -586,6 +596,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-targeted-tooltip"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-recurrence-bars"></script>
 </body>
 </html>

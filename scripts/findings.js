@@ -1204,51 +1204,41 @@ function recurrenceSubjects() {
   return groups;
 }
 
-function recurrenceCurve(subjects) {
-  const eventTimes = [...new Set(subjects.filter((subject) => subject.event).map((subject) => subject.time))].sort((left, right) => left - right);
-  let survival = 1;
-  const points = [{ time: 0, recurrence: 0 }];
-  eventTimes.forEach((time) => {
-    const atRisk = subjects.filter((subject) => subject.time >= time).length;
-    const events = subjects.filter((subject) => subject.event && subject.time === time).length;
-    if (!atRisk || !events) return;
-    points.push({ time, recurrence: 1 - survival });
-    survival *= 1 - events / atRisk;
-    points.push({ time, recurrence: 1 - survival });
-  });
-  if (subjects.length) {
-    points.push({
-      time: Math.max(...subjects.map((subject) => subject.time)),
-      recurrence: 1 - survival
-    });
-  }
-  return points;
-}
-
 function renderRecurrence() {
   const groups = recurrenceSubjects();
-  const colors = { early: "#ae5037", middle: "#3f7082", late: "#a77b2c" };
   const labels = { early: "First 20%", middle: "Middle 60%", late: "Final 20%" };
   const allSubjects = Object.values(groups).flat();
-  const svg = document.querySelector("#recurrence-chart");
-  svg.replaceChildren();
-  const left = 58, right = 620, top = 25, bottom = 290;
-  const maxDays = Math.max(7, ...allSubjects.map((subject) => subject.time));
-  const xScale = (days) => left + (days / maxDays) * (right - left);
-  const yScale = (value) => bottom - value * (bottom - top);
-  addCartesianFrame(svg, {
-    left, right, top, bottom,
-    xTicks: Array.from({ length: 6 }, (_, index) => ({ value: (maxDays * index) / 5, label: `${Math.round((maxDays * index) / 5)}d` })),
-    yTicks: [0, .25, .5, .75, 1].map((value) => ({ value, label: `${value * 100}%` })),
-    xScale, yScale, xLabel: "Days after first drift", yLabel: "Probability of another drift"
-  });
-  Object.entries(groups).forEach(([group, subjects], groupIndex) => {
-    const points = recurrenceCurve(subjects);
-    const pathPoints = points.map((point) => `${xScale(point.time)},${yScale(point.recurrence)}`).join(" ");
-    svg.append(svgElement("polyline", { points: pathPoints, fill: "none", stroke: colors[group], "stroke-width": 3 }));
-    const legendY = 18 + groupIndex * 17;
-    svg.append(svgElement("line", { x1: 390, x2: 412, y1: legendY, y2: legendY, stroke: colors[group], "stroke-width": 3 }));
-    svg.append(svgElement("text", { x: 418, y: legendY + 3, class: "svg-label" }, `${labels[group]} (n=${subjects.length})`));
+  const container = document.querySelector("#recurrence-bars");
+  container.replaceChildren();
+  Object.entries(groups).forEach(([group, subjects]) => {
+    const recurrent = subjects.filter((subject) => subject.event).length;
+    const rate = subjects.length ? recurrent / subjects.length : 0;
+    const row = document.createElement("div");
+    row.className = `recurrence-row${subjects.length === 0 ? " is-empty" : subjects.length < 5 ? " is-small" : ""}`;
+    const heading = document.createElement("div");
+    heading.className = "recurrence-heading";
+    const label = document.createElement("span");
+    label.className = "recurrence-label";
+    label.textContent = labels[group];
+    const value = document.createElement("span");
+    value.className = "recurrence-value";
+    value.textContent = subjects.length ? `${recurrent} of ${subjects.length} · ${Math.round(rate * 100)}%` : "No goal periods";
+    heading.append(label, value);
+    const track = document.createElement("div");
+    track.className = "recurrence-track";
+    const fill = document.createElement("span");
+    fill.className = "recurrence-fill";
+    fill.style.width = `${rate * 100}%`;
+    track.append(fill);
+    const detail = document.createElement("div");
+    detail.className = "recurrence-detail";
+    detail.textContent = subjects.length === 0
+      ? "No first drift began this late in a goal period."
+      : subjects.length < 5
+        ? "Too few goal periods for a stable comparison."
+        : `${subjects.length - recurrent} goal period${subjects.length - recurrent === 1 ? "" : "s"} had no later confirmed episode.`;
+    row.append(heading, track, detail);
+    container.append(row);
   });
   document.querySelector("#recurrence-meta").textContent = `${allSubjects.length} drift-positive goal periods`;
 }
