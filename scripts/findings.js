@@ -835,13 +835,6 @@ function svgTitle(parent, textValue) {
   parent.append(svgElement("title", {}, textValue));
 }
 
-function median(values) {
-  if (!values.length) return 0;
-  const sorted = [...values].sort((left, right) => left - right);
-  const middle = Math.floor(sorted.length / 2);
-  return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
-}
-
 function goalAtlasGroups(periods) {
   if (!goalCategories.length) return [{ category: null, periods }];
   const groups = goalCategories.map((category) => ({
