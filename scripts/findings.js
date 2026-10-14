@@ -1099,33 +1099,13 @@ function renderDurationDistribution() {
     track.append(fill);
     const count = document.createElement("span");
     count.className = "duration-count";
-    count.textContent = String(bin.count);
+    count.textContent = `${bin.count} (${known.length ? Math.round((bin.count / known.length) * 100) : 0}%)`;
     row.append(labelNode, track, count);
     container.append(row);
   });
-
-  const svg = document.querySelector("#duration-ecdf");
-  svg.replaceChildren();
-  const left = 58, right = 620, top = 20, bottom = 155;
-  const minLog = Math.log10(60);
-  const maxSeconds = Math.max(604800, known.at(-1) || 604800);
-  const maxLog = Math.log10(maxSeconds);
-  const xScale = (seconds) => left + ((Math.log10(Math.max(60, seconds)) - minLog) / (maxLog - minLog)) * (right - left);
-  const yScale = (value) => bottom - value * (bottom - top);
-  const durationTicks = [60, 600, 3600, 21600, 86400, 604800].filter((value) => value <= maxSeconds);
-  addCartesianFrame(svg, {
-    left, right, top, bottom,
-    xTicks: durationTicks.map((value) => ({ value, label: formatDuration(value) })),
-    yTicks: [0, .25, .5, .75, 1].map((value) => ({ value, label: `${value * 100}%` })),
-    xScale, yScale, xLabel: "Validated duration (log scale)", yLabel: "Episodes ≤ duration"
-  });
-  if (known.length) {
-    const points = known.map((seconds, index) => `${xScale(Math.max(60, seconds))},${yScale((index + 1) / known.length)}`);
-    svg.append(svgElement("polyline", { points: points.join(" "), fill: "none", stroke: "#3f7082", "stroke-width": 3 }));
-  }
   const unknown = goalMaxEpisodes.length - known.length;
-  document.querySelector("#duration-meta").textContent = `${known.length} validated`;
-  document.querySelector("#duration-note").textContent = `${unknown} of ${goalMaxEpisodes.length} confirmed episodes have unresolved numeric duration and are excluded from the histogram and curve.`;
+  document.querySelector("#duration-meta").textContent = `${known.length} episodes with validated duration`;
+  document.querySelector("#duration-note").textContent = `${unknown} of ${goalMaxEpisodes.length} confirmed episodes have unresolved numeric duration and are excluded from this chart. Percentages use the ${known.length} episodes with validated duration.`;
 }
 
 function recurrenceSubjects() {
