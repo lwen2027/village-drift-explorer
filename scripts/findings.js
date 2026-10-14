@@ -890,6 +890,36 @@ function goalAtlasGroupHeading({ category, periods }) {
   return heading;
 }
 
+// The atlas clips overflowing names, so tooltips are drawn in a fixed layer outside it.
+const floatingTip = document.createElement("div");
+floatingTip.className = "floating-tip";
+floatingTip.setAttribute("role", "tooltip");
+floatingTip.hidden = true;
+document.body.append(floatingTip);
+
+function showFloatingTip(event) {
+  const target = event.target.closest?.("[data-tip]");
+  if (!target) return;
+  floatingTip.textContent = target.dataset.tip;
+  floatingTip.hidden = false;
+  const rect = target.getBoundingClientRect();
+  const tipRect = floatingTip.getBoundingClientRect();
+  const left = Math.min(window.innerWidth - tipRect.width - 8, Math.max(8, rect.left));
+  const top = rect.bottom + 6 + tipRect.height > window.innerHeight ? rect.top - tipRect.height - 6 : rect.bottom + 6;
+  floatingTip.style.left = `${left}px`;
+  floatingTip.style.top = `${top}px`;
+}
+
+function hideFloatingTip(event) {
+  if (event.target.closest?.("[data-tip]")) floatingTip.hidden = true;
+}
+
+document.addEventListener("mouseover", showFloatingTip);
+document.addEventListener("focusin", showFloatingTip);
+document.addEventListener("mouseout", hideFloatingTip);
+document.addEventListener("focusout", hideFloatingTip);
+document.addEventListener("scroll", () => { floatingTip.hidden = true; }, true);
+
 function renderGoalAtlas() {
   const sortMode = document.querySelector("#goal-atlas-sort").value;
   const sorted = [...goalPeriods].sort((left, right) => {
@@ -918,9 +948,11 @@ function renderGoalAtlas() {
           .map(([person]) => person);
         const badge = document.createElement("span");
         badge.className = "goal-strip-targeted";
-        badge.textContent = "outside";
-        badge.title = `Targeted by outside humans: ${targeting.contacts} contacts on ${targeting.days} days (${people.join(", ")}); `
-          + `${targeting.led_to_episodes} drift episode${targeting.led_to_episodes === 1 ? "" : "s"} triggered by outside humans`;
+        badge.textContent = "targeted";
+        badge.tabIndex = 0;
+        badge.dataset.tip = `Targeted by outside (non-staff) humans: ${targeting.contacts} contacts on ${targeting.days} days (${people.join(", ")}); `
+          + `${targeting.led_to_episodes} drift episode${targeting.led_to_episodes === 1 ? "" : "s"} triggered by outside humans. Results for this agent may be biased.`;
+        badge.setAttribute("aria-label", badge.dataset.tip);
         agent.append(" ", badge);
       }
       const goal = document.createElement("div");

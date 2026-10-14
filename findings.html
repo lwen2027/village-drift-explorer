@@ -166,6 +166,8 @@
     .goal-strip-segment.is-unknown { top: 2px; width: 8px !important; min-width: 8px; height: 8px; border-radius: 1px; transform: translateX(-4px) rotate(45deg); background: var(--rust); }
     .goal-strip-targeted { display: inline-block; margin-left: 4px; padding: 0 5px; border: 1px solid var(--rust); border-radius: 999px; color: var(--rust); font: 700 9px/14px var(--mono); text-transform: uppercase; vertical-align: 1px; cursor: help; }
     .legend-swatch.is-targeted { width: auto; height: auto; padding: 0 5px; border: 1px solid var(--rust); background: none; color: var(--rust); font: 700 9px/14px var(--mono); text-transform: uppercase; }
+    .goal-strip-targeted:focus-visible { outline: 2px solid var(--rust); outline-offset: 1px; }
+    .floating-tip { position: fixed; z-index: 50; max-width: 320px; padding: 8px 10px; border-radius: 8px; background: var(--ink); color: var(--card); font-size: 12px; font-weight: 500; line-height: 1.45; box-shadow: 0 6px 18px rgba(0, 0, 0, .18); pointer-events: none; }
     .goal-strip-correction { position: absolute; top: -5px; z-index: 1; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid var(--ink, #1f2a37); transform: translateX(-5px); cursor: help; }
     .legend-swatch.is-correction { width: 0; height: 0; border-radius: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid var(--ink, #1f2a37); background: none; }
     .goal-strip-count { color: var(--muted); font: 700 10px/1.2 var(--mono); text-align: right; }
@@ -428,7 +430,7 @@
               </select>
             </div>
             <div class="goal-atlas" id="goal-atlas"></div>
-            <div class="viz-legend"><span class="legend-item"><span class="legend-swatch"></span>Validated duration</span><span class="legend-item"><span class="legend-swatch is-point"></span>Duration unresolved</span><span class="legend-item"><span class="legend-swatch is-reviewed"></span>Human-reviewed episode</span><span class="legend-item"><span class="legend-swatch is-correction"></span>Operator correction</span><span class="legend-item"><span class="legend-swatch is-targeted">outside</span>Targeted by outside humans on 10+ days</span></div>
+            <div class="viz-legend"><span class="legend-item"><span class="legend-swatch"></span>Validated duration</span><span class="legend-item"><span class="legend-swatch is-point"></span>Duration unresolved</span><span class="legend-item"><span class="legend-swatch is-reviewed"></span>Human-reviewed episode</span><span class="legend-item"><span class="legend-swatch is-correction"></span>Operator correction</span><span class="legend-item"><span class="legend-swatch is-targeted">targeted</span>Targeted by outside humans on 10+ days</span></div>
             <p class="viz-note" id="goal-atlas-note"></p>
           </article>
 
@@ -584,6 +586,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-outside-10-days"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-targeted-tooltip"></script>
 </body>
 </html>
