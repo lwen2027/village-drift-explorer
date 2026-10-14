@@ -26,6 +26,7 @@ const triggerTaxonomyCategories = Array.isArray(triggerTaxonomy.categories)
   ? triggerTaxonomy.categories
   : [];
 const triggerTaxonomyByEpisode = new Map(Object.entries(triggerTaxonomy.assignments || {}));
+const triggerTaxonomyLabels = new Map(triggerTaxonomyCategories.map((category) => [category.id, category.label]));
 // Goal categories are optional; without them the atlas renders as one ungrouped list.
 const goalCategories = categoryResponse.ok ? (await categoryResponse.json()).categories || [] : [];
 // Operator corrections are optional too; each targeted correction becomes a marker on the agent's atlas row.
@@ -655,6 +656,7 @@ function label(kind, value) {
   if (kind === "pause") return pauseLabels[value] || value;
   if (kind === "source") return sourceLabels[value] || value;
   if (kind === "agent") return agentLabel(value);
+  if (kind === "taxonomy") return triggerTaxonomyLabels.get(value) || value;
   return starterLabels[kind]?.[value] || value.replaceAll("_", " ");
 }
 
@@ -2124,6 +2126,11 @@ function renderEpisodeList() {
 
 function render() {
   renderMetrics();
+  renderBarChart({
+    elementId: "#official-trigger-chart", totalId: "#official-trigger-total",
+    labelKind: "taxonomy", accessor: (row) => [triggerTaxonomyByEpisode.get(row.episodeId)],
+    chartClass: "taxonomy"
+  });
   renderBarChart({
     elementId: "#trigger-chart", totalId: "#trigger-total",
     labelKind: "trigger", accessor: (row) => row.annotation.trigger_categories,
