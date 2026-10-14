@@ -942,8 +942,64 @@ function addCartesianFrame(svg, { left, right, top, bottom, xTicks, yTicks, xSca
   svg.append(yTitle);
 }
 
+const burdenColors = ["#3f7082", "#ae5037", "#a77b2c", "#466f61", "#74578f", "#bd6f3b", "#657a3d", "#8a5961", "#5b6f9e", "#8d734e"];
+
+function dominantMechanism(period) {
+  const counts = new Map();
+  period.episodes.forEach((episode) => {
+    const mechanism = episode.mechanism_shape || "unknown";
+    counts.set(mechanism, (counts.get(mechanism) || 0) + 1);
+  });
+  return [...counts.entries()]
+    .sort((left, right) => right[1] - left[1] || mechanismLabel(left[0]).localeCompare(mechanismLabel(right[0])))[0]?.[0] || "unknown";
+}
+
+function burdenGrouping(period, mode) {
+  if (mode === "model_family") {
+    const family = modelFamily(period.agent);
+    return { key: family, label: family };
+  }
+  if (mode === "mechanism") {
+    const mechanism = dominantMechanism(period);
+    return { key: mechanism, label: mechanismLabel(mechanism) };
+  }
+  const categoryId = goalCategoryByAgent.get(period.agent) || "other";
+  const category = goalCategories.find((candidate) => candidate.id === categoryId);
+  return { key: categoryId, label: category?.label || "Other goals" };
+}
+
+function orderedBurdenGroups(plotted, mode) {
+  const present = new Map(plotted.map((period) => {
+    const grouping = burdenGrouping(period, mode);
+    return [grouping.key, grouping];
+  }));
+  if (mode === "goal_type") {
+    const ordered = goalCategories.filter((category) => present.has(category.id)).map((category) => present.get(category.id));
+    if (present.has("other")) ordered.push(present.get("other"));
+    return ordered;
+  }
+  return [...present.values()].sort((left, right) => left.label.localeCompare(right.label));
+}
+
+function renderBurdenLegend(groups, colorByKey) {
+  const legend = document.querySelector("#burden-legend");
+  legend.replaceChildren();
+  groups.forEach((group) => {
+    const item = document.createElement("span");
+    item.className = "legend-item";
+    const swatch = document.createElement("span");
+    swatch.className = "legend-swatch is-circle";
+    swatch.style.background = colorByKey.get(group.key);
+    item.append(swatch, document.createTextNode(group.label));
+    legend.append(item);
+  });
+}
+
 function renderBurdenScatter() {
   const plotted = goalPeriods.filter((period) => period.episodes.length);
+  const mode = document.querySelector("#burden-color-mode").value;
+  const groups = orderedBurdenGroups(plotted, mode);
+  const colorByKey = new Map(groups.map((group, index) => [group.key, burdenColors[index % burdenColors.length]]));
   const svg = document.querySelector("#burden-scatter");
   svg.replaceChildren();
   const left = 58, right = 620, top = 20, bottom = 305;
@@ -962,18 +1018,20 @@ function renderBurdenScatter() {
   }));
   addCartesianFrame(svg, { left, right, top, bottom, xTicks, yTicks, xScale, yScale, xLabel: "Confirmed episodes", yLabel: "Validated drift share" });
   plotted.forEach((period) => {
+    const grouping = burdenGrouping(period, mode);
     const point = svgElement("circle", {
       cx: xScale(period.episodes.length),
       cy: yScale(period.burdenShare),
       r: 5.5,
-      fill: "#466f61",
+      fill: colorByKey.get(grouping.key) || "#8d8678",
       stroke: period.unknownDurationCount ? "#ae5037" : "#fbf8f0",
       "stroke-width": period.unknownDurationCount ? 2.5 : 1.5,
       opacity: .84
     });
-    svgTitle(point, `${period.agent} — ${period.goal}\n${period.episodes.length} episodes; ${(period.burdenShare * 100).toFixed(2)}% validated drift share; ${period.unknownDurationCount} unresolved durations`);
+    svgTitle(point, `${period.agent} — ${period.goal}\n${grouping.label}\n${period.episodes.length} episodes; ${(period.burdenShare * 100).toFixed(2)}% validated drift share; ${period.unknownDurationCount} unresolved durations`);
     svg.append(point);
   });
+  renderBurdenLegend(groups, colorByKey);
   document.querySelector("#burden-meta").textContent = `${plotted.length} drift-positive goal periods`;
 }
 
@@ -1253,6 +1311,7 @@ function initializeExplorations() {
   renderGoalAtlas();
   document.querySelector("#goal-atlas-sort").addEventListener("change", renderGoalAtlas);
   renderBurdenScatter();
+  document.querySelector("#burden-color-mode").addEventListener("change", renderBurdenScatter);
   renderDurationDistribution();
   renderRecurrence();
   initializeCumulativeChart();
