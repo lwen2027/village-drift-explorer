@@ -1,11 +1,12 @@
 const REVIEW_STORAGE_KEY = "village-drift-manual-review-ledger:v1";
 const fresh = { cache: "no-store" };
 
-const [bundleResponse, manifestResponse, annotationResponse, sourceResponse] = await Promise.all([
+const [bundleResponse, manifestResponse, annotationResponse, sourceResponse, categoryResponse] = await Promise.all([
   fetch("./data/second_audit_v2.json", fresh),
   fetch("./data/manual_review_wait_exclusions_v1.json", fresh),
   fetch("./data/manual_review_annotations_v1.json", fresh),
-  fetch("./data/source_records.json", fresh)
+  fetch("./data/source_records.json", fresh),
+  fetch("./data/goal_categories_v1.json", fresh)
 ]);
 
 if (!bundleResponse.ok || !manifestResponse.ok || !annotationResponse.ok || !sourceResponse.ok) {
@@ -19,6 +20,11 @@ const bundle = await bundleResponse.json();
 const manifest = await manifestResponse.json();
 const committedSeed = await annotationResponse.json();
 const sourceRecords = await sourceResponse.json();
+// Goal categories are optional; without them the atlas renders as one ungrouped list.
+const goalCategories = categoryResponse.ok ? (await categoryResponse.json()).categories || [] : [];
+const goalCategoryByAgent = new Map(
+  goalCategories.flatMap((category) => category.agents.map((agent) => [agent, category.id]))
+);
 const borderlineEpisodeIds = new Set(
   Object.entries(committedSeed.annotations || {})
     .filter(([, annotation]) => annotation?.drift_assessment === "borderline")
@@ -429,18 +435,40 @@ const agentNameById = new Map(
   (sourceRecords.agentRecords || []).map((agent) => [agent.id, agent.name])
 );
 
-const goalPeriods = (sourceRecords.agentGoalRecords || [])
+// A goal reworded mid-assignment appears as back-to-back records with the same
+// short name; treat those as one goal period that keeps the latest wording.
+function mergeRewordedGoals(periods) {
+  const merged = [];
+  [...periods].sort((left, right) =>
+    left.agent.localeCompare(right.agent) || left.startMs - right.startMs
+  ).forEach((period) => {
+    const previous = merged.at(-1);
+    if (previous && previous.agent === period.agent
+        && previous.shortGoal === period.shortGoal
+        && Math.abs(period.startMs - previous.endMs) < 60 * 1000) {
+      previous.priorGoals.push(previous.goal);
+      previous.goal = period.goal;
+      previous.endMs = period.endMs;
+      return;
+    }
+    merged.push(period);
+  });
+  return merged;
+}
+
+const goalPeriods = mergeRewordedGoals((sourceRecords.agentGoalRecords || [])
   .map((goal) => ({
     id: goal.id,
     agent: agentNameById.get(goal.agent_id) || "Unknown agent",
     goal: goal.name,
+    priorGoals: [],
     shortGoal: goal.short_name || goal.name,
     startMs: timestampMs(goal.start_time),
     endMs: Math.min(timestampMs(goal.end_time) ?? analysisHorizonMs, analysisHorizonMs),
     episodes: [],
     synthetic: false
   }))
-  .filter((goal) => goal.startMs != null && goal.startMs < goal.endMs);
+  .filter((goal) => goal.startMs != null && goal.startMs < goal.endMs));
 
 const periodsByAgent = new Map();
 goalPeriods.forEach((period) => {
@@ -458,10 +486,12 @@ function goalPeriodForEpisode(episode) {
   const onsetMs = episodeOnsetMs(episode);
   const candidates = periodsByAgent.get(episode.agent) || [];
   const assigned = normalizedGoalText(episode.assigned_goal);
-  const nameMatches = candidates.filter((period) => {
-    const goal = normalizedGoalText(period.goal);
-    return assigned === goal || assigned.includes(goal) || goal.includes(assigned);
-  });
+  const nameMatches = candidates.filter((period) =>
+    [period.goal, ...(period.priorGoals || [])].some((name) => {
+      const goal = normalizedGoalText(name);
+      return assigned === goal || assigned.includes(goal) || goal.includes(assigned);
+    })
+  );
   if (nameMatches.length) {
     return [...nameMatches].sort((left, right) =>
       Math.abs(left.startMs - onsetMs) - Math.abs(right.startMs - onsetMs)
@@ -805,6 +835,45 @@ function svgTitle(parent, textValue) {
   parent.append(svgElement("title", {}, textValue));
 }
 
+function median(values) {
+  if (!values.length) return 0;
+  const sorted = [...values].sort((left, right) => left - right);
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+}
+
+function goalAtlasGroups(periods) {
+  if (!goalCategories.length) return [{ category: null, periods }];
+  const groups = goalCategories.map((category) => ({
+    category,
+    periods: periods.filter((period) => goalCategoryByAgent.get(period.agent) === category.id)
+  }));
+  const uncategorized = periods.filter((period) => !goalCategoryByAgent.has(period.agent));
+  if (uncategorized.length) {
+    groups.push({ category: { id: "other", label: "Other goals", note: "Not yet assigned to a goal category." }, periods: uncategorized });
+  }
+  return groups.filter((group) => group.periods.length);
+}
+
+function goalAtlasGroupHeading({ category, periods }) {
+  const heading = document.createElement("div");
+  heading.className = "goal-atlas-group";
+  const title = document.createElement("div");
+  title.className = "goal-atlas-group-title";
+  title.textContent = category.label;
+  const stats = document.createElement("span");
+  stats.className = "goal-atlas-group-stats";
+  const medianEpisodes = median(periods.map((period) => period.episodes.length));
+  const medianShare = median(periods.map((period) => period.burdenShare));
+  stats.textContent = `${periods.length} goal period${periods.length === 1 ? "" : "s"} · median ${Number.isInteger(medianEpisodes) ? medianEpisodes : medianEpisodes.toFixed(1)} ep · median ${(medianShare * 100).toFixed(1)}% validated drift`;
+  title.append(stats);
+  const note = document.createElement("div");
+  note.className = "goal-atlas-group-note";
+  note.textContent = category.note;
+  heading.append(title, note);
+  return heading;
+}
+
 function renderGoalAtlas() {
   const sortMode = document.querySelector("#goal-atlas-sort").value;
   const sorted = [...goalPeriods].sort((left, right) => {
@@ -815,43 +884,48 @@ function renderGoalAtlas() {
   });
   const atlas = document.querySelector("#goal-atlas");
   atlas.replaceChildren();
-  sorted.forEach((period) => {
-    const row = document.createElement("div");
-    row.className = "goal-strip-row";
-    const identity = document.createElement("div");
-    identity.className = "goal-strip-name";
-    const agent = document.createElement("div");
-    agent.className = "goal-strip-agent";
-    agent.textContent = period.agent;
-    const goal = document.createElement("div");
-    goal.className = "goal-strip-goal";
-    goal.textContent = period.shortGoal;
-    goal.title = period.goal;
-    identity.append(agent, goal);
-    const track = document.createElement("div");
-    track.className = "goal-strip-track";
-    period.episodes.forEach((episode) => {
-      const onsetMs = episodeOnsetMs(episode);
-      if (onsetMs == null) return;
-      const interval = validatedInterval(episode);
-      const displayStart = Math.max(period.startMs, Math.min(period.endMs, onsetMs));
-      const left = Math.max(0, Math.min(100, ((displayStart - period.startMs) / period.durationMs) * 100));
-      const segment = document.createElement("span");
-      const reviewed = reviewedEpisodeIds.has(episode.episode_id);
-      segment.className = `goal-strip-segment${interval ? "" : " is-unknown"}${reviewed ? " is-reviewed" : ""}`;
-      segment.style.left = `${left}%`;
-      if (interval) {
-        const end = Math.max(displayStart, Math.min(period.endMs, interval.endMs));
-        segment.style.width = `${Math.max(.25, ((end - displayStart) / period.durationMs) * 100)}%`;
-      }
-      segment.title = `${episode.activity} · ${formatDuration(episode.duration_seconds == null ? NaN : Number(episode.duration_seconds))}${reviewed ? " · human reviewed" : ""}`;
-      track.append(segment);
+  goalAtlasGroups(sorted).forEach((group) => {
+    if (group.category) atlas.append(goalAtlasGroupHeading(group));
+    group.periods.forEach((period) => {
+      const row = document.createElement("div");
+      row.className = "goal-strip-row";
+      const identity = document.createElement("div");
+      identity.className = "goal-strip-name";
+      const agent = document.createElement("div");
+      agent.className = "goal-strip-agent";
+      agent.textContent = period.agent;
+      const goal = document.createElement("div");
+      goal.className = "goal-strip-goal";
+      goal.textContent = period.shortGoal;
+      goal.title = period.priorGoals?.length
+        ? `${period.goal}\nEarlier wording: ${period.priorGoals.join(" / ")}`
+        : period.goal;
+      identity.append(agent, goal);
+      const track = document.createElement("div");
+      track.className = "goal-strip-track";
+      period.episodes.forEach((episode) => {
+        const onsetMs = episodeOnsetMs(episode);
+        if (onsetMs == null) return;
+        const interval = validatedInterval(episode);
+        const displayStart = Math.max(period.startMs, Math.min(period.endMs, onsetMs));
+        const left = Math.max(0, Math.min(100, ((displayStart - period.startMs) / period.durationMs) * 100));
+        const segment = document.createElement("span");
+        const reviewed = reviewedEpisodeIds.has(episode.episode_id);
+        segment.className = `goal-strip-segment${interval ? "" : " is-unknown"}${reviewed ? " is-reviewed" : ""}`;
+        segment.style.left = `${left}%`;
+        if (interval) {
+          const end = Math.max(displayStart, Math.min(period.endMs, interval.endMs));
+          segment.style.width = `${Math.max(.25, ((end - displayStart) / period.durationMs) * 100)}%`;
+        }
+        segment.title = `${episode.activity} · ${formatDuration(episode.duration_seconds == null ? NaN : Number(episode.duration_seconds))}${reviewed ? " · human reviewed" : ""}`;
+        track.append(segment);
+      });
+      const count = document.createElement("div");
+      count.className = "goal-strip-count";
+      count.textContent = `${period.episodes.length} ep`;
+      row.append(identity, track, count);
+      atlas.append(row);
     });
-    const count = document.createElement("div");
-    count.className = "goal-strip-count";
-    count.textContent = `${period.episodes.length} ep`;
-    row.append(identity, track, count);
-    atlas.append(row);
   });
   const known = goalMaxEpisodes.filter((episode) => episode.duration_seconds != null).length;
   document.querySelector("#goal-atlas-note").textContent = `${goalPeriods.length} goal periods · ${goalMaxEpisodes.length} confirmed episodes · ${known} with validated duration · ${goalMaxEpisodes.length - known} onset-only duration records.`;

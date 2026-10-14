@@ -137,6 +137,11 @@
     .legend-swatch.is-reviewed { background: var(--green); }
 
     .goal-atlas { max-height: 560px; overflow: auto; padding-right: 5px; }
+    .goal-atlas-group { position: sticky; top: 0; z-index: 1; padding: 12px 0 8px; border-bottom: 1px solid var(--line); background: var(--card); }
+    .goal-atlas-group:not(:first-child) { margin-top: 10px; }
+    .goal-atlas-group-title { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; font-size: 13px; font-weight: 800; }
+    .goal-atlas-group-stats { color: var(--muted); font: 700 10px/1.3 var(--mono); }
+    .goal-atlas-group-note { margin-top: 3px; color: var(--muted); font-size: 11px; line-height: 1.4; }
     .goal-strip-row { display: grid; grid-template-columns: minmax(150px, 230px) 1fr 58px; gap: 12px; align-items: center; min-height: 38px; border-bottom: 1px solid rgba(207, 193, 166, .5); }
     .goal-strip-row:last-child { border-bottom: 0; }
     .goal-strip-name { min-width: 0; }
@@ -393,7 +398,7 @@
         <div class="viz-grid">
           <article class="viz-card is-wide">
             <div class="viz-heading">
-              <div><h3>Goal-window atlas</h3><p>Every goal period aligned from assignment (0%) to the audit boundary (100%).</p></div>
+              <div><h3>Goal-window atlas</h3><p>Every goal period aligned from assignment (0%) to the audit boundary (100%), grouped by the kind of work the goal calls for.</p></div>
               <select class="viz-control" id="goal-atlas-sort" aria-label="Sort goal-window atlas">
                 <option value="burden">Sort by validated drift share</option>
                 <option value="episodes">Sort by episode count</option>
@@ -539,6 +544,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261013-queue-metric"></script>
+  <script type="module" src="./scripts/findings.js?v=20261013-goal-atlas-groups"></script>
 </body>
 </html>
