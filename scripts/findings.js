@@ -1191,11 +1191,19 @@ function renderFirstDriftTiming() {
     if (first == null || !Number.isFinite(period.durationMs) || period.durationMs <= 0) return [];
     return [{ period, position: Math.max(0, Math.min(1, (first - period.startMs) / period.durationMs)) }];
   });
-  const bins = Array.from({ length: 5 }, (_, index) => ({
-    label: `${index * 20}–${(index + 1) * 20}%`,
+  const boundaries = [0, .01, .02, .05, .1, .2, .4, .6, .8, 1];
+  const bins = boundaries.slice(0, -1).map((start, index) => ({
+    start,
+    end: boundaries[index + 1],
+    label: `${start * 100}–${boundaries[index + 1] * 100}%`,
     periods: []
   }));
-  positions.forEach((entry) => bins[Math.min(4, Math.floor(entry.position * 5))].periods.push(entry.period));
+  positions.forEach((entry) => {
+    const bin = bins.find((candidate, index) =>
+      entry.position >= candidate.start && (entry.position < candidate.end || index === bins.length - 1)
+    );
+    if (bin) bin.periods.push(entry.period);
+  });
   const container = document.querySelector("#first-drift-bars");
   container.replaceChildren();
   bins.forEach((bin) => {
@@ -1219,7 +1227,7 @@ function renderFirstDriftTiming() {
   });
   const missing = goalPeriods.filter((period) => period.episodes.length).length - positions.length;
   document.querySelector("#first-drift-meta").textContent = `${positions.length} drift-positive goal periods`;
-  document.querySelector("#first-drift-note").textContent = `Each bar shows the share of drift-positive goal periods whose first confirmed episode began in that fifth of the goal window.${missing ? ` ${missing} period${missing === 1 ? "" : "s"} lacked a usable onset.` : ""}`;
+  document.querySelector("#first-drift-note").textContent = `Bins are intentionally narrower near assignment and bars show counts, not density per percentage point. Percentages use all ${positions.length} drift-positive goal periods.${missing ? ` ${missing} period${missing === 1 ? "" : "s"} lacked a usable onset.` : ""}`;
 }
 
 function renderCumulativeGoal(periodId) {
