@@ -322,6 +322,7 @@
 
     .results { margin-top: 28px; }
     .results-heading { padding-bottom: 13px; border-bottom: 1px solid var(--line-strong); }
+    .results .filters { margin-top: 13px; }
     .results-count { color: var(--muted); font: 700 12px/1 var(--mono); }
     .episode-list { display: grid; gap: 10px; margin-top: 13px; }
     .episode-row {
@@ -578,17 +579,7 @@
             <p class="section-kicker">Annotation breakdown</p>
             <h2 id="breakdown-title">Patterns within fully reviewed episodes</h2>
           </div>
-          <p>Charts summarize goal-maximization episodes whose required annotation fields are resolved. Use the dropdowns to narrow only the episode list below.</p>
-        </div>
-
-        <div class="filters" id="filters" aria-label="Findings overview filters">
-          <div class="filter-field"><label for="agent-filter">Agent</label><select id="agent-filter"></select></div>
-          <div class="filter-field"><label for="trigger-filter">Trigger</label><select id="trigger-filter"></select></div>
-          <div class="filter-field"><label for="pause-filter">Pause context</label><select id="pause-filter"></select></div>
-          <div class="filter-field"><label for="request-filter">Request relationship</label><select id="request-filter"></select></div>
-          <div class="filter-field"><label for="recovery-filter">Recovery</label><select id="recovery-filter"></select></div>
-          <div class="filter-field"><label for="source-filter">Review source</label><select id="source-filter"></select></div>
-          <button class="clear-filters" id="clear-filters" type="button">Clear filters</button>
+          <p>Charts summarize all goal-maximization episodes whose required annotation fields are resolved.</p>
         </div>
 
         <div class="chart-grid">
@@ -617,11 +608,20 @@
 
       <section class="results" aria-labelledby="results-title">
         <div class="results-heading"><h2 id="results-title">Fully reviewed episodes</h2><span class="results-count" id="results-count"></span></div>
+        <div class="filters" id="filters" aria-label="Episode list filters">
+          <div class="filter-field"><label for="agent-filter">Agent</label><select id="agent-filter"></select></div>
+          <div class="filter-field"><label for="trigger-filter">Trigger</label><select id="trigger-filter"></select></div>
+          <div class="filter-field"><label for="pause-filter">Pause context</label><select id="pause-filter"></select></div>
+          <div class="filter-field"><label for="request-filter">Request relationship</label><select id="request-filter"></select></div>
+          <div class="filter-field"><label for="recovery-filter">Recovery</label><select id="recovery-filter"></select></div>
+          <div class="filter-field"><label for="source-filter">Review source</label><select id="source-filter"></select></div>
+          <button class="clear-filters" id="clear-filters" type="button">Clear filters</button>
+        </div>
         <div class="episode-list" id="episode-list"></div>
         <button class="show-more" id="show-more" type="button">Show 40 more</button>
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-bout-spans"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-list-filters"></script>
 </body>
 </html>
