@@ -1806,12 +1806,37 @@ function renderResilienceScorecards() {
     const recovered = agentRows.filter((row) => isObservedRecovery(row.annotation)).length;
     const selfCorrected = agentRows.filter((row) => row.annotation.recovery_mechanisms.includes("self_correction")).length;
     return { agent, reviewed: agentRows.length, recovered, selfCorrected };
-  }).sort((left, right) => right.reviewed - left.reviewed || (right.recovered / right.reviewed) - (left.recovered / left.reviewed));
+  });
+  const rate = (score, numerator) => numerator(score) / score.reviewed;
+  const compareAgent = (left, right) => agentLabel(left.agent).localeCompare(agentLabel(right.agent));
+  const sortMode = document.querySelector("#resilience-sort").value;
+  const comparators = {
+    recovery_rate: (left, right) => rate(right, (score) => score.recovered) - rate(left, (score) => score.recovered)
+      || rate(right, (score) => score.selfCorrected) - rate(left, (score) => score.selfCorrected)
+      || right.reviewed - left.reviewed
+      || compareAgent(left, right),
+    self_rate: (left, right) => rate(right, (score) => score.selfCorrected) - rate(left, (score) => score.selfCorrected)
+      || right.selfCorrected - left.selfCorrected
+      || rate(right, (score) => score.recovered) - rate(left, (score) => score.recovered)
+      || compareAgent(left, right),
+    self_count: (left, right) => right.selfCorrected - left.selfCorrected
+      || rate(right, (score) => score.selfCorrected) - rate(left, (score) => score.selfCorrected)
+      || right.reviewed - left.reviewed
+      || compareAgent(left, right),
+    pressure: (left, right) => right.reviewed - left.reviewed
+      || rate(right, (score) => score.recovered) - rate(left, (score) => score.recovered)
+      || compareAgent(left, right),
+    agent: compareAgent
+  };
+  scorecards.sort(comparators[sortMode] || comparators.recovery_rate);
   const list = document.querySelector("#resilience-list");
   list.replaceChildren();
-  scorecards.forEach((score) => {
+  scorecards.forEach((score, index) => {
     const row = document.createElement("div");
     row.className = "score-row";
+    const rank = document.createElement("div");
+    rank.className = "score-rank";
+    rank.textContent = `#${index + 1}`;
     const agent = document.createElement("div");
     agent.className = "score-agent";
     agent.textContent = agentLabel(score.agent);
@@ -1833,7 +1858,7 @@ function renderResilienceScorecards() {
     const summary = document.createElement("div");
     summary.className = "score-summary";
     summary.textContent = `${Math.round(recoveryRate * 100)}% recovered · ${score.selfCorrected}/${score.recovered} self-corrected`;
-    row.append(agent, reviewed, track, summary);
+    row.append(rank, agent, reviewed, track, summary);
     list.append(row);
   });
   document.querySelector("#resilience-meta").textContent = `${scorecards.length} agents · ${rows.length} reviewed episodes`;
@@ -1890,108 +1915,13 @@ function renderEpisodeMotifs() {
   document.querySelector("#motif-meta").textContent = `Top ${ranked.length} of ${motifs.size} observed motifs`;
 }
 
-function collectionLength(value) {
-  if (Array.isArray(value)) return value.length;
-  if (value && typeof value === "object") return Object.keys(value).length;
-  return value ? 1 : 0;
-}
-
-function evidenceGapCount(episode) {
-  let gaps = 0;
-  if (episode.duration_seconds == null) gaps += 1;
-  if (episode.onset_precision !== "timestamp") gaps += 1;
-  if (!episode.drift_end?.ended_at) gaps += 1;
-  if (episode.episode_completeness !== "complete") gaps += 1;
-  const triggerStatus = episode.evidence?.trigger?.status;
-  if (!triggerStatus || triggerStatus === "unavailable") gaps += 1;
-  gaps += Math.min(2, collectionLength(episode.incomplete_fields));
-  gaps += Math.min(2, collectionLength(episode.missing_evidence_for));
-  return gaps;
-}
-
-function observedImpactHours(episode) {
-  if (episode.duration_seconds != null) return Math.max(1 / 60, Number(episode.duration_seconds) / 3600);
-  const start = episodeOnsetMs(episode);
-  const end = timestampMs(episode.drift_end?.last_observed_drift_at)
-    ?? timestampMs(episode.observed_through, "end")
-    ?? start;
-  return Math.max(1 / 60, (end - start) / 3600000);
-}
-
-function episodeHref(episodeId) {
-  return queueIds.has(episodeId)
-    ? `review.html?scope=maximization&review=all#${encodeURIComponent(episodeId)}`
-    : `index.html?scope=maximization#${encodeURIComponent(episodeId)}`;
-}
-
-function renderAuditPriorityMap() {
-  const candidates = goalMaxEpisodes.map((episode) => {
-    const gaps = evidenceGapCount(episode);
-    const hours = observedImpactHours(episode);
-    return {
-      episode,
-      gaps,
-      hours,
-      score: (1 + gaps) * Math.log2(2 + hours) * (episode.duration_seconds == null ? 1.5 : 1)
-    };
-  });
-  const svg = document.querySelector("#priority-map");
-  svg.replaceChildren();
-  const left = 58, right = 620, top = 22, bottom = 325;
-  const minLog = Math.log10(1 / 60);
-  const maxLog = Math.log10(Math.max(...candidates.map((candidate) => candidate.hours)));
-  const maxGaps = Math.max(1, ...candidates.map((candidate) => candidate.gaps));
-  const xScale = (hours) => left + ((Math.log10(Math.max(1 / 60, hours)) - minLog) / Math.max(.001, maxLog - minLog)) * (right - left);
-  const yScale = (gaps) => bottom - (gaps / maxGaps) * (bottom - top);
-  const hourTicks = [1 / 60, 1, 24, 168].filter((value) => Math.log10(value) <= maxLog);
-  addCartesianFrame(svg, {
-    left, right, top, bottom,
-    xTicks: hourTicks.map((value) => ({ value, label: value < 1 ? "1m" : value < 24 ? `${value}h` : `${value / 24}d` })),
-    yTicks: Array.from({ length: maxGaps + 1 }, (_, value) => ({ value, label: String(value) })),
-    xScale, yScale, xLabel: "Observed or validated span (log)", yLabel: "Evidence gaps"
-  });
-  candidates.forEach((candidate) => {
-    const reviewed = reviewedEpisodeIds.has(candidate.episode.episode_id);
-    const point = svgElement("circle", {
-      cx: xScale(candidate.hours), cy: yScale(candidate.gaps), r: 3.4,
-      fill: candidate.episode.duration_seconds == null ? "#fbf8f0" : reviewed ? "#466f61" : "#ae5037",
-      stroke: reviewed ? "#466f61" : "#ae5037", "stroke-width": candidate.episode.duration_seconds == null ? 2 : 1,
-      opacity: .7
-    });
-    svgTitle(point, `${agentLabel(candidate.episode.agent)} — ${candidate.episode.activity}\n${candidate.gaps} evidence gaps; ${formatDuration(candidate.hours * 3600)} observed/validated span${reviewed ? "; human reviewed" : ""}`);
-    svg.append(point);
-  });
-  const ranked = [...candidates].sort((left, right) => right.score - left.score).slice(0, 8);
-  const list = document.querySelector("#priority-list");
-  list.replaceChildren();
-  ranked.forEach((candidate, index) => {
-    const link = document.createElement("a");
-    link.className = "priority-item";
-    link.href = episodeHref(candidate.episode.episode_id);
-    const copy = document.createElement("div");
-    const name = document.createElement("div");
-    name.className = "priority-name";
-    name.textContent = `${agentLabel(candidate.episode.agent)} · ${shortText(candidate.episode.activity, 48)}`;
-    const detail = document.createElement("div");
-    detail.className = "priority-detail";
-    detail.textContent = `${candidate.gaps} gaps · ${formatDuration(candidate.hours * 3600)} observed/validated span`;
-    copy.append(name, detail);
-    const rank = document.createElement("div");
-    rank.className = "priority-rank";
-    rank.textContent = `#${index + 1}`;
-    link.append(copy, rank);
-    list.append(link);
-  });
-  document.querySelector("#priority-meta").textContent = `${candidates.filter((candidate) => candidate.gaps).length} episodes with at least one gap`;
-}
-
 function initializeExperimentalLenses() {
   renderDriftWeather();
   renderAgentFingerprints();
   renderInfluenceBars();
   renderResilienceScorecards();
+  document.querySelector("#resilience-sort").addEventListener("change", renderResilienceScorecards);
   renderEpisodeMotifs();
-  renderAuditPriorityMap();
 }
 
 function renderEpisodeList() {

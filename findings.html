@@ -211,10 +211,11 @@
     .influence-bar-fill { display: block; height: 100%; min-width: 2px; }
     .influence-bar-count { color: var(--muted); font: 700 10px/1 var(--mono); text-align: right; }
     .influence-legend { margin: 0 0 11px; }
-    .motif-list, .priority-list, .resilience-list { display: grid; gap: 9px; }
-    .score-head, .score-row { display: grid; grid-template-columns: minmax(150px, 1.2fr) 90px minmax(240px, 2.6fr) 180px; gap: 12px; align-items: center; }
+    .motif-list, .resilience-list { display: grid; gap: 9px; }
+    .score-head, .score-row { display: grid; grid-template-columns: 36px minmax(150px, 1.2fr) 90px minmax(240px, 2.6fr) 180px; gap: 12px; align-items: center; }
     .score-head { padding: 0 10px 7px; color: var(--muted); font: 700 9px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
     .score-row { padding: 10px; border: 1px solid var(--line); border-radius: 11px; background: var(--card); font-size: 11px; }
+    .score-rank { color: var(--rust); font: 800 11px/1 var(--mono); }
     .score-agent { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 800; }
     .score-track { display: flex; height: 12px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
     .score-fill { display: block; height: 100%; background: #9bb7a7; }
@@ -230,13 +231,6 @@
     .motif-step { padding: 5px 7px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); font-size: 10px; }
     .motif-arrow { color: var(--muted); font-size: 11px; }
     .motif-count { font: 800 12px/1 var(--mono); text-align: right; }
-    .priority-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(250px, .65fr); gap: 18px; align-items: start; }
-    .priority-item { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 9px 10px; border-bottom: 1px solid var(--line); text-decoration: none; }
-    .priority-item:hover { background: var(--paper); }
-    .priority-name { font-size: 11px; font-weight: 800; }
-    .priority-detail { margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.35; }
-    .priority-rank { color: var(--rust); font: 800 11px/1 var(--mono); }
-
     .filters {
       position: sticky;
       top: 0;
@@ -376,7 +370,6 @@
       .episode-link { justify-self: start; }
       .fingerprint-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
       .influence-grid { grid-template-columns: 1fr; }
-      .priority-layout { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
       .page-shell { width: min(100% - 22px, 1500px); }
@@ -396,8 +389,9 @@
       .burden-filter-actions { justify-content: flex-start; }
       .fingerprint-grid { grid-template-columns: 1fr; }
       .score-head { display: none; }
-      .score-row { grid-template-columns: 1fr 58px; }
+      .score-row { grid-template-columns: 34px 1fr 58px; }
       .score-row .score-track { grid-column: 1 / -1; }
+      .score-row .score-summary { grid-column: 2 / -1; }
       .score-summary { grid-column: 1 / -1; }
       .clear-filters { margin-left: 0; }
     }
@@ -548,9 +542,23 @@
 
 
           <article class="viz-card is-wide">
-            <div class="viz-heading"><div><h3>Goal resilience scorecards</h3><p>Recovery as a share of reviewed drift, with self-correction highlighted inside the recovered subset.</p></div><span class="viz-meta" id="resilience-meta"></span></div>
+            <div class="viz-heading">
+              <div><h3>Goal resilience scorecards</h3><p>Recovery as a share of reviewed drift, with self-correction highlighted inside the recovered subset.</p></div>
+              <div class="viz-controls">
+                <span class="viz-meta" id="resilience-meta"></span>
+                <label class="viz-control-label" for="resilience-sort"><span>Rank by</span>
+                  <select class="viz-control" id="resilience-sort">
+                    <option value="recovery_rate">Highest recovery share</option>
+                    <option value="self_rate">Highest self-correction share</option>
+                    <option value="self_count">Most self-corrected episodes</option>
+                    <option value="pressure">Most reviewed drift episodes</option>
+                    <option value="agent">Agent name</option>
+                  </select>
+                </label>
+              </div>
+            </div>
             <div class="viz-legend score-legend"><span class="legend-item"><span class="legend-swatch is-self-recovery"></span>Self-correction</span><span class="legend-item"><span class="legend-swatch is-other-recovery"></span>Other observed recovery</span><span class="legend-item"><span class="legend-swatch is-no-recovery"></span>No observed recovery</span></div>
-            <div class="score-head"><span>Agent</span><span>Reviewed episodes</span><span>Recovery composition</span><span>Summary</span></div>
+            <div class="score-head"><span>Rank</span><span>Agent</span><span>Reviewed episodes</span><span>Recovery composition</span><span>Summary</span></div>
             <div class="resilience-list" id="resilience-list"></div>
             <p class="viz-note">Every bar represents 100% of that agent’s fully reviewed episodes. Episode count indicates distraction pressure; colored segments show the subset with an observed recovery.</p>
           </article>
@@ -560,14 +568,6 @@
             <div class="motif-list" id="motif-list"></div>
           </article>
 
-          <article class="viz-card">
-            <div class="viz-heading"><div><h3>Audit priority map</h3><p>Potential episode impact against missing or weak timing evidence.</p></div><span class="viz-meta" id="priority-meta"></span></div>
-            <div class="priority-layout">
-              <svg class="svg-chart" id="priority-map" viewBox="0 0 640 390" role="img" aria-label="Audit priority map"></svg>
-              <div class="priority-list" id="priority-list"></div>
-            </div>
-            <p class="viz-note">Priority is a deterministic heuristic combining observed span and evidence gaps. It is a review aid, not a revised drift judgment.</p>
-          </article>
         </div>
       </section>
 
@@ -621,6 +621,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-drift-bouts-resilience"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-resilience-ranking"></script>
 </body>
 </html>
