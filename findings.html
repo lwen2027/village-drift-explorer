@@ -228,19 +228,27 @@
     .legend-swatch.is-other-recovery { background: #9bb7a7; }
     .legend-swatch.is-no-recovery { background: var(--paper-deep); border: 1px solid var(--line); }
     .taxonomy-card { margin: 20px 0; }
-    .taxonomy-legend { margin: 0 0 18px; }
-    .taxonomy-chart { display: grid; gap: 22px; }
+    .taxonomy-key { display: flex; align-items: center; justify-content: flex-end; gap: 7px; margin: 0 0 15px; color: var(--muted); font: 700 9px/1 var(--mono); }
+    .taxonomy-key-gradient { width: 116px; height: 9px; border: 1px solid rgba(70, 111, 97, .18); border-radius: 999px; background: linear-gradient(90deg, rgba(70, 111, 97, .08), rgba(70, 111, 97, .86)); }
+    .taxonomy-chart { display: grid; gap: 24px; }
     .taxonomy-family { display: grid; gap: 8px; }
     .taxonomy-family-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 7px; border-bottom: 1px solid var(--line); }
     .taxonomy-family-heading h4 { margin: 0; font-size: 13px; }
     .taxonomy-family-heading span { color: var(--muted); font: 700 10px/1 var(--mono); }
-    .taxonomy-row { display: grid; grid-template-columns: minmax(220px, 1.15fr) minmax(260px, 2fr) 38px; gap: 12px; align-items: center; padding: 7px 8px; border-radius: 9px; }
-    .taxonomy-row:hover { background: var(--paper); }
+    .taxonomy-grid-wrap { overflow-x: auto; padding-bottom: 4px; }
+    .taxonomy-heatmap { display: grid; gap: 4px; min-width: 1120px; }
+    .taxonomy-column-label { display: flex; min-height: 56px; align-items: flex-end; justify-content: center; padding: 4px; color: var(--muted); font: 700 9px/1.2 var(--mono); text-align: center; }
+    .taxonomy-column-label.is-category { justify-content: flex-start; }
+    .taxonomy-category-cell { position: sticky; left: 0; z-index: 2; display: flex; min-height: 48px; flex-direction: column; justify-content: center; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
     .taxonomy-label { font-size: 11px; font-weight: 800; }
     .taxonomy-description { margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.35; }
-    .taxonomy-track { display: flex; height: 13px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
-    .taxonomy-segment { display: block; height: 100%; min-width: 2px; }
-    .taxonomy-count { color: var(--muted); font: 800 11px/1 var(--mono); text-align: right; }
+    .taxonomy-cell, .taxonomy-total-cell { display: flex; min-height: 48px; align-items: center; justify-content: center; flex-direction: column; border-radius: 8px; text-align: center; }
+    .taxonomy-cell { border: 1px solid rgba(70, 111, 97, .12); background: rgba(70, 111, 97, var(--heat, .08)); color: var(--ink); }
+    .taxonomy-cell strong { font: 800 11px/1 var(--mono); }
+    .taxonomy-cell span { margin-top: 4px; font: 700 8px/1 var(--mono); opacity: .75; }
+    .taxonomy-cell.is-zero { border-color: transparent; background: rgba(0, 0, 0, .025); color: #a39b8d; }
+    .taxonomy-cell.is-strong { color: white; }
+    .taxonomy-total-cell { border: 1px solid var(--line); background: var(--paper); font: 800 11px/1 var(--mono); }
     .filters {
       position: sticky;
       top: 0;
@@ -404,8 +412,7 @@
       .score-row .score-track { grid-column: 1 / -1; }
       .score-row .score-summary { grid-column: 2 / -1; }
       .score-summary { grid-column: 1 / -1; }
-      .taxonomy-row { grid-template-columns: 1fr 38px; }
-      .taxonomy-track { grid-column: 1 / -1; grid-row: 2; }
+      .taxonomy-key { justify-content: flex-start; }
       .clear-filters { margin-left: 0; }
     }
   </style>
@@ -589,8 +596,8 @@
         </div>
 
         <article class="chart-card is-wide taxonomy-card">
-          <div class="chart-heading"><div><h3>Official trigger taxonomy → correction mechanism</h3><p>Every fully reviewed confirmed episode receives one curated trigger category; stacked segments show how those episodes ended.</p></div><span class="chart-total" id="taxonomy-total"></span></div>
-          <div class="viz-legend taxonomy-legend" id="taxonomy-legend"></div>
+          <div class="chart-heading"><div><h3>Official trigger taxonomy → correction mechanism</h3><p>Rows are curated trigger categories; cells show how frequently each correction mechanism ended episodes in that category.</p></div><span class="chart-total" id="taxonomy-total"></span></div>
+          <div class="taxonomy-key" id="taxonomy-key"></div>
           <div class="taxonomy-chart" id="taxonomy-chart"></div>
           <p class="viz-note" id="taxonomy-note"></p>
         </article>
@@ -635,6 +642,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-trigger-taxonomy"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-taxonomy-heatmap"></script>
 </body>
 </html>

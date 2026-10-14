@@ -1899,28 +1899,6 @@ function mechanismLabel(value) {
   return labels[value] || String(value || "Unknown").replaceAll("_", " ");
 }
 
-const taxonomyRecoveryColors = {
-  self_correction: "#466f61",
-  finished_activity: "#81a27b",
-  automatic_nudge: "#d19a5b",
-  operator_nudge: "#b96043",
-  operator_message: "#984b38",
-  peer_feedback: "#3f7082",
-  custom_peer_agent_message: "#5c8ca0",
-  external_user_intervention: "#74578f",
-  checking_email: "#667f9b",
-  custom_scheduled_checkpoint_reached: "#a77b2c",
-  end_of_day: "#8c7d68",
-  natural_end_or_timeout: "#9c927f",
-  not_corrected: "#c8c0ae",
-  unknown: "#ded8ca"
-};
-
-function taxonomyRecoveryColor(recovery, index) {
-  return taxonomyRecoveryColors[recovery]
-    || burdenColors[index % burdenColors.length];
-}
-
 function renderTriggerTaxonomy() {
   const categoryById = new Map(triggerTaxonomyCategories.map((category) => [category.id, category]));
   const taxonomyRows = rows.map((row) => ({
@@ -1940,15 +1918,10 @@ function renderTriggerTaxonomy() {
   const recoveryOrder = [...globalRecoveryCounts.entries()]
     .sort((left, right) => right[1] - left[1] || label("recovery", left[0]).localeCompare(label("recovery", right[0])))
     .map(([recovery]) => recovery);
-  const recoveryColors = new Map(recoveryOrder.map((recovery, index) => [
-    recovery,
-    taxonomyRecoveryColor(recovery, index)
-  ]));
 
   const rowsByCategory = new Map(triggerTaxonomyCategories.map((category) => [category.id, []]));
   taxonomyRows.forEach((row) => rowsByCategory.get(row.taxonomyId).push(row));
   const visibleCategories = triggerTaxonomyCategories.filter((category) => rowsByCategory.get(category.id).length);
-  const maxCount = Math.max(1, ...visibleCategories.map((category) => rowsByCategory.get(category.id).length));
   const families = [];
   visibleCategories.forEach((category) => {
     let family = families.find((item) => item.name === category.family);
@@ -1959,16 +1932,16 @@ function renderTriggerTaxonomy() {
     family.categories.push(category);
   });
 
-  const legend = document.querySelector("#taxonomy-legend");
-  legend.replaceChildren(...recoveryOrder.map((recovery) => {
-    const item = document.createElement("span");
-    item.className = "legend-item";
-    const swatch = document.createElement("span");
-    swatch.className = "legend-swatch";
-    swatch.style.background = recoveryColors.get(recovery);
-    item.append(swatch, document.createTextNode(label("recovery", recovery)));
-    return item;
-  }));
+  const key = document.querySelector("#taxonomy-key");
+  const keyLabel = document.createElement("span");
+  keyLabel.textContent = "Within-category share";
+  const zero = document.createElement("span");
+  zero.textContent = "0%";
+  const gradient = document.createElement("span");
+  gradient.className = "taxonomy-key-gradient";
+  const full = document.createElement("span");
+  full.textContent = "100%";
+  key.replaceChildren(keyLabel, zero, gradient, full);
 
   const chart = document.querySelector("#taxonomy-chart");
   chart.replaceChildren();
@@ -1988,15 +1961,34 @@ function renderTriggerTaxonomy() {
     familyHeading.append(familyName, familyTotal);
     familySection.append(familyHeading);
 
+    const gridWrap = document.createElement("div");
+    gridWrap.className = "taxonomy-grid-wrap";
+    const heatmap = document.createElement("div");
+    heatmap.className = "taxonomy-heatmap";
+    heatmap.style.gridTemplateColumns = `minmax(260px, 1.8fr) repeat(${recoveryOrder.length}, minmax(58px, .55fr)) 52px`;
+    const categoryHeader = document.createElement("div");
+    categoryHeader.className = "taxonomy-column-label is-category";
+    categoryHeader.textContent = "Trigger category";
+    heatmap.append(categoryHeader);
+    recoveryOrder.forEach((recovery) => {
+      const header = document.createElement("div");
+      header.className = "taxonomy-column-label";
+      header.textContent = label("recovery", recovery);
+      heatmap.append(header);
+    });
+    const totalHeader = document.createElement("div");
+    totalHeader.className = "taxonomy-column-label";
+    totalHeader.textContent = "Total";
+    heatmap.append(totalHeader);
+
     family.categories.forEach((category) => {
       const categoryRows = rowsByCategory.get(category.id);
       const recoveryCounts = new Map();
       categoryRows.forEach((row) => {
         recoveryCounts.set(row.primaryRecovery, (recoveryCounts.get(row.primaryRecovery) || 0) + 1);
       });
-      const categoryRow = document.createElement("div");
-      categoryRow.className = "taxonomy-row";
       const copy = document.createElement("div");
+      copy.className = "taxonomy-category-cell";
       const categoryLabel = document.createElement("div");
       categoryLabel.className = "taxonomy-label";
       categoryLabel.textContent = category.label;
@@ -2004,30 +1996,37 @@ function renderTriggerTaxonomy() {
       description.className = "taxonomy-description";
       description.textContent = category.description;
       copy.append(categoryLabel, description);
-      const track = document.createElement("div");
-      track.className = "taxonomy-track";
+      heatmap.append(copy);
       recoveryOrder.forEach((recovery) => {
         const count = recoveryCounts.get(recovery) || 0;
-        if (!count) return;
-        const segment = document.createElement("span");
-        segment.className = "taxonomy-segment";
-        segment.style.width = `${(count / maxCount) * 100}%`;
-        segment.style.background = recoveryColors.get(recovery);
-        segment.title = `${category.label} → ${label("recovery", recovery)}: ${count}`;
-        track.append(segment);
+        const share = count / categoryRows.length;
+        const cell = document.createElement("div");
+        cell.className = `taxonomy-cell${count ? "" : " is-zero"}${share >= .62 ? " is-strong" : ""}`;
+        cell.style.setProperty("--heat", count ? (.08 + share * .78).toFixed(3) : "0.025");
+        cell.title = `${category.label} → ${label("recovery", recovery)}: ${count} of ${categoryRows.length} (${Math.round(share * 100)}%)`;
+        const value = document.createElement("strong");
+        value.textContent = count ? String(count) : "—";
+        cell.append(value);
+        if (count) {
+          const percentage = document.createElement("span");
+          percentage.textContent = `${Math.round(share * 100)}%`;
+          cell.append(percentage);
+        }
+        heatmap.append(cell);
       });
       const count = document.createElement("div");
-      count.className = "taxonomy-count";
+      count.className = "taxonomy-total-cell";
       count.textContent = String(categoryRows.length);
-      categoryRow.append(copy, track, count);
-      familySection.append(categoryRow);
+      heatmap.append(count);
     });
+    gridWrap.append(heatmap);
+    familySection.append(gridWrap);
     chart.append(familySection);
   });
 
   const multiRecoveryCount = taxonomyRows.filter((row) => row.annotation.recovery_mechanisms.length > 1).length;
   document.querySelector("#taxonomy-total").textContent = `${visibleCategories.length} categories · ${taxonomyRows.length} episodes`;
-  document.querySelector("#taxonomy-note").textContent = `Bar lengths show episode counts relative to the largest category; colors show the primary recorded correction mechanism. ${multiRecoveryCount} episodes also retain a secondary recovery label in their annotation.`;
+  document.querySelector("#taxonomy-note").textContent = `Cell shading represents the share within each trigger category; every populated cell shows its episode count and percentage, and the final column gives the category total. ${multiRecoveryCount} episodes also retain a secondary recovery label in their annotation.`;
 }
 
 function initializeExperimentalLenses() {
