@@ -1802,19 +1802,11 @@ function renderResilienceScorecards() {
     if (!reviewedByAgent.has(row.episode.agent)) reviewedByAgent.set(row.episode.agent, []);
     reviewedByAgent.get(row.episode.agent).push(row);
   });
-  const durationsByAgent = new Map();
-  goalMaxEpisodes.forEach((episode) => {
-    if (episode.duration_seconds == null) return;
-    if (!durationsByAgent.has(episode.agent)) durationsByAgent.set(episode.agent, []);
-    durationsByAgent.get(episode.agent).push(Number(episode.duration_seconds));
-  });
-  const scorecards = [...reviewedByAgent.entries()].map(([agent, agentRows]) => ({
-    agent,
-    reviewed: agentRows.length,
-    recovered: agentRows.filter((row) => isObservedRecovery(row.annotation)).length / agentRows.length,
-    selfCorrected: agentRows.filter((row) => row.annotation.recovery_mechanisms.includes("self_correction")).length / agentRows.length,
-    medianDuration: median(durationsByAgent.get(agent) || [])
-  })).sort((left, right) => right.reviewed - left.reviewed || right.recovered - left.recovered);
+  const scorecards = [...reviewedByAgent.entries()].map(([agent, agentRows]) => {
+    const recovered = agentRows.filter((row) => isObservedRecovery(row.annotation)).length;
+    const selfCorrected = agentRows.filter((row) => row.annotation.recovery_mechanisms.includes("self_correction")).length;
+    return { agent, reviewed: agentRows.length, recovered, selfCorrected };
+  }).sort((left, right) => right.reviewed - left.reviewed || (right.recovered / right.reviewed) - (left.recovered / left.reviewed));
   const list = document.querySelector("#resilience-list");
   list.replaceChildren();
   scorecards.forEach((score) => {
@@ -1826,27 +1818,25 @@ function renderResilienceScorecards() {
     const reviewed = document.createElement("div");
     reviewed.className = "score-value";
     reviewed.textContent = String(score.reviewed);
-    const recoveredTrack = document.createElement("div");
-    recoveredTrack.className = "score-track";
-    const recoveredFill = document.createElement("span");
-    recoveredFill.className = "score-fill";
-    recoveredFill.style.width = `${score.recovered * 100}%`;
-    recoveredFill.title = `${Math.round(score.recovered * 100)}% with an observed recovery`;
-    recoveredTrack.append(recoveredFill);
-    const selfTrack = document.createElement("div");
-    selfTrack.className = "score-track";
+    const recoveryRate = score.recovered / score.reviewed;
+    const selfRate = score.selfCorrected / score.reviewed;
+    const track = document.createElement("div");
+    track.className = "score-track";
+    track.title = `${score.recovered} of ${score.reviewed} episodes recovered; ${score.selfCorrected} self-corrected`;
     const selfFill = document.createElement("span");
     selfFill.className = "score-fill is-self";
-    selfFill.style.width = `${score.selfCorrected * 100}%`;
-    selfFill.title = `${Math.round(score.selfCorrected * 100)}% self-corrected`;
-    selfTrack.append(selfFill);
-    const duration = document.createElement("div");
-    duration.className = "score-value";
-    duration.textContent = score.medianDuration == null ? "—" : formatDuration(score.medianDuration);
-    row.append(agent, reviewed, recoveredTrack, selfTrack, duration);
+    selfFill.style.width = `${selfRate * 100}%`;
+    const otherFill = document.createElement("span");
+    otherFill.className = "score-fill";
+    otherFill.style.width = `${Math.max(0, recoveryRate - selfRate) * 100}%`;
+    track.append(selfFill, otherFill);
+    const summary = document.createElement("div");
+    summary.className = "score-summary";
+    summary.textContent = `${Math.round(recoveryRate * 100)}% recovered · ${score.selfCorrected}/${score.recovered} self-corrected`;
+    row.append(agent, reviewed, track, summary);
     list.append(row);
   });
-  document.querySelector("#resilience-meta").textContent = `${scorecards.length} reviewed agents`;
+  document.querySelector("#resilience-meta").textContent = `${scorecards.length} agents · ${rows.length} reviewed episodes`;
 }
 
 function mechanismLabel(value) {
