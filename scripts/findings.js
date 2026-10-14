@@ -1276,20 +1276,31 @@ function initializeCumulativeChart() {
 }
 
 function renderAnnotationFlow() {
-  const mechanismLabels = {
-    non_pursuit: "Non-pursuit",
-    activity_changed: "Activity changed",
-    relationship_changed: "Relationship changed",
-    assignment_changed: "Assignment changed"
-  };
+  function flowTriggerAndContext(annotation) {
+    const triggers = annotation.trigger_categories || [];
+    if (triggers.includes("pause") && annotation.pause_context) {
+      return { trigger: "pause", context: `pause:${annotation.pause_context}` };
+    }
+    const requestTrigger = triggers.find((trigger) => externalTriggerCategoryIds.has(trigger));
+    if (requestTrigger && annotation.request_relationship) {
+      return { trigger: requestTrigger, context: `request:${annotation.request_relationship}` };
+    }
+    return { trigger: triggers[0] || "unknown", context: "none" };
+  }
+  function contextLabel(value) {
+    if (value === "none") return "No secondary context";
+    const [kind, category] = value.split(":", 2);
+    if (kind === "pause") return `Pause · ${label("pause", category)}`;
+    if (kind === "request") return `Request · ${label("request_relationship", category)}`;
+    return value.replaceAll("_", " ");
+  }
   const flowRows = rows.map((row) => ({
-    trigger: row.annotation.trigger_categories[0] || "unknown",
-    mechanism: row.episode.mechanism_shape || "unknown",
+    ...flowTriggerAndContext(row.annotation),
     recovery: row.annotation.recovery_mechanisms[0] || "unknown"
   }));
   const stages = [
     { key: "trigger", x: 175, label: (value) => label("trigger", value) },
-    { key: "mechanism", x: 580, label: (value) => mechanismLabels[value] || value.replaceAll("_", " ") },
+    { key: "context", x: 580, label: contextLabel },
     { key: "recovery", x: 965, label: (value) => label("recovery", value) }
   ];
   const chartTop = 40, chartHeight = 540, nodeWidth = 14, gap = 9;
@@ -1352,7 +1363,7 @@ function renderAnnotationFlow() {
       });
   }
   stages.forEach((stage, stageIndex) => {
-    const heading = ["Trigger", "Drift shape", "Recovery"][stageIndex];
+    const heading = ["Trigger", "Trigger context", "Recovery"][stageIndex];
     svg.append(svgElement("text", { x: stage.x + nodeWidth / 2, y: 18, "text-anchor": "middle", class: "svg-title" }, heading));
     nodeMaps[stageIndex].forEach((node) => {
       const rect = svgElement("rect", { x: node.x, y: node.y, width: nodeWidth, height: Math.max(1, node.height), rx: 4, fill: stageIndex === 1 ? "#3f7082" : stageIndex === 0 ? "#ae5037" : "#466f61" });
@@ -1360,7 +1371,8 @@ function renderAnnotationFlow() {
       svg.append(rect);
       const anchor = stageIndex === 0 ? "end" : "start";
       const textX = stageIndex === 0 ? node.x - 8 : node.x + nodeWidth + 8;
-      svg.append(svgElement("text", { x: textX, y: node.y + Math.max(9, node.height / 2 + 3), "text-anchor": anchor, class: "svg-label" }, `${shortText(stage.label(node.value), 28)} · ${node.count}`));
+      const labelLength = stageIndex === 1 ? 38 : 28;
+      svg.append(svgElement("text", { x: textX, y: node.y + Math.max(9, node.height / 2 + 3), "text-anchor": anchor, class: "svg-label" }, `${shortText(stage.label(node.value), labelLength)} · ${node.count}`));
     });
   });
   document.querySelector("#flow-meta").textContent = `${flowRows.length} reviewed episodes`;

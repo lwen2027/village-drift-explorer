@@ -484,9 +484,9 @@
           </article>
 
           <article class="viz-card is-wide">
-            <div class="viz-heading"><div><h3>Trigger → drift shape → recovery</h3><p>Primary human annotation at each stage for fully reviewed goal-maximization episodes.</p></div><span class="viz-meta" id="flow-meta"></span></div>
-            <div class="flow-wrap"><svg class="svg-chart flow-chart" id="annotation-flow" viewBox="0 0 1180 620" role="img" aria-label="Trigger to drift shape to recovery flow diagram"></svg></div>
-            <p class="viz-note">Multi-label annotations use the first recorded trigger and recovery so each reviewed episode contributes one path.</p>
+            <div class="viz-heading"><div><h3>Trigger → context → recovery</h3><p>How fully reviewed episodes began, the relevant request or pause context, and how they ended.</p></div><span class="viz-meta" id="flow-meta"></span></div>
+            <div class="flow-wrap"><svg class="svg-chart flow-chart" id="annotation-flow" viewBox="0 0 1180 620" role="img" aria-label="Manual trigger annotation to trigger context to recovery flow diagram"></svg></div>
+            <p class="viz-note">Pause triggers use their manually reviewed pause context; agent or human communications use request relationship. Other triggers require no secondary context. Multi-label reviews use one precedence-selected trigger and the first recorded recovery so each episode contributes one path.</p>
           </article>
         </div>
       </section>
@@ -591,6 +591,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-first-drift-bins"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-manual-flow"></script>
 </body>
 </html>
