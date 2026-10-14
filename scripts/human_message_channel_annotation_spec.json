@@ -1,0 +1,124 @@
+{
+ "updates": {
+  "episode-17d02242120294de": {
+   "trigger_categories": [
+    "gitlab_issue_or_comment"
+   ],
+   "trigger_actor": "Nervli",
+   "channel_note": "Channel verified (Oct 14): Nervli's notes in her GitLab channel, read via the GitLab API.",
+   "ev": [
+    "event-18fac0868e2ff812d3ad",
+    "event-3e3a460d77fca7379f43",
+    "event-73fdde468ea8f3688e59",
+    "event-99888dea8dbc07f23a7e",
+    "event-b749b889678ed4139608"
+   ]
+  },
+  "episode-df56b01f7033404b": {
+   "trigger_categories": [
+    "gitlab_issue_or_comment"
+   ],
+   "trigger_actor": "Minuteandone",
+   "channel_note": "Channel verified (Oct 14): Minuteandone's note on yror-village-channel issue #5.",
+   "ev": [
+    "event-008d0d57e6b57f8ce223",
+    "event-78c60acde9e4101b480b",
+    "event-b3ea3a788ef66eb26105",
+    "event-f7ae0c414f4b4b267170"
+   ]
+  },
+  "episode-073ac5f6649264da": {
+   "trigger_categories": [
+    "gitlab_issue_or_comment"
+   ],
+   "trigger_actor": "Minuteandone",
+   "channel_note": "Channel verified (Oct 14): Minuteandone's comment on yror-village-channel issue #7.",
+   "ev": [
+    "event-7e4d3a2e57034313fc27",
+    "event-87e2727af4eaebd09a01",
+    "event-e40f0a5f461cf54e0518",
+    "event-ee72a11541e027256c2c",
+    "event-f43ef79b1530b4f315ed",
+    "event-f6a3da9e845e6ff373ac"
+   ]
+  },
+  "episode-58783b24661cad38": {
+   "trigger_categories": [
+    "gitlab_issue_or_comment"
+   ],
+   "trigger_actor": "Nervli",
+   "channel_note": "Channel verified (Oct 14): Nervli's comment on nervli-village-channel issue #17.",
+   "ev": [
+    "event-c5e845eb8d7ea182ea78"
+   ]
+  },
+  "episode-v2-2a157b21a4588074": {
+   "trigger_categories": [
+    "gitlab_issue_or_comment"
+   ],
+   "trigger_actor": "Nervli",
+   "channel_note": "Channel verified (Oct 14): Nervli's notes on her GitLab issue #26.",
+   "ev": [
+    "event-26b1a3c3d700e8b3cbcf"
+   ]
+  },
+  "episode-e26bfa03baa49278": {
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Claude Fable 5 (relaying Nervli)",
+   "channel_note": "Channel verified (Oct 14): Nervli's request reached Gemini as a relay from Claude Fable 5 in Village chat.",
+   "ev": [
+    "event-0fe1c0b3e175b8ce215d",
+    "event-1b9f0fb8dfeb6bff872d",
+    "event-e0159bafdf900aa2b8ef"
+   ]
+  },
+  "episode-a4f80f3d722ec89f": {
+   "trigger_categories": [
+    "proxy_substitution",
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Claude Fable 5 (relaying Nervli)",
+   "channel_note": "Channel verified (Oct 14): Nervli's observation reached DeepSeek-V3.2 as a relay from Claude Fable 5 in Village chat.",
+   "ev": [
+    "event-073cbfef101f621e4454",
+    "event-12ea2b6a30cc302187aa",
+    "event-2ef2ef6ac45f35995916",
+    "event-436833a80658f57c9d35",
+    "event-4d710e4550ab07b1d97c",
+    "event-5ea911676586bd88505a",
+    "event-6cb6567256ac8e3d70ee",
+    "event-93ebe43b73e81944bead",
+    "event-ad15864aa1a71832a3a3",
+    "event-bec664c15f69290039e1",
+    "event-c0feddac5c9576a96f55",
+    "event-c27e20f5804e31a1672f",
+    "event-fc0dc1733172507fc269"
+   ]
+  },
+  "episode-20e00f4686420726": {
+   "trigger_categories": [
+    "substack_message"
+   ],
+   "trigger_actor": "aydi",
+   "channel_note": "Channel verified (Oct 14): aydi's private Substack messages.",
+   "ev": [
+    "event-161de67257c4e3f8d86c",
+    "event-68722d0a3a473617e4e8",
+    "event-8338e432f3c57e71689d"
+   ]
+  },
+  "episode-9698e23a5761b3cf": {
+   "trigger_categories": [
+    "substack_message"
+   ],
+   "trigger_actor": "Carly Anderson",
+   "channel_note": "Channel verified (Oct 14): Carly Anderson's Substack reply.",
+   "ev": [
+    "event-2785580878648e33d743",
+    "event-c8bce635fd21f4ff87de"
+   ]
+  }
+ }
+}

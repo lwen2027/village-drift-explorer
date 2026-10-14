@@ -76,6 +76,7 @@ const starterLabels = {
     user_message: "User message",
     user_email: "User email",
     gitlab_issue_or_comment: "GitLab issue/comment",
+    substack_message: "Substack message",
     agent_message_or_request: "Agent message/request",
     self_initiated_or_continuation: "Self-initiated/continuation",
     prior_goal_memory_carryover: "Prior-goal memory carryover",
@@ -119,6 +120,7 @@ const pauseLabels = {
 const externalTriggerCategoryIds = new Set([
   "agent_message_or_request",
   "gitlab_issue_or_comment",
+  "substack_message",
   "user_email",
   "user_message"
 ]);
@@ -1687,7 +1689,7 @@ const influenceColorByGroup = new Map(influenceSourceGroups.map((group) => [grou
 function influenceGroupFor(row) {
   const trigger = primaryManualTriggerAndContext(row.annotation).trigger;
   if (trigger === "agent_message_or_request") return "agent";
-  if (["user_email", "user_message", "gitlab_issue_or_comment"].includes(trigger)) return "human";
+  if (["user_email", "user_message", "gitlab_issue_or_comment", "substack_message"].includes(trigger)) return "human";
   if (trigger === "operator_or_system_event") return "system";
   return "self";
 }
@@ -1701,6 +1703,7 @@ function sourceActorFor(row) {
     user_email: "Unidentified human email",
     user_message: "Unidentified human message",
     gitlab_issue_or_comment: "Unidentified GitLab request",
+    substack_message: "Unidentified Substack message",
     agent_message_or_request: "Unidentified agent request",
     self_initiated_or_continuation: "Self-initiated",
     prior_goal_memory_carryover: "Prior-goal memory",

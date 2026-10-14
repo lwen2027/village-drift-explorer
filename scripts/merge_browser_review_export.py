@@ -16,6 +16,7 @@ DEFAULT_ANNOTATIONS = ROOT / "data" / "manual_review_annotations_v1.json"
 EXTERNAL_TRIGGER_CATEGORIES = {
     "agent_message_or_request",
     "gitlab_issue_or_comment",
+    "substack_message",
     "user_email",
     "user_message",
 }

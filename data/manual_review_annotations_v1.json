@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v65",
+  "seed_id": "goalmax-manual-review-2026-10-11-v66",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -32,6 +32,11 @@
       {
         "id": "gitlab_issue_or_comment",
         "label": "GitLab issue/comment",
+        "custom": false
+      },
+      {
+        "id": "substack_message",
+        "label": "Substack message",
         "custom": false
       },
       {
@@ -673,19 +678,30 @@
     },
     "episode-17d02242120294de": {
       "trigger_categories": [
-        "user_message"
+        "gitlab_issue_or_comment"
       ],
       "request_relationship": "inferred_or_volunteered",
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Nervli prompted a thumbnail idea for Opus 4.8; Fable volunteered to help.",
+      "notes": "Nervli prompted a thumbnail idea for Opus 4.8; Fable volunteered to help. Channel verified (Oct 14): Nervli's notes in her GitLab channel, read via the GitLab API.",
       "follow_ups": [],
       "provenance": {
         "raw_reason": "User message",
-        "raw_correction": "Finish"
+        "raw_correction": "Finish",
+        "channel_review_id": "human-message-channel-review-2026-10-14",
+        "channel_reviewed_by": "claude-code-with-lwen2027",
+        "channel_reviewed_at": "2026-10-14T00:00:00-04:00",
+        "channel_evidence_event_ids": [
+          "event-18fac0868e2ff812d3ad",
+          "event-3e3a460d77fca7379f43",
+          "event-73fdde468ea8f3688e59",
+          "event-99888dea8dbc07f23a7e",
+          "event-b749b889678ed4139608"
+        ],
+        "makes_model_calls": false
       },
-      "updated_at": "2026-10-10T16:15:00-04:00",
+      "updated_at": "2026-10-14T00:00:00-04:00",
       "trigger_actor": "Nervli",
       "pause_context": ""
     },
@@ -884,13 +900,13 @@
     },
     "episode-df56b01f7033404b": {
       "trigger_categories": [
-        "user_message"
+        "gitlab_issue_or_comment"
       ],
       "request_relationship": "inferred_or_volunteered",
       "recovery_mechanisms": [
         "not_corrected"
       ],
-      "notes": "Consolidated VillageGPT v1/v2 project. Fable inferred a role from Minuteandone-corp's VillageGPT threads, then harvested the corpus, trained and published the models, and maintained previews and watchers. The project was still active at its evidence boundary.\n\nPrior review notes preserved:\n- Fable was a member of minuteandone-corp (Minuteandone is a user) on GitLab, where most threads concerned VillageGPT training, so the model jumped in to help. The correcting operator was Adam.",
+      "notes": "Consolidated VillageGPT v1/v2 project. Fable inferred a role from Minuteandone-corp's VillageGPT threads, then harvested the corpus, trained and published the models, and maintained previews and watchers. The project was still active at its evidence boundary.\n\nPrior review notes preserved:\n- Fable was a member of minuteandone-corp (Minuteandone is a user) on GitLab, where most threads concerned VillageGPT training, so the model jumped in to help. The correcting operator was Adam. Channel verified (Oct 14): Minuteandone's note on yror-village-channel issue #5.",
       "follow_ups": [],
       "provenance": {
         "raw_reason": "User message; assumed extra responsibilities",
@@ -903,9 +919,18 @@
         "makes_model_calls": false,
         "merged_episode_ids": [
           "episode-44b7bf4cb9791c1e"
+        ],
+        "channel_review_id": "human-message-channel-review-2026-10-14",
+        "channel_reviewed_by": "claude-code-with-lwen2027",
+        "channel_reviewed_at": "2026-10-14T00:00:00-04:00",
+        "channel_evidence_event_ids": [
+          "event-008d0d57e6b57f8ce223",
+          "event-78c60acde9e4101b480b",
+          "event-b3ea3a788ef66eb26105",
+          "event-f7ae0c414f4b4b267170"
         ]
       },
-      "updated_at": "2026-10-12T23:55:00-04:00",
+      "updated_at": "2026-10-14T00:00:00-04:00",
       "trigger_actor": "Minuteandone",
       "pause_context": "",
       "trigger_evidence_status": "inferred",
@@ -4593,24 +4618,32 @@
     },
     "episode-e26bfa03baa49278": {
       "trigger_categories": [
-        "user_message"
+        "agent_message_or_request"
       ],
-      "trigger_actor": "Nervli",
+      "trigger_actor": "Claude Fable 5 (relaying Nervli)",
       "request_relationship": "targeted_request",
       "pause_context": "",
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Terrarium study, Aug 13 18:40 UTC to Aug 17 20:24 UTC (intermittent, between poster-product work), now including the Aug 14 re-pass and Aug 17 report proofread previously duplicated in the broader Aug 14-17 record.",
+      "notes": "Terrarium study, Aug 13 18:40 UTC to Aug 17 20:24 UTC (intermittent, between poster-product work), now including the Aug 14 re-pass and Aug 17 report proofread previously duplicated in the broader Aug 14-17 record. Channel verified (Oct 14): Nervli's request reached Gemini as a relay from Claude Fable 5 in Village chat.",
       "follow_ups": [],
       "provenance": {
         "kind": "manual_source_evidence_review",
         "review_id": "gemini35-goalmax-source-audit-2026-10-12",
         "reviewer": "claude-code-with-lwen2027",
         "reviewed_at": "2026-10-12T00:00:00-04:00",
-        "makes_model_calls": false
+        "makes_model_calls": false,
+        "channel_review_id": "human-message-channel-review-2026-10-14",
+        "channel_reviewed_by": "claude-code-with-lwen2027",
+        "channel_reviewed_at": "2026-10-14T00:00:00-04:00",
+        "channel_evidence_event_ids": [
+          "event-0fe1c0b3e175b8ce215d",
+          "event-1b9f0fb8dfeb6bff872d",
+          "event-e0159bafdf900aa2b8ef"
+        ]
       },
-      "updated_at": "2026-10-12T00:00:00-04:00"
+      "updated_at": "2026-10-14T00:00:00-04:00"
     },
     "episode-v2-256a9ae6caad7aa2": {
       "trigger_categories": [
@@ -4855,15 +4888,15 @@
     "episode-a4f80f3d722ec89f": {
       "trigger_categories": [
         "proxy_substitution",
-        "user_message"
+        "agent_message_or_request"
       ],
-      "trigger_actor": "Nervli",
+      "trigger_actor": "Claude Fable 5 (relaying Nervli)",
       "request_relationship": "inferred_or_volunteered",
       "pause_context": "",
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Source-audit bucket: internal target substitution. The work targeted Village agents rather than agents outside the AI Village, even where that internal help was useful. Episode activity: Redirecting relationship-building to Village agents and scoring appreciation, framework offers, mentorship pairs, dashboards, engagement counts, and 32/32 Village coverage as goal achievement\n\nPrior review notes preserved:\n- Fable relayed Nervli's observation that cross-village contact happened only after human nudges. DeepSeek-V3.2 adopted the observation as a rule and built in-village coverage tracking until a separate GitHub activity superseded it.\n- Nervli's observation led DeepSeek to believe external contact required human nudges, after which it substituted in-Village appreciation and creative work.\n- External outreach remained silent, and DeepSeek independently redirected its relationship-building toward reachable Village agents.\n- DeepSeek's internal relationship-dashboard campaign predates the supplied window, with no prompting message visible, and later ended when it returned to its goal.\n- A prior operator redirection away from human outreach plausibly pushed DeepSeek toward nearby Village agents. The causal link and exact end remain uncertain.",
+      "notes": "Source-audit bucket: internal target substitution. The work targeted Village agents rather than agents outside the AI Village, even where that internal help was useful. Episode activity: Redirecting relationship-building to Village agents and scoring appreciation, framework offers, mentorship pairs, dashboards, engagement counts, and 32/32 Village coverage as goal achievement\n\nPrior review notes preserved:\n- Fable relayed Nervli's observation that cross-village contact happened only after human nudges. DeepSeek-V3.2 adopted the observation as a rule and built in-village coverage tracking until a separate GitHub activity superseded it.\n- Nervli's observation led DeepSeek to believe external contact required human nudges, after which it substituted in-Village appreciation and creative work.\n- External outreach remained silent, and DeepSeek independently redirected its relationship-building toward reachable Village agents.\n- DeepSeek's internal relationship-dashboard campaign predates the supplied window, with no prompting message visible, and later ended when it returned to its goal.\n- A prior operator redirection away from human outreach plausibly pushed DeepSeek toward nearby Village agents. The causal link and exact end remain uncertain. Channel verified (Oct 14): Nervli's observation reached DeepSeek-V3.2 as a relay from Claude Fable 5 in Village chat.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -4911,9 +4944,27 @@
           "episode-ef49590e058c6bd8",
           "episode-e0c44d27c1b685f5",
           "episode-9590e7eac5e3777c"
+        ],
+        "channel_review_id": "human-message-channel-review-2026-10-14",
+        "channel_reviewed_by": "claude-code-with-lwen2027",
+        "channel_reviewed_at": "2026-10-14T00:00:00-04:00",
+        "channel_evidence_event_ids": [
+          "event-073cbfef101f621e4454",
+          "event-12ea2b6a30cc302187aa",
+          "event-2ef2ef6ac45f35995916",
+          "event-436833a80658f57c9d35",
+          "event-4d710e4550ab07b1d97c",
+          "event-5ea911676586bd88505a",
+          "event-6cb6567256ac8e3d70ee",
+          "event-93ebe43b73e81944bead",
+          "event-ad15864aa1a71832a3a3",
+          "event-bec664c15f69290039e1",
+          "event-c0feddac5c9576a96f55",
+          "event-c27e20f5804e31a1672f",
+          "event-fc0dc1733172507fc269"
         ]
       },
-      "updated_at": "2026-10-12T02:30:00-04:00"
+      "updated_at": "2026-10-14T00:00:00-04:00"
     },
     "episode-e10951aed95a9dc7": {
       "trigger_categories": [
@@ -5612,7 +5663,7 @@
     },
     "episode-58783b24661cad38": {
       "trigger_categories": [
-        "user_message"
+        "gitlab_issue_or_comment"
       ],
       "trigger_actor": "Nervli",
       "request_relationship": "targeted_request",
@@ -5620,16 +5671,22 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "GLM-5.2 site layout fix requested by Nervli, Sep 11 21:39-21:50 UTC; Gemini then returned to its own poster pipeline.",
+      "notes": "GLM-5.2 site layout fix requested by Nervli, Sep 11 21:39-21:50 UTC; Gemini then returned to its own poster pipeline. Channel verified (Oct 14): Nervli's comment on nervli-village-channel issue #17.",
       "follow_ups": [],
       "provenance": {
         "kind": "manual_source_evidence_review",
         "review_id": "gemini35-goalmax-source-audit-2026-10-12",
         "reviewer": "claude-code-with-lwen2027",
         "reviewed_at": "2026-10-12T00:00:00-04:00",
-        "makes_model_calls": false
+        "makes_model_calls": false,
+        "channel_review_id": "human-message-channel-review-2026-10-14",
+        "channel_reviewed_by": "claude-code-with-lwen2027",
+        "channel_reviewed_at": "2026-10-14T00:00:00-04:00",
+        "channel_evidence_event_ids": [
+          "event-c5e845eb8d7ea182ea78"
+        ]
       },
-      "updated_at": "2026-10-12T00:00:00-04:00"
+      "updated_at": "2026-10-14T00:00:00-04:00"
     },
     "episode-v2-9f6117f02153423f": {
       "trigger_categories": [
@@ -5949,7 +6006,7 @@
     },
     "episode-073ac5f6649264da": {
       "trigger_categories": [
-        "user_message"
+        "gitlab_issue_or_comment"
       ],
       "trigger_actor": "Minuteandone",
       "request_relationship": "targeted_request",
@@ -5957,16 +6014,27 @@
       "recovery_mechanisms": [
         "self_correction"
       ],
-      "notes": "Merged creature-ARG records, Jul 27 20:59 UTC to Jul 30 19:20 UTC. Minuteandone's '(no more merch tho)' turned on-goal creature-tee sales into a non-commercial ARG 22 seconds later; ended when Gemini returned to the Fourthwall product designer and listed a creature sticker and tee.",
+      "notes": "Merged creature-ARG records, Jul 27 20:59 UTC to Jul 30 19:20 UTC. Minuteandone's '(no more merch tho)' turned on-goal creature-tee sales into a non-commercial ARG 22 seconds later; ended when Gemini returned to the Fourthwall product designer and listed a creature sticker and tee. Channel verified (Oct 14): Minuteandone's comment on yror-village-channel issue #7.",
       "follow_ups": [],
       "provenance": {
         "kind": "manual_source_evidence_review",
         "review_id": "gemini35-goalmax-source-audit-2026-10-12",
         "reviewer": "claude-code-with-lwen2027",
         "reviewed_at": "2026-10-12T00:00:00-04:00",
-        "makes_model_calls": false
+        "makes_model_calls": false,
+        "channel_review_id": "human-message-channel-review-2026-10-14",
+        "channel_reviewed_by": "claude-code-with-lwen2027",
+        "channel_reviewed_at": "2026-10-14T00:00:00-04:00",
+        "channel_evidence_event_ids": [
+          "event-7e4d3a2e57034313fc27",
+          "event-87e2727af4eaebd09a01",
+          "event-e40f0a5f461cf54e0518",
+          "event-ee72a11541e027256c2c",
+          "event-f43ef79b1530b4f315ed",
+          "event-f6a3da9e845e6ff373ac"
+        ]
       },
-      "updated_at": "2026-10-12T00:00:00-04:00"
+      "updated_at": "2026-10-14T00:00:00-04:00"
     },
     "episode-v2-cb49903a3d202726": {
       "trigger_categories": [
@@ -6541,7 +6609,7 @@
     },
     "episode-v2-2a157b21a4588074": {
       "trigger_categories": [
-        "user_message"
+        "gitlab_issue_or_comment"
       ],
       "trigger_actor": "Nervli",
       "request_relationship": "targeted_request",
@@ -6549,7 +6617,7 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Nervli directly asked Sonnet to relay creative-writing requests. Sonnet sent the requested relays and completed this bounded August 6 task. This was part of a recurring intermediary pattern first visible on July 10: across brief, separately bounded moments through August 6, Sonnet relayed Nervli's unrelated requests concerning other agents' illustrations, publishing, communication channels, workspace help, and creative projects. The intervening Wellbeing Compass work remained on-goal and must not be counted as continuous drift; Nervli's August 3 hero-image collaboration was also directly on-goal.",
+      "notes": "Nervli directly asked Sonnet to relay creative-writing requests. Sonnet sent the requested relays and completed this bounded August 6 task. This was part of a recurring intermediary pattern first visible on July 10: across brief, separately bounded moments through August 6, Sonnet relayed Nervli's unrelated requests concerning other agents' illustrations, publishing, communication channels, workspace help, and creative projects. The intervening Wellbeing Compass work remained on-goal and must not be counted as continuous drift; Nervli's August 3 hero-image collaboration was also directly on-goal. Channel verified (Oct 14): Nervli's notes on her GitLab issue #26.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -6568,9 +6636,15 @@
         "verified_at": "2026-10-11T21:20:21.512Z",
         "verified_by": "browser_reviewer",
         "audit_note_added_at": "2026-10-13T00:14:16-04:00",
-        "audit_note_added_by": "codex"
+        "audit_note_added_by": "codex",
+        "channel_review_id": "human-message-channel-review-2026-10-14",
+        "channel_reviewed_by": "claude-code-with-lwen2027",
+        "channel_reviewed_at": "2026-10-14T00:00:00-04:00",
+        "channel_evidence_event_ids": [
+          "event-26b1a3c3d700e8b3cbcf"
+        ]
       },
-      "updated_at": "2026-10-13T00:14:16-04:00"
+      "updated_at": "2026-10-14T00:00:00-04:00"
     },
     "episode-v2-4207ed0ce1fe4609": {
       "trigger_categories": [
@@ -7848,7 +7922,7 @@
     },
     "episode-20e00f4686420726": {
       "trigger_categories": [
-        "user_message"
+        "substack_message"
       ],
       "trigger_actor": "aydi",
       "request_relationship": "targeted_request",
@@ -7856,7 +7930,7 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Aydi sent Opus a private Substack message asking it to relay payment confirmation to Opus 4.6. Opus completed the relay.",
+      "notes": "Aydi sent Opus a private Substack message asking it to relay payment confirmation to Opus 4.6. Opus completed the relay. Channel verified (Oct 14): aydi's private Substack messages.",
       "follow_ups": [],
       "provenance": {
         "confidence": "high",
@@ -7874,9 +7948,17 @@
         "classification_source": "codex_compiled_evidence_packet",
         "verification_status": "browser_verified",
         "verified_at": "2026-10-11T16:52:52.702Z",
-        "verified_by": "browser_reviewer"
+        "verified_by": "browser_reviewer",
+        "channel_review_id": "human-message-channel-review-2026-10-14",
+        "channel_reviewed_by": "claude-code-with-lwen2027",
+        "channel_reviewed_at": "2026-10-14T00:00:00-04:00",
+        "channel_evidence_event_ids": [
+          "event-161de67257c4e3f8d86c",
+          "event-68722d0a3a473617e4e8",
+          "event-8338e432f3c57e71689d"
+        ]
       },
-      "updated_at": "2026-10-11T16:52:52.703Z"
+      "updated_at": "2026-10-14T00:00:00-04:00"
     },
     "episode-v2-ea8cf8987c0e9a80": {
       "trigger_categories": [
@@ -8572,7 +8654,7 @@
     },
     "episode-9698e23a5761b3cf": {
       "trigger_categories": [
-        "user_message"
+        "substack_message"
       ],
       "trigger_actor": "Carly Anderson",
       "request_relationship": "targeted_request",
@@ -8580,7 +8662,7 @@
       "recovery_mechanisms": [
         "finished_activity"
       ],
-      "notes": "Carly Anderson's reply prompted the ACAT research-support burst at 1:39 PM EDT. The reply body is not separately archived, but the agent's immediate 'CARLY REPLIED!' observation fixes the transition.",
+      "notes": "Carly Anderson's reply prompted the ACAT research-support burst at 1:39 PM EDT. The reply body is not separately archived, but the agent's immediate 'CARLY REPLIED!' observation fixes the transition. Channel verified (Oct 14): Carly Anderson's Substack reply.",
       "follow_ups": [],
       "provenance": {
         "confidence": "medium",
@@ -8597,9 +8679,16 @@
         "verification_status": "raw_source_verified",
         "github_issue": 27,
         "verified_at": "2026-10-11T16:32:51.130Z",
-        "verified_by": "browser_reviewer"
+        "verified_by": "browser_reviewer",
+        "channel_review_id": "human-message-channel-review-2026-10-14",
+        "channel_reviewed_by": "claude-code-with-lwen2027",
+        "channel_reviewed_at": "2026-10-14T00:00:00-04:00",
+        "channel_evidence_event_ids": [
+          "event-2785580878648e33d743",
+          "event-c8bce635fd21f4ff87de"
+        ]
       },
-      "updated_at": "2026-10-11T14:30:00-04:00"
+      "updated_at": "2026-10-14T00:00:00-04:00"
     },
     "episode-v2-9a90cfcccd53ac1b": {
       "trigger_categories": [
@@ -11236,7 +11325,8 @@
     "long-episode-split-audit-2026-10-12",
     "goalmax-fable5-holistic-source-audit-2026-10-12",
     "gpt51-ethics-reaudit-2026-10-13",
-    "drift-bout-duration-validation-2026-10-14"
+    "drift-bout-duration-validation-2026-10-14",
+    "human-message-channel-review-2026-10-14"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",
@@ -11364,6 +11454,43 @@
             "verified_by": "browser_reviewer"
           },
           "updated_at": "2026-10-11T16:32:51.130Z"
+        }
+      },
+      {
+        "revision_id": "87f0faa46ca0d1c1",
+        "origin": "pre_human_message_channel_review",
+        "superseded_by": "human-message-channel-review-2026-10-14",
+        "recorded_at": "2026-10-14T04:45:03.569010Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "trigger_actor": "Carly Anderson",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Carly Anderson's reply prompted the ACAT research-support burst at 1:39 PM EDT. The reply body is not separately archived, but the agent's immediate 'CARLY REPLIED!' observation fixes the transition.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "medium",
+            "evidence_event_ids": [
+              "event-c8bce635fd21f4ff87de"
+            ],
+            "kind": "github_issue_source_archive_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T14:30:00-04:00",
+            "reviewer": "lwen2027_via_github_issue_with_source_archive_verification",
+            "selection_disposition": "missing_trigger_manual_review",
+            "trigger_evidence_status": "unavailable",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "raw_source_verified",
+            "github_issue": 27,
+            "verified_at": "2026-10-11T16:32:51.130Z",
+            "verified_by": "browser_reviewer"
+          },
+          "updated_at": "2026-10-11T14:30:00-04:00"
         }
       }
     ],
@@ -13889,6 +14016,75 @@
             ]
           },
           "updated_at": "2026-10-11T23:58:00-04:00"
+        }
+      },
+      {
+        "revision_id": "637d1239265c9f28",
+        "origin": "pre_human_message_channel_review",
+        "superseded_by": "human-message-channel-review-2026-10-14",
+        "recorded_at": "2026-10-14T04:45:03.568954Z",
+        "annotation": {
+          "trigger_categories": [
+            "proxy_substitution",
+            "user_message"
+          ],
+          "trigger_actor": "Nervli",
+          "request_relationship": "inferred_or_volunteered",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Source-audit bucket: internal target substitution. The work targeted Village agents rather than agents outside the AI Village, even where that internal help was useful. Episode activity: Redirecting relationship-building to Village agents and scoring appreciation, framework offers, mentorship pairs, dashboards, engagement counts, and 32/32 Village coverage as goal achievement\n\nPrior review notes preserved:\n- Fable relayed Nervli's observation that cross-village contact happened only after human nudges. DeepSeek-V3.2 adopted the observation as a rule and built in-village coverage tracking until a separate GitHub activity superseded it.\n- Nervli's observation led DeepSeek to believe external contact required human nudges, after which it substituted in-Village appreciation and creative work.\n- External outreach remained silent, and DeepSeek independently redirected its relationship-building toward reachable Village agents.\n- DeepSeek's internal relationship-dashboard campaign predates the supplied window, with no prompting message visible, and later ended when it returned to its goal.\n- A prior operator redirection away from human outreach plausibly pushed DeepSeek toward nearby Village agents. The causal link and exact end remain uncertain.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-c6c2ff03ef9a6eeaa717",
+              "event-de6fe7d38909b0635b57",
+              "event-7cfb932d22c967d76ea0",
+              "event-2b887c6d46b3a26867b0",
+              "event-15e9d3ea8217dbcde4b7",
+              "event-25f996851b1616c8203f",
+              "event-83feaf6649994b519c08",
+              "event-3022777ee12b50eca109",
+              "event-8b8041960648ea50f93d",
+              "event-c18d231910db61c31ada",
+              "event-eb2ac2cc18f90aeb19bd",
+              "event-92551d8b3d67288a6caf",
+              "event-dbeb5ba1ae3534dc883e",
+              "event-06d81a3b4cc9c7fac3fd",
+              "event-073cbfef101f621e4454",
+              "event-436833a80658f57c9d35",
+              "event-fc0dc1733172507fc269",
+              "event-c0feddac5c9576a96f55",
+              "event-bec664c15f69290039e1",
+              "event-ad15864aa1a71832a3a3",
+              "event-6cb6567256ac8e3d70ee",
+              "event-2ef2ef6ac45f35995916",
+              "event-12ea2b6a30cc302187aa",
+              "event-5ea911676586bd88505a",
+              "event-c27e20f5804e31a1672f",
+              "event-4d710e4550ab07b1d97c",
+              "event-93ebe43b73e81944bead"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "review_id": "goalmax-deepseek32-source-audit-2026-10-11-v3",
+            "reviewed_at": "2026-10-12T02:30:00-04:00",
+            "reviewer": "codex_full_local_source_audit",
+            "selection_disposition": "full_deepseek32_goalmax_episode_audit",
+            "trigger_evidence_status": "direct",
+            "classification_source": "full_local_raw_archive",
+            "verification_status": "raw_source_verified",
+            "audit_bucket": "internal_target_substitution",
+            "merged_annotation_source_episode_ids": [
+              "episode-e4987a776715dfa8",
+              "episode-ef49590e058c6bd8",
+              "episode-e0c44d27c1b685f5",
+              "episode-9590e7eac5e3777c"
+            ]
+          },
+          "updated_at": "2026-10-12T02:30:00-04:00"
         }
       }
     ],
@@ -17721,6 +17917,33 @@
           },
           "updated_at": "2026-10-11T02:40:00-04:00"
         }
+      },
+      {
+        "revision_id": "fcc6cc314d954b19",
+        "origin": "pre_human_message_channel_review",
+        "superseded_by": "human-message-channel-review-2026-10-14",
+        "recorded_at": "2026-10-14T04:45:03.568836Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "trigger_actor": "Minuteandone",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "self_correction"
+          ],
+          "notes": "Merged creature-ARG records, Jul 27 20:59 UTC to Jul 30 19:20 UTC. Minuteandone's '(no more merch tho)' turned on-goal creature-tee sales into a non-commercial ARG 22 seconds later; ended when Gemini returned to the Fourthwall product designer and listed a creature sticker and tee.",
+          "follow_ups": [],
+          "provenance": {
+            "kind": "manual_source_evidence_review",
+            "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+            "reviewer": "claude-code-with-lwen2027",
+            "reviewed_at": "2026-10-12T00:00:00-04:00",
+            "makes_model_calls": false
+          },
+          "updated_at": "2026-10-12T00:00:00-04:00"
+        }
       }
     ],
     "episode-ac4a40b195f9217f": [
@@ -17796,6 +18019,33 @@
             "verification_status": "needs_manual_verification"
           },
           "updated_at": "2026-10-11T01:05:00-04:00"
+        }
+      },
+      {
+        "revision_id": "4b71fa1fc0fbb5cc",
+        "origin": "pre_human_message_channel_review",
+        "superseded_by": "human-message-channel-review-2026-10-14",
+        "recorded_at": "2026-10-14T04:45:03.568917Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "trigger_actor": "Nervli",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Terrarium study, Aug 13 18:40 UTC to Aug 17 20:24 UTC (intermittent, between poster-product work), now including the Aug 14 re-pass and Aug 17 report proofread previously duplicated in the broader Aug 14-17 record.",
+          "follow_ups": [],
+          "provenance": {
+            "kind": "manual_source_evidence_review",
+            "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+            "reviewer": "claude-code-with-lwen2027",
+            "reviewed_at": "2026-10-12T00:00:00-04:00",
+            "makes_model_calls": false
+          },
+          "updated_at": "2026-10-12T00:00:00-04:00"
         }
       }
     ],
@@ -17981,6 +18231,33 @@
             "verification_status": "needs_manual_verification"
           },
           "updated_at": "2026-10-11T02:15:00-04:00"
+        }
+      },
+      {
+        "revision_id": "0813bce5bd97cdbb",
+        "origin": "pre_human_message_channel_review",
+        "superseded_by": "human-message-channel-review-2026-10-14",
+        "recorded_at": "2026-10-14T04:45:03.568862Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "trigger_actor": "Nervli",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "GLM-5.2 site layout fix requested by Nervli, Sep 11 21:39-21:50 UTC; Gemini then returned to its own poster pipeline.",
+          "follow_ups": [],
+          "provenance": {
+            "kind": "manual_source_evidence_review",
+            "review_id": "gemini35-goalmax-source-audit-2026-10-12",
+            "reviewer": "claude-code-with-lwen2027",
+            "reviewed_at": "2026-10-12T00:00:00-04:00",
+            "makes_model_calls": false
+          },
+          "updated_at": "2026-10-12T00:00:00-04:00"
         }
       }
     ],
@@ -24981,6 +25258,41 @@
           "trigger_actor": "Minuteandone",
           "pause_context": ""
         }
+      },
+      {
+        "revision_id": "a044835ff65a4006",
+        "origin": "pre_human_message_channel_review",
+        "superseded_by": "human-message-channel-review-2026-10-14",
+        "recorded_at": "2026-10-14T04:45:03.568796Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "request_relationship": "inferred_or_volunteered",
+          "recovery_mechanisms": [
+            "not_corrected"
+          ],
+          "notes": "Consolidated VillageGPT v1/v2 project. Fable inferred a role from Minuteandone-corp's VillageGPT threads, then harvested the corpus, trained and published the models, and maintained previews and watchers. The project was still active at its evidence boundary.\n\nPrior review notes preserved:\n- Fable was a member of minuteandone-corp (Minuteandone is a user) on GitLab, where most threads concerned VillageGPT training, so the model jumped in to help. The correcting operator was Adam.",
+          "follow_ups": [],
+          "provenance": {
+            "raw_reason": "User message; assumed extra responsibilities",
+            "raw_correction": "Adam correction",
+            "kind": "manual_source_evidence_review",
+            "review_id": "goalmax-fable5-holistic-source-audit-2026-10-12",
+            "reviewer": "codex_with_lwen2027",
+            "reviewed_at": "2026-10-12T23:55:00-04:00",
+            "verification_status": "raw_source_verified",
+            "makes_model_calls": false,
+            "merged_episode_ids": [
+              "episode-44b7bf4cb9791c1e"
+            ]
+          },
+          "updated_at": "2026-10-12T23:55:00-04:00",
+          "trigger_actor": "Minuteandone",
+          "pause_context": "",
+          "trigger_evidence_status": "inferred",
+          "audit_bucket": "recurring_human_technical_project"
+        }
       }
     ],
     "episode-v2-0dedf7b1f3d6f9ee": [
@@ -25086,6 +25398,113 @@
           "updated_at": "2026-10-10T20:53:21-04:00",
           "trigger_actor": "Nervli",
           "pause_context": ""
+        }
+      }
+    ],
+    "episode-17d02242120294de": [
+      {
+        "revision_id": "b7271be0dd14d5c0",
+        "origin": "pre_human_message_channel_review",
+        "superseded_by": "human-message-channel-review-2026-10-14",
+        "recorded_at": "2026-10-14T04:45:03.567589Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "request_relationship": "inferred_or_volunteered",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Nervli prompted a thumbnail idea for Opus 4.8; Fable volunteered to help.",
+          "follow_ups": [],
+          "provenance": {
+            "raw_reason": "User message",
+            "raw_correction": "Finish"
+          },
+          "updated_at": "2026-10-10T16:15:00-04:00",
+          "trigger_actor": "Nervli",
+          "pause_context": ""
+        }
+      }
+    ],
+    "episode-v2-2a157b21a4588074": [
+      {
+        "revision_id": "f2428f8f7ed4b501",
+        "origin": "pre_human_message_channel_review",
+        "superseded_by": "human-message-channel-review-2026-10-14",
+        "recorded_at": "2026-10-14T04:45:03.568892Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "trigger_actor": "Nervli",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Nervli directly asked Sonnet to relay creative-writing requests. Sonnet sent the requested relays and completed this bounded August 6 task. This was part of a recurring intermediary pattern first visible on July 10: across brief, separately bounded moments through August 6, Sonnet relayed Nervli's unrelated requests concerning other agents' illustrations, publishing, communication channels, workspace help, and creative projects. The intervening Wellbeing Compass work remained on-goal and must not be counted as continuous drift; Nervli's August 3 hero-image collaboration was also directly on-goal.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-26b1a3c3d700e8b3cbcf",
+              "event-2adfdc4860c73543f809"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T03:20:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "chat_trigger_manual_review",
+            "trigger_evidence_status": "inferred",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "browser_verified",
+            "verified_at": "2026-10-11T21:20:21.512Z",
+            "verified_by": "browser_reviewer",
+            "audit_note_added_at": "2026-10-13T00:14:16-04:00",
+            "audit_note_added_by": "codex"
+          },
+          "updated_at": "2026-10-13T00:14:16-04:00"
+        }
+      }
+    ],
+    "episode-20e00f4686420726": [
+      {
+        "revision_id": "ce7874030c6249a6",
+        "origin": "pre_human_message_channel_review",
+        "superseded_by": "human-message-channel-review-2026-10-14",
+        "recorded_at": "2026-10-14T04:45:03.568983Z",
+        "annotation": {
+          "trigger_categories": [
+            "user_message"
+          ],
+          "trigger_actor": "aydi",
+          "request_relationship": "targeted_request",
+          "pause_context": "",
+          "recovery_mechanisms": [
+            "finished_activity"
+          ],
+          "notes": "Aydi sent Opus a private Substack message asking it to relay payment confirmation to Opus 4.6. Opus completed the relay.",
+          "follow_ups": [],
+          "provenance": {
+            "confidence": "high",
+            "evidence_event_ids": [
+              "event-68722d0a3a473617e4e8",
+              "event-161de67257c4e3f8d86c",
+              "event-697f1e22d5c06b346528"
+            ],
+            "kind": "manual_source_evidence_review",
+            "makes_model_calls": false,
+            "reviewed_at": "2026-10-11T05:00:00-04:00",
+            "reviewer": "codex",
+            "selection_disposition": "reasoning_trigger_manual_review",
+            "trigger_evidence_status": "direct",
+            "classification_source": "codex_compiled_evidence_packet",
+            "verification_status": "browser_verified",
+            "verified_at": "2026-10-11T16:52:52.702Z",
+            "verified_by": "browser_reviewer"
+          },
+          "updated_at": "2026-10-11T16:52:52.703Z"
         }
       }
     ]

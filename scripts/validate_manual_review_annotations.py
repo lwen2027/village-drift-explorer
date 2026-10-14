@@ -24,6 +24,7 @@ REQUIRED_FIELDS = {
 EXTERNAL_TRIGGERS = {
     "agent_message_or_request",
     "gitlab_issue_or_comment",
+    "substack_message",
     "user_email",
     "user_message",
 }
