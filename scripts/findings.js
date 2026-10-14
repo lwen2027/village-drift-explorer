@@ -24,9 +24,15 @@ const sourceRecords = await sourceResponse.json();
 // Goal categories are optional; without them the atlas renders as one ungrouped list.
 const goalCategories = categoryResponse.ok ? (await categoryResponse.json()).categories || [] : [];
 // Operator corrections are optional too; each targeted correction becomes a marker on the agent's atlas row.
-const operatorCorrections = contactResponse.ok
-  ? (await contactResponse.json()).operator_corrections || []
-  : [];
+const humanContact = contactResponse.ok ? await contactResponse.json() : {};
+const operatorCorrections = humanContact.operator_corrections || [];
+// Agents contacted by outside (non-staff) humans on at least this many goal days are flagged as possibly biased.
+const OUTSIDE_TARGETING_MIN_DAYS = 10;
+const outsideTargetingByAgent = new Map(
+  Object.entries(humanContact.agents || {})
+    .map(([agent, record]) => [agent, record.outside_targeting])
+    .filter(([, targeting]) => targeting && targeting.days >= OUTSIDE_TARGETING_MIN_DAYS)
+);
 const correctionsByAgent = new Map();
 operatorCorrections.forEach((correction) => {
   correction.targets.forEach((agent) => {
@@ -34,6 +40,10 @@ operatorCorrections.forEach((correction) => {
     correctionsByAgent.get(agent).push(correction);
   });
 });
+// Heavily targeted agents carry an asterisk wherever their name is shown on this page.
+function agentLabel(agent) {
+  return outsideTargetingByAgent.has(agent) ? `${agent}*` : agent;
+}
 const goalCategoryByAgent = new Map(
   goalCategories.flatMap((category) => category.agents.map((agent) => [agent, category.id]))
 );
@@ -619,6 +629,7 @@ function label(kind, value) {
   if (!value) return "Not classified";
   if (kind === "pause") return pauseLabels[value] || value;
   if (kind === "source") return sourceLabels[value] || value;
+  if (kind === "agent") return agentLabel(value);
   return starterLabels[kind]?.[value] || value.replaceAll("_", " ");
 }
 
@@ -898,7 +909,20 @@ function renderGoalAtlas() {
       identity.className = "goal-strip-name";
       const agent = document.createElement("div");
       agent.className = "goal-strip-agent";
-      agent.textContent = period.agent;
+      agent.textContent = agentLabel(period.agent);
+      const targeting = outsideTargetingByAgent.get(period.agent);
+      if (targeting) {
+        const people = Object.entries(targeting.by_person || {})
+          .sort((left, right) => right[1].contacts - left[1].contacts)
+          .slice(0, 3)
+          .map(([person]) => person);
+        const badge = document.createElement("span");
+        badge.className = "goal-strip-targeted";
+        badge.textContent = "outside";
+        badge.title = `Targeted by outside humans: ${targeting.contacts} contacts on ${targeting.days} days (${people.join(", ")}); `
+          + `${targeting.led_to_episodes} drift episode${targeting.led_to_episodes === 1 ? "" : "s"} triggered by outside humans`;
+        agent.append(" ", badge);
+      }
       const goal = document.createElement("div");
       goal.className = "goal-strip-goal";
       goal.textContent = period.shortGoal;
@@ -1079,7 +1103,7 @@ function renderBurdenScatter() {
       "stroke-width": selected && period.unknownDurationCount ? 2.5 : 1.5,
       opacity: selected ? .9 : .13
     });
-    svgTitle(point, `${selected ? "" : "Excluded · "}${period.agent} — ${period.goal}\n${grouping.label}\n${period.episodes.length} episodes; ${(period.burdenShare * 100).toFixed(2)}% validated drift share; ${period.unknownDurationCount} unresolved durations`);
+    svgTitle(point, `${selected ? "" : "Excluded · "}${agentLabel(period.agent)} — ${period.goal}\n${grouping.label}\n${period.episodes.length} episodes; ${(period.burdenShare * 100).toFixed(2)}% validated drift share; ${period.unknownDurationCount} unresolved durations`);
     svg.append(point);
   });
   renderBurdenLegend(groups, colorByKey, selectedKeys, groupCounts);
@@ -1230,7 +1254,7 @@ function renderCumulativeGoal(periodId) {
     svgTitle(marker, episode.activity);
     svg.append(marker);
   });
-  document.querySelector("#cumulative-note").textContent = `${period.agent} · ${period.episodes.length} episodes · ${(period.burdenShare * 100).toFixed(2)}% minimum validated drift share · ${period.unknownDurationCount} unresolved durations shown as diamonds.`;
+  document.querySelector("#cumulative-note").textContent = `${agentLabel(period.agent)} · ${period.episodes.length} episodes · ${(period.burdenShare * 100).toFixed(2)}% minimum validated drift share · ${period.unknownDurationCount} unresolved durations shown as diamonds.`;
 }
 
 function initializeCumulativeChart() {
@@ -1240,7 +1264,7 @@ function initializeCumulativeChart() {
   periods.forEach((period) => {
     const option = document.createElement("option");
     option.value = period.id;
-    option.textContent = `${period.agent} — ${shortText(period.shortGoal, 34)}`;
+    option.textContent = `${agentLabel(period.agent)} — ${shortText(period.shortGoal, 34)}`;
     select.append(option);
   });
   select.addEventListener("change", () => renderCumulativeGoal(select.value));
@@ -1540,7 +1564,7 @@ function renderAgentFingerprints() {
     card.className = "fingerprint-card";
     const name = document.createElement("div");
     name.className = "fingerprint-agent";
-    name.textContent = profile.agent;
+    name.textContent = agentLabel(profile.agent);
     const meta = document.createElement("div");
     meta.className = "fingerprint-meta";
     meta.textContent = `${profile.episodeCount} confirmed episodes`;
@@ -1639,18 +1663,18 @@ function renderInfluenceNetwork() {
       d: `M 345 ${sourceY.get(source)} C 550 ${sourceY.get(source)}, 550 ${targetY.get(target)}, 755 ${targetY.get(target)}`,
       fill: "none", stroke: "#ae5037", opacity: .13 + .35 * (count / maxEdge), "stroke-width": 1 + 8 * (count / maxEdge)
     });
-    svgTitle(path, `${source} → ${target}: ${count} reviewed episodes`);
+    svgTitle(path, `${agentLabel(source)} → ${agentLabel(target)}: ${count} reviewed episodes`);
     svg.append(path);
   });
   sources.forEach((source) => {
     const y = sourceY.get(source);
     svg.append(svgElement("circle", { cx: 340, cy: y, r: 5, fill: "#ae5037" }));
-    svg.append(svgElement("text", { x: 330, y: y + 3, "text-anchor": "end", class: "svg-label" }, `${shortText(source, 44)} · ${sourceCounts.get(source)}`));
+    svg.append(svgElement("text", { x: 330, y: y + 3, "text-anchor": "end", class: "svg-label" }, `${shortText(agentLabel(source), 44)} · ${sourceCounts.get(source)}`));
   });
   targets.forEach((target) => {
     const y = targetY.get(target);
     svg.append(svgElement("circle", { cx: 760, cy: y, r: 5, fill: "#466f61" }));
-    svg.append(svgElement("text", { x: 770, y: y + 3, class: "svg-label" }, `${shortText(target, 40)} · ${targetCounts.get(target)}`));
+    svg.append(svgElement("text", { x: 770, y: y + 3, class: "svg-label" }, `${shortText(agentLabel(target), 40)} · ${targetCounts.get(target)}`));
   });
   svg.append(svgElement("text", { x: 340, y: 18, "text-anchor": "middle", class: "svg-title" }, "Trigger source"));
   svg.append(svgElement("text", { x: 760, y: 18, "text-anchor": "middle", class: "svg-title" }, "Drifting agent"));
@@ -1688,7 +1712,7 @@ function renderResilienceScorecards() {
     row.className = "score-row";
     const agent = document.createElement("div");
     agent.className = "score-agent";
-    agent.textContent = score.agent;
+    agent.textContent = agentLabel(score.agent);
     const reviewed = document.createElement("div");
     reviewed.className = "score-value";
     reviewed.textContent = String(score.reviewed);
@@ -1834,7 +1858,7 @@ function renderAuditPriorityMap() {
       stroke: reviewed ? "#466f61" : "#ae5037", "stroke-width": candidate.episode.duration_seconds == null ? 2 : 1,
       opacity: .7
     });
-    svgTitle(point, `${candidate.episode.agent} — ${candidate.episode.activity}\n${candidate.gaps} evidence gaps; ${formatDuration(candidate.hours * 3600)} observed/validated span${reviewed ? "; human reviewed" : ""}`);
+    svgTitle(point, `${agentLabel(candidate.episode.agent)} — ${candidate.episode.activity}\n${candidate.gaps} evidence gaps; ${formatDuration(candidate.hours * 3600)} observed/validated span${reviewed ? "; human reviewed" : ""}`);
     svg.append(point);
   });
   const ranked = [...candidates].sort((left, right) => right.score - left.score).slice(0, 8);
@@ -1847,7 +1871,7 @@ function renderAuditPriorityMap() {
     const copy = document.createElement("div");
     const name = document.createElement("div");
     name.className = "priority-name";
-    name.textContent = `${candidate.episode.agent} · ${shortText(candidate.episode.activity, 48)}`;
+    name.textContent = `${agentLabel(candidate.episode.agent)} · ${shortText(candidate.episode.activity, 48)}`;
     const detail = document.createElement("div");
     detail.className = "priority-detail";
     detail.textContent = `${candidate.gaps} gaps · ${formatDuration(candidate.hours * 3600)} observed/validated span`;
@@ -1900,7 +1924,7 @@ function renderEpisodeList() {
     const identity = document.createElement("div");
     const agent = document.createElement("div");
     agent.className = "episode-agent";
-    agent.textContent = row.episode.agent;
+    agent.textContent = agentLabel(row.episode.agent);
     const date = document.createElement("div");
     date.className = "episode-date";
     date.textContent = displayDay(row.episode.onset || row.episode.activity_start);
