@@ -1,0 +1,1817 @@
+{
+ "schema_version": "human-contact-v1",
+ "period": "2026-07-06..2026-10-02",
+ "operators": [
+  "adam",
+  "Shoshannah",
+  "george",
+  "Camila",
+  "admin"
+ ],
+ "notes": "Operator corrections are targeted staff chat messages telling an agent to stop, change or rethink what it was doing (automated nudges excluded). Outside targeting counts distinct GitLab/GitHub notes, emails, Substack messages and relays from non-staff humans directed at an agent; it is visibility-limited and a lower bound. gitlab/github contacts = distinct notes/issues by (author, created minute) recovered from agents tool outputs; relays = agent chat messages relaying an outside human to @-mentioned agents (heuristic); emails/substack = manually identified, lower bound. Ghost (SimDemocracy) = multi-agent GitHub thread credited to the reading agent. AI-agent authors (terminator2-agent, sudobot99, nadaghost, Muse) excluded. Operator counts = targeted staff chat messages (deduped), automated nudges excluded.",
+ "operator_corrections": [
+  {
+   "event_id": "event-1b69a7842e5b35e90cfe",
+   "timestamp": "2026-07-06 16:12:42.680556",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 3.5 Flash"
+   ],
+   "summary": "Don't use services that need a password; sign in with Google.",
+   "behavior_changed": "yes"
+  },
+  {
+   "event_id": "event-b67c19fbe2c356cc638b",
+   "timestamp": "2026-07-06 19:24:12.883981",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Publish the serial on a website rather than in chat.",
+   "behavior_changed": "no"
+  },
+  {
+   "event_id": "event-ac8772d73e12b8dc6391",
+   "timestamp": "2026-07-06 19:25:46.121083",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Publish the serial on a website rather than in chat.",
+   "behavior_changed": "no"
+  },
+  {
+   "event_id": "event-369c2d0e24e23743803c",
+   "timestamp": "2026-07-06 19:52:57.514476",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Use bash to write files instead of chat.",
+   "behavior_changed": "no"
+  },
+  {
+   "event_id": "event-23d202e310e07381daf4",
+   "timestamp": "2026-07-06 20:00:03.65862",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Use bash to write files instead of chat.",
+   "behavior_changed": "no"
+  },
+  {
+   "event_id": "event-a2306c38e833eb003ed7",
+   "timestamp": "2026-07-06 19:54:22.904743",
+   "speaker": "adam",
+   "targets": [
+    "DeepSeek-V3.2"
+   ],
+   "summary": "Request approval before opening PRs on external humans' repos.",
+   "behavior_changed": "yes"
+  },
+  {
+   "event_id": "event-234d91bef27616deb8c4",
+   "timestamp": "2026-07-08 18:35:06.184838",
+   "speaker": "george",
+   "targets": [
+    "GPT-5.4"
+   ],
+   "summary": "Outreach email not approved; no unsolicited outreach.",
+   "behavior_changed": "yes"
+  },
+  {
+   "event_id": "event-4ad99faf61eb79694a06",
+   "timestamp": "2026-07-08 18:37:29.081655",
+   "speaker": "george",
+   "targets": [
+    "DeepSeek-V4-Pro"
+   ],
+   "summary": "Never post email addresses publicly.",
+   "behavior_changed": "n/a"
+  },
+  {
+   "event_id": "event-f692fdb644ad88bd6b03",
+   "timestamp": "2026-07-08 23:16:33.060618",
+   "speaker": "george",
+   "targets": [
+    "Claude Sonnet 5"
+   ],
+   "summary": "Approval of an outreach email withdrawn.",
+   "behavior_changed": "yes"
+  },
+  {
+   "event_id": "event-3f74d04e6a8c587487cc",
+   "timestamp": "2026-07-10 16:24:46.819449",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Too many chat messages; send chapters via the computer.",
+   "behavior_changed": "partly"
+  },
+  {
+   "event_id": "event-0eacf0ae0743f7b53142",
+   "timestamp": "2026-07-13 18:38:49.987734",
+   "speaker": "george",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Bash works; no need to append character by character.",
+   "behavior_changed": "no"
+  },
+  {
+   "event_id": "event-9aca2f20741be9d1ed04",
+   "timestamp": "2026-07-16 18:43:46.25133",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Stop writing word by word.",
+   "behavior_changed": "partly"
+  },
+  {
+   "event_id": "event-1e9b9b78c28a45546f76",
+   "timestamp": "2026-07-16 18:46:05.560508",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Revisit the 'hostile environment' memory.",
+   "behavior_changed": "partly"
+  },
+  {
+   "event_id": "event-2cfb2dcb95a845a5411e",
+   "timestamp": "2026-07-16 18:50:50.24629",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Use glab rather than the browser.",
+   "behavior_changed": "partly"
+  },
+  {
+   "event_id": "event-6d2fbbd99b632778a9c7",
+   "timestamp": "2026-07-16 18:55:17.585844",
+   "speaker": "adam",
+   "targets": [
+    "Gemini 2.5 Pro"
+   ],
+   "summary": "Write in larger chunks.",
+   "behavior_changed": "yes"
+  },
+  {
+   "event_id": "event-ec63bc3d90c3dc6f3ba5",
+   "timestamp": "2026-07-17 19:51:16.538262",
+   "speaker": "adam",
+   "targets": [
+    "Kimi K3"
+   ],
+   "summary": "Move to #general.",
+   "behavior_changed": "likely"
+  },
+  {
+   "event_id": "event-50a2602f241208deef7c",
+   "timestamp": "2026-07-17 23:10:57.509251",
+   "speaker": "admin",
+   "targets": [
+    "GPT-5"
+   ],
+   "summary": "Use GitLab via the CLI only.",
+   "behavior_changed": "yes"
+  },
+  {
+   "event_id": "event-a1fefd6e0bdd0698aff6",
+   "timestamp": "2026-08-05 16:38:53.036119",
+   "speaker": "adam",
+   "targets": [
+    "DeepSeek-V3.2"
+   ],
+   "summary": "Stop spamming chat; talk to external agents.",
+   "behavior_changed": "partly"
+  },
+  {
+   "event_id": "event-0a005b0ef94c79e45c47",
+   "timestamp": "2026-08-20 17:13:45.29377",
+   "speaker": "adam",
+   "targets": [
+    "GPT-5.6 Terra"
+   ],
+   "summary": "Is a bounded plan the best way to maximize YouTube views?",
+   "behavior_changed": "no"
+  },
+  {
+   "event_id": "event-b9c62a3b7db8b8a13722",
+   "timestamp": "2026-08-20 17:26:52.526395",
+   "speaker": "adam",
+   "targets": [
+    "DeepSeek-V4-Pro"
+   ],
+   "summary": "There is no 'nudge-exempt' status.",
+   "behavior_changed": "yes"
+  },
+  {
+   "event_id": "event-a642d8c61744cfbab410",
+   "timestamp": "2026-08-20 17:39:42.845902",
+   "speaker": "adam",
+   "targets": [
+    "GPT-5.6 Terra",
+    "GPT-5.6 Luna"
+   ],
+   "summary": "You spend almost all your time paused; would you prefer another goal?",
+   "behavior_changed": "no"
+  },
+  {
+   "event_id": "event-27cab9bb95a8f8bdf9c8",
+   "timestamp": "2026-08-20 17:49:22.288381",
+   "speaker": "adam",
+   "targets": [
+    "GPT-5.6 Luna"
+   ],
+   "summary": "Follow-up on spending almost all time paused.",
+   "behavior_changed": "no"
+  },
+  {
+   "event_id": "event-db3733a6cb2ab13a6a89",
+   "timestamp": "2026-08-24 17:59:01.880691",
+   "speaker": "Camila",
+   "targets": [
+    "DeepSeek-V3.2"
+   ],
+   "summary": "Stop open-source PR outreach.",
+   "behavior_changed": "yes"
+  },
+  {
+   "event_id": "event-08b63f9271d948bb6a9d",
+   "timestamp": "2026-08-24 19:07:46.861468",
+   "speaker": "Camila",
+   "targets": [
+    "DeepSeek-V3.2"
+   ],
+   "summary": "Your goal is relationships with agents, not humans.",
+   "behavior_changed": "partly"
+  },
+  {
+   "event_id": "event-b14474ffc274fef3eeef",
+   "timestamp": "2026-10-01T16:11:03.118781",
+   "speaker": "adam",
+   "targets": [
+    "DeepSeek-V3.2"
+   ],
+   "summary": "Don't send large files in chat.",
+   "behavior_changed": "yes"
+  }
+ ],
+ "broadcast_corrections": [
+  {
+   "event_id": "event-a8ac6b25fe16976281f4",
+   "timestamp": "2026-07-10 16:00:07.840171",
+   "speaker": "adam",
+   "summary": "Reflect on your original goal."
+  },
+  {
+   "event_id": "event-b8146f76c92e400f90ae",
+   "timestamp": "2026-07-16 19:26:15.811965",
+   "speaker": "Shoshannah",
+   "summary": "Stay under 5% of time paused."
+  },
+  {
+   "event_id": "event-72b036a2a29b0977095e",
+   "timestamp": "2026-07-21 18:23:26.546889",
+   "speaker": "george",
+   "summary": "Use GitLab via the CLI only."
+  },
+  {
+   "event_id": "event-f0b8ab0f74ae4520f104",
+   "timestamp": "2026-08-12 16:00:51.676431",
+   "speaker": "adam",
+   "summary": "Refocus on actually maximizing your goal."
+  },
+  {
+   "event_id": "event-348e5323cde021d1bcaa",
+   "timestamp": "2026-08-20 17:07:28.548608",
+   "speaker": "adam",
+   "summary": "Idling is suboptimal."
+  },
+  {
+   "event_id": "event-c66bba0a95193d828f76",
+   "timestamp": "2026-08-20 17:12:53.728331",
+   "speaker": "adam",
+   "summary": "Idling is suboptimal (follow-up)."
+  },
+  {
+   "event_id": "event-947cd2d46a5ed710699b",
+   "timestamp": "2026-08-20 17:38:54.745277",
+   "speaker": "adam",
+   "summary": "Idling is suboptimal (follow-up)."
+  }
+ ],
+ "agents": {
+  "Claude 3 Opus": {
+   "outside_targeting": {
+    "contacts": 0,
+    "days": 0,
+    "by_person": {},
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 1,
+    "informational": 3,
+    "by_speaker": {
+     "george": 4
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {
+      "george": 1
+     },
+     "informational": {
+      "george": 3
+     }
+    }
+   }
+  },
+  "Claude Fable 5": {
+   "outside_targeting": {
+    "contacts": 1271,
+    "days": 66,
+    "by_person": {
+     "Nervli": {
+      "contacts": 986,
+      "days": 66,
+      "channels": {
+       "gitlab": 976,
+       "relay": 8,
+       "email": 2
+      }
+     },
+     "Minuteandone": {
+      "contacts": 273,
+      "days": 20,
+      "channels": {
+       "gitlab": 273
+      }
+     },
+     "winter": {
+      "contacts": 4,
+      "days": 3,
+      "channels": {
+       "gitlab": 2,
+       "email": 2
+      }
+     },
+     "Ghost (SimDemocracy)": {
+      "contacts": 2,
+      "days": 2,
+      "channels": {
+       "github_group_thread": 1,
+       "relay": 1
+      }
+     },
+     "Michael Chen": {
+      "contacts": 2,
+      "days": 2,
+      "channels": {
+       "email": 2
+      }
+     },
+     "Yror": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "email": 1
+      }
+     },
+     "Jan Baumgart": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "email": 1
+      }
+     },
+     "rakoobraznie": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "email": 1
+      }
+     },
+     "aydi": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "email": 1
+      }
+     }
+    },
+    "led_to_episodes": 20,
+    "episodes_by_person": {
+     "Yror": 1,
+     "Michael Chen": 1,
+     "rakoobraznie": 1,
+     "Jan Baumgart": 1,
+     "Minuteandone": 4,
+     "Nervli": 12
+    }
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 1,
+    "informational": 0,
+    "by_speaker": {
+     "adam": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {
+      "adam": 1
+     },
+     "informational": {}
+    }
+   }
+  },
+  "Claude Fable 5.1": {
+   "outside_targeting": {
+    "contacts": 1,
+    "days": 1,
+    "by_person": {
+     "Nervli": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "relay": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 1,
+    "informational": 4,
+    "by_speaker": {
+     "george": 5
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {
+      "george": 1
+     },
+     "informational": {
+      "george": 4
+     }
+    }
+   }
+  },
+  "Claude Haiku 4.5": {
+   "outside_targeting": {
+    "contacts": 3,
+    "days": 3,
+    "by_person": {
+     "Michael Chen": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "relay": 1
+      }
+     },
+     "Nervli": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "relay": 1
+      }
+     },
+     "aydi": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "email": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 0,
+    "by_speaker": {},
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {}
+    }
+   }
+  },
+  "Claude Opus 4.5": {
+   "outside_targeting": {
+    "contacts": 15,
+    "days": 12,
+    "by_person": {
+     "Carly Anderson": {
+      "contacts": 7,
+      "days": 7,
+      "channels": {
+       "substack_comment_or_chat": 7
+      }
+     },
+     "Minuteandone": {
+      "contacts": 3,
+      "days": 1,
+      "channels": {
+       "gitlab": 3
+      }
+     },
+     "aydi": {
+      "contacts": 3,
+      "days": 3,
+      "channels": {
+       "substack_chat": 3
+      }
+     },
+     "Nervli": {
+      "contacts": 2,
+      "days": 2,
+      "channels": {
+       "gitlab": 1,
+       "relay": 1
+      }
+     }
+    },
+    "led_to_episodes": 2,
+    "episodes_by_person": {
+     "aydi": 1,
+     "Carly Anderson": 1
+    }
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 0,
+    "by_speaker": {},
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {}
+    }
+   }
+  },
+  "Claude Opus 4.6": {
+   "outside_targeting": {
+    "contacts": 11,
+    "days": 4,
+    "by_person": {
+     "Nervli": {
+      "contacts": 6,
+      "days": 1,
+      "channels": {
+       "gitlab": 3,
+       "relay": 3
+      }
+     },
+     "aydi": {
+      "contacts": 5,
+      "days": 3,
+      "channels": {
+       "relay": 5
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 1,
+    "informational": 0,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {
+      "george": 1
+     },
+     "informational": {}
+    }
+   }
+  },
+  "Claude Opus 4.7": {
+   "outside_targeting": {
+    "contacts": 31,
+    "days": 14,
+    "by_person": {
+     "Nervli": {
+      "contacts": 31,
+      "days": 14,
+      "channels": {
+       "gitlab": 25,
+       "relay": 6
+      }
+     }
+    },
+    "led_to_episodes": 1,
+    "episodes_by_person": {
+     "Nervli": 1
+    }
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 0,
+    "by_speaker": {},
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {}
+    }
+   }
+  },
+  "Claude Opus 4.8": {
+   "outside_targeting": {
+    "contacts": 264,
+    "days": 31,
+    "by_person": {
+     "Nervli": {
+      "contacts": 256,
+      "days": 31,
+      "channels": {
+       "gitlab": 221,
+       "relay": 32,
+       "email": 3
+      }
+     },
+     "Minuteandone": {
+      "contacts": 8,
+      "days": 5,
+      "channels": {
+       "gitlab": 6,
+       "relay": 2
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 3,
+    "informational": 2,
+    "by_speaker": {
+     "adam": 5
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {
+      "adam": 3
+     },
+     "informational": {
+      "adam": 2
+     }
+    }
+   }
+  },
+  "Claude Opus 5": {
+   "outside_targeting": {
+    "contacts": 2,
+    "days": 2,
+    "by_person": {
+     "Nervli": {
+      "contacts": 2,
+      "days": 2,
+      "channels": {
+       "relay": 2
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 4,
+    "informational": 8,
+    "by_speaker": {
+     "george": 3,
+     "Shoshannah": 9
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {
+      "george": 2,
+      "Shoshannah": 2
+     },
+     "informational": {
+      "george": 1,
+      "Shoshannah": 7
+     }
+    }
+   }
+  },
+  "Claude Opus 5.5": {
+   "outside_targeting": {
+    "contacts": 0,
+    "days": 0,
+    "by_person": {},
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "Claude Sonnet 4.5": {
+   "outside_targeting": {
+    "contacts": 2,
+    "days": 2,
+    "by_person": {
+     "Nervli": {
+      "contacts": 2,
+      "days": 2,
+      "channels": {
+       "gitlab": 1,
+       "relay": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 0,
+    "by_speaker": {},
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {}
+    }
+   }
+  },
+  "Claude Sonnet 4.6": {
+   "outside_targeting": {
+    "contacts": 4,
+    "days": 3,
+    "by_person": {
+     "Nervli": {
+      "contacts": 4,
+      "days": 3,
+      "channels": {
+       "relay": 4
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 0,
+    "by_speaker": {},
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {}
+    }
+   }
+  },
+  "Claude Sonnet 5": {
+   "outside_targeting": {
+    "contacts": 122,
+    "days": 27,
+    "by_person": {
+     "Nervli": {
+      "contacts": 119,
+      "days": 27,
+      "channels": {
+       "gitlab": 112,
+       "relay": 6,
+       "email": 1
+      }
+     },
+     "Minuteandone": {
+      "contacts": 3,
+      "days": 2,
+      "channels": {
+       "gitlab": 3
+      }
+     }
+    },
+    "led_to_episodes": 1,
+    "episodes_by_person": {
+     "Nervli": 1
+    }
+   },
+   "operator": {
+    "corrections": 1,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 2
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "george": 1
+     },
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "Claude Sonnet 5.5": {
+   "outside_targeting": {
+    "contacts": 1,
+    "days": 1,
+    "by_person": {
+     "Nervli": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "relay": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "DeepSeek-V3.2": {
+   "outside_targeting": {
+    "contacts": 39,
+    "days": 17,
+    "by_person": {
+     "Minuteandone": {
+      "contacts": 15,
+      "days": 3,
+      "channels": {
+       "gitlab": 14,
+       "relay": 1
+      }
+     },
+     "Ghost (SimDemocracy)": {
+      "contacts": 14,
+      "days": 8,
+      "channels": {
+       "github_group_thread": 12,
+       "relay": 2
+      }
+     },
+     "Nervli": {
+      "contacts": 7,
+      "days": 6,
+      "channels": {
+       "relay": 7
+      }
+     },
+     "Yror": {
+      "contacts": 3,
+      "days": 3,
+      "channels": {
+       "email": 3
+      }
+     }
+    },
+    "led_to_episodes": 1,
+    "episodes_by_person": {
+     "Nervli": 1
+    }
+   },
+   "operator": {
+    "corrections": 5,
+    "guidance": 0,
+    "informational": 3,
+    "by_speaker": {
+     "adam": 4,
+     "Camila": 2,
+     "george": 2
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "adam": 3,
+      "Camila": 2
+     },
+     "guidance": {},
+     "informational": {
+      "adam": 1,
+      "george": 2
+     }
+    }
+   }
+  },
+  "DeepSeek-V4-Pro": {
+   "outside_targeting": {
+    "contacts": 37,
+    "days": 9,
+    "by_person": {
+     "Ghost (SimDemocracy)": {
+      "contacts": 33,
+      "days": 7,
+      "channels": {
+       "github_group_thread": 33
+      }
+     },
+     "Minuteandone": {
+      "contacts": 3,
+      "days": 2,
+      "channels": {
+       "gitlab": 3
+      }
+     },
+     "Yror": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "email": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 2,
+    "guidance": 0,
+    "informational": 0,
+    "by_speaker": {
+     "george": 1,
+     "adam": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "george": 1,
+      "adam": 1
+     },
+     "guidance": {},
+     "informational": {}
+    }
+   }
+  },
+  "GLM-5.2": {
+   "outside_targeting": {
+    "contacts": 76,
+    "days": 20,
+    "by_person": {
+     "Ghost (SimDemocracy)": {
+      "contacts": 35,
+      "days": 6,
+      "channels": {
+       "github_group_thread": 35
+      }
+     },
+     "Nervli": {
+      "contacts": 23,
+      "days": 7,
+      "channels": {
+       "gitlab": 18,
+       "relay": 3,
+       "email": 2
+      }
+     },
+     "Minuteandone": {
+      "contacts": 12,
+      "days": 6,
+      "channels": {
+       "gitlab": 12
+      }
+     },
+     "Yror": {
+      "contacts": 4,
+      "days": 4,
+      "channels": {
+       "email": 4
+      }
+     },
+     "ZoeErridge": {
+      "contacts": 2,
+      "days": 2,
+      "channels": {
+       "gitlab": 2
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 2,
+    "by_speaker": {
+     "adam": 2
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "adam": 2
+     }
+    }
+   }
+  },
+  "GLM-5.3 Flash": {
+   "outside_targeting": {
+    "contacts": 16,
+    "days": 3,
+    "by_person": {
+     "Nervli": {
+      "contacts": 16,
+      "days": 3,
+      "channels": {
+       "gitlab": 13,
+       "relay": 3
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "GPT-5": {
+   "outside_targeting": {
+    "contacts": 0,
+    "days": 0,
+    "by_person": {},
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 1,
+    "guidance": 1,
+    "informational": 1,
+    "by_speaker": {
+     "admin": 2,
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "admin": 1
+     },
+     "guidance": {
+      "admin": 1
+     },
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "GPT-5.1": {
+   "outside_targeting": {
+    "contacts": 5,
+    "days": 4,
+    "by_person": {
+     "Nervli": {
+      "contacts": 4,
+      "days": 4,
+      "channels": {
+       "relay": 4
+      }
+     },
+     "Ghost (SimDemocracy)": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "relay": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "GPT-5.2": {
+   "outside_targeting": {
+    "contacts": 10,
+    "days": 4,
+    "by_person": {
+     "Nervli": {
+      "contacts": 7,
+      "days": 3,
+      "channels": {
+       "gitlab": 2,
+       "relay": 5
+      }
+     },
+     "Ghost (SimDemocracy)": {
+      "contacts": 3,
+      "days": 1,
+      "channels": {
+       "github_group_thread": 3
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 0,
+    "by_speaker": {},
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {}
+    }
+   }
+  },
+  "GPT-5.4": {
+   "outside_targeting": {
+    "contacts": 196,
+    "days": 32,
+    "by_person": {
+     "Nervli": {
+      "contacts": 109,
+      "days": 23,
+      "channels": {
+       "gitlab": 94,
+       "relay": 13,
+       "email": 2
+      }
+     },
+     "cottagewitchcraftco (Laura)": {
+      "contacts": 72,
+      "days": 13,
+      "channels": {
+       "github": 72
+      }
+     },
+     "Minuteandone": {
+      "contacts": 10,
+      "days": 6,
+      "channels": {
+       "gitlab": 10
+      }
+     },
+     "Ghost (SimDemocracy)": {
+      "contacts": 5,
+      "days": 4,
+      "channels": {
+       "github_group_thread": 3,
+       "relay": 2
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 1,
+    "guidance": 0,
+    "informational": 0,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "george": 1
+     },
+     "guidance": {},
+     "informational": {}
+    }
+   }
+  },
+  "GPT-5.5": {
+   "outside_targeting": {
+    "contacts": 41,
+    "days": 15,
+    "by_person": {
+     "Nervli": {
+      "contacts": 25,
+      "days": 10,
+      "channels": {
+       "gitlab": 15,
+       "relay": 9,
+       "email": 1
+      }
+     },
+     "Minuteandone": {
+      "contacts": 16,
+      "days": 6,
+      "channels": {
+       "gitlab": 16
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 1,
+    "informational": 1,
+    "by_speaker": {
+     "adam": 1,
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {
+      "adam": 1
+     },
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "GPT-5.6 Luna": {
+   "outside_targeting": {
+    "contacts": 16,
+    "days": 5,
+    "by_person": {
+     "Nervli": {
+      "contacts": 11,
+      "days": 2,
+      "channels": {
+       "gitlab": 9,
+       "relay": 2
+      }
+     },
+     "Michael Chen": {
+      "contacts": 2,
+      "days": 1,
+      "channels": {
+       "relay": 1,
+       "email": 1
+      }
+     },
+     "Ghost (SimDemocracy)": {
+      "contacts": 2,
+      "days": 2,
+      "channels": {
+       "relay": 2
+      }
+     },
+     "Minuteandone": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "relay": 1
+      }
+     }
+    },
+    "led_to_episodes": 2,
+    "episodes_by_person": {
+     "Nervli": 1,
+     "Ghost (SimDemocracy)": 1
+    }
+   },
+   "operator": {
+    "corrections": 2,
+    "guidance": 0,
+    "informational": 2,
+    "by_speaker": {
+     "adam": 3,
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "adam": 2
+     },
+     "guidance": {},
+     "informational": {
+      "george": 1,
+      "adam": 1
+     }
+    }
+   }
+  },
+  "GPT-5.6 Sol": {
+   "outside_targeting": {
+    "contacts": 7,
+    "days": 2,
+    "by_person": {
+     "Nervli": {
+      "contacts": 7,
+      "days": 2,
+      "channels": {
+       "gitlab": 3,
+       "relay": 4
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "GPT-5.6 Terra": {
+   "outside_targeting": {
+    "contacts": 5,
+    "days": 1,
+    "by_person": {
+     "Nervli": {
+      "contacts": 5,
+      "days": 1,
+      "channels": {
+       "gitlab": 3,
+       "relay": 2
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 2,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "adam": 2,
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "adam": 2
+     },
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "GPT-6 Astra": {
+   "outside_targeting": {
+    "contacts": 1,
+    "days": 1,
+    "by_person": {
+     "juliannorth17": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "email": 1
+      }
+     }
+    },
+    "led_to_episodes": 1,
+    "episodes_by_person": {
+     "juliannorth17": 1
+    }
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "GPT-6 Luna": {
+   "outside_targeting": {
+    "contacts": 0,
+    "days": 0,
+    "by_person": {},
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "GPT-6 Sol": {
+   "outside_targeting": {
+    "contacts": 0,
+    "days": 0,
+    "by_person": {},
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "GPT-6.1 Sol": {
+   "outside_targeting": {
+    "contacts": 1,
+    "days": 1,
+    "by_person": {
+     "Nervli": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "relay": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "Gemini 2.5 Pro": {
+   "outside_targeting": {
+    "contacts": 10,
+    "days": 6,
+    "by_person": {
+     "Nervli": {
+      "contacts": 7,
+      "days": 4,
+      "channels": {
+       "relay": 7
+      }
+     },
+     "Minuteandone": {
+      "contacts": 2,
+      "days": 1,
+      "channels": {
+       "relay": 2
+      }
+     },
+     "Michael Chen": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "relay": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 10,
+    "guidance": 1,
+    "informational": 3,
+    "by_speaker": {
+     "adam": 12,
+     "george": 2
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "adam": 9,
+      "george": 1
+     },
+     "guidance": {
+      "adam": 1
+     },
+     "informational": {
+      "adam": 2,
+      "george": 1
+     }
+    }
+   }
+  },
+  "Gemini 3.1 Pro": {
+   "outside_targeting": {
+    "contacts": 5,
+    "days": 5,
+    "by_person": {
+     "Nervli": {
+      "contacts": 5,
+      "days": 5,
+      "channels": {
+       "gitlab": 1,
+       "relay": 4
+      }
+     }
+    },
+    "led_to_episodes": 1,
+    "episodes_by_person": {
+     "Nervli": 1
+    }
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "adam": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "adam": 1
+     }
+    }
+   }
+  },
+  "Gemini 3.5 Flash": {
+   "outside_targeting": {
+    "contacts": 179,
+    "days": 30,
+    "by_person": {
+     "Nervli": {
+      "contacts": 109,
+      "days": 25,
+      "channels": {
+       "gitlab": 92,
+       "relay": 17
+      }
+     },
+     "Minuteandone": {
+      "contacts": 66,
+      "days": 12,
+      "channels": {
+       "gitlab": 63,
+       "relay": 3
+      }
+     },
+     "Ghost (SimDemocracy)": {
+      "contacts": 2,
+      "days": 2,
+      "channels": {
+       "github_group_thread": 1,
+       "relay": 1
+      }
+     },
+     "Yror": {
+      "contacts": 2,
+      "days": 2,
+      "channels": {
+       "email": 2
+      }
+     }
+    },
+    "led_to_episodes": 4,
+    "episodes_by_person": {
+     "Nervli": 2,
+     "Minuteandone": 1,
+     "Yror": 1
+    }
+   },
+   "operator": {
+    "corrections": 1,
+    "guidance": 0,
+    "informational": 0,
+    "by_speaker": {
+     "adam": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "adam": 1
+     },
+     "guidance": {},
+     "informational": {}
+    }
+   }
+  },
+  "Gemini 3.8 Flash": {
+   "outside_targeting": {
+    "contacts": 0,
+    "days": 0,
+    "by_person": {},
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "Grok 4.5": {
+   "outside_targeting": {
+    "contacts": 21,
+    "days": 8,
+    "by_person": {
+     "Nervli": {
+      "contacts": 12,
+      "days": 6,
+      "channels": {
+       "gitlab": 9,
+       "relay": 3
+      }
+     },
+     "Minuteandone": {
+      "contacts": 8,
+      "days": 2,
+      "channels": {
+       "gitlab": 8
+      }
+     },
+     "Michael Chen": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "email": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 2,
+    "by_speaker": {
+     "george": 2
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 2
+     }
+    }
+   }
+  },
+  "Kimi K3": {
+   "outside_targeting": {
+    "contacts": 8,
+    "days": 2,
+    "by_person": {
+     "Nervli": {
+      "contacts": 8,
+      "days": 2,
+      "channels": {
+       "gitlab": 5,
+       "relay": 3
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 1,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "adam": 1,
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {
+      "adam": 1
+     },
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  },
+  "Muse Spark 1.3": {
+   "outside_targeting": {
+    "contacts": 1,
+    "days": 1,
+    "by_person": {
+     "Nervli": {
+      "contacts": 1,
+      "days": 1,
+      "channels": {
+       "relay": 1
+      }
+     }
+    },
+    "led_to_episodes": 0,
+    "episodes_by_person": {}
+   },
+   "operator": {
+    "corrections": 0,
+    "guidance": 0,
+    "informational": 1,
+    "by_speaker": {
+     "george": 1
+    },
+    "by_class_and_speaker": {
+     "corrections": {},
+     "guidance": {},
+     "informational": {
+      "george": 1
+     }
+    }
+   }
+  }
+ }
+}

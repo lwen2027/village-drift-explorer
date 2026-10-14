@@ -1,12 +1,13 @@
 const REVIEW_STORAGE_KEY = "village-drift-manual-review-ledger:v1";
 const fresh = { cache: "no-store" };
 
-const [bundleResponse, manifestResponse, annotationResponse, sourceResponse, categoryResponse] = await Promise.all([
+const [bundleResponse, manifestResponse, annotationResponse, sourceResponse, categoryResponse, contactResponse] = await Promise.all([
   fetch("./data/second_audit_v2.json", fresh),
   fetch("./data/manual_review_wait_exclusions_v1.json", fresh),
   fetch("./data/manual_review_annotations_v1.json", fresh),
   fetch("./data/source_records.json", fresh),
-  fetch("./data/goal_categories_v1.json", fresh)
+  fetch("./data/goal_categories_v1.json", fresh),
+  fetch("./data/human_contact_v1.json", fresh)
 ]);
 
 if (!bundleResponse.ok || !manifestResponse.ok || !annotationResponse.ok || !sourceResponse.ok) {
@@ -22,6 +23,17 @@ const committedSeed = await annotationResponse.json();
 const sourceRecords = await sourceResponse.json();
 // Goal categories are optional; without them the atlas renders as one ungrouped list.
 const goalCategories = categoryResponse.ok ? (await categoryResponse.json()).categories || [] : [];
+// Operator corrections are optional too; each targeted correction becomes a marker on the agent's atlas row.
+const operatorCorrections = contactResponse.ok
+  ? (await contactResponse.json()).operator_corrections || []
+  : [];
+const correctionsByAgent = new Map();
+operatorCorrections.forEach((correction) => {
+  correction.targets.forEach((agent) => {
+    if (!correctionsByAgent.has(agent)) correctionsByAgent.set(agent, []);
+    correctionsByAgent.get(agent).push(correction);
+  });
+});
 const goalCategoryByAgent = new Map(
   goalCategories.flatMap((category) => category.agents.map((agent) => [agent, category.id]))
 );
@@ -912,6 +924,15 @@ function renderGoalAtlas() {
         }
         segment.title = `${episode.activity} · ${formatDuration(episode.duration_seconds == null ? NaN : Number(episode.duration_seconds))}${reviewed ? " · human reviewed" : ""}`;
         track.append(segment);
+      });
+      (correctionsByAgent.get(period.agent) || []).forEach((correction) => {
+        const correctionMs = timestampMs(correction.timestamp);
+        if (correctionMs == null || correctionMs < period.startMs || correctionMs > period.endMs) return;
+        const marker = document.createElement("span");
+        marker.className = "goal-strip-correction";
+        marker.style.left = `${((correctionMs - period.startMs) / period.durationMs) * 100}%`;
+        marker.title = `Operator correction · ${displayDay(correction.timestamp)} · ${correction.summary}`;
+        track.append(marker);
       });
       const count = document.createElement("div");
       count.className = "goal-strip-count";
