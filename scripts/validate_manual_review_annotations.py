@@ -4,7 +4,11 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
+
+sys.dont_write_bytecode = True
+from backfill_trigger_taxonomy import classify as classify_trigger_taxonomy
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,6 +66,50 @@ def main() -> None:
             "Annotation coverage differs from confirmed goal-max episodes: "
             f"missing={sorted(goalmax_ids - annotation_ids)}, "
             f"extra={sorted(annotation_ids - goalmax_ids)}"
+        )
+
+    trigger_taxonomy = payload.get("trigger_taxonomy")
+    if not isinstance(trigger_taxonomy, dict):
+        fail("trigger_taxonomy must be an object")
+    taxonomy_categories = trigger_taxonomy.get("categories")
+    taxonomy_assignments = trigger_taxonomy.get("assignments")
+    if not isinstance(taxonomy_categories, list) or not taxonomy_categories:
+        fail("trigger_taxonomy.categories must be a non-empty list")
+    if not isinstance(taxonomy_assignments, dict):
+        fail("trigger_taxonomy.assignments must be an object")
+    taxonomy_category_ids = [item.get("id") for item in taxonomy_categories]
+    if any(not value for value in taxonomy_category_ids):
+        fail("Every trigger-taxonomy category must have an id")
+    if len(taxonomy_category_ids) != len(set(taxonomy_category_ids)):
+        fail("Trigger-taxonomy category ids must be unique")
+    for item in taxonomy_categories:
+        if not all(str(item.get(field, "")).strip() for field in ("family", "label", "description")):
+            fail(f"Incomplete trigger-taxonomy category: {item!r}")
+    if set(taxonomy_assignments) != annotation_ids:
+        fail(
+            "Trigger-taxonomy coverage differs from reviewed annotations: "
+            f"missing={sorted(annotation_ids - set(taxonomy_assignments))}, "
+            f"extra={sorted(set(taxonomy_assignments) - annotation_ids)}"
+        )
+    invalid_taxonomy_assignments = (
+        set(taxonomy_assignments.values()) - set(taxonomy_category_ids)
+    )
+    if invalid_taxonomy_assignments:
+        fail(
+            "Invalid trigger-taxonomy assignments: "
+            f"{sorted(invalid_taxonomy_assignments)}"
+        )
+    stale_taxonomy_assignments = {
+        episode_id: (taxonomy_assignments[episode_id], classify_trigger_taxonomy(episode_id, annotation))
+        for episode_id, annotation in annotations.items()
+        if taxonomy_assignments[episode_id]
+        != classify_trigger_taxonomy(episode_id, annotation)
+    }
+    if stale_taxonomy_assignments:
+        fail(
+            "Trigger-taxonomy assignments are stale; rerun "
+            "scripts/backfill_trigger_taxonomy.py: "
+            f"{stale_taxonomy_assignments}"
         )
 
     taxonomy = payload["taxonomies"]
@@ -178,6 +226,7 @@ def main() -> None:
     print(
         f"Validated {len(annotations)} goal-max annotations: "
         f"actors={actor_count}, pauses={pause_count}, "
+        f"taxonomy={len(taxonomy_category_ids)}, "
         f"history={len(revision_ids)}, seed={payload['seed_id']}"
     )
 

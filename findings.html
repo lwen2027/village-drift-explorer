@@ -212,7 +212,7 @@
     .influence-bar-fill { display: block; height: 100%; min-width: 2px; }
     .influence-bar-count { color: var(--muted); font: 700 10px/1 var(--mono); text-align: right; }
     .influence-legend { margin: 0 0 11px; }
-    .motif-list, .resilience-list { display: grid; gap: 9px; }
+    .resilience-list { display: grid; gap: 9px; }
     .score-head, .score-row { display: grid; grid-template-columns: 36px minmax(150px, 1.2fr) 90px minmax(240px, 2.6fr) 180px; gap: 12px; align-items: center; }
     .score-head { padding: 0 10px 7px; color: var(--muted); font: 700 9px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
     .score-row { padding: 10px; border: 1px solid var(--line); border-radius: 11px; background: var(--card); font-size: 11px; }
@@ -227,11 +227,20 @@
     .legend-swatch.is-self-recovery { background: var(--green); }
     .legend-swatch.is-other-recovery { background: #9bb7a7; }
     .legend-swatch.is-no-recovery { background: var(--paper-deep); border: 1px solid var(--line); }
-    .motif-row { display: grid; grid-template-columns: 1fr 44px; gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--card); }
-    .motif-path { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
-    .motif-step { padding: 5px 7px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); font-size: 10px; }
-    .motif-arrow { color: var(--muted); font-size: 11px; }
-    .motif-count { font: 800 12px/1 var(--mono); text-align: right; }
+    .taxonomy-card { margin: 20px 0; }
+    .taxonomy-legend { margin: 0 0 18px; }
+    .taxonomy-chart { display: grid; gap: 22px; }
+    .taxonomy-family { display: grid; gap: 8px; }
+    .taxonomy-family-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 7px; border-bottom: 1px solid var(--line); }
+    .taxonomy-family-heading h4 { margin: 0; font-size: 13px; }
+    .taxonomy-family-heading span { color: var(--muted); font: 700 10px/1 var(--mono); }
+    .taxonomy-row { display: grid; grid-template-columns: minmax(220px, 1.15fr) minmax(260px, 2fr) 38px; gap: 12px; align-items: center; padding: 7px 8px; border-radius: 9px; }
+    .taxonomy-row:hover { background: var(--paper); }
+    .taxonomy-label { font-size: 11px; font-weight: 800; }
+    .taxonomy-description { margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.35; }
+    .taxonomy-track { display: flex; height: 13px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
+    .taxonomy-segment { display: block; height: 100%; min-width: 2px; }
+    .taxonomy-count { color: var(--muted); font: 800 11px/1 var(--mono); text-align: right; }
     .filters {
       position: sticky;
       top: 0;
@@ -395,6 +404,8 @@
       .score-row .score-track { grid-column: 1 / -1; }
       .score-row .score-summary { grid-column: 2 / -1; }
       .score-summary { grid-column: 1 / -1; }
+      .taxonomy-row { grid-template-columns: 1fr 38px; }
+      .taxonomy-track { grid-column: 1 / -1; grid-row: 2; }
       .clear-filters { margin-left: 0; }
     }
   </style>
@@ -565,11 +576,6 @@
             <p class="viz-note">Every bar represents 100% of that agent’s fully reviewed episodes. Episode count indicates distraction pressure; colored segments show the subset with an observed recovery.</p>
           </article>
 
-          <article class="viz-card">
-            <div class="viz-heading"><div><h3>Episode motifs</h3><p>Most common complete trigger-to-recovery sequences.</p></div><span class="viz-meta" id="motif-meta"></span></div>
-            <div class="motif-list" id="motif-list"></div>
-          </article>
-
         </div>
       </section>
 
@@ -581,6 +587,13 @@
           </div>
           <p>Charts summarize all goal-maximization episodes whose required annotation fields are resolved.</p>
         </div>
+
+        <article class="chart-card is-wide taxonomy-card">
+          <div class="chart-heading"><div><h3>Official trigger taxonomy → correction mechanism</h3><p>Every fully reviewed confirmed episode receives one curated trigger category; stacked segments show how those episodes ended.</p></div><span class="chart-total" id="taxonomy-total"></span></div>
+          <div class="viz-legend taxonomy-legend" id="taxonomy-legend"></div>
+          <div class="taxonomy-chart" id="taxonomy-chart"></div>
+          <p class="viz-note" id="taxonomy-note"></p>
+        </article>
 
         <div class="chart-grid">
           <article class="chart-card">
@@ -622,6 +635,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-list-filters"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-trigger-taxonomy"></script>
 </body>
 </html>

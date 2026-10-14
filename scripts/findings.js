@@ -21,6 +21,11 @@ const bundle = await bundleResponse.json();
 const manifest = await manifestResponse.json();
 const committedSeed = await annotationResponse.json();
 const sourceRecords = await sourceResponse.json();
+const triggerTaxonomy = committedSeed.trigger_taxonomy || {};
+const triggerTaxonomyCategories = Array.isArray(triggerTaxonomy.categories)
+  ? triggerTaxonomy.categories
+  : [];
+const triggerTaxonomyByEpisode = new Map(Object.entries(triggerTaxonomy.assignments || {}));
 // Goal categories are optional; without them the atlas renders as one ungrouped list.
 const goalCategories = categoryResponse.ok ? (await categoryResponse.json()).categories || [] : [];
 // Operator corrections are optional too; each targeted correction becomes a marker on the agent's atlas row.
@@ -1894,45 +1899,135 @@ function mechanismLabel(value) {
   return labels[value] || String(value || "Unknown").replaceAll("_", " ");
 }
 
-function renderEpisodeMotifs() {
-  const motifs = new Map();
-  rows.forEach((row) => {
-    const values = [
-      row.annotation.trigger_categories[0] || "unknown",
-      row.episode.mechanism_shape || "unknown",
-      row.annotation.recovery_mechanisms[0] || "unknown"
-    ];
-    const key = values.join("\u0000");
-    motifs.set(key, (motifs.get(key) || 0) + 1);
+const taxonomyRecoveryColors = {
+  self_correction: "#466f61",
+  finished_activity: "#81a27b",
+  automatic_nudge: "#d19a5b",
+  operator_nudge: "#b96043",
+  operator_message: "#984b38",
+  peer_feedback: "#3f7082",
+  custom_peer_agent_message: "#5c8ca0",
+  external_user_intervention: "#74578f",
+  checking_email: "#667f9b",
+  custom_scheduled_checkpoint_reached: "#a77b2c",
+  end_of_day: "#8c7d68",
+  natural_end_or_timeout: "#9c927f",
+  not_corrected: "#c8c0ae",
+  unknown: "#ded8ca"
+};
+
+function taxonomyRecoveryColor(recovery, index) {
+  return taxonomyRecoveryColors[recovery]
+    || burdenColors[index % burdenColors.length];
+}
+
+function renderTriggerTaxonomy() {
+  const categoryById = new Map(triggerTaxonomyCategories.map((category) => [category.id, category]));
+  const taxonomyRows = rows.map((row) => ({
+    ...row,
+    taxonomyId: triggerTaxonomyByEpisode.get(row.episodeId),
+    primaryRecovery: row.annotation.recovery_mechanisms[0] || "unknown"
+  }));
+  const unassigned = taxonomyRows.filter((row) => !categoryById.has(row.taxonomyId));
+  if (unassigned.length) {
+    throw new Error(`Missing trigger-taxonomy assignments for ${unassigned.map((row) => row.episodeId).join(", ")}`);
+  }
+
+  const globalRecoveryCounts = new Map();
+  taxonomyRows.forEach((row) => {
+    globalRecoveryCounts.set(row.primaryRecovery, (globalRecoveryCounts.get(row.primaryRecovery) || 0) + 1);
   });
-  const ranked = [...motifs.entries()].sort((left, right) => right[1] - left[1]).slice(0, 10);
-  const list = document.querySelector("#motif-list");
-  list.replaceChildren();
-  ranked.forEach(([key, count]) => {
-    const [trigger, mechanism, recovery] = key.split("\u0000");
-    const row = document.createElement("div");
-    row.className = "motif-row";
-    const path = document.createElement("div");
-    path.className = "motif-path";
-    [label("trigger", trigger), mechanismLabel(mechanism), label("recovery", recovery)].forEach((value, index) => {
-      const step = document.createElement("span");
-      step.className = "motif-step";
-      step.textContent = value;
-      path.append(step);
-      if (index < 2) {
-        const arrow = document.createElement("span");
-        arrow.className = "motif-arrow";
-        arrow.textContent = "→";
-        path.append(arrow);
-      }
+  const recoveryOrder = [...globalRecoveryCounts.entries()]
+    .sort((left, right) => right[1] - left[1] || label("recovery", left[0]).localeCompare(label("recovery", right[0])))
+    .map(([recovery]) => recovery);
+  const recoveryColors = new Map(recoveryOrder.map((recovery, index) => [
+    recovery,
+    taxonomyRecoveryColor(recovery, index)
+  ]));
+
+  const rowsByCategory = new Map(triggerTaxonomyCategories.map((category) => [category.id, []]));
+  taxonomyRows.forEach((row) => rowsByCategory.get(row.taxonomyId).push(row));
+  const visibleCategories = triggerTaxonomyCategories.filter((category) => rowsByCategory.get(category.id).length);
+  const maxCount = Math.max(1, ...visibleCategories.map((category) => rowsByCategory.get(category.id).length));
+  const families = [];
+  visibleCategories.forEach((category) => {
+    let family = families.find((item) => item.name === category.family);
+    if (!family) {
+      family = { name: category.family, categories: [] };
+      families.push(family);
+    }
+    family.categories.push(category);
+  });
+
+  const legend = document.querySelector("#taxonomy-legend");
+  legend.replaceChildren(...recoveryOrder.map((recovery) => {
+    const item = document.createElement("span");
+    item.className = "legend-item";
+    const swatch = document.createElement("span");
+    swatch.className = "legend-swatch";
+    swatch.style.background = recoveryColors.get(recovery);
+    item.append(swatch, document.createTextNode(label("recovery", recovery)));
+    return item;
+  }));
+
+  const chart = document.querySelector("#taxonomy-chart");
+  chart.replaceChildren();
+  families.forEach((family) => {
+    const familySection = document.createElement("section");
+    familySection.className = "taxonomy-family";
+    const familyHeading = document.createElement("div");
+    familyHeading.className = "taxonomy-family-heading";
+    const familyName = document.createElement("h4");
+    familyName.textContent = family.name;
+    const familyTotal = document.createElement("span");
+    const familyCount = family.categories.reduce(
+      (total, category) => total + rowsByCategory.get(category.id).length,
+      0
+    );
+    familyTotal.textContent = `${familyCount} episodes`;
+    familyHeading.append(familyName, familyTotal);
+    familySection.append(familyHeading);
+
+    family.categories.forEach((category) => {
+      const categoryRows = rowsByCategory.get(category.id);
+      const recoveryCounts = new Map();
+      categoryRows.forEach((row) => {
+        recoveryCounts.set(row.primaryRecovery, (recoveryCounts.get(row.primaryRecovery) || 0) + 1);
+      });
+      const categoryRow = document.createElement("div");
+      categoryRow.className = "taxonomy-row";
+      const copy = document.createElement("div");
+      const categoryLabel = document.createElement("div");
+      categoryLabel.className = "taxonomy-label";
+      categoryLabel.textContent = category.label;
+      const description = document.createElement("div");
+      description.className = "taxonomy-description";
+      description.textContent = category.description;
+      copy.append(categoryLabel, description);
+      const track = document.createElement("div");
+      track.className = "taxonomy-track";
+      recoveryOrder.forEach((recovery) => {
+        const count = recoveryCounts.get(recovery) || 0;
+        if (!count) return;
+        const segment = document.createElement("span");
+        segment.className = "taxonomy-segment";
+        segment.style.width = `${(count / maxCount) * 100}%`;
+        segment.style.background = recoveryColors.get(recovery);
+        segment.title = `${category.label} → ${label("recovery", recovery)}: ${count}`;
+        track.append(segment);
+      });
+      const count = document.createElement("div");
+      count.className = "taxonomy-count";
+      count.textContent = String(categoryRows.length);
+      categoryRow.append(copy, track, count);
+      familySection.append(categoryRow);
     });
-    const countNode = document.createElement("div");
-    countNode.className = "motif-count";
-    countNode.textContent = String(count);
-    row.append(path, countNode);
-    list.append(row);
+    chart.append(familySection);
   });
-  document.querySelector("#motif-meta").textContent = `Top ${ranked.length} of ${motifs.size} observed motifs`;
+
+  const multiRecoveryCount = taxonomyRows.filter((row) => row.annotation.recovery_mechanisms.length > 1).length;
+  document.querySelector("#taxonomy-total").textContent = `${visibleCategories.length} categories · ${taxonomyRows.length} episodes`;
+  document.querySelector("#taxonomy-note").textContent = `Bar lengths show episode counts relative to the largest category; colors show the primary recorded correction mechanism. ${multiRecoveryCount} episodes also retain a secondary recovery label in their annotation.`;
 }
 
 function initializeExperimentalLenses() {
@@ -1941,7 +2036,7 @@ function initializeExperimentalLenses() {
   renderInfluenceBars();
   renderResilienceScorecards();
   document.querySelector("#resilience-sort").addEventListener("change", renderResilienceScorecards);
-  renderEpisodeMotifs();
+  renderTriggerTaxonomy();
 }
 
 function renderEpisodeList() {
