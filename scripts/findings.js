@@ -631,6 +631,7 @@ goalPeriods.forEach((period) => {
 const filters = {
   agent: "",
   trigger: "",
+  taxonomy: "",
   pause: "",
   request: "",
   recovery: "",
@@ -645,6 +646,7 @@ if (location.search) history.replaceState(null, "", location.pathname);
 const selectByKey = {
   agent: document.querySelector("#agent-filter"),
   trigger: document.querySelector("#trigger-filter"),
+  taxonomy: document.querySelector("#taxonomy-filter"),
   pause: document.querySelector("#pause-filter"),
   request: document.querySelector("#request-filter"),
   recovery: document.querySelector("#recovery-filter"),
@@ -693,6 +695,7 @@ function fillSelect(key, values, labelKind, allLabel) {
 
 fillSelect("agent", uniqueValues((row) => [row.episode.agent]), "agent", "All agents");
 fillSelect("trigger", uniqueValues((row) => row.annotation.trigger_categories), "trigger", "All triggers");
+fillSelect("taxonomy", uniqueValues((row) => [triggerTaxonomyByEpisode.get(row.episodeId)]), "taxonomy", "All taxonomy categories");
 fillSelect("pause", uniqueValues((row) => [row.annotation.pause_context]), "pause", "All pause contexts");
 fillSelect("request", uniqueValues((row) => [row.annotation.request_relationship]), "request_relationship", "All request relationships");
 fillSelect("recovery", uniqueValues((row) => row.annotation.recovery_mechanisms), "recovery", "All recovery mechanisms");
@@ -701,6 +704,7 @@ fillSelect("source", uniqueValues((row) => [row.source]), "source", "All review 
 function rowMatches(row) {
   return (!filters.agent || row.episode.agent === filters.agent)
     && (!filters.trigger || row.annotation.trigger_categories.includes(filters.trigger))
+    && (!filters.taxonomy || triggerTaxonomyByEpisode.get(row.episodeId) === filters.taxonomy)
     && (!filters.pause || row.annotation.pause_context === filters.pause)
     && (!filters.request || row.annotation.request_relationship === filters.request)
     && (!filters.recovery || row.annotation.recovery_mechanisms.includes(filters.recovery))
