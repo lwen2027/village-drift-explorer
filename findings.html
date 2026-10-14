@@ -138,6 +138,7 @@
     .legend-swatch.is-circle { width: 10px; height: 10px; border-radius: 50%; }
     .legend-swatch.is-point { width: 8px; height: 8px; border-radius: 1px; transform: rotate(45deg); background: var(--rust); }
     .legend-swatch.is-reviewed { background: var(--green); }
+    .legend-swatch.is-bridge { height: 6px; border-radius: 1px; background: repeating-linear-gradient(90deg, var(--rust) 0 2px, transparent 2px 4px); opacity: .7; }
     .burden-filter-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-top: 10px; }
     .burden-filter-row .viz-legend { flex: 1; margin-top: 0; }
     .burden-filter-chip { padding: 5px 8px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font: inherit; }
@@ -162,6 +163,7 @@
     .goal-strip-goal { margin-top: 2px; overflow: hidden; color: var(--muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
     .goal-strip-track { position: relative; height: 12px; border-radius: 999px; background: var(--paper-deep); }
     .goal-strip-span { position: absolute; top: 5px; height: 2px; border-radius: 999px; background: var(--rust); opacity: .35; }
+    .goal-strip-bridge { position: absolute; top: 3px; height: 6px; min-width: 2px; border-radius: 1px; background: repeating-linear-gradient(90deg, var(--rust) 0 2px, transparent 2px 4px); opacity: .7; }
     .goal-strip-segment { position: absolute; top: 2px; height: 8px; min-width: 2px; border-radius: 999px; background: var(--rust); }
     .goal-strip-segment.is-reviewed { box-shadow: inset 0 0 0 2px var(--green); }
     .goal-strip-segment.is-unknown { top: 2px; width: 8px !important; min-width: 8px; height: 8px; border-radius: 1px; transform: translateX(-4px) rotate(45deg); background: var(--rust); }
@@ -468,7 +470,7 @@
               </select>
             </div>
             <div class="goal-atlas" id="goal-atlas"></div>
-            <div class="viz-legend"><span class="legend-item"><span class="legend-swatch"></span>Validated duration</span><span class="legend-item"><span class="legend-swatch is-point"></span>Duration unresolved</span><span class="legend-item"><span class="legend-swatch is-reviewed"></span>Human-reviewed episode</span><span class="legend-item"><span class="legend-swatch is-correction"></span>Operator correction</span><span class="legend-item"><span class="legend-swatch is-targeted">targeted</span>Targeted by outside humans on 10+ days</span></div>
+            <div class="viz-legend"><span class="legend-item"><span class="legend-swatch"></span>Validated duration</span><span class="legend-item"><span class="legend-swatch is-bridge"></span>Drift continued across overnight session break</span><span class="legend-item"><span class="legend-swatch is-point"></span>Duration unresolved</span><span class="legend-item"><span class="legend-swatch is-reviewed"></span>Human-reviewed episode</span><span class="legend-item"><span class="legend-swatch is-correction"></span>Operator correction</span><span class="legend-item"><span class="legend-swatch is-targeted">targeted</span>Targeted by outside humans on 10+ days</span></div>
             <p class="viz-note" id="goal-atlas-note"></p>
           </article>
 
@@ -647,6 +649,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-taxonomy-filter"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-session-bridges"></script>
 </body>
 </html>

@@ -1011,15 +1011,32 @@ function renderGoalAtlas() {
           ? bouts
           : [validatedInterval(episode) || { startMs: onsetMs, endMs: null }];
         const position = (ms) => Math.max(0, Math.min(100, ((Math.max(period.startMs, Math.min(period.endMs, ms)) - period.startMs) / period.durationMs) * 100));
+        const stretches = driftStretches(bouts);
+        const continuesFromPrevious = new Set();
+        stretches.forEach((stretch) => stretch.slice(1).forEach((bout) => continuesFromPrevious.add(bout)));
+        const stretchText = stretches.length < bouts.length
+          ? ` in ${stretches.length} continuous ${stretches.length === 1 ? "stretch" : "stretches"}`
+          : "";
         if (bouts.length > 1) {
           // A faint line ties together the bouts that belong to one episode.
           const span = document.createElement("span");
           span.className = "goal-strip-span";
           span.style.left = `${position(bouts[0].startMs)}%`;
           span.style.width = `${Math.max(.25, position(bouts.at(-1).endMs) - position(bouts[0].startMs))}%`;
-          span.dataset.tip = `${activityText} · ${bouts.length} drift bouts · ${totalText} total${reviewedText}`;
+          span.dataset.tip = `${activityText} · ${bouts.length} drift bouts${stretchText} · ${totalText} total${reviewedText}`;
           track.append(span);
         }
+        bouts.forEach((bout, index) => {
+          if (!continuesFromPrevious.has(bout)) return;
+          // Overnight session breaks inside a stretch are bridged, not shown as recovery.
+          const previous = bouts[index - 1];
+          const bridge = document.createElement("span");
+          bridge.className = "goal-strip-bridge";
+          bridge.style.left = `${position(previous.endMs)}%`;
+          bridge.style.width = `${Math.max(.15, position(bout.startMs) - position(previous.endMs))}%`;
+          bridge.dataset.tip = `${activityText} · session closed during drift ${displayDay(new Date(previous.endMs).toISOString())}; drift resumed when the next session opened ${displayDay(new Date(bout.startMs).toISOString())}${reviewedText}`;
+          track.append(bridge);
+        });
         intervals.forEach((interval, index) => {
           const left = position(interval.startMs);
           const segment = document.createElement("span");
@@ -1028,8 +1045,12 @@ function renderGoalAtlas() {
           if (interval.endMs != null) {
             segment.style.width = `${Math.max(.25, position(interval.endMs) - left)}%`;
           }
+          const continuity = [
+            continuesFromPrevious.has(interval) ? "continues from previous session" : "",
+            continuesFromPrevious.has(bouts[index + 1]) ? "continues into next session" : ""
+          ].filter(Boolean).join(", ");
           segment.dataset.tip = bouts.length > 1
-            ? `${activityText} · bout ${index + 1} of ${bouts.length}, ${displayDay(new Date(interval.startMs).toISOString())}: ${formatDuration((interval.endMs - interval.startMs) / 1000)} (episode total ${totalText})${reviewedText}`
+            ? `${activityText} · bout ${index + 1} of ${bouts.length}, ${displayDay(new Date(interval.startMs).toISOString())}: ${formatDuration((interval.endMs - interval.startMs) / 1000)}${continuity ? ` · ${continuity}` : ""} (episode total ${totalText}${stretchText ? `, ${bouts.length} bouts${stretchText}` : ""})${reviewedText}`
             : `${activityText} · ${totalText}${reviewedText}`;
           track.append(segment);
         });
@@ -1489,6 +1510,55 @@ function villageDateAndHour(milliseconds) {
     date: `${parts.year}-${parts.month}-${parts.day}`,
     hour: Number(parts.hour)
   };
+}
+
+const villageMinuteClock = new Intl.DateTimeFormat("en-CA", {
+  timeZone: VILLAGE_TIME_ZONE,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23"
+});
+// Bouts are cut at each session boundary. A bout still running near the close
+// that resumes as the next weekday session opens is one continuous stretch of
+// drift, not a return to the goal followed by new drift.
+const SESSION_CLOSE_MINUTE = 16 * 60 + 50;
+const SESSION_OPEN_MINUTE = 9 * 60 + 10;
+
+function villageDateAndMinute(milliseconds) {
+  const parts = Object.fromEntries(
+    villageMinuteClock.formatToParts(new Date(milliseconds))
+      .filter((part) => part.type !== "literal")
+      .map((part) => [part.type, part.value])
+  );
+  return {
+    date: `${parts.year}-${parts.month}-${parts.day}`,
+    minute: Number(parts.hour) * 60 + Number(parts.minute)
+  };
+}
+
+function isSessionBreakOnly(endMs, startMs) {
+  const end = villageDateAndMinute(endMs);
+  const start = villageDateAndMinute(startMs);
+  if (start.date <= end.date || end.minute < SESSION_CLOSE_MINUTE || start.minute > SESSION_OPEN_MINUTE) return false;
+  // Any weekday between the two sessions was a working day without drift.
+  for (let day = new Date(`${end.date}T12:00:00Z`); ; ) {
+    day.setUTCDate(day.getUTCDate() + 1);
+    const date = day.toISOString().slice(0, 10);
+    if (date >= start.date) return true;
+    if (day.getUTCDay() >= 1 && day.getUTCDay() <= 5) return false;
+  }
+}
+
+function driftStretches(bouts) {
+  const stretches = [];
+  bouts.forEach((bout, index) => {
+    if (index && isSessionBreakOnly(bouts[index - 1].endMs, bout.startMs)) stretches.at(-1).push(bout);
+    else stretches.push([bout]);
+  });
+  return stretches;
 }
 
 function villageHourLabel(hour) {
