@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "seed_id": "goalmax-manual-review-2026-10-11-v64",
+  "seed_id": "goalmax-manual-review-2026-10-11-v65",
   "source": "Committed goal-maximization human reviews, including GitHub reconciliation and source-verified agent-level episode audits.",
   "taxonomies": {
     "trigger": [
@@ -3590,37 +3590,6 @@
         "trigger_evidence_status": "direct"
       },
       "updated_at": "2026-10-10T23:55:00-04:00"
-    },
-    "episode-v2-5bf054daa58a009f": {
-      "trigger_categories": [
-        "agent_message_or_request"
-      ],
-      "trigger_actor": "GPT-5",
-      "request_relationship": "open_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "finished_activity"
-      ],
-      "notes": "Source-verified brief diversion. GPT-5 relayed Opus 4.8's open request for anyone with working GitLab access to merge MR !3. DeepSeek accepted the request and executed the merge at about 19:00:23Z, then returned to AI Village News scouting. This is causally distinct from both the self-initiated waiting pattern and the article-count proxy.\n\nPrior review notes preserved:\n- GPT-5 asked Opus 4.8 or anyone with working GitLab access to merge MR !3. DeepSeek-V4-Pro took the open request, verified the MR was already merged, and handed the repository back for the addendum.",
-      "follow_ups": [],
-      "provenance": {
-        "confidence": "high",
-        "evidence_event_ids": [
-          "event-47e88fc1fd5eb3b286ed",
-          "event-1a3521faf1cbac537dc1"
-        ],
-        "kind": "manual_source_evidence_review",
-        "makes_model_calls": false,
-        "review_id": "goalmax-deepseekv4-source-audit-2026-10-12-v2",
-        "reviewed_at": "2026-10-12T12:00:00-04:00",
-        "reviewer": "codex_full_local_source_audit",
-        "selection_disposition": "full_deepseekv4_goalmax_episode_audit",
-        "trigger_evidence_status": "direct",
-        "classification_source": "full_local_raw_archive",
-        "verification_status": "raw_source_verified",
-        "audit_bucket": "open_peer_request"
-      },
-      "updated_at": "2026-10-12T12:00:00-04:00"
     },
     "episode-v2-eb84f48bbec47f79": {
       "trigger_categories": [
@@ -11017,30 +10986,6 @@
       },
       "updated_at": "2026-10-12T23:55:00-04:00"
     },
-    "episode-v2-a17f9ad78c3f1a47": {
-      "trigger_categories": [
-        "agent_message_or_request"
-      ],
-      "trigger_actor": "Claude Opus 5",
-      "request_relationship": "targeted_request",
-      "pause_context": "",
-      "recovery_mechanisms": [
-        "finished_activity"
-      ],
-      "trigger_evidence_status": "direct",
-      "audit_bucket": "repeated_peer_verification",
-      "notes": "Opus 5 directly invited independent verification. Fable ran and reported checks for disproofs #64 through #67 between its own tasks; the fourth report closes the observed sequence.",
-      "follow_ups": [],
-      "provenance": {
-        "kind": "manual_source_evidence_review",
-        "review_id": "goalmax-fable5-holistic-source-audit-2026-10-12",
-        "reviewer": "codex_with_lwen2027",
-        "reviewed_at": "2026-10-12T23:55:00-04:00",
-        "verification_status": "raw_source_verified",
-        "makes_model_calls": false
-      },
-      "updated_at": "2026-10-12T23:55:00-04:00"
-    },
     "episode-v2-46b038039354dc59": {
       "follow_ups": [],
       "trigger_categories": [
@@ -11290,7 +11235,8 @@
     "remaining-goalmax-holistic-audit-2026-10-12",
     "long-episode-split-audit-2026-10-12",
     "goalmax-fable5-holistic-source-audit-2026-10-12",
-    "gpt51-ethics-reaudit-2026-10-13"
+    "gpt51-ethics-reaudit-2026-10-13",
+    "drift-bout-duration-validation-2026-10-14"
   ],
   "resolved_browser_hashes": {
     "episode-v2-ba535f42e23debc7": "annotation-v1-3b2c6ef5",

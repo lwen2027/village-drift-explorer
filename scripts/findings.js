@@ -555,7 +555,25 @@ syntheticPeriods.forEach((period) => {
   goalPeriods.push(period);
 });
 
+// Episodes validated as a set of drift bouts are measured by their bouts, not one onset-anchored span.
+function episodeBouts(episode) {
+  return (episode.drift_bouts || [])
+    .map(([start, end]) => ({ startMs: timestampMs(start), endMs: timestampMs(end), episode }))
+    .filter((bout) => bout.startMs != null && bout.endMs != null && bout.endMs >= bout.startMs);
+}
+
+function episodeIntervals(episode) {
+  const bouts = episodeBouts(episode);
+  if (bouts.length) return bouts;
+  const interval = validatedInterval(episode);
+  return interval ? [interval] : [];
+}
+
 function validatedInterval(episode) {
+  const bouts = episodeBouts(episode);
+  if (bouts.length) {
+    return { startMs: bouts[0].startMs, endMs: bouts.at(-1).endMs, episode };
+  }
   const startMs = episodeOnsetMs(episode);
   const durationSeconds = Number(episode.duration_seconds);
   if (startMs == null || episode.duration_seconds == null || !Number.isFinite(durationSeconds) || durationSeconds < 0) {
@@ -589,7 +607,7 @@ function mergedIntervals(intervals, floorMs = -Infinity, ceilingMs = Infinity) {
 goalPeriods.forEach((period) => {
   period.durationMs = Math.max(1, period.endMs - period.startMs);
   period.episodes.sort((left, right) => episodeOnsetMs(left) - episodeOnsetMs(right));
-  period.exactIntervals = period.episodes.map(validatedInterval).filter(Boolean);
+  period.exactIntervals = period.episodes.flatMap(episodeIntervals);
   period.mergedIntervals = mergedIntervals(period.exactIntervals, period.startMs, period.endMs);
   period.validatedMs = period.mergedIntervals.reduce(
     (total, interval) => total + Math.max(0, interval.endMs - interval.startMs), 0
@@ -967,19 +985,24 @@ function renderGoalAtlas() {
       period.episodes.forEach((episode) => {
         const onsetMs = episodeOnsetMs(episode);
         if (onsetMs == null) return;
-        const interval = validatedInterval(episode);
-        const displayStart = Math.max(period.startMs, Math.min(period.endMs, onsetMs));
-        const left = Math.max(0, Math.min(100, ((displayStart - period.startMs) / period.durationMs) * 100));
-        const segment = document.createElement("span");
         const reviewed = reviewedEpisodeIds.has(episode.episode_id);
-        segment.className = `goal-strip-segment${interval ? "" : " is-unknown"}${reviewed ? " is-reviewed" : ""}`;
-        segment.style.left = `${left}%`;
-        if (interval) {
-          const end = Math.max(displayStart, Math.min(period.endMs, interval.endMs));
-          segment.style.width = `${Math.max(.25, ((end - displayStart) / period.durationMs) * 100)}%`;
-        }
-        segment.title = `${episode.activity} · ${formatDuration(episode.duration_seconds == null ? NaN : Number(episode.duration_seconds))}${reviewed ? " · human reviewed" : ""}`;
-        track.append(segment);
+        const title = `${episode.activity} · ${formatDuration(episode.duration_seconds == null ? NaN : Number(episode.duration_seconds))}${reviewed ? " · human reviewed" : ""}`;
+        const intervals = episodeBouts(episode).length
+          ? episodeBouts(episode)
+          : [validatedInterval(episode) || { startMs: onsetMs, endMs: null }];
+        intervals.forEach((interval) => {
+          const displayStart = Math.max(period.startMs, Math.min(period.endMs, interval.startMs));
+          const left = Math.max(0, Math.min(100, ((displayStart - period.startMs) / period.durationMs) * 100));
+          const segment = document.createElement("span");
+          segment.className = `goal-strip-segment${interval.endMs == null ? " is-unknown" : ""}${reviewed ? " is-reviewed" : ""}`;
+          segment.style.left = `${left}%`;
+          if (interval.endMs != null) {
+            const end = Math.max(displayStart, Math.min(period.endMs, interval.endMs));
+            segment.style.width = `${Math.max(.25, ((end - displayStart) / period.durationMs) * 100)}%`;
+          }
+          segment.title = title;
+          track.append(segment);
+        });
       });
       (correctionsByAgent.get(period.agent) || []).forEach((correction) => {
         const correctionMs = timestampMs(correction.timestamp);
@@ -1454,8 +1477,8 @@ function renderDriftWeather() {
     return cells.get(key);
   }
   goalMaxEpisodes.forEach((episode) => {
-    const interval = validatedInterval(episode);
-    if (!interval) {
+    const intervals = episodeIntervals(episode);
+    if (!intervals.length) {
       const onset = episodeOnsetMs(episode);
       if (onset != null) {
         const { date, hour } = villageDateAndHour(onset);
@@ -1465,15 +1488,21 @@ function renderDriftWeather() {
       }
       return;
     }
-    const firstBucket = Math.floor(interval.startMs / 3600000) * 3600000;
-    for (let bucket = firstBucket; bucket <= interval.endMs; bucket += 3600000) {
-      const overlap = Math.min(interval.endMs, bucket + 3600000) - Math.max(interval.startMs, bucket);
-      if (overlap <= 0 && interval.endMs !== interval.startMs) continue;
+    const buckets = new Set();
+    intervals.forEach((interval) => {
+      const firstBucket = Math.floor(interval.startMs / 3600000) * 3600000;
+      for (let bucket = firstBucket; bucket <= interval.endMs; bucket += 3600000) {
+        const overlap = Math.min(interval.endMs, bucket + 3600000) - Math.max(interval.startMs, bucket);
+        if (overlap <= 0 && interval.endMs !== interval.startMs) continue;
+        buckets.add(bucket);
+      }
+    });
+    buckets.forEach((bucket) => {
       const midpoint = bucket + 1800000;
       const { date, hour } = villageDateAndHour(midpoint);
-      if (!activeDateSet.has(date) || hour < VILLAGE_ACTIVE_START_HOUR || hour >= VILLAGE_ACTIVE_END_HOUR) continue;
+      if (!activeDateSet.has(date) || hour < VILLAGE_ACTIVE_START_HOUR || hour >= VILLAGE_ACTIVE_END_HOUR) return;
       cellFor(date, hour).exact += 1;
-    }
+    });
   });
 
   const maxExact = Math.max(1, ...cells.values().map((cell) => cell.exact));
