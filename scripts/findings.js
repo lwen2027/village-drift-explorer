@@ -1283,18 +1283,19 @@ function initializeCumulativeChart() {
   }
 }
 
-function renderAnnotationFlow() {
-  function flowTriggerAndContext(annotation) {
-    const triggers = annotation.trigger_categories || [];
-    if (triggers.includes("pause") && annotation.pause_context) {
-      return { trigger: "pause", context: `pause:${annotation.pause_context}` };
-    }
-    const requestTrigger = triggers.find((trigger) => externalTriggerCategoryIds.has(trigger));
-    if (requestTrigger && annotation.request_relationship) {
-      return { trigger: requestTrigger, context: `request:${annotation.request_relationship}` };
-    }
-    return { trigger: triggers[0] || "unknown", context: "none" };
+function primaryManualTriggerAndContext(annotation) {
+  const triggers = annotation.trigger_categories || [];
+  if (triggers.includes("pause") && annotation.pause_context) {
+    return { trigger: "pause", context: `pause:${annotation.pause_context}` };
   }
+  const requestTrigger = triggers.find((trigger) => externalTriggerCategoryIds.has(trigger));
+  if (requestTrigger && annotation.request_relationship) {
+    return { trigger: requestTrigger, context: `request:${annotation.request_relationship}` };
+  }
+  return { trigger: triggers[0] || "unknown", context: "none" };
+}
+
+function renderAnnotationFlow() {
   function contextLabel(value) {
     if (value === "none") return "No secondary context";
     const [kind, category] = value.split(":", 2);
@@ -1303,7 +1304,7 @@ function renderAnnotationFlow() {
     return value.replaceAll("_", " ");
   }
   const flowRows = rows.map((row) => ({
-    ...flowTriggerAndContext(row.annotation),
+    ...primaryManualTriggerAndContext(row.annotation),
     recovery: row.annotation.recovery_mechanisms[0] || "unknown"
   }));
   const stages = [
@@ -1646,16 +1647,26 @@ function renderAgentFingerprints() {
   document.querySelector("#fingerprint-meta").textContent = `${profiles.length} drift-positive agents in ${families.size} model families · axes normalized to observed maxima`;
 }
 
-function primaryTriggerItem(episode) {
-  return (((episode.evidence || {}).trigger || {}).items || [])[0] || null;
+const influenceSourceGroups = [
+  { id: "self", label: "Self / internal", color: "#ae5037" },
+  { id: "agent", label: "Village agent", color: "#3f7082" },
+  { id: "human", label: "Human / external", color: "#a77b2c" },
+  { id: "system", label: "Operator / system", color: "#74578f" }
+];
+const influenceColorByGroup = new Map(influenceSourceGroups.map((group) => [group.id, group.color]));
+
+function influenceGroupFor(row) {
+  const trigger = primaryManualTriggerAndContext(row.annotation).trigger;
+  if (trigger === "agent_message_or_request") return "agent";
+  if (["user_email", "user_message", "gitlab_issue_or_comment"].includes(trigger)) return "human";
+  if (trigger === "operator_or_system_event") return "system";
+  return "self";
 }
 
 function sourceActorFor(row) {
-  if (row.annotation.trigger_actor.trim()) return row.annotation.trigger_actor.trim();
-  const item = primaryTriggerItem(row.episode);
-  const source = item?.source || {};
-  if (source.speaker && source.speaker !== row.episode.agent) return source.speaker;
-  const trigger = row.annotation.trigger_categories[0] || "unknown";
+  const actor = String(row.annotation.trigger_actor || "").trim();
+  if (actor) return actor;
+  const trigger = primaryManualTriggerAndContext(row.annotation).trigger;
   const channelActors = {
     pause: "Self-directed pause",
     user_email: "Unidentified human email",
@@ -1672,60 +1683,84 @@ function sourceActorFor(row) {
   return channelActors[trigger] || label("trigger", trigger);
 }
 
-function renderInfluenceNetwork() {
-  const rawEdges = new Map();
+function appendInfluenceBar(container, { labelText, count, maxCount, segments, title }) {
+  const row = document.createElement("div");
+  row.className = "influence-bar-row";
+  row.title = title || `${labelText}: ${count} reviewed episodes`;
+  const labelNode = document.createElement("span");
+  labelNode.className = "influence-bar-label";
+  labelNode.textContent = labelText;
+  const track = document.createElement("span");
+  track.className = "influence-bar-track";
+  segments.forEach(({ group, count: segmentCount }) => {
+    if (!segmentCount) return;
+    const fill = document.createElement("span");
+    fill.className = "influence-bar-fill";
+    fill.style.width = `${(segmentCount / maxCount) * 100}%`;
+    fill.style.background = influenceColorByGroup.get(group) || "#8d8678";
+    fill.title = `${influenceSourceGroups.find((candidate) => candidate.id === group)?.label || group}: ${segmentCount}`;
+    track.append(fill);
+  });
+  const countNode = document.createElement("span");
+  countNode.className = "influence-bar-count";
+  countNode.textContent = String(count);
+  row.append(labelNode, track, countNode);
+  container.append(row);
+}
+
+function renderInfluenceBars() {
+  const sourceCounts = new Map();
+  const sourceGroup = new Map();
+  const targetCounts = new Map();
   rows.forEach((row) => {
     const source = sourceActorFor(row);
     const target = row.episode.agent;
-    const key = `${source}\u0000${target}`;
-    rawEdges.set(key, (rawEdges.get(key) || 0) + 1);
+    const group = influenceGroupFor(row);
+    sourceCounts.set(source, (sourceCounts.get(source) || 0) + 1);
+    if (!sourceGroup.has(source)) sourceGroup.set(source, group);
+    if (!targetCounts.has(target)) targetCounts.set(target, new Map());
+    const targetGroups = targetCounts.get(target);
+    targetGroups.set(group, (targetGroups.get(group) || 0) + 1);
   });
-  const sourceCounts = new Map();
-  const targetCounts = new Map();
-  rawEdges.forEach((count, key) => {
-    const [source, target] = key.split("\u0000");
-    sourceCounts.set(source, (sourceCounts.get(source) || 0) + count);
-    targetCounts.set(target, (targetCounts.get(target) || 0) + count);
-  });
-  const edges = rawEdges;
-  const sources = [...sourceCounts.keys()].sort((left, right) => sourceCounts.get(right) - sourceCounts.get(left) || left.localeCompare(right));
-  const targets = [...targetCounts.keys()].sort((left, right) => targetCounts.get(right) - targetCounts.get(left) || left.localeCompare(right));
-  const rowGap = 22;
-  const height = Math.max(240, 60 + Math.max(sources.length, targets.length) * rowGap);
-  const columnY = (values) => {
-    const span = (Math.max(sources.length, targets.length) - 1) * rowGap;
-    const offset = 40 + (span - (values.length - 1) * rowGap) / 2;
-    return new Map(values.map((value, index) => [value, offset + index * rowGap]));
-  };
-  const sourceY = columnY(sources);
-  const targetY = columnY(targets);
-  const svg = document.querySelector("#influence-network");
-  svg.setAttribute("viewBox", `0 0 1100 ${height}`);
-  svg.replaceChildren();
-  const maxEdge = Math.max(1, ...edges.values());
-  edges.forEach((count, key) => {
-    const [source, target] = key.split("\u0000");
-    const path = svgElement("path", {
-      d: `M 345 ${sourceY.get(source)} C 550 ${sourceY.get(source)}, 550 ${targetY.get(target)}, 755 ${targetY.get(target)}`,
-      fill: "none", stroke: "#ae5037", opacity: .13 + .35 * (count / maxEdge), "stroke-width": 1 + 8 * (count / maxEdge)
-    });
-    svgTitle(path, `${agentLabel(source)} → ${agentLabel(target)}: ${count} reviewed episodes`);
-    svg.append(path);
-  });
-  sources.forEach((source) => {
-    const y = sourceY.get(source);
-    svg.append(svgElement("circle", { cx: 340, cy: y, r: 5, fill: "#ae5037" }));
-    svg.append(svgElement("text", { x: 330, y: y + 3, "text-anchor": "end", class: "svg-label" }, `${shortText(agentLabel(source), 44)} · ${sourceCounts.get(source)}`));
-  });
-  targets.forEach((target) => {
-    const y = targetY.get(target);
-    svg.append(svgElement("circle", { cx: 760, cy: y, r: 5, fill: "#466f61" }));
-    svg.append(svgElement("text", { x: 770, y: y + 3, class: "svg-label" }, `${shortText(agentLabel(target), 40)} · ${targetCounts.get(target)}`));
-  });
-  svg.append(svgElement("text", { x: 340, y: 18, "text-anchor": "middle", class: "svg-title" }, "Trigger source"));
-  svg.append(svgElement("text", { x: 760, y: 18, "text-anchor": "middle", class: "svg-title" }, "Drifting agent"));
-  const named = new Set(rows.map(sourceActorFor).filter((actor) => agentNameById && [...agentNameById.values()].includes(actor))).size;
-  document.querySelector("#influence-meta").textContent = `${rows.length} reviewed episodes · ${sources.length} sources → ${targets.length} agents · ${named} named trigger agents`;
+
+  const sources = [...sourceCounts.entries()].sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]));
+  const sourceList = document.querySelector("#trigger-source-bars");
+  sourceList.replaceChildren();
+  const maxSourceCount = Math.max(1, ...sources.map(([, count]) => count));
+  sources.forEach(([source, count]) => appendInfluenceBar(sourceList, {
+    labelText: agentLabel(source),
+    count,
+    maxCount: maxSourceCount,
+    segments: [{ group: sourceGroup.get(source), count }]
+  }));
+
+  const targets = [...targetCounts.entries()].map(([agent, groups]) => ({
+    agent,
+    groups,
+    count: [...groups.values()].reduce((sum, count) => sum + count, 0)
+  })).sort((left, right) => right.count - left.count || left.agent.localeCompare(right.agent));
+  const targetList = document.querySelector("#affected-agent-bars");
+  targetList.replaceChildren();
+  const maxTargetCount = Math.max(1, ...targets.map((target) => target.count));
+  targets.forEach((target) => appendInfluenceBar(targetList, {
+    labelText: agentLabel(target.agent),
+    count: target.count,
+    maxCount: maxTargetCount,
+    segments: influenceSourceGroups.map((group) => ({ group: group.id, count: target.groups.get(group.id) || 0 })),
+    title: `${agentLabel(target.agent)}: ${target.count} reviewed episodes\n${influenceSourceGroups.map((group) => `${group.label}: ${target.groups.get(group.id) || 0}`).join("\n")}`
+  }));
+
+  const legend = document.querySelector("#influence-legend");
+  legend.replaceChildren(...influenceSourceGroups.map((group) => {
+    const item = document.createElement("span");
+    item.className = "legend-item";
+    const swatch = document.createElement("span");
+    swatch.className = "legend-swatch";
+    swatch.style.background = group.color;
+    item.append(swatch, document.createTextNode(group.label));
+    return item;
+  }));
+  document.querySelector("#influence-meta").textContent = `${rows.length} reviewed episodes · ${sources.length} trigger sources · ${targets.length} affected agents`;
 }
 
 function isObservedRecovery(annotation) {
@@ -1934,7 +1969,7 @@ function renderAuditPriorityMap() {
 function initializeExperimentalLenses() {
   renderDriftWeather();
   renderAgentFingerprints();
-  renderInfluenceNetwork();
+  renderInfluenceBars();
   renderResilienceScorecards();
   renderEpisodeMotifs();
   renderAuditPriorityMap();
