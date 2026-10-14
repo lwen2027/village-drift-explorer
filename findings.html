@@ -182,16 +182,11 @@
     .duration-track { height: 12px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
     .duration-fill { display: block; height: 100%; border-radius: inherit; background: var(--blue); }
     .duration-count { font: 700 11px/1 var(--mono); text-align: right; }
-    .recurrence-bars { display: grid; gap: 13px; }
-    .recurrence-row { display: grid; gap: 6px; }
-    .recurrence-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-size: 12px; }
-    .recurrence-label { font-weight: 800; }
-    .recurrence-value { color: var(--muted); font: 700 11px/1.2 var(--mono); text-align: right; }
-    .recurrence-track { height: 14px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
-    .recurrence-fill { display: block; height: 100%; border-radius: inherit; background: var(--rust); }
-    .recurrence-row.is-small .recurrence-fill { background: var(--blue); }
-    .recurrence-row.is-empty .recurrence-track { background: repeating-linear-gradient(135deg, var(--paper-deep), var(--paper-deep) 6px, rgba(207, 193, 166, .42) 6px, rgba(207, 193, 166, .42) 12px); }
-    .recurrence-detail { color: var(--muted); font-size: 11px; line-height: 1.35; }
+    .first-drift-bars { display: grid; gap: 9px; }
+    .first-drift-row { display: grid; grid-template-columns: 82px 1fr 78px; gap: 9px; align-items: center; font-size: 12px; }
+    .first-drift-track { height: 14px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
+    .first-drift-fill { display: block; height: 100%; border-radius: inherit; background: var(--rust); }
+    .first-drift-count { color: var(--muted); font: 700 11px/1.2 var(--mono); text-align: right; }
     .flow-wrap { overflow-x: auto; }
     .flow-chart { min-width: 940px; }
     .weather-wrap { overflow-x: auto; padding-bottom: 5px; }
@@ -483,9 +478,9 @@
           </article>
 
           <article class="viz-card">
-            <div class="viz-heading"><div><h3>Recurrence after first drift</h3><p>How many goal periods had another confirmed episode after their first drift.</p></div><span class="viz-meta" id="recurrence-meta"></span></div>
-            <div class="recurrence-bars" id="recurrence-bars" role="img" aria-label="Observed recurrence after first drift by first-drift position"></div>
-            <p class="viz-note">A recurrence means a later confirmed episode in the same goal period. These are observed proportions, not causal estimates; very small cohorts are labeled rather than treated as reliable comparisons.</p>
+            <div class="viz-heading"><div><h3>When first drift occurs</h3><p>Position of each goal period's first confirmed drift episode.</p></div><span class="viz-meta" id="first-drift-meta"></span></div>
+            <div class="first-drift-bars" id="first-drift-bars" role="img" aria-label="First confirmed drift position within the goal period"></div>
+            <p class="viz-note" id="first-drift-note"></p>
           </article>
 
           <article class="viz-card is-wide">
@@ -596,6 +591,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-recurrence-bars"></script>
+  <script type="module" src="./scripts/findings.js?v=20261014-first-drift-bins"></script>
 </body>
 </html>

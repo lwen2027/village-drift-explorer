@@ -1185,62 +1185,41 @@ function renderDurationDistribution() {
   document.querySelector("#duration-note").textContent = `${unknown} of ${goalMaxEpisodes.length} confirmed episodes have unresolved numeric duration and are excluded from this chart. Percentages use the ${known.length} episodes with validated duration.`;
 }
 
-function recurrenceSubjects() {
-  const groups = { early: [], middle: [], late: [] };
-  goalPeriods.forEach((period) => {
-    const onsets = period.episodes.map(episodeOnsetMs).filter(Number.isFinite).sort((left, right) => left - right);
-    if (!onsets.length) return;
-    const first = onsets[0];
-    const position = Math.max(0, Math.min(1, (first - period.startMs) / period.durationMs));
-    const group = position < .2 ? "early" : position < .8 ? "middle" : "late";
-    const second = onsets.find((onset) => onset > first);
-    const censorDays = Math.max(0, (period.endMs - first) / DAY_MS);
-    groups[group].push({
-      time: second ? Math.max(0, (second - first) / DAY_MS) : censorDays,
-      event: Boolean(second),
-      period
-    });
+function renderFirstDriftTiming() {
+  const positions = goalPeriods.flatMap((period) => {
+    const first = period.episodes.map(episodeOnsetMs).filter(Number.isFinite).sort((left, right) => left - right)[0];
+    if (first == null || !Number.isFinite(period.durationMs) || period.durationMs <= 0) return [];
+    return [{ period, position: Math.max(0, Math.min(1, (first - period.startMs) / period.durationMs)) }];
   });
-  return groups;
-}
-
-function renderRecurrence() {
-  const groups = recurrenceSubjects();
-  const labels = { early: "First 20%", middle: "Middle 60%", late: "Final 20%" };
-  const allSubjects = Object.values(groups).flat();
-  const container = document.querySelector("#recurrence-bars");
+  const bins = Array.from({ length: 5 }, (_, index) => ({
+    label: `${index * 20}–${(index + 1) * 20}%`,
+    periods: []
+  }));
+  positions.forEach((entry) => bins[Math.min(4, Math.floor(entry.position * 5))].periods.push(entry.period));
+  const container = document.querySelector("#first-drift-bars");
   container.replaceChildren();
-  Object.entries(groups).forEach(([group, subjects]) => {
-    const recurrent = subjects.filter((subject) => subject.event).length;
-    const rate = subjects.length ? recurrent / subjects.length : 0;
+  bins.forEach((bin) => {
+    const share = positions.length ? bin.periods.length / positions.length : 0;
     const row = document.createElement("div");
-    row.className = `recurrence-row${subjects.length === 0 ? " is-empty" : subjects.length < 5 ? " is-small" : ""}`;
-    const heading = document.createElement("div");
-    heading.className = "recurrence-heading";
+    row.className = "first-drift-row";
+    row.title = bin.periods.length ? bin.periods.map((period) => agentLabel(period.agent)).join(", ") : "No goal periods";
     const label = document.createElement("span");
-    label.className = "recurrence-label";
-    label.textContent = labels[group];
-    const value = document.createElement("span");
-    value.className = "recurrence-value";
-    value.textContent = subjects.length ? `${recurrent} of ${subjects.length} · ${Math.round(rate * 100)}%` : "No goal periods";
-    heading.append(label, value);
+    label.textContent = bin.label;
     const track = document.createElement("div");
-    track.className = "recurrence-track";
+    track.className = "first-drift-track";
     const fill = document.createElement("span");
-    fill.className = "recurrence-fill";
-    fill.style.width = `${rate * 100}%`;
+    fill.className = "first-drift-fill";
+    fill.style.width = `${share * 100}%`;
     track.append(fill);
-    const detail = document.createElement("div");
-    detail.className = "recurrence-detail";
-    detail.textContent = subjects.length === 0
-      ? "No first drift began this late in a goal period."
-      : subjects.length < 5
-        ? "Too few goal periods for a stable comparison."
-        : `${subjects.length - recurrent} goal period${subjects.length - recurrent === 1 ? "" : "s"} had no later confirmed episode.`;
-    row.append(heading, track, detail);
+    const count = document.createElement("span");
+    count.className = "first-drift-count";
+    count.textContent = `${bin.periods.length} (${Math.round(share * 100)}%)`;
+    row.append(label, track, count);
     container.append(row);
   });
-  document.querySelector("#recurrence-meta").textContent = `${allSubjects.length} drift-positive goal periods`;
+  const missing = goalPeriods.filter((period) => period.episodes.length).length - positions.length;
+  document.querySelector("#first-drift-meta").textContent = `${positions.length} drift-positive goal periods`;
+  document.querySelector("#first-drift-note").textContent = `Each bar shows the share of drift-positive goal periods whose first confirmed episode began in that fifth of the goal window.${missing ? ` ${missing} period${missing === 1 ? "" : "s"} lacked a usable onset.` : ""}`;
 }
 
 function renderCumulativeGoal(periodId) {
@@ -1404,7 +1383,7 @@ function initializeExplorations() {
   });
   document.querySelector("#burden-show-context").addEventListener("change", renderBurdenScatter);
   renderDurationDistribution();
-  renderRecurrence();
+  renderFirstDriftTiming();
   initializeCumulativeChart();
   renderAnnotationFlow();
 }
