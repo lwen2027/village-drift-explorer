@@ -1054,10 +1054,7 @@ function goalAtlasEpisodePanel(period, track) {
       const status = document.createElement("strong");
       status.textContent = driftEndLabels[end.status] || "End";
       ending.append(status);
-      if (end.reason) {
-        ending.append(` · ${shortText(end.reason, 220)}`);
-        ending.title = end.reason;
-      }
+      if (end.reason) ending.append(` · ${end.reason}`);
       what.append(ending);
     }
 
