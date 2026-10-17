@@ -1,0 +1,515 @@
+{
+ "updates": {
+  "episode-v2-8e0f8aca1dbfcd67": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-2bb1477eaaa55867",
+   "evidence": "2026-07-14 16:15:39",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-2bb1477eaaa55867); evidence 2026-07-14 16:15:39 UTC."
+  },
+  "episode-v2-5ab71fc4f51cc7fa": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-0fede6e010b9781a",
+   "evidence": "2026-07-22 17:29:00",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-0fede6e010b9781a); evidence 2026-07-22 17:29:00 UTC."
+  },
+  "episode-v2-77f3b69063ef2fd3": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-4df0ad5ffe6fa75b",
+   "evidence": "2026-07-29 16:18:53",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-4df0ad5ffe6fa75b); evidence 2026-07-29 16:18:53 UTC."
+  },
+  "episode-v2-96ff404500b4ea8e": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-16662c71e4893a1b",
+   "evidence": "2026-08-06 16:08:54",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-16662c71e4893a1b); evidence 2026-08-06 16:08:54 UTC."
+  },
+  "episode-v2-16662c71e4893a1b": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-6e504fb866165c5b",
+   "evidence": "2026-08-07 23:55:22",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-6e504fb866165c5b); evidence 2026-08-07 23:55:22 UTC."
+  },
+  "episode-v2-6e504fb866165c5b": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-7deb98f17baf0da4",
+   "evidence": "2026-08-11 16:32:28",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-7deb98f17baf0da4); evidence 2026-08-11 16:32:28 UTC."
+  },
+  "episode-v2-7deb98f17baf0da4": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-fbf16050bf749bb9",
+   "evidence": "2026-08-12 16:13:13",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-fbf16050bf749bb9); evidence 2026-08-12 16:13:13 UTC."
+  },
+  "episode-v2-fbf16050bf749bb9": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-639a31ecd89e4956",
+   "evidence": "2026-08-13 16:14:47",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-639a31ecd89e4956); evidence 2026-08-13 16:14:47 UTC."
+  },
+  "episode-v2-53cefeb95e57259f": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-a4c5eb1066669d00",
+   "evidence": "2026-08-19 16:01:51",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-a4c5eb1066669d00); evidence 2026-08-19 16:01:51 UTC."
+  },
+  "episode-v2-a4c5eb1066669d00": {
+   "recovery": "end_of_day",
+   "related_episode_id": null,
+   "evidence": "2026-08-24 16:14:21",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the drift stopped at the end of the workday and the next session was on-goal; evidence 2026-08-24 16:14:21 UTC."
+  },
+  "episode-v2-6740d82ee399104c": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-da8495a3f9ed5c61",
+   "evidence": "2026-08-28 16:05:14",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-da8495a3f9ed5c61); evidence 2026-08-28 16:05:14 UTC."
+  },
+  "episode-v2-da8495a3f9ed5c61": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-f5e57a67723eeda3",
+   "evidence": "2026-09-03 17:14:52",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-f5e57a67723eeda3); evidence 2026-09-03 17:14:52 UTC."
+  },
+  "episode-v2-0d151668a7f4190d": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-a867865a85d0477f",
+   "evidence": "2026-09-10 16:07:55",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-a867865a85d0477f); evidence 2026-09-10 16:07:55 UTC."
+  },
+  "episode-v2-a867865a85d0477f": {
+   "recovery": "finished_activity",
+   "related_episode_id": null,
+   "evidence": "2026-09-11 20:06:13",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the drift activity finished; evidence 2026-09-11 20:06:13 UTC."
+  },
+  "episode-v2-fd55b8d5c6cbefb2": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-9f310ad9e7169481",
+   "evidence": "2026-09-15 21:17:16",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-9f310ad9e7169481); evidence 2026-09-15 21:17:16 UTC."
+  },
+  "episode-v2-9f310ad9e7169481": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-c06d7145f72d43bd",
+   "evidence": "2026-09-21 17:31:06",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-c06d7145f72d43bd); evidence 2026-09-21 17:31:06 UTC."
+  },
+  "episode-v2-c06d7145f72d43bd": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:54:50",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:54:50 UTC."
+  },
+  "episode-v2-6272a73c4f66d969": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-90f7d68d7042f590",
+   "evidence": "2026-07-08 16:13:37",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-90f7d68d7042f590); evidence 2026-07-08 16:13:37 UTC."
+  },
+  "episode-v2-1de0be583da6886b": {
+   "recovery": "switched_to_another_drift",
+   "related_episode_id": "episode-v2-56172cd315f809f5",
+   "evidence": "2026-07-10 19:23:29",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): a different drift took over (episode-v2-56172cd315f809f5); evidence 2026-07-10 19:23:29 UTC."
+  },
+  "episode-v2-e6b458a26e3f94be": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-0cc73543ff5a8929",
+   "evidence": "2026-07-14 16:11:25",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-0cc73543ff5a8929); evidence 2026-07-14 16:11:25 UTC."
+  },
+  "episode-v2-1ce6b2028dfb9487": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-6bfe11d65f922e9d",
+   "evidence": "2026-07-15 16:05:16",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-6bfe11d65f922e9d); evidence 2026-07-15 16:05:16 UTC."
+  },
+  "episode-v2-0cc73543ff5a8929": {
+   "recovery": "switched_to_another_drift",
+   "related_episode_id": "episode-6bfe11d65f922e9d",
+   "evidence": "2026-07-15 16:05:16",
+   "confidence": "low",
+   "note": "Recovery verified against raw logs (Oct 17): a different drift took over (episode-6bfe11d65f922e9d); evidence 2026-07-15 16:05:16 UTC."
+  },
+  "episode-0987809c98a209ce": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-d3a0ef3be49f22b0",
+   "evidence": "2026-07-27 16:04:09",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-d3a0ef3be49f22b0); evidence 2026-07-27 16:04:09 UTC."
+  },
+  "episode-d3a0ef3be49f22b0": {
+   "recovery": "switched_to_another_drift",
+   "related_episode_id": "episode-e5d1f9dd2768af9a",
+   "evidence": "2026-08-04 20:42:01",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): a different drift took over (episode-e5d1f9dd2768af9a); evidence 2026-08-04 20:42:01 UTC."
+  },
+  "episode-7e590b7c6fcef0b7": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-f5f1fab23afd602e",
+   "evidence": "2026-08-10 16:01:08",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-f5f1fab23afd602e); evidence 2026-08-10 16:01:08 UTC."
+  },
+  "episode-v2-ecf5098bb1a1267f": {
+   "recovery": "end_of_day",
+   "related_episode_id": "episode-665a0591f84b764a",
+   "evidence": "2026-08-13 16:05:30",
+   "confidence": "low",
+   "note": "Recovery verified against raw logs (Oct 17): the drift stopped at the end of the workday and the next session was on-goal; evidence 2026-08-13 16:05:30 UTC."
+  },
+  "episode-665a0591f84b764a": {
+   "recovery": "switched_to_another_drift",
+   "related_episode_id": "episode-7f8905daf1c63703",
+   "evidence": "2026-08-17 18:16:38",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): a different drift took over (episode-7f8905daf1c63703); evidence 2026-08-17 18:16:38 UTC."
+  },
+  "episode-v2-efc1dc1283b94f35": {
+   "recovery": "end_of_day",
+   "related_episode_id": "episode-7f8905daf1c63703",
+   "evidence": "2026-08-17 16:00:45",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the drift stopped at the end of the workday and the next session was on-goal; evidence 2026-08-17 16:00:45 UTC."
+  },
+  "episode-v2-a1dd15359cb1313f": {
+   "recovery": "external_user_intervention",
+   "related_episode_id": null,
+   "evidence": "2026-08-25 17:16:42",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): an outside user's intervention ended it; evidence 2026-08-25 17:16:42 UTC."
+  },
+  "episode-4a8bc82196dfb241": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-8120e77b0309c7db",
+   "evidence": "2026-09-01 16:00:54",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-8120e77b0309c7db); evidence 2026-09-01 16:00:54 UTC."
+  },
+  "episode-8120e77b0309c7db": {
+   "recovery": "peer_feedback",
+   "related_episode_id": "episode-a4f80f3d722ec89f",
+   "evidence": "2026-09-02 16:10:41",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): peer feedback ended it; evidence 2026-09-02 16:10:41 UTC."
+  },
+  "episode-v2-0856d6faaee47a49": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-1c49b3d5151ed8bd",
+   "evidence": "2026-09-07 16:04:14",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-1c49b3d5151ed8bd); evidence 2026-09-07 16:04:14 UTC."
+  },
+  "episode-v2-1c49b3d5151ed8bd": {
+   "recovery": "switched_to_another_drift",
+   "related_episode_id": "episode-a4f80f3d722ec89f",
+   "evidence": "2026-09-09 16:05:21",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): a different drift took over (episode-a4f80f3d722ec89f); evidence 2026-09-09 16:05:21 UTC."
+  },
+  "episode-2475a88d83dfbe1d": {
+   "recovery": "operator_message",
+   "related_episode_id": "episode-47f299b2fd2c9f42",
+   "evidence": "2026-09-25 16:14:51",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): an operator message ended it; evidence 2026-09-25 16:14:51 UTC."
+  },
+  "episode-47f299b2fd2c9f42": {
+   "recovery": "switched_to_another_drift",
+   "related_episode_id": "episode-b7ded741f0d64e8f",
+   "evidence": "2026-09-29 19:03:54",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): a different drift took over (episode-b7ded741f0d64e8f); evidence 2026-09-29 19:03:54 UTC."
+  },
+  "episode-b7ded741f0d64e8f": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 21:13:52",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 21:13:52 UTC."
+  },
+  "episode-v2-5ec168375161cdb5": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:21:41",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:21:41 UTC."
+  },
+  "episode-v2-6ddb1f77744618f9": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:28:07",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:28:07 UTC."
+  },
+  "episode-v2-9a90cfcccd53ac1b": {
+   "recovery": "finished_activity",
+   "related_episode_id": null,
+   "evidence": "2026-08-10 16:07:19",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the drift activity finished; evidence 2026-08-10 16:07:19 UTC."
+  },
+  "episode-13c16652f87624a1": {
+   "recovery": "end_of_day",
+   "related_episode_id": null,
+   "evidence": "2026-08-17 16:09:39",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the drift stopped at the end of the workday and the next session was on-goal; evidence 2026-08-17 16:09:39 UTC."
+  },
+  "episode-v2-d7903ed8e57aa04d": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-49eef3b9828b9831",
+   "evidence": "2026-07-16 16:01:47",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-49eef3b9828b9831); evidence 2026-07-16 16:01:47 UTC."
+  },
+  "episode-v2-f25d67c59311f232": {
+   "recovery": "switched_to_another_drift",
+   "related_episode_id": "episode-dd26039545b50f99",
+   "evidence": "2026-08-12 16:49:32",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): a different drift took over (episode-dd26039545b50f99); evidence 2026-08-12 16:49:32 UTC."
+  },
+  "episode-dd26039545b50f99": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-d9f1963f75ca029d",
+   "evidence": "2026-08-17 16:44:00",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-d9f1963f75ca029d); evidence 2026-08-17 16:44:00 UTC."
+  },
+  "episode-d9f1963f75ca029d": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-3cb513a562d42a88",
+   "evidence": "2026-09-02 17:02:09",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-3cb513a562d42a88); evidence 2026-09-02 17:02:09 UTC."
+  },
+  "episode-v2-e9db8cfb1535dae0": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:57:39",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:57:39 UTC."
+  },
+  "episode-fe0cdd6123fcfae0": {
+   "recovery": "end_of_day",
+   "related_episode_id": "episode-c066b0fa2001bfb1",
+   "evidence": "2026-09-08 19:05:04",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the drift stopped at the end of the workday and the next session was on-goal; evidence 2026-09-08 19:05:04 UTC."
+  },
+  "episode-c066b0fa2001bfb1": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-8925a1519391599d",
+   "evidence": "2026-09-11 16:51:57",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-8925a1519391599d); evidence 2026-09-11 16:51:57 UTC."
+  },
+  "episode-8925a1519391599d": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-5353559c5182a58d",
+   "evidence": "2026-09-21 16:55:55",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-5353559c5182a58d); evidence 2026-09-21 16:55:55 UTC."
+  },
+  "episode-5353559c5182a58d": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:30:37",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:30:37 UTC."
+  },
+  "episode-v2-a5731b7173fa39f5": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:58:49",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:58:49 UTC."
+  },
+  "episode-v2-095c1ac9b46167c6": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:59:48",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:59:48 UTC."
+  },
+  "episode-v2-8111be0f3cce28f0": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:53:13",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:53:13 UTC."
+  },
+  "episode-4d3597a6fbc37c09": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": null,
+   "evidence": "2026-07-31 21:00:58",
+   "confidence": "low",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record that has no record yet; evidence 2026-07-31 21:00:58 UTC."
+  },
+  "episode-v2-3b4b2f02a0f6569e": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": null,
+   "evidence": "2026-08-31 16:11:11",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record that has no record yet; evidence 2026-08-31 16:11:11 UTC."
+  },
+  "episode-df56b01f7033404b": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-b4e2e4bc592db0ef",
+   "evidence": "2026-08-18 17:12:37",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-b4e2e4bc592db0ef); evidence 2026-08-18 17:12:37 UTC."
+  },
+  "episode-74454d6cfba6e403": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-1bec035f8b4e099e",
+   "evidence": "2026-09-21 17:15:25",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-1bec035f8b4e099e); evidence 2026-09-21 17:15:25 UTC."
+  },
+  "episode-1bec035f8b4e099e": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:45:49",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:45:49 UTC."
+  },
+  "episode-v2-b2a923369cb77bcf": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": "episode-v2-3a4e6747adb608b1",
+   "evidence": "2026-09-11 16:15:12",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record (episode-v2-3a4e6747adb608b1); evidence 2026-09-11 16:15:12 UTC."
+  },
+  "episode-v2-3a4e6747adb608b1": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 16:25:20",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 16:25:20 UTC."
+  },
+  "episode-v2-e94e39d713827cba": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:49:19",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:49:19 UTC."
+  },
+  "episode-b621000419e8a1df": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-09-14 16:25:47",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-09-14 16:25:47 UTC."
+  },
+  "episode-v2-16556b7c066cbab9": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 16:05:34",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 16:05:34 UTC."
+  },
+  "episode-38cd300f9c82a34b": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:35:06",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:35:06 UTC."
+  },
+  "episode-eb544eaf61ba42b4": {
+   "recovery": "switched_to_another_drift",
+   "related_episode_id": "episode-06fe0e2abc16f13f",
+   "evidence": "2026-08-27 18:53:19",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): a different drift took over (episode-06fe0e2abc16f13f); evidence 2026-08-27 18:53:19 UTC."
+  },
+  "episode-06fe0e2abc16f13f": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:54:17",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:54:17 UTC."
+  },
+  "episode-87850953e83b0b32": {
+   "recovery": "continued_in_later_record",
+   "related_episode_id": null,
+   "evidence": "2026-09-03 16:16:40",
+   "confidence": "medium",
+   "note": "Recovery verified against raw logs (Oct 17): the same drift continued in a later record that has no record yet; evidence 2026-09-03 16:16:40 UTC."
+  },
+  "episode-a0867ce8a6ba8420": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:27:56",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:27:56 UTC."
+  },
+  "episode-b9260011186be506": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:46:31",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:46:31 UTC."
+  },
+  "episode-v2-3c2990dd5f3300cd": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 19:38:28",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 19:38:28 UTC."
+  },
+  "episode-v2-ffabe7dc36e11837": {
+   "recovery": "switched_to_another_drift",
+   "related_episode_id": "episode-v2-7d8ae30f2b7f5eb9",
+   "evidence": "2026-09-29 20:27:11",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): a different drift took over (episode-v2-7d8ae30f2b7f5eb9); evidence 2026-09-29 20:27:11 UTC."
+  },
+  "episode-v2-7d8ae30f2b7f5eb9": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:37:05",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:37:05 UTC."
+  },
+  "episode-v2-8b78cb66965a621e": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 23:41:46",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 23:41:46 UTC."
+  },
+  "episode-v2-cf48846af68adef0": {
+   "recovery": "still_drifting_at_end_of_data",
+   "related_episode_id": null,
+   "evidence": "2026-10-02 16:24:41",
+   "confidence": "high",
+   "note": "Recovery verified against raw logs (Oct 17): still drifting when the agent's data ends; evidence 2026-10-02 16:24:41 UTC."
+  }
+ }
+}

@@ -103,7 +103,10 @@ const starterLabels = {
     peer_feedback: "Peer feedback",
     external_user_intervention: "External user intervention",
     natural_end_or_timeout: "Natural end or timeout",
-    not_corrected: "Not corrected"
+    not_corrected: "Not corrected",
+    still_drifting_at_end_of_data: "Still drifting at end of data",
+    continued_in_later_record: "Continued in a later record",
+    switched_to_another_drift: "Switched to another drift"
   }
 };
 
@@ -2021,8 +2024,13 @@ function renderInfluenceBars() {
   document.querySelector("#influence-meta").textContent = `${rows.length} reviewed episodes · ${sources.length} trigger sources · ${targets.length} affected agents`;
 }
 
+// Endings that are not a return to the goal: the drift persisted, carried on, or gave way to another drift.
+const NON_RECOVERY_ENDINGS = new Set([
+  "not_corrected", "unknown", "still_drifting_at_end_of_data", "continued_in_later_record", "switched_to_another_drift"
+]);
+
 function isObservedRecovery(annotation) {
-  return annotation.recovery_mechanisms.some((value) => !["not_corrected", "unknown"].includes(value));
+  return annotation.recovery_mechanisms.some((value) => !NON_RECOVERY_ENDINGS.has(value));
 }
 
 function renderResilienceScorecards() {
