@@ -162,7 +162,11 @@
     .goal-strip-name { min-width: 0; }
     .goal-strip-agent { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 800; }
     .goal-strip-goal { margin-top: 2px; overflow: hidden; color: var(--muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
-    .goal-strip-track { position: relative; height: 12px; border-radius: 999px; background: var(--paper-deep); }
+    .goal-strip-track { position: relative; height: 12px; }
+    .goal-strip-window { position: absolute; top: 0; bottom: 0; border-radius: 999px; background: var(--paper-deep); }
+    .goal-strip-axis { min-height: 22px; border-bottom: 1px solid var(--line); }
+    .goal-strip-axis-track { position: relative; height: 14px; }
+    .goal-strip-axis-tick { position: absolute; top: 0; padding-left: 4px; border-left: 1px solid var(--line); color: var(--muted); font: 700 9px/14px var(--mono); white-space: nowrap; }
     .goal-strip-segment { position: absolute; top: 2px; height: 8px; min-width: 2px; border-radius: 999px; background: var(--rust); }
     .goal-strip-segment.is-unbroken { background: repeating-linear-gradient(135deg, var(--rust) 0 2px, color-mix(in srgb, var(--rust) 35%, transparent) 2px 4px); }
     .goal-strip-segment.is-reviewed { box-shadow: inset 0 0 0 2px var(--green); }
@@ -461,7 +465,7 @@
         <div class="viz-grid">
           <article class="viz-card is-wide">
             <div class="viz-heading">
-              <div><h3>Goal-window atlas</h3><p>Every goal period aligned from assignment (0%) to the audit boundary (100%), grouped by the kind of work the goal calls for.</p></div>
+              <div><h3>Goal-window atlas</h3><p>Every goal period on one shared calendar, from assignment to the Oct 2 audit boundary, so agents onboarded later have shorter windows. Grouped by the kind of work the goal calls for.</p></div>
               <select class="viz-control" id="goal-atlas-sort" aria-label="Sort goal-window atlas">
                 <option value="burden">Sort by validated drift share</option>
                 <option value="episodes">Sort by episode count</option>
@@ -470,7 +474,7 @@
               </select>
             </div>
             <div class="goal-atlas" id="goal-atlas"></div>
-            <div class="viz-legend"><span class="legend-item"><span class="legend-swatch is-intensity"></span>Episode span; darker days had more drift hours</span><span class="legend-item"><span class="legend-swatch is-unbroken"></span>Spans sessions without a daily breakdown</span><span class="legend-item"><span class="legend-swatch is-point"></span>Duration unresolved</span><span class="legend-item"><span class="legend-swatch is-reviewed"></span>Human-reviewed episode</span><span class="legend-item"><span class="legend-swatch is-correction"></span>Operator correction</span><span class="legend-item"><span class="legend-swatch is-targeted">targeted</span>Targeted by outside humans on 10+ days</span></div>
+            <div class="viz-legend"><span class="legend-item"><span class="legend-swatch is-intensity"></span>Episode span; darker days had more drift hours</span><span class="legend-item"><span class="legend-swatch is-unbroken"></span>Start and end only, no daily breakdown</span><span class="legend-item"><span class="legend-swatch is-point"></span>Duration unresolved</span><span class="legend-item"><span class="legend-swatch is-reviewed"></span>Human-reviewed episode</span><span class="legend-item"><span class="legend-swatch is-correction"></span>Operator correction</span><span class="legend-item"><span class="legend-swatch is-targeted">targeted</span>Targeted by outside humans on 10+ days</span></div>
             <p class="viz-note" id="goal-atlas-note"></p>
           </article>
 
@@ -649,6 +653,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261014-shaded-episodes"></script>
+  <script type="module" src="./scripts/findings.js?v=20261017-shared-axis"></script>
 </body>
 </html>

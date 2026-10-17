@@ -951,6 +951,29 @@ document.addEventListener("mouseout", hideFloatingTip);
 document.addEventListener("focusout", hideFloatingTip);
 document.addEventListener("scroll", () => { floatingTip.hidden = true; }, true);
 
+function goalAtlasAxis(startMs, endMs, axisPosition) {
+  const row = document.createElement("div");
+  row.className = "goal-strip-row goal-strip-axis";
+  const track = document.createElement("div");
+  track.className = "goal-strip-axis-track";
+  const tick = (ms, text) => {
+    const label = document.createElement("span");
+    label.className = "goal-strip-axis-tick";
+    label.style.left = `${axisPosition(ms)}%`;
+    label.textContent = text;
+    track.append(label);
+  };
+  const month = new Intl.DateTimeFormat("en-US", { month: "short", timeZone: "UTC" });
+  const start = new Date(startMs);
+  tick(startMs, new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", timeZone: "UTC" }).format(start));
+  for (let date = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth() + 1, 1)); date.getTime() < endMs; date.setUTCMonth(date.getUTCMonth() + 1)) {
+    // Skip a month label that would collide with the start label.
+    if (axisPosition(date.getTime()) - axisPosition(startMs) > 4) tick(date.getTime(), month.format(date));
+  }
+  row.append(document.createElement("div"), track, document.createElement("div"));
+  return row;
+}
+
 function renderGoalAtlas() {
   const sortMode = document.querySelector("#goal-atlas-sort").value;
   const sorted = [...goalPeriods].sort((left, right) => {
@@ -961,6 +984,11 @@ function renderGoalAtlas() {
   });
   const atlas = document.querySelector("#goal-atlas");
   atlas.replaceChildren();
+  // Every row shares one calendar axis, so agents onboarded later show shorter goal windows.
+  const axisStartMs = Math.min(...goalPeriods.map((period) => period.startMs));
+  const axisEndMs = Math.max(...goalPeriods.map((period) => period.endMs));
+  const axisPosition = (ms) => ((ms - axisStartMs) / Math.max(1, axisEndMs - axisStartMs)) * 100;
+  atlas.append(goalAtlasAxis(axisStartMs, axisEndMs, axisPosition));
   goalAtlasGroups(sorted).forEach((group) => {
     if (group.category) atlas.append(goalAtlasGroupHeading(group));
     group.periods.forEach((period) => {
@@ -995,6 +1023,12 @@ function renderGoalAtlas() {
       identity.append(agent, goal);
       const track = document.createElement("div");
       track.className = "goal-strip-track";
+      const goalWindow = document.createElement("span");
+      goalWindow.className = "goal-strip-window";
+      goalWindow.style.left = `${axisPosition(period.startMs)}%`;
+      goalWindow.style.width = `${axisPosition(period.endMs) - axisPosition(period.startMs)}%`;
+      goalWindow.dataset.tip = `Goal window · ${displayDay(new Date(period.startMs).toISOString())} – ${displayDay(new Date(period.endMs - 1000).toISOString())}`;
+      track.append(goalWindow);
       period.episodes.forEach((episode) => {
         const onsetMs = episodeOnsetMs(episode);
         if (onsetMs == null) return;
@@ -1010,7 +1044,7 @@ function renderGoalAtlas() {
         const interval = bouts.length
           ? { startMs: bouts[0].startMs, endMs: bouts.at(-1).endMs }
           : validatedInterval(episode) || { startMs: onsetMs, endMs: null };
-        const position = (ms) => Math.max(0, Math.min(100, ((Math.max(period.startMs, Math.min(period.endMs, ms)) - period.startMs) / period.durationMs) * 100));
+        const position = (ms) => axisPosition(Math.max(period.startMs, Math.min(period.endMs, ms)));
         const left = position(interval.startMs);
         const bar = document.createElement("span");
         bar.className = `goal-strip-segment${interval.endMs == null ? " is-unknown" : ""}${reviewed ? " is-reviewed" : ""}`;
@@ -1025,7 +1059,7 @@ function renderGoalAtlas() {
           // Without bouts, a span that crosses a session boundary cannot be split by day.
           if (!bouts.length && endDay !== startDay) {
             bar.classList.add("is-unbroken");
-            detailText = `${totalText} · no daily breakdown, drawn as one continuous span`;
+            detailText = `${totalText} · start and end only, no daily breakdown`;
           } else {
             // A short episode without bouts is one bout of drift on its day.
             const days = boutDays(bouts.length ? bouts : [interval]);
@@ -1043,7 +1077,7 @@ function renderGoalAtlas() {
         if (correctionMs == null || correctionMs < period.startMs || correctionMs > period.endMs) return;
         const marker = document.createElement("span");
         marker.className = "goal-strip-correction";
-        marker.style.left = `${((correctionMs - period.startMs) / period.durationMs) * 100}%`;
+        marker.style.left = `${axisPosition(correctionMs)}%`;
         marker.dataset.tip = `Operator correction · ${displayDay(correction.timestamp)} · ${correction.summary}`;
         track.append(marker);
       });
