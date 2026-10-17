@@ -178,6 +178,30 @@
     .goal-strip-correction { position: absolute; top: -5px; z-index: 1; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid var(--ink, #1f2a37); transform: translateX(-5px); cursor: help; }
     .legend-swatch.is-correction { width: 0; height: 0; border-radius: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid var(--ink, #1f2a37); background: none; }
     .goal-strip-count { color: var(--muted); font: 700 10px/1.2 var(--mono); text-align: right; }
+    .goal-strip-row.is-expandable { cursor: pointer; }
+    .goal-strip-row.is-expandable:hover, .goal-strip-row.is-expanded { background: color-mix(in srgb, var(--paper-deep) 45%, transparent); }
+    .goal-strip-toggle { justify-self: end; padding: 4px 6px; border: 1px solid transparent; border-radius: 7px; background: none; cursor: pointer; }
+    .goal-strip-toggle::after { content: " ▸"; }
+    .goal-strip-toggle[aria-expanded="true"]::after { content: " ▾"; }
+    .goal-strip-toggle:hover { border-color: var(--line); color: var(--ink); }
+    .goal-strip-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+    .goal-strip-toggle:disabled { cursor: default; opacity: .5; }
+    .goal-strip-toggle:disabled::after { content: ""; }
+    .goal-strip-segment.is-highlighted { z-index: 1; outline: 2px solid var(--ink); outline-offset: 1px; }
+    .goal-strip-detail { padding: 4px 0 14px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper-deep) 45%, transparent); }
+    .atlas-episode-list { display: grid; gap: 6px; margin: 0; padding: 0 8px; list-style: none; }
+    .atlas-episode { display: grid; grid-template-columns: 150px minmax(0, 1.6fr) minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); font-size: 12px; line-height: 1.4; transition: border-color .2s, box-shadow .2s; }
+    .atlas-episode:hover, .atlas-episode.is-highlighted { border-color: var(--line-strong); box-shadow: 0 0 0 2px color-mix(in srgb, var(--rust) 30%, transparent); }
+    .atlas-episode-when { display: grid; gap: 3px; }
+    .atlas-episode-when strong { font-size: 12px; }
+    .atlas-episode-when span { color: var(--muted); font: 700 10px/1.35 var(--mono); }
+    .atlas-episode-activity { font-weight: 700; }
+    .atlas-episode-end { margin-top: 4px; color: var(--muted); }
+    .atlas-episode-end strong { color: var(--ink); font-weight: 700; }
+    .atlas-episode-facts { display: grid; grid-template-columns: auto 1fr; gap: 3px 8px; margin: 0; }
+    .atlas-episode-facts dt { color: var(--muted); font: 700 9px/1.6 var(--mono); text-transform: uppercase; }
+    .atlas-episode-facts dd { margin: 0; }
+    .atlas-episode .episode-link { padding: 6px 9px; font-size: 11px; }
 
     .svg-chart { display: block; width: 100%; height: auto; overflow: visible; }
     .svg-axis { stroke: var(--line-strong); stroke-width: 1; }
@@ -406,6 +430,8 @@
       .bar-row { grid-template-columns: minmax(110px, .9fr) 1.4fr 40px; }
       .episode-row { grid-template-columns: 1fr; gap: 10px; }
       .goal-strip-row { grid-template-columns: minmax(110px, 150px) 1fr 44px; gap: 8px; }
+      .atlas-episode { grid-template-columns: 1fr; gap: 8px; }
+      .atlas-episode .episode-link { justify-self: start; }
       .viz-heading { flex-direction: column; }
       .viz-controls { align-items: stretch; width: 100%; }
       .viz-control-label { justify-content: space-between; }
@@ -465,7 +491,7 @@
         <div class="viz-grid">
           <article class="viz-card is-wide">
             <div class="viz-heading">
-              <div><h3>Goal-window atlas</h3><p>Every goal period on one shared calendar, from assignment to the Oct 2 audit boundary, so agents onboarded later have shorter windows. Grouped by the kind of work the goal calls for.</p></div>
+              <div><h3>Goal-window atlas</h3><p>Every goal period on one shared calendar, from assignment to the Oct 2 audit boundary, so agents onboarded later have shorter windows. Grouped by the kind of work the goal calls for; click a row to list its episodes.</p></div>
               <select class="viz-control" id="goal-atlas-sort" aria-label="Sort goal-window atlas">
                 <option value="burden">Sort by validated drift share</option>
                 <option value="episodes">Sort by episode count</option>
@@ -653,6 +679,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261017-shared-axis"></script>
+  <script type="module" src="./scripts/findings.js?v=20261017-atlas-details"></script>
 </body>
 </html>

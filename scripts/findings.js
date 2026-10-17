@@ -974,6 +974,125 @@ function goalAtlasAxis(startMs, endMs, axisPosition) {
   return row;
 }
 
+const expandedAtlasPeriods = new Set();
+const reviewRowByEpisode = new Map(rows.map((row) => [row.episodeId, row]));
+
+function atlasEpisodeTiming(episode, onsetMs = episodeOnsetMs(episode)) {
+  const totalSeconds = episode.duration_seconds == null ? NaN : Number(episode.duration_seconds);
+  // Bout totals are drift time, so show hours rather than calendar days.
+  const totalText = Number.isFinite(totalSeconds) && totalSeconds >= 86400
+    ? `${Math.round(totalSeconds / 3600)} hr`
+    : formatDuration(totalSeconds);
+  const bouts = episodeBouts(episode);
+  const interval = bouts.length
+    ? { startMs: bouts[0].startMs, endMs: bouts.at(-1).endMs }
+    : validatedInterval(episode) || { startMs: onsetMs, endMs: null };
+  // A bout that runs to the 5 PM PT close ends at 00:00 UTC, which belongs to the day before.
+  const startDay = displayDay(new Date(interval.startMs).toISOString());
+  const endDay = interval.endMs == null ? startDay : displayDay(new Date(Math.max(interval.startMs, interval.endMs - 1000)).toISOString());
+  const timing = { interval, totalText, detailText: totalText, rangeText: endDay === startDay ? startDay : `${startDay} – ${endDay}`, unbroken: false, days: null };
+  if (interval.endMs == null) return timing;
+  // Without bouts, a span that crosses a session boundary cannot be split by day.
+  if (!bouts.length && endDay !== startDay) {
+    timing.unbroken = true;
+    timing.detailText = `${totalText} · start and end only, no daily breakdown`;
+    return timing;
+  }
+  // A short episode without bouts is one bout of drift on its day.
+  timing.days = boutDays(bouts.length ? bouts : [interval]);
+  if (bouts.length) {
+    timing.detailText = `${totalText} drift on ${timing.days.size} ${timing.days.size === 1 ? "day" : "days"} (${bouts.length} ${bouts.length === 1 ? "bout" : "bouts"})`;
+  }
+  return timing;
+}
+
+function episodeLinkFor(episodeId) {
+  const link = document.createElement("a");
+  link.className = "episode-link";
+  link.href = queueIds.has(episodeId)
+    ? `review.html?scope=maximization&review=all#${encodeURIComponent(episodeId)}`
+    : `index.html?scope=maximization#${encodeURIComponent(episodeId)}`;
+  link.textContent = queueIds.has(episodeId) ? "Open review" : "Open evidence";
+  return link;
+}
+
+const driftEndLabels = {
+  ongoing_at_evidence_end: "Still drifting when the evidence ends",
+  returned_to_goal: "Returned to goal",
+  activity_ended: "Activity ended"
+};
+
+function goalAtlasEpisodePanel(period, track) {
+  const panel = document.createElement("div");
+  panel.className = "goal-strip-detail";
+  const list = document.createElement("ol");
+  list.className = "atlas-episode-list";
+  period.episodes.forEach((episode) => {
+    const review = reviewRowByEpisode.get(episode.episode_id);
+    const timing = atlasEpisodeTiming(episode);
+    const item = document.createElement("li");
+    item.className = "atlas-episode";
+    item.dataset.episodeId = episode.episode_id;
+
+    const when = document.createElement("div");
+    when.className = "atlas-episode-when";
+    const range = document.createElement("strong");
+    range.textContent = timing.rangeText;
+    const detail = document.createElement("span");
+    detail.textContent = timing.detailText;
+    when.append(range, detail);
+
+    const what = document.createElement("div");
+    const activity = document.createElement("div");
+    activity.className = "atlas-episode-activity";
+    activity.textContent = episode.activity;
+    what.append(activity);
+    const end = episode.drift_end || {};
+    if (end.status || end.reason) {
+      const ending = document.createElement("div");
+      ending.className = "atlas-episode-end";
+      const status = document.createElement("strong");
+      status.textContent = driftEndLabels[end.status] || "End";
+      ending.append(status);
+      if (end.reason) {
+        ending.append(` · ${shortText(end.reason, 220)}`);
+        ending.title = end.reason;
+      }
+      what.append(ending);
+    }
+
+    const facts = document.createElement("dl");
+    facts.className = "atlas-episode-facts";
+    const fact = (term, value) => {
+      if (!value) return;
+      const dt = document.createElement("dt");
+      dt.textContent = term;
+      const dd = document.createElement("dd");
+      dd.textContent = value;
+      facts.append(dt, dd);
+    };
+    if (review) {
+      const annotation = review.annotation;
+      const official = triggerTaxonomyLabels.get(triggerTaxonomyByEpisode.get(episode.episode_id));
+      fact("Trigger", [official || annotation.trigger_categories.map((value) => label("trigger", value)).join(", "), annotation.trigger_actor].filter(Boolean).join(" · "));
+      fact("Request", annotation.request_relationship && label("request_relationship", annotation.request_relationship));
+      fact("Pause", annotation.pause_context && label("pause", annotation.pause_context));
+      fact("Recovery", annotation.recovery_mechanisms.map((value) => label("recovery", value)).join(", "));
+    } else {
+      fact("Review", "Not yet fully reviewed");
+    }
+
+    item.append(when, what, facts, episodeLinkFor(episode.episode_id));
+    // Hovering an episode points at its bar in the row above.
+    const bar = track.querySelector(`[data-episode-id="${CSS.escape(episode.episode_id)}"]`);
+    item.addEventListener("mouseenter", () => bar?.classList.add("is-highlighted"));
+    item.addEventListener("mouseleave", () => bar?.classList.remove("is-highlighted"));
+    list.append(item);
+  });
+  panel.append(list);
+  return panel;
+}
+
 function renderGoalAtlas() {
   const sortMode = document.querySelector("#goal-atlas-sort").value;
   const sorted = [...goalPeriods].sort((left, right) => {
@@ -993,7 +1112,7 @@ function renderGoalAtlas() {
     if (group.category) atlas.append(goalAtlasGroupHeading(group));
     group.periods.forEach((period) => {
       const row = document.createElement("div");
-      row.className = "goal-strip-row";
+      row.className = "goal-strip-row is-expandable";
       const identity = document.createElement("div");
       identity.className = "goal-strip-name";
       const agent = document.createElement("div");
@@ -1033,43 +1152,19 @@ function renderGoalAtlas() {
         const onsetMs = episodeOnsetMs(episode);
         if (onsetMs == null) return;
         const reviewed = reviewedEpisodeIds.has(episode.episode_id);
-        const totalSeconds = episode.duration_seconds == null ? NaN : Number(episode.duration_seconds);
-        // Bout totals are drift time, so show hours rather than calendar days.
-        const totalText = Number.isFinite(totalSeconds) && totalSeconds >= 86400
-          ? `${Math.round(totalSeconds / 3600)} hr`
-          : formatDuration(totalSeconds);
-        const activityText = shortText(episode.activity, 90);
-        const reviewedText = reviewed ? " · human reviewed" : "";
-        const bouts = episodeBouts(episode);
-        const interval = bouts.length
-          ? { startMs: bouts[0].startMs, endMs: bouts.at(-1).endMs }
-          : validatedInterval(episode) || { startMs: onsetMs, endMs: null };
+        const timing = atlasEpisodeTiming(episode, onsetMs);
+        const { interval } = timing;
         const position = (ms) => axisPosition(Math.max(period.startMs, Math.min(period.endMs, ms)));
         const left = position(interval.startMs);
         const bar = document.createElement("span");
-        bar.className = `goal-strip-segment${interval.endMs == null ? " is-unknown" : ""}${reviewed ? " is-reviewed" : ""}`;
+        bar.className = `goal-strip-segment${interval.endMs == null ? " is-unknown" : ""}${reviewed ? " is-reviewed" : ""}${timing.unbroken ? " is-unbroken" : ""}`;
+        bar.dataset.episodeId = episode.episode_id;
         bar.style.left = `${left}%`;
-        // A bout that runs to the 5 PM PT close ends at 00:00 UTC, which belongs to the day before.
-        const startDay = displayDay(new Date(interval.startMs).toISOString());
-        const endDay = interval.endMs == null ? startDay : displayDay(new Date(Math.max(interval.startMs, interval.endMs - 1000)).toISOString());
-        const rangeText = endDay === startDay ? startDay : `${startDay} – ${endDay}`;
-        let detailText = totalText;
         if (interval.endMs != null) {
           bar.style.width = `${Math.max(.25, position(interval.endMs) - left)}%`;
-          // Without bouts, a span that crosses a session boundary cannot be split by day.
-          if (!bouts.length && endDay !== startDay) {
-            bar.classList.add("is-unbroken");
-            detailText = `${totalText} · start and end only, no daily breakdown`;
-          } else {
-            // A short episode without bouts is one bout of drift on its day.
-            const days = boutDays(bouts.length ? bouts : [interval]);
-            bar.style.background = boutDayGradient(days, interval);
-            if (bouts.length) {
-              detailText = `${totalText} drift on ${days.size} ${days.size === 1 ? "day" : "days"} (${bouts.length} ${bouts.length === 1 ? "bout" : "bouts"})`;
-            }
-          }
+          if (timing.days) bar.style.background = boutDayGradient(timing.days, interval);
         }
-        bar.dataset.tip = `${activityText} · ${rangeText} · ${detailText}${reviewedText}`;
+        bar.dataset.tip = `${shortText(episode.activity, 90)} · ${timing.rangeText} · ${timing.detailText}${reviewed ? " · human reviewed" : ""}`;
         track.append(bar);
       });
       (correctionsByAgent.get(period.agent) || []).forEach((correction) => {
@@ -1081,11 +1176,40 @@ function renderGoalAtlas() {
         marker.dataset.tip = `Operator correction · ${displayDay(correction.timestamp)} · ${correction.summary}`;
         track.append(marker);
       });
-      const count = document.createElement("div");
-      count.className = "goal-strip-count";
+      const count = document.createElement("button");
+      count.type = "button";
+      count.className = "goal-strip-count goal-strip-toggle";
       count.textContent = `${period.episodes.length} ep`;
+      count.setAttribute("aria-label", `${period.episodes.length} confirmed episodes for ${agentLabel(period.agent)}; show details`);
       row.append(identity, track, count);
       atlas.append(row);
+      const setExpanded = (expanded) => {
+        count.setAttribute("aria-expanded", String(expanded));
+        row.classList.toggle("is-expanded", expanded);
+        if (expanded) {
+          expandedAtlasPeriods.add(period.id);
+          if (!row.nextElementSibling?.classList.contains("goal-strip-detail")) row.after(goalAtlasEpisodePanel(period, track));
+        } else {
+          expandedAtlasPeriods.delete(period.id);
+          if (row.nextElementSibling?.classList.contains("goal-strip-detail")) row.nextElementSibling.remove();
+        }
+      };
+      setExpanded(expandedAtlasPeriods.has(period.id) && period.episodes.length > 0);
+      if (!period.episodes.length) count.disabled = true;
+      row.addEventListener("click", (event) => {
+        if (!period.episodes.length) return;
+        const bar = event.target.closest(".goal-strip-segment");
+        // Clicking a bar opens the row and points at that episode instead of collapsing it.
+        if (bar) {
+          setExpanded(true);
+          const item = row.nextElementSibling.querySelector(`[data-episode-id="${CSS.escape(bar.dataset.episodeId)}"]`);
+          item?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          item?.classList.add("is-highlighted");
+          setTimeout(() => item?.classList.remove("is-highlighted"), 1600);
+          return;
+        }
+        setExpanded(!row.classList.contains("is-expanded"));
+      });
     });
   });
   const known = goalMaxEpisodes.filter((episode) => episode.duration_seconds != null).length;
@@ -2194,13 +2318,7 @@ function renderEpisodeList() {
     row.annotation.recovery_mechanisms.forEach((value) => tags.append(tag(label("recovery", value))));
     tags.append(tag(label("source", row.source)));
 
-    const link = document.createElement("a");
-    link.className = "episode-link";
-    link.href = queueIds.has(row.episodeId)
-      ? `review.html?scope=maximization&review=all#${encodeURIComponent(row.episodeId)}`
-      : `index.html?scope=maximization#${encodeURIComponent(row.episodeId)}`;
-    link.textContent = queueIds.has(row.episodeId) ? "Open review" : "Open evidence";
-    item.append(identity, activityWrap, tags, link);
+    item.append(identity, activityWrap, tags, episodeLinkFor(row.episodeId));
     list.append(item);
   });
 }
