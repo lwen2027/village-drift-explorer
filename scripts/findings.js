@@ -580,6 +580,38 @@ function episodeIntervals(episode) {
   return interval ? [interval] : [];
 }
 
+// Drift hours for ranking. Bout-measured episodes use their bout sum; start-and-end-only
+// spans are clipped to weekday Village hours (9 AM–5 PM PT, 16:00–24:00 UTC) and flagged as estimates.
+const VILLAGE_DAY_UTC_START_HOUR = 16;
+function driftHoursFor(episode) {
+  const seconds = Number(episode.duration_seconds);
+  if (!Number.isFinite(seconds) || seconds <= 0) return { hours: 0, estimated: false };
+  if (episodeBouts(episode).length) return { hours: seconds / 3600, estimated: false };
+  const startMs = episodeOnsetMs(episode);
+  if (startMs == null) return { hours: 0, estimated: false };
+  const endMs = startMs + seconds * 1000;
+  let clipped = 0;
+  for (let dayMs = Math.floor(startMs / DAY_MS) * DAY_MS; dayMs < endMs; dayMs += DAY_MS) {
+    const weekday = new Date(dayMs).getUTCDay();
+    if (weekday === 0 || weekday === 6) continue;
+    const windowStart = dayMs + VILLAGE_DAY_UTC_START_HOUR * 3600000;
+    clipped += Math.max(0, Math.min(endMs, dayMs + DAY_MS) - Math.max(startMs, windowStart));
+  }
+  return { hours: clipped / 3600000, estimated: clipped / 1000 < seconds - 1 };
+}
+
+function measureText(value, mode) {
+  if (mode !== "hours") return String(value);
+  return value >= 10 ? `${Math.round(value).toLocaleString()} h` : `${value.toFixed(1)} h`;
+}
+
+function hoursEstimateNote(inputRows) {
+  const estimated = inputRows.filter((row) => driftHoursFor(row.episode).estimated);
+  if (!estimated.length) return "";
+  const hours = estimated.reduce((sum, row) => sum + driftHoursFor(row.episode).hours, 0);
+  return `${estimated.length} start-and-end-only episodes (${measureText(hours, "hours")}) are clipped to weekday 9 AM–5 PM PT and are estimates.`;
+}
+
 function validatedInterval(episode) {
   const bouts = episodeBouts(episode);
   if (bouts.length) {
@@ -718,11 +750,11 @@ function filteredRows() {
   return rows.filter(rowMatches);
 }
 
-function countValues(inputRows, accessor) {
+function countValues(inputRows, accessor, weight = () => 1) {
   const counts = new Map();
   inputRows.forEach((row) => {
     accessor(row).filter(Boolean).forEach((value) => {
-      counts.set(value, (counts.get(value) || 0) + 1);
+      counts.set(value, (counts.get(value) || 0) + weight(row));
     });
   });
   return [...counts.entries()].sort((left, right) =>
@@ -779,9 +811,14 @@ function renderMetrics() {
   );
 }
 
+// "episodes" counts how often a pattern leads to drift; "hours" sums how much drift it caused.
+let breakdownMeasure = "episodes";
+let influenceMeasure = "episodes";
+const rowWeight = (mode) => (row) => (mode === "hours" ? driftHoursFor(row.episode).hours : 1);
+
 function renderBarChart({ elementId, totalId, labelKind, accessor, chartClass }) {
   const input = rows;
-  const counts = countValues(input, accessor);
+  const counts = countValues(input, accessor, rowWeight(breakdownMeasure));
   const max = Math.max(1, ...counts.map(([, count]) => count));
   const element = document.querySelector(elementId);
   element.replaceChildren();
@@ -800,11 +837,14 @@ function renderBarChart({ elementId, totalId, labelKind, accessor, chartClass })
     track.append(fill);
     const countNode = document.createElement("span");
     countNode.className = "bar-count";
-    countNode.textContent = String(count);
+    countNode.textContent = measureText(count, breakdownMeasure);
     bar.append(labelNode, track, countNode);
     element.append(bar);
   });
-  document.querySelector(totalId).textContent = `${input.length} reviewed`;
+  const totalHours = input.reduce((sum, row) => sum + driftHoursFor(row.episode).hours, 0);
+  document.querySelector(totalId).textContent = breakdownMeasure === "hours"
+    ? `${input.length} reviewed · ${measureText(totalHours, "hours")}`
+    : `${input.length} reviewed`;
 }
 
 function renderMatrix() {
@@ -1947,7 +1987,7 @@ function sourceActorFor(row) {
 function appendInfluenceBar(container, { labelText, count, maxCount, segments, title }) {
   const row = document.createElement("div");
   row.className = "influence-bar-row";
-  row.title = title || `${labelText}: ${count} reviewed episodes`;
+  row.title = title || `${labelText}: ${measureText(count, influenceMeasure)}${influenceMeasure === "hours" ? " of drift" : " reviewed episodes"}`;
   const labelNode = document.createElement("span");
   labelNode.className = "influence-bar-label";
   labelNode.textContent = labelText;
@@ -1959,12 +1999,12 @@ function appendInfluenceBar(container, { labelText, count, maxCount, segments, t
     fill.className = "influence-bar-fill";
     fill.style.width = `${(segmentCount / maxCount) * 100}%`;
     fill.style.background = influenceColorByGroup.get(group) || "#8d8678";
-    fill.title = `${influenceSourceGroups.find((candidate) => candidate.id === group)?.label || group}: ${segmentCount}`;
+    fill.title = `${influenceSourceGroups.find((candidate) => candidate.id === group)?.label || group}: ${measureText(segmentCount, influenceMeasure)}`;
     track.append(fill);
   });
   const countNode = document.createElement("span");
   countNode.className = "influence-bar-count";
-  countNode.textContent = String(count);
+  countNode.textContent = measureText(count, influenceMeasure);
   row.append(labelNode, track, countNode);
   container.append(row);
 }
@@ -1973,15 +2013,16 @@ function renderInfluenceBars() {
   const sourceCounts = new Map();
   const sourceGroup = new Map();
   const targetCounts = new Map();
+  const weight = rowWeight(influenceMeasure);
   rows.forEach((row) => {
     const source = sourceActorFor(row);
     const target = row.episode.agent;
     const group = influenceGroupFor(row);
-    sourceCounts.set(source, (sourceCounts.get(source) || 0) + 1);
+    sourceCounts.set(source, (sourceCounts.get(source) || 0) + weight(row));
     if (!sourceGroup.has(source)) sourceGroup.set(source, group);
     if (!targetCounts.has(target)) targetCounts.set(target, new Map());
     const targetGroups = targetCounts.get(target);
-    targetGroups.set(group, (targetGroups.get(group) || 0) + 1);
+    targetGroups.set(group, (targetGroups.get(group) || 0) + weight(row));
   });
 
   const sources = [...sourceCounts.entries()].sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]));
@@ -2008,7 +2049,7 @@ function renderInfluenceBars() {
     count: target.count,
     maxCount: maxTargetCount,
     segments: influenceSourceGroups.map((group) => ({ group: group.id, count: target.groups.get(group.id) || 0 })),
-    title: `${agentLabel(target.agent)}: ${target.count} reviewed episodes\n${influenceSourceGroups.map((group) => `${group.label}: ${target.groups.get(group.id) || 0}`).join("\n")}`
+    title: `${agentLabel(target.agent)}: ${measureText(target.count, influenceMeasure)}${influenceMeasure === "hours" ? " of drift" : " reviewed episodes"}\n${influenceSourceGroups.map((group) => `${group.label}: ${measureText(target.groups.get(group.id) || 0, influenceMeasure)}`).join("\n")}`
   }));
 
   const legend = document.querySelector("#influence-legend");
@@ -2022,6 +2063,10 @@ function renderInfluenceBars() {
     return item;
   }));
   document.querySelector("#influence-meta").textContent = `${rows.length} reviewed episodes · ${sources.length} trigger sources · ${targets.length} affected agents`;
+  const hoursMode = influenceMeasure === "hours";
+  document.querySelector("#trigger-source-rank").textContent = hoursMode ? "Ranked by drift hours" : "Ranked by reviewed episodes";
+  document.querySelector("#affected-agent-rank").textContent = hoursMode ? "Stacked drift hours" : "Stacked episode counts";
+  document.querySelector("#influence-estimate-note").textContent = hoursMode ? hoursEstimateNote(rows) : "";
 }
 
 // Endings that are not a return to the goal: the drift persisted, carried on, or gave way to another drift.
@@ -2358,6 +2403,16 @@ function render() {
   renderMatrix();
   renderEpisodeList();
 }
+
+document.querySelector("#influence-measure").addEventListener("change", (event) => {
+  influenceMeasure = event.target.value;
+  renderInfluenceBars();
+});
+document.querySelector("#breakdown-measure").addEventListener("change", (event) => {
+  breakdownMeasure = event.target.value;
+  document.querySelector("#breakdown-estimate-note").textContent = breakdownMeasure === "hours" ? hoursEstimateNote(rows) : "";
+  render();
+});
 
 document.querySelector("#clear-filters").addEventListener("click", () => {
   Object.keys(filters).forEach((key) => {

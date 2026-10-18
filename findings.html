@@ -577,18 +577,29 @@
           </article>
 
           <article class="viz-card is-wide">
-            <div class="viz-heading"><div><h3>Trigger sources and affected agents</h3><p>Who or what initiated reviewed drift, and how source types were distributed across drifting agents.</p></div><span class="viz-meta" id="influence-meta"></span></div>
+            <div class="viz-heading"><div><h3>Trigger sources and affected agents</h3><p>Who or what initiated reviewed drift, and how source types were distributed across drifting agents.</p></div>
+              <div class="viz-controls">
+                <span class="viz-meta" id="influence-meta"></span>
+                <label class="viz-control-label" for="influence-measure"><span>Measure</span>
+                  <select class="viz-control" id="influence-measure">
+                    <option value="episodes">Episodes (how often)</option>
+                    <option value="hours">Drift hours (how much)</option>
+                  </select>
+                </label>
+              </div>
+            </div>
             <div class="viz-legend influence-legend" id="influence-legend"></div>
             <div class="influence-grid">
               <section class="influence-panel" aria-labelledby="trigger-source-title">
-                <div class="influence-panel-heading"><h4 id="trigger-source-title">Trigger source</h4><span>Ranked by reviewed episodes</span></div>
+                <div class="influence-panel-heading"><h4 id="trigger-source-title">Trigger source</h4><span id="trigger-source-rank">Ranked by reviewed episodes</span></div>
                 <div class="influence-list" id="trigger-source-bars"></div>
               </section>
               <section class="influence-panel" aria-labelledby="affected-agent-title">
-                <div class="influence-panel-heading"><h4 id="affected-agent-title">Source mix by drifting agent</h4><span>Stacked episode counts</span></div>
+                <div class="influence-panel-heading"><h4 id="affected-agent-title">Source mix by drifting agent</h4><span id="affected-agent-rank">Stacked episode counts</span></div>
                 <div class="influence-list" id="affected-agent-bars"></div>
               </section>
             </div>
+            <p class="viz-note" id="influence-estimate-note"></p>
             <p class="viz-note">Named sources use the manually reviewed <code>trigger_actor</code> field. When no actor applies, the source is grouped by the manually reviewed trigger category; no Stage 2 source inference is used.</p>
           </article>
 
@@ -625,6 +636,13 @@
             <h2 id="breakdown-title">Patterns within fully reviewed episodes</h2>
           </div>
           <p>Charts summarize all goal-maximization episodes whose required annotation fields are resolved.</p>
+          <label class="viz-control-label" for="breakdown-measure"><span>Bar charts measure</span>
+            <select class="viz-control" id="breakdown-measure">
+              <option value="episodes">Episodes (how often)</option>
+              <option value="hours">Drift hours (how much)</option>
+            </select>
+          </label>
+          <p class="viz-note" id="breakdown-estimate-note"></p>
         </div>
 
         <article class="chart-card is-wide taxonomy-card">
