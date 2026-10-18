@@ -1866,6 +1866,36 @@ const AGENT_RELEASE_DATES = {
   "GPT-6.1 Sol": "2026-09-29"
 };
 
+// Share of an agent's reviewed drift hours in episodes that ended in an observed recovery.
+function recoveredHourShare(episodes) {
+  let reviewed = 0;
+  let recovered = 0;
+  episodes.forEach((episode) => {
+    const review = reviewRowByEpisode.get(episode.episode_id);
+    if (!review) return;
+    const { hours } = driftHoursFor(episode);
+    reviewed += hours;
+    if (isObservedRecovery(review.annotation)) recovered += hours;
+  });
+  return reviewed ? recovered / reviewed : 0;
+}
+
+// Share of an agent's reviewed drift hours in waiting episodes (pause trigger or a waiting taxonomy category).
+function waitHourShare(episodes) {
+  let reviewed = 0;
+  let waiting = 0;
+  episodes.forEach((episode) => {
+    const review = reviewRowByEpisode.get(episode.episode_id);
+    if (!review) return;
+    const { hours } = driftHoursFor(episode);
+    const taxonomy = triggerTaxonomyByEpisode.get(episode.episode_id) || "";
+    reviewed += hours;
+    if (review.annotation.trigger_categories.includes("pause") || taxonomy.startsWith("pause")
+        || taxonomy === "memory_reinforced_waiting") waiting += hours;
+  });
+  return reviewed ? waiting / reviewed : 0;
+}
+
 function renderAgentFingerprints() {
   const periodsByName = new Map();
   goalPeriods.forEach((period) => {
@@ -1877,7 +1907,6 @@ function renderAgentFingerprints() {
     const totalMs = periods.reduce((sum, period) => sum + period.durationMs, 0);
     const validatedMs = periods.reduce((sum, period) => sum + period.validatedMs, 0);
     const driftPositive = periods.filter((period) => period.episodes.length);
-    const activeDays = new Set(episodes.map((episode) => localDateKey(episodeOnsetMs(episode))));
     const knownDurations = episodes.filter((episode) => episode.duration_seconds != null).map((episode) => Number(episode.duration_seconds));
     return {
       agent,
@@ -1886,9 +1915,9 @@ function renderAgentFingerprints() {
         episodes.length / Math.max(1, totalMs / DAY_MS) * 30,
         validatedMs / Math.max(1, totalMs),
         driftPositive.length ? driftPositive.reduce((sum, period) => sum + (1 - period.firstPosition), 0) / driftPositive.length : 0,
-        activeDays.size / Math.max(1, totalMs / DAY_MS),
+        waitHourShare(episodes),
         knownDurations.length ? knownDurations.filter((seconds) => seconds >= 28800).length / knownDurations.length : 0,
-        episodes.length ? episodes.filter((episode) => episode.duration_seconds == null).length / episodes.length : 0
+        recoveredHourShare(episodes)
       ]
     };
   }).filter((profile) => profile.episodeCount).sort((left, right) => right.episodeCount - left.episodeCount);
@@ -1896,9 +1925,9 @@ function renderAgentFingerprints() {
     ["Frequency", "episodes / 30 days"],
     ["Burden", "validated drift share"],
     ["Early onset", "earlier first drift"],
-    ["Day spread", "share of goal days with drift"],
+    ["Wait", "share of reviewed drift hours spent pausing or waiting"],
     ["Long-form", "validated episodes ≥8 hours"],
-    ["Unresolved", "duration-unresolved share"]
+    ["Recovery", "share of reviewed drift hours that ended in a recovery"]
   ];
   const maxima = definitions.map((_, index) => Math.max(.0001, ...profiles.map((profile) => profile.raw[index])));
   const container = document.querySelector("#fingerprint-grid");
