@@ -663,7 +663,7 @@ const workingWindows = (() => {
     const noonUtc = Date.parse(`${date}T12:00:00Z`);
     const offsetHours = 12 - Number(pacificHour.format(new Date(noonUtc)));
     const startMs = Date.parse(`${date}T00:00:00Z`) + (9 + offsetHours) * 3600000;
-    return { startMs, endMs: startMs + 8 * 3600000 };
+    return { date, startMs, endMs: startMs + 8 * 3600000 };
   });
 })();
 
@@ -817,8 +817,9 @@ function metricCard(labelText, value, copy, fraction = null) {
 }
 
 function renderMetrics() {
-  // Borderline episodes are left out of the goal-max rows but stay in the review queue.
-  const reviewedInQueue = [...queueIds].filter((episodeId) => {
+  // Report the same non-borderline queue that Manual Review actually renders.
+  const visibleQueueIds = [...queueIds].filter((episodeId) => episodeById.has(episodeId));
+  const reviewedInQueue = visibleQueueIds.filter((episodeId) => {
     const annotation = mergedAnnotations.get(episodeId)
       || committedSeed.annotations?.[episodeId];
     return annotation && annotationIsFullyResolved(annotation);
@@ -833,9 +834,9 @@ function renderMetrics() {
     ),
     metricCard(
       "Current queue fully reviewed",
-      `${reviewedInQueue} / ${queueIds.size}`,
+      `${reviewedInQueue} / ${visibleQueueIds.length}`,
       "Annotations completed among episodes still shown in Manual Review",
-      reviewedInQueue / queueIds.size
+      reviewedInQueue / visibleQueueIds.length
     )
   );
 }
@@ -1465,8 +1466,8 @@ function renderDurationDistribution() {
     container.append(row);
   });
   const unknown = goalMaxEpisodes.length - known.length;
-  document.querySelector("#duration-meta").textContent = `${known.length} episodes with validated duration`;
-  document.querySelector("#duration-note").textContent = `${unknown} of ${goalMaxEpisodes.length} confirmed episodes have unresolved numeric duration and are excluded from this chart. Percentages use the ${known.length} episodes with validated duration.`;
+  document.querySelector("#duration-meta").textContent = `${known.length} episodes with measured drift time`;
+  document.querySelector("#duration-note").textContent = `${unknown} of ${goalMaxEpisodes.length} confirmed episodes have unresolved numeric drift time and are excluded. For bout-based episodes, the value is the sum of validated drift bouts—not the onset-to-end envelope. Percentages use the ${known.length} episodes with measured drift time.`;
 }
 
 function renderFirstDriftTiming() {
@@ -2218,15 +2219,23 @@ function renderResilienceScorecards() {
     const selfCorrected = total(agentRows.filter((row) => row.annotation.recovery_mechanisms.includes("self_correction")));
     return { agent, reviewed: total(agentRows), recovered, selfCorrected };
   }).filter((score) => score.reviewed > 0);
+  const minimumReviewed = mode === "hours" ? 5 : 5;
+  scorecards.forEach((score) => {
+    score.rateEligible = score.reviewed >= minimumReviewed;
+  });
   const rate = (score, numerator) => numerator(score) / score.reviewed;
   const compareAgent = (left, right) => agentLabel(left.agent).localeCompare(agentLabel(right.agent));
   const sortMode = document.querySelector("#resilience-sort").value;
+  const rateSort = sortMode === "recovery_rate" || sortMode === "self_rate";
+  const eligibleFirst = (left, right) => Number(right.rateEligible) - Number(left.rateEligible);
   const comparators = {
-    recovery_rate: (left, right) => rate(right, (score) => score.recovered) - rate(left, (score) => score.recovered)
+    recovery_rate: (left, right) => eligibleFirst(left, right)
+      || rate(right, (score) => score.recovered) - rate(left, (score) => score.recovered)
       || rate(right, (score) => score.selfCorrected) - rate(left, (score) => score.selfCorrected)
       || right.reviewed - left.reviewed
       || compareAgent(left, right),
-    self_rate: (left, right) => rate(right, (score) => score.selfCorrected) - rate(left, (score) => score.selfCorrected)
+    self_rate: (left, right) => eligibleFirst(left, right)
+      || rate(right, (score) => score.selfCorrected) - rate(left, (score) => score.selfCorrected)
       || right.selfCorrected - left.selfCorrected
       || rate(right, (score) => score.recovered) - rate(left, (score) => score.recovered)
       || compareAgent(left, right),
@@ -2242,12 +2251,15 @@ function renderResilienceScorecards() {
   scorecards.sort(comparators[sortMode] || comparators.recovery_rate);
   const list = document.querySelector("#resilience-list");
   list.replaceChildren();
+  let eligibleRank = 0;
   scorecards.forEach((score, index) => {
     const row = document.createElement("div");
     row.className = "score-row";
+    if (rateSort && !score.rateEligible) row.classList.add("is-small-sample");
     const rank = document.createElement("div");
     rank.className = "score-rank";
-    rank.textContent = `#${index + 1}`;
+    if (!rateSort || score.rateEligible) eligibleRank += 1;
+    rank.textContent = rateSort && !score.rateEligible ? "—" : `#${rateSort ? eligibleRank : index + 1}`;
     const agent = document.createElement("div");
     agent.className = "score-agent";
     agent.textContent = agentLabel(score.agent);
@@ -2270,16 +2282,22 @@ function renderResilienceScorecards() {
     track.append(selfFill, otherFill);
     const summary = document.createElement("div");
     summary.className = "score-summary";
-    summary.textContent = mode === "hours"
+    const summaryText = mode === "hours"
       ? `${Math.round(recoveryRate * 100)}% of hours recovered · ${Math.round(selfRate * 100)}% self-corrected`
       : `${Math.round(recoveryRate * 100)}% recovered · ${score.selfCorrected}/${score.recovered} self-corrected`;
+    summary.textContent = `${rateSort && !score.rateEligible ? "Small sample · " : ""}${summaryText}`;
     row.append(rank, agent, reviewed, track, summary);
     list.append(row);
   });
+  document.querySelector("#resilience-reviewed-heading").textContent = mode === "hours" ? "Reviewed drift hours" : "Reviewed episodes";
+  document.querySelector("#resilience-self-count-option").textContent = mode === "hours" ? "Most self-corrected drift hours" : "Most self-corrected episodes";
   document.querySelector("#resilience-meta").textContent = `${scorecards.length} agents · ${rows.length} reviewed episodes`;
-  document.querySelector("#resilience-note").textContent = mode === "hours"
+  const thresholdNote = rateSort
+    ? ` Rate rankings require at least ${mode === "hours" ? "5 reviewed drift hours" : "5 reviewed episodes"}; smaller samples remain visible but unranked.`
+    : "";
+  document.querySelector("#resilience-note").textContent = (mode === "hours"
     ? `Every bar represents 100% of that agent’s reviewed drift hours; colored segments show the share of those hours in episodes that ended in an observed recovery. ${hoursEstimateNote(rows)}`.trim()
-    : "Every bar represents 100% of that agent’s fully reviewed episodes. Episode count indicates distraction pressure; colored segments show the subset with an observed recovery.";
+    : "Every bar represents 100% of that agent’s fully reviewed episodes. Episode count indicates distraction pressure; colored segments show the subset with an observed recovery.") + thresholdNote;
 }
 
 function mechanismLabel(value) {
@@ -2606,7 +2624,7 @@ function renderRecoveryCurves() {
     left, right, top, bottom,
     xTicks: ticks.map(([value, tickLabel]) => ({ value, label: tickLabel })),
     yTicks: [0, .25, .5, .75, 1].map((value) => ({ value, label: `${value * 100}%` })),
-    xScale, yScale, xLabel: "Episode drift duration (log scale)", yLabel: "Share lasting longer"
+    xScale, yScale, xLabel: "Measured drift time (log scale)", yLabel: "Share above threshold"
   });
   const episodePoints = [], hourPoints = [];
   let remainingHours = totalHours;
@@ -2632,11 +2650,11 @@ function renderRecoveryCurves() {
   const recoveredHours = recovered.reduce((sum, row) => sum + hoursOf(row), 0);
   const reviewedHours = rows.reduce((sum, row) => sum + hoursOf(row), 0);
   document.querySelector("#recovery-curve-note").textContent =
-    `Median episode lasts ${measureText(median, "hours")}, but half of all drift hours sit in episodes of ${measureText(weightedMedian, "hours")} or longer. `
+    `The median episode contains ${measureText(median, "hours")} of measured drift, but half of all measured drift time sits in episodes with ${measureText(weightedMedian, "hours")} or more. `
     + `${percentText(recovered.length / rows.length)} of reviewed episodes ended in an observed recovery, covering ${percentText(recoveredHours / reviewedHours)} of reviewed drift hours.`;
   document.querySelector("#recovery-curve-legend").innerHTML =
-    '<span class="legend-item"><span class="legend-swatch" style="background:#3f7082"></span>Share of episodes lasting longer than x</span>'
-    + '<span class="legend-item"><span class="legend-swatch" style="background:#ae5037"></span>Share of drift hours in episodes lasting longer than x</span>';
+    '<span class="legend-item"><span class="legend-swatch" style="background:#3f7082"></span>Share of episodes above x measured drift time</span>'
+    + '<span class="legend-item"><span class="legend-swatch" style="background:#ae5037"></span>Share of measured drift time in episodes above x</span>';
   document.querySelector("#recovery-curve-meta").textContent = `${durations.length} episodes · ${measureText(totalHours, "hours")}`;
 }
 
@@ -2822,49 +2840,35 @@ function renderReciprocity() {
 // ---------------------------------------------------------------------------
 // Goal-window cards: one card per goal period with its aggregate numbers and every episode.
 // ---------------------------------------------------------------------------
-const cardWorkDays = new Map();
-bundle.stage1_daily_verdicts.forEach((row) => {
-  if (row.period !== "goal_maximization" || !row.day || !row.agent) return;
-  const weekday = new Date(`${row.day}T12:00:00Z`).getUTCDay();
-  if (weekday === 0 || weekday === 6) return;
-  if (!cardWorkDays.has(row.agent)) cardWorkDays.set(row.agent, new Set());
-  cardWorkDays.get(row.agent).add(row.day);
-});
-const cardPacific = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hourCycle: "h23" });
-const cardHourCache = new Map();
-function cardPacificDateHour(ms) {
-  const bucket = Math.floor(ms / 3600000);
-  if (!cardHourCache.has(bucket)) {
-    const parts = Object.fromEntries(cardPacific.formatToParts(new Date(bucket * 3600000)).filter((part) => part.type !== "literal").map((part) => [part.type, part.value]));
-    cardHourCache.set(bucket, { date: `${parts.year}-${parts.month}-${parts.day}`, hour: Number(parts.hour) });
-  }
-  return cardHourCache.get(bucket);
-}
-
-// Working time and drift for one period: 8 hours per weekday the agent ran under the goal, and the union of its bouts inside 9 AM–5 PM PT on those days.
+// Working time and drift for one period use the same source-grounded denominator
+// as the atlas and burden scatter: the exact overlap of the assignment interval
+// with active Village weekdays from 9 AM–5 PM Pacific.
 function periodWorkingStats(period) {
-  const days = [...(cardWorkDays.get(period.agent) || [])].filter((day) => {
-    const ms = timestampMs(day);
-    return ms != null && ms >= period.startMs - DAY_MS && ms <= period.endMs;
+  const periodWindows = workingWindows.map((window) => ({
+    ...window,
+    availableStartMs: Math.max(window.startMs, period.startMs),
+    availableEndMs: Math.min(window.endMs, period.endMs)
+  })).filter((window) => window.availableEndMs > window.availableStartMs);
+  const merged = mergedIntervals(
+    period.episodes.flatMap(episodeIntervals),
+    period.startMs,
+    period.endMs
+  );
+  const dailyShares = periodWindows.map((window) => {
+    const availableMs = window.availableEndMs - window.availableStartMs;
+    const driftMs = merged.reduce((sum, interval) => sum + Math.max(
+      0,
+      Math.min(interval.endMs, window.availableEndMs)
+        - Math.max(interval.startMs, window.availableStartMs)
+    ), 0);
+    return { day: window.date, share: Math.min(1, driftMs / availableMs) };
   });
-  const daySet = new Set(days);
-  const merged = mergedIntervals(period.episodes.flatMap(episodeIntervals));
-  const secondsByDay = new Map();
-  let seconds = 0;
-  merged.forEach((interval) => {
-    for (let cursor = interval.startMs; cursor < interval.endMs;) {
-      const next = Math.min(interval.endMs, (Math.floor(cursor / 3600000) + 1) * 3600000);
-      const { date, hour } = cardPacificDateHour(cursor);
-      if (hour >= 9 && hour < 17 && daySet.has(date)) {
-        seconds += (next - cursor) / 1000;
-        secondsByDay.set(date, (secondsByDay.get(date) || 0) + (next - cursor) / 1000);
-      }
-      cursor = next;
-    }
-  });
-  // Daily drift share of the 8-hour working day, in date order, for the shape label and sparkline.
-  const dailyShares = days.sort().map((day) => ({ day, share: Math.min(1, (secondsByDay.get(day) || 0) / (8 * 3600)) }));
-  return { workingHours: days.length * 8, driftWorkingHours: seconds / 3600, workDays: days.length, dailyShares };
+  return {
+    workingHours: period.workingMs / 3600000,
+    driftWorkingHours: period.validatedWorkingMs / 3600000,
+    workDays: periodWindows.length,
+    dailyShares
+  };
 }
 
 // Window-level drift shape from daily drift shares, split into thirds: is drift high at the start, and at the end?

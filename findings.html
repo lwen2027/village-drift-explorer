@@ -318,6 +318,7 @@
     .score-head, .score-row { display: grid; grid-template-columns: 36px minmax(150px, 1.2fr) 90px minmax(240px, 2.6fr) 180px; gap: 12px; align-items: center; }
     .score-head { padding: 0 10px 7px; color: var(--muted); font: 700 9px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
     .score-row { padding: 10px; border: 1px solid var(--line); border-radius: 11px; background: var(--card); font-size: 11px; }
+    .score-row.is-small-sample { background: color-mix(in srgb, var(--card) 82%, var(--paper-deep)); opacity: .78; }
     .score-rank { color: var(--rust); font: 800 11px/1 var(--mono); }
     .score-agent { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 800; }
     .score-track { display: flex; height: 12px; overflow: hidden; border-radius: 999px; background: var(--paper-deep); }
@@ -550,7 +551,7 @@
 
       <div class="sample-warning">
         <strong>Interpret with care</strong>
-        <span>Agents marked * were contacted by outside (non-staff) humans on 10+ goal days, mainly through GitLab and email, so their results may be biased. Timing charts use all confirmed goal-maximization episodes. Annotation charts and the episode list use the human-reviewed sample, where pause-heavy batches were intentionally prioritized; their raw shares are not population estimates.</span>
+        <span>Agents marked * were contacted by outside (non-staff) humans on 10+ goal days, mainly through GitLab and email, so their results may be biased. Timing charts use all current non-borderline goal-maximization episodes. Annotation charts use the fully resolved reviewed set shown in the coverage cards.</span>
       </div>
 
       <section class="exploration" aria-labelledby="goal-window-title" id="goal-windows">
@@ -583,7 +584,7 @@
         </div>
         <div class="viz-legend gw-legend" aria-label="Drift origin colors"><span class="gw-legend-title">What started the drift:</span><span id="gw-legend" class="gw-legend-items"></span></div>
         <div class="gw-list" id="goal-window-cards"></div>
-        <p class="viz-note">Working time is 9 AM–5 PM Pacific on each weekday the agent ran under the goal. Breakdowns use fully reviewed episodes; “episodes / hours” pairs compare how often with how much. Rule excerpts are the agent's own words from an unreviewed keyword pass. <strong>Drift shape</strong> compares the drift share of working time in the first, middle and last third of the window (shown as three percentages): sustained throughout (high at both ends), rises over the window (low start, high end), drifts then recovers (high start, low end), mid-window burst (low at both ends), minimal (under 5% overall). “High” means at least half of the window’s peak third. The sparkline shows each working day’s drift share, with dividers at the thirds.</p>
+        <p class="viz-note">Working time is the exact overlap between each source-recorded assignment and active Village weekdays, 9 AM–5 PM Pacific; partial first days are clipped at assignment time. Breakdowns use fully reviewed episodes; “episodes / hours” pairs compare how often with how much. Rule excerpts are the agent's own words from an unreviewed keyword pass. <strong>Drift shape</strong> compares the drift share of working time in the first, middle and last third of the window (shown as three percentages): sustained throughout (high at both ends), rises over the window (low start, high end), drifts then recovers (high start, low end), mid-window burst (low at both ends), minimal (under 5% overall). “High” means at least half of the window’s peak third. The sparkline shows each working day’s drift share, with dividers at the thirds.</p>
       </section>
 
       <section class="exploration" aria-labelledby="exploration-title">
@@ -642,7 +643,7 @@
           </article>
 
           <article class="viz-card">
-            <div class="viz-heading"><div><h3>Episode duration</h3><p>How long confirmed drift episodes lasted, grouped into readable time ranges.</p></div><span class="viz-meta" id="duration-meta"></span></div>
+            <div class="viz-heading"><div><h3>Measured drift time</h3><p>Validated drift time within each episode, grouped into readable ranges.</p></div><span class="viz-meta" id="duration-meta"></span></div>
             <div class="duration-bars" id="duration-bars"></div>
             <p class="viz-note" id="duration-note"></p>
           </article>
@@ -734,7 +735,7 @@
                   <select class="viz-control" id="resilience-sort">
                     <option value="recovery_rate">Highest recovery share</option>
                     <option value="self_rate">Highest self-correction share</option>
-                    <option value="self_count">Most self-corrected episodes</option>
+                    <option value="self_count" id="resilience-self-count-option">Most self-corrected episodes</option>
                     <option value="pressure">Most reviewed drift (episodes or hours)</option>
                     <option value="agent">Agent name</option>
                   </select>
@@ -742,7 +743,7 @@
               </div>
             </div>
             <div class="viz-legend score-legend"><span class="legend-item"><span class="legend-swatch is-self-recovery"></span>Self-correction</span><span class="legend-item"><span class="legend-swatch is-other-recovery"></span>Other observed recovery</span><span class="legend-item"><span class="legend-swatch is-no-recovery"></span>No observed recovery</span></div>
-            <div class="score-head"><span>Rank</span><span>Agent</span><span>Reviewed episodes</span><span>Recovery composition</span><span>Summary</span></div>
+            <div class="score-head"><span>Rank</span><span>Agent</span><span id="resilience-reviewed-heading">Reviewed episodes</span><span>Recovery composition</span><span>Summary</span></div>
             <div class="resilience-list" id="resilience-list"></div>
             <p class="viz-note" id="resilience-note">Every bar represents 100% of that agent’s fully reviewed episodes. Episode count indicates distraction pressure; colored segments show the subset with an observed recovery.</p>
           </article>
@@ -909,6 +910,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261018-drift-shapes"></script>
+  <script type="module" src="./scripts/findings.js?v=20261018-working-denominators"></script>
 </body>
 </html>

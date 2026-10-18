@@ -1,12 +1,12 @@
 {
   "counts": {
     "excluded_from_default_manual_queue": 43,
-    "goal_maximization_episodes": 415,
+    "goal_maximization_episodes": 403,
     "mechanical_repeated_wait_only": 43,
     "mechanical_single_wait_only": 4,
     "mixed_wait_and_other_evidence": 27,
-    "no_cited_wait_primitive": 341,
-    "remaining_in_default_manual_queue": 372
+    "no_cited_wait_primitive": 329,
+    "remaining_in_default_manual_queue": 360
   },
   "default_manual_review_queue_episode_ids": [
     "episode-v2-574582cf35f8e5e3",
@@ -109,7 +109,6 @@
     "episode-v2-3936c4d0f0956e03",
     "episode-v2-c225a4f93371dbfb",
     "episode-v2-618d986973f3900c",
-    "episode-65be1a7476554df9",
     "episode-9698e23a5761b3cf",
     "episode-v2-f4142f74657ecb21",
     "episode-v2-189db8701b1e2fd5",
@@ -141,10 +140,6 @@
     "episode-v2-19b45170e68f9200",
     "episode-v2-68c6d47348e30d85",
     "episode-v2-abb5daa8225fa611",
-    "episode-dd26039545b50f99",
-    "episode-d9f1963f75ca029d",
-    "episode-3cb513a562d42a88",
-    "episode-v2-62d199b5706c1764",
     "episode-v2-91b194d96f302825",
     "episode-v2-82f133b3cde05ab4",
     "episode-v2-d06533b95960ef98",
@@ -235,11 +230,6 @@
     "episode-v2-1cb36a1e417a1f58",
     "episode-eb544eaf61ba42b4",
     "episode-06fe0e2abc16f13f",
-    "episode-162f263f3cd06457",
-    "episode-v2-c0c641c742a6d883",
-    "episode-v2-46b038039354dc59",
-    "episode-v2-83e86c62f5daafa2",
-    "episode-v2-94ccde00331145d9",
     "episode-v2-5fe52cadf48994cf",
     "episode-v2-0a3844ffb99f7e26",
     "episode-v2-18aa4735b8065842",
@@ -373,11 +363,9 @@
     "episode-v2-eb8677f88710625a",
     "episode-f08cc4e75555f1ec",
     "episode-v2-620e774ab4e42e0b",
-    "episode-v2-3b4b2f02a0f6569e",
     "episode-v2-5cf74f663ce6ec0b",
     "episode-v2-eb84f48bbec47f79",
     "episode-e10951aed95a9dc7",
-    "episode-v2-658d493edaf1b2e3",
     "episode-v2-17f2ab37c7505e50",
     "episode-v2-8b78cb66965a621e",
     "episode-v2-cf48846af68adef0"
@@ -3342,7 +3330,7 @@
       "rule_id": "mechanical_repeated_wait_only_v1"
     }
   ],
-  "generated_at": "2026-10-18T03:24:16.134820+00:00",
+  "generated_at": "2026-10-18T05:34:27.006458+00:00",
   "held_for_review": {
     "mechanical_single_wait_only": [
       {
@@ -4824,7 +4812,6 @@
       "episode-v2-3936c4d0f0956e03",
       "episode-v2-c225a4f93371dbfb",
       "episode-v2-618d986973f3900c",
-      "episode-65be1a7476554df9",
       "episode-9698e23a5761b3cf",
       "episode-v2-f4142f74657ecb21",
       "episode-v2-189db8701b1e2fd5",
@@ -4856,10 +4843,6 @@
       "episode-v2-19b45170e68f9200",
       "episode-v2-68c6d47348e30d85",
       "episode-v2-abb5daa8225fa611",
-      "episode-dd26039545b50f99",
-      "episode-d9f1963f75ca029d",
-      "episode-3cb513a562d42a88",
-      "episode-v2-62d199b5706c1764",
       "episode-v2-91b194d96f302825",
       "episode-v2-82f133b3cde05ab4",
       "episode-v2-d06533b95960ef98",
@@ -4950,11 +4933,6 @@
       "episode-v2-1cb36a1e417a1f58",
       "episode-eb544eaf61ba42b4",
       "episode-06fe0e2abc16f13f",
-      "episode-162f263f3cd06457",
-      "episode-v2-c0c641c742a6d883",
-      "episode-v2-46b038039354dc59",
-      "episode-v2-83e86c62f5daafa2",
-      "episode-v2-94ccde00331145d9",
       "episode-v2-5fe52cadf48994cf",
       "episode-v2-0a3844ffb99f7e26",
       "episode-v2-18aa4735b8065842",
@@ -5088,11 +5066,9 @@
       "episode-v2-eb8677f88710625a",
       "episode-f08cc4e75555f1ec",
       "episode-v2-620e774ab4e42e0b",
-      "episode-v2-3b4b2f02a0f6569e",
       "episode-v2-5cf74f663ce6ec0b",
       "episode-v2-eb84f48bbec47f79",
       "episode-e10951aed95a9dc7",
-      "episode-v2-658d493edaf1b2e3",
       "episode-v2-17f2ab37c7505e50",
       "episode-v2-8b78cb66965a621e",
       "episode-v2-cf48846af68adef0"
@@ -5100,7 +5076,7 @@
   },
   "input": {
     "path": "artifacts/final/second_audit_v2.json",
-    "sha256": "b1ebf3c11c89ab2a37f6f948c4b8d3aecb01e40eb9f3c6925816069cb9fb764c"
+    "sha256": "9fd0393ed5ee01b0cc923ec823dd6702055a83576220f2d0f4550d7520ce7c47"
   },
   "makes_model_calls": false,
   "rule": {
