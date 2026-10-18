@@ -577,9 +577,9 @@
 
         <div class="viz-grid">
           <article class="viz-card is-wide">
-            <div class="viz-heading"><div><h3>Village drift weather</h3><p>Concurrent validated drift and unresolved-duration onsets by Village date and active hour.</p></div><span class="viz-meta" id="weather-meta"></span></div>
+            <div class="viz-heading"><div><h3>Village drift weather</h3><p>Share of active agents drifting in each Village hour, by run day.</p></div><span class="viz-meta" id="weather-meta"></span></div>
             <div class="weather-wrap"><svg class="svg-chart weather-chart" id="weather-chart" viewBox="0 0 1120 340" role="img" aria-label="Village drift weather heatmap"></svg></div>
-            <p class="viz-note">Dates and hours use America/Los_Angeles, matching Village days. Only analyzed run days and the 9:00 AM–5:00 PM PT active window are shown; overnight wall-clock spans are excluded. Darker cells indicate more simultaneous validated drift; gold dots mark unresolved-duration episode onsets.</p>
+            <p class="viz-note">Dates and hours use America/Los_Angeles, matching Village days. Only analyzed run days and the 9:00 AM–5:00 PM PT active window are shown; overnight wall-clock spans are excluded. Each cell is shaded by the share of that day’s goal-maximization agents drifting in that hour (the agent count varied from 18 to 38), so days with more agents running don’t look darker by default. Weekends are omitted.</p>
           </article>
 
           <article class="viz-card is-wide">
@@ -723,6 +723,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261018-working-hours-burden"></script>
+  <script type="module" src="./scripts/findings.js?v=20261018-weather-share"></script>
 </body>
 </html>

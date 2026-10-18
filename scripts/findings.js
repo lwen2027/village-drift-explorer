@@ -1788,12 +1788,24 @@ function villageHourLabel(hour) {
 }
 
 function renderDriftWeather() {
-  const dates = [...new Set(goalMaxDays)];
+  // Village run days only: weekday dates. Saturday-dated logs are Friday evening's spill-over past midnight UTC.
+  const isWeekday = (date) => {
+    const weekday = new Date(`${date}T12:00:00Z`).getUTCDay();
+    return weekday >= 1 && weekday <= 5;
+  };
+  const dates = [...new Set(goalMaxDays)].filter(isWeekday);
   const activeDateSet = new Set(dates);
+  // Agents in a goal-maximization period on each day: the denominator for each cell's share.
+  const activeAgentsByDate = new Map();
+  bundle.stage1_daily_verdicts.forEach((row) => {
+    if (row.period !== "goal_maximization" || !activeDateSet.has(row.day) || !row.agent) return;
+    if (!activeAgentsByDate.has(row.day)) activeAgentsByDate.set(row.day, new Set());
+    activeAgentsByDate.get(row.day).add(row.agent);
+  });
   const cells = new Map();
   function cellFor(date, hour) {
     const key = `${date}\u0000${hour}`;
-    if (!cells.has(key)) cells.set(key, { exact: 0, unresolved: 0 });
+    if (!cells.has(key)) cells.set(key, { agents: new Set(), unresolved: 0 });
     return cells.get(key);
   }
   goalMaxEpisodes.forEach((episode) => {
@@ -1818,14 +1830,20 @@ function renderDriftWeather() {
       }
     });
     buckets.forEach((bucket) => {
-      const midpoint = bucket + 1800000;
-      const { date, hour } = villageDateAndHour(midpoint);
+      const { date, hour } = villageDateAndHour(bucket + 1800000);
       if (!activeDateSet.has(date) || hour < VILLAGE_ACTIVE_START_HOUR || hour >= VILLAGE_ACTIVE_END_HOUR) return;
-      cellFor(date, hour).exact += 1;
+      cellFor(date, hour).agents.add(episode.agent);
     });
   });
+  // Each cell's shade is the share of that day's active agents drifting in that hour.
+  cells.forEach((cell, key) => {
+    const date = key.split("\u0000")[0];
+    cell.exact = cell.agents.size;
+    cell.active = activeAgentsByDate.get(date)?.size || 0;
+    cell.share = cell.active ? cell.exact / cell.active : 0;
+  });
 
-  const maxExact = Math.max(1, ...cells.values().map((cell) => cell.exact));
+  const maxShare = Math.max(.01, ...[...cells.values()].map((cell) => cell.share));
   const svg = document.querySelector("#weather-chart");
   svg.replaceChildren();
   const left = 54, right = 1100, top = 30, bottom = 288;
@@ -1834,8 +1852,8 @@ function renderDriftWeather() {
   const cellHeight = (bottom - top) / activeHours;
   dates.forEach((date, dateIndex) => {
     for (let hour = VILLAGE_ACTIVE_START_HOUR; hour < VILLAGE_ACTIVE_END_HOUR; hour += 1) {
-      const cell = cells.get(`${date}\u0000${hour}`) || { exact: 0, unresolved: 0 };
-      const opacity = cell.exact ? .08 + .84 * (cell.exact / maxExact) : .025;
+      const cell = cells.get(`${date}\u0000${hour}`) || { exact: 0, unresolved: 0, share: 0, active: activeAgentsByDate.get(date)?.size || 0 };
+      const opacity = cell.exact ? .08 + .84 * (cell.share / maxShare) : .025;
       const rect = svgElement("rect", {
         x: left + dateIndex * cellWidth,
         y: top + (hour - VILLAGE_ACTIVE_START_HOUR) * cellHeight,
@@ -1844,7 +1862,7 @@ function renderDriftWeather() {
         rx: 1,
         fill: `rgba(174, 80, 55, ${opacity})`
       });
-      svgTitle(rect, `${date} ${villageHourLabel(hour)} PT · ${cell.exact} validated concurrent drift · ${cell.unresolved} unresolved-duration onsets`);
+      svgTitle(rect, `${date} ${villageHourLabel(hour)} PT · ${cell.exact} of ${cell.active} active agents drifting (${Math.round(cell.share * 100)}%)${cell.unresolved ? ` · ${cell.unresolved} unresolved-duration onsets` : ""}`);
       svg.append(rect);
       if (cell.unresolved) {
         svg.append(svgElement("circle", {
