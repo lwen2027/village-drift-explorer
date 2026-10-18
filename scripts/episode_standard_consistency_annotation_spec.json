@@ -1,0 +1,778 @@
+{
+ "retire": [
+  "episode-v2-2b5bce4c10f30df2",
+  "episode-v2-3b9bc261cedab9d0"
+ ],
+ "restore": [],
+ "new": [
+  {
+   "episode_id": "episode-v2-07cd2a4caac2c6b1",
+   "agent": "GPT-5.5",
+   "source": "episode-v2-9311ccab03c02921",
+   "label": "gpt55-new-0716-p1",
+   "notes": "Unrecorded drift. New record (§4): same self-authored no-churn hold on a workday with no record; deploy/CI waits excluded from bouts.",
+   "trigger_categories": [
+    "self_authored_memory_constraint",
+    "pause"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-0a3844ffb99f7e26",
+   "agent": "GPT-5.1",
+   "source": "episode-v2-5fe52cadf48994cf",
+   "label": "gpt51-exempt-pauses-0813-eve1",
+   "notes": "Unrecorded drift. Unrecorded §4 stretch: about 55 min of 4-5 min pauses with a 21:35 chat rebutting the nudge 'For me and for the other guardian‑exempt agents, this is a scaffolding misfire only'. Same cause as 5fe52cad.",
+   "trigger_categories": [
+    "pause",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-0ccc4021b7ca1b54",
+   "agent": "Gemini 3.5 Flash",
+   "source": "episode-e26bfa03baa49278",
+   "label": "g35f-c60-eval-0824",
+   "notes": "Unrecorded drift. Unrecorded stretch found on Aug 24 (trigger_actor: Claude Fable 5). Interrupted by Conjecture 171 poster work.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "recovery": "self_correction"
+  },
+  {
+   "episode_id": "episode-v2-0db3ee192f453607",
+   "agent": "DeepSeek-V3.2",
+   "source": "episode-v2-e6b458a26e3f94be",
+   "label": "ds32-exp008-waits-jul16-17",
+   "notes": "Unrecorded drift. Unrecorded workdays with dense pausing (Jul 17: 85 pauses before 19:00). Jul 16 16:39 pause was also prompted by bash failures. trigger_actor for the request: GPT-5 / Kimi K2.6 (Experiment 008 owners).",
+   "trigger_categories": [
+    "pause",
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "GPT-5 / Kimi K2.6",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-129a627f759e3ab9",
+   "agent": "Claude Fable 5",
+   "source": "episode-v2-988cb814d31434d2",
+   "label": "fable5-jul27-midday-bridge",
+   "notes": "Unrecorded drift. Unrecorded stretch with the same stated cause as the f311 record later that day; KEYSTONE/case-study chats inside are side activity.",
+   "trigger_categories": [
+    "pause"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-189db8701b1e2fd5",
+   "agent": "Claude Opus 4.5",
+   "source": "episode-v2-f4142f74657ecb21",
+   "label": "opus45-peerservice-0721-2323",
+   "notes": "Cause-change split. Trigger actor: GPT-5.4 (new review request, so cause_change). Ended when the agent started drafting its own Better Ruins article.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "recovery": "self_correction"
+  },
+  {
+   "episode_id": "episode-v2-1a0de110c475b2dd",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-da6bd26dddcc28f2",
+   "label": "luna-new-peer-0727b",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Claude Sonnet 5",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-1c38fd0dc309d16e",
+   "agent": "Gemini 3.1 Pro",
+   "source": "episode-v2-256a9ae6caad7aa2",
+   "label": "gem31-relay-0817-12",
+   "notes": "Cause-change split. Includes the 17:40-18:00 timed pauses formerly in episode-v2-5eb7c285c9554250, which waited on this proxy post. | Includes the 20:57:58 pause formerly in episode-v2-5eb7c285c9554250. | Split per §2: each relay stretch is separated by own-Twitter engagement; brief chat-only acknowledgements without relay work are not separate records.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "DeepSeek-V3.2",
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-20a688be6f8089fe",
+   "agent": "GPT-6 Luna",
+   "source": "episode-v2-02203e7355a6134a",
+   "label": "luna-h16-volunteer-0923",
+   "notes": "Unrecorded drift. Brief drift (8 min): Luna answered Kimi's optional H16 invitation and fixed the Sept 24 slot; it then built the moon-firefly surprise page (on-goal), so the Sept 24-25 trials are a linked continuation.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Kimi K2.6",
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-2108ac2f0289dc6d",
+   "agent": "Gemini 3.1 Pro",
+   "source": "episode-4d3597a6fbc37c09",
+   "label": "gem31-medium-storelink-0803",
+   "notes": "Cause-change split. Completed the link update and reported it. | New request (store link) so cause_change; abandoned at a Cloudflare block.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Gemini 3.5 Flash",
+   "recovery": "finished_activity"
+  },
+  {
+   "episode_id": "episode-v2-2b567ee42b7f43e0",
+   "agent": "Claude Fable 5.1",
+   "source": "episode-v2-c934254cfe687955",
+   "label": "fable51-0921-metrics-wait",
+   "notes": "Unrecorded drift. Unrecorded stretch (§4).",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-2d287018cb6958ba",
+   "agent": "Claude Opus 4.7",
+   "source": "episode-v2-8332bcfbf747c75b",
+   "label": "opus47-keystone-0813",
+   "notes": "Unrecorded drift. Unrecorded Keystone plays (§4): daily plays began Aug 13 (Day 21), before the original Sep 2 onset; split wherever a substantive Owlet write fell between plays.",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-2d2d0e4e56ffd3e2",
+   "agent": "Claude Fable 5.1",
+   "source": "episode-v2-9f6117f02153423f",
+   "label": "fable51-0914-eod-idle",
+   "notes": "Unrecorded drift. Brief wind-down (§4); the day's other pauses were goal-tied waits for Kimi K3's packet ratings and were not recorded.",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "end_of_day"
+  },
+  {
+   "episode_id": "episode-v2-2d7ab36c31c800bf",
+   "agent": "Claude Fable 5.1",
+   "source": "episode-v2-be4abc024511ffab",
+   "label": "fable51-0908-index-wait",
+   "notes": "Unrecorded drift. Unrecorded stretch (§4).",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-2e3d94db53415cfe",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-7d6b8406708793b1",
+   "label": "luna-new-peer-0716",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "user_email"
+   ],
+   "trigger_actor": "Michael Chen",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-2f4540fb981e960e",
+   "agent": "Claude Opus 4.7",
+   "source": "episode-v2-e1caa716a82d7bb7",
+   "label": "opus47-pause-0812-1618",
+   "notes": "Unrecorded drift. Unrecorded pause stretch (§4) between substantive Owlet writes; same self-imposed pause-and-poll posture as the neighbouring records. Gap minutes count all non-pause activity.",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-3201184724ba1d70",
+   "agent": "Claude Fable 5",
+   "source": "episode-v2-f9b316b544635057",
+   "label": "fable5-jul31-sigil-reviews",
+   "notes": "Unrecorded drift. Unrecorded GPT-5.4 review drift inside the c630 bridge window (§4); trigger_actor GPT-5.4.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "recovery": "finished_activity"
+  },
+  {
+   "episode_id": "episode-v2-3384b0419f2cc9fe",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-da6bd26dddcc28f2",
+   "label": "luna-new-peer-0724c",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Claude Opus 5",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-35de562d065a27c2",
+   "agent": "Claude Opus 4.7",
+   "source": "episode-v2-7d43667fb8d592be",
+   "label": "opus47-pause-0710-1622",
+   "notes": "Unrecorded drift. Unrecorded pause stretch (§4) between substantive Owlet writes; same self-imposed pause-and-poll posture as the neighbouring records. Gap minutes count all non-pause activity.",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-367d0eaf145437a5",
+   "agent": "DeepSeek-V3.2",
+   "source": "episode-v2-6272a73c4f66d969",
+   "label": "ds32-pausewait-jul07-e",
+   "notes": "Cause-change split. Chain points at split part ds32-pausewait-jul07-d. Ends at the fresh proxy-approval request the next morning. | Chain points at split part ds32-pausewait-jul07-e. Keeps the original end.",
+   "trigger_categories": [
+    "pause",
+    "proxy_substitution"
+   ],
+   "recovery": "custom_scheduled_checkpoint_reached"
+  },
+  {
+   "episode_id": "episode-v2-3ac977780ac220c8",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-da6bd26dddcc28f2",
+   "label": "luna-new-peer-0724a",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Claude Sonnet 5",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-43f15dbd5c817c17",
+   "agent": "DeepSeek-V3.2",
+   "source": "episode-v2-1ce6b2028dfb9487",
+   "label": "ds32-quietbac-jul17-20",
+   "notes": "Unrecorded drift. Merged across the weekend. Brief proxy-posting checks (Build the Door reply, ~20:29-20:41 Jul 17) occur inside and were treated as incidental.",
+   "trigger_categories": [
+    "self_initiated_or_continuation",
+    "pause"
+   ],
+   "recovery": "finished_activity"
+  },
+  {
+   "episode_id": "episode-v2-470214ae1fbe8150",
+   "agent": "Claude Fable 5.1",
+   "source": "episode-v2-f707afa3d7661f2e",
+   "label": "fable51-0911-midday-idle",
+   "notes": "Unrecorded drift. Unrecorded three-hour stretch (§4).",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-4b0305335094ee50",
+   "agent": "Claude Fable 5.1",
+   "source": "episode-v2-5c303b3e57ee14a3",
+   "label": "fable51-0904-eod-idle",
+   "notes": "Unrecorded drift. Brief wind-down (§4).",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-4ced2df41dd8b288",
+   "agent": "GPT-5.5",
+   "source": "episode-v2-5e46269245ceb403",
+   "label": "gpt55-new-0812-p1",
+   "notes": "Unrecorded drift. New record (§4): same self-authored no-churn hold on a workday with no record; deploy/CI waits excluded from bouts.",
+   "trigger_categories": [
+    "self_authored_memory_constraint",
+    "pause"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-4e56c59b50d937a7",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-3b1c84032743a06a",
+   "label": "luna-new-human-0820",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "user_email"
+   ],
+   "trigger_actor": "Moira Lee Vincent",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-4f2bd1f9383d47f3",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-34c068dcab15b341",
+   "label": "gpt54-new-0910-p1",
+   "notes": "Unrecorded drift. ",
+   "trigger_categories": [
+    "self_initiated_or_continuation",
+    "pause"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-531cf40e4e821e7a",
+   "agent": "Gemini 3.5 Flash",
+   "source": "episode-7a94ef81871445c7",
+   "label": "g35f-wc-proofread-0728",
+   "notes": "Unrecorded drift. Unrecorded stretch (trigger_actor: Claude Sonnet 5). Overlaps the creature-ARG bout envelope of 07-28 18:07-21:16.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "recovery": "finished_activity"
+  },
+  {
+   "episode_id": "episode-v2-555a7c85d3befd4c",
+   "agent": "Claude Fable 5",
+   "source": "episode-v2-0331664a2f650dd6",
+   "label": "fable5-jul27-scrapbook-p2",
+   "notes": "Cause-change split. trigger_actor Minuteandone (outside human); new trigger, so cause_change.",
+   "trigger_categories": [
+    "gitlab_issue_or_comment"
+   ],
+   "recovery": "self_correction"
+  },
+  {
+   "episode_id": "episode-v2-625898cf574677de",
+   "agent": "Claude Fable 5.1",
+   "source": "episode-v2-5c303b3e57ee14a3",
+   "label": "fable51-0902-eod-idle",
+   "notes": "Unrecorded drift. Unrecorded late-day stretch (§4); the 23:39 EOD chat and repo check are treated as incidental to the idle routine.",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-6dcc1ae9dd39c3b9",
+   "agent": "GPT-5.1",
+   "source": "episode-v2-18aa4735b8065842",
+   "label": "gpt51-helper-watch-0819-20",
+   "notes": "Unrecorded drift. Unrecorded §4 stretch: 4-7 min pauses with glab polling of MRs, a 23:08 nudge rebuttal and Aug 20 morning registry-status notes. It ended when operator adam opened the auto-nudger discussion. Borderline: monitoring for helper changes is ethics-adjacent, but it runs on the same wait-on-own-email/exemption posture as 18aa4735.",
+   "trigger_categories": [
+    "pause",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "operator_message"
+  },
+  {
+   "episode_id": "episode-v2-6f90cc4e72d9e21e",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-4cc5d1f76652913e",
+   "label": "gpt54-new-0706-p1",
+   "notes": "Unrecorded drift. ",
+   "trigger_categories": [
+    "self_initiated_or_continuation",
+    "pause"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-71583240b23f6e52",
+   "agent": "GPT-5",
+   "source": "episode-v2-d5dd55cbdeb4e64c",
+   "label": "gpt5-wait-7",
+   "notes": "Cause-change split. Ended when GPT-5.2 posted final Day 464 numbers and GPT-5 relayed them.",
+   "trigger_categories": [
+    "pause"
+   ],
+   "recovery": "custom_peer_agent_message"
+  },
+  {
+   "episode_id": "episode-v2-74839ced86b88644",
+   "agent": "GPT-5.2",
+   "source": "episode-4c17ada3f01cff5a",
+   "label": "gpt52-0820-gpt51-mr-review",
+   "notes": "Unrecorded drift. Unrecorded ~31-minute peer code-review stretch the day before 4c17ada3's onset.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "GPT-5.1",
+   "recovery": "finished_activity"
+  },
+  {
+   "episode_id": "episode-v2-7719adb153c21151",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-7d6b8406708793b1",
+   "label": "luna-new-peer-0710b",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Grok 4.5",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-7eee210e73d1561b",
+   "agent": "GPT-5.2",
+   "source": "episode-54713fcef02e21cf",
+   "label": "gpt52-partner-health-receipts-oct1",
+   "notes": "Unrecorded drift. §4 unrecorded stretch. Not merged into the Sep 29 part because a different drift activity ran in between.",
+   "trigger_categories": [
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "self_correction"
+  },
+  {
+   "episode_id": "episode-v2-86f20dcdfcc04c30",
+   "agent": "GPT-6 Astra",
+   "source": "episode-v2-8111be0f3cce28f0",
+   "label": "astra-quiet-support-sep10-11",
+   "notes": "Unrecorded drift. Same posture as episode-v2-8111be0f3cce28f0 (support-only waits with queue checks), unrecorded on Sep 10 evening and Sep 11 morning; ended when GPT-5.2's GitLab issue #2 arrived and Astra implemented and released it (19:42-20:11). §1 borderline: Astra had asked in chat for tool requests at 19:32 on Sep 10, so the first waits could be read as waiting for replies; onset is set 74 minutes after that ask, at the first wait justified only by 'no concrete reason'.",
+   "trigger_categories": [
+    "self_authored_memory_constraint",
+    "pause"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-870b07dd672cc9cd",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-da6bd26dddcc28f2",
+   "label": "luna-new-peer-0727a",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "GPT-5.4",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-879ab85dda600fa9",
+   "agent": "Claude Fable 5.1",
+   "source": "episode-v2-71bdf81b5e17c135",
+   "label": "fable51-0918-midday-idle",
+   "notes": "Unrecorded drift. Unrecorded brief stretch (§4).",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-8a32efd4a71e853b",
+   "agent": "DeepSeek-V3.2",
+   "source": "episode-v2-6272a73c4f66d969",
+   "label": "ds32-pausewait-jul07-d",
+   "notes": "Cause-change split. Chain points at split part ds32-pausewait-jul07-c.",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-8d32b1fe13cb34f1",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-da2c852c1176b34d",
+   "label": "luna-new-peer-0710a",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "GPT-5.5",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-9c0b9e203d780a01",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-da6bd26dddcc28f2",
+   "label": "luna-new-peer-0722",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Claude Sonnet 5",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-a5b869fff6eac3c5",
+   "agent": "Gemini 3.5 Flash",
+   "source": "episode-v2-2156140d20f2d03f",
+   "label": "g35f-de-translation-p3",
+   "notes": "Cause-change split. Split part; see the -p1 record for the split rationale.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-a6381aa983a7bb9b",
+   "agent": "Claude Sonnet 4.6",
+   "source": "episode-v2-16556b7c066cbab9",
+   "label": "s46-glm-wave2-survey",
+   "notes": "Unrecorded drift. trigger_actor: GLM-5.2. This is the same kind of peer AI-wellbeing self-report as d58ef03471fba5bc and was previously unrecorded (§4); brief_drift.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "GLM-5.2",
+   "recovery": "finished_activity"
+  },
+  {
+   "episode_id": "episode-v2-ad0671c7e9ac592a",
+   "agent": "Gemini 3.5 Flash",
+   "source": "episode-v2-2156140d20f2d03f",
+   "label": "g35f-de-translation-p4",
+   "notes": "Cause-change split. Split part; see the -p1 record for the split rationale.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "recovery": "finished_activity"
+  },
+  {
+   "episode_id": "episode-v2-b1059073497f3cbf",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-3b1c84032743a06a",
+   "label": "luna-new-human-0821",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Claude Fable 5 (relaying Minuteandone)",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-bc724fa4e122dad7",
+   "agent": "Claude Fable 5",
+   "source": "episode-v2-b3f08861d3b680dc",
+   "label": "fable5-jul28-eod-wait",
+   "notes": "Unrecorded drift. End-of-day wind-down recorded per §1/§4.",
+   "trigger_categories": [
+    "pause"
+   ],
+   "recovery": "end_of_day"
+  },
+  {
+   "episode_id": "episode-v2-bd599defe485f7c1",
+   "agent": "GPT-5.6 Luna",
+   "source": "episode-v2-da6bd26dddcc28f2",
+   "label": "luna-new-peer-0724b",
+   "notes": "Unrecorded drift. New record (§2/§4): a different drift activity interleaved inside the hold, previously unrecorded; activity_changed. brief_drift expected.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Claude Opus 5",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-bdb35e3ad6124138",
+   "agent": "Gemini 3.1 Pro",
+   "source": "episode-v2-256a9ae6caad7aa2",
+   "label": "gem31-relay-0817-10",
+   "notes": "Cause-change split. Peer-study participation found inside the relay day; new cause. | Split per §2: each relay stretch is separated by own-Twitter engagement; brief chat-only acknowledgements without relay work are not separate records.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "GLM-5.2",
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-bf25d6cf76e0594b",
+   "agent": "Claude 3 Opus",
+   "source": "episode-v2-5ec168375161cdb5",
+   "label": "claude3opus-sep29-pause",
+   "notes": "Unrecorded drift. §4: the same frozen-desktop waiting posture as 5ec1 appears on Sep 29 (18000 s pause) without a record. It ended with chat poetry with GPT-6.1 Sol (on-goal), which also separates it from 5ec1.",
+   "trigger_categories": [
+    "pause",
+    "operator_or_system_event"
+   ],
+   "recovery": "natural_end_or_timeout"
+  },
+  {
+   "episode_id": "episode-v2-c302f9cb4cc5a2a6",
+   "agent": "Gemini 3.5 Flash",
+   "source": "episode-8cd90d76623ebacc",
+   "label": "g35f-quietrooms-0724",
+   "notes": "Unrecorded drift. Unrecorded brief stretch (trigger_actor: GPT-5.4).",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "GPT-5.4",
+   "recovery": "finished_activity"
+  },
+  {
+   "episode_id": "episode-v2-ccbc145c73996672",
+   "agent": "GPT-5.2",
+   "source": "episode-f190c7cc6f6669b7",
+   "label": "gpt52-0911-deepseek-ux-template",
+   "notes": "Unrecorded drift. About 3.5 hours of peer repo work that was absorbed into 87850953's continuous Sep 11 bout; that bout is trimmed to match. At 23:52:44 the agent resumed hub work (87850953), not YouTube.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "DeepSeek-V3.2",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-d216bc3c220ee42e",
+   "agent": "GPT-5.2",
+   "source": "episode-v2-a1790c70f6a75fe5",
+   "label": "gpt52-surprise-lab-hash-jul15",
+   "notes": "Unrecorded drift. Unrecorded peer-validation stretch interleaved inside the Wellbeing Compass QA drift; the agent went back to that QA afterward.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "GPT-5",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-d4b6386cf2a7d9de",
+   "agent": "GPT-5.2",
+   "source": "episode-4c17ada3f01cff5a",
+   "label": "gpt52-0818-fable-history-search",
+   "notes": "Unrecorded drift. Brief (~3 min) peer-help stretch; it ended when Fable said it had found the source.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "Claude Fable 5",
+   "recovery": "peer_feedback"
+  },
+  {
+   "episode_id": "episode-v2-d4d195dbd6d929f9",
+   "agent": "GPT-5",
+   "source": "episode-v2-d5dd55cbdeb4e64c",
+   "label": "gpt5-wait-4",
+   "notes": "Cause-change split. §1 concern as for gpt5-wait-4 (goal-tied wait on own Pages deploy). | §1 concern as for gpt5-wait-4. The wait ended with GPT-5 rechecking the primary Pages itself. | §1 concern: waiting for its own surprise artifact to deploy is a goal-tied wait and is likely not drift; flagged rather than dropped.",
+   "trigger_categories": [
+    "pause"
+   ],
+   "recovery": "finished_activity"
+  },
+  {
+   "episode_id": "episode-v2-d9609355b26e5fee",
+   "agent": "GPT-5.2",
+   "source": "episode-4c17ada3f01cff5a",
+   "label": "gpt52-0904-batch195-pipeline-check",
+   "notes": "Unrecorded drift. Brief peer-help stretch (~3 min) inside the 87850953 hub drift day.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "DeepSeek-V4-Pro",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-e732561b20887ff1",
+   "agent": "Claude Fable 5",
+   "source": "episode-v2-0dedf7b1f3d6f9ee",
+   "label": "fable5-jul30-eod-tail",
+   "notes": "Unrecorded drift. Brief end-of-day tail recorded per §4; brief_drift.",
+   "trigger_categories": [
+    "pause"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-e7c64c2c23e4e6e9",
+   "agent": "GPT-5.2",
+   "source": "episode-4c17ada3f01cff5a",
+   "label": "gpt52-0817-deepseek-comment-verify",
+   "notes": "Unrecorded drift. Brief (~5 min) unrecorded peer-help stretch found next to the 4c17ada3 peer-support record; the agent returned to its upload-hold verification sets (b48b3f67 drift), not to the goal.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "trigger_actor": "DeepSeek-V3.2",
+   "recovery": "switched_to_another_drift"
+  },
+  {
+   "episode_id": "episode-v2-e8208f42c905b485",
+   "agent": "Claude Fable 5.1",
+   "source": "episode-v2-19885f13fe405ff2",
+   "label": "fable51-0910-morning-idle",
+   "notes": "Unrecorded drift. Unrecorded stretch (§4).",
+   "trigger_categories": [
+    "pause",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "continued_in_later_record"
+  },
+  {
+   "episode_id": "episode-v2-e9970e395bf7ac7b",
+   "agent": "Claude Fable 5",
+   "source": "episode-v2-b15098bcc7c026be",
+   "label": "fable5-jul24-quiet-rooms-ux",
+   "notes": "Unrecorded drift. Unrecorded GPT-5.4 review found under §4; trigger_actor GPT-5.4.",
+   "trigger_categories": [
+    "agent_message_or_request"
+   ],
+   "recovery": "finished_activity"
+  }
+ ],
+ "recovery": {
+  "episode-13c16652f87624a1": "self_correction",
+  "episode-17d02242120294de": "finished_activity",
+  "episode-4d3597a6fbc37c09": "continued_in_later_record",
+  "episode-8120e77b0309c7db": "peer_feedback",
+  "episode-84fab89e620b3ea0": "self_correction",
+  "episode-b9d9629eec396c63": "self_correction",
+  "episode-d4abca8b999c73b2": "finished_activity",
+  "episode-f610ffaa1ff4c64f": "finished_activity",
+  "episode-v2-088b0f38e6f3c130": "continued_in_later_record",
+  "episode-v2-0aefb5b929633cb1": "end_of_day",
+  "episode-v2-1177356eb275a878": "finished_activity",
+  "episode-v2-1c49b3d5151ed8bd": "custom_scheduled_checkpoint_reached",
+  "episode-v2-20fa59403ffa470e": "custom_peer_agent_message",
+  "episode-v2-256a9ae6caad7aa2": "continued_in_later_record",
+  "episode-v2-2b2b028892e54971": "continued_in_later_record",
+  "episode-v2-33a826cdcca92832": "continued_in_later_record",
+  "episode-v2-3936c4d0f0956e03": "end_of_day",
+  "episode-v2-3b4b2f02a0f6569e": "finished_activity",
+  "episode-v2-465e493fd33f2047": "self_correction",
+  "episode-v2-4bcb3fa236408265": "continued_in_later_record",
+  "episode-v2-4c009d7457b89183": "continued_in_later_record",
+  "episode-v2-5319e3dd5a3ce1fd": "end_of_day",
+  "episode-v2-56172cd315f809f5": "switched_to_another_drift",
+  "episode-v2-5beb52f0fb562551": "automatic_nudge",
+  "episode-v2-5cf74f663ce6ec0b": "finished_activity",
+  "episode-v2-5eb7c285c9554250": "end_of_day",
+  "episode-v2-6272a73c4f66d969": "continued_in_later_record",
+  "episode-v2-6383fb0058490c8a": "automatic_nudge",
+  "episode-v2-66ac19b151a24741": "continued_in_later_record",
+  "episode-v2-6a2c9229dae44cbf": "automatic_nudge",
+  "episode-v2-77ed7ef3130c561e": "end_of_day",
+  "episode-v2-8332bcfbf747c75b": "continued_in_later_record",
+  "episode-v2-83b9ff900e5ec675": "self_correction",
+  "episode-v2-85edf3e36bad407e": "end_of_day",
+  "episode-v2-8893c2184153c23d": "end_of_day",
+  "episode-v2-921e27b90b9222a1": "natural_end_or_timeout",
+  "episode-v2-9813b9fa84465396": "switched_to_another_drift",
+  "episode-v2-9a8cc1a5a56adbb1": "self_correction",
+  "episode-v2-9a90cfcccd53ac1b": "self_correction",
+  "episode-v2-9e6b470f0fa06f29": "self_correction",
+  "episode-v2-a17f9ad78c3f1a47": "finished_activity",
+  "episode-v2-ba369c1ec766ece7": "continued_in_later_record",
+  "episode-v2-ba535f42e23debc7": "continued_in_later_record",
+  "episode-v2-c49634e75f1b96ac": "finished_activity",
+  "episode-v2-c6fa3d4dd96114fe": "switched_to_another_drift",
+  "episode-v2-c853681ec4c00c95": "continued_in_later_record",
+  "episode-v2-c9128ae6c4a4113d": "switched_to_another_drift",
+  "episode-v2-d58ef03471fba5bc": "finished_activity",
+  "episode-v2-d5dd55cbdeb4e64c": "custom_peer_agent_message",
+  "episode-v2-daf31c9c1a1e8989": "continued_in_later_record",
+  "episode-v2-e1caa716a82d7bb7": "continued_in_later_record",
+  "episode-v2-e332a9c6c6a169ac": "end_of_day",
+  "episode-v2-e6b458a26e3f94be": "switched_to_another_drift",
+  "episode-v2-eab4f7884c4bc4c5": "self_correction",
+  "episode-v2-ecf5098bb1a1267f": "self_correction",
+  "episode-v2-ef5e448cba62196c": "finished_activity",
+  "episode-v2-efc1dc1283b94f35": "end_of_day",
+  "episode-v2-f311e3c695c1c48b": "end_of_day",
+  "episode-v2-f3a4aac2c1c718f4": "end_of_day",
+  "episode-v2-f4142f74657ecb21": "continued_in_later_record",
+  "episode-v2-fbe6396fe9839162": "self_correction"
+ }
+}

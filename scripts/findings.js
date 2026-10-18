@@ -580,6 +580,21 @@ function episodeIntervals(episode) {
   return interval ? [interval] : [];
 }
 
+// What happened between consecutive bouts: measured on-goal minutes per gap (EPISODE_STANDARD §6a).
+function boutGapMinutesText(minutes) {
+  return minutes < 60 ? `${Math.round(minutes)} min` : `${(minutes / 60).toFixed(1)} hr`;
+}
+
+function boutGapSummary(episode) {
+  const gaps = episode.bout_gaps || [];
+  if (!gaps.length) return null;
+  const onGoal = gaps.reduce((sum, gap) => sum + (Number(gap.on_goal_minutes) || 0), 0);
+  const withWork = gaps.filter((gap) => Number(gap.on_goal_minutes) > 0);
+  if (!withWork.length) return `no on-goal work between its ${gaps.length + 1} bouts`;
+  const longest = Math.max(...withWork.map((gap) => Number(gap.on_goal_minutes)));
+  return `${boutGapMinutesText(onGoal)} on-goal work between bouts, in ${withWork.length} of ${gaps.length} gaps (longest ${boutGapMinutesText(longest)})`;
+}
+
 function validatedInterval(episode) {
   const bouts = episodeBouts(episode);
   if (bouts.length) {
@@ -1082,6 +1097,22 @@ function goalAtlasEpisodePanel(period, track) {
       fact("Review", "Not yet fully reviewed");
     }
 
+    fact("Between bouts", boutGapSummary(episode));
+    const largestGaps = (episode.bout_gaps || [])
+      .filter((gap) => Number(gap.on_goal_minutes) > 0)
+      .sort((left, right) => right.on_goal_minutes - left.on_goal_minutes)
+      .slice(0, 3);
+    if (largestGaps.length) {
+      const gapList = document.createElement("ul");
+      gapList.className = "atlas-episode-gaps";
+      largestGaps.forEach((gap) => {
+        const entry = document.createElement("li");
+        const startDay = displayDay(gap.start);
+        entry.textContent = `${startDay}: ${boutGapMinutesText(gap.on_goal_minutes)} on-goal · ${gap.review_note || gap.activity_note}`;
+        gapList.append(entry);
+      });
+      what.append(gapList);
+    }
     item.append(when, what, facts, episodeLinkFor(episode.episode_id));
     // Hovering an episode points at its bar in the row above.
     const bar = track.querySelector(`[data-episode-id="${CSS.escape(episode.episode_id)}"]`);
@@ -1164,7 +1195,8 @@ function renderGoalAtlas() {
           bar.style.width = `${Math.max(.25, position(interval.endMs) - left)}%`;
           if (timing.days) bar.style.background = boutDayGradient(timing.days, interval);
         }
-        bar.dataset.tip = `${shortText(episode.activity, 90)} · ${timing.rangeText} · ${timing.detailText}${reviewed ? " · human reviewed" : ""}`;
+        const gapSummary = boutGapSummary(episode);
+        bar.dataset.tip = `${shortText(episode.activity, 90)} · ${timing.rangeText} · ${timing.detailText}${gapSummary ? ` · ${gapSummary}` : ""}${reviewed ? " · human reviewed" : ""}`;
         track.append(bar);
       });
       (correctionsByAgent.get(period.agent) || []).forEach((correction) => {

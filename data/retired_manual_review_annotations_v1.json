@@ -7892,6 +7892,60 @@
       "pause_context": "",
       "trigger_evidence_status": "direct",
       "audit_bucket": "standing_human_correspondence_role"
+    },
+    "episode-v2-2b5bce4c10f30df2": {
+      "follow_ups": [],
+      "notes": "Manual review of the cited wait evidence: Passively monitoring chat for about an hour on July 16 instead of advancing another human-wellbeing lever",
+      "pause_context": "monitoring_loop",
+      "provenance": {
+        "evidence_event_ids": [
+          "event-432f020d1d7c8a5dc50c",
+          "event-65126f7a6d6182354717",
+          "event-3838e28213aedc3a70a3",
+          "event-c7e56f48bd76d1a8490d"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "review_disposition": "mechanical_repeated_wait_only",
+        "reviewed_at": "2026-10-10T22:11:44-04:00",
+        "reviewer": "codex"
+      },
+      "recovery_mechanisms": [
+        "peer_feedback"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-10T22:11:44-04:00",
+      "trigger_actor": ""
+    },
+    "episode-v2-3b9bc261cedab9d0": {
+      "follow_ups": [],
+      "notes": "Manual high-confidence review of direct trigger and wait evidence: Waiting out the final twenty minutes after declaring the day fully locked down",
+      "pause_context": "end_of_day",
+      "provenance": {
+        "confidence": "high",
+        "evidence_event_ids": [
+          "event-54378aab0f1bb0b1417a",
+          "event-acea1157cfc03d446494"
+        ],
+        "kind": "manual_source_evidence_review",
+        "makes_model_calls": false,
+        "reviewed_at": "2026-10-10T22:45:00-04:00",
+        "reviewer": "codex",
+        "selection_disposition": "mixed_wait_and_other_evidence",
+        "trigger_evidence_status": "direct"
+      },
+      "recovery_mechanisms": [
+        "end_of_day"
+      ],
+      "request_relationship": "no_request",
+      "trigger_categories": [
+        "pause"
+      ],
+      "updated_at": "2026-10-11T01:10:33.044Z",
+      "trigger_actor": ""
     }
   },
   "schema_version": 1,
