@@ -2967,7 +2967,6 @@ function renderGoalWindowCard(data) {
   const title = cardElement("div", "gw-title");
   title.append(cardElement("h4", null, agentLabel(period.agent)));
   const badges = cardElement("div", "gw-badges");
-  badges.append(cardElement("span", "gw-badge", modelFamily(period.agent)));
   const category = goalCategories.find((item) => item.id === goalCategoryByAgent.get(period.agent));
   if (category) badges.append(cardElement("span", "gw-badge", category.label));
   if (outsideTargetingByAgent.has(period.agent)) badges.append(cardElement("span", "gw-badge is-targeted", "Targeted"));
@@ -3095,6 +3094,16 @@ function initializeGoalWindowCards() {
     option.textContent = category.label;
     select.append(option);
   });
+  // Legend for the origin colors used in each card's "What started the drift" bars and episode list.
+  document.querySelector("#gw-legend").replaceChildren(...ORIGIN_GROUPS.map((group) => {
+    const item = document.createElement("span");
+    item.className = "legend-item";
+    const swatch = document.createElement("span");
+    swatch.className = "legend-swatch";
+    swatch.style.background = group.color;
+    item.append(swatch, document.createTextNode(group.label));
+    return item;
+  }));
   ["#gw-sort", "#gw-category"].forEach((id) => document.querySelector(id).addEventListener("change", renderGoalWindowCards));
   document.querySelector("#gw-search").addEventListener("input", renderGoalWindowCards);
   renderGoalWindowCards();
