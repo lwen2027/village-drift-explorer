@@ -2681,159 +2681,142 @@ function sourceAgentFor(actor) {
   return "Outside humans";
 }
 
-function renderWhoPullsWhom() {
-  const mode = document.querySelector("#pull-measure").value;
-  const cells = new Map();
-  const sourceTotals = new Map();
-  const targetTotals = new Map();
+// Outside-request episodes as (source, target, episode count, drift hours) tallies under the given key functions.
+function pullTallies(sourceKey, targetKey) {
+  const tallies = new Map();
   rows.forEach((row) => {
     if (triggerOriginFor(row.annotation) !== "outside" || !row.annotation.trigger_actor) return;
-    const source = sourceAgentFor(row.annotation.trigger_actor);
-    const target = row.episode.agent;
-    const value = mode === "hours" ? hoursOf(row) : 1;
+    const source = sourceKey(sourceAgentFor(row.annotation.trigger_actor));
+    const target = targetKey(row.episode.agent);
     const key = `${source}\u0000${target}`;
-    cells.set(key, (cells.get(key) || 0) + value);
-    sourceTotals.set(source, (sourceTotals.get(source) || 0) + value);
-    targetTotals.set(target, (targetTotals.get(target) || 0) + value);
+    if (!tallies.has(key)) tallies.set(key, { source, target, episodes: 0, hours: 0 });
+    const tally = tallies.get(key);
+    tally.episodes += 1;
+    tally.hours += hoursOf(row);
   });
-  const order = (totals) => [...totals.entries()].filter(([, value]) => value > 0).sort((left, right) => right[1] - left[1]).map(([name]) => name);
-  const sources = order(sourceTotals).slice(0, 14);
-  const targets = order(targetTotals).slice(0, 16);
-  const max = Math.max(.0001, ...[...cells.values()]);
-  const table = document.querySelector("#pull-matrix");
+  return [...tallies.values()];
+}
+
+// Heatmap of tallies. Axes are ordered by episode counts in both modes, so they stay put when toggling.
+function renderPullMatrix(table, tallies, mode, { maxSources = 14, maxTargets = 16, corner, labelFor = (name) => name }) {
+  const totals = (field) => {
+    const map = new Map();
+    tallies.forEach((tally) => map.set(tally[field], (map.get(tally[field]) || 0) + tally.episodes));
+    return [...map.entries()].sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0])).map(([name]) => name);
+  };
+  const sources = totals("source").slice(0, maxSources);
+  const targets = totals("target").slice(0, maxTargets);
+  const value = (tally) => (mode === "hours" ? tally.hours : tally.episodes);
+  const cells = new Map(tallies.map((tally) => [`${tally.source}\u0000${tally.target}`, value(tally)]));
+  const max = Math.max(.0001, ...cells.values());
   table.replaceChildren();
   table.style.gridTemplateColumns = `minmax(150px, 1.4fr) repeat(${targets.length}, minmax(34px, 1fr))`;
-  const corner = document.createElement("div");
-  corner.className = "pull-head is-corner";
-  corner.textContent = "Source ↓ / drifting agent →";
-  table.append(corner);
+  const cornerNode = document.createElement("div");
+  cornerNode.className = "pull-head is-corner";
+  cornerNode.textContent = corner;
+  table.append(cornerNode);
   targets.forEach((target) => {
     const head = document.createElement("div");
     head.className = "pull-head";
-    head.textContent = agentLabel(target);
-    head.title = agentLabel(target);
+    head.textContent = labelFor(target);
+    head.title = labelFor(target);
     table.append(head);
   });
   sources.forEach((source) => {
     const name = document.createElement("div");
     name.className = "pull-source";
-    name.textContent = source === "Outside humans" || source === "Multiple agents" ? source : agentLabel(source);
+    name.textContent = labelFor(source);
     table.append(name);
     targets.forEach((target) => {
-      const value = cells.get(`${source}\u0000${target}`) || 0;
+      const cellValue = cells.get(`${source}\u0000${target}`) || 0;
       const cell = document.createElement("div");
-      cell.className = `pull-cell${value ? "" : " is-zero"}`;
-      cell.style.setProperty("--heat", value ? (.12 + .8 * value / max).toFixed(3) : "0");
-      cell.textContent = value ? (mode === "hours" ? (value >= 10 ? Math.round(value) : value.toFixed(1)) : String(value)) : "";
-      cell.title = `${source} → ${target}: ${measureText(value, mode)}${mode === "hours" ? " of drift" : " episodes"}`;
+      cell.className = `pull-cell${cellValue ? "" : " is-zero"}`;
+      cell.style.setProperty("--heat", cellValue ? (.12 + .8 * cellValue / max).toFixed(3) : "0");
+      cell.textContent = cellValue ? (mode === "hours" ? (cellValue >= 10 ? Math.round(cellValue) : cellValue.toFixed(1)) : String(cellValue)) : "";
+      cell.title = `${labelFor(source)} → ${labelFor(target)}: ${measureText(cellValue, mode)}${mode === "hours" ? " of drift" : " episodes"}`;
       table.append(cell);
     });
   });
+  return { sources, targets };
+}
+
+const pullLabel = (name) => (name === "Outside humans" || name === "Multiple agents" ? name : agentLabel(name));
+
+function renderWhoPullsWhom() {
+  const mode = document.querySelector("#pull-measure").value;
+  const { sources, targets } = renderPullMatrix(document.querySelector("#pull-matrix"), pullTallies((name) => name, (name) => name), mode,
+    { corner: "Source ↓ / drifting agent →", labelFor: pullLabel });
   document.querySelector("#pull-meta").textContent = `${sources.length} sources · ${targets.length} drifting agents shown`;
 }
 
-const STORY_MARKERS = [
-  { id: "correction", label: "Operator correction", symbol: "▼" },
-  { id: "nudge", label: "Nudge inside an episode", symbol: "●" },
-  { id: "rule", label: "First self-authored rule cited", symbol: "★" }
-];
+function renderFamilyPulls() {
+  const mode = document.querySelector("#family-pull-measure").value;
+  const family = (name) => (name === "Outside humans" || name === "Multiple agents" ? name : modelFamily(name));
+  const tallies = pullTallies(family, family);
+  const { sources, targets } = renderPullMatrix(document.querySelector("#family-pull-matrix"), tallies, mode,
+    { corner: "Source family ↓ / drifting family →", maxSources: 12, maxTargets: 10 });
+  const agentPairs = tallies.filter((tally) => tally.source !== "Outside humans" && tally.source !== "Multiple agents");
+  const same = agentPairs.filter((tally) => tally.source === tally.target);
+  const sum = (items, field) => items.reduce((total, tally) => total + tally[field], 0);
+  document.querySelector("#family-pull-note").textContent =
+    `Among agent-to-agent pulls, ${percentText(sum(same, "episodes") / Math.max(1, sum(agentPairs, "episodes")))} of episodes and `
+    + `${percentText(sum(same, "hours") / Math.max(.0001, sum(agentPairs, "hours")))} of drift hours stay within one model family. `
+    + "Families differ in how many agents they have in the Village, so compare rows with their totals in mind.";
+  document.querySelector("#family-pull-meta").textContent = `${sources.length} source groups · ${targets.length} families`;
+}
 
-function renderStoryStrips() {
-  const container = document.querySelector("#story-strips");
-  container.replaceChildren();
-  const periods = goalPeriods.filter((period) => period.episodes.length)
-    .sort((left, right) => left.startMs - right.startMs || left.agent.localeCompare(right.agent));
-  const axisStart = Math.min(...periods.map((period) => period.startMs));
-  const axisEnd = Math.max(...periods.map((period) => period.endMs));
-  const position = (ms) => ((ms - axisStart) / Math.max(1, axisEnd - axisStart)) * 100;
-  const rulesByEpisode = selfAuthoredRules.episodes || {};
-  periods.forEach((period) => {
-    const row = document.createElement("div");
-    row.className = "story-row";
-    const name = document.createElement("div");
-    name.className = "story-name";
-    const hours = period.episodes.reduce((sum, episode) => sum + driftHoursFor(episode).hours, 0);
-    name.innerHTML = "";
-    const agentNode = document.createElement("strong");
-    agentNode.textContent = agentLabel(period.agent);
-    const statsNode = document.createElement("span");
-    statsNode.textContent = `${period.episodes.length} ep · ${measureText(hours, "hours")}`;
-    name.append(agentNode, statsNode);
-    name.title = period.goal;
-    const track = document.createElement("div");
-    track.className = "story-track";
-    const windowNode = document.createElement("span");
-    windowNode.className = "story-window";
-    windowNode.style.left = `${position(period.startMs)}%`;
-    windowNode.style.width = `${Math.max(.2, position(period.endMs) - position(period.startMs))}%`;
-    track.append(windowNode);
-    let firstRule = null;
-    period.episodes.forEach((episode) => {
-      const review = reviewRowByEpisode.get(episode.episode_id);
-      const origin = review ? triggerOriginFor(review.annotation) : null;
-      episodeIntervals(episode).forEach((interval) => {
-        const bar = document.createElement("span");
-        bar.className = "story-bar";
-        bar.style.left = `${position(interval.startMs)}%`;
-        bar.style.width = `${Math.max(.12, position(interval.endMs) - position(interval.startMs))}%`;
-        bar.style.background = origin ? ORIGIN_BY_ID.get(origin).color : "#8d8678";
-        bar.dataset.tip = `${shortText(episode.activity, 90)} · ${origin ? ORIGIN_BY_ID.get(origin).label : "not yet reviewed"}`;
-        track.append(bar);
-      });
-      (episode.operator_nudges_within_evidence || []).forEach((nudge) => {
-        const at = timestampMs(nudge.timestamp);
-        if (at == null) return;
-        const marker = document.createElement("span");
-        marker.className = "story-marker is-nudge";
-        marker.textContent = "●";
-        marker.style.left = `${position(at)}%`;
-        marker.dataset.tip = `Nudge · ${displayDay(nudge.timestamp)} · ${nudge.outcome === "corrected" ? "drift corrected" : "drift continued"}`;
-        track.append(marker);
-      });
-      (rulesByEpisode[episode.episode_id] || []).forEach((tag) => {
-        if (!firstRule || tag.first_seen < firstRule.first_seen) firstRule = tag;
-      });
-    });
-    (correctionsByAgent.get(period.agent) || []).forEach((correction) => {
-      const at = timestampMs(correction.timestamp);
-      if (at == null || at < period.startMs || at > period.endMs) return;
-      const marker = document.createElement("span");
-      marker.className = "story-marker is-correction";
-      marker.textContent = "▼";
-      marker.style.left = `${position(at)}%`;
-      marker.dataset.tip = `Operator correction · ${displayDay(correction.timestamp)} · ${correction.summary}`;
-      track.append(marker);
-    });
-    if (firstRule) {
-      const marker = document.createElement("span");
-      marker.className = "story-marker is-rule";
-      marker.textContent = "★";
-      marker.style.left = `${position(timestampMs(firstRule.first_seen))}%`;
-      marker.dataset.tip = `First self-authored rule cited · ${displayDay(firstRule.first_seen)} · ${(selfAuthoredRules.rules || {})[firstRule.rule] || firstRule.rule}: “${firstRule.excerpt}”`;
-      track.append(marker);
-    }
-    row.append(name, track);
-    container.append(row);
+function renderReciprocity() {
+  const tallies = pullTallies((name) => name, (name) => name)
+    .filter((tally) => tally.source !== "Outside humans" && tally.source !== "Multiple agents" && tally.source !== tally.target);
+  const byPair = new Map(tallies.map((tally) => [`${tally.source}\u0000${tally.target}`, tally]));
+  const seen = new Set();
+  const mutual = [];
+  const oneWay = [];
+  tallies.forEach((tally) => {
+    const pairKey = [tally.source, tally.target].sort().join("\u0000");
+    if (seen.has(pairKey)) return;
+    seen.add(pairKey);
+    const back = byPair.get(`${tally.target}\u0000${tally.source}`);
+    if (back) mutual.push([tally, back]);
+    else oneWay.push(tally);
   });
-  const legend = document.querySelector("#story-legend");
-  legend.replaceChildren(
-    ...ORIGIN_GROUPS.map((group) => {
-      const item = document.createElement("span");
-      item.className = "legend-item";
-      const swatch = document.createElement("span");
-      swatch.className = "legend-swatch";
-      swatch.style.background = group.color;
-      item.append(swatch, document.createTextNode(group.label));
-      return item;
-    }),
-    ...STORY_MARKERS.map((marker) => {
-      const item = document.createElement("span");
-      item.className = "legend-item";
-      item.textContent = `${marker.symbol} ${marker.label}`;
-      return item;
-    })
-  );
-  document.querySelector("#story-meta").textContent = `${periods.length} goal periods with drift`;
+  const cellText = (tally) => (tally ? `${tally.episodes} ep · ${measureText(tally.hours, "hours")}` : "—");
+  const table = document.querySelector("#reciprocity-table");
+  table.replaceChildren();
+  const header = document.createElement("div");
+  header.className = "reciprocity-row is-head";
+  ["Pair", "A pulls B", "B pulls A"].forEach((text) => {
+    const cell = document.createElement("span");
+    cell.textContent = text;
+    header.append(cell);
+  });
+  table.append(header);
+  const addRow = (first, second, kind) => {
+    const row = document.createElement("div");
+    row.className = `reciprocity-row is-${kind}`;
+    const pair = document.createElement("span");
+    pair.textContent = `${agentLabel(first.source)} ↔ ${agentLabel(first.target)}`;
+    const forward = document.createElement("span");
+    forward.textContent = cellText(first);
+    const backward = document.createElement("span");
+    backward.textContent = cellText(second);
+    row.append(pair, forward, backward);
+    table.append(row);
+  };
+  mutual.sort((left, right) => (right[0].episodes + right[1].episodes) - (left[0].episodes + left[1].episodes))
+    .forEach(([first, second]) => addRow(first, second, "mutual"));
+  oneWay.sort((left, right) => right.episodes - left.episodes || right.hours - left.hours).slice(0, 8)
+    .forEach((tally) => addRow(tally, null, "one-way"));
+  const pairs = mutual.length + oneWay.length;
+  const mutualEpisodes = mutual.reduce((sum, [first, second]) => sum + first.episodes + second.episodes, 0);
+  const mutualHours = mutual.reduce((sum, [first, second]) => sum + first.hours + second.hours, 0);
+  const totalEpisodes = tallies.reduce((sum, tally) => sum + tally.episodes, 0);
+  const totalHours = tallies.reduce((sum, tally) => sum + tally.hours, 0);
+  document.querySelector("#reciprocity-note").textContent =
+    `${mutual.length} of ${pairs} agent pairs pull each other in both directions. Those mutual pairs account for `
+    + `${percentText(mutualEpisodes / Math.max(1, totalEpisodes))} of agent-to-agent drift episodes and ${percentText(mutualHours / Math.max(.0001, totalHours))} of its drift hours. `
+    + "Mutual pairs are listed first, then the largest one-way pulls.";
+  document.querySelector("#reciprocity-meta").textContent = `${pairs} agent pairs`;
 }
 
 function initializeDriftDynamics() {
@@ -2844,7 +2827,9 @@ function initializeDriftDynamics() {
   renderNudgeResponse();
   renderWhoPullsWhom();
   document.querySelector("#pull-measure").addEventListener("change", renderWhoPullsWhom);
-  renderStoryStrips();
+  renderFamilyPulls();
+  document.querySelector("#family-pull-measure").addEventListener("change", renderFamilyPulls);
+  renderReciprocity();
 }
 
 function initializeExperimentalLenses() {

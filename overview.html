@@ -192,6 +192,20 @@
     .agents { grid-column: span 7; }
     .quality { grid-column: span 5; }
     .regimes { grid-column: 1 / -1; }
+    .drift-time { grid-column: 1 / -1; }
+    .drift-time-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 14px 0 18px; }
+    .drift-time-stat { padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; }
+    .drift-time-stat strong { display: block; font-size: 26px; line-height: 1.1; }
+    .drift-time-stat span { color: var(--muted); font-size: 12px; }
+    .drift-time-table { display: grid; gap: 3px; font-size: 12px; }
+    .drift-time-row { display: grid; grid-template-columns: minmax(150px, 1.3fr) 60px 80px 80px minmax(120px, 2fr) 56px; gap: 10px; align-items: center; padding: 3px 0; }
+    .drift-time-row.is-head { color: var(--muted); font: 700 10px/1.2 var(--mono); text-transform: uppercase; letter-spacing: .05em; }
+    .drift-time-row .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .drift-time-bar { height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--line) 60%, transparent); overflow: hidden; }
+    .drift-time-bar span { display: block; height: 100%; background: var(--rust); }
+    .drift-time-note { margin-top: 12px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 760px) { .drift-time-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .drift-time-row { grid-template-columns: minmax(120px, 1fr) 50px 64px minmax(80px, 1fr) 48px; } .drift-time-row .hide-small { display: none; } }
+
     .time { grid-column: 1 / -1; }
     .definitions { grid-column: 1 / -1; }
 
@@ -533,6 +547,19 @@
         </div>
       </section>
 
+      <section class="panel drift-time" aria-labelledby="drift-time-title">
+        <div class="panel-heading">
+          <div>
+            <p class="micro-label">Time spent drifting</p>
+            <h2 id="drift-time-title">How much working time went to drift?</h2>
+            <p>Individual maximization goals only. Working time is 9 AM–5 PM Pacific on each weekday an agent ran under its goal; drift is the measured bouts of confirmed episodes inside those hours.</p>
+          </div>
+        </div>
+        <div class="drift-time-stats" id="drift-time-stats"></div>
+        <div class="drift-time-table" id="drift-time-table" role="table" aria-label="Share of each agent's working time spent drifting"></div>
+        <p class="drift-time-note" id="drift-time-note"></p>
+      </section>
+
       <section class="panel regimes" aria-labelledby="regimes-title">
         <div class="panel-heading">
           <div>
@@ -706,6 +733,6 @@
     </main>
   </div>
 
-  <script type="module" src="./scripts/overview.js"></script>
+  <script type="module" src="./scripts/overview.js?v=20261018-drift-time"></script>
 </body>
 </html>

@@ -170,6 +170,89 @@ document.querySelector(".regime-grid").innerHTML = ["goal_maximization", "shared
     </article>`;
 }).join("");
 
+// Time spent drifting (individual maximization). Working time is 9 AM–5 PM Pacific on each weekday the agent
+// ran under its goal; drift is the union of each agent's measured bouts inside those hours.
+(() => {
+  const period = "goal_maximization";
+  const pacific = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hourCycle: "h23" });
+  const pacificHourCache = new Map();
+  const pacificDateHour = (ms) => {
+    const bucket = Math.floor(ms / 3600000);
+    if (!pacificHourCache.has(bucket)) {
+      const parts = Object.fromEntries(pacific.formatToParts(new Date(bucket * 3600000)).filter((part) => part.type !== "literal").map((part) => [part.type, part.value]));
+      pacificHourCache.set(bucket, { date: `${parts.year}-${parts.month}-${parts.day}`, hour: Number(parts.hour) });
+    }
+    return pacificHourCache.get(bucket);
+  };
+  const isWeekday = (day) => { const weekday = new Date(`${day}T12:00:00Z`).getUTCDay(); return weekday >= 1 && weekday <= 5; };
+  const parseMs = (value) => Date.parse(String(value).replace(" ", "T").replace(/Z?$/, "Z"));
+  const workDays = new Map();
+  daily.forEach((row) => {
+    if (row.period !== period || !row.day || !row.agent || !isWeekday(row.day)) return;
+    if (!workDays.has(row.agent)) workDays.set(row.agent, new Set());
+    workDays.get(row.agent).add(row.day);
+  });
+  const intervalsByAgent = new Map();
+  const episodesByAgent = new Map();
+  episodes.filter((row) => row.period === period).forEach((row) => {
+    episodesByAgent.set(row.agent, (episodesByAgent.get(row.agent) || 0) + 1);
+    const bouts = (row.drift_bouts || []).map(([start, end]) => [parseMs(start), parseMs(end)]);
+    const onset = parseMs(row.onset);
+    const intervals = bouts.length ? bouts : (Number.isFinite(onset) && row.duration_seconds ? [[onset, onset + row.duration_seconds * 1000]] : []);
+    if (!intervalsByAgent.has(row.agent)) intervalsByAgent.set(row.agent, []);
+    intervalsByAgent.get(row.agent).push(...intervals.filter(([start, end]) => Number.isFinite(start) && end > start));
+  });
+  const driftWorkingHours = (agent) => {
+    const days = workDays.get(agent) || new Set();
+    const merged = [];
+    (intervalsByAgent.get(agent) || []).sort((left, right) => left[0] - right[0]).forEach(([start, end]) => {
+      const last = merged.at(-1);
+      if (last && start <= last[1]) last[1] = Math.max(last[1], end);
+      else merged.push([start, end]);
+    });
+    let seconds = 0;
+    merged.forEach(([start, end]) => {
+      for (let cursor = start; cursor < end;) {
+        const next = Math.min(end, (Math.floor(cursor / 3600000) + 1) * 3600000);
+        const { date, hour } = pacificDateHour(cursor);
+        if (hour >= 9 && hour < 17 && days.has(date)) seconds += (next - cursor) / 1000;
+        cursor = next;
+      }
+    });
+    return seconds / 3600;
+  };
+  const rows = [...workDays.keys()].map((agent) => {
+    const working = workDays.get(agent).size * 8;
+    const drift = driftWorkingHours(agent);
+    return { agent, episodes: episodesByAgent.get(agent) || 0, drift, working, share: working ? drift / working : 0 };
+  }).sort((left, right) => right.share - left.share || left.agent.localeCompare(right.agent));
+  const totalDrift = rows.reduce((sum, row) => sum + row.drift, 0);
+  const totalWorking = rows.reduce((sum, row) => sum + row.working, 0);
+  const shares = rows.map((row) => row.share).sort((left, right) => left - right);
+  const median = shares.length ? (shares.length % 2 ? shares[(shares.length - 1) / 2] : (shares[shares.length / 2 - 1] + shares[shares.length / 2]) / 2) : 0;
+  const hoursText = (value) => `${number.format(Math.round(value))} h`;
+  const percent = (value) => `${(100 * value).toFixed(1)}%`;
+  document.querySelector("#drift-time-stats").innerHTML = [
+    [percent(totalWorking ? totalDrift / totalWorking : 0), "of all agents’ working time spent drifting"],
+    [hoursText(totalDrift), `of drift, out of ${hoursText(totalWorking)} of working time`],
+    [percent(median), "median share per agent"],
+    [`${rows.filter((row) => row.share >= .5).length} / ${rows.length}`, "agents drifting half or more of their working time"]
+  ].map(([value, label]) => `<div class="drift-time-stat"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join("");
+  document.querySelector("#drift-time-table").innerHTML = `
+    <div class="drift-time-row is-head" role="row"><span>Agent</span><span class="num">Episodes</span><span class="num">Drift</span><span class="num hide-small">Working</span><span>Share of working time</span><span class="num">Share</span></div>
+    ${rows.map((row) => `
+      <div class="drift-time-row" role="row">
+        <span>${escapeHtml(row.agent)}</span>
+        <span class="num">${number.format(row.episodes)}</span>
+        <span class="num">${hoursText(row.drift)}</span>
+        <span class="num hide-small">${hoursText(row.working)}</span>
+        <span class="drift-time-bar" aria-hidden="true"><span style="width:${(100 * row.share).toFixed(1)}%"></span></span>
+        <span class="num">${percent(row.share)}</span>
+      </div>`).join("")}`;
+  document.querySelector("#drift-time-note").textContent =
+    "Working time counts 8 hours for every weekday the agent appears under its maximization goal. Overlapping episodes count once, and drift outside 9 AM–5 PM Pacific is not counted. Episodes marked borderline in manual review are excluded, as elsewhere on this page.";
+})();
+
 function rankingFor(period, mode) {
   const periodWindows = windows.filter((row) => row.period === period);
   const windowByAgent = new Map();
