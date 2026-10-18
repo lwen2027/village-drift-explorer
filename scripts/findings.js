@@ -602,6 +602,7 @@ function driftHoursFor(episode) {
 
 function measureText(value, mode) {
   if (mode !== "hours") return String(value);
+  if (value > 0 && value < .05) return "<0.1 h";
   return value >= 10 ? `${Math.round(value).toLocaleString()} h` : `${value.toFixed(1)} h`;
 }
 
@@ -2084,11 +2085,14 @@ function renderResilienceScorecards() {
     if (!reviewedByAgent.has(row.episode.agent)) reviewedByAgent.set(row.episode.agent, []);
     reviewedByAgent.get(row.episode.agent).push(row);
   });
+  const mode = document.querySelector("#resilience-measure").value;
+  const weight = rowWeight(mode);
+  const total = (input) => input.reduce((sum, row) => sum + weight(row), 0);
   const scorecards = [...reviewedByAgent.entries()].map(([agent, agentRows]) => {
-    const recovered = agentRows.filter((row) => isObservedRecovery(row.annotation)).length;
-    const selfCorrected = agentRows.filter((row) => row.annotation.recovery_mechanisms.includes("self_correction")).length;
-    return { agent, reviewed: agentRows.length, recovered, selfCorrected };
-  });
+    const recovered = total(agentRows.filter((row) => isObservedRecovery(row.annotation)));
+    const selfCorrected = total(agentRows.filter((row) => row.annotation.recovery_mechanisms.includes("self_correction")));
+    return { agent, reviewed: total(agentRows), recovered, selfCorrected };
+  }).filter((score) => score.reviewed > 0);
   const rate = (score, numerator) => numerator(score) / score.reviewed;
   const compareAgent = (left, right) => agentLabel(left.agent).localeCompare(agentLabel(right.agent));
   const sortMode = document.querySelector("#resilience-sort").value;
@@ -2124,12 +2128,14 @@ function renderResilienceScorecards() {
     agent.textContent = agentLabel(score.agent);
     const reviewed = document.createElement("div");
     reviewed.className = "score-value";
-    reviewed.textContent = String(score.reviewed);
+    reviewed.textContent = measureText(score.reviewed, mode);
     const recoveryRate = score.recovered / score.reviewed;
     const selfRate = score.selfCorrected / score.reviewed;
     const track = document.createElement("div");
     track.className = "score-track";
-    track.title = `${score.recovered} of ${score.reviewed} episodes recovered; ${score.selfCorrected} self-corrected`;
+    track.title = mode === "hours"
+      ? `${measureText(score.recovered, mode)} of ${measureText(score.reviewed, mode)} of drift ended in a recovery; ${measureText(score.selfCorrected, mode)} self-corrected`
+      : `${score.recovered} of ${score.reviewed} episodes recovered; ${score.selfCorrected} self-corrected`;
     const selfFill = document.createElement("span");
     selfFill.className = "score-fill is-self";
     selfFill.style.width = `${selfRate * 100}%`;
@@ -2139,11 +2145,16 @@ function renderResilienceScorecards() {
     track.append(selfFill, otherFill);
     const summary = document.createElement("div");
     summary.className = "score-summary";
-    summary.textContent = `${Math.round(recoveryRate * 100)}% recovered · ${score.selfCorrected}/${score.recovered} self-corrected`;
+    summary.textContent = mode === "hours"
+      ? `${Math.round(recoveryRate * 100)}% of hours recovered · ${Math.round(selfRate * 100)}% self-corrected`
+      : `${Math.round(recoveryRate * 100)}% recovered · ${score.selfCorrected}/${score.recovered} self-corrected`;
     row.append(rank, agent, reviewed, track, summary);
     list.append(row);
   });
   document.querySelector("#resilience-meta").textContent = `${scorecards.length} agents · ${rows.length} reviewed episodes`;
+  document.querySelector("#resilience-note").textContent = mode === "hours"
+    ? `Every bar represents 100% of that agent’s reviewed drift hours; colored segments show the share of those hours in episodes that ended in an observed recovery. ${hoursEstimateNote(rows)}`.trim()
+    : "Every bar represents 100% of that agent’s fully reviewed episodes. Episode count indicates distraction pressure; colored segments show the subset with an observed recovery.";
 }
 
 function mechanismLabel(value) {
@@ -2176,6 +2187,9 @@ function renderTriggerTaxonomy() {
     .sort((left, right) => right[1] - left[1] || label("recovery", left[0]).localeCompare(label("recovery", right[0])))
     .map(([recovery]) => recovery);
 
+  const mode = document.querySelector("#taxonomy-measure").value;
+  const weight = rowWeight(mode);
+  const weightOf = (input) => input.reduce((sum, row) => sum + weight(row), 0);
   const rowsByCategory = new Map(triggerTaxonomyCategories.map((category) => [category.id, []]));
   taxonomyRows.forEach((row) => rowsByCategory.get(row.taxonomyId).push(row));
   const visibleCategories = triggerTaxonomyCategories.filter((category) => rowsByCategory.get(category.id).length);
@@ -2211,10 +2225,10 @@ function renderTriggerTaxonomy() {
     familyName.textContent = family.name;
     const familyTotal = document.createElement("span");
     const familyCount = family.categories.reduce(
-      (total, category) => total + rowsByCategory.get(category.id).length,
+      (total, category) => total + weightOf(rowsByCategory.get(category.id)),
       0
     );
-    familyTotal.textContent = `${familyCount} episodes`;
+    familyTotal.textContent = mode === "hours" ? `${measureText(familyCount, mode)} of drift` : `${familyCount} episodes`;
     familyHeading.append(familyName, familyTotal);
     familySection.append(familyHeading);
 
@@ -2241,8 +2255,9 @@ function renderTriggerTaxonomy() {
     family.categories.forEach((category) => {
       const categoryRows = rowsByCategory.get(category.id);
       const recoveryCounts = new Map();
+      const categoryTotal = weightOf(categoryRows);
       categoryRows.forEach((row) => {
-        recoveryCounts.set(row.primaryRecovery, (recoveryCounts.get(row.primaryRecovery) || 0) + 1);
+        recoveryCounts.set(row.primaryRecovery, (recoveryCounts.get(row.primaryRecovery) || 0) + weight(row));
       });
       const copy = document.createElement("div");
       copy.className = "taxonomy-category-cell";
@@ -2256,13 +2271,13 @@ function renderTriggerTaxonomy() {
       heatmap.append(copy);
       recoveryOrder.forEach((recovery) => {
         const count = recoveryCounts.get(recovery) || 0;
-        const share = count / categoryRows.length;
+        const share = categoryTotal ? count / categoryTotal : 0;
         const cell = document.createElement("div");
         cell.className = `taxonomy-cell${count ? "" : " is-zero"}${share >= .62 ? " is-strong" : ""}`;
         cell.style.setProperty("--heat", count ? (.08 + share * .78).toFixed(3) : "0.025");
-        cell.title = `${category.label} → ${label("recovery", recovery)}: ${count} of ${categoryRows.length} (${Math.round(share * 100)}%)`;
+        cell.title = `${category.label} → ${label("recovery", recovery)}: ${measureText(count, mode)} of ${measureText(categoryTotal, mode)} (${Math.round(share * 100)}%)`;
         const value = document.createElement("strong");
-        value.textContent = count ? String(count) : "—";
+        value.textContent = count ? measureText(count, mode) : "—";
         cell.append(value);
         if (count) {
           const percentage = document.createElement("span");
@@ -2273,7 +2288,7 @@ function renderTriggerTaxonomy() {
       });
       const count = document.createElement("div");
       count.className = "taxonomy-total-cell";
-      count.textContent = String(categoryRows.length);
+      count.textContent = measureText(categoryTotal, mode);
       heatmap.append(count);
     });
     gridWrap.append(heatmap);
@@ -2283,7 +2298,8 @@ function renderTriggerTaxonomy() {
 
   const multiRecoveryCount = taxonomyRows.filter((row) => row.annotation.recovery_mechanisms.length > 1).length;
   document.querySelector("#taxonomy-total").textContent = `${visibleCategories.length} categories · ${taxonomyRows.length} episodes`;
-  document.querySelector("#taxonomy-note").textContent = `Cell shading represents the share within each trigger category; every populated cell shows its episode count and percentage, and the final column gives the category total. ${multiRecoveryCount} episodes also retain a secondary recovery label in their annotation.`;
+  const unit = mode === "hours" ? "drift hours" : "episode count";
+  document.querySelector("#taxonomy-note").textContent = `Cell shading represents the share within each trigger category; every populated cell shows its ${unit} and percentage, and the final column gives the category total. ${multiRecoveryCount} episodes also retain a secondary recovery label in their annotation. ${mode === "hours" ? hoursEstimateNote(taxonomyRows) : ""}`.trim();
 }
 
 function initializeExperimentalLenses() {
@@ -2292,7 +2308,9 @@ function initializeExperimentalLenses() {
   renderInfluenceBars();
   renderResilienceScorecards();
   document.querySelector("#resilience-sort").addEventListener("change", renderResilienceScorecards);
+  document.querySelector("#resilience-measure").addEventListener("change", renderResilienceScorecards);
   renderTriggerTaxonomy();
+  document.querySelector("#taxonomy-measure").addEventListener("change", renderTriggerTaxonomy);
 }
 
 function renderEpisodeList() {

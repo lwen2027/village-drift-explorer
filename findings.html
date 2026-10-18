@@ -609,12 +609,18 @@
               <div><h3>Goal resilience scorecards</h3><p>Recovery as a share of reviewed drift, with self-correction highlighted inside the recovered subset.</p></div>
               <div class="viz-controls">
                 <span class="viz-meta" id="resilience-meta"></span>
+                <label class="viz-control-label" for="resilience-measure"><span>Measure</span>
+                  <select class="viz-control" id="resilience-measure">
+                    <option value="episodes">Episodes (how often)</option>
+                    <option value="hours">Drift hours (how much)</option>
+                  </select>
+                </label>
                 <label class="viz-control-label" for="resilience-sort"><span>Rank by</span>
                   <select class="viz-control" id="resilience-sort">
                     <option value="recovery_rate">Highest recovery share</option>
                     <option value="self_rate">Highest self-correction share</option>
                     <option value="self_count">Most self-corrected episodes</option>
-                    <option value="pressure">Most reviewed drift episodes</option>
+                    <option value="pressure">Most reviewed drift (episodes or hours)</option>
                     <option value="agent">Agent name</option>
                   </select>
                 </label>
@@ -623,7 +629,7 @@
             <div class="viz-legend score-legend"><span class="legend-item"><span class="legend-swatch is-self-recovery"></span>Self-correction</span><span class="legend-item"><span class="legend-swatch is-other-recovery"></span>Other observed recovery</span><span class="legend-item"><span class="legend-swatch is-no-recovery"></span>No observed recovery</span></div>
             <div class="score-head"><span>Rank</span><span>Agent</span><span>Reviewed episodes</span><span>Recovery composition</span><span>Summary</span></div>
             <div class="resilience-list" id="resilience-list"></div>
-            <p class="viz-note">Every bar represents 100% of that agent’s fully reviewed episodes. Episode count indicates distraction pressure; colored segments show the subset with an observed recovery.</p>
+            <p class="viz-note" id="resilience-note">Every bar represents 100% of that agent’s fully reviewed episodes. Episode count indicates distraction pressure; colored segments show the subset with an observed recovery.</p>
           </article>
 
         </div>
@@ -646,7 +652,12 @@
         </div>
 
         <article class="chart-card is-wide taxonomy-card">
-          <div class="chart-heading"><div><h3>Official trigger taxonomy → correction mechanism</h3><p>Rows are curated trigger categories; cells show how frequently each correction mechanism ended episodes in that category.</p></div><span class="chart-total" id="taxonomy-total"></span></div>
+          <div class="chart-heading"><div><h3>Official trigger taxonomy → correction mechanism</h3><p>Rows are curated trigger categories; cells show how frequently each correction mechanism ended episodes in that category.</p></div><div class="viz-controls"><span class="chart-total" id="taxonomy-total"></span><label class="viz-control-label" for="taxonomy-measure"><span>Measure</span>
+                  <select class="viz-control" id="taxonomy-measure">
+                    <option value="episodes">Episodes (how often)</option>
+                    <option value="hours">Drift hours (how much)</option>
+                  </select>
+                </label></div></div>
           <div class="taxonomy-key" id="taxonomy-key"></div>
           <div class="taxonomy-chart" id="taxonomy-chart"></div>
           <p class="viz-note" id="taxonomy-note"></p>
@@ -697,6 +708,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261018-drift-hours-toggle"></script>
+  <script type="module" src="./scripts/findings.js?v=20261018-drift-hours-recovery"></script>
 </body>
 </html>
