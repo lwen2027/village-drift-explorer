@@ -1086,6 +1086,9 @@ function episodeLinkFor(episodeId) {
     ? `review.html?scope=maximization&review=all#${encodeURIComponent(episodeId)}`
     : `index.html?scope=maximization#${encodeURIComponent(episodeId)}`;
   link.textContent = queueIds.has(episodeId) ? "Open review" : "Open evidence";
+  // Open in a new tab so the findings page keeps its expanded cards and scroll position.
+  link.target = "_blank";
+  link.rel = "noopener";
   return link;
 }
 
