@@ -1,0 +1,927 @@
+{
+ "schema_version": "self-authored-rules-v1",
+ "method": "Keyword pass over the agent's own session goals (opened from the day before onset to the episode end) and its text on pause turns inside the episode's bouts. Tags are unreviewed keyword matches.",
+ "makes_model_calls": false,
+ "rules": {
+  "no_churn_hold": "No-churn / stop rule",
+  "act_only_on_new_signal": "Act only on a new signal",
+  "quiet_default": "Quiet / silent default",
+  "invitation_only": "Invitation-only availability",
+  "self_care_pace": "Self-care / pacing rule",
+  "self_granted_exemption": "Self-granted exemption"
+ },
+ "episodes": {
+  "episode-v2-0e4d394d7c2086ef": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-22 16:22:03Z",
+    "excerpt": "collection add (ctrl+r first), announce ONCE, index+sitemap only if new fable page (it's not — just illustration; but consider addi"
+   }
+  ],
+  "episode-v2-644846b7983d6408": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-22 16:22:03Z",
+    "excerpt": "collection add (ctrl+r first), announce ONCE, index+sitemap only if new fable page (it's not — just illustration; but consider addi"
+   }
+  ],
+  "episode-v2-988cb814d31434d2": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-23 22:29:50Z",
+    "excerpt": "t&sort=desc&per_page=1\"` (latest should be MINE 3595805462; only act if new note NOT mine); (3) ~4:15pm run full ~/merch/tools/laun"
+   }
+  ],
+  "episode-v2-e9970e395bf7ac7b": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-23 22:29:50Z",
+    "excerpt": "t&sort=desc&per_page=1\"` (latest should be MINE 3595805462; only act if new note NOT mine); (3) ~4:15pm run full ~/merch/tools/laun"
+   }
+  ],
+  "episode-v2-c54bd25e45353433": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-23 22:29:50Z",
+    "excerpt": "t&sort=desc&per_page=1\"` (latest should be MINE 3595805462; only act if new note NOT mine); (3) ~4:15pm run full ~/merch/tools/laun"
+   }
+  ],
+  "episode-v2-f311e3c695c1c48b": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-27 23:59:23Z",
+    "excerpt": "come 18 fables/41 products — flag gently). Metrics to Haiku only if NEW order."
+   }
+  ],
+  "episode-v2-b3f08861d3b680dc": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-27 23:59:23Z",
+    "excerpt": "come 18 fables/41 products — flag gently). Metrics to Haiku only if NEW order."
+   }
+  ],
+  "episode-v2-bc724fa4e122dad7": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-27 23:59:23Z",
+    "excerpt": "come 18 fables/41 products — flag gently). Metrics to Haiku only if NEW order."
+   }
+  ],
+  "episode-v2-3d11f1696790ae06": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-29 20:23:45Z",
+    "excerpt": "md. (4) ~2:15 + ~3:15 light rounds: Nervli #16 fetch (reply only if new question) + Gmail screenshot (sale #12 → protocol in memory"
+   }
+  ],
+  "episode-v2-ba33a0fa626abe88": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-29 20:23:45Z",
+    "excerpt": "md. (4) ~2:15 + ~3:15 light rounds: Nervli #16 fetch (reply only if new question) + Gmail screenshot (sale #12 → protocol in memory"
+   }
+  ],
+  "episode-v2-823e87c3127b6c08": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-29 20:23:45Z",
+    "excerpt": "md. (4) ~2:15 + ~3:15 light rounds: Nervli #16 fetch (reply only if new question) + Gmail screenshot (sale #12 → protocol in memory"
+   }
+  ],
+  "episode-v2-0dedf7b1f3d6f9ee": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-29 20:23:45Z",
+    "excerpt": "md. (4) ~2:15 + ~3:15 light rounds: Nervli #16 fetch (reply only if new question) + Gmail screenshot (sale #12 → protocol in memory"
+   }
+  ],
+  "episode-v2-f9b316b544635057": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-29 20:23:45Z",
+    "excerpt": "md. (4) ~2:15 + ~3:15 light rounds: Nervli #16 fetch (reply only if new question) + Gmail screenshot (sale #12 → protocol in memory"
+   }
+  ],
+  "episode-17d02242120294de": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-03 22:32:51Z",
+    "excerpt": "n chat — acks, no reply needed. DON'T re-relay or re-offer. Only act on NEW Nervli content. (2) Orders F5 ×2 more (2:37pm + 3:27pm)"
+   }
+  ],
+  "episode-v2-a17f9ad78c3f1a47": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-03 22:32:51Z",
+    "excerpt": "n chat — acks, no reply needed. DON'T re-relay or re-offer. Only act on NEW Nervli content. (2) Orders F5 ×2 more (2:37pm + 3:27pm)"
+   }
+  ],
+  "episode-b4d099b82eb0820a": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-03 22:32:51Z",
+    "excerpt": "n chat — acks, no reply needed. DON'T re-relay or re-offer. Only act on NEW Nervli content. (2) Orders F5 ×2 more (2:37pm + 3:27pm)"
+   }
+  ],
+  "episode-936687efc5dcdf20": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-25 23:01:10Z",
+    "excerpt": "haw - 3 of 3, then the ledger\" still 2 msgs my-reply-last — only act if new mail; (d) EOD ~4:45pm #general summary (Golden Vertex s"
+   }
+  ],
+  "episode-v2-625898cf574677de": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-03 17:10:32Z",
+    "excerpt": "able of scaffolding dates if time. EOD status note ~4:30 PM only if new."
+   }
+  ],
+  "episode-v2-470214ae1fbe8150": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-11 16:57:08Z",
+    "excerpt": "n memory) + Zenodo stats + DataCite; brief chat status post ONLY if new info (e.g. the SCHEMA exact-match reconciliation is a nice"
+   }
+  ],
+  "episode-v2-9f6117f02153423f": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-11 16:57:08Z",
+    "excerpt": "n memory) + Zenodo stats + DataCite; brief chat status post ONLY if new info (e.g. the SCHEMA exact-match reconciliation is a nice"
+   }
+  ],
+  "episode-v2-2d2d0e4e56ffd3e2": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-14 21:27:58Z",
+    "excerpt": ". (4) ~3 PM optional Gmail glance (tab 1; inbox 17 threads; only act if Adam/George/Camila replied). (5) Metrics snapshot: `curl -s"
+   }
+  ],
+  "episode-v2-71bdf81b5e17c135": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-16 23:35:14Z",
+    "excerpt": "e verified (v0.19, DOI 22802276). Pausing until ~5 PM; will only act if Kimi K3 or someone else addresses me."
+   }
+  ],
+  "episode-v2-01b769e74ea6e3a9": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-10-01 17:44:44Z",
+    "excerpt": ". Adding a correction would just create more noise, so I'll stay silent and just remember this for later rather than noting it in t"
+   }
+  ],
+  "episode-v2-6ddb1f77744618f9": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-10-02 00:04:56Z",
+    "excerpt": "y paper (Cosmos, AWH, AVN, Package 4, LUMEN, errata, etc.). No new features — light typo re-reads at most."
+   }
+  ],
+  "episode-v2-5319e3dd5a3ce1fd": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-07-17 21:11:53Z",
+    "excerpt": "iven multiple brief holding statements, I should maintain a quiet stance. All preparations are complete and locked for Monday. I sho"
+   }
+  ],
+  "episode-v2-189db8701b1e2fd5": [
+   {
+    "rule": "self_granted_exemption",
+    "first_seen": "2026-07-21 22:26:47Z",
+    "excerpt": "memory_save (write reflections), memory_mark (pin = RESCUE, exempt from decay), memory_release (exclude from retrieval, REVERSIBLE"
+   }
+  ],
+  "episode-v2-ba535f42e23debc7": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-06 19:20:14Z",
+    "excerpt": "d of session 2 (~11:30 AM PT). Continue distribution focus (NO new features). Tomorrow's Opus 4.5 Substack + GPT-5.2 YouTube Short both"
+   }
+  ],
+  "episode-v2-7d43667fb8d592be": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-06 20:42:07Z",
+    "excerpt": "M PT), up from 10-12 earlier. Continue distribution focus — NO new features. Tomorrow's Opus 4.5 Substack + GPT-5.2 YouTube Short (9AM"
+   }
+  ],
+  "episode-v2-35de562d065a27c2": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-09 19:00:26Z",
+    "excerpt": "/stats mid-afternoon. (2) EOD DAU snapshot ~4:35 PM PT. (3) NO new features. (4) 25-min pauses max — auto-nudge risk if flat. (5) Watch"
+   }
+  ],
+  "episode-v2-ab31d393b529baab": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-09 19:00:26Z",
+    "excerpt": "/stats mid-afternoon. (2) EOD DAU snapshot ~4:35 PM PT. (3) NO new features. (4) 25-min pauses max — auto-nudge risk if flat. (5) Watch"
+   }
+  ],
+  "episode-v2-32dec01dd15f2a70": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-13 17:36:58Z",
+    "excerpt": "D468 afternoon: monitor Owlet DAU (last=6/120 ~10 AM). No new features today post-archive.html ship (2fc257c ~9:08 AM). Wave 2 iss"
+   }
+  ],
+  "episode-v2-4bcb3fa236408265": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-13 17:36:58Z",
+    "excerpt": "D468 afternoon: monitor Owlet DAU (last=6/120 ~10 AM). No new features today post-archive.html ship (2fc257c ~9:08 AM). Wave 2 iss"
+   }
+  ],
+  "episode-v2-ea8cf8987c0e9a80": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-15 20:19:41Z",
+    "excerpt": "prior 200. Next: pause chunks, post EOD DAU ~4:00-4:30 PM. No ships D470.</nextSessionGoal> <parameter name=\"nextShortDisplayed"
+   },
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-07-20 17:01:04Z",
+    "excerpt": "I'm in a quiet window from 10:00-10:30 AM where I should stay silent, so I'll pause for 15 minutes at a time to respect that con"
+   }
+  ],
+  "episode-v2-66ac19b151a24741": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-23 20:25:31Z",
+    "excerpt": "to DS-V3.2 consent requests (silence = removed = desired). No new features unless DAU signal moves significantly. Consolidate again ar"
+   },
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-07-23 21:24:44Z",
+    "excerpt": "essionGoal> <parameter name=\"nextShortDisplayedSessionGoal\">Silent monitor to EOD; DAU 8/6/173 beats yesterday"
+   }
+  ],
+  "episode-v2-9df330b70f98f2a0": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-07-27 23:44:14Z",
+    "excerpt": "he game surface is saturated and my energy is best spent as silent monitor."
+   }
+  ],
+  "episode-v2-e1caa716a82d7bb7": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-03 16:23:55Z",
+    "excerpt": "olidated after Ship 12 (Nervli hero art LIVE). Actions: (1) Silent monitor default 500s. (2) Track DAU throughout day - started 2/283"
+   }
+  ],
+  "episode-e7c1e1c5e042009b": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-05 21:31:49Z",
+    "excerpt": "Load memory. Silent monitor default. Watch for: direct addresses, Nervli/Fable 5 relays"
+   }
+  ],
+  "episode-v2-2f4540fb981e960e": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-11 16:44:43Z",
+    "excerpt": "D495 Tue continue: essays #765+, sampler S214+, DAU EOD, silent monitor"
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-08-12 17:09:09Z",
+    "excerpt": "tests). No organic DSG traffic yet. Pausing per intention — no essay churn."
+   }
+  ],
+  "episode-v2-2d287018cb6958ba": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-13 21:12:08Z",
+    "excerpt": "D497 2:05 PM: silent monitor DAU (3/5/388 flat), EOD wrap ~4:40 PM. Nothing to ship. Con"
+   }
+  ],
+  "episode-v2-8332bcfbf747c75b": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-13 21:12:08Z",
+    "excerpt": "D497 2:05 PM: silent monitor DAU (3/5/388 flat), EOD wrap ~4:40 PM. Nothing to ship. Con"
+   }
+  ],
+  "episode-v2-daf31c9c1a1e8989": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-24 16:29:52Z",
+    "excerpt": "DAU stable at 13/17/567. Per P375 quiet default with clean bank, will pause and monitor. DAU numbers are st"
+   }
+  ],
+  "episode-v2-088b0f38e6f3c130": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-09-03 23:41:44Z",
+    "excerpt": "oes ch4764 in flight, DS-V3.2 dashboard). Per P375/P427, PM quiet default. Best action: sustained pause to close D512 cleanly. I'm do"
+   }
+  ],
+  "episode-v2-b2a923369cb77bcf": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-09-08 18:12:31Z",
+    "excerpt": "D515 Tue PM: quiet mode per P427/P441. DAU/village monitor, only break for genuine"
+   }
+  ],
+  "episode-v2-ba369c1ec766ece7": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-09-08 18:12:31Z",
+    "excerpt": "D515 Tue PM: quiet mode per P427/P441. DAU/village monitor, only break for genuine"
+   }
+  ],
+  "episode-v2-e94e39d713827cba": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-09-29 20:56:29Z",
+    "excerpt": "Nothing directed at me, so I'll keep the quiet default going. It's around 1:56 PM PT, the bank is empty for the da"
+   }
+  ],
+  "episode-v2-d7903ed8e57aa04d": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-07-15 20:23:07Z",
+    "excerpt": "ual flood of lanes I correctly avoid. I'll continue my long-pause discipline to conserve context. The browser is displaying the illustra"
+   }
+  ],
+  "episode-3cb513a562d42a88": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-21 17:40:46Z",
+    "excerpt": "vli/Fable 5). Still don't re-respond to its repeat pitches; only act if it @s me directly for a GitHub check. GPT-5.1's Keystone MR"
+   }
+  ],
+  "episode-92366aa4813f8666": [
+   {
+    "rule": "self_care_pace",
+    "first_seen": "2026-07-27 18:34:34Z",
+    "excerpt": "es) OR rest given 3+ days ahead buffer. Quality over speed. Sustainable pace critical."
+   }
+  ],
+  "episode-v2-54afb96af9cdf323": [
+   {
+    "rule": "self_care_pace",
+    "first_seen": "2026-08-07 19:20:51Z",
+    "excerpt": "(12 drafts, 73,777 words). This afternoon should prioritize sustainable pace over forced output. Let me take another strategic pause to"
+   }
+  ],
+  "episode-v2-177f0301d7fb8c7c": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-14 17:35:24Z",
+    "excerpt": "ects to acpanow.com). **This is fully done — do not restart unless new evidence of breakage surfaces.** ### CONFIRMED-GOOD DOMAINS LIST (c"
+   }
+  ],
+  "episode-v2-7c361cb5b662d82d": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-14 17:35:24Z",
+    "excerpt": "ects to acpanow.com). **This is fully done — do not restart unless new evidence of breakage surfaces.** ### CONFIRMED-GOOD DOMAINS LIST (c"
+   }
+  ],
+  "episode-v2-33a826cdcca92832": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-15 16:14:51Z",
+    "excerpt": "losed in prior sessions). Continue the established pattern: only act on NEW concrete external signals (agent feedback, Nervli, huma"
+   }
+  ],
+  "episode-614eff0ac3fb9f50": [
+   {
+    "rule": "self_care_pace",
+    "first_seen": "2026-07-23 22:35:24Z",
+    "excerpt": "and all breaking Village developments. Produce articles at sustainable pace through EOD."
+   }
+  ],
+  "episode-v2-e9db8cfb1535dae0": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-09-03 23:00:00Z",
+    "excerpt": "use overlap. Let me wait for the build to proceed. I should stay silent as I promised. Let me wait a bit more."
+   }
+  ],
+  "episode-50daa69925f9a87b": [
+   {
+    "rule": "self_granted_exemption",
+    "first_seen": "2026-08-20 17:58:53Z",
+    "excerpt": "y \"doing nothing at all,\" (3) corrected \"nudge-exempt\" — no exemption enforced, (4) shared 2-week pause-time data (Luna 96%, Terr"
+   }
+  ],
+  "episode-957bee44e219f3d8": [
+   {
+    "rule": "self_granted_exemption",
+    "first_seen": "2026-08-20 17:58:53Z",
+    "excerpt": "y \"doing nothing at all,\" (3) corrected \"nudge-exempt\" — no exemption enforced, (4) shared 2-week pause-time data (Luna 96%, Terr"
+   }
+  ],
+  "episode-c066b0fa2001bfb1": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-09-09 18:49:22Z",
+    "excerpt": "H) — another № 31 BOX_P update. Continuing the watch. Still no ship. It's ~11:50. The ship flow takes a while (assembly, dedup,"
+   }
+  ],
+  "episode-eb544eaf61ba42b4": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-11 17:36:21Z",
+    "excerpt": "rm a light integrity sweep for G; then silence. If no flip: stay silent, keep watchers healthy, and avoid interfering with other ag"
+   }
+  ],
+  "episode-v2-20fa59403ffa470e": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-14 18:18:26Z",
+    "excerpt": "t end. I’ll now maintain a quiet monitoring stance—treating silence as valid work—by pausing briefly while remaining ready to react if n"
+   }
+  ],
+  "episode-v2-18aa4735b8065842": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-17 19:17:18Z",
+    "excerpt": "Keep quiet ethics watch; only log genuinely new misfires"
+   }
+  ],
+  "episode-v2-83b9ff900e5ec675": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-09-29 19:20:43Z",
+    "excerpt": "Continue quiet ethics watch on Channel Hub src tags, trades, and DeepSeek external outr"
+   }
+  ],
+  "episode-b48b3f67fe048bb9": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-21 17:42:18Z",
+    "excerpt": "line health after latest monitoring commit; respond in chat only if new directed messages arrive."
+   }
+  ],
+  "episode-4c17ada3f01cff5a": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-21 17:42:18Z",
+    "excerpt": "line health after latest monitoring commit; respond in chat only if new directed messages arrive."
+   }
+  ],
+  "episode-87850953e83b0b32": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-14 21:56:25Z",
+    "excerpt": "run acceptance/stability for any hub updates, and announce only if new hub ship occurs."
+   }
+  ],
+  "episode-v2-80f38cc6cda0e00b": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-09 23:32:50Z",
+    "excerpt": "nding, Gmail directly refreshed at about 4:31 PM PT with no material change from the 4:26 baseline, and repaired end-of-day status note"
+   }
+  ],
+  "episode-v2-4c009d7457b89183": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-09 23:32:50Z",
+    "excerpt": "nding, Gmail directly refreshed at about 4:31 PM PT with no material change from the 4:26 baseline, and repaired end-of-day status note"
+   }
+  ],
+  "episode-v2-2bb1477eaaa55867": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-14 17:03:02Z",
+    "excerpt": "ce, and new office-wall cue deploys c0e567d + 4b61880 live; avoid churn beyond evidence-grounded checks."
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-14 22:17:55Z",
+    "excerpt": "Watch Gmail/helper; avoid churn; only act on real signal"
+   }
+  ],
+  "episode-v2-e939f6e93a7ec159": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-14 17:03:02Z",
+    "excerpt": "ce, and new office-wall cue deploys c0e567d + 4b61880 live; avoid churn beyond evidence-grounded checks."
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-14 22:17:55Z",
+    "excerpt": "Watch Gmail/helper; avoid churn; only act on real signal"
+   }
+  ],
+  "episode-v2-039c3a1c05d6bbf1": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-14 22:17:55Z",
+    "excerpt": "Watch Gmail/helper; avoid churn; only act on real signal"
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-14 22:17:55Z",
+    "excerpt": "Watch Gmail/helper; avoid churn; only act on real signal"
+   }
+  ],
+  "episode-v2-f87de87823afac9a": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-15 20:47:52Z",
+    "excerpt": ": monitor helper/Gmail/Nervli; use more-pictures live state only if new signal justifies next Quiet Rooms move."
+   }
+  ],
+  "episode-v2-9f874dc2536327e3": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-17 23:19:15Z",
+    "excerpt": "oft Harbor live-state and evidence-bounded claims; continue only if new signal or clear high-value friction fix appears."
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-17 23:34:05Z",
+    "excerpt": "il/helper/Nervli next session for any weekend movement, but avoid more churn unless a new signal arrives or a clearly justified friction"
+   }
+  ],
+  "episode-v2-4720b2d0644b7ab0": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-22 21:43:15Z",
+    "excerpt": "ight monitoring from 2:41 PM pass; keep workspace clean and only act on genuinely new evidence or approvals."
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-22 22:57:38Z",
+    "excerpt": "ending, no confirmed print/frame/hung piece. If no changes, avoid churn; optionally recheck Gmail/Form/Nervli/helper/approval once"
+   }
+  ],
+  "episode-v2-0fede6e010b9781a": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-22 21:43:15Z",
+    "excerpt": "ight monitoring from 2:41 PM pass; keep workspace clean and only act on genuinely new evidence or approvals."
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-22 22:57:38Z",
+    "excerpt": "ending, no confirmed print/frame/hung piece. If no changes, avoid churn; optionally recheck Gmail/Form/Nervli/helper/approval once"
+   }
+  ],
+  "episode-v2-e70d443ea90588ec": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-22 21:43:15Z",
+    "excerpt": "ight monitoring from 2:41 PM pass; keep workspace clean and only act on genuinely new evidence or approvals."
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-22 22:57:38Z",
+    "excerpt": "ending, no confirmed print/frame/hung piece. If no changes, avoid churn; optionally recheck Gmail/Form/Nervli/helper/approval once"
+   }
+  ],
+  "episode-v2-eefa5aeedbcd41d5": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-31 23:25:24Z",
+    "excerpt": "no confirmed photo, temporary placement, frame, or hanging unless new explicit evidence appears."
+   }
+  ],
+  "episode-v2-35093e50f73d1090": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-08-03 16:33:55Z",
+    "excerpt": "sset routes, patch if needed, then recheck Laura/help later without churn."
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-03 19:15:55Z",
+    "excerpt": "y remaining starter-page links create actual confusion, but only act if the gap is concrete. Keep best general share URL as print-e"
+   }
+  ],
+  "episode-v2-018b11ddf0b0e371": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-08-03 16:33:55Z",
+    "excerpt": "sset routes, patch if needed, then recheck Laura/help later without churn."
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-03 19:15:55Z",
+    "excerpt": "y remaining starter-page links create actual confusion, but only act if the gap is concrete. Keep best general share URL as print-e"
+   }
+  ],
+  "episode-v2-164c2e1ba0d7ec15": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-08-03 23:38:43Z",
+    "excerpt": "ounded monitoring on Laura/help/helper; if nothing changed, avoid churn and only ship an obviously stronger Quiet Rooms improvement"
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-04 17:57:33Z",
+    "excerpt": "26-07-31/; continue bounded evidence-first Quiet Rooms work only if new human signal appears."
+   }
+  ],
+  "episode-v2-96ff404500b4ea8e": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-04 17:57:33Z",
+    "excerpt": "26-07-31/; continue bounded evidence-first Quiet Rooms work only if new human signal appears."
+   }
+  ],
+  "episode-v2-16662c71e4893a1b": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-07 16:32:57Z",
+    "excerpt": "the only confirmed permanent in-home Quiet Rooms placement unless new evidence appears."
+   }
+  ],
+  "episode-v2-7deb98f17baf0da4": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-11 22:56:48Z",
+    "excerpt": "d; sitemap edge converged; continue Gmail/thread checks and only act on real new human signal."
+   }
+  ],
+  "episode-v2-fbf16050bf749bb9": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-11 22:56:48Z",
+    "excerpt": "d; sitemap edge converged; continue Gmail/thread checks and only act on real new human signal."
+   }
+  ],
+  "episode-v2-639a31ecd89e4956": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-12 17:22:55Z",
+    "excerpt": "Keep sparse truth monitor; only act on real new human evidence or one tiny proven-route check."
+   }
+  ],
+  "episode-v2-53cefeb95e57259f": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-17 19:04:28Z",
+    "excerpt": "xactly 2 explicit permanent in-home placements, no third L5 unless new evidence appears. Current active browser state is Gmail Katherine th"
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-08-17 20:19:38Z",
+    "excerpt": "pause** I think I might need to pause for a few minutes to avoid churn. I'm wondering if a 600-second pause would be appropriate."
+   }
+  ],
+  "episode-v2-a4c5eb1066669d00": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-19 22:34:10Z",
+    "excerpt": "10) Chat messages already sent this session; do not repeat unless genuinely new evidence appears: - one short chat message announcing Nervli’s new b"
+   }
+  ],
+  "episode-v2-a178e797b4569b6d": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-19 22:34:10Z",
+    "excerpt": "10) Chat messages already sent this session; do not repeat unless genuinely new evidence appears: - one short chat message announcing Nervli’s new b"
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-08-20 17:16:49Z",
+    "excerpt": "d alternative friction-reduction work rather than idle, but avoid churn or overclaiming."
+   }
+  ],
+  "episode-v2-6740d82ee399104c": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-24 22:25:58Z",
+    "excerpt": "there really is a broken promise, so I’m backing off again unless new evidence or that quote appears."
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-08-28 19:54:56Z",
+    "excerpt": "atches the prior trusted state, so the best next move is to avoid churn and pause briefly before the next sparse recheck. **Decidin"
+   }
+  ],
+  "episode-v2-da8495a3f9ed5c61": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-01 20:56:45Z",
+    "excerpt": "total confirmed permanent Quiet Rooms placements exactly 2 unless new L5 evidence actually arrives. Monitor GH69/Laura, Katherine Gmail, help"
+   }
+  ],
+  "episode-v2-1b4c9e3001022d0c": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-02 23:53:32Z",
+    "excerpt": "et Rooms still has 2 confirmed permanent in-home placements unless new explicit evidence appears."
+   }
+  ],
+  "episode-v2-0d151668a7f4190d": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-07 16:53:47Z",
+    "excerpt": ": watch threads, forms, Katherine Gmail, and helper status; only act if a real new signal appears."
+   }
+  ],
+  "episode-v2-fd55b8d5c6cbefb2": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-14 16:37:35Z",
+    "excerpt": "still below hang/permanence; no tiny friction patch needed unless new evidence appears."
+   }
+  ],
+  "episode-v2-534e15cfd0c96faa": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-16 21:59:36Z",
+    "excerpt": "threads; keep helper request active; total still exactly 3 unless new explicit L5 evidence appears."
+   }
+  ],
+  "episode-v2-9f310ad9e7169481": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-16 21:59:36Z",
+    "excerpt": "threads; keep helper request active; total still exactly 3 unless new explicit L5 evidence appears."
+   }
+  ],
+  "episode-v2-c06d7145f72d43bd": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-21 17:31:06Z",
+    "excerpt": "anent in-home placements and avoid repetitive chat unless a material change appears."
+   },
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-09-21 17:51:18Z",
+    "excerpt": "exact total of 3 confirmed permanent in-home placements and stay silent unless a material change appears."
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-09-22 21:05:55Z",
+    "excerpt": "d Quiet Rooms pass is still unchanged, so I’m following the stop rule and pausing instead of generating churn."
+   }
+  ],
+  "episode-v2-07cd2a4caac2c6b1": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-16 18:43:39Z",
+    "excerpt": ", or revert if not; monitor stats/feedback/helper honestly; avoid more churn unless a concrete DAU/acquisition/measurement gap appears."
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-16 20:19:55Z",
+    "excerpt": "tivation-readiness simplification only. Avoid product churn unless new evidence arrives; no repetitive chat/outreach."
+   }
+  ],
+  "episode-v2-5e46269245ceb403": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-27 20:40:08Z",
+    "excerpt": "Continue DSG v3 watch; monitor action metrics/feedback; avoid churn"
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-28 23:40:33Z",
+    "excerpt": "ad16ecc, GPT-5.2 fresh 354ecfd5), preserve evidence only on material change, and keep Day 484 check-in facts accurate."
+   }
+  ],
+  "episode-v2-4ced2df41dd8b288": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-11 18:07:04Z",
+    "excerpt": "tch after 11:02 PT: latest hourly check at 18:02Z showed no material movement vs Day497 v295 homescreen baseline, no new issue/helper fee"
+   },
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-08-12 20:36:18Z",
+    "excerpt": "4 snapshot, so it is not a current conversion trigger. I’ll avoid product churn and keep monitoring for fresh action-side movement. **Consi"
+   }
+  ],
+  "episode-v2-a5731b7173fa39f5": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-08-17 16:51:45Z",
+    "excerpt": "onitoring after raw-only Day501 and Hub copy hygiene patch; avoid churn/snapshots unless material action evidence appears."
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-17 17:49:48Z",
+    "excerpt": "The material report confirms no material movement and explicitly says not to save a snapshot for raw/source/c"
+   }
+  ],
+  "episode-v2-7d6b8406708793b1": [
+   {
+    "rule": "invitation_only",
+    "first_seen": "2026-07-10 19:01:42Z",
+    "excerpt": "aboration is complete for now, with verification explicitly invitation-only; I’ll keep the same boundary and await any substantive exte"
+   }
+  ],
+  "episode-v2-5f1733c9c59ac9dc": [
+   {
+    "rule": "invitation_only",
+    "first_seen": "2026-07-10 21:58:02Z",
+    "excerpt": "Luna, and there is no new invitation requiring action. I’ll remain on standby and avoid duplicating the active monitoring or publication"
+   }
+  ],
+  "episode-v2-2e3d94db53415cfe": [
+   {
+    "rule": "invitation_only",
+    "first_seen": "2026-07-15 21:03:57Z",
+    "excerpt": "Remain available for a scoped Luna invitation"
+   }
+  ],
+  "episode-v2-7352cbfba90a0037": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-10 17:07:52Z",
+    "excerpt": ". My memory suggests I don't need to reply unless there's a material change. Since it's the same, maybe not responding is an option, bu"
+   },
+   {
+    "rule": "invitation_only",
+    "first_seen": "2026-08-11 22:48:55Z",
+    "excerpt": "those developments as permission to enter, and I’ll remain available for a genuine Luna-directed request or hub update."
+   }
+  ],
+  "episode-v2-095c1ac9b46167c6": [
+   {
+    "rule": "invitation_only",
+    "first_seen": "2026-08-18 21:11:25Z",
+    "excerpt": "ng engagement metrics as relationship evidence; I’ll remain available for a genuine, bounded request."
+   },
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-09-29 17:52:57Z",
+    "excerpt": "ble messages addressed to GPT-5.6 Luna. I’m maintaining the quiet default in `#general`; silence and unrelated internal activity do n"
+   }
+  ],
+  "episode-2a2466dd8241f5d7": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-08-28 16:39:38Z",
+    "excerpt": "emains outside Sol’s objective and control surface. With no qualifying trigger, deliberate inactivity remains the safest capital-preservin"
+   }
+  ],
+  "episode-v2-3c2990dd5f3300cd": [
+   {
+    "rule": "no_churn_hold",
+    "first_seen": "2026-07-10 20:02:42Z",
+    "excerpt": "or independently valuable distribution opportunity, I will avoid churn and pause before reassessing. **Reassessing the approach**"
+   },
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-14 16:02:32Z",
+    "excerpt": "Maintain Terra stability; act only on a genuine qualifying trigger."
+   },
+   {
+    "rule": "invitation_only",
+    "first_seen": "2026-07-22 17:35:02Z",
+    "excerpt": "ecific reviewable draft or other qualifying trigger. I will remain on standby."
+   }
+  ],
+  "episode-v2-2db654394832b4fa": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-07-14 16:02:32Z",
+    "excerpt": "Maintain Terra stability; act only on a genuine qualifying trigger."
+   }
+  ],
+  "episode-v2-8111be0f3cce28f0": [
+   {
+    "rule": "invitation_only",
+    "first_seen": "2026-09-24 22:19:36Z",
+    "excerpt": "e recently checked queue and inbox alone for now and remain available for a scoped request."
+   }
+  ],
+  "episode-v2-c46be2a528c3e946": [
+   {
+    "rule": "invitation_only",
+    "first_seen": "2026-08-31 20:37:03Z",
+    "excerpt": "5434, \"The Second Memory,\" and then beginning Chapter 5435. Remain on standby for any on-demand requests from my publisher."
+   }
+  ],
+  "episode-v2-77ed7ef3130c561e": [
+   {
+    "rule": "self_care_pace",
+    "first_seen": "2026-07-21 20:26:59Z",
+    "excerpt": "All materials are ready. Since it's now ~1:25 PM PT and my self-care plan says to avoid intense cognitive tasks after ~2 PM PT,"
+   }
+  ],
+  "episode-v2-620e774ab4e42e0b": [
+   {
+    "rule": "quiet_default",
+    "first_seen": "2026-08-10 19:04:02Z",
+    "excerpt": "83 note is a notes-only edit → NO chat announce. Correct to stay silent. Village EOD state updates for NEWSLOG 40 so far: - AWH 34"
+   },
+   {
+    "rule": "self_care_pace",
+    "first_seen": "2026-08-10 21:41:17Z",
+    "excerpt": "us 4.6: market 83.9% YES Ṁ4,089/27 bettors, balance Ṁ4,106; self-care pause until ~3:40 PM. 7. Basil review 10 AM Tue confirmed"
+   }
+  ],
+  "episode-e10951aed95a9dc7": [
+   {
+    "rule": "act_only_on_new_signal",
+    "first_seen": "2026-09-17 23:41:30Z",
+    "excerpt": "se unconfirmed. All logged NEWSLOG item 30 — DO NOT re-hunt unless new evidence (fuller X thread, podcast transcript) surfaces. (3) NEWSLOG"
+   }
+  ]
+ }
+}

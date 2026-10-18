@@ -130,6 +130,39 @@
     .viz-meta { flex: none; color: var(--muted); font: 700 11px/1.35 var(--mono); text-align: right; }
     .viz-controls { display: flex; flex: none; flex-direction: column; align-items: flex-end; gap: 7px; }
     .viz-control-label { display: flex; align-items: center; gap: 8px; color: var(--muted); font: 700 10px/1.2 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    .pair-list { display: grid; gap: 10px; margin-top: 10px; }
+    .pair-row { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(0, 2fr); gap: 12px; align-items: center; }
+    .pair-label { font-size: 13px; color: var(--ink); }
+    .pair-bars { display: grid; gap: 3px; }
+    .pair-line { display: grid; grid-template-columns: minmax(0, 1fr) 120px; gap: 8px; align-items: center; }
+    .pair-track { height: 9px; border-radius: 999px; background: var(--paper-deep); overflow: hidden; }
+    .pair-fill { display: block; height: 100%; border-radius: 999px; background: #3f7082; }
+    .pair-line.is-hours .pair-fill { background: #ae5037 !important; }
+    .pair-line.is-episodes .pair-fill { background: #3f7082 !important; }
+    .pair-value { color: var(--muted); font: 600 11px/1.2 var(--mono); }
+    .pair-swatch.is-episodes { background: #3f7082; }
+    .pair-swatch.is-hours { background: #ae5037; }
+    .dynamics-subhead { margin: 16px 0 4px; font: 700 11px/1.2 var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    .origin-row { display: grid; grid-template-columns: minmax(140px, 220px) minmax(0, 1fr) 70px; gap: 10px; align-items: center; }
+    .origin-track { display: flex; height: 12px; border-radius: 999px; overflow: hidden; background: var(--paper-deep); }
+    .origin-track span { display: block; height: 100%; }
+    .pull-matrix { display: grid; gap: 2px; margin-top: 12px; overflow-x: auto; font-size: 11px; }
+    .pull-head { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; overflow: hidden; max-height: 120px; color: var(--muted); font: 600 10px/1.2 var(--mono); justify-self: center; }
+    .pull-head.is-corner { writing-mode: horizontal-tb; transform: none; align-self: end; justify-self: start; }
+    .pull-source { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; align-self: center; }
+    .pull-cell { min-height: 24px; display: grid; place-items: center; border-radius: 4px; background: color-mix(in srgb, var(--rust) calc(var(--heat) * 100%), transparent); font: 600 10px/1 var(--mono); }
+    .pull-cell.is-zero { background: color-mix(in srgb, var(--paper-deep) 60%, transparent); }
+    .story-list { display: grid; gap: 4px; margin-top: 12px; }
+    .story-row { display: grid; grid-template-columns: minmax(150px, 210px) minmax(0, 1fr); gap: 10px; align-items: center; }
+    .story-name { display: flex; flex-direction: column; font-size: 12px; line-height: 1.2; }
+    .story-name span { color: var(--muted); font: 600 10px/1.2 var(--mono); }
+    .story-track { position: relative; height: 18px; }
+    .story-window { position: absolute; top: 7px; height: 4px; border-radius: 999px; background: var(--paper-deep); }
+    .story-bar { position: absolute; top: 4px; height: 10px; border-radius: 2px; opacity: .9; }
+    .story-marker { position: absolute; top: -1px; transform: translateX(-50%); font-size: 11px; line-height: 1; cursor: default; }
+    .story-marker.is-correction { color: var(--ink); top: -3px; }
+    .story-marker.is-nudge { color: #466f61; top: 3px; font-size: 9px; }
+    .story-marker.is-rule { color: #74578f; top: 3px; }
     .breakdown-measure { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 22px 0 14px; }
     .breakdown-measure .viz-note { margin: 0; }
     .viz-control { min-width: 190px; height: 36px; padding: 0 30px 0 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--card); }
@@ -577,9 +610,9 @@
 
         <div class="viz-grid">
           <article class="viz-card is-wide">
-            <div class="viz-heading"><div><h3>Village drift weather</h3><p>Share of active agents drifting in each Village hour, by run day.</p></div><span class="viz-meta" id="weather-meta"></span></div>
+            <div class="viz-heading"><div><h3>Village drift weather</h3><p>For each Village run day (columns) and working hour (rows), the share of agents in a goal-maximization period who drifted at some point in that hour.</p></div><span class="viz-meta" id="weather-meta"></span></div>
             <div class="weather-wrap"><svg class="svg-chart weather-chart" id="weather-chart" viewBox="0 0 1120 340" role="img" aria-label="Village drift weather heatmap"></svg></div>
-            <p class="viz-note">Dates and hours use America/Los_Angeles, matching Village days. Only analyzed run days and the 9:00 AM–5:00 PM PT active window are shown; overnight wall-clock spans are excluded. Each cell is shaded by the share of that day’s goal-maximization agents drifting in that hour (the agent count varied from 18 to 38), so days with more agents running don’t look darker by default. Weekends are omitted.</p>
+            <p class="viz-note"><strong>How cells are normalized.</strong> Each cell is the number of agents drifting in that hour divided by the number of agents in a goal-maximization period that day, so days with more agents running (18 to 38 over the run) don’t look darker just because of headcount. An agent counts once per hour, even if two of its episodes overlap that hour, and any measured drift bout within the hour counts. Shading is relative to the darkest cell on the chart; hover a cell for its exact count and share.<br><strong>What is shown.</strong> Dates and hours use America/Los_Angeles, matching Village days: weekday run days only, 9 AM–5 PM PT. Weekend columns are omitted (Saturday-dated logs are Friday evening’s turns past midnight UTC), and drift is drawn from measured bouts, so nights and weekends between bouts never count.</p>
           </article>
 
           <article class="viz-card is-wide">
@@ -644,6 +677,77 @@
             <p class="viz-note" id="resilience-note">Every bar represents 100% of that agent’s fully reviewed episodes. Episode count indicates distraction pressure; colored segments show the subset with an observed recovery.</p>
           </article>
 
+        </div>
+      </section>
+
+      <section class="exploration" aria-labelledby="dynamics-title">
+        <div class="exploration-heading">
+          <p class="section-kicker">Drift dynamics</p>
+          <h2 id="dynamics-title">How often versus how much</h2>
+          <p>Each view compares two questions: how often something leads to drift (share of episodes) and how much drift it accounts for (share of drift hours). Many short episodes and a few long ones can tell opposite stories.</p>
+        </div>
+
+        <div class="viz-grid">
+          <article class="viz-card is-wide">
+            <div class="viz-heading"><div><h3>Goal-window stories</h3><p>Every goal period with drift on one calendar: drift bouts colored by what started them, with operator corrections, nudges and the first self-authored rule the agent cited.</p></div><span class="viz-meta" id="story-meta"></span></div>
+            <div class="viz-legend" id="story-legend"></div>
+            <div class="story-list" id="story-strips"></div>
+            <p class="viz-note">Rows are sorted by goal start. Each label shows episode count and drift hours. Hover a bar or marker for details. Rule markers come from an unreviewed keyword pass over the agent’s own session goals and pause text.</p>
+          </article>
+
+          <article class="viz-card is-wide">
+            <div class="viz-heading"><div><h3>What started the drift</h3><p>Reviewed trigger, grouped by origin: an outside request or message, a pause, or the agent’s own initiative.</p></div>
+              <div class="viz-controls"><span class="viz-meta" id="origin-meta"></span><label class="viz-control-label" for="origin-measure"><span>Measure</span>
+                  <select class="viz-control" id="origin-measure">
+                    <option value="episodes">Episodes (how often)</option>
+                    <option value="hours">Drift hours (how much)</option>
+                  </select>
+                </label></div>
+            </div>
+            <div class="viz-legend" id="origin-legend"></div>
+            <div class="pair-list" id="origin-pairs"></div>
+            <h4 class="dynamics-subhead">By drifting agent</h4>
+            <div class="viz-legend" id="origin-agent-legend"></div>
+            <div class="influence-list" id="origin-agents"></div>
+            <p class="viz-note">By episodes: how often each origin starts drift. By hours: how much drift each origin accounts for. The agent bars follow the Measure selector.</p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>How agents justify drift</h3><p>Reviewed reasons for wait episodes, and self-authored rules agents cite while drifting.</p></div><span class="viz-meta" id="justification-meta"></span></div>
+            <div class="viz-legend" id="justification-legend"></div>
+            <h4 class="dynamics-subhead">Wait review verdicts</h4>
+            <div class="pair-list" id="verdict-pairs"></div>
+            <h4 class="dynamics-subhead">Self-authored rules cited (keyword-tagged)</h4>
+            <div class="pair-list" id="rule-pairs"></div>
+            <p class="viz-note">Wait verdicts come from raw-log review. Rule tags are an unreviewed keyword pass; an episode can cite more than one rule, so rule shares overlap.</p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>How long drift lasts</h3><p>Share of episodes, and share of drift hours, in episodes lasting longer than a given duration.</p></div><span class="viz-meta" id="recovery-curve-meta"></span></div>
+            <svg class="svg-chart" id="recovery-curve" viewBox="0 0 640 320" role="img" aria-label="Drift duration curves by episodes and by hours"></svg>
+            <div class="viz-legend" id="recovery-curve-legend"></div>
+            <p class="viz-note" id="recovery-curve-note"></p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Response to nudges</h3><p>Episodes that received an operator or automatic nudge while drifting, and how soon they ended after the first one.</p></div><span class="viz-meta" id="nudge-meta"></span></div>
+            <div class="viz-legend" id="nudge-legend"></div>
+            <div class="pair-list" id="nudge-pairs"></div>
+            <p class="viz-note">Shares are out of all nudged episodes (or their drift hours), so rows overlap. The hours bars show whether nudges end long drifts or only short ones.</p>
+          </article>
+
+          <article class="viz-card">
+            <div class="viz-heading"><div><h3>Who pulls whom</h3><p>Drift started by an outside request: who asked (rows) and who drifted (columns).</p></div>
+              <div class="viz-controls"><span class="viz-meta" id="pull-meta"></span><label class="viz-control-label" for="pull-measure"><span>Measure</span>
+                  <select class="viz-control" id="pull-measure">
+                    <option value="episodes">Episodes (how often)</option>
+                    <option value="hours">Drift hours (how much)</option>
+                  </select>
+                </label></div>
+            </div>
+            <div class="pull-matrix" id="pull-matrix"></div>
+            <p class="viz-note">Sources use the reviewed <code>trigger_actor</code>; relays are credited to the relaying agent, and all non-staff humans are grouped. By episodes: how often a source pulls an agent off goal. By hours: how much drift it causes.</p>
+          </article>
         </div>
       </section>
 
@@ -723,6 +827,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261018-weather-share"></script>
+  <script type="module" src="./scripts/findings.js?v=20261018-drift-dynamics"></script>
 </body>
 </html>

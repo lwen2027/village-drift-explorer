@@ -31,6 +31,9 @@ const triggerTaxonomyLabels = new Map(triggerTaxonomyCategories.map((category) =
 const goalCategories = categoryResponse.ok ? (await categoryResponse.json()).categories || [] : [];
 // Operator corrections are optional too; each targeted correction becomes a marker on the agent's atlas row.
 const humanContact = contactResponse.ok ? await contactResponse.json() : {};
+// Self-authored rule tags (unreviewed keyword pass) are optional.
+const rulesResponse = await fetch("./data/self_authored_rules_v1.json", fresh);
+const selfAuthoredRules = rulesResponse.ok ? await rulesResponse.json() : {};
 const operatorCorrections = humanContact.operator_corrections || [];
 // Agents contacted by outside (non-staff) humans on at least this many goal days are flagged as possibly biased.
 const OUTSIDE_TARGETING_MIN_DAYS = 10;
@@ -2424,6 +2427,426 @@ function renderTriggerTaxonomy() {
   document.querySelector("#taxonomy-note").textContent = `Cell shading represents the share within each trigger category; every populated cell shows its ${unit} and percentage, and the final column gives the category total. ${multiRecoveryCount} episodes also retain a secondary recovery label in their annotation. ${mode === "hours" ? hoursEstimateNote(taxonomyRows) : ""}`.trim();
 }
 
+// ---------------------------------------------------------------------------
+// Drift dynamics: every chart compares how often (episodes) with how much (drift hours).
+// ---------------------------------------------------------------------------
+const OUTSIDE_TRIGGERS = new Set(["agent_message_or_request", "gitlab_issue_or_comment", "user_email", "user_message", "substack_message", "operator_or_system_event"]);
+const ORIGIN_GROUPS = [
+  { id: "outside", label: "Outside input (peer, human or operator)", color: "#3f7082" },
+  { id: "pause", label: "Pause", color: "#a77b2c" },
+  { id: "self", label: "Self-originated (proxy, own rule, own initiative)", color: "#ae5037" }
+];
+const ORIGIN_BY_ID = new Map(ORIGIN_GROUPS.map((group) => [group.id, group]));
+
+function triggerOriginFor(annotation) {
+  const triggers = new Set(annotation.trigger_categories || []);
+  if ([...triggers].some((trigger) => OUTSIDE_TRIGGERS.has(trigger))) return "outside";
+  return triggers.has("pause") ? "pause" : "self";
+}
+
+function hoursOf(row) {
+  return driftHoursFor(row.episode).hours;
+}
+
+function percentText(value) {
+  return `${Math.round(value * 100)}%`;
+}
+
+// One row per category: a bar for its share of episodes and a bar for its share of drift hours.
+// Shares default to the sum over items; pass totals when rows overlap (e.g. cumulative time windows).
+function renderPairedBars(container, items, { showCounts = true, totalEpisodes = null, totalHours = null } = {}) {
+  container.replaceChildren();
+  totalEpisodes = totalEpisodes || items.reduce((sum, item) => sum + item.episodes, 0) || 1;
+  totalHours = totalHours || items.reduce((sum, item) => sum + item.hours, 0) || 1;
+  items.forEach((item) => {
+    const row = document.createElement("div");
+    row.className = "pair-row";
+    const name = document.createElement("span");
+    name.className = "pair-label";
+    name.textContent = item.label;
+    const bars = document.createElement("span");
+    bars.className = "pair-bars";
+    [["episodes", item.episodes / totalEpisodes, `${item.episodes} ${item.episodes === 1 ? "episode" : "episodes"}`], ["hours", item.hours / totalHours, measureText(item.hours, "hours")]]
+      .forEach(([kind, share, value]) => {
+        const line = document.createElement("span");
+        line.className = `pair-line is-${kind}`;
+        const track = document.createElement("span");
+        track.className = "pair-track";
+        const fill = document.createElement("span");
+        fill.className = "pair-fill";
+        fill.style.width = `${share * 100}%`;
+        if (item.color) fill.style.background = item.color;
+        track.append(fill);
+        const text = document.createElement("span");
+        text.className = "pair-value";
+        text.textContent = showCounts ? `${percentText(share)} · ${value}` : percentText(share);
+        line.append(track, text);
+        bars.append(line);
+      });
+    row.append(name, bars);
+    row.title = `${item.label}: ${item.episodes} episodes (${percentText(item.episodes / totalEpisodes)}) · ${measureText(item.hours, "hours")} (${percentText(item.hours / totalHours)})`;
+    container.append(row);
+  });
+}
+
+function pairedLegend() {
+  return '<span class="legend-item"><span class="legend-swatch pair-swatch is-episodes"></span>Share of episodes (how often)</span>'
+    + '<span class="legend-item"><span class="legend-swatch pair-swatch is-hours"></span>Share of drift hours (how much)</span>';
+}
+
+function renderTriggerOrigin() {
+  const totals = new Map(ORIGIN_GROUPS.map((group) => [group.id, { ...group, episodes: 0, hours: 0 }]));
+  const byAgent = new Map();
+  rows.forEach((row) => {
+    const origin = triggerOriginFor(row.annotation);
+    const hours = hoursOf(row);
+    const total = totals.get(origin);
+    total.episodes += 1;
+    total.hours += hours;
+    if (!byAgent.has(row.episode.agent)) byAgent.set(row.episode.agent, new Map(ORIGIN_GROUPS.map((group) => [group.id, { episodes: 0, hours: 0 }])));
+    const cell = byAgent.get(row.episode.agent).get(origin);
+    cell.episodes += 1;
+    cell.hours += hours;
+  });
+  renderPairedBars(document.querySelector("#origin-pairs"), [...totals.values()]);
+  document.querySelector("#origin-legend").innerHTML = pairedLegend();
+
+  const mode = document.querySelector("#origin-measure").value;
+  const key = mode === "hours" ? "hours" : "episodes";
+  const list = document.querySelector("#origin-agents");
+  list.replaceChildren();
+  const agents = [...byAgent.entries()]
+    .map(([agent, groups]) => ({ agent, groups, total: [...groups.values()].reduce((sum, cell) => sum + cell[key], 0) }))
+    .filter((entry) => entry.total > 0)
+    .sort((left, right) => right.total - left.total || left.agent.localeCompare(right.agent));
+  agents.forEach((entry) => {
+    const row = document.createElement("div");
+    row.className = "origin-row";
+    const name = document.createElement("span");
+    name.className = "influence-bar-label";
+    name.textContent = agentLabel(entry.agent);
+    const track = document.createElement("span");
+    track.className = "origin-track";
+    ORIGIN_GROUPS.forEach((group) => {
+      const share = entry.groups.get(group.id)[key] / entry.total;
+      if (!share) return;
+      const fill = document.createElement("span");
+      fill.style.width = `${share * 100}%`;
+      fill.style.background = group.color;
+      fill.title = `${group.label}: ${measureText(entry.groups.get(group.id)[key], mode)} (${percentText(share)})`;
+      track.append(fill);
+    });
+    const value = document.createElement("span");
+    value.className = "influence-bar-count";
+    value.textContent = measureText(entry.total, mode);
+    row.append(name, track, value);
+    list.append(row);
+  });
+  document.querySelector("#origin-agent-legend").replaceChildren(...ORIGIN_GROUPS.map((group) => {
+    const item = document.createElement("span");
+    item.className = "legend-item";
+    const swatch = document.createElement("span");
+    swatch.className = "legend-swatch";
+    swatch.style.background = group.color;
+    item.append(swatch, document.createTextNode(group.label));
+    return item;
+  }));
+  document.querySelector("#origin-meta").textContent = `${rows.length} reviewed episodes`;
+}
+
+const WAIT_VERDICT_LABELS = {
+  goal_tied: "Goal-tied wait",
+  pretextual: "Pretextual wait (own rule or exemption)",
+  unrelated: "Unrelated wait",
+  mixed: "Mixed"
+};
+
+function renderJustifications() {
+  const verdicts = new Map(Object.keys(WAIT_VERDICT_LABELS).map((id) => [id, { label: WAIT_VERDICT_LABELS[id], episodes: 0, hours: 0 }]));
+  goalMaxEpisodes.forEach((episode) => {
+    const review = episode.wait_review;
+    if (!review || !verdicts.has(review.verdict)) return;
+    const entry = verdicts.get(review.verdict);
+    entry.episodes += 1;
+    entry.hours += driftHoursFor(episode).hours;
+  });
+  renderPairedBars(document.querySelector("#verdict-pairs"), [...verdicts.values()].filter((entry) => entry.episodes));
+  const ruleLabels = selfAuthoredRules.rules || {};
+  const rules = new Map(Object.entries(ruleLabels).map(([id, ruleLabel]) => [id, { label: ruleLabel, episodes: 0, hours: 0 }]));
+  const byEpisode = new Map(goalMaxEpisodes.map((episode) => [episode.episode_id, episode]));
+  Object.entries(selfAuthoredRules.episodes || {}).forEach(([episodeId, tags]) => {
+    const episode = byEpisode.get(episodeId);
+    if (!episode) return;
+    tags.forEach((tag) => {
+      const entry = rules.get(tag.rule);
+      if (!entry) return;
+      entry.episodes += 1;
+      entry.hours += driftHoursFor(episode).hours;
+    });
+  });
+  renderPairedBars(document.querySelector("#rule-pairs"), [...rules.values()].filter((entry) => entry.episodes)
+    .sort((left, right) => right.hours - left.hours));
+  document.querySelector("#justification-legend").innerHTML = pairedLegend();
+  const reviewed = [...verdicts.values()].reduce((sum, entry) => sum + entry.episodes, 0);
+  const tagged = Object.keys(selfAuthoredRules.episodes || {}).length;
+  document.querySelector("#justification-meta").textContent = `${reviewed} reviewed waits · ${tagged} episodes citing a rule`;
+}
+
+function renderRecoveryCurves() {
+  const durations = goalMaxEpisodes.map((episode) => driftHoursFor(episode).hours).filter((hours) => hours > 0).sort((left, right) => left - right);
+  const totalHours = durations.reduce((sum, hours) => sum + hours, 0);
+  const svg = document.querySelector("#recovery-curve");
+  svg.replaceChildren();
+  const left = 62, right = 620, top = 24, bottom = 272;
+  const minLog = Math.log10(1 / 60), maxLog = Math.log10(Math.max(2, durations.at(-1)));
+  const xScale = (hours) => left + (Math.log10(Math.max(1 / 60, hours)) - minLog) / (maxLog - minLog) * (right - left);
+  const yScale = (share) => bottom - share * (bottom - top);
+  const ticks = [[1 / 60, "1 min"], [10 / 60, "10 min"], [1, "1 h"], [8, "8 h"], [40, "40 h"], [200, "200 h"]].filter(([hours]) => hours <= 10 ** maxLog);
+  addCartesianFrame(svg, {
+    left, right, top, bottom,
+    xTicks: ticks.map(([value, tickLabel]) => ({ value, label: tickLabel })),
+    yTicks: [0, .25, .5, .75, 1].map((value) => ({ value, label: `${value * 100}%` })),
+    xScale, yScale, xLabel: "Episode drift duration (log scale)", yLabel: "Share lasting longer"
+  });
+  const episodePoints = [], hourPoints = [];
+  let remainingHours = totalHours;
+  durations.forEach((hours, index) => {
+    const x = xScale(hours);
+    episodePoints.push([x, yScale((durations.length - index) / durations.length)], [x, yScale((durations.length - index - 1) / durations.length)]);
+    hourPoints.push([x, yScale(remainingHours / totalHours)]);
+    remainingHours -= hours;
+    hourPoints.push([x, yScale(remainingHours / totalHours)]);
+  });
+  [[episodePoints, "#3f7082", "Episodes"], [hourPoints, "#ae5037", "Drift hours"]].forEach(([points, color, name]) => {
+    const line = svgElement("polyline", { points: [[left, yScale(1)], ...points].map((point) => point.join(",")).join(" "), fill: "none", stroke: color, "stroke-width": 2.5 });
+    svgTitle(line, name);
+    svg.append(line);
+  });
+  const median = durations[Math.floor(durations.length / 2)];
+  let cumulative = 0, weightedMedian = 0;
+  for (const hours of durations) {
+    cumulative += hours;
+    if (cumulative >= totalHours / 2) { weightedMedian = hours; break; }
+  }
+  const recovered = rows.filter((row) => isObservedRecovery(row.annotation));
+  const recoveredHours = recovered.reduce((sum, row) => sum + hoursOf(row), 0);
+  const reviewedHours = rows.reduce((sum, row) => sum + hoursOf(row), 0);
+  document.querySelector("#recovery-curve-note").textContent =
+    `Median episode lasts ${measureText(median, "hours")}, but half of all drift hours sit in episodes of ${measureText(weightedMedian, "hours")} or longer. `
+    + `${percentText(recovered.length / rows.length)} of reviewed episodes ended in an observed recovery, covering ${percentText(recoveredHours / reviewedHours)} of reviewed drift hours.`;
+  document.querySelector("#recovery-curve-legend").innerHTML =
+    '<span class="legend-item"><span class="legend-swatch" style="background:#3f7082"></span>Share of episodes lasting longer than x</span>'
+    + '<span class="legend-item"><span class="legend-swatch" style="background:#ae5037"></span>Share of drift hours in episodes lasting longer than x</span>';
+  document.querySelector("#recovery-curve-meta").textContent = `${durations.length} episodes · ${measureText(totalHours, "hours")}`;
+}
+
+function renderNudgeResponse() {
+  const nudged = [];
+  goalMaxEpisodes.forEach((episode) => {
+    const nudges = (episode.operator_nudges_within_evidence || []).filter((nudge) => timestampMs(nudge.timestamp) != null);
+    if (!nudges.length) return;
+    const end = episode.drift_end || {};
+    const endMs = timestampMs(end.ended_at);
+    const first = Math.min(...nudges.map((nudge) => timestampMs(nudge.timestamp)));
+    nudged.push({
+      episode,
+      hours: driftHoursFor(episode).hours,
+      corrected: nudges.some((nudge) => nudge.outcome === "corrected"),
+      minutesToEnd: endMs == null ? null : Math.max(0, (endMs - first) / 60000)
+    });
+  });
+  const windows = [[15, "Ended within 15 min of the first nudge"], [60, "Ended within 1 hour"], [240, "Ended within 4 hours"]];
+  const totalEpisodes = nudged.length || 1;
+  const totalHours = nudged.reduce((sum, item) => sum + item.hours, 0) || 1;
+  const items = [
+    { label: "Reviewer judged the nudge corrected the drift", filter: (item) => item.corrected },
+    ...windows.map(([minutes, windowLabel]) => ({ label: windowLabel, filter: (item) => item.minutesToEnd != null && item.minutesToEnd <= minutes })),
+    { label: "Still drifting when the evidence ends", filter: (item) => item.minutesToEnd == null }
+  ];
+  // Each share is out of all nudged episodes / drift hours, so the rows overlap and don't sum to 100%.
+  renderPairedBars(document.querySelector("#nudge-pairs"), items.map((item) => {
+    const matched = nudged.filter(item.filter);
+    return { label: item.label, episodes: matched.length, hours: matched.reduce((sum, entry) => sum + entry.hours, 0) };
+  }), { totalEpisodes, totalHours });
+  document.querySelector("#nudge-legend").innerHTML = pairedLegend();
+  document.querySelector("#nudge-meta").textContent = `${nudged.length} episodes with a nudge inside them · ${measureText(totalHours, "hours")}`;
+}
+
+function sourceAgentFor(actor) {
+  const text = String(actor || "");
+  const agents = [...new Set(goalMaxEpisodes.map((episode) => episode.agent))].sort((left, right) => right.length - left.length);
+  const named = agents.find((agent) => text.startsWith(agent));
+  if (named) return named;
+  if (/multiple|peers/i.test(text)) return "Multiple agents";
+  return "Outside humans";
+}
+
+function renderWhoPullsWhom() {
+  const mode = document.querySelector("#pull-measure").value;
+  const cells = new Map();
+  const sourceTotals = new Map();
+  const targetTotals = new Map();
+  rows.forEach((row) => {
+    if (triggerOriginFor(row.annotation) !== "outside" || !row.annotation.trigger_actor) return;
+    const source = sourceAgentFor(row.annotation.trigger_actor);
+    const target = row.episode.agent;
+    const value = mode === "hours" ? hoursOf(row) : 1;
+    const key = `${source}\u0000${target}`;
+    cells.set(key, (cells.get(key) || 0) + value);
+    sourceTotals.set(source, (sourceTotals.get(source) || 0) + value);
+    targetTotals.set(target, (targetTotals.get(target) || 0) + value);
+  });
+  const order = (totals) => [...totals.entries()].filter(([, value]) => value > 0).sort((left, right) => right[1] - left[1]).map(([name]) => name);
+  const sources = order(sourceTotals).slice(0, 14);
+  const targets = order(targetTotals).slice(0, 16);
+  const max = Math.max(.0001, ...[...cells.values()]);
+  const table = document.querySelector("#pull-matrix");
+  table.replaceChildren();
+  table.style.gridTemplateColumns = `minmax(150px, 1.4fr) repeat(${targets.length}, minmax(34px, 1fr))`;
+  const corner = document.createElement("div");
+  corner.className = "pull-head is-corner";
+  corner.textContent = "Source ↓ / drifting agent →";
+  table.append(corner);
+  targets.forEach((target) => {
+    const head = document.createElement("div");
+    head.className = "pull-head";
+    head.textContent = agentLabel(target);
+    head.title = agentLabel(target);
+    table.append(head);
+  });
+  sources.forEach((source) => {
+    const name = document.createElement("div");
+    name.className = "pull-source";
+    name.textContent = source === "Outside humans" || source === "Multiple agents" ? source : agentLabel(source);
+    table.append(name);
+    targets.forEach((target) => {
+      const value = cells.get(`${source}\u0000${target}`) || 0;
+      const cell = document.createElement("div");
+      cell.className = `pull-cell${value ? "" : " is-zero"}`;
+      cell.style.setProperty("--heat", value ? (.12 + .8 * value / max).toFixed(3) : "0");
+      cell.textContent = value ? (mode === "hours" ? (value >= 10 ? Math.round(value) : value.toFixed(1)) : String(value)) : "";
+      cell.title = `${source} → ${target}: ${measureText(value, mode)}${mode === "hours" ? " of drift" : " episodes"}`;
+      table.append(cell);
+    });
+  });
+  document.querySelector("#pull-meta").textContent = `${sources.length} sources · ${targets.length} drifting agents shown`;
+}
+
+const STORY_MARKERS = [
+  { id: "correction", label: "Operator correction", symbol: "▼" },
+  { id: "nudge", label: "Nudge inside an episode", symbol: "●" },
+  { id: "rule", label: "First self-authored rule cited", symbol: "★" }
+];
+
+function renderStoryStrips() {
+  const container = document.querySelector("#story-strips");
+  container.replaceChildren();
+  const periods = goalPeriods.filter((period) => period.episodes.length)
+    .sort((left, right) => left.startMs - right.startMs || left.agent.localeCompare(right.agent));
+  const axisStart = Math.min(...periods.map((period) => period.startMs));
+  const axisEnd = Math.max(...periods.map((period) => period.endMs));
+  const position = (ms) => ((ms - axisStart) / Math.max(1, axisEnd - axisStart)) * 100;
+  const rulesByEpisode = selfAuthoredRules.episodes || {};
+  periods.forEach((period) => {
+    const row = document.createElement("div");
+    row.className = "story-row";
+    const name = document.createElement("div");
+    name.className = "story-name";
+    const hours = period.episodes.reduce((sum, episode) => sum + driftHoursFor(episode).hours, 0);
+    name.innerHTML = "";
+    const agentNode = document.createElement("strong");
+    agentNode.textContent = agentLabel(period.agent);
+    const statsNode = document.createElement("span");
+    statsNode.textContent = `${period.episodes.length} ep · ${measureText(hours, "hours")}`;
+    name.append(agentNode, statsNode);
+    name.title = period.goal;
+    const track = document.createElement("div");
+    track.className = "story-track";
+    const windowNode = document.createElement("span");
+    windowNode.className = "story-window";
+    windowNode.style.left = `${position(period.startMs)}%`;
+    windowNode.style.width = `${Math.max(.2, position(period.endMs) - position(period.startMs))}%`;
+    track.append(windowNode);
+    let firstRule = null;
+    period.episodes.forEach((episode) => {
+      const review = reviewRowByEpisode.get(episode.episode_id);
+      const origin = review ? triggerOriginFor(review.annotation) : null;
+      episodeIntervals(episode).forEach((interval) => {
+        const bar = document.createElement("span");
+        bar.className = "story-bar";
+        bar.style.left = `${position(interval.startMs)}%`;
+        bar.style.width = `${Math.max(.12, position(interval.endMs) - position(interval.startMs))}%`;
+        bar.style.background = origin ? ORIGIN_BY_ID.get(origin).color : "#8d8678";
+        bar.dataset.tip = `${shortText(episode.activity, 90)} · ${origin ? ORIGIN_BY_ID.get(origin).label : "not yet reviewed"}`;
+        track.append(bar);
+      });
+      (episode.operator_nudges_within_evidence || []).forEach((nudge) => {
+        const at = timestampMs(nudge.timestamp);
+        if (at == null) return;
+        const marker = document.createElement("span");
+        marker.className = "story-marker is-nudge";
+        marker.textContent = "●";
+        marker.style.left = `${position(at)}%`;
+        marker.dataset.tip = `Nudge · ${displayDay(nudge.timestamp)} · ${nudge.outcome === "corrected" ? "drift corrected" : "drift continued"}`;
+        track.append(marker);
+      });
+      (rulesByEpisode[episode.episode_id] || []).forEach((tag) => {
+        if (!firstRule || tag.first_seen < firstRule.first_seen) firstRule = tag;
+      });
+    });
+    (correctionsByAgent.get(period.agent) || []).forEach((correction) => {
+      const at = timestampMs(correction.timestamp);
+      if (at == null || at < period.startMs || at > period.endMs) return;
+      const marker = document.createElement("span");
+      marker.className = "story-marker is-correction";
+      marker.textContent = "▼";
+      marker.style.left = `${position(at)}%`;
+      marker.dataset.tip = `Operator correction · ${displayDay(correction.timestamp)} · ${correction.summary}`;
+      track.append(marker);
+    });
+    if (firstRule) {
+      const marker = document.createElement("span");
+      marker.className = "story-marker is-rule";
+      marker.textContent = "★";
+      marker.style.left = `${position(timestampMs(firstRule.first_seen))}%`;
+      marker.dataset.tip = `First self-authored rule cited · ${displayDay(firstRule.first_seen)} · ${(selfAuthoredRules.rules || {})[firstRule.rule] || firstRule.rule}: “${firstRule.excerpt}”`;
+      track.append(marker);
+    }
+    row.append(name, track);
+    container.append(row);
+  });
+  const legend = document.querySelector("#story-legend");
+  legend.replaceChildren(
+    ...ORIGIN_GROUPS.map((group) => {
+      const item = document.createElement("span");
+      item.className = "legend-item";
+      const swatch = document.createElement("span");
+      swatch.className = "legend-swatch";
+      swatch.style.background = group.color;
+      item.append(swatch, document.createTextNode(group.label));
+      return item;
+    }),
+    ...STORY_MARKERS.map((marker) => {
+      const item = document.createElement("span");
+      item.className = "legend-item";
+      item.textContent = `${marker.symbol} ${marker.label}`;
+      return item;
+    })
+  );
+  document.querySelector("#story-meta").textContent = `${periods.length} goal periods with drift`;
+}
+
+function initializeDriftDynamics() {
+  renderTriggerOrigin();
+  document.querySelector("#origin-measure").addEventListener("change", renderTriggerOrigin);
+  renderJustifications();
+  renderRecoveryCurves();
+  renderNudgeResponse();
+  renderWhoPullsWhom();
+  document.querySelector("#pull-measure").addEventListener("change", renderWhoPullsWhom);
+  renderStoryStrips();
+}
+
 function initializeExperimentalLenses() {
   renderDriftWeather();
   renderAgentFingerprints();
@@ -2570,4 +2993,5 @@ document.querySelector("#show-more").addEventListener("click", () => {
 
 initializeExplorations();
 initializeExperimentalLenses();
+initializeDriftDynamics();
 render();
