@@ -130,6 +130,8 @@
     .viz-meta { flex: none; color: var(--muted); font: 700 11px/1.35 var(--mono); text-align: right; }
     .viz-controls { display: flex; flex: none; flex-direction: column; align-items: flex-end; gap: 7px; }
     .viz-control-label { display: flex; align-items: center; gap: 8px; color: var(--muted); font: 700 10px/1.2 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    .breakdown-measure { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 22px 0 14px; }
+    .breakdown-measure .viz-note { margin: 0; }
     .viz-control { min-width: 190px; height: 36px; padding: 0 30px 0 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--card); }
     .viz-note { margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.5; }
     .viz-legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 0; color: var(--muted); font-size: 11px; }
@@ -642,13 +644,6 @@
             <h2 id="breakdown-title">Patterns within fully reviewed episodes</h2>
           </div>
           <p>Charts summarize all goal-maximization episodes whose required annotation fields are resolved.</p>
-          <label class="viz-control-label" for="breakdown-measure"><span>Bar charts measure</span>
-            <select class="viz-control" id="breakdown-measure">
-              <option value="episodes">Episodes (how often)</option>
-              <option value="hours">Drift hours (how much)</option>
-            </select>
-          </label>
-          <p class="viz-note" id="breakdown-estimate-note"></p>
         </div>
 
         <article class="chart-card is-wide taxonomy-card">
@@ -662,6 +657,16 @@
           <div class="taxonomy-chart" id="taxonomy-chart"></div>
           <p class="viz-note" id="taxonomy-note"></p>
         </article>
+
+        <div class="breakdown-measure">
+          <label class="viz-control-label" for="breakdown-measure"><span>Bar charts below measure</span>
+            <select class="viz-control" id="breakdown-measure">
+              <option value="episodes">Episodes (how often)</option>
+              <option value="hours">Drift hours (how much)</option>
+            </select>
+          </label>
+          <p class="viz-note" id="breakdown-estimate-note"></p>
+        </div>
 
         <div class="chart-grid">
           <article class="chart-card is-wide">
@@ -708,6 +713,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261018-drift-hours-recovery"></script>
+  <script type="module" src="./scripts/findings.js?v=20261018-fingerprint-release-order"></script>
 </body>
 </html>

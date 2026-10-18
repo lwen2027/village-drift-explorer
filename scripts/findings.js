@@ -1844,6 +1844,28 @@ function modelFamily(agent) {
   return "Other";
 }
 
+// Release order within a model family: public release dates for models that predate the Village,
+// otherwise the day the model joined the Village (which follows its release closely).
+const AGENT_RELEASE_DATES = {
+  "Claude 3 Opus": "2024-03-04", "GPT-4o": "2024-05-13", "Claude 3.5 Sonnet": "2024-06-20",
+  "o1": "2024-12-05", "Claude 3.7 Sonnet": "2025-02-24", "GPT-4.1": "2025-04-14", "o3": "2025-04-16",
+  "Gemini 2.5 Pro": "2025-04-24", "o4-mini": "2025-05-22", "Claude Opus 4": "2025-05-23",
+  "Claude Opus 4.1": "2025-08-18", "Grok 4": "2025-08-18", "GPT-5": "2025-08-18",
+  "Claude Sonnet 4.5": "2025-09-30", "Claude Haiku 4.5": "2025-10-22", "GPT-5.1": "2025-11-14",
+  "Gemini 3 Pro": "2025-11-19", "Claude Opus 4.5": "2025-11-25", "Opus 4.5 (Claude Code)": "2025-11-25",
+  "DeepSeek-V3.2": "2025-12-04", "GPT-5.2": "2025-12-12", "Claude Opus 4.6": "2026-02-06",
+  "Claude Sonnet 4.6": "2026-02-18", "Gemini 3.1 Pro": "2026-03-09", "GPT-5.4": "2026-03-16",
+  "Claude Opus 4.7": "2026-04-17", "Kimi K2.6": "2026-04-22", "GPT-5.5": "2026-04-27",
+  "Gemini 3.5 Flash": "2026-05-20", "Claude Opus 4.8": "2026-05-28", "Claude Fable 5": "2026-06-09",
+  "Claude Sonnet 5": "2026-06-30", "DeepSeek-V4-Pro": "2026-07-02", "GLM-5.2": "2026-07-03",
+  "GPT-5.6 Sol": "2026-07-09", "GPT-5.6 Terra": "2026-07-09", "GPT-5.6 Luna": "2026-07-09",
+  "Grok 4.5": "2026-07-10", "Kimi K3": "2026-07-17", "Claude Opus 5": "2026-07-24",
+  "GLM-5.3 Flash": "2026-08-28", "Claude Fable 5.1": "2026-09-01", "Muse Spark 1.3": "2026-09-03",
+  "Gemini 3.8 Flash": "2026-09-03", "GPT-6 Astra": "2026-09-04", "GPT-6 Sol": "2026-09-22",
+  "GPT-6 Luna": "2026-09-22", "Claude Opus 5.5": "2026-09-22", "Claude Sonnet 5.5": "2026-09-28",
+  "GPT-6.1 Sol": "2026-09-29"
+};
+
 function renderAgentFingerprints() {
   const periodsByName = new Map();
   goalPeriods.forEach((period) => {
@@ -1887,6 +1909,10 @@ function renderAgentFingerprints() {
     if (!families.has(family)) families.set(family, []);
     families.get(family).push(profile);
   });
+  // Within a family, earlier releases come first; agents without a known date go last.
+  families.forEach((members) => members.sort((left, right) =>
+    (AGENT_RELEASE_DATES[left.agent] || "9999").localeCompare(AGENT_RELEASE_DATES[right.agent] || "9999")
+    || left.agent.localeCompare(right.agent)));
   const familyEntries = [...families.entries()].sort((left, right) =>
     (left[0] === "Other" ? 1 : 0) - (right[0] === "Other" ? 1 : 0)
     || right[1].reduce((sum, profile) => sum + profile.episodeCount, 0) - left[1].reduce((sum, profile) => sum + profile.episodeCount, 0)
