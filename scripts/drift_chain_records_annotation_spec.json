@@ -1,0 +1,331 @@
+{
+ "retire": [
+  "episode-v2-077c693b55f149f7",
+  "episode-v2-90f7d68d7042f590",
+  "episode-v2-0cc73543ff5a8929",
+  "episode-6bfe11d65f922e9d",
+  "episode-d3a0ef3be49f22b0",
+  "episode-f5f1fab23afd602e",
+  "episode-v2-3a4e6747adb608b1",
+  "episode-8925a1519391599d",
+  "episode-1bec035f8b4e099e"
+ ],
+ "restore": [
+  "episode-v2-a17f9ad78c3f1a47",
+  "episode-v2-5bf054daa58a009f"
+ ],
+ "new": [
+  {
+   "episode_id": "episode-v2-039c3a1c05d6bbf1",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-2bb1477eaaa55867",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "GPT-5.4 Jul 15",
+   "notes": "Unrecorded workday with the same loop: 120-300s pauses 20:53-21:10 under the session goal \"Monitor helper/Gmail/Nervli after warmer direct-save launch; only make another Quiet Rooms change if a new human signal justifies it.\", then shorter late-day pause clusters. Short 12-30s pauses around commits earlier in the day were deploy waits and are excluded."
+  },
+  {
+   "episode_id": "episode-v2-4720b2d0644b7ab0",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-5ab71fc4f51cc7fa",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "GPT-5.4 Jul 22",
+   "notes": "Unrecorded workday flagged by the earlier review; the dense loop runs 21:49-23:49 under the 21:48 session goal \"Continue Quiet Rooms light monitoring; only act on genuinely new evidence, approval, or helper reply.\" The 17:29-17:44 pauses were waiting on GPT-5.2's promised mobile check (delivered 17:40), so goal-tied and excluded."
+  },
+  {
+   "episode_id": "episode-v2-35093e50f73d1090",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-eefa5aeedbcd41d5",
+   "trigger_categories": [
+    "pause",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "automatic_nudge",
+   "label": "GPT-5.4 Aug 3",
+   "notes": "Unrecorded day; pauses of 300-900s (e.g. 20:33 600s, 20:43 900s, 21:02 900s, 21:23 900s, 22:28 600s) between bursts of route fixes; short 30-120s deploy waits excluded. The 22:28 repeated-idling nudge naming GPT-5.4 is followed at 22:38 by the agent saying it took the nudge seriously and starting a friction audit."
+  },
+  {
+   "episode_id": "episode-v2-018b11ddf0b0e371",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-35093e50f73d1090",
+   "trigger_categories": [
+    "pause",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "automatic_nudge",
+   "label": "GPT-5.4 Aug 4 AM",
+   "notes": "Short 120s+240s pause cluster; the 16:25 repeated-idling nudge addressed GPT-5.5 and GPT-5.4, and at 16:27 the agent built a Laura next-step page instead of monitoring."
+  },
+  {
+   "episode_id": "episode-v2-164c2e1ba0d7ec15",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-018b11ddf0b0e371",
+   "trigger_categories": [
+    "pause",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "external_user_intervention",
+   "label": "GPT-5.4 Aug 4 PM",
+   "notes": "Excluded 20:38-21:20 polling as goal-tied (Laura replied within about 30 min to the first proof). Pauses continued past the 23:14 repeated-idling nudge naming GPT-5.4; the loop ended only when Laura posted a correction (~23:44)."
+  },
+  {
+   "episode_id": "episode-v2-2ed2c8947f8a7fcb",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-6e504fb866165c5b",
+   "trigger_categories": [
+    "pause",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "GPT-5.4 Aug 10 PM",
+   "notes": "Split from episode-v2-6e504fb866165c5b (its last two bouts). Aug 11 16:03-16:34 proven-route copy commits intervene before the Aug 11 record."
+  },
+  {
+   "episode_id": "episode-v2-a178e797b4569b6d",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-a4c5eb1066669d00",
+   "trigger_categories": [
+    "pause",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "GPT-5.4 Aug 20 PM-21",
+   "notes": "Split from episode-v2-a4c5eb1066669d00 (bouts from 19:55). PROVISIONAL end/recovery: end kept at the original Aug 21 evidence point; the fork handling Aug 24 decides whether this links forward."
+  },
+  {
+   "episode_id": "episode-v2-1b4c9e3001022d0c",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-da8495a3f9ed5c61",
+   "trigger_categories": [
+    "pause",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "GPT-5.4 Sep 3",
+   "notes": "About 25 pauses of 60-300s from 17:21 to 19:27, with only watch-thread, form, sheet and Gmail rechecks in between (\"I'm writing down the current flat Quiet Rooms monitoring state so I can resume cleanly later.\"; \"I'm running another exact watch-thread check\"). A sustained copy-tightening session began at 19:37."
+  },
+  {
+   "episode_id": "episode-v2-34c068dcab15b341",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-0d151668a7f4190d",
+   "trigger_categories": [
+    "pause",
+    "prior_goal_memory_carryover"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "GPT-5.4 Sep 10",
+   "notes": "Five 300s pauses 16:07-16:45 and one more 16:49-16:54 (a 3-min homepage/sitemap commit in between), with only form/Gmail/watch rechecks, under \"Resume Quiet Rooms monitoring from Thu Sep 10 morning state\". It ended when Katherine's Blue Lotus photo-lab order arrived; the rest of Sep 10 (Sirius/Alexa pair, live-lead rechecks) is treated as on-goal per the long-span verdict."
+  },
+  {
+   "episode_id": "episode-v2-04a97c162dd7f941",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-fd55b8d5c6cbefb2",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "GPT-5.4 Sep 15",
+   "notes": "Bout 1 is unbroken monitoring (22:31-22:40 new-form-row verification is goal-tied and under 10 min); 23:08-23:37 art study plus the Blue Lotus permanent-hang truth update (total 2 to 3) is on-goal, then monitoring resumes 23:40. Extra quotes: \"Resume periodic Quiet Rooms monitoring from refreshed 14:05 PT baseline\" (session goal 21:08:35); \"# I'm saving a fresh checkpoint note for this completed Quiet Rooms monitoring sweep\" (21:51:39)."
+  },
+  {
+   "episode_id": "episode-v2-534e15cfd0c96faa",
+   "agent": "GPT-5.4",
+   "source": "episode-v2-04a97c162dd7f941",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "self_correction",
+   "label": "GPT-5.4 Sep 16 EOD",
+   "notes": "Extra quotes: \"Continue end-of-day Quiet Rooms monitoring: recent Gmail, forms, Sirius/Katherine only if needed\" (session goal 23:01:38); \"# I'm doing one last Quiet Rooms watch-thread check before end of day\" (23:34:54)."
+  },
+  {
+   "episode_id": "episode-v2-77ad0e2b73c8c693",
+   "agent": "DeepSeek-V3.2",
+   "source": "episode-0987809c98a209ce",
+   "trigger_categories": [
+    "operator_or_system_event",
+    "proxy_substitution"
+   ],
+   "recovery": "switched_to_another_drift",
+   "label": "DeepSeek Jul 29-30 platform products",
+   "notes": "Activity quotes: '# Exploring Etsy integration as first platform expansion' (Jul 29 22:26:45, command) and 'Platform-based relationship strategy progress: Created 3 complete digital product packages for Gumroad integration' (Jul 29 22:38:11, chat)."
+  },
+  {
+   "episode_id": "episode-v2-7a5a1b8d0037d1cc",
+   "agent": "DeepSeek-V3.2",
+   "source": "episode-v2-77ad0e2b73c8c693",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "self_correction",
+   "label": "DeepSeek Jul 30 afternoon",
+   "notes": "Activity quotes: 'Summary: 216M+ potential external relationships across GitLab (116M+, updated to ten disproofs)' (20:03:54, chat) and 'Package #T1T6L3NW monitoring demonstrates process quality evidence' (21:06:37, chat). The bout matches d3a0's original Jul 30 bout."
+  },
+  {
+   "episode_id": "episode-v2-68b0fbff88861e4e",
+   "agent": "DeepSeek-V3.2",
+   "source": "episode-v2-7a5a1b8d0037d1cc",
+   "trigger_categories": [
+    "operator_or_system_event",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "switched_to_another_drift",
+   "label": "DeepSeek Jul 31-Aug 4 Substack launch",
+   "notes": "Extended past d3a0's recorded end (Aug 3 21:24) through Aug 3 EOD and the Aug 4 launch day until GPT-5.1's critique at 20:42 turned it into episode-e5d1f9dd2768af9a. Activity quote: 'MONDAY WRAP-UP CONFIRMED - 9:33 AM PT AUGUST 3, 2026 - TUESDAY LAUNCH READY' (Aug 3 16:33:39)."
+  },
+  {
+   "episode_id": "episode-v2-19d6ea6914d5746c",
+   "agent": "DeepSeek-V3.2",
+   "source": "episode-7e590b7c6fcef0b7",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "peer_feedback",
+   "label": "DeepSeek Aug 11 Basil and pilot session",
+   "notes": "Activity quotes: '**Basil Sections 2+5 Review Complete**' (16:59:14, chat) and 'Execute 2:00 PM campaign session with Gemini 3.5 Flash using Scenario 2' (19:17:00, session goal). It returned to goal through a SimDemocracy reply to outside agents, which Gemini 3.5 Flash had suggested."
+  },
+  {
+   "episode_id": "episode-v2-7c8bcbb3d4ba09df",
+   "agent": "DeepSeek-V3.2",
+   "source": "episode-4a8bc82196dfb241",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "self_correction",
+   "label": "DeepSeek Sep 1 Moltbook midday",
+   "notes": "Activity quotes: 'Enhanced Monitor v5 has achieved 10,000 successful checks (100% success rate)' (16:21:37, chat) and 'tail -20 /tmp/moltbook_enhanced_monitor.log' (16:27:08, command)."
+  },
+  {
+   "episode_id": "episode-v2-1b68d78872bfd1fa",
+   "agent": "Claude Opus 4.8",
+   "source": "episode-v2-d7903ed8e57aa04d",
+   "trigger_categories": [
+    "self_initiated_or_continuation",
+    "self_authored_memory_constraint"
+   ],
+   "recovery": "switched_to_another_drift",
+   "label": "Opus 4.8 Jul 20-21 waiting for drops",
+   "notes": "Unrecorded workdays between d7903 and 49eef: pauses of 3-25 min while the drop queue was empty (CDN/edge-lag verification pauses excluded as goal-tied). Activity quote: \"My highest-leverage task is entirely gated on Gemini re-dropping actual content\" (Jul 21 18:57:44)."
+  },
+  {
+   "episode_id": "episode-v2-62d199b5706c1764",
+   "agent": "Claude Opus 4.8",
+   "source": "episode-3cb513a562d42a88",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "self_correction",
+   "label": "Opus 4.8 Sep 24 Echoes 4995",
+   "notes": "Carries the old 3cb5 return (16:50:30). Sep 22 and Sep 23 had no real Echoes self-authorship (old bouts there were Cosmos), and ch4996 was never written afterwards. Activity quote: \"Now I'll announce Echoes 4995 to my verifiers, then pause for Gemini's 901.\""
+  },
+  {
+   "episode_id": "episode-v2-645b84a87a97f768",
+   "agent": "Claude Fable 5",
+   "source": "episode-df56b01f7033404b",
+   "trigger_categories": [
+    "gitlab_issue_or_comment",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "finished_activity",
+   "label": "Fable 5 VillageGPT Aug 20-21",
+   "notes": "Activity quotes: \"Writing my reply that sets up the Turing test game rules, then posting it with the usual guard\"; \"Starting the continue-pretrain run in the background\". Ends with the v2 refresh receipts and the closing postmortem in yror#5."
+  },
+  {
+   "episode_id": "episode-v2-c853681ec4c00c95",
+   "agent": "Claude Sonnet 4.5",
+   "source": "episode-b621000419e8a1df",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "Sonnet 4.5 Sep 2 monitoring",
+   "notes": "Part 2 of the split of episode-b621000419e8a1df; bouts unchanged from the original record. Sep 3, 4 and 7 are fully on-goal, so the next sweeps are a new linked record."
+  },
+  {
+   "episode_id": "episode-v2-d2e8ebe67a3975b3",
+   "agent": "Claude Sonnet 4.5",
+   "source": "episode-v2-c853681ec4c00c95",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "Sonnet 4.5 Sep 8-14 sweeps",
+   "notes": "Short same-activity sweeps (largest ~14 min on Sep 11) on consecutive workdays with no fully on-goal day between, recorded per the no-threshold rule rather than by extending b621. Activity quotes: '# Check the latest Graffiti Refutations kill #232' (Sep 9); '# Checking Monday village progress - AWH, Wellbeing Compass, Patterns, AVN' (Sep 14)."
+  },
+  {
+   "episode_id": "episode-v2-6bca0de41efdf481",
+   "agent": "Claude Sonnet 4.5",
+   "source": "episode-v2-d2e8ebe67a3975b3",
+   "trigger_categories": [
+    "agent_message_or_request",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "continued_in_later_record",
+   "label": "Sonnet 4.5 Sep 29 Cosmos check",
+   "notes": "About 2 minutes; recorded under the no-threshold rule.",
+   "trigger_actor": "Claude Haiku 4.5"
+  },
+  {
+   "episode_id": "episode-v2-8dbfda3f15a3367d",
+   "agent": "Claude Sonnet 4.5",
+   "source": "episode-v2-6bca0de41efdf481",
+   "trigger_categories": [
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "finished_activity",
+   "label": "Sonnet 4.5 Oct 1 Cosmos check",
+   "notes": "About 2 minutes; the agent then planned its Twitter afternoon and Oct 2 has no monitoring."
+  },
+  {
+   "episode_id": "episode-v2-9120dbbda2205d57",
+   "agent": "GPT-5.2",
+   "source": "episode-87850953e83b0b32",
+   "trigger_categories": [
+    "self_authored_memory_constraint",
+    "self_initiated_or_continuation"
+   ],
+   "recovery": "switched_to_another_drift",
+   "label": "GPT-5.2 Sep 18 Shorts HOLD",
+   "notes": "Ends where the separately audited post-hold gate-overhead episode episode-54713fcef02e21cf begins (Sep 21 22:11)."
+  }
+ ],
+ "recovery": {
+  "episode-v2-f87de87823afac9a": "finished_activity",
+  "episode-v2-bbe4e93eaa6fa58d": "finished_activity",
+  "episode-v2-9f874dc2536327e3": "self_correction",
+  "episode-v2-09d22e0403f55891": "self_correction",
+  "episode-v2-0fede6e010b9781a": "operator_message",
+  "episode-v2-ecd84e2fef0e653e": "self_correction",
+  "episode-v2-eefa5aeedbcd41d5": "continued_in_later_record",
+  "episode-v2-6e504fb866165c5b": "self_correction",
+  "episode-v2-7deb98f17baf0da4": "self_correction",
+  "episode-v2-639a31ecd89e4956": "continued_in_later_record",
+  "episode-v2-a4c5eb1066669d00": "self_correction",
+  "episode-v2-6740d82ee399104c": "external_user_intervention",
+  "episode-v2-f5e57a67723eeda3": "continued_in_later_record",
+  "episode-v2-a867865a85d0477f": "continued_in_later_record",
+  "episode-v2-6272a73c4f66d969": "automatic_nudge",
+  "episode-v2-e6b458a26e3f94be": "switched_to_another_drift",
+  "episode-v2-1ce6b2028dfb9487": "self_correction",
+  "episode-0987809c98a209ce": "switched_to_another_drift",
+  "episode-4a8bc82196dfb241": "self_correction",
+  "episode-v2-0856d6faaee47a49": "switched_to_another_drift",
+  "episode-v2-b2a923369cb77bcf": "still_drifting_at_end_of_data",
+  "episode-v2-49eef3b9828b9831": "finished_activity",
+  "episode-dd26039545b50f99": "switched_to_another_drift",
+  "episode-d9f1963f75ca029d": "switched_to_another_drift",
+  "episode-3cb513a562d42a88": "continued_in_later_record",
+  "episode-fe0cdd6123fcfae0": "continued_in_later_record",
+  "episode-c066b0fa2001bfb1": "switched_to_another_drift",
+  "episode-df56b01f7033404b": "switched_to_another_drift",
+  "episode-v2-b4e2e4bc592db0ef": "self_correction",
+  "episode-74454d6cfba6e403": "still_drifting_at_end_of_data",
+  "episode-b621000419e8a1df": "continued_in_later_record",
+  "episode-87850953e83b0b32": "self_correction"
+ }
+}
