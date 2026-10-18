@@ -2819,6 +2819,287 @@ function renderReciprocity() {
   document.querySelector("#reciprocity-meta").textContent = `${pairs} agent pairs`;
 }
 
+// ---------------------------------------------------------------------------
+// Goal-window cards: one card per goal period with its aggregate numbers and every episode.
+// ---------------------------------------------------------------------------
+const cardWorkDays = new Map();
+bundle.stage1_daily_verdicts.forEach((row) => {
+  if (row.period !== "goal_maximization" || !row.day || !row.agent) return;
+  const weekday = new Date(`${row.day}T12:00:00Z`).getUTCDay();
+  if (weekday === 0 || weekday === 6) return;
+  if (!cardWorkDays.has(row.agent)) cardWorkDays.set(row.agent, new Set());
+  cardWorkDays.get(row.agent).add(row.day);
+});
+const cardPacific = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hourCycle: "h23" });
+const cardHourCache = new Map();
+function cardPacificDateHour(ms) {
+  const bucket = Math.floor(ms / 3600000);
+  if (!cardHourCache.has(bucket)) {
+    const parts = Object.fromEntries(cardPacific.formatToParts(new Date(bucket * 3600000)).filter((part) => part.type !== "literal").map((part) => [part.type, part.value]));
+    cardHourCache.set(bucket, { date: `${parts.year}-${parts.month}-${parts.day}`, hour: Number(parts.hour) });
+  }
+  return cardHourCache.get(bucket);
+}
+
+// Working time and drift for one period: 8 hours per weekday the agent ran under the goal, and the union of its bouts inside 9 AM–5 PM PT on those days.
+function periodWorkingStats(period) {
+  const days = [...(cardWorkDays.get(period.agent) || [])].filter((day) => {
+    const ms = timestampMs(day);
+    return ms != null && ms >= period.startMs - DAY_MS && ms <= period.endMs;
+  });
+  const daySet = new Set(days);
+  const merged = mergedIntervals(period.episodes.flatMap(episodeIntervals));
+  let seconds = 0;
+  merged.forEach((interval) => {
+    for (let cursor = interval.startMs; cursor < interval.endMs;) {
+      const next = Math.min(interval.endMs, (Math.floor(cursor / 3600000) + 1) * 3600000);
+      const { date, hour } = cardPacificDateHour(cursor);
+      if (hour >= 9 && hour < 17 && daySet.has(date)) seconds += (next - cursor) / 1000;
+      cursor = next;
+    }
+  });
+  return { workingHours: days.length * 8, driftWorkingHours: seconds / 3600, workDays: days.length };
+}
+
+function topEntries(map, limit = 3) {
+  return [...map.entries()].sort((left, right) => right[1].episodes - left[1].episodes || right[1].hours - left[1].hours).slice(0, limit);
+}
+
+function tally(map, key, hours) {
+  if (!map.has(key)) map.set(key, { episodes: 0, hours: 0 });
+  const entry = map.get(key);
+  entry.episodes += 1;
+  entry.hours += hours;
+}
+
+function goalWindowCardData(period) {
+  const working = periodWorkingStats(period);
+  const episodes = [...period.episodes].sort((left, right) => episodeOnsetMs(left) - episodeOnsetMs(right));
+  const hoursOfEpisode = (episode) => driftHoursFor(episode).hours;
+  const totalHours = episodes.reduce((sum, episode) => sum + hoursOfEpisode(episode), 0);
+  const reviewed = episodes.map((episode) => ({ episode, review: reviewRowByEpisode.get(episode.episode_id) })).filter((item) => item.review);
+  const origins = new Map(ORIGIN_GROUPS.map((group) => [group.id, { episodes: 0, hours: 0 }]));
+  const taxonomy = new Map();
+  const actors = new Map();
+  const endings = new Map();
+  let recoveredEpisodes = 0, recoveredHours = 0, reviewedHours = 0;
+  reviewed.forEach(({ episode, review }) => {
+    const hours = hoursOfEpisode(episode);
+    reviewedHours += hours;
+    const origin = origins.get(triggerOriginFor(review.annotation));
+    origin.episodes += 1;
+    origin.hours += hours;
+    const category = triggerTaxonomyByEpisode.get(episode.episode_id);
+    if (category) tally(taxonomy, triggerTaxonomyLabels.get(category) || category, hours);
+    if (review.annotation.trigger_actor) tally(actors, pullLabel(sourceAgentFor(review.annotation.trigger_actor)) === "Outside humans" ? review.annotation.trigger_actor : pullLabel(sourceAgentFor(review.annotation.trigger_actor)), hours);
+    tally(endings, label("recovery", review.annotation.recovery_mechanisms[0] || "unknown"), hours);
+    if (isObservedRecovery(review.annotation)) {
+      recoveredEpisodes += 1;
+      recoveredHours += hours;
+    }
+  });
+  // Episodes this agent's own requests started in other agents.
+  const pulled = new Map();
+  rows.forEach((row) => {
+    if (row.episode.agent === period.agent || !row.annotation.trigger_actor) return;
+    if (sourceAgentFor(row.annotation.trigger_actor) !== period.agent) return;
+    const onsetMs = episodeOnsetMs(row.episode);
+    if (onsetMs == null || onsetMs < period.startMs || onsetMs > period.endMs) return;
+    tally(pulled, agentLabel(row.episode.agent), hoursOfEpisode(row.episode));
+  });
+  const verdicts = new Map();
+  episodes.forEach((episode) => {
+    if (episode.wait_review) tally(verdicts, WAIT_VERDICT_LABELS[episode.wait_review.verdict] || episode.wait_review.verdict, hoursOfEpisode(episode));
+  });
+  const rules = new Map();
+  episodes.forEach((episode) => {
+    (selfAuthoredRules.episodes?.[episode.episode_id] || []).forEach((tag) => {
+      const ruleLabel = (selfAuthoredRules.rules || {})[tag.rule] || tag.rule;
+      if (!rules.has(ruleLabel) || tag.first_seen < rules.get(ruleLabel).first_seen) rules.set(ruleLabel, tag);
+    });
+  });
+  const nudges = episodes.flatMap((episode) => episode.operator_nudges_within_evidence || []);
+  const corrections = (correctionsByAgent.get(period.agent) || []).filter((correction) => {
+    const ms = timestampMs(correction.timestamp);
+    return ms != null && ms >= period.startMs && ms <= period.endMs;
+  });
+  const firstOnset = episodes.length ? episodeOnsetMs(episodes[0]) : null;
+  const longest = episodes.reduce((best, episode) => (hoursOfEpisode(episode) > (best ? hoursOfEpisode(best) : -1) ? episode : best), null);
+  return {
+    period, working, episodes, totalHours, reviewed, origins, taxonomy, actors, endings, pulled, verdicts, rules, nudges, corrections,
+    recoveredEpisodes, recoveredHours, reviewedHours,
+    share: working.workingHours ? working.driftWorkingHours / working.workingHours : 0,
+    firstDriftDays: firstOnset == null ? null : (firstOnset - period.startMs) / DAY_MS,
+    longest,
+    stillDrifting: episodes.filter((episode) => (episode.drift_end || {}).status === "ongoing_at_evidence_end").length,
+    targeting: outsideTargetingByAgent.get(period.agent) || (humanContact.agents?.[period.agent] || {}).outside_targeting || null
+  };
+}
+
+function cardElement(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text != null) node.textContent = text;
+  return node;
+}
+
+function cardListBlock(title, entries, formatter) {
+  const block = cardElement("div", "gw-block");
+  block.append(cardElement("h5", null, title));
+  if (!entries.length) {
+    block.append(cardElement("p", "gw-empty", "None"));
+    return block;
+  }
+  const list = cardElement("ul");
+  entries.forEach((entry) => list.append(cardElement("li", null, formatter(entry))));
+  block.append(list);
+  return block;
+}
+
+const pairText = ([name, value]) => `${name} · ${value.episodes} ep · ${measureText(value.hours, "hours")}`;
+
+function renderGoalWindowCard(data) {
+  const { period } = data;
+  const card = cardElement("article", "gw-card");
+  card.dataset.agent = period.agent;
+
+  const head = cardElement("header", "gw-head");
+  const title = cardElement("div", "gw-title");
+  title.append(cardElement("h4", null, agentLabel(period.agent)));
+  const badges = cardElement("div", "gw-badges");
+  badges.append(cardElement("span", "gw-badge", modelFamily(period.agent)));
+  const category = goalCategories.find((item) => item.id === goalCategoryByAgent.get(period.agent));
+  if (category) badges.append(cardElement("span", "gw-badge", category.label));
+  if (outsideTargetingByAgent.has(period.agent)) badges.append(cardElement("span", "gw-badge is-targeted", "Targeted"));
+  title.append(badges);
+  head.append(title);
+  head.append(cardElement("p", "gw-goal", period.goal));
+  const endText = new Date(Math.min(period.endMs, analysisHorizonMs)).toISOString();
+  head.append(cardElement("p", "gw-dates", `${displayDay(new Date(period.startMs).toISOString())} – ${displayDay(endText)} · ${data.working.workDays} working days`));
+  card.append(head);
+
+  const stats = cardElement("div", "gw-stats");
+  [
+    [String(data.episodes.length), "episodes"],
+    [measureText(data.totalHours, "hours"), "drift"],
+    [percentText(data.share), "of working time"],
+    [data.firstDriftDays == null ? "—" : `${Math.max(0, data.firstDriftDays).toFixed(1)} d`, "to first drift"],
+    [data.longest ? measureText(driftHoursFor(data.longest).hours, "hours") : "—", "longest episode"],
+    [data.reviewed.length ? `${percentText(data.recoveredEpisodes / data.reviewed.length)} / ${percentText(data.reviewedHours ? data.recoveredHours / data.reviewedHours : 0)}` : "—", "recovered (episodes / hours)"]
+  ].forEach(([value, caption]) => {
+    const stat = cardElement("div", "gw-stat");
+    stat.append(cardElement("strong", null, value), cardElement("span", null, caption));
+    stats.append(stat);
+  });
+  card.append(stats);
+
+  if (data.reviewed.length) {
+    const origin = cardElement("div", "gw-origin");
+    origin.append(cardElement("h5", null, "What started the drift"));
+    const totalEpisodes = data.reviewed.length;
+    const totalHours = data.reviewedHours || 1;
+    [["episodes", "Episodes", totalEpisodes], ["hours", "Hours", totalHours]].forEach(([key, caption, total]) => {
+      const line = cardElement("div", "gw-origin-line");
+      line.append(cardElement("span", "gw-origin-label", caption));
+      const track = cardElement("span", "gw-origin-track");
+      ORIGIN_GROUPS.forEach((group) => {
+        const value = data.origins.get(group.id)[key];
+        if (!value) return;
+        const fill = cardElement("span");
+        fill.style.width = `${(value / total) * 100}%`;
+        fill.style.background = group.color;
+        fill.title = `${group.label}: ${key === "hours" ? measureText(value, "hours") : value} (${percentText(value / total)})`;
+        track.append(fill);
+      });
+      line.append(track);
+      origin.append(line);
+    });
+    card.append(origin);
+  }
+
+  const grid = cardElement("div", "gw-grid");
+  grid.append(
+    cardListBlock("Top trigger categories", topEntries(data.taxonomy), pairText),
+    cardListBlock("Pulled off goal by", topEntries(data.actors), pairText),
+    cardListBlock("Pulled others off goal", topEntries(data.pulled), pairText),
+    cardListBlock("How episodes ended", topEntries(data.endings, 4), pairText),
+    cardListBlock("Wait reviews", topEntries(data.verdicts, 4), pairText),
+    cardListBlock("Self-authored rules cited", [...data.rules.entries()].sort((left, right) => left[1].first_seen.localeCompare(right[1].first_seen)),
+      ([ruleLabel, tag]) => `${ruleLabel} · first ${displayDay(tag.first_seen)}: “${shortText(tag.excerpt, 110)}”`)
+  );
+  const human = cardElement("div", "gw-block");
+  human.append(cardElement("h5", null, "People and nudges"));
+  const humanList = cardElement("ul");
+  const targeting = data.targeting;
+  humanList.append(cardElement("li", null, `Outside-human contacts: ${targeting ? `${number(targeting.contacts)} over ${targeting.days} days` : "none recorded"}`));
+  humanList.append(cardElement("li", null, `Operator corrections: ${data.corrections.length}${data.corrections.length ? ` (latest: ${shortText(data.corrections.at(-1).summary, 80)})` : ""}`));
+  const corrected = data.nudges.filter((nudge) => nudge.outcome === "corrected").length;
+  humanList.append(cardElement("li", null, `Nudges inside episodes: ${data.nudges.length}${data.nudges.length ? ` (${corrected} corrected the drift)` : ""}`));
+  if (data.stillDrifting) humanList.append(cardElement("li", null, `Still drifting when the data ends: ${data.stillDrifting} episode${data.stillDrifting === 1 ? "" : "s"}`));
+  human.append(humanList);
+  grid.append(human);
+  card.append(grid);
+
+  if (data.episodes.length) {
+    const details = cardElement("details", "gw-episodes");
+    details.append(cardElement("summary", null, `All ${data.episodes.length} episodes`));
+    const list = cardElement("ol");
+    data.episodes.forEach((episode) => {
+      const review = reviewRowByEpisode.get(episode.episode_id);
+      const item = cardElement("li");
+      const when = cardElement("span", "gw-ep-when", atlasEpisodeTiming(episode).rangeText);
+      const hours = cardElement("span", "gw-ep-hours", measureText(driftHoursFor(episode).hours, "hours"));
+      const origin = review ? ORIGIN_BY_ID.get(triggerOriginFor(review.annotation)) : null;
+      const originNode = cardElement("span", "gw-ep-origin", origin ? origin.label.split(" (")[0] : "Not reviewed");
+      if (origin) originNode.style.color = origin.color;
+      const ending = cardElement("span", "gw-ep-end", review ? label("recovery", review.annotation.recovery_mechanisms[0] || "unknown") : driftEndLabels[(episode.drift_end || {}).status] || "");
+      const activity = cardElement("span", "gw-ep-activity", episode.activity);
+      item.append(when, hours, originNode, ending, activity, episodeLinkFor(episode.episode_id));
+      list.append(item);
+    });
+    details.append(list);
+    card.append(details);
+  }
+  return card;
+}
+
+const number = (value) => new Intl.NumberFormat("en-US").format(value);
+let goalWindowCards = null;
+
+function renderGoalWindowCards() {
+  if (!goalWindowCards) goalWindowCards = goalPeriods.map(goalWindowCardData);
+  const sortMode = document.querySelector("#gw-sort").value;
+  const category = document.querySelector("#gw-category").value;
+  const query = document.querySelector("#gw-search").value.trim().toLowerCase();
+  const sorters = {
+    share: (left, right) => right.share - left.share,
+    hours: (left, right) => right.totalHours - left.totalHours,
+    episodes: (left, right) => right.episodes.length - left.episodes.length,
+    release: (left, right) => (AGENT_RELEASE_DATES[left.period.agent] || "9999").localeCompare(AGENT_RELEASE_DATES[right.period.agent] || "9999"),
+    agent: (left, right) => left.period.agent.localeCompare(right.period.agent)
+  };
+  const visible = goalWindowCards
+    .filter((data) => !category || goalCategoryByAgent.get(data.period.agent) === category)
+    .filter((data) => !query || `${data.period.agent} ${data.period.goal}`.toLowerCase().includes(query))
+    .sort((left, right) => (sorters[sortMode] || sorters.share)(left, right) || left.period.agent.localeCompare(right.period.agent));
+  const container = document.querySelector("#goal-window-cards");
+  container.replaceChildren(...visible.map(renderGoalWindowCard));
+  document.querySelector("#gw-meta").textContent = `${visible.length} of ${goalWindowCards.length} goal windows`;
+}
+
+function initializeGoalWindowCards() {
+  const select = document.querySelector("#gw-category");
+  goalCategories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category.id;
+    option.textContent = category.label;
+    select.append(option);
+  });
+  ["#gw-sort", "#gw-category"].forEach((id) => document.querySelector(id).addEventListener("change", renderGoalWindowCards));
+  document.querySelector("#gw-search").addEventListener("input", renderGoalWindowCards);
+  renderGoalWindowCards();
+}
+
 function initializeDriftDynamics() {
   renderTriggerOrigin();
   document.querySelector("#origin-measure").addEventListener("change", renderTriggerOrigin);
@@ -2979,4 +3260,5 @@ document.querySelector("#show-more").addEventListener("click", () => {
 initializeExplorations();
 initializeExperimentalLenses();
 initializeDriftDynamics();
+initializeGoalWindowCards();
 render();
