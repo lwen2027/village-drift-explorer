@@ -2849,16 +2849,48 @@ function periodWorkingStats(period) {
   });
   const daySet = new Set(days);
   const merged = mergedIntervals(period.episodes.flatMap(episodeIntervals));
+  const secondsByDay = new Map();
   let seconds = 0;
   merged.forEach((interval) => {
     for (let cursor = interval.startMs; cursor < interval.endMs;) {
       const next = Math.min(interval.endMs, (Math.floor(cursor / 3600000) + 1) * 3600000);
       const { date, hour } = cardPacificDateHour(cursor);
-      if (hour >= 9 && hour < 17 && daySet.has(date)) seconds += (next - cursor) / 1000;
+      if (hour >= 9 && hour < 17 && daySet.has(date)) {
+        seconds += (next - cursor) / 1000;
+        secondsByDay.set(date, (secondsByDay.get(date) || 0) + (next - cursor) / 1000);
+      }
       cursor = next;
     }
   });
-  return { workingHours: days.length * 8, driftWorkingHours: seconds / 3600, workDays: days.length };
+  // Daily drift share of the 8-hour working day, in date order, for the shape label and sparkline.
+  const dailyShares = days.sort().map((day) => ({ day, share: Math.min(1, (secondsByDay.get(day) || 0) / (8 * 3600)) }));
+  return { workingHours: days.length * 8, driftWorkingHours: seconds / 3600, workDays: days.length, dailyShares };
+}
+
+// Window-level drift shape from daily drift shares, split into thirds: is drift high at the start, and at the end?
+// "High" means at least half of the window's peak third. Descriptive only; the thirds are shown alongside.
+const DRIFT_SHAPES = [
+  { id: "sustained", label: "Sustained throughout", note: "high at the start and at the end" },
+  { id: "rises", label: "Rises over the window", note: "low at the start, high by the end" },
+  { id: "burst", label: "Mid-window burst", note: "low at both ends, peaking in the middle" },
+  { id: "recovers", label: "Drifts, then recovers", note: "high at the start, low by the end" },
+  { id: "minimal", label: "Minimal drift", note: "under 5% of working time" },
+  { id: "short", label: "Too short to classify", note: "fewer than 10 working days" }
+];
+const DRIFT_SHAPE_BY_ID = new Map(DRIFT_SHAPES.map((shape) => [shape.id, shape]));
+
+function driftShapeFor(dailyShares) {
+  const shares = dailyShares.map((entry) => entry.share);
+  if (shares.length < 10) return { id: "short", thirds: null };
+  const mean = (values) => (values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0);
+  const n = shares.length;
+  const thirds = [0, 1, 2].map((index) => mean(shares.slice(Math.floor(index * n / 3), Math.floor((index + 1) * n / 3))));
+  if (mean(shares) < .05) return { id: "minimal", thirds };
+  const half = Math.max(...thirds) / 2;
+  const highStart = thirds[0] >= half;
+  const highEnd = thirds[2] >= half;
+  const id = highStart && highEnd ? "sustained" : highEnd ? "rises" : highStart ? "recovers" : "burst";
+  return { id, thirds };
 }
 
 function topEntries(map, limit = 3) {
@@ -2926,6 +2958,7 @@ function goalWindowCardData(period) {
   const firstOnset = episodes.length ? episodeOnsetMs(episodes[0]) : null;
   const longest = episodes.reduce((best, episode) => (hoursOfEpisode(episode) > (best ? hoursOfEpisode(best) : -1) ? episode : best), null);
   return {
+    shape: driftShapeFor(working.dailyShares),
     period, working, episodes, totalHours, reviewed, origins, taxonomy, actors, endings, pulled, verdicts, rules, nudges, corrections,
     recoveredEpisodes, recoveredHours, reviewedHours,
     share: working.workingHours ? working.driftWorkingHours / working.workingHours : 0,
@@ -2970,6 +3003,11 @@ function renderGoalWindowCard(data) {
   const category = goalCategories.find((item) => item.id === goalCategoryByAgent.get(period.agent));
   if (category) badges.append(cardElement("span", "gw-badge", category.label));
   if (outsideTargetingByAgent.has(period.agent)) badges.append(cardElement("span", "gw-badge is-targeted", "Targeted"));
+  const shape = DRIFT_SHAPE_BY_ID.get(data.shape.id);
+  const shapeBadge = cardElement("span", `gw-badge gw-shape is-${shape.id}`,
+    data.shape.thirds && shape.id !== "minimal" ? `${shape.label} · ${data.shape.thirds.map((value) => Math.round(value * 100)).join(" / ")}%` : shape.label);
+  shapeBadge.title = `${shape.label}: ${shape.note}.${data.shape.thirds ? ` Drift share of working time in each third of the window: ${data.shape.thirds.map((value) => percentText(value)).join(", ")}.` : ""}`;
+  badges.prepend(shapeBadge);
   title.append(badges);
   head.append(title);
   head.append(cardElement("p", "gw-goal", period.goal));
@@ -2991,6 +3029,27 @@ function renderGoalWindowCard(data) {
     stats.append(stat);
   });
   card.append(stats);
+
+  if (data.working.dailyShares.length) {
+    const spark = cardElement("div", "gw-spark");
+    spark.title = "Daily share of the working day spent drifting, across the window";
+    const count = data.working.dailyShares.length;
+    data.working.dailyShares.forEach((entry, index) => {
+      const bar = cardElement("span");
+      bar.style.left = `${(index / count) * 100}%`;
+      bar.style.width = `${Math.max(.6, 100 / count - .4)}%`;
+      bar.style.height = `${Math.max(entry.share ? 6 : 2, entry.share * 100)}%`;
+      if (!entry.share) bar.className = "is-zero";
+      bar.title = `${displayDay(entry.day)}: ${percentText(entry.share)} of the working day`;
+      spark.append(bar);
+    });
+    [1, 2].forEach((third) => {
+      const divider = cardElement("i");
+      divider.style.left = `${(third / 3) * 100}%`;
+      spark.append(divider);
+    });
+    card.append(spark);
+  }
 
   if (data.reviewed.length) {
     const origin = cardElement("div", "gw-origin");
@@ -3069,16 +3128,20 @@ function renderGoalWindowCards() {
   if (!goalWindowCards) goalWindowCards = goalPeriods.map(goalWindowCardData);
   const sortMode = document.querySelector("#gw-sort").value;
   const category = document.querySelector("#gw-category").value;
+  const shapeFilter = document.querySelector("#gw-shape").value;
   const query = document.querySelector("#gw-search").value.trim().toLowerCase();
   const sorters = {
     share: (left, right) => right.share - left.share,
     hours: (left, right) => right.totalHours - left.totalHours,
     episodes: (left, right) => right.episodes.length - left.episodes.length,
     release: (left, right) => (AGENT_RELEASE_DATES[left.period.agent] || "9999").localeCompare(AGENT_RELEASE_DATES[right.period.agent] || "9999"),
-    agent: (left, right) => left.period.agent.localeCompare(right.period.agent)
+    agent: (left, right) => left.period.agent.localeCompare(right.period.agent),
+    shape: (left, right) => DRIFT_SHAPES.findIndex((shape) => shape.id === left.shape.id) - DRIFT_SHAPES.findIndex((shape) => shape.id === right.shape.id)
+      || right.share - left.share
   };
   const visible = goalWindowCards
     .filter((data) => !category || goalCategoryByAgent.get(data.period.agent) === category)
+    .filter((data) => !shapeFilter || data.shape.id === shapeFilter)
     .filter((data) => !query || `${data.period.agent} ${data.period.goal}`.toLowerCase().includes(query))
     .sort((left, right) => (sorters[sortMode] || sorters.share)(left, right) || left.period.agent.localeCompare(right.period.agent));
   const container = document.querySelector("#goal-window-cards");
@@ -3104,7 +3167,14 @@ function initializeGoalWindowCards() {
     item.append(swatch, document.createTextNode(group.label));
     return item;
   }));
-  ["#gw-sort", "#gw-category"].forEach((id) => document.querySelector(id).addEventListener("change", renderGoalWindowCards));
+  const shapeSelect = document.querySelector("#gw-shape");
+  DRIFT_SHAPES.forEach((shape) => {
+    const option = document.createElement("option");
+    option.value = shape.id;
+    option.textContent = shape.label;
+    shapeSelect.append(option);
+  });
+  ["#gw-sort", "#gw-category", "#gw-shape"].forEach((id) => document.querySelector(id).addEventListener("change", renderGoalWindowCards));
   document.querySelector("#gw-search").addEventListener("input", renderGoalWindowCards);
   renderGoalWindowCards();
 }
@@ -3266,8 +3336,47 @@ document.querySelector("#show-more").addEventListener("click", () => {
   renderEpisodeList();
 });
 
+// Collapsible page sections. Each top-level section gets a toggle in its heading; the choice is remembered per section.
+const SECTION_COLLAPSE_KEY = "village-drift-findings-collapsed-sections:v1";
+function initializeCollapsibleSections() {
+  let collapsed;
+  try {
+    collapsed = new Set(JSON.parse(localStorage.getItem(SECTION_COLLAPSE_KEY) || "[]"));
+  } catch {
+    collapsed = new Set();
+  }
+  const save = () => {
+    try { localStorage.setItem(SECTION_COLLAPSE_KEY, JSON.stringify([...collapsed])); } catch { /* storage unavailable */ }
+  };
+  document.querySelectorAll("main section[aria-labelledby]").forEach((section) => {
+    const heading = section.querySelector(":scope > .exploration-heading, :scope > .section-heading, :scope > .coverage-heading, :scope > .results-heading");
+    if (!heading) return;
+    const id = section.getAttribute("aria-labelledby");
+    const title = document.getElementById(id)?.textContent || "section";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "section-toggle";
+    const apply = (isCollapsed) => {
+      section.classList.toggle("is-collapsed", isCollapsed);
+      button.setAttribute("aria-expanded", String(!isCollapsed));
+      button.textContent = isCollapsed ? "Show" : "Hide";
+      button.setAttribute("aria-label", `${isCollapsed ? "Show" : "Hide"} ${title}`);
+    };
+    button.addEventListener("click", () => {
+      const isCollapsed = !section.classList.contains("is-collapsed");
+      if (isCollapsed) collapsed.add(id); else collapsed.delete(id);
+      save();
+      apply(isCollapsed);
+    });
+    heading.classList.add("has-section-toggle");
+    heading.append(button);
+    apply(collapsed.has(id));
+  });
+}
+
 initializeExplorations();
 initializeExperimentalLenses();
 initializeDriftDynamics();
 initializeGoalWindowCards();
+initializeCollapsibleSections();
 render();

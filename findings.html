@@ -162,6 +162,11 @@
     .gw-legend { margin: 0 0 12px; }
     .gw-legend-title { color: var(--muted); font: 700 10px/1.2 var(--mono); text-transform: uppercase; letter-spacing: .06em; margin-right: 8px; }
     .gw-legend-items { display: inline-flex; flex-wrap: wrap; gap: 6px 14px; }
+    .gw-shape { color: var(--ink); border-color: var(--ink-soft); }
+    .gw-spark { position: relative; height: 30px; border-bottom: 1px solid var(--line); }
+    .gw-spark span { position: absolute; bottom: 0; background: var(--rust); border-radius: 1px 1px 0 0; opacity: .85; }
+    .gw-spark span.is-zero { background: var(--line); opacity: .6; }
+    .gw-spark i { position: absolute; top: 0; bottom: 0; border-left: 1px dashed var(--line); }
     .gw-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
     .gw-card { padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); display: grid; gap: 12px; align-content: start; }
     .gw-head h4 { margin: 0; font-size: 17px; }
@@ -191,6 +196,10 @@
     .gw-ep-activity { flex-basis: 100%; }
     @media (max-width: 980px) { .gw-list { grid-template-columns: 1fr; } }
     @media (max-width: 560px) { .gw-grid, .gw-stats { grid-template-columns: 1fr 1fr; } }
+    .has-section-toggle { position: relative; padding-right: 76px; }
+    .section-toggle { position: absolute; top: 0; right: 0; padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink-soft); cursor: pointer; font: 700 10px/1.2 var(--mono); text-transform: uppercase; letter-spacing: .05em; }
+    .section-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    section.is-collapsed > :not(.has-section-toggle) { display: none !important; }
     .breakdown-measure { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 22px 0 14px; }
     .breakdown-measure .viz-note { margin: 0; }
     .viz-control { min-width: 190px; height: 36px; padding: 0 30px 0 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--card); }
@@ -556,12 +565,16 @@
               <option value="share">Share of working time drifting</option>
               <option value="hours">Drift hours</option>
               <option value="episodes">Episodes</option>
+              <option value="shape">Drift shape</option>
               <option value="release">Model release</option>
               <option value="agent">Agent name</option>
             </select>
           </label>
           <label class="viz-control-label" for="gw-category"><span>Goal type</span>
             <select class="viz-control" id="gw-category"><option value="">All goal types</option></select>
+          </label>
+          <label class="viz-control-label" for="gw-shape"><span>Drift shape</span>
+            <select class="viz-control" id="gw-shape"><option value="">All shapes</option></select>
           </label>
           <label class="viz-control-label" for="gw-search"><span>Search</span>
             <input class="viz-control" id="gw-search" type="search" placeholder="Agent or goal">
@@ -570,7 +583,7 @@
         </div>
         <div class="viz-legend gw-legend" aria-label="Drift origin colors"><span class="gw-legend-title">What started the drift:</span><span id="gw-legend" class="gw-legend-items"></span></div>
         <div class="gw-list" id="goal-window-cards"></div>
-        <p class="viz-note">Working time is 9 AM–5 PM Pacific on each weekday the agent ran under the goal. Breakdowns use fully reviewed episodes; “episodes / hours” pairs compare how often with how much. Rule excerpts are the agent's own words from an unreviewed keyword pass.</p>
+        <p class="viz-note">Working time is 9 AM–5 PM Pacific on each weekday the agent ran under the goal. Breakdowns use fully reviewed episodes; “episodes / hours” pairs compare how often with how much. Rule excerpts are the agent's own words from an unreviewed keyword pass. <strong>Drift shape</strong> compares the drift share of working time in the first, middle and last third of the window (shown as three percentages): sustained throughout (high at both ends), rises over the window (low start, high end), drifts then recovers (high start, low end), mid-window burst (low at both ends), minimal (under 5% overall). “High” means at least half of the window’s peak third. The sparkline shows each working day’s drift share, with dividers at the thirds.</p>
       </section>
 
       <section class="exploration" aria-labelledby="exploration-title">
@@ -896,6 +909,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="./scripts/findings.js?v=20261018-goal-window-legend-2"></script>
+  <script type="module" src="./scripts/findings.js?v=20261018-drift-shapes"></script>
 </body>
 </html>
