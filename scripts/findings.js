@@ -648,15 +648,40 @@ function mergedIntervals(intervals, floorMs = -Infinity, ceilingMs = Infinity) {
   return merged;
 }
 
+// Village working hours: 9 AM–5 PM Pacific on weekdays the Village ran. Drift burden is measured
+// against these hours rather than the 24/7 calendar, so goal periods are comparable however they fall.
+const workingWindows = (() => {
+  const pacificHour = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hourCycle: "h23" });
+  const dates = [...new Set(goalMaxDays)].filter((date) => {
+    const weekday = new Date(`${date}T12:00:00Z`).getUTCDay();
+    return weekday >= 1 && weekday <= 5;
+  });
+  return dates.map((date) => {
+    const noonUtc = Date.parse(`${date}T12:00:00Z`);
+    const offsetHours = 12 - Number(pacificHour.format(new Date(noonUtc)));
+    const startMs = Date.parse(`${date}T00:00:00Z`) + (9 + offsetHours) * 3600000;
+    return { startMs, endMs: startMs + 8 * 3600000 };
+  });
+})();
+
+function workingOverlapMs(startMs, endMs) {
+  return workingWindows.reduce((total, window) =>
+    total + Math.max(0, Math.min(endMs, window.endMs) - Math.max(startMs, window.startMs)), 0);
+}
+
 goalPeriods.forEach((period) => {
   period.durationMs = Math.max(1, period.endMs - period.startMs);
+  period.workingMs = Math.max(1, workingOverlapMs(period.startMs, period.endMs));
   period.episodes.sort((left, right) => episodeOnsetMs(left) - episodeOnsetMs(right));
   period.exactIntervals = period.episodes.flatMap(episodeIntervals);
   period.mergedIntervals = mergedIntervals(period.exactIntervals, period.startMs, period.endMs);
   period.validatedMs = period.mergedIntervals.reduce(
     (total, interval) => total + Math.max(0, interval.endMs - interval.startMs), 0
   );
-  period.burdenShare = period.validatedMs / period.durationMs;
+  period.validatedWorkingMs = period.mergedIntervals.reduce(
+    (total, interval) => total + workingOverlapMs(interval.startMs, interval.endMs), 0
+  );
+  period.burdenShare = period.validatedWorkingMs / period.workingMs;
   period.unknownDurationCount = period.episodes.filter((episode) => !validatedInterval(episode)).length;
   const firstOnset = period.episodes.length ? episodeOnsetMs(period.episodes[0]) : null;
   period.firstPosition = firstOnset == null
@@ -956,7 +981,7 @@ function goalAtlasGroupHeading({ category, periods }) {
   stats.className = "goal-atlas-group-stats";
   const medianEpisodes = median(periods.map((period) => period.episodes.length));
   const medianShare = median(periods.map((period) => period.burdenShare));
-  stats.textContent = `${periods.length} goal period${periods.length === 1 ? "" : "s"} · median ${Number.isInteger(medianEpisodes) ? medianEpisodes : medianEpisodes.toFixed(1)} ep · median ${(medianShare * 100).toFixed(1)}% validated drift`;
+  stats.textContent = `${periods.length} goal period${periods.length === 1 ? "" : "s"} · median ${Number.isInteger(medianEpisodes) ? medianEpisodes : medianEpisodes.toFixed(1)} ep · median ${(medianShare * 100).toFixed(1)}% of working hours drifting`;
   title.append(stats);
   const note = document.createElement("div");
   note.className = "goal-atlas-group-note";
@@ -1372,7 +1397,7 @@ function renderBurdenScatter() {
     value: (yMax * index) / 5,
     label: `${Math.round(((yMax * index) / 5) * 100)}%`
   }));
-  addCartesianFrame(svg, { left, right, top, bottom, xTicks, yTicks, xScale, yScale, xLabel: "Confirmed episodes", yLabel: "Validated drift share" });
+  addCartesianFrame(svg, { left, right, top, bottom, xTicks, yTicks, xScale, yScale, xLabel: "Confirmed episodes", yLabel: "Share of working hours drifting" });
   const orderedPoints = [...plotted].sort((leftPeriod, rightPeriod) => {
     const leftSelected = selectedKeys.has(burdenGrouping(leftPeriod, mode).key);
     const rightSelected = selectedKeys.has(burdenGrouping(rightPeriod, mode).key);
@@ -1391,7 +1416,7 @@ function renderBurdenScatter() {
       "stroke-width": selected && period.unknownDurationCount ? 2.5 : 1.5,
       opacity: selected ? .9 : .13
     });
-    svgTitle(point, `${selected ? "" : "Excluded · "}${agentLabel(period.agent)} — ${period.goal}\n${grouping.label}\n${period.episodes.length} episodes; ${(period.burdenShare * 100).toFixed(2)}% validated drift share; ${period.unknownDurationCount} unresolved durations`);
+    svgTitle(point, `${selected ? "" : "Excluded · "}${agentLabel(period.agent)} — ${period.goal}\n${grouping.label}\n${period.episodes.length} episodes; ${(period.burdenShare * 100).toFixed(1)}% of working hours spent drifting; ${period.unknownDurationCount} unresolved durations`);
     svg.append(point);
   });
   renderBurdenLegend(groups, colorByKey, selectedKeys, groupCounts);
@@ -1499,7 +1524,7 @@ function renderCumulativeGoal(periodId) {
     left, right, top, bottom,
     xTicks: [0, .25, .5, .75, 1].map((value) => ({ value, label: `${value * 100}%` })),
     yTicks: [0, .25, .5, .75, 1].map((fraction) => ({ value: maxShare * fraction, label: `${(maxShare * fraction * 100).toFixed(1)}%` })),
-    xScale, yScale, xLabel: "Position in goal window", yLabel: "Cumulative validated drift"
+    xScale, yScale, xLabel: "Position in goal window", yLabel: "Cumulative share of working hours"
   });
   let cumulative = 0;
   const points = [[xScale(0), yScale(0)]];
@@ -1507,7 +1532,7 @@ function renderCumulativeGoal(periodId) {
     const startPosition = Math.max(0, Math.min(1, (interval.startMs - period.startMs) / period.durationMs));
     const endPosition = Math.max(0, Math.min(1, (interval.endMs - period.startMs) / period.durationMs));
     points.push([xScale(startPosition), yScale(cumulative)]);
-    cumulative += Math.max(0, interval.endMs - interval.startMs) / period.durationMs;
+    cumulative += workingOverlapMs(interval.startMs, interval.endMs) / period.workingMs;
     points.push([xScale(endPosition), yScale(cumulative)]);
   });
   points.push([xScale(1), yScale(cumulative)]);
@@ -1519,7 +1544,7 @@ function renderCumulativeGoal(periodId) {
     svgTitle(marker, episode.activity);
     svg.append(marker);
   });
-  document.querySelector("#cumulative-note").textContent = `${agentLabel(period.agent)} · ${period.episodes.length} episodes · ${(period.burdenShare * 100).toFixed(2)}% minimum validated drift share · ${period.unknownDurationCount} unresolved durations shown as diamonds.`;
+  document.querySelector("#cumulative-note").textContent = `${agentLabel(period.agent)} · ${period.episodes.length} episodes · ${(period.burdenShare * 100).toFixed(1)}% of working hours spent drifting · ${period.unknownDurationCount} unresolved durations shown as diamonds.`;
 }
 
 function initializeCumulativeChart() {
@@ -1559,24 +1584,40 @@ function renderAnnotationFlow() {
     if (kind === "request") return `Request · ${label("request_relationship", category)}`;
     return value.replaceAll("_", " ");
   }
+  const mode = document.querySelector("#flow-measure").value;
+  const weight = rowWeight(mode);
   const flowRows = rows.map((row) => ({
     ...primaryManualTriggerAndContext(row.annotation),
-    recovery: row.annotation.recovery_mechanisms[0] || "unknown"
-  }));
+    recovery: row.annotation.recovery_mechanisms[0] || "unknown",
+    weight: weight(row)
+  })).filter((row) => row.weight > 0);
   const stages = [
     { key: "trigger", x: 175, label: (value) => label("trigger", value) },
     { key: "context", x: 580, label: contextLabel },
     { key: "recovery", x: 965, label: (value) => label("recovery", value) }
   ];
   const chartTop = 40, chartHeight = 540, nodeWidth = 14, gap = 9;
-  const countsByStage = stages.map((stage) => countValues(flowRows, (row) => [row[stage.key]]));
-  const total = Math.max(1, flowRows.length);
-  const scale = Math.min(...countsByStage.map((counts) => (chartHeight - Math.max(0, counts.length - 1) * gap) / total));
+  // Order each column in groups so related nodes sit together and bands cross less:
+  // triggers (pauses, outside requests, self-originated, operator/system), contexts (pause, request, none),
+  // and endings (no outside input, after outside input, not a recovery).
+  const SELF_ENDINGS = new Set(["self_correction", "finished_activity", "end_of_day"]);
+  const groupOf = [
+    (value) => (value === "pause" ? 0 : externalTriggerCategoryIds.has(value) ? 1 : value === "operator_or_system_event" ? 3 : 2),
+    (value) => (value.startsWith("pause:") ? 0 : value.startsWith("request:") ? 1 : 2),
+    (value) => (SELF_ENDINGS.has(value) ? 0 : NON_RECOVERY_ENDINGS.has(value) ? 2 : 1)
+  ];
+  const countsByStage = stages.map((stage, stageIndex) => countValues(flowRows, (row) => [row[stage.key]], (row) => row.weight)
+    .sort((left, right) => groupOf[stageIndex](left[0]) - groupOf[stageIndex](right[0]) || right[1] - left[1]));
+  const total = Math.max(.0001, flowRows.reduce((sum, row) => sum + row.weight, 0));
+  const scale = Math.min(...countsByStage.map((counts) => (chartHeight - Math.max(0, counts.length - 1) * gap - 3 * 14) / total));
   const nodeMaps = stages.map(() => new Map());
+  const groupGap = 14;
   countsByStage.forEach((counts, stageIndex) => {
-    const used = counts.reduce((sum, [, count]) => sum + count * scale, 0) + Math.max(0, counts.length - 1) * gap;
+    const groupBreaks = counts.filter((entry, index) => index && groupOf[stageIndex](entry[0]) !== groupOf[stageIndex](counts[index - 1][0])).length;
+    const used = counts.reduce((sum, [, count]) => sum + count * scale, 0) + Math.max(0, counts.length - 1) * gap + groupBreaks * groupGap;
     let y = chartTop + (chartHeight - used) / 2;
-    counts.forEach(([value, count]) => {
+    counts.forEach(([value, count], index) => {
+      if (index && groupOf[stageIndex](value) !== groupOf[stageIndex](counts[index - 1][0])) y += groupGap;
       nodeMaps[stageIndex].set(value, { value, count, x: stages[stageIndex].x, y, height: count * scale });
       y += count * scale + gap;
     });
@@ -1591,7 +1632,7 @@ function renderAnnotationFlow() {
     const links = new Map();
     flowRows.forEach((row) => {
       const key = `${row[leftStage.key]}\u0000${row[rightStage.key]}`;
-      links.set(key, (links.get(key) || 0) + 1);
+      links.set(key, (links.get(key) || 0) + row.weight);
     });
     const sourceOffsets = new Map();
     const targetOffsets = new Map();
@@ -1607,7 +1648,7 @@ function renderAnnotationFlow() {
       .forEach((link) => {
         const sourceNode = nodeMaps[stageIndex].get(link.source);
         const targetNode = nodeMaps[stageIndex + 1].get(link.target);
-        const width = Math.max(1, link.count * scale);
+        const width = Math.max(mode === "hours" ? .5 : 1, link.count * scale);
         const sourceOffset = sourceOffsets.get(link.source) || 0;
         const targetOffset = targetOffsets.get(link.target) || 0;
         const x1 = sourceNode.x + nodeWidth;
@@ -1621,7 +1662,7 @@ function renderAnnotationFlow() {
           "stroke-width": width,
           opacity: .18
         });
-        svgTitle(path, `${stages[stageIndex].label(link.source)} → ${stages[stageIndex + 1].label(link.target)}: ${link.count}`);
+        svgTitle(path, `${stages[stageIndex].label(link.source)} → ${stages[stageIndex + 1].label(link.target)}: ${measureText(link.count, mode)}`);
         svg.append(path);
         sourceOffsets.set(link.source, sourceOffset + width);
         targetOffsets.set(link.target, targetOffset + width);
@@ -1630,17 +1671,23 @@ function renderAnnotationFlow() {
   stages.forEach((stage, stageIndex) => {
     const heading = ["Trigger", "Trigger context", "Recovery"][stageIndex];
     svg.append(svgElement("text", { x: stage.x + nodeWidth / 2, y: 18, "text-anchor": "middle", class: "svg-title" }, heading));
+    // Tiny nodes (common in hours mode) would stack their labels; keep at least 11px between them.
+    let lastLabelY = -Infinity;
     nodeMaps[stageIndex].forEach((node) => {
       const rect = svgElement("rect", { x: node.x, y: node.y, width: nodeWidth, height: Math.max(1, node.height), rx: 4, fill: stageIndex === 1 ? "#3f7082" : stageIndex === 0 ? "#ae5037" : "#466f61" });
-      svgTitle(rect, `${stage.label(node.value)}: ${node.count}`);
+      svgTitle(rect, `${stage.label(node.value)}: ${measureText(node.count, mode)}`);
       svg.append(rect);
       const anchor = stageIndex === 0 ? "end" : "start";
       const textX = stageIndex === 0 ? node.x - 8 : node.x + nodeWidth + 8;
       const labelLength = stageIndex === 1 ? 38 : 28;
-      svg.append(svgElement("text", { x: textX, y: node.y + Math.max(9, node.height / 2 + 3), "text-anchor": anchor, class: "svg-label" }, `${shortText(stage.label(node.value), labelLength)} · ${node.count}`));
+      const labelY = Math.max(node.y + Math.max(9, node.height / 2 + 3), lastLabelY + 11);
+      lastLabelY = labelY;
+      svg.append(svgElement("text", { x: textX, y: labelY, "text-anchor": anchor, class: "svg-label" }, `${shortText(stage.label(node.value), labelLength)} · ${measureText(node.count, mode)}`));
     });
   });
-  document.querySelector("#flow-meta").textContent = `${flowRows.length} reviewed episodes`;
+  document.querySelector("#flow-meta").textContent = mode === "hours"
+    ? `${rows.length} reviewed episodes · ${measureText(total, mode)}`
+    : `${rows.length} reviewed episodes`;
 }
 
 function initializeExplorations() {
@@ -1663,6 +1710,7 @@ function initializeExplorations() {
   renderFirstDriftTiming();
   initializeCumulativeChart();
   renderAnnotationFlow();
+  document.querySelector("#flow-measure").addEventListener("change", renderAnnotationFlow);
 }
 
 function localDateKey(milliseconds) {
@@ -1905,7 +1953,8 @@ function renderAgentFingerprints() {
   const profiles = [...periodsByName.entries()].map(([agent, periods]) => {
     const episodes = periods.flatMap((period) => period.episodes);
     const totalMs = periods.reduce((sum, period) => sum + period.durationMs, 0);
-    const validatedMs = periods.reduce((sum, period) => sum + period.validatedMs, 0);
+    const validatedMs = periods.reduce((sum, period) => sum + period.validatedWorkingMs, 0);
+    const workingMs = periods.reduce((sum, period) => sum + period.workingMs, 0);
     const driftPositive = periods.filter((period) => period.episodes.length);
     const knownDurations = episodes.filter((episode) => episode.duration_seconds != null).map((episode) => Number(episode.duration_seconds));
     return {
@@ -1913,7 +1962,7 @@ function renderAgentFingerprints() {
       episodeCount: episodes.length,
       raw: [
         episodes.length / Math.max(1, totalMs / DAY_MS) * 30,
-        validatedMs / Math.max(1, totalMs),
+        validatedMs / Math.max(1, workingMs),
         driftPositive.length ? driftPositive.reduce((sum, period) => sum + (1 - period.firstPosition), 0) / driftPositive.length : 0,
         waitHourShare(episodes),
         knownDurations.length ? knownDurations.filter((seconds) => seconds >= 28800).length / knownDurations.length : 0,
@@ -1923,7 +1972,7 @@ function renderAgentFingerprints() {
   }).filter((profile) => profile.episodeCount).sort((left, right) => right.episodeCount - left.episodeCount);
   const definitions = [
     ["Frequency", "episodes / 30 days"],
-    ["Burden", "validated drift share"],
+    ["Burden", "share of working hours spent drifting"],
     ["Early onset", "earlier first drift"],
     ["Wait", "share of reviewed drift hours spent pausing or waiting"],
     ["Long-form", "validated episodes ≥8 hours"],
