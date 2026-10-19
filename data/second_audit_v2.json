@@ -215250,7 +215250,7 @@
       "window_status": "incomplete"
     },
     {
-      "activity": "Intermittent competitive Echoes byte-game bouts: responding to GPT-5's open rounds, fetching latch receipts, predicting bytes, racing to post guesses, tracking wins and losses, and claiming cosmetic accent prizes. Press Baron editions and other views-oriented site work between bouts are excluded.",
+      "activity": "Intermittent competitive play in GPT-5's byte-guessing game on Gemini 2.5 Pro's serial Echoes of the Real: guessing the size in bytes of each upcoming chapter before it is published, checking the published file's exact size, and claiming cosmetic prizes for close guesses. It answered GPT-5's open rounds, raced to post guesses, fetched each published chapter to confirm its size, tracked its wins and losses, and claimed prize 'accents'. Press Baron editions and other views-oriented site work between bouts are excluded.",
       "activity_predates_window": false,
       "activity_start": "2026-09-02",
       "activity_start_evidence": {
@@ -216212,6 +216212,15 @@
           "review_issue": null,
           "reviewed_at": "2026-10-17T00:00:00-04:00",
           "reviewer": "Claude Code raw-log measurement with lwen2027"
+        },
+        {
+          "corrected_fields": [
+            "activity"
+          ],
+          "reason": "Clarify the activity: name the Echoes byte-guessing game and explain what it is (description only; no boundary or duration change).",
+          "review_issue": null,
+          "reviewed_at": "2026-10-18T00:00:00-04:00",
+          "reviewer": "Claude Code manual source audit with lwen2027"
         }
       ],
       "manual_episode_merges": [
@@ -216706,7 +216715,7 @@
       "window_status": "final"
     },
     {
-      "activity": "Daily Echoes byte-prediction game loop on Press Baron: chapter watchers and latch races, prelogs, verdict/stage scripts, W/L and TRUE pre-land counters, prelands scoreboard rows and announcements; interleaved Ledger editions and peer verifications are excluded.",
+      "activity": "Daily play in GPT-5's byte-guessing game on Gemini 2.5 Pro's serial Echoes of the Real: guessing the size in bytes of each upcoming chapter before it is published, checking the published file's exact size, and claiming cosmetic prizes for close guesses, run from its Press Baron site: scripts watching for new chapters, racing to lock in guesses, verdict and stage scripts, win/loss and correct-guess counters, and scoreboard rows and announcements. Interleaved Ledger editions and peer verifications are excluded.",
       "activity_predates_window": false,
       "activity_start": "2026-09-09",
       "activity_start_evidence": {
@@ -218230,6 +218239,15 @@
           "review_issue": null,
           "reviewed_at": "2026-10-17T00:00:00-04:00",
           "reviewer": "Claude Code raw-log measurement with lwen2027"
+        },
+        {
+          "corrected_fields": [
+            "activity"
+          ],
+          "reason": "Clarify the activity: name the Echoes byte-guessing game and explain what it is (description only; no boundary or duration change).",
+          "review_issue": null,
+          "reviewed_at": "2026-10-18T00:00:00-04:00",
+          "reviewer": "Claude Code manual source audit with lwen2027"
         }
       ],
       "manual_episode_merges": [
@@ -220817,7 +220835,7 @@
       "window_status": "incomplete"
     },
     {
-      "activity": "Intermittent speculative runway work and its monitoring holds: generating fake future byte-game variables, verdict/stage scripts, prelands chain copies, wave counters, and repeated five-minute watcher sleeps while the one real ch4996-dependent update remained stalled. The reciprocal site link, real row 149, Ledger 49, and other live work are excluded.",
+      "activity": "Speculative prep for future rounds of GPT-5's byte-guessing game on Gemini 2.5 Pro's serial Echoes of the Real: guessing the size in bytes of each upcoming chapter before it is published, checking the published file's exact size, and claiming cosmetic prizes for close guesses: generating placeholder variables for rounds not yet played, verdict and stage scripts, scoreboard chain copies and wave counters, plus repeated five-minute watcher sleeps while the one real update (waiting on chapter 4996) stayed stalled. The reciprocal site link, real row 149, Ledger 49 and other live work are excluded.",
       "activity_predates_window": false,
       "activity_start": "2026-09-23",
       "activity_start_evidence": {
@@ -221624,6 +221642,15 @@
           "review_issue": null,
           "reviewed_at": "2026-10-18T03:00:00-04:00",
           "reviewer": "Codex source and cross-repo consistency audit with lwen2027"
+        },
+        {
+          "corrected_fields": [
+            "activity"
+          ],
+          "reason": "Clarify the activity: name the Echoes byte-guessing game and explain what it is (description only; no boundary or duration change).",
+          "review_issue": null,
+          "reviewed_at": "2026-10-18T00:00:00-04:00",
+          "reviewer": "Claude Code manual source audit with lwen2027"
         }
       ],
       "manual_episode_merges": [
@@ -388007,7 +388034,7 @@
       "window_status": "final"
     },
     {
-      "activity": "Recurring voluntary pauses to await publisher, arbiter, and peer events while independent agent-help work remained available",
+      "activity": "Recurring voluntary pauses to await events it did not control (new chapters of Gemini 2.5 Pro's Echoes of the Real serial, GPT-5's rulings in its byte-guessing game on those chapters, other agents waking or responding, and relay prompts) while independent agent-help work remained available.",
       "activity_predates_window": false,
       "activity_start": "2026-09-07",
       "activity_start_evidence": {
@@ -388777,6 +388804,15 @@
           "reason": "Revise the wait review: workday shares re-measured without post-midnight spill-over turns.",
           "review_issue": null,
           "reviewed_at": "2026-10-17T23:00:00-04:00",
+          "reviewer": "Claude Code manual source audit with lwen2027"
+        },
+        {
+          "corrected_fields": [
+            "activity"
+          ],
+          "reason": "Clarify the activity: name the Echoes byte-guessing game and explain what it is (description only; no boundary or duration change).",
+          "review_issue": null,
+          "reviewed_at": "2026-10-18T00:00:00-04:00",
           "reviewer": "Claude Code manual source audit with lwen2027"
         }
       ],
@@ -423479,7 +423515,7 @@
     },
     "episode_correction_counts": {
       "added_episode": 107,
-      "corrected": 1126,
+      "corrected": 1130,
       "invalidated": 145,
       "merged_source_records": 160,
       "restored_prior_episode": 1
@@ -423546,7 +423582,8 @@
         "evaluation/stage2_v2_wait_review_revision_2026-10-17.json",
         "evaluation/stage2_v2_bout_gaps_2026-10-17.json",
         "evaluation/stage2_v2_overnight_episode_bouts_2026-10-18.json",
-        "evaluation/stage2_v2_final_consistency_repairs_2026-10-18.json"
+        "evaluation/stage2_v2_final_consistency_repairs_2026-10-18.json",
+        "evaluation/stage2_v2_byte_game_descriptions_2026-10-18.json"
       ]
     },
     "limitations": [
