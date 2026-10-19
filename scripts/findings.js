@@ -2846,6 +2846,12 @@ function renderReciprocity() {
 // Working time and drift for one period use the same source-grounded denominator
 // as the atlas and burden scatter: the exact overlap of the assignment interval
 // with active Village weekdays from 9 AM–5 PM Pacific.
+// Village run days (weekdays with goal-maximization activity): the shared x-axis for card sparklines.
+const villageRunDays = [...new Set(goalMaxDays)].filter((day) => {
+  const weekday = new Date(`${day}T12:00:00Z`).getUTCDay();
+  return weekday >= 1 && weekday <= 5;
+}).sort();
+
 function periodWorkingStats(period) {
   const periodWindows = workingWindows.map((window) => ({
     ...window,
@@ -3038,24 +3044,42 @@ function renderGoalWindowCard(data) {
   card.append(stats);
 
   if (data.working.dailyShares.length) {
+    // Bars of daily drift share on a calendar shared by every card (one fixed-width slot per Village run day),
+    // so bar widths match across cards and later joiners start further right.
+    const slots = villageRunDays.length;
+    const slotOf = new Map(villageRunDays.map((day, index) => [day, index]));
+    const entries = data.working.dailyShares
+      .map((entry) => ({ ...entry, index: slotOf.get(entry.day) }))
+      .filter((entry) => entry.index != null)
+      .sort((left, right) => left.index - right.index);
     const spark = cardElement("div", "gw-spark");
-    spark.title = "Daily share of the working day spent drifting, across the window";
-    const count = data.working.dailyShares.length;
-    data.working.dailyShares.forEach((entry, index) => {
-      const bar = cardElement("span");
-      bar.style.left = `${(index / count) * 100}%`;
-      bar.style.width = `${Math.max(.6, 100 / count - .4)}%`;
+    spark.setAttribute("role", "img");
+    spark.setAttribute("aria-label", "Daily share of the working day spent drifting, on the shared Village calendar");
+    if (entries.length) {
+      const span = cardElement("span", "gw-spark-window");
+      span.style.left = `${(entries[0].index / slots) * 100}%`;
+      span.style.width = `${((entries.at(-1).index - entries[0].index + 1) / slots) * 100}%`;
+      spark.append(span);
+    }
+    entries.forEach((entry) => {
+      const bar = cardElement("span", entry.share ? "gw-spark-bar" : "gw-spark-bar is-zero");
+      bar.style.left = `${(entry.index / slots) * 100}%`;
+      bar.style.width = `${100 / slots}%`;
       bar.style.height = `${Math.max(entry.share ? 6 : 2, entry.share * 100)}%`;
-      if (!entry.share) bar.className = "is-zero";
       bar.title = `${displayDay(entry.day)}: ${percentText(entry.share)} of the working day`;
       spark.append(bar);
     });
-    [1, 2].forEach((third) => {
-      const divider = cardElement("i");
-      divider.style.left = `${(third / 3) * 100}%`;
-      spark.append(divider);
-    });
-    card.append(spark);
+    // Dashed dividers mark where each third of the agent's own window begins (the shape label uses these thirds).
+    if (entries.length >= 3) {
+      [1, 2].forEach((third) => {
+        const divider = cardElement("i");
+        divider.style.left = `${(entries[Math.floor(third * entries.length / 3)].index / slots) * 100}%`;
+        spark.append(divider);
+      });
+    }
+    const axis = cardElement("div", "gw-spark-axis");
+    axis.append(cardElement("span", null, displayDay(villageRunDays[0])), cardElement("span", null, displayDay(villageRunDays.at(-1))));
+    card.append(spark, axis);
   }
 
   if (data.reviewed.length) {
