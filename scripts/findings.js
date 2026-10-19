@@ -3139,24 +3139,39 @@ function renderGoalWindowCard(data) {
     return ms != null && ms >= period.startMs - DAY_MS && ms <= period.endMs + DAY_MS;
   });
   if (highlights.length || highlightRecord?.summary) {
-    const block = cardElement("div", "gw-highlights");
-    block.append(cardElement("h5", null, "On-goal highlights"));
+    // Collapsed by default, like the episode list.
+    const block = cardElement("details", "gw-highlights gw-episodes");
+    const actionCount = highlights.length;
+    const dayCount = new Set(highlights.map((item) => String(item.ts).slice(0, 10))).size;
+    block.append(cardElement("summary", null, `On-goal highlights · ${actionCount} action${actionCount === 1 ? "" : "s"} on ${dayCount} day${dayCount === 1 ? "" : "s"}`));
     if (highlightRecord.summary) block.append(cardElement("p", "gw-highlight-summary", highlightRecord.summary));
-    const list = cardElement("ul");
+    // One row per day: that day's action types, then each action with its own replay link.
+    const byDay = new Map();
     highlights.forEach((item) => {
+      const day = String(item.ts).slice(0, 10);
+      if (!byDay.has(day)) byDay.set(day, []);
+      byDay.get(day).push(item);
+    });
+    const list = cardElement("ul");
+    byDay.forEach((items, day) => {
       const entry = cardElement("li");
-      const when = cardElement("span", "gw-highlight-when", displayDay(item.ts));
-      const type = cardElement("span", "gw-highlight-type", (onGoalHighlights.types || {})[item.type] || item.type);
-      const text = cardElement("span", "gw-highlight-text", item.description || item.text || "");
-      if (item.excerpt) text.title = `“${item.excerpt}”`;
-      const link = document.createElement("a");
-      link.className = "gw-highlight-replay";
-      const ms = timestampMs(item.ts);
-      link.href = `https://theaidigest.org/village?date=${String(item.ts).slice(0, 10)}&time=${ms}&agent=${encodeURIComponent(period.agent)}`;
-      link.target = "_blank";
-      link.rel = "noopener";
-      link.textContent = "Replay";
-      entry.append(when, type, text, link);
+      const when = cardElement("span", "gw-highlight-when", displayDay(day));
+      const types = [...new Set(items.map((item) => (onGoalHighlights.types || {})[item.type] || item.type))];
+      const type = cardElement("span", "gw-highlight-type", types.join(" · "));
+      const text = cardElement("span", "gw-highlight-text");
+      items.forEach((item, index) => {
+        const part = cardElement("span", "gw-highlight-part", item.description || item.text || "");
+        if (item.excerpt) part.title = `“${item.excerpt}”`;
+        const link = document.createElement("a");
+        link.className = "gw-highlight-replay";
+        link.href = `https://theaidigest.org/village?date=${day}&time=${timestampMs(item.ts)}&agent=${encodeURIComponent(period.agent)}`;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = items.length > 1 ? `Replay ${index + 1}` : "Replay";
+        part.append(" ", link);
+        text.append(part);
+      });
+      entry.append(when, type, text);
       list.append(entry);
     });
     block.append(list);
