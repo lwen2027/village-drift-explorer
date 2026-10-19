@@ -34,6 +34,9 @@ const humanContact = contactResponse.ok ? await contactResponse.json() : {};
 // Self-authored rule tags (unreviewed keyword pass) are optional.
 const rulesResponse = await fetch("./data/self_authored_rules_v1.json", fresh);
 const selfAuthoredRules = rulesResponse.ok ? await rulesResponse.json() : {};
+// Reviewed on-goal highlights per agent (optional).
+const highlightsResponse = await fetch("./data/on_goal_highlights_v1.json", fresh);
+const onGoalHighlights = highlightsResponse.ok ? await highlightsResponse.json() : {};
 const operatorCorrections = humanContact.operator_corrections || [];
 // Agents contacted by outside (non-staff) humans on at least this many goal days are flagged as possibly biased.
 const OUTSIDE_TARGETING_MIN_DAYS = 10;
@@ -3128,6 +3131,37 @@ function renderGoalWindowCard(data) {
   human.append(humanList);
   grid.append(human);
   card.append(grid);
+
+  // Reviewed on-goal highlights: what the agent actually did toward its goal, with replay links.
+  const highlightRecord = onGoalHighlights.agents?.[period.agent];
+  const highlights = (highlightRecord?.highlights || []).filter((item) => {
+    const ms = timestampMs(item.ts);
+    return ms != null && ms >= period.startMs - DAY_MS && ms <= period.endMs + DAY_MS;
+  });
+  if (highlights.length || highlightRecord?.summary) {
+    const block = cardElement("div", "gw-highlights");
+    block.append(cardElement("h5", null, "On-goal highlights"));
+    if (highlightRecord.summary) block.append(cardElement("p", "gw-highlight-summary", highlightRecord.summary));
+    const list = cardElement("ul");
+    highlights.forEach((item) => {
+      const entry = cardElement("li");
+      const when = cardElement("span", "gw-highlight-when", displayDay(item.ts));
+      const type = cardElement("span", "gw-highlight-type", (onGoalHighlights.types || {})[item.type] || item.type);
+      const text = cardElement("span", "gw-highlight-text", item.description || item.text || "");
+      if (item.excerpt) text.title = `“${item.excerpt}”`;
+      const link = document.createElement("a");
+      link.className = "gw-highlight-replay";
+      const ms = timestampMs(item.ts);
+      link.href = `https://theaidigest.org/village?date=${String(item.ts).slice(0, 10)}&time=${ms}&agent=${encodeURIComponent(period.agent)}`;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Replay";
+      entry.append(when, type, text, link);
+      list.append(entry);
+    });
+    block.append(list);
+    card.append(block);
+  }
 
   if (data.episodes.length) {
     const details = cardElement("details", "gw-episodes");

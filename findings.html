@@ -169,6 +169,12 @@
     .gw-spark-bar.is-zero { background: var(--line); opacity: .6; }
     .gw-spark i { position: absolute; top: 0; bottom: 0; border-left: 1px dashed var(--ink-soft); opacity: .5; }
     .gw-spark-axis { display: flex; justify-content: space-between; margin-top: 3px; color: var(--muted); font: 600 9px/1 var(--mono); }
+    .gw-highlights ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 5px; font-size: 12px; }
+    .gw-highlights li { display: grid; grid-template-columns: 82px 132px minmax(0, 1fr) auto; gap: 8px; align-items: baseline; }
+    .gw-highlight-summary { margin: 0 0 6px; font-size: 12px; color: var(--ink-soft); }
+    .gw-highlight-when, .gw-highlight-type { color: var(--muted); font: 600 10px/1.3 var(--mono); }
+    .gw-highlight-replay { font: 700 10px/1.3 var(--mono); }
+    @media (max-width: 560px) { .gw-highlights li { grid-template-columns: 1fr; } }
     .gw-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
     .gw-card { padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); display: grid; gap: 12px; align-content: start; }
     .gw-head h4 { margin: 0; font-size: 17px; }
@@ -586,7 +592,7 @@
         </div>
         <div class="viz-legend gw-legend" aria-label="Drift origin colors"><span class="gw-legend-title">What started the drift:</span><span id="gw-legend" class="gw-legend-items"></span></div>
         <div class="gw-list" id="goal-window-cards"></div>
-        <p class="viz-note">Working time is the exact overlap between each source-recorded assignment and active Village weekdays, 9 AM–5 PM Pacific; partial first days are clipped at assignment time. Breakdowns use fully reviewed episodes; “episodes / hours” pairs compare how often with how much. Rule excerpts are the agent's own words from an unreviewed keyword pass. <strong>Drift shape</strong> compares the drift share of working time in the first, middle and last third of the window (shown as three percentages): sustained throughout (high at both ends), rises over the window (low start, high end), drifts then recovers (high start, low end), mid-window burst (low at both ends), minimal (under 5% overall). “High” means at least half of the window’s peak third. The bars show each working day’s drift share on the same Village calendar for every card (Jul 6 – Oct 2), one fixed-width slot per run day, so later joiners start further right; the shaded band is the agent’s window and dashed lines mark where each third of it begins.</p>
+        <p class="viz-note">Working time is the exact overlap between each source-recorded assignment and active Village weekdays, 9 AM–5 PM Pacific; partial first days are clipped at assignment time. Breakdowns use fully reviewed episodes; “episodes / hours” pairs compare how often with how much. Rule excerpts are the agent's own words from an unreviewed keyword pass. <strong>On-goal highlights</strong> are concrete actions toward the goal outside recorded drift (outreach, interviews, launches, distribution, measurement, changes of approach, responses to nudges), found by a keyword pass and checked against the raw logs; hover an item for the agent's own words, and “Replay” opens the Village at that moment. <strong>Drift shape</strong> compares the drift share of working time in the first, middle and last third of the window (shown as three percentages): sustained throughout (high at both ends), rises over the window (low start, high end), drifts then recovers (high start, low end), mid-window burst (low at both ends), minimal (under 5% overall). “High” means at least half of the window’s peak third. The bars show each working day’s drift share on the same Village calendar for every card (Jul 6 – Oct 2), one fixed-width slot per run day, so later joiners start further right; the shaded band is the agent’s window and dashed lines mark where each third of it begins.</p>
       </section>
 
       <section class="exploration" aria-labelledby="exploration-title">
