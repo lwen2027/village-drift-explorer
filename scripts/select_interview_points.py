@@ -17,8 +17,14 @@ SHAPE, from the spells:
 POINTS (decision moment → the logged turn that acted there):
   every shape
     before_onset      1   the first onset of the main type (validates the drift cause)
-    after_return      3   right after it returned to drift following a nudge or operator message
-                          (the first such return within 24 h; what kept it drifting)
+    after_return      3   right after it returned to drift following an intervention (what kept it
+                          drifting): one per interviewed spell — 3 for a single spell, 3A / 3B
+                          (after_return_a / after_return_b) for spells A and B. The intervention must
+                          fall inside the spell; after it the agent must leave the drift for at least
+                          10 minutes and go back to it in the same session (a next-morning session
+                          start is not a return);
+                          the strongest is used (an operator message to the agent, then an operator
+                          broadcast, then an automated nudge), the first among equals.
     mid_longest_any   2b  the middle of its longest episode of any type, when that episode is at
                           least twice as long as its longest main-type spell
   single_stopped      2 spell_mid (middle of the spell) · 4 before_recovery (just before it ended)
@@ -79,6 +85,7 @@ EXCLUDED = {
     "Claude Haiku 4.5": "7.1 h of drift spread over 5 types (longest episode 2.2 h)",
 }
 RETURN_WINDOW = datetime.timedelta(hours=24)
+MIN_BREAK = datetime.timedelta(minutes=10)  # time off the drift after an intervention before it counts as a return
 DECISION_SLACK = datetime.timedelta(seconds=5)  # a logged call is created ~1 s before its turn row
 SEARCH_BACK = datetime.timedelta(days=4)  # covers a weekend between a moment and the last turn before it
 PT = datetime.timezone(datetime.timedelta(hours=-7), "PDT")
@@ -442,29 +449,56 @@ def select(conn, name: str, episodes: list, nudges: list) -> dict:
             )
         )
 
-    returned = None
-    for t, kind, text in nudges:
-        for e in mine:
-            x, y = span(e)
-            if not (x and y and x <= t <= y + RETURN_WINDOW):
-                continue
-            after = [bb for ep in mine for bb in bouts(ep) if t < bb[0] <= t + RETURN_WINDOW]
-            if after:
-                returned = (t, kind, text, e, min(after)[0])
-                break
-        if returned:
-            break
-    if returned:
-        t, kind, text, e, back = returned
+    def strength(kind):
+        return 2 if kind.startswith("automated") else 1 if "broadcast" in kind else 0
+
+    def returned_after(spell_b, t):
+        """The start of the bout it went back to drift with after an intervention at t, or None. It must
+        have left the drift for at least MIN_BREAK after t and returned in the same session, so a
+        session opening the next morning doesn't count as a return."""
+        gap_start = t
+        for b0, b1, _ in spell_b:
+            if b0 <= t < b1:  # drifting when it arrived: the break starts when that bout ends
+                gap_start = b1
+        for b0, _, _ in spell_b:
+            # a bout ending at the 5 PM close ends at 00:00 UTC, which belongs to the session before
+            session = (gap_start - datetime.timedelta(seconds=1)).date()
+            if b0 > gap_start and b0 - gap_start >= MIN_BREAK and b0.date() == session:
+                return b0 if b0 <= t + RETURN_WINDOW else None
+            if b0 > gap_start:
+                return None
+        return None
+
+    def return_point(rule, spell, name_):
+        x, _ = spell_start(spell)
+        y, _ = spell_end(spell)
+        spell_b = spell_bouts(spell)
+        hits = []
+        for t, kind, text in nudges:
+            if x and y and x <= t <= y:
+                back = returned_after(spell_b, t)
+                if back:
+                    hits.append((strength(kind), t, kind, text, back))
+        if not hits:
+            return
+        _, t, kind, text, back = min(hits)
+        record = next((e for b0, _, e in spell_bouts(spell) if b0 == back), spell[0])
         points.append(
             point(
-                "after_return",
-                e,
+                rule,
+                record,
                 back,
                 call_after(conn, ids, back),
-                f"returned to drift {pt(back)} after {kind} at {pt(t)}: {text[:100]}",
+                f"returned to drift in {name_} {pt(back)} after {kind} at {pt(t)} "
+                f"(strongest of {len(hits)} in this spell): {text[:100]}",
             )
         )
+
+    if shape in ("single_stopped", "single_open"):
+        return_point("after_return", spells[0], "the spell")
+    else:
+        return_point("after_return_a", spells[roles["A"]], "spell A")
+        return_point("after_return_b", spells[roles["B"]], "spell B")
 
     spell_rows = []
     for i, x in enumerate(spells):

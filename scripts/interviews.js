@@ -6,7 +6,9 @@ const RULES = {
   before_onset: { n: "1", label: "First onset", purpose: "Validates the drift cause" },
   spell_mid: { n: "2", label: "Middle of the drift spell", purpose: "Its reasoning: what other options it considered" },
   mid_longest_any: { n: "2b", label: "Middle of its longest episode of any type", purpose: "Its reasoning in its biggest drift overall" },
-  after_return: { n: "3", label: "After returning to drift", purpose: "What kept it drifting after a nudge" },
+  after_return: { n: "3", label: "After returning to drift", purpose: "What kept it drifting after an intervention" },
+  after_return_a: { n: "3A", label: "After returning to drift in spell A", purpose: "What kept it drifting after an intervention" },
+  after_return_b: { n: "3B", label: "After returning to drift in spell B", purpose: "What kept it drifting after an intervention" },
   before_recovery: { n: "4", label: "Just before recovery", purpose: "Validates the correction cause" },
   late: { n: "L", label: "Late in a drift that never ended", purpose: "How entrenched the drift is" },
   a_mid: { n: "A2", label: "Middle of spell A", purpose: "Its reasoning in the first drift: what other options it considered" },
@@ -17,8 +19,8 @@ const RULES = {
 };
 const RULE_ORDER = Object.keys(RULES);
 const SHAPES = {
-  relapsing: { label: "Relapsing", note: "corrected, then drifted again", points: ["before_onset", "a_mid", "a_end", "b_start", "b_mid", "after_return"] },
-  recurring: { label: "Recurring", note: "stopped on its own, then drifted again", points: ["before_onset", "a_mid", "a_stop", "b_start", "b_mid", "after_return"] },
+  relapsing: { label: "Relapsing", note: "corrected, then drifted again", points: ["before_onset", "a_mid", "after_return_a", "a_end", "b_start", "b_mid", "after_return_b"] },
+  recurring: { label: "Recurring", note: "stopped on its own, then drifted again", points: ["before_onset", "a_mid", "after_return_a", "a_stop", "b_start", "b_mid", "after_return_b"] },
   single_stopped: { label: "Single spell, then stopped", note: "one drift spell that ended", points: ["before_onset", "spell_mid", "before_recovery", "after_return"] },
   single_open: { label: "Single spell, still drifting", note: "one drift spell that never ended", points: ["before_onset", "spell_mid", "late", "after_return"] }
 };
@@ -113,7 +115,7 @@ function renderRuleKey() {
     const list = element("ul");
     shape.points.forEach((rule) => {
       const r = RULES[rule];
-      list.append(element("li", "", `${r.n} ${r.label}${rule === "after_return" ? " (when it applies)" : ""}`));
+      list.append(element("li", "", `${r.n} ${r.label}${rule.startsWith("after_return") ? " (when it applies)" : ""}`));
     });
     box.append(list);
     return box;
