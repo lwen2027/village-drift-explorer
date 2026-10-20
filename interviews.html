@@ -113,6 +113,9 @@
     .ip-spell { position: absolute; top: 2px; height: 12px; min-width: 6px; border: solid color-mix(in srgb, var(--rust) 55%, transparent); border-width: 0 1px 1px; border-radius: 0 0 4px 4px; }
     .ip-spell span { position: absolute; top: 2px; left: 50%; transform: translateX(-50%); padding: 0 3px; background: var(--card); color: var(--muted); font: 700 9px/1 var(--mono); white-space: nowrap; }
     .ip-spell span.is-right { left: auto; right: 0; transform: none; }
+    .ip-spell span.is-left { left: 0; transform: none; }
+    .ip-spell-band { position: absolute; top: 22px; height: 18px; min-width: 6px; border-radius: 5px; background: color-mix(in srgb, var(--rust) 16%, transparent); outline: 1.5px solid var(--rust); pointer-events: none; }
+    .ip-spell-band.is-second { background: color-mix(in srgb, var(--blue) 16%, transparent); outline-color: var(--blue); }
     .ip-spell.is-role { border-color: var(--rust); border-width: 0 2px 2px; }
     .ip-spell.is-role span { color: var(--ink); }
     .ip-spell.is-second { border-color: color-mix(in srgb, var(--blue) 55%, transparent); }
@@ -216,6 +219,6 @@
       <section class="excluded" id="ip-excluded" hidden></section>
     </main>
   </div>
-  <script type="module" src="./scripts/interviews.js?v=20261020-click-zoom"></script>
+  <script type="module" src="./scripts/interviews.js?v=20261020-spell-lanes-2"></script>
 </body>
 </html>

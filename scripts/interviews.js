@@ -290,27 +290,59 @@ function renderStrip(agent, points, tracks, view) {
     mark.append(element("b", "", RULES[p.rule]?.n || "?"), element("i"));
     strip.append(mark);
   });
-  // One bracket per spell under the bars, so chained records read as one drift.
+  // Spells: a band over the bars for spells A and B, and a bracket per spell underneath. Brackets that
+  // would overlap (spells can run in parallel) go on separate rows; only those with room get a label.
   const brackets = element("div", "ip-spell-row");
+  const lanes = [];
+  const MIN_PCT = 0.6;
+  const items = [];
   tracks.forEach((track, ti) => {
     const byRole = Object.fromEntries((track.spells || []).filter((sp) => sp.role).map((sp) => [sp.role, sp]));
     (track.spells || []).forEach((sp) => {
       const a = ms(sp.start_utc);
       const z = ms(sp.end_utc) ?? a;
       if (a == null || !inView(a, z)) return;
-      const bracket = element("span", `ip-spell${sp.role ? " is-role" : ""}${ti > 0 ? " is-second" : ""}`);
-      bracket.style.left = pos(a);
-      bracket.style.width = `calc(${pos(z)} - ${pos(a)})`;
-      let text = sp.role || String(sp.n);
-      if (sp.role === "B" && byRole.A) text += ` · ${gapText(a - ms(byRole.A.end_utc))} after A`;
-      bracket.title = `${track.type_label} · spell ${sp.n}${sp.role ? ` (${sp.role})` : ""}: ${sp.start_pt} – ${sp.end_pt} · ${sp.hours} h · ${sp.ending}`;
-      const label = element("span", "", text);
-      // near the right edge, anchor the label to the bracket's right end so it stays inside the card
-      if ((a - start) / (end - start) > 0.75) label.classList.add("is-right");
-      bracket.append(label);
-      brackets.append(bracket);
+      const left = Math.max(0, ((a - start) / (end - start)) * 100);
+      const right = Math.min(100, ((z - start) / (end - start)) * 100);
+      items.push({ sp, ti, left, width: Math.max(MIN_PCT, right - left), track, byRole });
     });
   });
+  // Role spells first, so they get the top bracket row.
+  items.sort((l, r) => (r.sp.role ? 1 : 0) - (l.sp.role ? 1 : 0) || l.left - r.left);
+  items.forEach(({ sp, ti, left, width, track, byRole }) => {
+    let text = sp.role || String(sp.n);
+    if (sp.role === "B" && byRole.A) text += ` · ${gapText(ms(sp.start_utc) - ms(byRole.A.end_utc))} after A`;
+    // a label needs about 1.2% of the strip per character on a typical card (9px monospace)
+    const labelPct = text.length * 1.2 + 1;
+    const showLabel = sp.role || width >= labelPct;
+    const needed = showLabel ? Math.max(width, labelPct) : width;
+    let lane = lanes.findIndex((ends) => ends.every(([l, r]) => left >= r + 0.8 || left + needed <= l - 0.8));
+    if (lane < 0) {
+      lanes.push([]);
+      lane = lanes.length - 1;
+    }
+    lanes[lane].push([left, left + needed]);
+    const bracket = element("span", `ip-spell${sp.role ? " is-role" : ""}${ti > 0 ? " is-second" : ""}`);
+    bracket.style.left = `${left}%`;
+    bracket.style.width = `${width}%`;
+    bracket.style.top = `${2 + lane * 15}px`;
+    bracket.title = `${track.type_label} · spell ${sp.n}${sp.role ? ` (${sp.role})` : ""}: ${sp.start_pt} – ${sp.end_pt} · ${sp.hours} h · ${sp.ending}`;
+    if (showLabel) {
+      const label = element("span", "", text);
+      if (left > 75) label.classList.add("is-right");
+      else if (width < labelPct) label.classList.add("is-left");
+      bracket.append(label);
+    }
+    brackets.append(bracket);
+    if (sp.role) {
+      const band = element("span", `ip-spell-band${ti > 0 ? " is-second" : ""}`);
+      band.style.left = `${left}%`;
+      band.style.width = `${width}%`;
+      band.title = bracket.title;
+      strip.insertBefore(band, strip.querySelector(".ip-strip-mark"));
+    }
+  });
+  brackets.style.height = `${Math.max(1, lanes.length) * 15 + 2}px`;
   const axis = element("div", "ip-strip-axis");
   const label = (t) => (end - start < 4 * 24 * HOUR_MS ? timeFormat : dayFormat).format(t);
   axis.append(element("span", "", label(start)), element("span", "", label(start + (end - start) / 2)), element("span", "", label(end)));
