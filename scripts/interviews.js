@@ -301,7 +301,8 @@ function renderStrip(agent, points, tracks, view) {
     (track.spells || []).forEach((sp) => {
       const a = ms(sp.start_utc);
       const z = ms(sp.end_utc) ?? a;
-      if (a == null || !inView(a, z)) return;
+      // only spells A and B are drawn; every spell is still listed under the card
+      if (!sp.role || a == null || !inView(a, z)) return;
       const left = Math.max(0, ((a - start) / (end - start)) * 100);
       const right = Math.min(100, ((z - start) / (end - start)) * 100);
       items.push({ sp, ti, left, width: Math.max(MIN_PCT, right - left), track, byRole });
