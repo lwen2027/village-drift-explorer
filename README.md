@@ -12,6 +12,7 @@ Interactive explorer for confirmed goal-drift episodes in the [AI Village](https
 | [Pipeline overview](https://lwen2027.github.io/village-drift-explorer/overview.html) (`overview.html`) | How raw activity becomes confirmed episodes: goal-window verdicts, goal-maximization vs. shared-goal periods, per-agent counts, evidence quality, and definitions. |
 | [Findings overview](https://lwen2027.github.io/village-drift-explorer/findings.html) (`findings.html`) | Aggregate findings from fully reviewed episodes: review coverage, timing and duration, triggers, recovery, and pause contexts. |
 | [Manual review](https://lwen2027.github.io/village-drift-explorer/review.html) (`review.html`) | Review queue for goal-maximization episodes. Annotations are saved in the browser and can be exported as JSON or CSV. |
+| [Interview points](https://lwen2027.github.io/village-drift-explorer/interviews.html) (`interviews.html`) | The replay points selected for interviewing each drifting agent (`data/interview_points_v1.json`), one card per agent with a timeline of its episodes, what it did at each point, links to the Village replay and the episode, and per-point review marks saved in the browser and exportable as JSON. |
 
 ## Repository layout
 
