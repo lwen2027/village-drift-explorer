@@ -110,7 +110,7 @@ function element(tag, className, text) {
 function renderRuleKey() {
   document.querySelector("#rule-key").replaceChildren(...Object.entries(SHAPES).map(([id, shape]) => {
     const box = element("div");
-    const n = selection.agents.filter((a) => a.shape === id).length;
+    const n = selection.agents.filter((a) => tracksOf(a).some((t) => t.shape === id)).length;
     box.append(element("strong", "", `${shape.label} (${n})`), element("span", "ip-key-note", shape.note));
     const list = element("ul");
     shape.points.forEach((rule) => {
@@ -124,7 +124,7 @@ function renderRuleKey() {
 
 function renderSpells(a) {
   const box = element("details", "ip-spells");
-  const counts = a.spells.length === a.main_type_episodes ? "" : ` from ${a.main_type_episodes} records`;
+  const counts = a.spells.length === a.episodes ? "" : ` from ${a.episodes} records`;
   box.append(element("summary", "", `${a.spells.length} drift spell${a.spells.length === 1 ? "" : "s"}${counts}`));
   const list = element("ol");
   a.spells.forEach((sp) => {
@@ -139,7 +139,7 @@ function renderSpells(a) {
   return box;
 }
 
-function renderStrip(agent, points, mainType) {
+function renderStrip(agent, points, trackTypes) {
   const episodes = episodesByAgent.get(agent) || [];
   const spans = episodes.map(episodeSpan).filter(([a]) => a != null);
   const pointTimes = points.map((p) => ms(p.moment_utc)).filter((t) => t != null);
@@ -154,7 +154,8 @@ function renderStrip(agent, points, mainType) {
   episodes.forEach((e) => {
     const [a, z] = episodeSpan(e);
     if (a == null) return;
-    const bar = element("span", `ip-strip-ep${categoryOf.get(e.episode_id) === mainType ? " is-main" : ""}`);
+    const track = trackTypes.indexOf(categoryOf.get(e.episode_id));
+    const bar = element("span", `ip-strip-ep${track === 0 ? " is-main" : track > 0 ? " is-second" : ""}`);
     bar.style.left = pos(a);
     bar.style.width = `calc(${pos(z ?? a)} - ${pos(a)})`;
     bar.title = `${categoryLabel.get(categoryOf.get(e.episode_id)) || ""} · ${e.activity}`;
@@ -169,7 +170,7 @@ function renderStrip(agent, points, mainType) {
     const left = ((t - start) / (end - start)) * 100;
     raised = left - lastLeft < 3 ? !raised : false;
     lastLeft = left;
-    const mark = element("span", `ip-strip-mark${raised ? " is-raised" : ""}`);
+    const mark = element("span", `ip-strip-mark${raised ? " is-raised" : ""}${p.track > 0 ? " is-second" : ""}`);
     mark.style.left = pos(t);
     mark.title = `${RULES[p.rule]?.label || p.rule} · ${p.moment_pt}`;
     mark.append(element("b", "", RULES[p.rule]?.n || "?"), element("i"));
@@ -272,29 +273,54 @@ function renderPoint(agent, p) {
   return item;
 }
 
+function tracksOf(a) {
+  return a.tracks || [{ type: a.main_type, type_label: a.main_type_label, hours: a.main_type_hours, episodes: a.main_type_episodes, shape: a.shape, spells: a.spells, points: a.points }];
+}
+
+function renderTrack(a, track, index, multiple) {
+  const section = element("section", `ip-track${index > 0 ? " is-second" : ""}`);
+  if (multiple) {
+    const head = element("div", "ip-track-head");
+    head.append(element("h4", "", `${index === 0 ? "Main type" : "Second type"}: ${track.type_label}`),
+      element("span", "ip-badge is-shape", SHAPES[track.shape]?.label || track.shape));
+    section.append(head, element("p", "ip-sub", `${track.hours} h · ${track.episodes} episode${track.episodes === 1 ? "" : "s"} of this type`));
+  }
+  const list = element("ol", "ip-points");
+  [...track.points]
+    .sort((l, r) => String(l.moment_utc).localeCompare(String(r.moment_utc)))
+    .forEach((p) => list.append(renderPoint(a.agent, p)));
+  section.append(renderSpells(track), list);
+  return section;
+}
+
 function renderCard(a) {
+  const tracks = tracksOf(a);
+  const multiple = tracks.length > 1;
   const card = element("article", "ip-card");
   const title = element("div", "ip-title");
   title.append(element("h3", "", a.agent));
   const badges = element("div", "ip-badges");
   const statuses = a.points.map((p) => statusOf(a.agent, p));
   const done = statuses.filter((s) => s !== "open").length;
-  badges.append(element("span", "ip-badge is-shape", SHAPES[a.shape]?.label || a.shape));
+  if (!multiple) badges.append(element("span", "ip-badge is-shape", SHAPES[a.shape]?.label || a.shape));
+  else badges.append(element("span", "ip-badge is-shape", "2 drift types"));
   badges.append(element("span", "ip-badge", `${a.points.length} points`));
   const progress = element("span", `ip-badge${statuses.includes("change") ? " is-change" : done === a.points.length ? " is-done" : ""}`,
     statuses.includes("change") ? `${statuses.filter((s) => s === "change").length} to change` : `${done}/${a.points.length} reviewed`);
   badges.append(progress);
   title.append(badges);
   const sub = element("p", "ip-sub");
-  sub.append(document.createTextNode(`${a.main_type_label} `),
-    element("span", "", `· ${a.main_type_hours} h of ${a.total_hours} h drift · ${a.main_type_episodes} episode${a.main_type_episodes === 1 ? "" : "s"} of this type`));
+  if (multiple) {
+    sub.append(document.createTextNode(`${tracks.map((t) => `${t.type_label} (${t.hours} h)`).join(" + ")} `),
+      element("span", "", `· of ${a.total_hours} h drift · the two types never drift at the same time`));
+  } else {
+    sub.append(document.createTextNode(`${a.main_type_label} `),
+      element("span", "", `· ${a.main_type_hours} h of ${a.total_hours} h drift · ${a.main_type_episodes} episode${a.main_type_episodes === 1 ? "" : "s"} of this type`));
+  }
   const head = element("div");
   head.append(title, sub);
-  const list = element("ol", "ip-points");
-  [...a.points]
-    .sort((l, r) => String(l.moment_utc).localeCompare(String(r.moment_utc)))
-    .forEach((p) => list.append(renderPoint(a.agent, p)));
-  card.append(head, renderStrip(a.agent, a.points, a.main_type), renderSpells(a), list);
+  card.append(head, renderStrip(a.agent, a.points, tracks.map((t) => t.type)));
+  tracks.forEach((track, i) => card.append(renderTrack(a, track, i, multiple)));
   return card;
 }
 
@@ -313,8 +339,8 @@ function render() {
     review: (l, r) => reviewed(l) - reviewed(r)
   };
   const visible = selection.agents
-    .filter((a) => !type || a.main_type === type)
-    .filter((a) => !shape || a.shape === shape)
+    .filter((a) => !type || tracksOf(a).some((t) => t.type === type))
+    .filter((a) => !shape || tracksOf(a).some((t) => t.shape === shape))
     .filter((a) => !rule || a.points.some((p) => p.rule === rule))
     .filter((a) => {
       const s = a.points.map((p) => statusOf(a.agent, p));
@@ -334,12 +360,12 @@ function render() {
 
 function initialize() {
   renderRuleKey();
-  const types = [...new Map(selection.agents.map((a) => [a.main_type, a.main_type_label])).entries()].sort((l, r) => l[1].localeCompare(r[1]));
+  const types = [...new Map(selection.agents.flatMap((a) => tracksOf(a).map((t) => [t.type, t.type_label]))).entries()].sort((l, r) => l[1].localeCompare(r[1]));
   const typeSelect = document.querySelector("#ip-type");
   types.forEach(([id, label]) => typeSelect.append(new Option(label, id)));
   const shapeSelect = document.querySelector("#ip-shape");
   Object.entries(SHAPES).forEach(([id, shape]) => {
-    const n = selection.agents.filter((a) => a.shape === id).length;
+    const n = selection.agents.filter((a) => tracksOf(a).some((t) => t.shape === id)).length;
     if (n) shapeSelect.append(new Option(`${shape.label} (${n})`, id));
   });
   const ruleSelect = document.querySelector("#ip-rule");

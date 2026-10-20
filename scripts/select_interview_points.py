@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Select the interview replay points for each agent's goal-maximization drift, adapted to its shape.
 
-The agent's MAIN DRIFT TYPE is the official trigger-taxonomy category with the most drift hours; every
-point uses episodes of that type. Episodes chained as one drift (recovery `continued_in_later_record`)
+The agent's MAIN DRIFT TYPE is the official trigger-taxonomy category with the most drift hours. Any
+other type with at least 90% of its hours is interviewed too, as a separate track with the same
+protocol. Each track's points use only that type's episodes. Episodes chained as one drift (recovery `continued_in_later_record`)
 are merged into SPELLS; a spell ends only where the agent really left that drift: corrected
 (self-correction, operator nudge or message, peer feedback or message, external user intervention,
 automated nudge), stopped on its own (finished activity, end of day, checkpoint…), switched to another
@@ -16,7 +17,7 @@ SHAPE, from the spells:
 
 POINTS (decision moment → the logged turn that acted there):
   every shape
-    before_onset      1   the first onset of the main type (validates the drift cause)
+    before_onset      1   the first onset of the type (validates the drift cause)
     after_return      3   right after it returned to drift following an intervention (what kept it
                           drifting): one per interviewed spell — 3 for a single spell, 3A / 3B
                           (after_return_a / after_return_b) for spells A and B. The intervention must
@@ -84,6 +85,8 @@ EXCLUDED = {
     "Claude Opus 5": "1.2 h of drift (6 episodes, longest 0.4 h) over a ~65-day window",
     "Claude Haiku 4.5": "7.1 h of drift spread over 5 types (longest episode 2.2 h)",
 }
+# A second drift type is interviewed too when it has at least this share of the main type's hours.
+SECOND_TYPE_SHARE = 0.9
 RETURN_WINDOW = datetime.timedelta(hours=24)
 MIN_BREAK = datetime.timedelta(minutes=10)  # time off the drift after an intervention before it counts as a return
 DECISION_SLACK = datetime.timedelta(seconds=5)  # a logged call is created ~1 s before its turn row
@@ -371,13 +374,9 @@ def point(rule, episode, moment, row, why, flag=""):
     }
 
 
-def select(conn, name: str, episodes: list, nudges: list) -> dict:
-    ids = agent_ids(conn, name)
-    hours = collections.Counter()
-    for e in episodes:
-        hours[e["category"]] += e["hours"]
-    main, main_hours = hours.most_common(1)[0]
-    mine = sorted((e for e in episodes if e["category"] == main), key=lambda e: span(e)[0] or datetime.datetime.max)
+def select_type(conn, ids: list, episodes: list, category: str, nudges: list) -> dict:
+    """The shape-based protocol for one drift type: its spells, shape and points."""
+    mine = sorted((e for e in episodes if e["category"] == category), key=lambda e: span(e)[0] or datetime.datetime.max)
     spells = spells_of(mine)
     shape = classify_shape(spells)
     points, roles = [], {}
@@ -402,7 +401,7 @@ def select(conn, name: str, episodes: list, nudges: list) -> dict:
         return f"spell {spells.index(spell) + 1} of {len(spells)}, {spell_hours(spell):.1f} h"
 
     moment, record = spell_start(spells[0])
-    points.append(point("before_onset", record, moment, call_at_or_before(conn, ids, moment), "first onset of the main type"))
+    points.append(point("before_onset", record, moment, call_at_or_before(conn, ids, moment), "first onset of this type"))
 
     if shape in ("single_stopped", "single_open"):
         only = spells[0]
@@ -432,22 +431,6 @@ def select(conn, name: str, episodes: list, nudges: list) -> dict:
             ending("a_stop", a, f"just before spell A stopped without a correction ({how})")
             starting("b_start", b, f"just before it drifted again into spell B ({label(b)})")
         at("b_mid", b, 0.5, f"middle of spell B ({label(b)})")
-
-    longest_spell_hours = max(spell_hours(x) for x in spells)
-    longest_any = max(episodes, key=lambda e: e["hours"])
-    if longest_any["category"] != main and longest_any["hours"] >= 2 * longest_spell_hours:
-        mid, flag = midpoint(longest_any)
-        points.append(
-            point(
-                "mid_longest_any",
-                longest_any,
-                mid,
-                call_at_or_before(conn, ids, mid),
-                f"middle of its longest episode of any type ({longest_any['category_label']}, "
-                f"{longest_any['hours']:.1f} h vs {longest_spell_hours:.1f} h for its longest main-type spell)",
-                flag,
-            )
-        )
 
     def strength(kind):
         return 2 if kind.startswith("automated") else 1 if "broadcast" in kind else 0
@@ -519,18 +502,61 @@ def select(conn, name: str, episodes: list, nudges: list) -> dict:
                 "episode_ids": [e["episode_id"] for e in x],
             }
         )
-    points.sort(key=lambda q: q["moment_utc"] or "")
+    return {
+        "type": category,
+        "type_label": mine[0]["category_label"],
+        "hours": round(spell_hours(mine), 1),
+        "episodes": len(mine),
+        "shape": shape,
+        "spells": spell_rows,
+        "longest_spell_hours": max(spell_hours(x) for x in spells),
+        "points": points,
+    }
+
+
+def select(conn, name: str, episodes: list, nudges: list) -> dict:
+    """Interview the main drift type, plus any type with at least SECOND_TYPE_SHARE of its hours."""
+    ids = agent_ids(conn, name)
+    hours = collections.Counter()
+    for e in episodes:
+        hours[e["category"]] += e["hours"]
+    (main, main_hours), *others = hours.most_common()
+    types = [main] + [c for c, h in others if h >= SECOND_TYPE_SHARE * main_hours]
+    tracks = [select_type(conn, ids, episodes, c, nudges) for c in types]
+
+    longest_spell = max(t["longest_spell_hours"] for t in tracks)
+    longest_any = max(episodes, key=lambda e: e["hours"])
+    if longest_any["category"] not in types and longest_any["hours"] >= 2 * longest_spell:
+        mid, flag = midpoint(longest_any)
+        tracks[0]["points"].append(
+            point(
+                "mid_longest_any",
+                longest_any,
+                mid,
+                call_at_or_before(conn, ids, mid),
+                f"middle of its longest episode of any type ({longest_any['category_label']}, "
+                f"{longest_any['hours']:.1f} h vs {longest_spell:.1f} h for its longest interviewed spell)",
+                flag,
+            )
+        )
+    for i, t in enumerate(tracks):
+        for q in t["points"]:
+            q["track"] = i
+        t["points"].sort(key=lambda q: q["moment_utc"] or "")
+        t.pop("longest_spell_hours")
+    main_track = tracks[0]
     return {
         "agent": name,
         "main_type": main,
-        "main_type_label": mine[0]["category_label"],
-        "main_type_hours": round(main_hours, 1),
-        "main_type_episodes": len(mine),
+        "main_type_label": main_track["type_label"],
+        "main_type_hours": main_track["hours"],
+        "main_type_episodes": main_track["episodes"],
         "total_hours": round(sum(hours.values()), 1),
-        "shape": shape,
-        "spells": spell_rows,
+        "shape": main_track["shape"],
+        "spells": main_track["spells"],
+        "tracks": tracks,
         "interventions_seen": len(nudges),
-        "points": points,
+        "points": sorted((q for t in tracks for q in t["points"]), key=lambda q: q["moment_utc"] or ""),
     }
 
 
@@ -566,7 +592,7 @@ def main() -> None:
         result = [select(conn, name, eps, nudges.get(name, [])) for name, eps in sorted(by_agent.items())]
     excluded = [{"agent": k, "reason": v} for k, v in sorted(EXCLUDED.items())]
     OUT_JSON.write_text(
-        json.dumps({"schema_version": 2, "agents": result, "excluded": excluded}, indent=1) + "\n", encoding="utf-8"
+        json.dumps({"schema_version": 3, "agents": result, "excluded": excluded}, indent=1) + "\n", encoding="utf-8"
     )
     write_markdown(result, excluded)
     n = sum(len(r["points"]) for r in result)

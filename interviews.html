@@ -87,6 +87,15 @@
     .ip-strip-window { position: absolute; top: 26px; height: 10px; border-radius: 999px; background: var(--paper-deep); }
     .ip-strip-ep { position: absolute; top: 27px; height: 8px; min-width: 2px; border-radius: 3px; background: color-mix(in srgb, var(--muted) 45%, transparent); }
     .ip-strip-ep.is-main { background: var(--rust); }
+    .ip-strip-ep.is-second { background: var(--blue); }
+    .ip-strip-mark.is-second b { background: var(--blue); }
+    .ip-strip-mark.is-second i { background: var(--blue); }
+    .ip-track { display: grid; gap: 8px; }
+    .ip-track + .ip-track { padding-top: 12px; border-top: 1px solid var(--line); }
+    .ip-track-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; }
+    .ip-track-head h4 { margin: 0; font-size: 14px; }
+    .ip-track.is-second .ip-track-head h4 { color: var(--blue); }
+    .ip-track.is-second .ip-num { background: var(--blue); }
     .ip-strip-mark { position: absolute; top: 12px; transform: translateX(-50%); display: grid; justify-items: center; }
     .ip-strip-mark.is-raised { top: 0; }
     .ip-strip-mark.is-raised i { height: 34px; }
@@ -150,7 +159,7 @@
       <section class="intro" aria-labelledby="intro-title">
         <p class="section-kicker">Interview protocol</p>
         <h2 id="intro-title">Selected replay points</h2>
-        <p>Each agent is interviewed about its main drift type: the official trigger category with the most drift hours. Its episodes of that type are merged into drift spells (records chained as one drift become one spell), and the points depend on the shape of those spells. Each point maps to the logged model call the agent made at that moment, which <code>village-exact</code> can replay exactly. Points are chosen by <code>scripts/select_interview_points.py</code> and listed in time order; the badge is the point's type.</p>
+        <p>Each agent is interviewed about its main drift type: the official trigger category with the most drift hours. A second type is interviewed too when it has at least 90% of the main type's hours (shown in blue; an agent is never in two drift types at once). Each type's episodes are merged into drift spells (records chained as one drift become one spell), and the points depend on the shape of those spells. Each point maps to the logged model call the agent made at that moment, which <code>village-exact</code> can replay exactly. Points are chosen by <code>scripts/select_interview_points.py</code> and listed in time order; the badge is the point's type.</p>
         <div class="rule-key" id="rule-key"></div>
       </section>
 
@@ -191,6 +200,6 @@
       <section class="excluded" id="ip-excluded" hidden></section>
     </main>
   </div>
-  <script type="module" src="./scripts/interviews.js?v=20261020-return-per-spell"></script>
+  <script type="module" src="./scripts/interviews.js?v=20261020-second-type"></script>
 </body>
 </html>
