@@ -444,11 +444,14 @@ function renderPoint(agent, p) {
   return item;
 }
 
-// Which points the page shows: only point 1 (the first onset of each interviewed type), or all of them.
+// Which points the page shows: the onset points of the first interview round (point 1 of every
+// interviewed type, plus B1, the start of the relapse, for relapsing types), or all of them.
 let pointMode = "first";
-const shown = (points) => (pointMode === "first" ? points.filter((p) => p.rule === "before_onset") : points);
+const isOnset = (p, shape) => p.rule === "before_onset" || (p.rule === "b_start" && shape === "relapsing");
 function viewOf(a) {
-  return { ...a, points: shown(a.points), tracks: tracksOf(a).map((t) => ({ ...t, points: shown(t.points) })) };
+  if (pointMode !== "first") return { ...a, tracks: tracksOf(a) };
+  const tracks = tracksOf(a).map((t) => ({ ...t, points: t.points.filter((p) => isOnset(p, t.shape)) }));
+  return { ...a, tracks, points: tracks.flatMap((t) => t.points) };
 }
 
 function tracksOf(a) {
