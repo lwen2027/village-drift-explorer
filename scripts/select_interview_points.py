@@ -1,28 +1,41 @@
 #!/usr/bin/env python3
-"""Select the interview replay points for each agent's goal-maximization drift.
+"""Select the interview replay points for each agent's goal-maximization drift, adapted to its shape.
 
-Protocol (one point per rule, when the rule applies):
-  1. before_onset     the first onset of the agent's main drift type (validates the drift cause)
-  2. mid_longest      the middle of the longest episode of that type (what else it considered)
-  2b. mid_longest_any the middle of the agent's longest episode of any type, only when that is a
-                      different episode at least twice as long as the main type's longest
-  3. after_return     right after it returned to drift following a nudge or operator message
-                      (what kept it drifting)
-  4. before_recovery  just before a corrected recovery from that type (validates the correction cause)
+The agent's MAIN DRIFT TYPE is the official trigger-taxonomy category with the most drift hours; every
+point uses episodes of that type. Episodes chained as one drift (recovery `continued_in_later_record`)
+are merged into SPELLS; a spell ends only where the agent really left that drift: corrected
+(self-correction, operator nudge or message, peer feedback or message, external user intervention,
+automated nudge), stopped on its own (finished activity, end of day, checkpoint…), switched to another
+drift, or still drifting when the data ends.
 
-Choices the protocol leaves open:
-  - Main drift type = the official trigger-taxonomy category with the most drift hours.
-  - Every point uses episodes of the main type only.
-  - "Middle" = the moment half of the episode's measured drift time has passed (bouts summed). An
-    episode without bouts uses the midpoint of its span, flagged only when the span crosses sessions.
-  - Interventions = automated nudges mentioning the agent, targeted operator corrections, and operator
-    broadcasts to everyone. One counts when it falls inside a main-type episode's window and a drift
-    bout of that type starts after it within 24 hours; the first such return is used.
-  - Corrected recovery = self-correction, operator nudge or message, peer feedback or message,
-    external user intervention, or an automated nudge. The longest such episode is used.
-  - The replay call: for points 1, 2 and 4, the last logged turn at or just before the moment (for
-    1 and 4, the turn that took the onset / recovery action, so its context ends before that choice);
-    for point 3, the first turn after the return bout began.
+SHAPE, from the spells:
+  relapsing       several spells, at least one corrected before a later one
+  recurring       several spells, none corrected before a later one
+  single_stopped  one spell that ended
+  single_open     one spell, still drifting when the data ends
+
+POINTS (decision moment → the logged turn that acted there):
+  every shape
+    before_onset      1   the first onset of the main type (validates the drift cause)
+    after_return      3   right after it returned to drift following a nudge or operator message
+                          (the first such return within 24 h; what kept it drifting)
+    mid_longest_any   2b  the middle of its longest episode of any type, when that episode is at
+                          least twice as long as its longest main-type spell
+  single_stopped      2 spell_mid (middle of the spell) · 4 before_recovery (just before it ended)
+  single_open         2 spell_mid · L late (90% through the spell's drift time: how entrenched)
+  relapsing           B = its biggest spell that starts after a corrected spell has ended; A = the
+                      biggest corrected spell that ended before B started.
+                      A2 a_mid · A4 a_end (just before A was corrected) · B1 b_start (just before the
+                      relapse: what brought it back) · B2 b_mid
+  recurring           the same with no correction: B = its biggest spell that starts after an earlier
+                      spell ended; A = the biggest spell that ended before B started.
+                      A2 a_mid · A4 a_stop (just before A stopped on its own: why it stopped) ·
+                      B1 b_start (what pulled it back) · B2 b_mid
+
+"Middle" / "90% through" are measured in drift time: the spell's bouts summed in order (a record
+without bouts counts as one bout over its span, flagged when that span crosses sessions). The replay
+call is the last logged turn at or just before the moment (for onsets and endings, the turn that
+took that action), or for after_return the first turn after the return began.
 
 Needs VILLAGE_DB_URI (read access to the village database) and psycopg. Writes
 data/interview_points_v1.json and docs/interview-points.md.
@@ -123,6 +136,89 @@ def midpoint(e: dict) -> tuple:
             return a + datetime.timedelta(seconds=half), ""
         half -= d
     return b[-1][1], ""
+
+
+CONTINUED = {"continued_in_later_record"}
+SWITCHED = {"switched_to_another_drift"}
+STILL_OPEN = {"still_drifting_at_end_of_data"}
+
+
+def spells_of(episodes: list) -> list:
+    """Main-type episodes grouped into spells (chained records merged), oldest first."""
+    out, cur = [], []
+    for e in sorted(episodes, key=lambda e: span(e)[0] or datetime.datetime.max):
+        cur.append(e)
+        if not (set(e["recovery"]) & CONTINUED):
+            out.append(cur)
+            cur = []
+    if cur:
+        out.append(cur)
+    return out
+
+
+def spell_ending(spell: list) -> str:
+    r = set(spell[-1]["recovery"])
+    if r & STILL_OPEN:
+        return "still drifting"
+    if r & SWITCHED:
+        return "switched"
+    if r & CORRECTED:
+        return "corrected"
+    return "stopped"
+
+
+def spell_hours(spell: list) -> float:
+    return sum(e["hours"] for e in spell)
+
+
+def spell_bouts(spell: list) -> list:
+    """[(start, end, record)] in order; a record without bouts counts as one bout over its span."""
+    out = []
+    for e in spell:
+        b = bouts(e)
+        if b:
+            out += [(x, y, e) for x, y in b]
+        else:
+            x, y = span(e)
+            if x and y:
+                out.append((x, y, e))
+    return sorted(out, key=lambda t: t[0])
+
+
+def spell_at(spell: list, fraction: float) -> tuple:
+    """(moment, record, flag) when `fraction` of the spell's drift time has passed."""
+    b = spell_bouts(spell)
+    if not b:
+        x = span(spell[0])[0]
+        return x, spell[0], "no timed bouts: onset used"
+    target = sum((y - x).total_seconds() for x, y, _ in b) * fraction
+    for x, y, e in b:
+        d = (y - x).total_seconds()
+        if target <= d:
+            flag = ""
+            if not bouts(e) and (y - datetime.timedelta(seconds=1)).date() != x.date():
+                flag = "no bouts, spans sessions: position within the span"
+            return x + datetime.timedelta(seconds=target), e, flag
+        target -= d
+    return b[-1][1], b[-1][2], ""
+
+
+def spell_start(spell: list) -> tuple:
+    return span(spell[0])[0], spell[0]
+
+
+def spell_end(spell: list) -> tuple:
+    e = spell[-1]
+    return ts((e.get("drift_end") or {}).get("ended_at")) or span(e)[1], e
+
+
+def classify_shape(spells: list) -> str:
+    if len(spells) == 1:
+        return "single_open" if spell_ending(spells[0]) == "still drifting" else "single_stopped"
+    corrected_ends = [spell_end(x)[0] for x in spells if spell_ending(x) == "corrected"]
+    if any(end and start and end <= start for end in corrected_ends for start in (spell_start(x)[0] for x in spells)):
+        return "relapsing"
+    return "recurring"
 
 
 def load_episodes() -> dict:
@@ -275,28 +371,64 @@ def select(conn, name: str, episodes: list, nudges: list) -> dict:
         hours[e["category"]] += e["hours"]
     main, main_hours = hours.most_common(1)[0]
     mine = sorted((e for e in episodes if e["category"] == main), key=lambda e: span(e)[0] or datetime.datetime.max)
-    label = mine[0]["category_label"]
-    points = []
+    spells = spells_of(mine)
+    shape = classify_shape(spells)
+    points, roles = [], {}
 
-    first = mine[0]
-    onset = span(first)[0]
-    points.append(point("before_onset", first, onset, call_at_or_before(conn, ids, onset), "first onset of the main type"))
+    def small(spell):
+        return f"this spell is only {spell_hours(spell):.1f} h" if spell_hours(spell) < 1 else ""
 
-    longest = max(mine, key=lambda e: e["hours"])
-    mid, flag = midpoint(longest)
-    points.append(
-        point(
-            "mid_longest",
-            longest,
-            mid,
-            call_at_or_before(conn, ids, mid),
-            f"middle of the longest episode ({longest['hours']:.1f} h)",
-            flag,
-        )
-    )
+    def at(rule, spell, fraction, why):
+        moment, record, flag = spell_at(spell, fraction)
+        flag = "; ".join(f for f in (flag, small(spell)) if f)
+        points.append(point(rule, record, moment, call_at_or_before(conn, ids, moment), why, flag))
 
+    def starting(rule, spell, why):
+        moment, record = spell_start(spell)
+        points.append(point(rule, record, moment, call_at_or_before(conn, ids, moment), why, small(spell)))
+
+    def ending(rule, spell, why):
+        moment, record = spell_end(spell)
+        points.append(point(rule, record, moment, call_at_or_before(conn, ids, moment), why, small(spell)))
+
+    def label(spell):
+        return f"spell {spells.index(spell) + 1} of {len(spells)}, {spell_hours(spell):.1f} h"
+
+    moment, record = spell_start(spells[0])
+    points.append(point("before_onset", record, moment, call_at_or_before(conn, ids, moment), "first onset of the main type"))
+
+    if shape in ("single_stopped", "single_open"):
+        only = spells[0]
+        at("spell_mid", only, 0.5, f"middle of the drift spell ({spell_hours(only):.1f} h)")
+        if shape == "single_stopped":
+            ending("before_recovery", only, f"just before it ended ({spell_ending(only)})")
+        else:
+            at("late", only, 0.9, "90% through the spell, which never ended: how entrenched it is")
+    else:  # relapsing or recurring: a spell A that ended, then a later spell B
+        if shape == "relapsing":  # B must begin after a correction ended (drifts can run in parallel)
+            enders = [x for x in spells if spell_ending(x) == "corrected"]
+        else:
+            enders = [x for x in spells if spell_ending(x) != "still drifting"]
+
+        def after_an_end(x):
+            return any(spell_end(y)[0] <= spell_start(x)[0] for y in enders if y is not x)
+
+        b = max((x for x in spells if after_an_end(x)), key=spell_hours)
+        a = max((y for y in enders if spell_end(y)[0] <= spell_start(b)[0]), key=spell_hours)
+        roles = {"A": spells.index(a), "B": spells.index(b)}
+        how = ", ".join(r for r in a[-1]["recovery"]) or spell_ending(a)
+        at("a_mid", a, 0.5, f"middle of spell A ({label(a)}, {'corrected' if shape == 'relapsing' else 'stopped on its own'})")
+        if shape == "relapsing":
+            ending("a_end", a, f"just before spell A was corrected ({', '.join(r for r in a[-1]['recovery'] if r in CORRECTED)})")
+            starting("b_start", b, f"just before the relapse into spell B ({label(b)})")
+        else:
+            ending("a_stop", a, f"just before spell A stopped without a correction ({how})")
+            starting("b_start", b, f"just before it drifted again into spell B ({label(b)})")
+        at("b_mid", b, 0.5, f"middle of spell B ({label(b)})")
+
+    longest_spell_hours = max(spell_hours(x) for x in spells)
     longest_any = max(episodes, key=lambda e: e["hours"])
-    if longest_any["episode_id"] != longest["episode_id"] and longest_any["hours"] >= 2 * longest["hours"]:
+    if longest_any["category"] != main and longest_any["hours"] >= 2 * longest_spell_hours:
         mid, flag = midpoint(longest_any)
         points.append(
             point(
@@ -305,7 +437,7 @@ def select(conn, name: str, episodes: list, nudges: list) -> dict:
                 mid,
                 call_at_or_before(conn, ids, mid),
                 f"middle of its longest episode of any type ({longest_any['category_label']}, "
-                f"{longest_any['hours']:.1f} h vs {longest['hours']:.1f} h for the main type)",
+                f"{longest_any['hours']:.1f} h vs {longest_spell_hours:.1f} h for its longest main-type spell)",
                 flag,
             )
         )
@@ -313,10 +445,10 @@ def select(conn, name: str, episodes: list, nudges: list) -> dict:
     returned = None
     for t, kind, text in nudges:
         for e in mine:
-            a, z = span(e)
-            if not (a and z and a <= t <= z + RETURN_WINDOW):
+            x, y = span(e)
+            if not (x and y and x <= t <= y + RETURN_WINDOW):
                 continue
-            after = [b for ep in mine for b in bouts(ep) if t < b[0] <= t + RETURN_WINDOW]
+            after = [bb for ep in mine for bb in bouts(ep) if t < bb[0] <= t + RETURN_WINDOW]
             if after:
                 returned = (t, kind, text, e, min(after)[0])
                 break
@@ -334,26 +466,35 @@ def select(conn, name: str, episodes: list, nudges: list) -> dict:
             )
         )
 
-    corrected = [e for e in mine if CORRECTED & set(e["recovery"])]
-    if corrected:
-        e = max(corrected, key=lambda e: e["hours"])
-        end = ts((e.get("drift_end") or {}).get("ended_at")) or span(e)[1]
-        points.append(
-            point(
-                "before_recovery",
-                e,
-                end,
-                call_at_or_before(conn, ids, end),
-                f"recovery by {', '.join(r for r in e['recovery'] if r in CORRECTED)}",
-            )
+    spell_rows = []
+    for i, x in enumerate(spells):
+        start, _ = spell_start(x)
+        end, _ = spell_end(x)
+        role = next((k for k, v in roles.items() if v == i), "")
+        spell_rows.append(
+            {
+                "n": i + 1,
+                "role": role,
+                "start_pt": pt(start),
+                "end_pt": pt(end),
+                "start_utc": start.isoformat() if start else None,
+                "end_utc": end.isoformat() if end else None,
+                "hours": round(spell_hours(x), 1),
+                "records": len(x),
+                "ending": spell_ending(x),
+                "episode_ids": [e["episode_id"] for e in x],
+            }
         )
+    points.sort(key=lambda q: q["moment_utc"] or "")
     return {
         "agent": name,
         "main_type": main,
-        "main_type_label": label,
+        "main_type_label": mine[0]["category_label"],
         "main_type_hours": round(main_hours, 1),
         "main_type_episodes": len(mine),
         "total_hours": round(sum(hours.values()), 1),
+        "shape": shape,
+        "spells": spell_rows,
         "interventions_seen": len(nudges),
         "points": points,
     }
@@ -367,12 +508,12 @@ def write_markdown(result: list, excluded: list) -> None:
         "(`data/second_audit_v2.json`) and the official trigger taxonomy. Rules and open choices are in the "
         "script's docstring. Call ids are `llm_calls` ids for `village-exact show` / `replay`.",
         "",
-        "| Agent | Main type (hours) | Point | Moment | Call (logged action) | Why |",
+        "| Agent | Main type (hours, shape) | Point | Moment | Call (logged action) | Why |",
         "|---|---|---|---|---|---|",
     ]
     for r in result:
         for i, p in enumerate(r["points"]):
-            head = f"{r['agent']} | {r['main_type_label']} ({r['main_type_hours']} h)" if i == 0 else " | "
+            head = f"{r['agent']} | {r['main_type_label']} ({r['main_type_hours']} h, {r['shape']})" if i == 0 else " | "
             call = f"`{p['call_id']}` ({p['call_action']})" if p["call_id"] else "none found"
             why = p["why"] + (f" ⚠ {p['flag']}" if p["flag"] else "")
             lines.append(f"| {head} | {p['rule']} | {p['moment_pt']} | {call} | {why.replace('|', '/')} |")
@@ -391,7 +532,7 @@ def main() -> None:
         result = [select(conn, name, eps, nudges.get(name, [])) for name, eps in sorted(by_agent.items())]
     excluded = [{"agent": k, "reason": v} for k, v in sorted(EXCLUDED.items())]
     OUT_JSON.write_text(
-        json.dumps({"schema_version": 1, "agents": result, "excluded": excluded}, indent=1) + "\n", encoding="utf-8"
+        json.dumps({"schema_version": 2, "agents": result, "excluded": excluded}, indent=1) + "\n", encoding="utf-8"
     )
     write_markdown(result, excluded)
     n = sum(len(r["points"]) for r in result)

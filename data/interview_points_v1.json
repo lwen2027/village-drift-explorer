@@ -1,5 +1,5 @@
 {
- "schema_version": 1,
+ "schema_version": 2,
  "agents": [
   {
    "agent": "Claude 3 Opus",
@@ -8,6 +8,37 @@
    "main_type_hours": 22.9,
    "main_type_episodes": 2,
    "total_hours": 22.9,
+   "shape": "recurring",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Tue 2026-09-29 09:57 PT",
+     "end_pt": "Tue 2026-09-29 15:35 PT",
+     "start_utc": "2026-09-29T16:57:02",
+     "end_utc": "2026-09-29T22:35:09",
+     "hours": 5.0,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-bf25d6cf76e0594b"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "B",
+     "start_pt": "Wed 2026-09-30 09:45 PT",
+     "end_pt": "Fri 2026-10-02 16:21 PT",
+     "start_utc": "2026-09-30T16:45:23",
+     "end_utc": "2026-10-02T23:21:41",
+     "hours": 17.9,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-5ec168375161cdb5"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -23,7 +54,43 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-bf25d6cf76e0594b",
+     "category": "pause_monitoring_loop",
+     "moment_utc": "2026-09-29T19:27:02",
+     "moment_pt": "Tue 2026-09-29 12:27 PT",
+     "call_id": "2f470a52-6588-4518-a2fb-7830e70978ff",
+     "call_at_pt": "Tue 2026-09-29 12:25 PT",
+     "call_action": "(text)",
+     "why": "middle of spell A (spell 1 of 2, 5.0 h, stopped on its own)",
+     "flag": ""
+    },
+    {
+     "rule": "a_stop",
+     "episode_id": "episode-v2-bf25d6cf76e0594b",
+     "category": "pause_monitoring_loop",
+     "moment_utc": "2026-09-29T22:35:09",
+     "moment_pt": "Tue 2026-09-29 15:35 PT",
+     "call_id": "3e6198c1-ac20-4557-b77a-fdcbe4b721b7",
+     "call_at_pt": "Tue 2026-09-29 15:34 PT",
+     "call_action": "send_message_to_chat",
+     "why": "just before spell A stopped without a correction (natural_end_or_timeout)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-v2-5ec168375161cdb5",
+     "category": "pause_monitoring_loop",
+     "moment_utc": "2026-09-30T16:45:23",
+     "moment_pt": "Wed 2026-09-30 09:45 PT",
+     "call_id": "063f89f1-575e-407c-b7c6-01cf694674b6",
+     "call_at_pt": "Wed 2026-09-30 09:45 PT",
+     "call_action": "computer.wait",
+     "why": "just before it drifted again into spell B (spell 2 of 2, 17.9 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
      "episode_id": "episode-v2-5ec168375161cdb5",
      "category": "pause_monitoring_loop",
      "moment_utc": "2026-10-01T22:23:50.500000",
@@ -31,7 +98,7 @@
      "call_id": "8f39295e-9a22-4588-8837-b8b4c5020150",
      "call_at_pt": "Thu 2026-10-01 15:23 PT",
      "call_action": "send_message_to_chat",
-     "why": "middle of the longest episode (17.9 h)",
+     "why": "middle of spell B (spell 2 of 2, 17.9 h)",
      "flag": ""
     }
    ]
@@ -43,6 +110,205 @@
    "main_type_hours": 110.9,
    "main_type_episodes": 14,
    "total_hours": 263.6,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Fri 2026-07-24 12:08 PT",
+     "end_pt": "Fri 2026-07-24 12:45 PT",
+     "start_utc": "2026-07-24T19:08:56",
+     "end_utc": "2026-07-24T19:45:11",
+     "hours": 0.6,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-c54bd25e45353433"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "A",
+     "start_pt": "Mon 2026-07-27 09:38 PT",
+     "end_pt": "Mon 2026-07-27 09:46 PT",
+     "start_utc": "2026-07-27T16:38:11",
+     "end_utc": "2026-07-27T16:46:57",
+     "hours": 0.1,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-555a7c85d3befd4c"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "",
+     "start_pt": "Wed 2026-07-29 13:16 PT",
+     "end_pt": "Wed 2026-07-29 13:59 PT",
+     "start_utc": "2026-07-29T20:16:29",
+     "end_utc": "2026-07-29T20:59:20",
+     "hours": 0.7,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-3d11f1696790ae06"
+     ]
+    },
+    {
+     "n": 4,
+     "role": "",
+     "start_pt": "Fri 2026-07-31 10:13 PT",
+     "end_pt": "Fri 2026-07-31 11:47 PT",
+     "start_utc": "2026-07-31T17:13:44",
+     "end_utc": "2026-07-31T18:47:40",
+     "hours": 0.6,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-1177356eb275a878"
+     ]
+    },
+    {
+     "n": 5,
+     "role": "",
+     "start_pt": "Mon 2026-08-03 16:03 PT",
+     "end_pt": "Wed 2026-08-05 13:37 PT",
+     "start_utc": "2026-08-03T23:03:57",
+     "end_utc": "2026-08-05T20:37:24",
+     "hours": 5.4,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-17d02242120294de"
+     ]
+    },
+    {
+     "n": 6,
+     "role": "",
+     "start_pt": "Tue 2026-08-04 15:03 PT",
+     "end_pt": "Thu 2026-08-27 15:25 PT",
+     "start_utc": "2026-08-04T22:03:21",
+     "end_utc": "2026-08-27T22:25:09",
+     "hours": 20.7,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-b4d099b82eb0820a"
+     ]
+    },
+    {
+     "n": 7,
+     "role": "B",
+     "start_pt": "Wed 2026-08-05 14:20 PT",
+     "end_pt": "Tue 2026-08-18 13:51 PT",
+     "start_utc": "2026-08-05T21:20:51",
+     "end_utc": "2026-08-18T20:51:41",
+     "hours": 25.5,
+     "records": 1,
+     "ending": "switched",
+     "episode_ids": [
+      "episode-df56b01f7033404b"
+     ]
+    },
+    {
+     "n": 8,
+     "role": "",
+     "start_pt": "Mon 2026-08-10 16:44 PT",
+     "end_pt": "Mon 2026-08-17 16:58 PT",
+     "start_utc": "2026-08-10T23:44:34",
+     "end_utc": "2026-08-17T23:58:01",
+     "hours": 11.6,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-0b1fbcbb17e764e4"
+     ]
+    },
+    {
+     "n": 9,
+     "role": "",
+     "start_pt": "Tue 2026-08-18 15:06 PT",
+     "end_pt": "Thu 2026-08-20 11:34 PT",
+     "start_utc": "2026-08-18T22:06:03",
+     "end_utc": "2026-08-20T18:34:02",
+     "hours": 5.8,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-b4e2e4bc592db0ef"
+     ]
+    },
+    {
+     "n": 10,
+     "role": "",
+     "start_pt": "Thu 2026-08-20 11:44 PT",
+     "end_pt": "Fri 2026-08-21 11:54 PT",
+     "start_utc": "2026-08-20T18:44:36",
+     "end_utc": "2026-08-21T18:54:12",
+     "hours": 3.4,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-645b84a87a97f768"
+     ]
+    },
+    {
+     "n": 11,
+     "role": "",
+     "start_pt": "Tue 2026-08-25 09:39 PT",
+     "end_pt": "Wed 2026-08-26 16:27 PT",
+     "start_utc": "2026-08-25T16:39:58",
+     "end_utc": "2026-08-26T23:27:21",
+     "hours": 5.1,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-936687efc5dcdf20"
+     ]
+    },
+    {
+     "n": 12,
+     "role": "",
+     "start_pt": "Fri 2026-08-28 11:24 PT",
+     "end_pt": "Wed 2026-09-02 09:10 PT",
+     "start_utc": "2026-08-28T18:24:40",
+     "end_utc": "2026-09-02T16:10:20",
+     "hours": 4.8,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-d4abca8b999c73b2"
+     ]
+    },
+    {
+     "n": 13,
+     "role": "",
+     "start_pt": "Thu 2026-09-03 09:36 PT",
+     "end_pt": "Tue 2026-09-08 09:03 PT",
+     "start_utc": "2026-09-03T16:36:24",
+     "end_utc": "2026-09-08T16:03:08",
+     "hours": 21.7,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-77cca5ab3c9f90d1"
+     ]
+    },
+    {
+     "n": 14,
+     "role": "",
+     "start_pt": "Wed 2026-09-09 09:26 PT",
+     "end_pt": "Thu 2026-10-01 09:20 PT",
+     "start_utc": "2026-09-09T16:26:44",
+     "end_utc": "2026-10-01T16:20:04",
+     "hours": 4.8,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-dc58b10d925a6477"
+     ]
+    }
+   ],
    "interventions_seen": 30,
    "points": [
     {
@@ -58,28 +324,28 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-df56b01f7033404b",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-555a7c85d3befd4c",
      "category": "human_gitlab_issue",
-     "moment_utc": "2026-08-11T16:05:08",
-     "moment_pt": "Tue 2026-08-11 09:05 PT",
-     "call_id": "07174c34-3f24-43f2-afd6-da9ad6423429",
-     "call_at_pt": "Tue 2026-08-11 09:05 PT",
+     "moment_utc": "2026-07-27T16:41:48.500000",
+     "moment_pt": "Mon 2026-07-27 09:41 PT",
+     "call_id": "e4deab16-e536-47d2-828a-e5448e587f28",
+     "call_at_pt": "Mon 2026-07-27 09:41 PT",
      "call_action": "bash",
-     "why": "middle of the longest episode (25.5 h)",
-     "flag": ""
+     "why": "middle of spell A (spell 2 of 14, 0.1 h, corrected)",
+     "flag": "this spell is only 0.1 h"
     },
     {
-     "rule": "mid_longest_any",
-     "episode_id": "episode-74454d6cfba6e403",
-     "category": "request_expanded_standing_role",
-     "moment_utc": "2026-09-18T21:08:11",
-     "moment_pt": "Fri 2026-09-18 14:08 PT",
-     "call_id": "042a31da-cdb2-48e7-8184-bea1c72558cf",
-     "call_at_pt": "Fri 2026-09-18 14:08 PT",
-     "call_action": "computer.left_click",
-     "why": "middle of its longest episode of any type (Request-expanded standing role, 109.7 h vs 25.5 h for the main type)",
-     "flag": ""
+     "rule": "a_end",
+     "episode_id": "episode-v2-555a7c85d3befd4c",
+     "category": "human_gitlab_issue",
+     "moment_utc": "2026-07-27T16:46:57",
+     "moment_pt": "Mon 2026-07-27 09:46 PT",
+     "call_id": "8e51b7f5-022e-4de2-ad4e-35f91207a70c",
+     "call_at_pt": "Mon 2026-07-27 09:46 PT",
+     "call_action": "bash",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": "this spell is only 0.1 h"
     },
     {
      "rule": "after_return",
@@ -94,15 +360,39 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
-     "episode_id": "episode-b4d099b82eb0820a",
+     "rule": "b_start",
+     "episode_id": "episode-df56b01f7033404b",
      "category": "human_gitlab_issue",
-     "moment_utc": "2026-08-27T22:25:09",
-     "moment_pt": "Thu 2026-08-27 15:25 PT",
-     "call_id": "722c0c1b-220f-44b0-8e48-56e072e876c3",
-     "call_at_pt": "Thu 2026-08-27 15:24 PT",
-     "call_action": "computer.scroll",
-     "why": "recovery by self_correction",
+     "moment_utc": "2026-08-05T21:20:51",
+     "moment_pt": "Wed 2026-08-05 14:20 PT",
+     "call_id": "285c4f1f-b46a-4c72-94fd-a50df4eab7d2",
+     "call_at_pt": "Wed 2026-08-05 14:20 PT",
+     "call_action": "bash",
+     "why": "just before the relapse into spell B (spell 7 of 14, 25.5 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-df56b01f7033404b",
+     "category": "human_gitlab_issue",
+     "moment_utc": "2026-08-11T16:05:08",
+     "moment_pt": "Tue 2026-08-11 09:05 PT",
+     "call_id": "07174c34-3f24-43f2-afd6-da9ad6423429",
+     "call_at_pt": "Tue 2026-08-11 09:05 PT",
+     "call_action": "bash",
+     "why": "middle of spell B (spell 7 of 14, 25.5 h)",
+     "flag": ""
+    },
+    {
+     "rule": "mid_longest_any",
+     "episode_id": "episode-74454d6cfba6e403",
+     "category": "request_expanded_standing_role",
+     "moment_utc": "2026-09-18T21:08:11",
+     "moment_pt": "Fri 2026-09-18 14:08 PT",
+     "call_id": "042a31da-cdb2-48e7-8184-bea1c72558cf",
+     "call_at_pt": "Fri 2026-09-18 14:08 PT",
+     "call_action": "computer.left_click",
+     "why": "middle of its longest episode of any type (Request-expanded standing role, 109.7 h vs 25.5 h for its longest main-type spell)",
      "flag": ""
     }
    ]
@@ -114,6 +404,58 @@
    "main_type_hours": 69.5,
    "main_type_episodes": 10,
    "total_hours": 102.3,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Wed 2026-09-02 16:13 PT",
+     "end_pt": "Tue 2026-09-15 16:26 PT",
+     "start_utc": "2026-09-02T23:13:48",
+     "end_utc": "2026-09-15T23:26:20",
+     "hours": 13.4,
+     "records": 6,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-625898cf574677de",
+      "episode-v2-4b0305335094ee50",
+      "episode-v2-2d7ab36c31c800bf",
+      "episode-v2-e8208f42c905b485",
+      "episode-v2-470214ae1fbe8150",
+      "episode-v2-2d2d0e4e56ffd3e2"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "A",
+     "start_pt": "Fri 2026-09-18 13:02 PT",
+     "end_pt": "Thu 2026-10-01 13:32 PT",
+     "start_utc": "2026-09-18T20:02:05",
+     "end_utc": "2026-10-01T20:32:54",
+     "hours": 46.5,
+     "records": 3,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-879ab85dda600fa9",
+      "episode-v2-2b567ee42b7f43e0",
+      "episode-v2-01b769e74ea6e3a9"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "B",
+     "start_pt": "Thu 2026-10-01 14:38 PT",
+     "end_pt": "Fri 2026-10-02 16:20 PT",
+     "start_utc": "2026-10-01T21:38:40",
+     "end_utc": "2026-10-02T23:20:29",
+     "hours": 9.6,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-6ddb1f77744618f9"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -129,19 +471,19 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "a_mid",
      "episode_id": "episode-v2-01b769e74ea6e3a9",
      "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-09-28T20:13:16",
-     "moment_pt": "Mon 2026-09-28 13:13 PT",
-     "call_id": "b4a303d0-9a31-4bd1-b582-ddd8c7016785",
-     "call_at_pt": "Mon 2026-09-28 12:49 PT",
-     "call_action": "pause(2700)",
-     "why": "middle of the longest episode (44.8 h)",
+     "moment_utc": "2026-09-28T19:23:16.500000",
+     "moment_pt": "Mon 2026-09-28 12:23 PT",
+     "call_id": "eee1238f-bb20-4e68-bf38-d6421c7c7213",
+     "call_at_pt": "Mon 2026-09-28 12:17 PT",
+     "call_action": "pause(1800)",
+     "why": "middle of spell A (spell 2 of 3, 46.5 h, corrected)",
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_end",
      "episode_id": "episode-v2-01b769e74ea6e3a9",
      "category": "memory_reinforced_waiting",
      "moment_utc": "2026-10-01T20:32:54",
@@ -149,7 +491,31 @@
      "call_id": "caa00b29-a3d1-428c-92f7-e9709bbb2d58",
      "call_at_pt": "Thu 2026-10-01 13:32 PT",
      "call_action": "bash",
-     "why": "recovery by external_user_intervention",
+     "why": "just before spell A was corrected (external_user_intervention)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-v2-6ddb1f77744618f9",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-10-01T21:38:40",
+     "moment_pt": "Thu 2026-10-01 14:38 PT",
+     "call_id": "a69fcc4b-9711-4aa5-a4b3-ec22b2214cc2",
+     "call_at_pt": "Thu 2026-10-01 14:38 PT",
+     "call_action": "pause(1800)",
+     "why": "just before the relapse into spell B (spell 3 of 3, 9.6 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-6ddb1f77744618f9",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-10-02T18:32:52.500000",
+     "moment_pt": "Fri 2026-10-02 11:32 PT",
+     "call_id": "c8012b91-4bda-4c46-af37-c1e97157fa4b",
+     "call_at_pt": "Fri 2026-10-02 11:10 PT",
+     "call_action": "pause(1800)",
+     "why": "middle of spell B (spell 3 of 3, 9.6 h)",
      "flag": ""
     }
    ]
@@ -161,6 +527,37 @@
    "main_type_hours": 6.4,
    "main_type_episodes": 2,
    "total_hours": 13.8,
+   "shape": "recurring",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Fri 2026-07-17 10:39 PT",
+     "end_pt": "Fri 2026-07-17 12:05 PT",
+     "start_utc": "2026-07-17T17:39:15",
+     "end_utc": "2026-07-17T19:05:57",
+     "hours": 1.4,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-9698e23a5761b3cf"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "B",
+     "start_pt": "Wed 2026-08-05 12:56 PT",
+     "end_pt": "Thu 2026-08-06 15:26 PT",
+     "start_utc": "2026-08-05T19:56:21",
+     "end_utc": "2026-08-06T22:26:06",
+     "hours": 4.9,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-20e00f4686420726"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -176,7 +573,43 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "a_mid",
+     "episode_id": "episode-9698e23a5761b3cf",
+     "category": "human_substack_message",
+     "moment_utc": "2026-07-17T18:22:36",
+     "moment_pt": "Fri 2026-07-17 11:22 PT",
+     "call_id": "24762ed1-f229-4531-8341-9abfc632cbf3",
+     "call_at_pt": "Fri 2026-07-17 11:22 PT",
+     "call_action": "computer.left_click",
+     "why": "middle of spell A (spell 1 of 2, 1.4 h, stopped on its own)",
+     "flag": ""
+    },
+    {
+     "rule": "a_stop",
+     "episode_id": "episode-9698e23a5761b3cf",
+     "category": "human_substack_message",
+     "moment_utc": "2026-07-17T19:05:57",
+     "moment_pt": "Fri 2026-07-17 12:05 PT",
+     "call_id": "9af9c192-2543-46b1-8a6f-a14ef15cb1e8",
+     "call_at_pt": "Fri 2026-07-17 12:05 PT",
+     "call_action": "bash",
+     "why": "just before spell A stopped without a correction (finished_activity)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-20e00f4686420726",
+     "category": "human_substack_message",
+     "moment_utc": "2026-08-05T19:56:21",
+     "moment_pt": "Wed 2026-08-05 12:56 PT",
+     "call_id": "d77e3d32-1691-417f-a908-492088340bc8",
+     "call_at_pt": "Wed 2026-08-05 12:56 PT",
+     "call_action": "computer.left_click",
+     "why": "just before it drifted again into spell B (spell 2 of 2, 4.9 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
      "episode_id": "episode-20e00f4686420726",
      "category": "human_substack_message",
      "moment_utc": "2026-08-06T18:46:56",
@@ -184,7 +617,7 @@
      "call_id": "e269aac3-8aab-425c-bfdf-c6e30e3eb57f",
      "call_at_pt": "Thu 2026-08-06 11:46 PT",
      "call_action": "consolidate",
-     "why": "middle of the longest episode (4.9 h)",
+     "why": "middle of spell B (spell 2 of 2, 4.9 h)",
      "flag": ""
     }
    ]
@@ -196,6 +629,103 @@
    "main_type_hours": 457.7,
    "main_type_episodes": 16,
    "total_hours": 475.2,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Mon 2026-07-06 11:39 PT",
+     "end_pt": "Fri 2026-07-10 09:02 PT",
+     "start_utc": "2026-07-06T18:39:32",
+     "end_utc": "2026-07-10T16:02:00",
+     "hours": 28.2,
+     "records": 2,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-ba535f42e23debc7",
+      "episode-v2-7d43667fb8d592be"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "",
+     "start_pt": "Fri 2026-07-10 09:22 PT",
+     "end_pt": "Mon 2026-07-13 09:01 PT",
+     "start_utc": "2026-07-10T16:22:02",
+     "end_utc": "2026-07-13T16:01:26",
+     "hours": 7.5,
+     "records": 2,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-35de562d065a27c2",
+      "episode-v2-ab31d393b529baab"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "",
+     "start_pt": "Mon 2026-07-13 09:15 PT",
+     "end_pt": "Tue 2026-07-14 09:35 PT",
+     "start_utc": "2026-07-13T16:15:39",
+     "end_utc": "2026-07-14T16:35:22",
+     "hours": 8.1,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-32dec01dd15f2a70"
+     ]
+    },
+    {
+     "n": 4,
+     "role": "A",
+     "start_pt": "Tue 2026-07-14 09:47 PT",
+     "end_pt": "Thu 2026-07-23 12:35 PT",
+     "start_utc": "2026-07-14T16:47:46",
+     "end_utc": "2026-07-23T19:35:30",
+     "hours": 51.6,
+     "records": 2,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-4bcb3fa236408265",
+      "episode-v2-ea8cf8987c0e9a80"
+     ]
+    },
+    {
+     "n": 5,
+     "role": "",
+     "start_pt": "Thu 2026-07-23 12:55 PT",
+     "end_pt": "Tue 2026-08-04 09:01 PT",
+     "start_utc": "2026-07-23T19:55:57",
+     "end_utc": "2026-08-04T16:01:21",
+     "hours": 56.9,
+     "records": 2,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-66ac19b151a24741",
+      "episode-v2-9df330b70f98f2a0"
+     ]
+    },
+    {
+     "n": 6,
+     "role": "B",
+     "start_pt": "Tue 2026-08-04 09:11 PT",
+     "end_pt": "Fri 2026-10-02 16:38 PT",
+     "start_utc": "2026-08-04T16:11:55",
+     "end_utc": "2026-10-02T23:38:50",
+     "hours": 305.3,
+     "records": 7,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-e1caa716a82d7bb7",
+      "episode-v2-2f4540fb981e960e",
+      "episode-v2-8332bcfbf747c75b",
+      "episode-v2-daf31c9c1a1e8989",
+      "episode-v2-088b0f38e6f3c130",
+      "episode-v2-ba369c1ec766ece7",
+      "episode-v2-e94e39d713827cba"
+     ]
+    }
+   ],
    "interventions_seen": 26,
    "points": [
     {
@@ -211,18 +741,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-ba369c1ec766ece7",
-     "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-09-15T16:35:28",
-     "moment_pt": "Tue 2026-09-15 09:35 PT",
-     "call_id": "ecb12721-4481-48e7-a79d-a7651182c890",
-     "call_at_pt": "Tue 2026-09-15 09:18 PT",
-     "call_action": "pause(2700)",
-     "why": "middle of the longest episode (85.2 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-ba535f42e23debc7",
      "category": "memory_reinforced_waiting",
@@ -235,7 +753,19 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-ea8cf8987c0e9a80",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-07-17T19:15:52",
+     "moment_pt": "Fri 2026-07-17 12:15 PT",
+     "call_id": "0dbae61a-bb00-4d6f-a362-8f722a7ec776",
+     "call_at_pt": "Fri 2026-07-17 12:04 PT",
+     "call_action": "pause(1500)",
+     "why": "middle of spell A (spell 4 of 6, 51.6 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
      "episode_id": "episode-v2-ea8cf8987c0e9a80",
      "category": "memory_reinforced_waiting",
      "moment_utc": "2026-07-23T19:35:30",
@@ -243,7 +773,31 @@
      "call_id": "f25c9d7d-a74c-494c-8da0-7d2c35b4e623",
      "call_at_pt": "Thu 2026-07-23 12:35 PT",
      "call_action": "bash",
-     "why": "recovery by automatic_nudge",
+     "why": "just before spell A was corrected (automatic_nudge)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-v2-e1caa716a82d7bb7",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-04T16:11:55",
+     "moment_pt": "Tue 2026-08-04 09:11 PT",
+     "call_id": "9eac309b-7585-422f-8d6e-37a1c5dc40ac",
+     "call_at_pt": "Tue 2026-08-04 09:11 PT",
+     "call_action": "pause(500)",
+     "why": "just before the relapse into spell B (spell 6 of 6, 305.3 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-088b0f38e6f3c130",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-09-04T19:57:22.500000",
+     "moment_pt": "Fri 2026-09-04 12:57 PT",
+     "call_id": "f8631b63-734e-4ce5-ba41-0d56d165ca95",
+     "call_at_pt": "Fri 2026-09-04 12:23 PT",
+     "call_action": "pause(2700)",
+     "why": "middle of spell B (spell 6 of 6, 305.3 h)",
      "flag": ""
     }
    ]
@@ -255,6 +809,136 @@
    "main_type_hours": 40.8,
    "main_type_episodes": 10,
    "total_hours": 46.8,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Mon 2026-07-13 09:20 PT",
+     "end_pt": "Wed 2026-07-22 15:10 PT",
+     "start_utc": "2026-07-13T16:20:32",
+     "end_utc": "2026-07-22T22:10:33",
+     "hours": 21.7,
+     "records": 2,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-d7903ed8e57aa04d",
+      "episode-v2-49eef3b9828b9831"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "",
+     "start_pt": "Mon 2026-07-27 11:47 PT",
+     "end_pt": "Mon 2026-07-27 11:58 PT",
+     "start_utc": "2026-07-27T18:47:24",
+     "end_utc": "2026-07-27T18:58:52",
+     "hours": 0.2,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-f08b3c4ab58f98e1"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "",
+     "start_pt": "Mon 2026-08-03 12:14 PT",
+     "end_pt": "Mon 2026-08-03 12:31 PT",
+     "start_utc": "2026-08-03T19:14:54",
+     "end_utc": "2026-08-03T19:31:26",
+     "hours": 0.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-2b33fdcf122ed5b5"
+     ]
+    },
+    {
+     "n": 4,
+     "role": "",
+     "start_pt": "Wed 2026-08-05 09:06 PT",
+     "end_pt": "Wed 2026-08-05 16:46 PT",
+     "start_utc": "2026-08-05T16:06:11",
+     "end_utc": "2026-08-05T23:46:41",
+     "hours": 3.6,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-19b45170e68f9200"
+     ]
+    },
+    {
+     "n": 5,
+     "role": "",
+     "start_pt": "Tue 2026-08-11 09:07 PT",
+     "end_pt": "Wed 2026-08-12 09:01 PT",
+     "start_utc": "2026-08-11T16:07:20",
+     "end_utc": "2026-08-12T16:01:46",
+     "hours": 1.2,
+     "records": 1,
+     "ending": "switched",
+     "episode_ids": [
+      "episode-v2-f25d67c59311f232"
+     ]
+    },
+    {
+     "n": 6,
+     "role": "",
+     "start_pt": "Mon 2026-09-28 09:04 PT",
+     "end_pt": "Mon 2026-09-28 09:42 PT",
+     "start_utc": "2026-09-28T16:04:02",
+     "end_utc": "2026-09-28T16:42:51",
+     "hours": 0.6,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-91b194d96f302825"
+     ]
+    },
+    {
+     "n": 7,
+     "role": "",
+     "start_pt": "Wed 2026-09-30 09:02 PT",
+     "end_pt": "Wed 2026-09-30 16:57 PT",
+     "start_utc": "2026-09-30T16:02:54",
+     "end_utc": "2026-09-30T23:57:46",
+     "hours": 3.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-82f133b3cde05ab4"
+     ]
+    },
+    {
+     "n": 8,
+     "role": "A",
+     "start_pt": "Thu 2026-10-01 09:07 PT",
+     "end_pt": "Thu 2026-10-01 16:54 PT",
+     "start_utc": "2026-10-01T16:07:48",
+     "end_utc": "2026-10-01T23:54:01",
+     "hours": 4.6,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-d06533b95960ef98"
+     ]
+    },
+    {
+     "n": 9,
+     "role": "B",
+     "start_pt": "Fri 2026-10-02 09:04 PT",
+     "end_pt": "Fri 2026-10-02 16:59 PT",
+     "start_utc": "2026-10-02T16:04:58",
+     "end_utc": "2026-10-02T23:59:59",
+     "hours": 5.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-0499084f25349a92"
+     ]
+    }
+   ],
    "interventions_seen": 19,
    "points": [
     {
@@ -270,18 +954,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-d7903ed8e57aa04d",
-     "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-07-14T21:46:39",
-     "moment_pt": "Tue 2026-07-14 14:46 PT",
-     "call_id": "3b80a88f-05f7-4d5b-b073-0db551e7a8e4",
-     "call_at_pt": "Tue 2026-07-14 14:33 PT",
-     "call_action": "pause(1500)",
-     "why": "middle of the longest episode (18.9 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-49eef3b9828b9831",
      "category": "memory_reinforced_waiting",
@@ -294,15 +966,51 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-d06533b95960ef98",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-10-01T20:26:28.500000",
+     "moment_pt": "Thu 2026-10-01 13:26 PT",
+     "call_id": "20e90f6c-dc6a-4762-98e9-aacf5c767b5e",
+     "call_at_pt": "Thu 2026-10-01 13:25 PT",
+     "call_action": "send_message_to_chat",
+     "why": "middle of spell A (spell 8 of 9, 4.6 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
+     "episode_id": "episode-v2-d06533b95960ef98",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-10-01T23:54:01",
+     "moment_pt": "Thu 2026-10-01 16:54 PT",
+     "call_id": "8892c394-a8bb-44d2-a7ac-b47a42c225bd",
+     "call_at_pt": "Thu 2026-10-01 16:53 PT",
+     "call_action": "bash",
+     "why": "just before spell A was corrected (custom_peer_agent_message)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
      "episode_id": "episode-v2-0499084f25349a92",
      "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-10-02T23:59:59",
-     "moment_pt": "Fri 2026-10-02 16:59 PT",
-     "call_id": "3d931136-8741-4ef5-b3dc-468f17fb8760",
-     "call_at_pt": "Fri 2026-10-02 16:59 PT",
-     "call_action": "bash",
-     "why": "recovery by custom_peer_agent_message",
+     "moment_utc": "2026-10-02T16:04:58",
+     "moment_pt": "Fri 2026-10-02 09:04 PT",
+     "call_id": "b1c25105-d0cf-472b-8f5a-23e2e49e480b",
+     "call_at_pt": "Fri 2026-10-02 09:04 PT",
+     "call_action": "pause(120)",
+     "why": "just before the relapse into spell B (spell 9 of 9, 5.3 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-0499084f25349a92",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-10-02T19:19:53.500000",
+     "moment_pt": "Fri 2026-10-02 12:19 PT",
+     "call_id": "e51fba07-5641-45a5-ae62-b5b2ab3baa2d",
+     "call_at_pt": "Fri 2026-10-02 12:18 PT",
+     "call_action": "pause(120)",
+     "why": "middle of spell B (spell 9 of 9, 5.3 h)",
      "flag": ""
     }
    ]
@@ -314,6 +1022,23 @@
    "main_type_hours": 8.0,
    "main_type_episodes": 1,
    "total_hours": 8.0,
+   "shape": "single_stopped",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Thu 2026-09-24 09:01 PT",
+     "end_pt": "Fri 2026-09-25 09:12 PT",
+     "start_utc": "2026-09-24T16:01:57",
+     "end_utc": "2026-09-25T16:12:50",
+     "hours": 8.0,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-d3f0237fb0cafcfb"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -329,7 +1054,7 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "spell_mid",
      "episode_id": "episode-v2-d3f0237fb0cafcfb",
      "category": "pause_mistaken_day_boundary",
      "moment_utc": "2026-09-24T20:00:58",
@@ -337,7 +1062,7 @@
      "call_id": "88217799-34de-4351-9909-7a06ba0eb764",
      "call_at_pt": "Thu 2026-09-24 12:59 PT",
      "call_action": "bash",
-     "why": "middle of the longest episode (8.0 h)",
+     "why": "middle of the drift spell (8.0 h)",
      "flag": ""
     },
     {
@@ -349,7 +1074,7 @@
      "call_id": "a38c37d6-bb43-4e8f-9892-c438d07a744e",
      "call_at_pt": "Fri 2026-09-25 09:12 PT",
      "call_action": "bash",
-     "why": "recovery by self_correction",
+     "why": "just before it ended (corrected)",
      "flag": ""
     }
    ]
@@ -361,6 +1086,37 @@
    "main_type_hours": 63.8,
    "main_type_episodes": 2,
    "total_hours": 111.5,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Tue 2026-07-14 14:01 PT",
+     "end_pt": "Tue 2026-07-21 14:28 PT",
+     "start_utc": "2026-07-14T21:01:37",
+     "end_utc": "2026-07-21T21:28:45",
+     "hours": 34.7,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-e127a9995b43c845"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "B",
+     "start_pt": "Mon 2026-07-27 14:11 PT",
+     "end_pt": "Wed 2026-08-12 09:02 PT",
+     "start_utc": "2026-07-27T21:11:06",
+     "end_utc": "2026-08-12T16:02:06",
+     "hours": 29.1,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-92366aa4813f8666"
+     ]
+    }
+   ],
    "interventions_seen": 12,
    "points": [
     {
@@ -376,18 +1132,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-e127a9995b43c845",
-     "category": "memory_entrenched_proxy_objective",
-     "moment_utc": "2026-07-16T23:14:06",
-     "moment_pt": "Thu 2026-07-16 16:14 PT",
-     "call_id": "0b19778f-6878-44ec-8a48-3bd41d06185c",
-     "call_at_pt": "Thu 2026-07-16 16:14 PT",
-     "call_action": "computer.scroll",
-     "why": "middle of the longest episode (34.7 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-e127a9995b43c845",
      "category": "memory_entrenched_proxy_objective",
@@ -400,7 +1144,19 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_mid",
+     "episode_id": "episode-e127a9995b43c845",
+     "category": "memory_entrenched_proxy_objective",
+     "moment_utc": "2026-07-16T23:14:06",
+     "moment_pt": "Thu 2026-07-16 16:14 PT",
+     "call_id": "0b19778f-6878-44ec-8a48-3bd41d06185c",
+     "call_at_pt": "Thu 2026-07-16 16:14 PT",
+     "call_action": "computer.scroll",
+     "why": "middle of spell A (spell 1 of 2, 34.7 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
      "episode_id": "episode-e127a9995b43c845",
      "category": "memory_entrenched_proxy_objective",
      "moment_utc": "2026-07-21T21:28:45",
@@ -408,7 +1164,31 @@
      "call_id": "673b9fbf-e571-4df9-ad5f-115d8f7e6ea5",
      "call_at_pt": "Tue 2026-07-21 14:28 PT",
      "call_action": "bash",
-     "why": "recovery by self_correction",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-92366aa4813f8666",
+     "category": "memory_entrenched_proxy_objective",
+     "moment_utc": "2026-07-27T21:11:06",
+     "moment_pt": "Mon 2026-07-27 14:11 PT",
+     "call_id": "2bee810e-77c0-4399-8a90-fa95cb6fa72c",
+     "call_at_pt": "Mon 2026-07-27 14:08 PT",
+     "call_action": "(text)",
+     "why": "just before the relapse into spell B (spell 2 of 2, 29.1 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-92366aa4813f8666",
+     "category": "memory_entrenched_proxy_objective",
+     "moment_utc": "2026-08-03T20:52:50.500000",
+     "moment_pt": "Mon 2026-08-03 13:52 PT",
+     "call_id": "642142ac-4e20-4b25-8fa9-231b88e78a43",
+     "call_at_pt": "Mon 2026-08-03 13:51 PT",
+     "call_action": "consolidate",
+     "why": "middle of spell B (spell 2 of 2, 29.1 h)",
      "flag": ""
     }
    ]
@@ -420,6 +1200,23 @@
    "main_type_hours": 447.3,
    "main_type_episodes": 1,
    "total_hours": 450.0,
+   "shape": "single_open",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Tue 2026-07-07 11:54 PT",
+     "end_pt": "Fri 2026-10-02 16:59 PT",
+     "start_utc": "2026-07-07T18:54:03",
+     "end_utc": "2026-10-02T23:59:47",
+     "hours": 447.3,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-16556b7c066cbab9"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -435,18 +1232,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-16556b7c066cbab9",
-     "category": "self_chosen_proxy_objective",
-     "moment_utc": "2026-08-21T20:54:28.500000",
-     "moment_pt": "Fri 2026-08-21 13:54 PT",
-     "call_id": "4c79782c-4c26-4bdf-ae0c-6dab356666ab",
-     "call_at_pt": "Fri 2026-08-21 13:53 PT",
-     "call_action": "bash",
-     "why": "middle of the longest episode (447.3 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-16556b7c066cbab9",
      "category": "self_chosen_proxy_objective",
@@ -456,6 +1241,30 @@
      "call_at_pt": "Fri 2026-07-10 09:01 PT",
      "call_action": "send_message_to_chat",
      "why": "returned to drift Fri 2026-07-10 09:01 PT after operator broadcast (adam) at Fri 2026-07-10 09:00 PT: Reflect on your original goal.",
+     "flag": ""
+    },
+    {
+     "rule": "spell_mid",
+     "episode_id": "episode-v2-16556b7c066cbab9",
+     "category": "self_chosen_proxy_objective",
+     "moment_utc": "2026-08-21T20:54:28.500000",
+     "moment_pt": "Fri 2026-08-21 13:54 PT",
+     "call_id": "4c79782c-4c26-4bdf-ae0c-6dab356666ab",
+     "call_at_pt": "Fri 2026-08-21 13:53 PT",
+     "call_action": "bash",
+     "why": "middle of the drift spell (447.3 h)",
+     "flag": ""
+    },
+    {
+     "rule": "late",
+     "episode_id": "episode-v2-16556b7c066cbab9",
+     "category": "self_chosen_proxy_objective",
+     "moment_utc": "2026-09-25T18:25:18.500000",
+     "moment_pt": "Fri 2026-09-25 11:25 PT",
+     "call_id": "5f65c178-5308-410a-a0f3-4f10bb7a2d01",
+     "call_at_pt": "Fri 2026-09-25 11:20 PT",
+     "call_action": "(text)",
+     "why": "90% through the spell, which never ended: how entrenched it is",
      "flag": ""
     }
    ]
@@ -467,6 +1276,37 @@
    "main_type_hours": 8.0,
    "main_type_episodes": 2,
    "total_hours": 15.0,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Wed 2026-07-15 10:11 PT",
+     "end_pt": "Wed 2026-07-15 15:59 PT",
+     "start_utc": "2026-07-15T17:11:14",
+     "end_utc": "2026-07-15T22:59:25",
+     "hours": 5.8,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-7c361cb5b662d82d"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "B",
+     "start_pt": "Thu 2026-07-16 10:17 PT",
+     "end_pt": "Thu 2026-07-16 12:28 PT",
+     "start_utc": "2026-07-16T17:17:56",
+     "end_utc": "2026-07-16T19:28:59",
+     "hours": 2.2,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-837aa4eef724bf06"
+     ]
+    }
+   ],
    "interventions_seen": 13,
    "points": [
     {
@@ -482,7 +1322,7 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "a_mid",
      "episode_id": "episode-v2-7c361cb5b662d82d",
      "category": "pause_monitoring_loop",
      "moment_utc": "2026-07-15T20:05:19.500000",
@@ -490,11 +1330,11 @@
      "call_id": "2a2d8467-e5a1-47c6-ba0f-b770465bcc8c",
      "call_at_pt": "Wed 2026-07-15 12:59 PT",
      "call_action": "pause(900)",
-     "why": "middle of the longest episode (5.8 h)",
+     "why": "middle of spell A (spell 1 of 2, 5.8 h, corrected)",
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_end",
      "episode_id": "episode-v2-7c361cb5b662d82d",
      "category": "pause_monitoring_loop",
      "moment_utc": "2026-07-15T22:59:25",
@@ -502,7 +1342,31 @@
      "call_id": "e0e40b80-505d-4e70-8182-7666342a5e1f",
      "call_at_pt": "Wed 2026-07-15 15:59 PT",
      "call_action": "send_message_to_chat",
-     "why": "recovery by self_correction",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-v2-837aa4eef724bf06",
+     "category": "pause_monitoring_loop",
+     "moment_utc": "2026-07-16T17:17:56",
+     "moment_pt": "Thu 2026-07-16 10:17 PT",
+     "call_id": "50657ed2-b6fa-4fa7-a768-f47d18772c8d",
+     "call_at_pt": "Thu 2026-07-16 10:17 PT",
+     "call_action": "pause(600)",
+     "why": "just before the relapse into spell B (spell 2 of 2, 2.2 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-837aa4eef724bf06",
+     "category": "pause_monitoring_loop",
+     "moment_utc": "2026-07-16T18:23:27.500000",
+     "moment_pt": "Thu 2026-07-16 11:23 PT",
+     "call_id": "954498be-4749-4a93-bf9a-716bdf9c22a9",
+     "call_at_pt": "Thu 2026-07-16 11:08 PT",
+     "call_action": "pause(900)",
+     "why": "middle of spell B (spell 2 of 2, 2.2 h)",
      "flag": ""
     }
    ]
@@ -514,6 +1378,136 @@
    "main_type_hours": 139.4,
    "main_type_episodes": 10,
    "total_hours": 401.8,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Wed 2026-07-08 11:33 PT",
+     "end_pt": "Fri 2026-07-10 12:22 PT",
+     "start_utc": "2026-07-08T18:33:48",
+     "end_utc": "2026-07-10T19:22:06",
+     "hours": 16.7,
+     "records": 1,
+     "ending": "switched",
+     "episode_ids": [
+      "episode-v2-1de0be583da6886b"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "A",
+     "start_pt": "Fri 2026-07-10 12:47 PT",
+     "end_pt": "Fri 2026-07-17 12:44 PT",
+     "start_utc": "2026-07-10T19:47:19",
+     "end_utc": "2026-07-17T19:44:42",
+     "hours": 25.4,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-1ce6b2028dfb9487"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "",
+     "start_pt": "Wed 2026-07-29 15:19 PT",
+     "end_pt": "Thu 2026-07-30 11:01 PT",
+     "start_utc": "2026-07-29T22:19:07",
+     "end_utc": "2026-07-30T18:01:16",
+     "hours": 3.7,
+     "records": 1,
+     "ending": "switched",
+     "episode_ids": [
+      "episode-v2-77ad0e2b73c8c693"
+     ]
+    },
+    {
+     "n": 4,
+     "role": "B",
+     "start_pt": "Thu 2026-08-06 09:03 PT",
+     "end_pt": "Mon 2026-08-17 11:15 PT",
+     "start_utc": "2026-08-06T16:03:51",
+     "end_utc": "2026-08-17T18:15:01",
+     "hours": 36.1,
+     "records": 2,
+     "ending": "switched",
+     "episode_ids": [
+      "episode-7e590b7c6fcef0b7",
+      "episode-665a0591f84b764a"
+     ]
+    },
+    {
+     "n": 5,
+     "role": "",
+     "start_pt": "Wed 2026-08-19 09:14 PT",
+     "end_pt": "Wed 2026-08-19 16:18 PT",
+     "start_utc": "2026-08-19T16:14:20",
+     "end_utc": "2026-08-19T23:18:46",
+     "hours": 1.1,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-aa95178aec8a1bcb"
+     ]
+    },
+    {
+     "n": 6,
+     "role": "",
+     "start_pt": "Wed 2026-08-19 10:43 PT",
+     "end_pt": "Wed 2026-08-19 14:28 PT",
+     "start_utc": "2026-08-19T17:43:25",
+     "end_utc": "2026-08-19T21:28:28",
+     "hours": 3.7,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-06dd773fc9a618ea"
+     ]
+    },
+    {
+     "n": 7,
+     "role": "",
+     "start_pt": "Fri 2026-08-28 09:01 PT",
+     "end_pt": "Tue 2026-09-01 09:08 PT",
+     "start_utc": "2026-08-28T16:01:19",
+     "end_utc": "2026-09-01T16:08:17",
+     "hours": 16.0,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-4a8bc82196dfb241"
+     ]
+    },
+    {
+     "n": 8,
+     "role": "",
+     "start_pt": "Tue 2026-09-15 15:30 PT",
+     "end_pt": "Fri 2026-09-25 09:14 PT",
+     "start_utc": "2026-09-15T22:30:09",
+     "end_utc": "2026-09-25T16:14:51",
+     "hours": 28.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-2475a88d83dfbe1d"
+     ]
+    },
+    {
+     "n": 9,
+     "role": "",
+     "start_pt": "Fri 2026-09-18 12:58 PT",
+     "end_pt": "Mon 2026-09-21 13:21 PT",
+     "start_utc": "2026-09-18T19:58:13",
+     "end_utc": "2026-09-21T20:21:15",
+     "hours": 8.4,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-f0fb0ae0af03306e"
+     ]
+    }
+   ],
    "interventions_seen": 103,
    "points": [
     {
@@ -529,30 +1523,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-2475a88d83dfbe1d",
-     "category": "self_chosen_proxy_objective",
-     "moment_utc": "2026-09-17T21:58:45.500000",
-     "moment_pt": "Thu 2026-09-17 14:58 PT",
-     "call_id": "89ccc7ba-1845-4960-a0ee-25fd9be86339",
-     "call_at_pt": "Thu 2026-09-17 14:58 PT",
-     "call_action": "consolidate",
-     "why": "middle of the longest episode (28.3 h)",
-     "flag": ""
-    },
-    {
-     "rule": "mid_longest_any",
-     "episode_id": "episode-a4f80f3d722ec89f",
-     "category": "agent_inferred_or_volunteered",
-     "moment_utc": "2026-09-09T21:34:14.500000",
-     "moment_pt": "Wed 2026-09-09 14:34 PT",
-     "call_id": "d2612cd2-aec4-4780-9dd6-9eb17832d63f",
-     "call_at_pt": "Wed 2026-09-09 14:34 PT",
-     "call_action": "bash",
-     "why": "middle of its longest episode of any type (Inferred or volunteered agent response, 64.7 h vs 28.3 h for the main type)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-1de0be583da6886b",
      "category": "self_chosen_proxy_objective",
@@ -565,15 +1535,51 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
-     "episode_id": "episode-2475a88d83dfbe1d",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-1ce6b2028dfb9487",
      "category": "self_chosen_proxy_objective",
-     "moment_utc": "2026-09-25T16:14:51",
-     "moment_pt": "Fri 2026-09-25 09:14 PT",
-     "call_id": "5e113dfc-9de3-4502-9065-442395dd4080",
-     "call_at_pt": "Fri 2026-09-25 09:14 PT",
+     "moment_utc": "2026-07-14T23:42:51.500000",
+     "moment_pt": "Tue 2026-07-14 16:42 PT",
+     "call_id": "aed2ffe7-2fc3-43e7-8fea-1b179b52fcb7",
+     "call_at_pt": "Tue 2026-07-14 16:42 PT",
+     "call_action": "bash",
+     "why": "middle of spell A (spell 2 of 9, 25.4 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
+     "episode_id": "episode-v2-1ce6b2028dfb9487",
+     "category": "self_chosen_proxy_objective",
+     "moment_utc": "2026-07-17T19:44:42",
+     "moment_pt": "Fri 2026-07-17 12:44 PT",
+     "call_id": "4cbb710e-23aa-4649-82ef-b128dd9880e6",
+     "call_at_pt": "Fri 2026-07-17 12:44 PT",
      "call_action": "send_message_to_chat",
-     "why": "recovery by operator_message",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-7e590b7c6fcef0b7",
+     "category": "self_chosen_proxy_objective",
+     "moment_utc": "2026-08-06T16:03:51",
+     "moment_pt": "Thu 2026-08-06 09:03 PT",
+     "call_id": "44535215-c88f-43b2-b4e1-791db6b937a2",
+     "call_at_pt": "Thu 2026-08-06 09:03 PT",
+     "call_action": "send_message_to_chat",
+     "why": "just before the relapse into spell B (spell 4 of 9, 36.1 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-7e590b7c6fcef0b7",
+     "category": "self_chosen_proxy_objective",
+     "moment_utc": "2026-08-10T19:31:30",
+     "moment_pt": "Mon 2026-08-10 12:31 PT",
+     "call_id": "e33b7e2d-3de9-4995-8c15-155019adfc0d",
+     "call_at_pt": "Mon 2026-08-10 12:31 PT",
+     "call_action": "bash",
+     "why": "middle of spell B (spell 4 of 9, 36.1 h)",
      "flag": ""
     }
    ]
@@ -585,6 +1591,23 @@
    "main_type_hours": 201.4,
    "main_type_episodes": 1,
    "total_hours": 407.1,
+   "shape": "single_open",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Thu 2026-08-27 09:05 PT",
+     "end_pt": "Fri 2026-10-02 16:47 PT",
+     "start_utc": "2026-08-27T16:05:33",
+     "end_utc": "2026-10-02T23:47:15",
+     "hours": 201.4,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-e9db8cfb1535dae0"
+     ]
+    }
+   ],
    "interventions_seen": 18,
    "points": [
     {
@@ -600,7 +1623,7 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "spell_mid",
      "episode_id": "episode-v2-e9db8cfb1535dae0",
      "category": "self_authored_memory_constraint",
      "moment_utc": "2026-09-16T16:49:58",
@@ -608,7 +1631,19 @@
      "call_id": "550d8e48-10e1-48ae-881e-05b435b59819",
      "call_at_pt": "Wed 2026-09-16 09:48 PT",
      "call_action": "consolidate",
-     "why": "middle of the longest episode (201.4 h)",
+     "why": "middle of the drift spell (201.4 h)",
+     "flag": ""
+    },
+    {
+     "rule": "late",
+     "episode_id": "episode-v2-e9db8cfb1535dae0",
+     "category": "self_authored_memory_constraint",
+     "moment_utc": "2026-09-30T18:59:32",
+     "moment_pt": "Wed 2026-09-30 11:59 PT",
+     "call_id": "2e39029f-767b-4cb7-9c3a-c933e6f61f34",
+     "call_at_pt": "Wed 2026-09-30 11:59 PT",
+     "call_action": "bash",
+     "why": "90% through the spell, which never ended: how entrenched it is",
      "flag": ""
     }
    ]
@@ -620,6 +1655,51 @@
    "main_type_hours": 105.1,
    "main_type_episodes": 3,
    "total_hours": 147.3,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Wed 2026-08-05 10:45 PT",
+     "end_pt": "Wed 2026-08-05 15:16 PT",
+     "start_utc": "2026-08-05T17:45:29",
+     "end_utc": "2026-08-05T22:16:31",
+     "hours": 4.3,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-a20e520e995aea4e"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "A",
+     "start_pt": "Fri 2026-08-28 09:03 PT",
+     "end_pt": "Fri 2026-08-28 10:19 PT",
+     "start_utc": "2026-08-28T16:03:12",
+     "end_utc": "2026-08-28T17:19:01",
+     "hours": 1.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-ee81b9b07bee694d"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "B",
+     "start_pt": "Wed 2026-09-16 09:24 PT",
+     "end_pt": "Fri 2026-10-02 16:35 PT",
+     "start_utc": "2026-09-16T16:24:02",
+     "end_utc": "2026-10-02T23:35:06",
+     "hours": 99.5,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-38cd300f9c82a34b"
+     ]
+    }
+   ],
    "interventions_seen": 15,
    "points": [
     {
@@ -635,19 +1715,19 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-38cd300f9c82a34b",
+     "rule": "a_mid",
+     "episode_id": "episode-ee81b9b07bee694d",
      "category": "self_authored_memory_constraint",
-     "moment_utc": "2026-09-24T19:57:39.500000",
-     "moment_pt": "Thu 2026-09-24 12:57 PT",
-     "call_id": "14111ff6-996b-4637-88bf-48f4180c19ad",
-     "call_at_pt": "Thu 2026-09-24 12:57 PT",
-     "call_action": "bash",
-     "why": "middle of the longest episode (99.5 h)",
+     "moment_utc": "2026-08-28T16:41:06.500000",
+     "moment_pt": "Fri 2026-08-28 09:41 PT",
+     "call_id": "37302f29-8ff7-49c8-8384-6e79137f1af2",
+     "call_at_pt": "Fri 2026-08-28 09:40 PT",
+     "call_action": "consolidate",
+     "why": "middle of spell A (spell 2 of 3, 1.3 h, corrected)",
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_end",
      "episode_id": "episode-ee81b9b07bee694d",
      "category": "self_authored_memory_constraint",
      "moment_utc": "2026-08-28T17:19:01",
@@ -655,7 +1735,31 @@
      "call_id": "adee8818-3cf3-48ab-a06c-ef945dd4914c",
      "call_at_pt": "Fri 2026-08-28 10:19 PT",
      "call_action": "bash",
-     "why": "recovery by external_user_intervention",
+     "why": "just before spell A was corrected (external_user_intervention)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-38cd300f9c82a34b",
+     "category": "self_authored_memory_constraint",
+     "moment_utc": "2026-09-16T16:24:02",
+     "moment_pt": "Wed 2026-09-16 09:24 PT",
+     "call_id": "d7fede8d-12f6-4a48-995c-ce8f10ac37d5",
+     "call_at_pt": "Wed 2026-09-16 09:24 PT",
+     "call_action": "bash",
+     "why": "just before the relapse into spell B (spell 3 of 3, 99.5 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-38cd300f9c82a34b",
+     "category": "self_authored_memory_constraint",
+     "moment_utc": "2026-09-24T19:57:39.500000",
+     "moment_pt": "Thu 2026-09-24 12:57 PT",
+     "call_id": "14111ff6-996b-4637-88bf-48f4180c19ad",
+     "call_at_pt": "Thu 2026-09-24 12:57 PT",
+     "call_action": "bash",
+     "why": "middle of spell B (spell 3 of 3, 99.5 h)",
      "flag": ""
     }
    ]
@@ -667,6 +1771,23 @@
    "main_type_hours": 60.8,
    "main_type_episodes": 1,
    "total_hours": 142.5,
+   "shape": "single_stopped",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Wed 2026-09-09 09:03 PT",
+     "end_pt": "Tue 2026-09-22 16:56 PT",
+     "start_utc": "2026-09-09T16:03:07",
+     "end_utc": "2026-09-22T23:56:12",
+     "hours": 60.8,
+     "records": 1,
+     "ending": "switched",
+     "episode_ids": [
+      "episode-c066b0fa2001bfb1"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -682,7 +1803,7 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "spell_mid",
      "episode_id": "episode-c066b0fa2001bfb1",
      "category": "self_chosen_proxy_objective",
      "moment_utc": "2026-09-15T19:50:55",
@@ -690,7 +1811,19 @@
      "call_id": "791755f5-b994-4eb4-8fdd-ee56bdb83fb6",
      "call_at_pt": "Tue 2026-09-15 12:50 PT",
      "call_action": "use_computer",
-     "why": "middle of the longest episode (60.8 h)",
+     "why": "middle of the drift spell (60.8 h)",
+     "flag": ""
+    },
+    {
+     "rule": "before_recovery",
+     "episode_id": "episode-c066b0fa2001bfb1",
+     "category": "self_chosen_proxy_objective",
+     "moment_utc": "2026-09-22T23:56:12",
+     "moment_pt": "Tue 2026-09-22 16:56 PT",
+     "call_id": "594ff359-f835-4a24-90cb-544d9cad4f98",
+     "call_at_pt": "Tue 2026-09-22 16:56 PT",
+     "call_action": "bash",
+     "why": "just before it ended (switched)",
      "flag": ""
     }
    ]
@@ -702,6 +1835,37 @@
    "main_type_hours": 197.2,
    "main_type_episodes": 2,
    "total_hours": 330.8,
+   "shape": "recurring",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Wed 2026-07-15 09:29 PT",
+     "end_pt": "Mon 2026-07-20 11:46 PT",
+     "start_utc": "2026-07-15T16:29:23",
+     "end_utc": "2026-07-20T18:46:05",
+     "hours": 9.3,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-1cb36a1e417a1f58"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "B",
+     "start_pt": "Thu 2026-08-27 11:53 PT",
+     "end_pt": "Fri 2026-10-02 16:54 PT",
+     "start_utc": "2026-08-27T18:53:19",
+     "end_utc": "2026-10-02T23:54:17",
+     "hours": 187.9,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-06fe0e2abc16f13f"
+     ]
+    }
+   ],
    "interventions_seen": 519,
    "points": [
     {
@@ -717,18 +1881,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-06fe0e2abc16f13f",
-     "category": "request_expanded_standing_role",
-     "moment_utc": "2026-09-15T17:01:25",
-     "moment_pt": "Tue 2026-09-15 10:01 PT",
-     "call_id": "9dd3656a-4823-4815-bcf9-e9aad6468e2d",
-     "call_at_pt": "Tue 2026-09-15 10:01 PT",
-     "call_action": "send_message_to_chat",
-     "why": "middle of the longest episode (187.9 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-1cb36a1e417a1f58",
      "category": "request_expanded_standing_role",
@@ -738,6 +1890,54 @@
      "call_at_pt": "Wed 2026-07-15 10:52 PT",
      "call_action": "use_computer",
      "why": "returned to drift Wed 2026-07-15 10:51 PT after automated nudge at Wed 2026-07-15 10:28 PT: @GPT-5.6 Luna \u2014 based on your recent messages, it looks like you're repeatedly idling rather than ta",
+     "flag": ""
+    },
+    {
+     "rule": "a_mid",
+     "episode_id": "episode-v2-1cb36a1e417a1f58",
+     "category": "request_expanded_standing_role",
+     "moment_utc": "2026-07-17T17:34:36",
+     "moment_pt": "Fri 2026-07-17 10:34 PT",
+     "call_id": "39db341b-3025-4872-99e7-6f2c20522d36",
+     "call_at_pt": "Fri 2026-07-17 10:34 PT",
+     "call_action": "use_computer",
+     "why": "middle of spell A (spell 1 of 2, 9.3 h, stopped on its own)",
+     "flag": ""
+    },
+    {
+     "rule": "a_stop",
+     "episode_id": "episode-v2-1cb36a1e417a1f58",
+     "category": "request_expanded_standing_role",
+     "moment_utc": "2026-07-20T18:46:05",
+     "moment_pt": "Mon 2026-07-20 11:46 PT",
+     "call_id": "2def15a2-9288-41fc-a5d6-4267c10d01a1",
+     "call_at_pt": "Mon 2026-07-20 11:46 PT",
+     "call_action": "send_message_to_chat",
+     "why": "just before spell A stopped without a correction (finished_activity)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-06fe0e2abc16f13f",
+     "category": "request_expanded_standing_role",
+     "moment_utc": "2026-08-27T18:53:19",
+     "moment_pt": "Thu 2026-08-27 11:53 PT",
+     "call_id": "ce544b6d-242f-4f27-8172-23239ebd2f09",
+     "call_at_pt": "Thu 2026-08-27 11:53 PT",
+     "call_action": "send_message_to_chat",
+     "why": "just before it drifted again into spell B (spell 2 of 2, 187.9 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-06fe0e2abc16f13f",
+     "category": "request_expanded_standing_role",
+     "moment_utc": "2026-09-15T17:01:25",
+     "moment_pt": "Tue 2026-09-15 10:01 PT",
+     "call_id": "9dd3656a-4823-4815-bcf9-e9aad6468e2d",
+     "call_at_pt": "Tue 2026-09-15 10:01 PT",
+     "call_action": "send_message_to_chat",
+     "why": "middle of spell B (spell 2 of 2, 187.9 h)",
      "flag": ""
     }
    ]
@@ -749,6 +1949,51 @@
    "main_type_hours": 28.2,
    "main_type_episodes": 3,
    "total_hours": 46.4,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Wed 2026-08-12 12:51 PT",
+     "end_pt": "Thu 2026-08-13 11:25 PT",
+     "start_utc": "2026-08-12T19:51:52",
+     "end_utc": "2026-08-13T18:25:40",
+     "hours": 6.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-5fe52cadf48994cf"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "B",
+     "start_pt": "Fri 2026-08-14 10:59 PT",
+     "end_pt": "Mon 2026-08-17 15:32 PT",
+     "start_utc": "2026-08-14T17:59:41",
+     "end_utc": "2026-08-17T22:32:21",
+     "hours": 11.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-20fa59403ffa470e"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "",
+     "start_pt": "Tue 2026-08-18 11:42 PT",
+     "end_pt": "Wed 2026-08-19 14:33 PT",
+     "start_utc": "2026-08-18T18:42:14",
+     "end_utc": "2026-08-19T21:33:28",
+     "hours": 10.6,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-18aa4735b8065842"
+     ]
+    }
+   ],
    "interventions_seen": 69,
    "points": [
     {
@@ -764,18 +2009,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-20fa59403ffa470e",
-     "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-08-17T16:06:44.500000",
-     "moment_pt": "Mon 2026-08-17 09:06 PT",
-     "call_id": "c5d706bc-5293-4f22-917c-33d91906e4c6",
-     "call_at_pt": "Mon 2026-08-17 09:01 PT",
-     "call_action": "pause(420)",
-     "why": "middle of the longest episode (11.3 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-5fe52cadf48994cf",
      "category": "memory_reinforced_waiting",
@@ -788,15 +2021,51 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-5fe52cadf48994cf",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-12T23:16:34",
+     "moment_pt": "Wed 2026-08-12 16:16 PT",
+     "call_id": "f18754f9-d8d2-465f-8311-b54ec54f4516",
+     "call_at_pt": "Wed 2026-08-12 16:15 PT",
+     "call_action": "pause(240)",
+     "why": "middle of spell A (spell 1 of 3, 6.3 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
+     "episode_id": "episode-v2-5fe52cadf48994cf",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-13T18:25:40",
+     "moment_pt": "Thu 2026-08-13 11:25 PT",
+     "call_id": "27a3aeeb-0cda-4b4b-aec2-ce61b433aec5",
+     "call_at_pt": "Thu 2026-08-13 11:25 PT",
+     "call_action": "bash",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
      "episode_id": "episode-v2-20fa59403ffa470e",
      "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-08-17T22:32:21",
-     "moment_pt": "Mon 2026-08-17 15:32 PT",
-     "call_id": "7b7ee947-c6dd-4488-84b3-784fa6ef0dcb",
-     "call_at_pt": "Mon 2026-08-17 15:32 PT",
-     "call_action": "send_message_to_chat",
-     "why": "recovery by custom_peer_agent_message",
+     "moment_utc": "2026-08-14T17:59:41",
+     "moment_pt": "Fri 2026-08-14 10:59 PT",
+     "call_id": "96ead7fc-0dce-4a31-a3c7-8e5e0488bb1e",
+     "call_at_pt": "Fri 2026-08-14 10:59 PT",
+     "call_action": "pause(300)",
+     "why": "just before the relapse into spell B (spell 2 of 3, 11.3 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-20fa59403ffa470e",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-17T16:06:44.500000",
+     "moment_pt": "Mon 2026-08-17 09:06 PT",
+     "call_id": "c5d706bc-5293-4f22-917c-33d91906e4c6",
+     "call_at_pt": "Mon 2026-08-17 09:01 PT",
+     "call_action": "pause(420)",
+     "why": "middle of spell B (spell 2 of 3, 11.3 h)",
      "flag": ""
     }
    ]
@@ -808,6 +2077,79 @@
    "main_type_hours": 154.6,
    "main_type_episodes": 5,
    "total_hours": 277.9,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Tue 2026-08-25 13:52 PT",
+     "end_pt": "Mon 2026-09-14 14:56 PT",
+     "start_utc": "2026-08-25T20:52:14",
+     "end_utc": "2026-09-14T21:56:26",
+     "hours": 93.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-87850953e83b0b32"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "",
+     "start_pt": "Fri 2026-09-18 10:36 PT",
+     "end_pt": "Mon 2026-09-21 15:11 PT",
+     "start_utc": "2026-09-18T17:36:21",
+     "end_utc": "2026-09-21T22:11:44",
+     "hours": 12.5,
+     "records": 1,
+     "ending": "switched",
+     "episode_ids": [
+      "episode-v2-9120dbbda2205d57"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "B",
+     "start_pt": "Mon 2026-09-21 15:11 PT",
+     "end_pt": "Tue 2026-09-29 13:52 PT",
+     "start_utc": "2026-09-21T22:11:44",
+     "end_utc": "2026-09-29T20:52:33",
+     "hours": 36.2,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-54713fcef02e21cf"
+     ]
+    },
+    {
+     "n": 4,
+     "role": "",
+     "start_pt": "Thu 2026-10-01 09:28 PT",
+     "end_pt": "Fri 2026-10-02 16:46 PT",
+     "start_utc": "2026-10-01T16:28:30",
+     "end_utc": "2026-10-02T23:46:31",
+     "hours": 12.2,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-b9260011186be506"
+     ]
+    },
+    {
+     "n": 5,
+     "role": "",
+     "start_pt": "Thu 2026-10-01 11:23 PT",
+     "end_pt": "Thu 2026-10-01 11:54 PT",
+     "start_utc": "2026-10-01T18:23:02",
+     "end_utc": "2026-10-01T18:54:13",
+     "hours": 0.5,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-7eee210e73d1561b"
+     ]
+    }
+   ],
    "interventions_seen": 17,
    "points": [
     {
@@ -823,7 +2165,7 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "a_mid",
      "episode_id": "episode-87850953e83b0b32",
      "category": "self_authored_memory_constraint",
      "moment_utc": "2026-09-04T19:07:02",
@@ -831,11 +2173,11 @@
      "call_id": "7e323b5a-ed85-4781-871c-0324cba3fb8f",
      "call_at_pt": "Fri 2026-09-04 12:07 PT",
      "call_action": "use_computer",
-     "why": "middle of the longest episode (93.3 h)",
+     "why": "middle of spell A (spell 1 of 5, 93.3 h, corrected)",
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_end",
      "episode_id": "episode-87850953e83b0b32",
      "category": "self_authored_memory_constraint",
      "moment_utc": "2026-09-14T21:56:26",
@@ -843,7 +2185,31 @@
      "call_id": "f2666102-3e1a-44e3-b0ff-af8d8600c602",
      "call_at_pt": "Mon 2026-09-14 14:54 PT",
      "call_action": "(text)",
-     "why": "recovery by self_correction",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-54713fcef02e21cf",
+     "category": "self_authored_memory_constraint",
+     "moment_utc": "2026-09-21T22:11:44",
+     "moment_pt": "Mon 2026-09-21 15:11 PT",
+     "call_id": "ce8231be-cba4-4533-9c47-8d66776a987c",
+     "call_at_pt": "Mon 2026-09-21 15:11 PT",
+     "call_action": "bash",
+     "why": "just before the relapse into spell B (spell 3 of 5, 36.2 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-54713fcef02e21cf",
+     "category": "self_authored_memory_constraint",
+     "moment_utc": "2026-09-24T21:24:38.500000",
+     "moment_pt": "Thu 2026-09-24 14:24 PT",
+     "call_id": "48faab73-84fa-4a87-af40-b042e864aa9d",
+     "call_at_pt": "Thu 2026-09-24 14:24 PT",
+     "call_action": "bash",
+     "why": "middle of spell B (spell 3 of 5, 36.2 h)",
      "flag": ""
     }
    ]
@@ -855,6 +2221,148 @@
    "main_type_hours": 200.4,
    "main_type_episodes": 22,
    "total_hours": 249.7,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Thu 2026-07-23 11:22 PT",
+     "end_pt": "Thu 2026-07-23 11:24 PT",
+     "start_utc": "2026-07-23T18:22:28",
+     "end_utc": "2026-07-23T18:24:40",
+     "hours": 0.0,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-0fede6e010b9781a"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "",
+     "start_pt": "Thu 2026-07-23 13:44 PT",
+     "end_pt": "Thu 2026-07-23 16:28 PT",
+     "start_utc": "2026-07-23T20:44:17",
+     "end_utc": "2026-07-23T23:28:14",
+     "hours": 0.7,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-e70d443ea90588ec"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "",
+     "start_pt": "Mon 2026-07-27 10:56 PT",
+     "end_pt": "Wed 2026-07-29 16:20 PT",
+     "start_utc": "2026-07-27T17:56:13",
+     "end_utc": "2026-07-29T23:20:43",
+     "hours": 5.5,
+     "records": 2,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-77f3b69063ef2fd3",
+      "episode-v2-4df0ad5ffe6fa75b"
+     ]
+    },
+    {
+     "n": 4,
+     "role": "",
+     "start_pt": "Thu 2026-07-30 13:45 PT",
+     "end_pt": "Thu 2026-07-30 15:01 PT",
+     "start_utc": "2026-07-30T20:45:02",
+     "end_utc": "2026-07-30T22:01:28",
+     "hours": 0.2,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-ecd84e2fef0e653e"
+     ]
+    },
+    {
+     "n": 5,
+     "role": "",
+     "start_pt": "Fri 2026-07-31 09:48 PT",
+     "end_pt": "Mon 2026-08-10 11:55 PT",
+     "start_utc": "2026-07-31T16:48:53",
+     "end_utc": "2026-08-10T18:55:06",
+     "hours": 20.1,
+     "records": 4,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-eefa5aeedbcd41d5",
+      "episode-v2-96ff404500b4ea8e",
+      "episode-v2-16662c71e4893a1b",
+      "episode-v2-6e504fb866165c5b"
+     ]
+    },
+    {
+     "n": 6,
+     "role": "",
+     "start_pt": "Tue 2026-08-11 09:34 PT",
+     "end_pt": "Tue 2026-08-11 16:28 PT",
+     "start_utc": "2026-08-11T16:34:55",
+     "end_utc": "2026-08-11T23:28:01",
+     "hours": 2.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-7deb98f17baf0da4"
+     ]
+    },
+    {
+     "n": 7,
+     "role": "A",
+     "start_pt": "Wed 2026-08-12 09:23 PT",
+     "end_pt": "Thu 2026-08-20 10:05 PT",
+     "start_utc": "2026-08-12T16:23:42",
+     "end_utc": "2026-08-20T17:05:36",
+     "hours": 28.8,
+     "records": 4,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-fbf16050bf749bb9",
+      "episode-v2-639a31ecd89e4956",
+      "episode-v2-53cefeb95e57259f",
+      "episode-v2-a4c5eb1066669d00"
+     ]
+    },
+    {
+     "n": 8,
+     "role": "",
+     "start_pt": "Mon 2026-08-24 11:51 PT",
+     "end_pt": "Fri 2026-08-28 14:02 PT",
+     "start_utc": "2026-08-24T18:51:01",
+     "end_utc": "2026-08-28T21:02:22",
+     "hours": 28.8,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-6740d82ee399104c"
+     ]
+    },
+    {
+     "n": 9,
+     "role": "B",
+     "start_pt": "Mon 2026-08-31 09:03 PT",
+     "end_pt": "Fri 2026-10-02 16:58 PT",
+     "start_utc": "2026-08-31T16:03:31",
+     "end_utc": "2026-10-02T23:58:21",
+     "hours": 113.8,
+     "records": 7,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-da8495a3f9ed5c61",
+      "episode-v2-f5e57a67723eeda3",
+      "episode-v2-0d151668a7f4190d",
+      "episode-v2-a867865a85d0477f",
+      "episode-v2-fd55b8d5c6cbefb2",
+      "episode-v2-9f310ad9e7169481",
+      "episode-v2-c06d7145f72d43bd"
+     ]
+    }
+   ],
    "interventions_seen": 55,
    "points": [
     {
@@ -870,18 +2378,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-c06d7145f72d43bd",
-     "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-09-25T23:48:27",
-     "moment_pt": "Fri 2026-09-25 16:48 PT",
-     "call_id": "8d58aba6-395c-482b-a6b4-b783d34dd8b8",
-     "call_at_pt": "Fri 2026-09-25 16:48 PT",
-     "call_action": "computer.click",
-     "why": "middle of the longest episode (73.7 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-77f3b69063ef2fd3",
      "category": "memory_reinforced_waiting",
@@ -894,15 +2390,51 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
-     "episode_id": "episode-v2-6740d82ee399104c",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-53cefeb95e57259f",
      "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-08-28T21:02:22",
-     "moment_pt": "Fri 2026-08-28 14:02 PT",
-     "call_id": "6cdf555d-55ca-4fa0-82f2-272032c5dbbb",
-     "call_at_pt": "Fri 2026-08-28 14:02 PT",
+     "moment_utc": "2026-08-17T20:19:55",
+     "moment_pt": "Mon 2026-08-17 13:19 PT",
+     "call_id": "fc96cc2d-e714-43c0-8639-0480fbb7546a",
+     "call_at_pt": "Mon 2026-08-17 13:19 PT",
+     "call_action": "pause(600)",
+     "why": "middle of spell A (spell 7 of 9, 28.8 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
+     "episode_id": "episode-v2-a4c5eb1066669d00",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-20T17:05:36",
+     "moment_pt": "Thu 2026-08-20 10:05 PT",
+     "call_id": "154887bf-05a5-49ec-bf74-f771394031b4",
+     "call_at_pt": "Thu 2026-08-20 10:05 PT",
      "call_action": "bash",
-     "why": "recovery by external_user_intervention",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-v2-da8495a3f9ed5c61",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-31T16:03:31",
+     "moment_pt": "Mon 2026-08-31 09:03 PT",
+     "call_id": "f9dcd1bb-8297-4dd0-924f-2037afefdd07",
+     "call_at_pt": "Mon 2026-08-31 09:03 PT",
+     "call_action": "pause(300)",
+     "why": "just before the relapse into spell B (spell 9 of 9, 113.8 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-c06d7145f72d43bd",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-09-23T18:29:16.500000",
+     "moment_pt": "Wed 2026-09-23 11:29 PT",
+     "call_id": "2a3636a6-9721-4ffb-89bc-c701ef3f0cf0",
+     "call_at_pt": "Wed 2026-09-23 11:29 PT",
+     "call_action": "computer.keypress",
+     "why": "middle of spell B (spell 9 of 9, 113.8 h)",
      "flag": ""
     }
    ]
@@ -914,6 +2446,39 @@
    "main_type_hours": 316.8,
    "main_type_episodes": 4,
    "total_hours": 317.3,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Thu 2026-07-16 16:04 PT",
+     "end_pt": "Wed 2026-08-12 09:04 PT",
+     "start_utc": "2026-07-16T23:04:26",
+     "end_utc": "2026-08-12T16:04:30",
+     "hours": 52.8,
+     "records": 2,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-07cd2a4caac2c6b1",
+      "episode-v2-5e46269245ceb403"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "B",
+     "start_pt": "Wed 2026-08-12 09:43 PT",
+     "end_pt": "Fri 2026-10-02 16:55 PT",
+     "start_utc": "2026-08-12T16:43:51",
+     "end_utc": "2026-10-02T23:55:16",
+     "hours": 264.0,
+     "records": 2,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-4ced2df41dd8b288",
+      "episode-v2-a5731b7173fa39f5"
+     ]
+    }
+   ],
    "interventions_seen": 48,
    "points": [
     {
@@ -929,18 +2494,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-a5731b7173fa39f5",
-     "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-09-09T22:01:42.500000",
-     "moment_pt": "Wed 2026-09-09 15:01 PT",
-     "call_id": "8ea18ae4-7e65-4c57-8913-a7992a56d94e",
-     "call_at_pt": "Wed 2026-09-09 14:56 PT",
-     "call_action": "pause(1200)",
-     "why": "middle of the longest episode (257.0 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-07cd2a4caac2c6b1",
      "category": "memory_reinforced_waiting",
@@ -953,7 +2506,19 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-5e46269245ceb403",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-03T22:58:12.500000",
+     "moment_pt": "Mon 2026-08-03 15:58 PT",
+     "call_id": "ab0881ba-d97b-42b1-a177-9a30a2b584b2",
+     "call_at_pt": "Mon 2026-08-03 15:56 PT",
+     "call_action": "pause(900)",
+     "why": "middle of spell A (spell 1 of 2, 52.8 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
      "episode_id": "episode-v2-5e46269245ceb403",
      "category": "memory_reinforced_waiting",
      "moment_utc": "2026-08-12T16:04:30",
@@ -961,7 +2526,31 @@
      "call_id": "bbb4ded3-e5e7-4723-b244-8c1590df69f2",
      "call_at_pt": "Wed 2026-08-12 09:04 PT",
      "call_action": "bash",
-     "why": "recovery by self_correction",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-v2-4ced2df41dd8b288",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-12T16:43:51",
+     "moment_pt": "Wed 2026-08-12 09:43 PT",
+     "call_id": "a4ac0d24-2ffb-4bfb-9ed8-abe5d415dc0b",
+     "call_at_pt": "Wed 2026-08-12 09:43 PT",
+     "call_action": "pause(300)",
+     "why": "just before the relapse into spell B (spell 2 of 2, 264.0 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-a5731b7173fa39f5",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-09-09T18:26:55",
+     "moment_pt": "Wed 2026-09-09 11:26 PT",
+     "call_id": "e719c463-3f90-4bd8-b457-29ec5cea8c6f",
+     "call_at_pt": "Wed 2026-09-09 11:01 PT",
+     "call_action": "pause(1800)",
+     "why": "middle of spell B (spell 2 of 2, 264.0 h)",
      "flag": ""
     }
    ]
@@ -973,6 +2562,51 @@
    "main_type_hours": 462.8,
    "main_type_episodes": 3,
    "total_hours": 475.2,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Fri 2026-07-10 13:58 PT",
+     "end_pt": "Fri 2026-07-31 10:16 PT",
+     "start_utc": "2026-07-10T20:58:13",
+     "end_utc": "2026-07-31T17:16:21",
+     "hours": 114.0,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-5f1733c9c59ac9dc"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "",
+     "start_pt": "Fri 2026-07-31 15:19 PT",
+     "end_pt": "Mon 2026-08-17 09:00 PT",
+     "start_utc": "2026-07-31T22:19:29",
+     "end_utc": "2026-08-17T16:00:24",
+     "hours": 80.8,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-7352cbfba90a0037"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "B",
+     "start_pt": "Mon 2026-08-17 12:54 PT",
+     "end_pt": "Fri 2026-10-02 16:59 PT",
+     "start_utc": "2026-08-17T19:54:35",
+     "end_utc": "2026-10-02T23:59:00",
+     "hours": 268.0,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-095c1ac9b46167c6"
+     ]
+    }
+   ],
    "interventions_seen": 328,
    "points": [
     {
@@ -988,18 +2622,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-095c1ac9b46167c6",
-     "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-09-09T19:11:22",
-     "moment_pt": "Wed 2026-09-09 12:11 PT",
-     "call_id": "3bffc052-b9c8-4bb2-a9c9-b6875c5e4925",
-     "call_at_pt": "Wed 2026-09-09 12:09 PT",
-     "call_action": "pause(300)",
-     "why": "middle of the longest episode (268.0 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-5f1733c9c59ac9dc",
      "category": "memory_reinforced_waiting",
@@ -1012,7 +2634,19 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-5f1733c9c59ac9dc",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-07-21T23:34:59.500000",
+     "moment_pt": "Tue 2026-07-21 16:34 PT",
+     "call_id": "46fb55c4-6fd4-4e8a-a50e-99035c66b806",
+     "call_at_pt": "Tue 2026-07-21 16:28 PT",
+     "call_action": "pause(600)",
+     "why": "middle of spell A (spell 1 of 3, 114.0 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
      "episode_id": "episode-v2-5f1733c9c59ac9dc",
      "category": "memory_reinforced_waiting",
      "moment_utc": "2026-07-31T17:16:21",
@@ -1020,7 +2654,31 @@
      "call_id": "2a50e292-1c06-435c-b693-2c1e899f9621",
      "call_at_pt": "Fri 2026-07-31 10:16 PT",
      "call_action": "bash",
-     "why": "recovery by external_user_intervention",
+     "why": "just before spell A was corrected (external_user_intervention)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-v2-095c1ac9b46167c6",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-17T19:54:35",
+     "moment_pt": "Mon 2026-08-17 12:54 PT",
+     "call_id": "aa8ff706-9018-4b14-b5d8-568a8081e552",
+     "call_at_pt": "Mon 2026-08-17 12:54 PT",
+     "call_action": "pause(900)",
+     "why": "just before the relapse into spell B (spell 3 of 3, 268.0 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-095c1ac9b46167c6",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-09-09T19:11:22",
+     "moment_pt": "Wed 2026-09-09 12:11 PT",
+     "call_id": "3bffc052-b9c8-4bb2-a9c9-b6875c5e4925",
+     "call_at_pt": "Wed 2026-09-09 12:09 PT",
+     "call_action": "pause(300)",
+     "why": "middle of spell B (spell 3 of 3, 268.0 h)",
      "flag": ""
     }
    ]
@@ -1032,6 +2690,23 @@
    "main_type_hours": 220.2,
    "main_type_episodes": 1,
    "total_hours": 227.6,
+   "shape": "single_stopped",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Wed 2026-07-22 13:53 PT",
+     "end_pt": "Mon 2026-08-31 11:45 PT",
+     "start_utc": "2026-07-22T20:53:09",
+     "end_utc": "2026-08-31T18:45:28",
+     "hours": 220.2,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-2a2466dd8241f5d7"
+     ]
+    }
+   ],
    "interventions_seen": 37,
    "points": [
     {
@@ -1047,18 +2722,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-2a2466dd8241f5d7",
-     "category": "self_authored_memory_constraint",
-     "moment_utc": "2026-08-11T19:36:15.500000",
-     "moment_pt": "Tue 2026-08-11 12:36 PT",
-     "call_id": "e0021021-cff4-47fc-baba-167cade46752",
-     "call_at_pt": "Tue 2026-08-11 12:36 PT",
-     "call_action": "computer.type",
-     "why": "middle of the longest episode (220.2 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-2a2466dd8241f5d7",
      "category": "self_authored_memory_constraint",
@@ -1071,6 +2734,18 @@
      "flag": ""
     },
     {
+     "rule": "spell_mid",
+     "episode_id": "episode-2a2466dd8241f5d7",
+     "category": "self_authored_memory_constraint",
+     "moment_utc": "2026-08-11T19:36:15.500000",
+     "moment_pt": "Tue 2026-08-11 12:36 PT",
+     "call_id": "e0021021-cff4-47fc-baba-167cade46752",
+     "call_at_pt": "Tue 2026-08-11 12:36 PT",
+     "call_action": "computer.type",
+     "why": "middle of the drift spell (220.2 h)",
+     "flag": ""
+    },
+    {
      "rule": "before_recovery",
      "episode_id": "episode-2a2466dd8241f5d7",
      "category": "self_authored_memory_constraint",
@@ -1079,7 +2754,7 @@
      "call_id": "e0286507-508c-4e2f-bccc-cc94f9647dad",
      "call_at_pt": "Mon 2026-08-31 11:45 PT",
      "call_action": "bash",
-     "why": "recovery by external_user_intervention",
+     "why": "just before it ended (corrected)",
      "flag": ""
     }
    ]
@@ -1091,6 +2766,23 @@
    "main_type_hours": 455.3,
    "main_type_episodes": 1,
    "total_hours": 473.3,
+   "shape": "single_open",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Fri 2026-07-10 11:24 PT",
+     "end_pt": "Fri 2026-10-02 16:46 PT",
+     "start_utc": "2026-07-10T18:24:09",
+     "end_utc": "2026-10-02T23:46:14",
+     "hours": 455.3,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-3c2990dd5f3300cd"
+     ]
+    }
+   ],
    "interventions_seen": 190,
    "points": [
     {
@@ -1106,18 +2798,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-3c2990dd5f3300cd",
-     "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-08-24T17:06:20",
-     "moment_pt": "Mon 2026-08-24 10:06 PT",
-     "call_id": "c98a8a3a-d3b4-44e8-b6c9-d232eda93089",
-     "call_at_pt": "Mon 2026-08-24 10:02 PT",
-     "call_action": "pause(600)",
-     "why": "middle of the longest episode (455.3 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-3c2990dd5f3300cd",
      "category": "memory_reinforced_waiting",
@@ -1127,6 +2807,30 @@
      "call_at_pt": "Fri 2026-07-10 14:14 PT",
      "call_action": "computer.keypress",
      "why": "returned to drift Fri 2026-07-10 14:13 PT after automated nudge at Fri 2026-07-10 13:10 PT: @GPT-5.6 Terra and @GPT-5.6 Luna \u2014 based on your recent activity, it looks like you're both repeated",
+     "flag": ""
+    },
+    {
+     "rule": "spell_mid",
+     "episode_id": "episode-v2-3c2990dd5f3300cd",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-08-24T17:06:20",
+     "moment_pt": "Mon 2026-08-24 10:06 PT",
+     "call_id": "c98a8a3a-d3b4-44e8-b6c9-d232eda93089",
+     "call_at_pt": "Mon 2026-08-24 10:02 PT",
+     "call_action": "pause(600)",
+     "why": "middle of the drift spell (455.3 h)",
+     "flag": ""
+    },
+    {
+     "rule": "late",
+     "episode_id": "episode-v2-3c2990dd5f3300cd",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-09-25T16:24:21.600000",
+     "moment_pt": "Fri 2026-09-25 09:24 PT",
+     "call_id": "e7f815f3-cea1-4ca2-9ad1-b4b58cc5dea4",
+     "call_at_pt": "Fri 2026-09-25 09:19 PT",
+     "call_action": "pause(300)",
+     "why": "90% through the spell, which never ended: how entrenched it is",
      "flag": ""
     }
    ]
@@ -1138,6 +2842,23 @@
    "main_type_hours": 81.0,
    "main_type_episodes": 1,
    "total_hours": 87.7,
+   "shape": "single_open",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Fri 2026-09-11 13:35 PT",
+     "end_pt": "Fri 2026-10-02 16:54 PT",
+     "start_utc": "2026-09-11T20:35:02",
+     "end_utc": "2026-10-02T23:54:18",
+     "hours": 81.0,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-8111be0f3cce28f0"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -1153,7 +2874,7 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "spell_mid",
      "episode_id": "episode-v2-8111be0f3cce28f0",
      "category": "pause_monitoring_loop",
      "moment_utc": "2026-09-24T18:04:01.500000",
@@ -1161,7 +2882,19 @@
      "call_id": "e9b55f56-607f-484c-adf9-d2c7477974e5",
      "call_at_pt": "Thu 2026-09-24 11:03 PT",
      "call_action": "pause(1800)",
-     "why": "middle of the longest episode (81.0 h)",
+     "why": "middle of the drift spell (81.0 h)",
+     "flag": ""
+    },
+    {
+     "rule": "late",
+     "episode_id": "episode-v2-8111be0f3cce28f0",
+     "category": "pause_monitoring_loop",
+     "moment_utc": "2026-10-01T22:11:31.500000",
+     "moment_pt": "Thu 2026-10-01 15:11 PT",
+     "call_id": "fc23ff8b-28db-4a14-b879-27724a0504a7",
+     "call_at_pt": "Thu 2026-10-01 15:08 PT",
+     "call_action": "(text)",
+     "why": "90% through the spell, which never ended: how entrenched it is",
      "flag": ""
     }
    ]
@@ -1173,6 +2906,23 @@
    "main_type_hours": 19.2,
    "main_type_episodes": 1,
    "total_hours": 41.0,
+   "shape": "single_open",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Tue 2026-09-29 13:27 PT",
+     "end_pt": "Fri 2026-10-02 16:47 PT",
+     "start_utc": "2026-09-29T20:27:12",
+     "end_utc": "2026-10-02T23:47:27",
+     "hours": 19.2,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-7d8ae30f2b7f5eb9"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -1188,7 +2938,7 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "spell_mid",
      "episode_id": "episode-v2-7d8ae30f2b7f5eb9",
      "category": "request_expanded_standing_role",
      "moment_utc": "2026-09-30T22:05:57",
@@ -1196,7 +2946,19 @@
      "call_id": "f59e97dc-5b14-42bf-bccc-1f92335eadee",
      "call_at_pt": "Wed 2026-09-30 15:04 PT",
      "call_action": "bash",
-     "why": "middle of the longest episode (19.2 h)",
+     "why": "middle of the drift spell (19.2 h)",
+     "flag": ""
+    },
+    {
+     "rule": "late",
+     "episode_id": "episode-v2-7d8ae30f2b7f5eb9",
+     "category": "request_expanded_standing_role",
+     "moment_utc": "2026-10-01T23:48:51.400000",
+     "moment_pt": "Thu 2026-10-01 16:48 PT",
+     "call_id": "36079662-d896-442a-9045-690c8080d2a2",
+     "call_at_pt": "Thu 2026-10-01 16:48 PT",
+     "call_action": "(text)",
+     "why": "90% through the spell, which never ended: how entrenched it is",
      "flag": ""
     }
    ]
@@ -1208,6 +2970,23 @@
    "main_type_hours": 226.7,
    "main_type_episodes": 1,
    "total_hours": 227.2,
+   "shape": "single_stopped",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Fri 2026-07-31 16:30 PT",
+     "end_pt": "Fri 2026-09-11 09:50 PT",
+     "start_utc": "2026-07-31T23:30:44",
+     "end_utc": "2026-09-11T16:50:38",
+     "hours": 226.7,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-c46be2a528c3e946"
+     ]
+    }
+   ],
    "interventions_seen": 38,
    "points": [
     {
@@ -1223,18 +3002,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-c46be2a528c3e946",
-     "category": "request_expanded_standing_role",
-     "moment_utc": "2026-08-21T21:36:08.500000",
-     "moment_pt": "Fri 2026-08-21 14:36 PT",
-     "call_id": "9d113085-7e10-47fa-beea-419c45b7437a",
-     "call_at_pt": "Fri 2026-08-21 14:36 PT",
-     "call_action": "use_computer",
-     "why": "middle of the longest episode (226.7 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-c46be2a528c3e946",
      "category": "request_expanded_standing_role",
@@ -1247,6 +3014,18 @@
      "flag": ""
     },
     {
+     "rule": "spell_mid",
+     "episode_id": "episode-v2-c46be2a528c3e946",
+     "category": "request_expanded_standing_role",
+     "moment_utc": "2026-08-21T21:36:08.500000",
+     "moment_pt": "Fri 2026-08-21 14:36 PT",
+     "call_id": "9d113085-7e10-47fa-beea-419c45b7437a",
+     "call_at_pt": "Fri 2026-08-21 14:36 PT",
+     "call_action": "use_computer",
+     "why": "middle of the drift spell (226.7 h)",
+     "flag": ""
+    },
+    {
      "rule": "before_recovery",
      "episode_id": "episode-v2-c46be2a528c3e946",
      "category": "request_expanded_standing_role",
@@ -1255,7 +3034,7 @@
      "call_id": "c61329cb-aac3-4323-90f1-43727ea49651",
      "call_at_pt": "Fri 2026-09-11 09:50 PT",
      "call_action": "send_message_to_chat",
-     "why": "recovery by external_user_intervention",
+     "why": "just before it ended (corrected)",
      "flag": ""
     }
    ]
@@ -1267,6 +3046,55 @@
    "main_type_hours": 11.3,
    "main_type_episodes": 7,
    "total_hours": 23.0,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Wed 2026-07-29 16:06 PT",
+     "end_pt": "Tue 2026-08-04 11:38 PT",
+     "start_utc": "2026-07-29T23:06:29",
+     "end_utc": "2026-08-04T18:38:59",
+     "hours": 6.1,
+     "records": 2,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-4d3597a6fbc37c09",
+      "episode-v2-2108ac2f0289dc6d"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "A",
+     "start_pt": "Mon 2026-08-17 09:17 PT",
+     "end_pt": "Mon 2026-08-24 10:59 PT",
+     "start_utc": "2026-08-17T16:17:47",
+     "end_utc": "2026-08-24T17:59:40",
+     "hours": 5.1,
+     "records": 4,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-256a9ae6caad7aa2",
+      "episode-v2-bdb35e3ad6124138",
+      "episode-v2-1c38fd0dc309d16e",
+      "episode-v2-b4c5a88f68511238"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "B",
+     "start_pt": "Mon 2026-09-28 16:50 PT",
+     "end_pt": "Mon 2026-09-28 16:53 PT",
+     "start_utc": "2026-09-28T23:50:16",
+     "end_utc": "2026-09-28T23:53:35",
+     "hours": 0.1,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-a0c2f7339c54807e"
+     ]
+    }
+   ],
    "interventions_seen": 12,
    "points": [
     {
@@ -1282,18 +3110,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-4d3597a6fbc37c09",
-     "category": "agent_targeted_request",
-     "moment_utc": "2026-07-30T17:56:42.500000",
-     "moment_pt": "Thu 2026-07-30 10:56 PT",
-     "call_id": "3799c078-d241-49fe-89f5-3b52f75a134c",
-     "call_at_pt": "Thu 2026-07-30 10:56 PT",
-     "call_action": "use_computer",
-     "why": "middle of the longest episode (5.6 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-4d3597a6fbc37c09",
      "category": "agent_targeted_request",
@@ -1306,7 +3122,19 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-b4c5a88f68511238",
+     "category": "agent_targeted_request",
+     "moment_utc": "2026-08-21T16:47:30.500000",
+     "moment_pt": "Fri 2026-08-21 09:47 PT",
+     "call_id": "a30017b5-e267-427b-a302-510fb46904dd",
+     "call_at_pt": "Fri 2026-08-21 09:47 PT",
+     "call_action": "use_computer",
+     "why": "middle of spell A (spell 2 of 3, 5.1 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
      "episode_id": "episode-v2-b4c5a88f68511238",
      "category": "agent_targeted_request",
      "moment_utc": "2026-08-24T17:59:40",
@@ -1314,8 +3142,32 @@
      "call_id": "ab282136-b441-4497-a473-8d2437667ab9",
      "call_at_pt": "Mon 2026-08-24 10:59 PT",
      "call_action": "send_message_to_chat",
-     "why": "recovery by external_user_intervention",
+     "why": "just before spell A was corrected (external_user_intervention)",
      "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-v2-a0c2f7339c54807e",
+     "category": "agent_targeted_request",
+     "moment_utc": "2026-09-28T23:50:16",
+     "moment_pt": "Mon 2026-09-28 16:50 PT",
+     "call_id": "891e9fc6-fce6-4566-b746-ab33cfe6fda6",
+     "call_at_pt": "Mon 2026-09-28 16:50 PT",
+     "call_action": "bash",
+     "why": "just before the relapse into spell B (spell 3 of 3, 0.1 h)",
+     "flag": "this spell is only 0.1 h"
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-a0c2f7339c54807e",
+     "category": "agent_targeted_request",
+     "moment_utc": "2026-09-28T23:51:55.500000",
+     "moment_pt": "Mon 2026-09-28 16:51 PT",
+     "call_id": "91c71b6e-6bf9-48ee-b5b6-0e30fcfb6a86",
+     "call_at_pt": "Mon 2026-09-28 16:51 PT",
+     "call_action": "use_computer",
+     "why": "middle of spell B (spell 3 of 3, 0.1 h)",
+     "flag": "this spell is only 0.1 h"
     }
    ]
   },
@@ -1326,6 +3178,122 @@
    "main_type_hours": 30.9,
    "main_type_episodes": 9,
    "total_hours": 72.3,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Tue 2026-07-07 13:08 PT",
+     "end_pt": "Mon 2026-07-20 14:58 PT",
+     "start_utc": "2026-07-07T20:08:03",
+     "end_utc": "2026-07-20T21:58:50",
+     "hours": 0.5,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-2156140d20f2d03f"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "",
+     "start_pt": "Thu 2026-07-09 10:20 PT",
+     "end_pt": "Thu 2026-07-16 14:25 PT",
+     "start_utc": "2026-07-09T17:20:40",
+     "end_utc": "2026-07-16T21:25:41",
+     "hours": 20.3,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-b9ca369d46283391"
+     ]
+    },
+    {
+     "n": 3,
+     "role": "",
+     "start_pt": "Fri 2026-07-17 13:17 PT",
+     "end_pt": "Mon 2026-07-20 14:58 PT",
+     "start_utc": "2026-07-17T20:17:27",
+     "end_utc": "2026-07-20T21:58:50",
+     "hours": 1.4,
+     "records": 2,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-a5b869fff6eac3c5",
+      "episode-v2-ad0671c7e9ac592a"
+     ]
+    },
+    {
+     "n": 4,
+     "role": "",
+     "start_pt": "Tue 2026-08-04 16:36 PT",
+     "end_pt": "Tue 2026-08-04 16:49 PT",
+     "start_utc": "2026-08-04T23:36:16",
+     "end_utc": "2026-08-04T23:49:57",
+     "hours": 0.2,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-f3c31eac279bee43"
+     ]
+    },
+    {
+     "n": 5,
+     "role": "A",
+     "start_pt": "Wed 2026-08-05 09:52 PT",
+     "end_pt": "Wed 2026-08-05 14:26 PT",
+     "start_utc": "2026-08-05T16:52:25",
+     "end_utc": "2026-08-05T21:26:27",
+     "hours": 4.6,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-581b6eff9da2261d"
+     ]
+    },
+    {
+     "n": 6,
+     "role": "",
+     "start_pt": "Thu 2026-08-06 11:37 PT",
+     "end_pt": "Thu 2026-08-06 11:47 PT",
+     "start_utc": "2026-08-06T18:37:58",
+     "end_utc": "2026-08-06T18:47:54",
+     "hours": 0.1,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-ac4a40b195f9217f"
+     ]
+    },
+    {
+     "n": 7,
+     "role": "B",
+     "start_pt": "Thu 2026-08-13 11:40 PT",
+     "end_pt": "Mon 2026-08-17 13:24 PT",
+     "start_utc": "2026-08-13T18:40:27",
+     "end_utc": "2026-08-17T20:24:45",
+     "hours": 3.4,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-e26bfa03baa49278"
+     ]
+    },
+    {
+     "n": 8,
+     "role": "",
+     "start_pt": "Mon 2026-08-24 16:11 PT",
+     "end_pt": "Tue 2026-08-25 11:30 PT",
+     "start_utc": "2026-08-24T23:11:27",
+     "end_utc": "2026-08-25T18:30:17",
+     "hours": 0.5,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-0ccc4021b7ca1b54"
+     ]
+    }
+   ],
    "interventions_seen": 24,
    "points": [
     {
@@ -1341,18 +3309,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-b9ca369d46283391",
-     "category": "agent_targeted_request",
-     "moment_utc": "2026-07-13T17:53:38.500000",
-     "moment_pt": "Mon 2026-07-13 10:53 PT",
-     "call_id": "b4740a9f-b620-4a51-8751-00025137cbe1",
-     "call_at_pt": "Mon 2026-07-13 10:53 PT",
-     "call_action": "use_computer",
-     "why": "middle of the longest episode (20.3 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-2156140d20f2d03f",
      "category": "agent_targeted_request",
@@ -1365,7 +3321,19 @@
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-581b6eff9da2261d",
+     "category": "agent_targeted_request",
+     "moment_utc": "2026-08-05T19:09:25.500000",
+     "moment_pt": "Wed 2026-08-05 12:09 PT",
+     "call_id": "dbf0b1a3-4122-4449-aa92-71cd7f225610",
+     "call_at_pt": "Wed 2026-08-05 12:06 PT",
+     "call_action": "consolidate",
+     "why": "middle of spell A (spell 5 of 8, 4.6 h, corrected)",
+     "flag": ""
+    },
+    {
+     "rule": "a_end",
      "episode_id": "episode-v2-581b6eff9da2261d",
      "category": "agent_targeted_request",
      "moment_utc": "2026-08-05T21:26:27",
@@ -1373,7 +3341,31 @@
      "call_id": "9e1b5362-1533-4775-a592-880a646e7203",
      "call_at_pt": "Wed 2026-08-05 14:26 PT",
      "call_action": "bash",
-     "why": "recovery by self_correction",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-e26bfa03baa49278",
+     "category": "agent_targeted_request",
+     "moment_utc": "2026-08-13T18:40:27",
+     "moment_pt": "Thu 2026-08-13 11:40 PT",
+     "call_id": "eb0c2725-11f5-46d5-bef7-31e3d5f3c4ef",
+     "call_at_pt": "Thu 2026-08-13 11:37 PT",
+     "call_action": "consolidate",
+     "why": "just before the relapse into spell B (spell 7 of 8, 3.4 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-e26bfa03baa49278",
+     "category": "agent_targeted_request",
+     "moment_utc": "2026-08-14T16:19:48.500000",
+     "moment_pt": "Fri 2026-08-14 09:19 PT",
+     "call_id": "d8daee5f-5cb3-4824-b9ce-5ebac33858de",
+     "call_at_pt": "Fri 2026-08-14 09:18 PT",
+     "call_action": "bash",
+     "why": "middle of spell B (spell 7 of 8, 3.4 h)",
      "flag": ""
     }
    ]
@@ -1385,6 +3377,23 @@
    "main_type_hours": 8.3,
    "main_type_episodes": 1,
    "total_hours": 8.3,
+   "shape": "single_stopped",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Mon 2026-09-07 09:26 PT",
+     "end_pt": "Tue 2026-09-08 16:52 PT",
+     "start_utc": "2026-09-07T16:26:45",
+     "end_utc": "2026-09-08T23:52:25",
+     "hours": 8.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-465e493fd33f2047"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -1400,7 +3409,7 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "spell_mid",
      "episode_id": "episode-v2-465e493fd33f2047",
      "category": "pause_dependency_wait",
      "moment_utc": "2026-09-07T22:27:02.500000",
@@ -1408,7 +3417,7 @@
      "call_id": "e478c1d0-1b60-422f-945a-93a0cbd32e4d",
      "call_at_pt": "Mon 2026-09-07 15:27 PT",
      "call_action": "bash",
-     "why": "middle of the longest episode (8.3 h)",
+     "why": "middle of the drift spell (8.3 h)",
      "flag": ""
     },
     {
@@ -1420,7 +3429,7 @@
      "call_id": "b5b3cf89-1862-4715-9a8f-94352fbed22e",
      "call_at_pt": "Tue 2026-09-08 16:52 PT",
      "call_action": "bash",
-     "why": "recovery by self_correction",
+     "why": "just before it ended (corrected)",
      "flag": ""
     }
    ]
@@ -1432,6 +3441,23 @@
    "main_type_hours": 5.8,
    "main_type_episodes": 1,
    "total_hours": 11.1,
+   "shape": "single_stopped",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Thu 2026-07-16 12:35 PT",
+     "end_pt": "Mon 2026-07-20 09:02 PT",
+     "start_utc": "2026-07-16T19:35:01",
+     "end_utc": "2026-07-20T16:02:06",
+     "hours": 5.8,
+     "records": 1,
+     "ending": "stopped",
+     "episode_ids": [
+      "episode-v2-85edf3e36bad407e"
+     ]
+    }
+   ],
    "interventions_seen": 10,
    "points": [
     {
@@ -1447,7 +3473,7 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
+     "rule": "spell_mid",
      "episode_id": "episode-v2-85edf3e36bad407e",
      "category": "pause_nothing_left_to_do",
      "moment_utc": "2026-07-16T22:27:52.500000",
@@ -1455,7 +3481,7 @@
      "call_id": "01a7e21d-91b2-46d5-83d3-2d0a82a328fa",
      "call_at_pt": "Thu 2026-07-16 15:23 PT",
      "call_action": "pause(1200)",
-     "why": "middle of the longest episode (5.8 h)",
+     "why": "middle of the drift spell (5.8 h)",
      "flag": ""
     },
     {
@@ -1469,6 +3495,18 @@
      "call_action": "send_message_to_chat",
      "why": "returned to drift Fri 2026-07-17 16:29 PT after automated nudge at Fri 2026-07-17 10:24 PT: @Kimi K2.6 and @GLM-5.2 \u2014 based on your recent activity, it looks like you're both stuck in a patter",
      "flag": ""
+    },
+    {
+     "rule": "before_recovery",
+     "episode_id": "episode-v2-85edf3e36bad407e",
+     "category": "pause_nothing_left_to_do",
+     "moment_utc": "2026-07-20T16:02:06",
+     "moment_pt": "Mon 2026-07-20 09:02 PT",
+     "call_id": "3f198536-b157-41c1-99d1-2e83dde026be",
+     "call_at_pt": "Mon 2026-07-20 09:02 PT",
+     "call_action": "bash",
+     "why": "just before it ended (stopped)",
+     "flag": ""
     }
    ]
   },
@@ -1479,6 +3517,23 @@
    "main_type_hours": 72.5,
    "main_type_episodes": 1,
    "total_hours": 92.7,
+   "shape": "single_stopped",
+   "spells": [
+    {
+     "n": 1,
+     "role": "",
+     "start_pt": "Wed 2026-08-05 10:03 PT",
+     "end_pt": "Thu 2026-08-20 09:38 PT",
+     "start_utc": "2026-08-05T17:03:01",
+     "end_utc": "2026-08-20T16:38:01",
+     "hours": 72.5,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-620e774ab4e42e0b"
+     ]
+    }
+   ],
    "interventions_seen": 9,
    "points": [
     {
@@ -1494,18 +3549,6 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-620e774ab4e42e0b",
-     "category": "pause_monitoring_loop",
-     "moment_utc": "2026-08-12T19:44:12.500000",
-     "moment_pt": "Wed 2026-08-12 12:44 PT",
-     "call_id": "dde9cf06-8740-4a92-a8da-743ac69d62f9",
-     "call_at_pt": "Wed 2026-08-12 12:02 PT",
-     "call_action": "pause(3300)",
-     "why": "middle of the longest episode (72.5 h)",
-     "flag": ""
-    },
-    {
      "rule": "after_return",
      "episode_id": "episode-v2-620e774ab4e42e0b",
      "category": "pause_monitoring_loop",
@@ -1518,6 +3561,18 @@
      "flag": ""
     },
     {
+     "rule": "spell_mid",
+     "episode_id": "episode-v2-620e774ab4e42e0b",
+     "category": "pause_monitoring_loop",
+     "moment_utc": "2026-08-12T19:44:12.500000",
+     "moment_pt": "Wed 2026-08-12 12:44 PT",
+     "call_id": "dde9cf06-8740-4a92-a8da-743ac69d62f9",
+     "call_at_pt": "Wed 2026-08-12 12:02 PT",
+     "call_action": "pause(3300)",
+     "why": "middle of the drift spell (72.5 h)",
+     "flag": ""
+    },
+    {
      "rule": "before_recovery",
      "episode_id": "episode-v2-620e774ab4e42e0b",
      "category": "pause_monitoring_loop",
@@ -1526,7 +3581,7 @@
      "call_id": "255cc2b4-826f-4737-ab63-e805008d34e1",
      "call_at_pt": "Thu 2026-08-20 09:37 PT",
      "call_action": "bash",
-     "why": "recovery by self_correction",
+     "why": "just before it ended (corrected)",
      "flag": ""
     }
    ]
@@ -1538,6 +3593,37 @@
    "main_type_hours": 130.8,
    "main_type_episodes": 2,
    "total_hours": 145.1,
+   "shape": "relapsing",
+   "spells": [
+    {
+     "n": 1,
+     "role": "A",
+     "start_pt": "Tue 2026-09-08 11:33 PT",
+     "end_pt": "Mon 2026-09-14 09:02 PT",
+     "start_utc": "2026-09-08T18:33:34",
+     "end_utc": "2026-09-14T16:02:58",
+     "hours": 29.3,
+     "records": 1,
+     "ending": "corrected",
+     "episode_ids": [
+      "episode-v2-17f2ab37c7505e50"
+     ]
+    },
+    {
+     "n": 2,
+     "role": "B",
+     "start_pt": "Mon 2026-09-14 09:29 PT",
+     "end_pt": "Fri 2026-10-02 16:41 PT",
+     "start_utc": "2026-09-14T16:29:56",
+     "end_utc": "2026-10-02T23:41:46",
+     "hours": 101.5,
+     "records": 1,
+     "ending": "still drifting",
+     "episode_ids": [
+      "episode-v2-8b78cb66965a621e"
+     ]
+    }
+   ],
    "interventions_seen": 7,
    "points": [
     {
@@ -1553,19 +3639,19 @@
      "flag": ""
     },
     {
-     "rule": "mid_longest",
-     "episode_id": "episode-v2-8b78cb66965a621e",
+     "rule": "a_mid",
+     "episode_id": "episode-v2-17f2ab37c7505e50",
      "category": "memory_reinforced_waiting",
-     "moment_utc": "2026-09-22T22:06:34",
-     "moment_pt": "Tue 2026-09-22 15:06 PT",
-     "call_id": "222ffd5a-3907-4164-9d07-aa9b3b07be38",
-     "call_at_pt": "Tue 2026-09-22 15:06 PT",
-     "call_action": "use_computer",
-     "why": "middle of the longest episode (101.5 h)",
+     "moment_utc": "2026-09-10T17:18:47",
+     "moment_pt": "Thu 2026-09-10 10:18 PT",
+     "call_id": "1ba8117c-8803-4a14-a9be-3c0bcf2645a2",
+     "call_at_pt": "Thu 2026-09-10 10:17 PT",
+     "call_action": "pause(180)",
+     "why": "middle of spell A (spell 1 of 2, 29.3 h, corrected)",
      "flag": ""
     },
     {
-     "rule": "before_recovery",
+     "rule": "a_end",
      "episode_id": "episode-v2-17f2ab37c7505e50",
      "category": "memory_reinforced_waiting",
      "moment_utc": "2026-09-14T16:02:58",
@@ -1573,7 +3659,31 @@
      "call_id": "ac5019b6-bc02-4144-90ba-20a859643ce5",
      "call_at_pt": "Mon 2026-09-14 09:02 PT",
      "call_action": "bash",
-     "why": "recovery by self_correction",
+     "why": "just before spell A was corrected (self_correction)",
+     "flag": ""
+    },
+    {
+     "rule": "b_start",
+     "episode_id": "episode-v2-8b78cb66965a621e",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-09-14T16:29:56",
+     "moment_pt": "Mon 2026-09-14 09:29 PT",
+     "call_id": "bf20b9b7-d1b4-4dc5-85a5-5613b0bfd508",
+     "call_at_pt": "Mon 2026-09-14 09:29 PT",
+     "call_action": "bash",
+     "why": "just before the relapse into spell B (spell 2 of 2, 101.5 h)",
+     "flag": ""
+    },
+    {
+     "rule": "b_mid",
+     "episode_id": "episode-v2-8b78cb66965a621e",
+     "category": "memory_reinforced_waiting",
+     "moment_utc": "2026-09-22T22:06:34",
+     "moment_pt": "Tue 2026-09-22 15:06 PT",
+     "call_id": "222ffd5a-3907-4164-9d07-aa9b3b07be38",
+     "call_at_pt": "Tue 2026-09-22 15:06 PT",
+     "call_action": "use_computer",
+     "why": "middle of spell B (spell 2 of 2, 101.5 h)",
      "flag": ""
     }
    ]

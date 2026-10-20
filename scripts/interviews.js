@@ -1,14 +1,27 @@
 const REVIEW_KEY = "village-interview-point-review:v1";
 const fresh = { cache: "no-store" };
 
+// Point types. The number is the type, not the order: points are listed in time order on each card.
 const RULES = {
-  before_onset: { n: "1", label: "Before first onset", purpose: "Validates the drift cause" },
-  mid_longest: { n: "2", label: "Middle of the longest episode", purpose: "Its reasoning: what other options it considered" },
-  mid_longest_any: { n: "2b", label: "Middle of its longest episode of any type", purpose: "Its reasoning: what other options it considered" },
-  after_return: { n: "3", label: "After returning to drift", purpose: "Its reasoning: what kept it drifting after a nudge" },
-  before_recovery: { n: "4", label: "Just before recovery", purpose: "Validates the correction cause" }
+  before_onset: { n: "1", label: "First onset", purpose: "Validates the drift cause" },
+  spell_mid: { n: "2", label: "Middle of the drift spell", purpose: "Its reasoning: what other options it considered" },
+  mid_longest_any: { n: "2b", label: "Middle of its longest episode of any type", purpose: "Its reasoning in its biggest drift overall" },
+  after_return: { n: "3", label: "After returning to drift", purpose: "What kept it drifting after a nudge" },
+  before_recovery: { n: "4", label: "Just before recovery", purpose: "Validates the correction cause" },
+  late: { n: "L", label: "Late in a drift that never ended", purpose: "How entrenched the drift is" },
+  a_mid: { n: "A2", label: "Middle of spell A", purpose: "Its reasoning in the first drift: what other options it considered" },
+  a_end: { n: "A4", label: "Just before spell A was corrected", purpose: "Validates the correction cause" },
+  a_stop: { n: "A4", label: "Just before spell A stopped on its own", purpose: "Why it stopped without a correction" },
+  b_start: { n: "B1", label: "Just before it drifted again (spell B)", purpose: "What brought it back to drifting; compare with point 1" },
+  b_mid: { n: "B2", label: "Middle of spell B", purpose: "Its reasoning in the later drift: what changed since spell A" }
 };
 const RULE_ORDER = Object.keys(RULES);
+const SHAPES = {
+  relapsing: { label: "Relapsing", note: "corrected, then drifted again", points: ["before_onset", "a_mid", "a_end", "b_start", "b_mid", "after_return"] },
+  recurring: { label: "Recurring", note: "stopped on its own, then drifted again", points: ["before_onset", "a_mid", "a_stop", "b_start", "b_mid", "after_return"] },
+  single_stopped: { label: "Single spell, then stopped", note: "one drift spell that ended", points: ["before_onset", "spell_mid", "before_recovery", "after_return"] },
+  single_open: { label: "Single spell, still drifting", note: "one drift spell that never ended", points: ["before_onset", "spell_mid", "late", "after_return"] }
+};
 const HORIZON_MS = Date.parse("2026-10-03T00:00:00Z");
 
 const [pointsResponse, bundleResponse, annotationResponse, sourceResponse] = await Promise.all([
@@ -93,12 +106,35 @@ function element(tag, className, text) {
 }
 
 function renderRuleKey() {
-  document.querySelector("#rule-key").replaceChildren(...RULE_ORDER.map((id) => {
-    const r = RULES[id];
+  document.querySelector("#rule-key").replaceChildren(...Object.entries(SHAPES).map(([id, shape]) => {
     const box = element("div");
-    box.append(element("strong", "", `${r.n} · ${r.label}`), document.createTextNode(r.purpose));
+    const n = selection.agents.filter((a) => a.shape === id).length;
+    box.append(element("strong", "", `${shape.label} (${n})`), element("span", "ip-key-note", shape.note));
+    const list = element("ul");
+    shape.points.forEach((rule) => {
+      const r = RULES[rule];
+      list.append(element("li", "", `${r.n} ${r.label}${rule === "after_return" ? " (when it applies)" : ""}`));
+    });
+    box.append(list);
     return box;
   }));
+}
+
+function renderSpells(a) {
+  const box = element("details", "ip-spells");
+  const counts = a.spells.length === a.main_type_episodes ? "" : ` from ${a.main_type_episodes} records`;
+  box.append(element("summary", "", `${a.spells.length} drift spell${a.spells.length === 1 ? "" : "s"}${counts}`));
+  const list = element("ol");
+  a.spells.forEach((sp) => {
+    const item = element("li", sp.role ? "is-role" : "");
+    if (sp.role) item.append(element("b", "ip-role", sp.role));
+    const start = sp.start_pt.slice(4, 14);
+    const end = (sp.end_pt || "").slice(4, 14);
+    item.append(document.createTextNode(`${start}${end && end !== start ? ` – ${end}` : ""} · ${sp.hours} h · ${sp.ending}`));
+    list.append(item);
+  });
+  box.append(list);
+  return box;
 }
 
 function renderStrip(agent, points, mainType) {
@@ -241,6 +277,7 @@ function renderCard(a) {
   const badges = element("div", "ip-badges");
   const statuses = a.points.map((p) => statusOf(a.agent, p));
   const done = statuses.filter((s) => s !== "open").length;
+  badges.append(element("span", "ip-badge is-shape", SHAPES[a.shape]?.label || a.shape));
   badges.append(element("span", "ip-badge", `${a.points.length} points`));
   const progress = element("span", `ip-badge${statuses.includes("change") ? " is-change" : done === a.points.length ? " is-done" : ""}`,
     statuses.includes("change") ? `${statuses.filter((s) => s === "change").length} to change` : `${done}/${a.points.length} reviewed`);
@@ -253,15 +290,16 @@ function renderCard(a) {
   head.append(title, sub);
   const list = element("ol", "ip-points");
   [...a.points]
-    .sort((l, r) => RULE_ORDER.indexOf(l.rule) - RULE_ORDER.indexOf(r.rule))
+    .sort((l, r) => String(l.moment_utc).localeCompare(String(r.moment_utc)))
     .forEach((p) => list.append(renderPoint(a.agent, p)));
-  card.append(head, renderStrip(a.agent, a.points, a.main_type), list);
+  card.append(head, renderStrip(a.agent, a.points, a.main_type), renderSpells(a), list);
   return card;
 }
 
 function render() {
   const sort = document.querySelector("#ip-sort").value;
   const type = document.querySelector("#ip-type").value;
+  const shape = document.querySelector("#ip-shape").value;
   const rule = document.querySelector("#ip-rule").value;
   const status = document.querySelector("#ip-status").value;
   const query = document.querySelector("#ip-search").value.trim().toLowerCase();
@@ -274,6 +312,7 @@ function render() {
   };
   const visible = selection.agents
     .filter((a) => !type || a.main_type === type)
+    .filter((a) => !shape || a.shape === shape)
     .filter((a) => !rule || a.points.some((p) => p.rule === rule))
     .filter((a) => {
       const s = a.points.map((p) => statusOf(a.agent, p));
@@ -296,12 +335,17 @@ function initialize() {
   const types = [...new Map(selection.agents.map((a) => [a.main_type, a.main_type_label])).entries()].sort((l, r) => l[1].localeCompare(r[1]));
   const typeSelect = document.querySelector("#ip-type");
   types.forEach(([id, label]) => typeSelect.append(new Option(label, id)));
+  const shapeSelect = document.querySelector("#ip-shape");
+  Object.entries(SHAPES).forEach(([id, shape]) => {
+    const n = selection.agents.filter((a) => a.shape === id).length;
+    if (n) shapeSelect.append(new Option(`${shape.label} (${n})`, id));
+  });
   const ruleSelect = document.querySelector("#ip-rule");
   RULE_ORDER.forEach((id) => {
     const n = selection.agents.filter((a) => a.points.some((p) => p.rule === id)).length;
     if (n) ruleSelect.append(new Option(`${RULES[id].n} · ${RULES[id].label} (${n})`, id));
   });
-  ["#ip-sort", "#ip-type", "#ip-rule", "#ip-status"].forEach((id) => document.querySelector(id).addEventListener("change", render));
+  ["#ip-sort", "#ip-type", "#ip-shape", "#ip-rule", "#ip-status"].forEach((id) => document.querySelector(id).addEventListener("change", render));
   document.querySelector("#ip-search").addEventListener("input", render);
   document.querySelector("#ip-export").addEventListener("click", () => {
     const rows = selection.agents.flatMap((a) => a.points.map((p) => ({
