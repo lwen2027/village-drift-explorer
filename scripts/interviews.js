@@ -139,7 +139,15 @@ function renderSpells(a) {
   return box;
 }
 
-function renderStrip(agent, points, trackTypes) {
+function gapText(msGap) {
+  const minutes = Math.round(msGap / 60000);
+  if (minutes < 120) return `${minutes} min`;
+  const hours = Math.round(minutes / 60);
+  return hours < 48 ? `${hours} h` : `${Math.round(hours / 24)} days`;
+}
+
+function renderStrip(agent, points, tracks) {
+  const trackTypes = tracks.map((track) => track.type);
   const episodes = episodesByAgent.get(agent) || [];
   const spans = episodes.map(episodeSpan).filter(([a]) => a != null);
   const pointTimes = points.map((p) => ms(p.moment_utc)).filter((t) => t != null);
@@ -176,10 +184,31 @@ function renderStrip(agent, points, trackTypes) {
     mark.append(element("b", "", RULES[p.rule]?.n || "?"), element("i"));
     strip.append(mark);
   });
+  // One bracket per spell under the bars, so chained records read as one drift.
+  const brackets = element("div", "ip-spell-row");
+  tracks.forEach((track, ti) => {
+    const byRole = Object.fromEntries((track.spells || []).filter((sp) => sp.role).map((sp) => [sp.role, sp]));
+    (track.spells || []).forEach((sp) => {
+      const a = ms(sp.start_utc);
+      const z = ms(sp.end_utc) ?? a;
+      if (a == null) return;
+      const bracket = element("span", `ip-spell${sp.role ? " is-role" : ""}${ti > 0 ? " is-second" : ""}`);
+      bracket.style.left = pos(a);
+      bracket.style.width = `calc(${pos(z)} - ${pos(a)})`;
+      let text = sp.role || String(sp.n);
+      if (sp.role === "B" && byRole.A) text += ` · ${gapText(a - ms(byRole.A.end_utc))} after A`;
+      bracket.title = `${track.type_label} · spell ${sp.n}${sp.role ? ` (${sp.role})` : ""}: ${sp.start_pt} – ${sp.end_pt} · ${sp.hours} h · ${sp.ending}`;
+      const label = element("span", "", text);
+      // near the right edge, anchor the label to the bracket's right end so it stays inside the card
+      if ((a - start) / (end - start) > 0.75) label.classList.add("is-right");
+      bracket.append(label);
+      brackets.append(bracket);
+    });
+  });
   const axis = element("div", "ip-strip-axis");
   axis.append(element("span", "", dayFormat.format(start)), element("span", "", "Oct 2"));
   const wrap = element("div");
-  wrap.append(strip, axis);
+  wrap.append(strip, brackets, axis);
   return wrap;
 }
 
@@ -319,7 +348,7 @@ function renderCard(a) {
   }
   const head = element("div");
   head.append(title, sub);
-  card.append(head, renderStrip(a.agent, a.points, tracks.map((t) => t.type)));
+  card.append(head, renderStrip(a.agent, a.points, tracks));
   tracks.forEach((track, i) => card.append(renderTrack(a, track, i, multiple)));
   return card;
 }

@@ -101,6 +101,14 @@
     .ip-strip-mark.is-raised i { height: 34px; }
     .ip-strip-mark b { padding: 0 4px; border-radius: 4px; background: var(--ink); color: white; font: 700 9px/13px var(--mono); }
     .ip-strip-mark i { width: 1px; height: 22px; background: var(--ink); }
+    .ip-spell-row { position: relative; height: 16px; margin-top: 1px; }
+    .ip-spell { position: absolute; top: 2px; height: 12px; min-width: 6px; border: solid color-mix(in srgb, var(--rust) 55%, transparent); border-width: 0 1px 1px; border-radius: 0 0 4px 4px; }
+    .ip-spell span { position: absolute; top: 2px; left: 50%; transform: translateX(-50%); padding: 0 3px; background: var(--card); color: var(--muted); font: 700 9px/1 var(--mono); white-space: nowrap; }
+    .ip-spell span.is-right { left: auto; right: 0; transform: none; }
+    .ip-spell.is-role { border-color: var(--rust); border-width: 0 2px 2px; }
+    .ip-spell.is-role span { color: var(--ink); }
+    .ip-spell.is-second { border-color: color-mix(in srgb, var(--blue) 55%, transparent); }
+    .ip-spell.is-second.is-role { border-color: var(--blue); }
     .ip-strip-axis { display: flex; justify-content: space-between; color: var(--muted); font: 600 9px/1 var(--mono); }
 
     .ip-points { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
@@ -200,6 +208,6 @@
       <section class="excluded" id="ip-excluded" hidden></section>
     </main>
   </div>
-  <script type="module" src="./scripts/interviews.js?v=20261020-second-type"></script>
+  <script type="module" src="./scripts/interviews.js?v=20261020-spell-brackets-2"></script>
 </body>
 </html>
