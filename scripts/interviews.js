@@ -146,13 +146,64 @@ function gapText(msGap) {
   return hours < 48 ? `${hours} h` : `${Math.round(hours / 24)} days`;
 }
 
-function renderStrip(agent, points, tracks) {
+const zoomByAgent = new Map();
+const HOUR_MS = 3600000;
+const timeFormat = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "America/Los_Angeles" });
+
+function fullRange(agent, points) {
+  const spans = (episodesByAgent.get(agent) || []).map(episodeSpan).filter(([a]) => a != null);
+  const pointTimes = points.map((p) => ms(p.moment_utc)).filter((t) => t != null);
+  return { start: Math.min(windowStart.get(agent) ?? Infinity, ...spans.map(([a]) => a), ...pointTimes), end: HORIZON_MS };
+}
+
+// The range around the card's points and the spells they belong to, padded and kept inside the window.
+function pointsRange(points, tracks, full) {
+  const times = points.map((p) => ms(p.moment_utc)).filter((t) => t != null);
+  tracks.forEach((track) => (track.spells || []).filter((sp) => sp.role).forEach((sp) => times.push(ms(sp.start_utc), ms(sp.end_utc))));
+  const valid = times.filter((t) => t != null);
+  if (!valid.length) return full;
+  const lo = Math.min(...valid);
+  const hi = Math.max(...valid);
+  const pad = Math.max((hi - lo) * 0.08, 6 * HOUR_MS);
+  return { start: Math.max(full.start, lo - pad), end: Math.min(full.end, hi + pad) };
+}
+
+function renderTimeline(agent, points, tracks) {
+  const full = fullRange(agent, points);
+  const wrap = element("div", "ip-timeline");
+  const controls = element("div", "ip-zoom");
+  const fit = element("button", "ip-zoom-button", "Zoom to points");
+  const all = element("button", "ip-zoom-button", "Whole window");
+  fit.type = all.type = "button";
+  controls.append(fit, all, element("span", "ip-zoom-hint", "drag across the timeline to zoom · double-click to reset"));
+  const body = element("div");
+  const draw = () => {
+    const view = zoomByAgent.get(agent) || full;
+    all.disabled = !zoomByAgent.has(agent);
+    body.replaceChildren(renderStrip(agent, points, tracks, view, (next) => {
+      if (next) zoomByAgent.set(agent, next);
+      else zoomByAgent.delete(agent);
+      draw();
+    }));
+  };
+  fit.addEventListener("click", () => {
+    zoomByAgent.set(agent, pointsRange(points, tracks, full));
+    draw();
+  });
+  all.addEventListener("click", () => {
+    zoomByAgent.delete(agent);
+    draw();
+  });
+  draw();
+  wrap.append(controls, body);
+  return wrap;
+}
+
+function renderStrip(agent, points, tracks, view, onZoom) {
   const trackTypes = tracks.map((track) => track.type);
   const episodes = episodesByAgent.get(agent) || [];
-  const spans = episodes.map(episodeSpan).filter(([a]) => a != null);
-  const pointTimes = points.map((p) => ms(p.moment_utc)).filter((t) => t != null);
-  const start = Math.min(windowStart.get(agent) ?? Infinity, ...spans.map(([a]) => a), ...pointTimes);
-  const end = HORIZON_MS;
+  const { start, end } = view;
+  const inView = (a, z) => z >= start && a <= end;
   const pos = (t) => `${Math.max(0, Math.min(100, ((t - start) / (end - start)) * 100))}%`;
   const strip = element("div", "ip-strip");
   const goalWindow = element("span", "ip-strip-window");
@@ -161,7 +212,7 @@ function renderStrip(agent, points, tracks) {
   strip.append(goalWindow);
   episodes.forEach((e) => {
     const [a, z] = episodeSpan(e);
-    if (a == null) return;
+    if (a == null || !inView(a, z ?? a)) return;
     const track = trackTypes.indexOf(categoryOf.get(e.episode_id));
     const bar = element("span", `ip-strip-ep${track === 0 ? " is-main" : track > 0 ? " is-second" : ""}`);
     bar.style.left = pos(a);
@@ -174,7 +225,7 @@ function renderStrip(agent, points, tracks) {
   let raised = false;
   [...points].sort((l, r) => (ms(l.moment_utc) ?? 0) - (ms(r.moment_utc) ?? 0)).forEach((p) => {
     const t = ms(p.moment_utc);
-    if (t == null) return;
+    if (t == null || t < start || t > end) return;
     const left = ((t - start) / (end - start)) * 100;
     raised = left - lastLeft < 3 ? !raised : false;
     lastLeft = left;
@@ -191,7 +242,7 @@ function renderStrip(agent, points, tracks) {
     (track.spells || []).forEach((sp) => {
       const a = ms(sp.start_utc);
       const z = ms(sp.end_utc) ?? a;
-      if (a == null) return;
+      if (a == null || !inView(a, z)) return;
       const bracket = element("span", `ip-spell${sp.role ? " is-role" : ""}${ti > 0 ? " is-second" : ""}`);
       bracket.style.left = pos(a);
       bracket.style.width = `calc(${pos(z)} - ${pos(a)})`;
@@ -205,8 +256,41 @@ function renderStrip(agent, points, tracks) {
       brackets.append(bracket);
     });
   });
+  // Drag across the strip to zoom into that range; double-click to go back to the whole window.
+  const brush = element("span", "ip-brush");
+  brush.hidden = true;
+  strip.append(brush);
+  let dragFrom = null;
+  const at = (event) => {
+    const rect = strip.getBoundingClientRect();
+    return Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+  };
+  strip.addEventListener("pointerdown", (event) => {
+    dragFrom = at(event);
+    strip.setPointerCapture(event.pointerId);
+  });
+  strip.addEventListener("pointermove", (event) => {
+    if (dragFrom == null) return;
+    const now = at(event);
+    brush.hidden = false;
+    brush.style.left = `${Math.min(dragFrom, now) * 100}%`;
+    brush.style.width = `${Math.abs(now - dragFrom) * 100}%`;
+  });
+  strip.addEventListener("pointerup", (event) => {
+    if (dragFrom == null) return;
+    const now = at(event);
+    const [lo, hi] = [Math.min(dragFrom, now), Math.max(dragFrom, now)];
+    dragFrom = null;
+    brush.hidden = true;
+    if (hi - lo < 0.01) return; // a click, not a drag
+    const span = end - start;
+    onZoom({ start: start + lo * span, end: Math.max(start + hi * span, start + lo * span + HOUR_MS) });
+  });
+  strip.addEventListener("dblclick", () => onZoom(null));
+
   const axis = element("div", "ip-strip-axis");
-  axis.append(element("span", "", dayFormat.format(start)), element("span", "", "Oct 2"));
+  const label = (t) => (end - start < 4 * 24 * HOUR_MS ? timeFormat : dayFormat).format(t);
+  axis.append(element("span", "", label(start)), element("span", "", label(start + (end - start) / 2)), element("span", "", label(end)));
   const wrap = element("div");
   wrap.append(strip, brackets, axis);
   return wrap;
@@ -348,7 +432,7 @@ function renderCard(a) {
   }
   const head = element("div");
   head.append(title, sub);
-  card.append(head, renderStrip(a.agent, a.points, tracks));
+  card.append(head, renderTimeline(a.agent, a.points, tracks));
   tracks.forEach((track, i) => card.append(renderTrack(a, track, i, multiple)));
   return card;
 }

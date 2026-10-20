@@ -101,6 +101,13 @@
     .ip-strip-mark.is-raised i { height: 34px; }
     .ip-strip-mark b { padding: 0 4px; border-radius: 4px; background: var(--ink); color: white; font: 700 9px/13px var(--mono); }
     .ip-strip-mark i { width: 1px; height: 22px; background: var(--ink); }
+    .ip-zoom { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 2px; }
+    .ip-zoom-button { padding: 2px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); cursor: pointer; font: 700 10px/1.5 var(--mono); }
+    .ip-zoom-button:hover:not(:disabled) { border-color: var(--line-strong); }
+    .ip-zoom-button:disabled { opacity: .45; cursor: default; }
+    .ip-zoom-hint { color: var(--muted); font: 600 9px/1.3 var(--mono); }
+    .ip-strip { cursor: crosshair; touch-action: none; user-select: none; }
+    .ip-brush { position: absolute; top: 0; bottom: 0; background: color-mix(in srgb, var(--blue) 18%, transparent); border: 1px solid var(--blue); border-radius: 4px; pointer-events: none; }
     .ip-spell-row { position: relative; height: 16px; margin-top: 1px; }
     .ip-spell { position: absolute; top: 2px; height: 12px; min-width: 6px; border: solid color-mix(in srgb, var(--rust) 55%, transparent); border-width: 0 1px 1px; border-radius: 0 0 4px 4px; }
     .ip-spell span { position: absolute; top: 2px; left: 50%; transform: translateX(-50%); padding: 0 3px; background: var(--card); color: var(--muted); font: 700 9px/1 var(--mono); white-space: nowrap; }
@@ -208,6 +215,6 @@
       <section class="excluded" id="ip-excluded" hidden></section>
     </main>
   </div>
-  <script type="module" src="./scripts/interviews.js?v=20261020-spell-brackets-2"></script>
+  <script type="module" src="./scripts/interviews.js?v=20261020-zoom"></script>
 </body>
 </html>
