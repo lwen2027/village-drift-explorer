@@ -186,10 +186,10 @@ function renderPoint(agent, p) {
     if (p.rule === "before_recovery" && episode.drift_end?.reason) body.append(fact("How it ended", episode.drift_end.reason));
   }
   const links = element("div", "ip-links");
-  const copy = element("button", "ip-copy", "Copy village-exact command");
+  const copy = element("button", "ip-copy", "Copy call ID");
   copy.type = "button";
-  copy.title = p.call_id;
-  copy.addEventListener("click", () => copyText(`village-exact show ${p.call_id} --memory`, copy));
+  copy.title = `${p.call_id} — the logged model call to pass to village-exact show / replay`;
+  copy.addEventListener("click", () => copyText(p.call_id, copy));
   const t = ms(p.moment_utc);
   const replay = element("a", "", "Village replay ↗");
   replay.href = `https://theaidigest.org/village?date=${String(p.moment_utc).slice(0, 10)}&time=${t}&agent=${encodeURIComponent(agent)}`;
