@@ -172,23 +172,78 @@ function renderTimeline(agent, points, tracks) {
   const full = fullRange(agent, points);
   const wrap = element("div", "ip-timeline");
   const controls = element("div", "ip-zoom");
+  const out = element("button", "ip-zoom-button", "Zoom out");
   const fit = element("button", "ip-zoom-button", "Zoom to points");
   const all = element("button", "ip-zoom-button", "Whole window");
-  fit.type = all.type = "button";
-  controls.append(fit, all, element("span", "ip-zoom-hint", "drag across the timeline to zoom · double-click to reset"));
-  const body = element("div");
-  const draw = () => {
-    const view = zoomByAgent.get(agent) || full;
-    all.disabled = !zoomByAgent.has(agent);
-    body.replaceChildren(renderStrip(agent, points, tracks, view, (next) => {
-      if (next) zoomByAgent.set(agent, next);
-      else zoomByAgent.delete(agent);
-      draw();
-    }));
-  };
-  fit.addEventListener("click", () => {
-    zoomByAgent.set(agent, pointsRange(points, tracks, full));
+  out.type = fit.type = all.type = "button";
+  controls.append(out, fit, all, element("span", "ip-zoom-hint", "click to zoom in · drag to pan"));
+  const body = element("div", "ip-zoom-area");
+  const viewOf = () => zoomByAgent.get(agent) || full;
+  // Keep a view inside the goal window, at least an hour wide, and drop it when it covers everything.
+  const setView = (start, end) => {
+    const span = Math.min(Math.max(end - start, HOUR_MS), full.end - full.start);
+    let lo = Math.max(full.start, Math.min(full.end - span, start));
+    if (span >= full.end - full.start - 1) zoomByAgent.delete(agent);
+    else zoomByAgent.set(agent, { start: lo, end: lo + span });
     draw();
+  };
+  const zoomAround = (center, factor) => {
+    const view = viewOf();
+    const span = (view.end - view.start) / factor;
+    setView(center - span / 2, center + span / 2);
+  };
+  const draw = () => {
+    const view = viewOf();
+    const zoomed = zoomByAgent.has(agent);
+    out.disabled = all.disabled = !zoomed;
+    body.classList.toggle("is-zoomed", zoomed);
+    body.replaceChildren(renderStrip(agent, points, tracks, view));
+  };
+  // Pointer handling lives on the stable container, since the strip inside is redrawn while panning.
+  let drag = null;
+  let frame = null;
+  const fraction = (event) => {
+    const rect = body.getBoundingClientRect();
+    return Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+  };
+  body.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return;
+    drag = { x: event.clientX, view: viewOf(), moved: false };
+    body.setPointerCapture(event.pointerId);
+  });
+  body.addEventListener("pointermove", (event) => {
+    if (!drag) return;
+    const dx = event.clientX - drag.x;
+    if (!drag.moved && Math.abs(dx) < 4) return;
+    drag.moved = true;
+    body.classList.add("is-panning");
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = null;
+      const span = drag.view.end - drag.view.start;
+      const shift = (dx / body.getBoundingClientRect().width) * span;
+      setView(drag.view.start - shift, drag.view.end - shift);
+    });
+  });
+  const finish = (event) => {
+    if (!drag) return;
+    const view = viewOf();
+    if (!drag.moved) zoomAround(view.start + fraction(event) * (view.end - view.start), 3);
+    drag = null;
+    body.classList.remove("is-panning");
+  };
+  body.addEventListener("pointerup", finish);
+  body.addEventListener("pointercancel", () => {
+    drag = null;
+    body.classList.remove("is-panning");
+  });
+  out.addEventListener("click", () => {
+    const view = viewOf();
+    zoomAround((view.start + view.end) / 2, 1 / 3);
+  });
+  fit.addEventListener("click", () => {
+    const range = pointsRange(points, tracks, full);
+    setView(range.start, range.end);
   });
   all.addEventListener("click", () => {
     zoomByAgent.delete(agent);
@@ -199,7 +254,7 @@ function renderTimeline(agent, points, tracks) {
   return wrap;
 }
 
-function renderStrip(agent, points, tracks, view, onZoom) {
+function renderStrip(agent, points, tracks, view) {
   const trackTypes = tracks.map((track) => track.type);
   const episodes = episodesByAgent.get(agent) || [];
   const { start, end } = view;
@@ -256,38 +311,6 @@ function renderStrip(agent, points, tracks, view, onZoom) {
       brackets.append(bracket);
     });
   });
-  // Drag across the strip to zoom into that range; double-click to go back to the whole window.
-  const brush = element("span", "ip-brush");
-  brush.hidden = true;
-  strip.append(brush);
-  let dragFrom = null;
-  const at = (event) => {
-    const rect = strip.getBoundingClientRect();
-    return Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
-  };
-  strip.addEventListener("pointerdown", (event) => {
-    dragFrom = at(event);
-    strip.setPointerCapture(event.pointerId);
-  });
-  strip.addEventListener("pointermove", (event) => {
-    if (dragFrom == null) return;
-    const now = at(event);
-    brush.hidden = false;
-    brush.style.left = `${Math.min(dragFrom, now) * 100}%`;
-    brush.style.width = `${Math.abs(now - dragFrom) * 100}%`;
-  });
-  strip.addEventListener("pointerup", (event) => {
-    if (dragFrom == null) return;
-    const now = at(event);
-    const [lo, hi] = [Math.min(dragFrom, now), Math.max(dragFrom, now)];
-    dragFrom = null;
-    brush.hidden = true;
-    if (hi - lo < 0.01) return; // a click, not a drag
-    const span = end - start;
-    onZoom({ start: start + lo * span, end: Math.max(start + hi * span, start + lo * span + HOUR_MS) });
-  });
-  strip.addEventListener("dblclick", () => onZoom(null));
-
   const axis = element("div", "ip-strip-axis");
   const label = (t) => (end - start < 4 * 24 * HOUR_MS ? timeFormat : dayFormat).format(t);
   axis.append(element("span", "", label(start)), element("span", "", label(start + (end - start) / 2)), element("span", "", label(end)));
