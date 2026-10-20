@@ -183,6 +183,12 @@
       </section>
 
       <div class="controls">
+        <label class="control-label" for="ip-points"><span>Points shown</span>
+          <select class="control" id="ip-points">
+            <option value="first" selected>Point 1 only (first onset)</option>
+            <option value="all">All points</option>
+          </select>
+        </label>
         <label class="control-label" for="ip-sort"><span>Sort by</span>
           <select class="control" id="ip-sort">
             <option value="hours">Main-type drift hours</option>
@@ -219,6 +225,6 @@
       <section class="excluded" id="ip-excluded" hidden></section>
     </main>
   </div>
-  <script type="module" src="./scripts/interviews.js?v=20261020-ab-only"></script>
+  <script type="module" src="./scripts/interviews.js?v=20261020-point1"></script>
 </body>
 </html>

@@ -159,7 +159,9 @@ function fullRange(agent, points) {
 // The range around the card's points and the spells they belong to, padded and kept inside the window.
 function pointsRange(points, tracks, full) {
   const times = points.map((p) => ms(p.moment_utc)).filter((t) => t != null);
-  tracks.forEach((track) => (track.spells || []).filter((sp) => sp.role).forEach((sp) => times.push(ms(sp.start_utc), ms(sp.end_utc))));
+  if (pointMode !== "first") {
+    tracks.forEach((track) => (track.spells || []).filter((sp) => sp.role).forEach((sp) => times.push(ms(sp.start_utc), ms(sp.end_utc))));
+  }
   const valid = times.filter((t) => t != null);
   if (!valid.length) return full;
   const lo = Math.min(...valid);
@@ -302,7 +304,7 @@ function renderStrip(agent, points, tracks, view) {
       const a = ms(sp.start_utc);
       const z = ms(sp.end_utc) ?? a;
       // only spells A and B are drawn; every spell is still listed under the card
-      if (!sp.role || a == null || !inView(a, z)) return;
+      if (pointMode === "first" || !sp.role || a == null || !inView(a, z)) return;
       const left = Math.max(0, ((a - start) / (end - start)) * 100);
       const right = Math.min(100, ((z - start) / (end - start)) * 100);
       items.push({ sp, ti, left, width: Math.max(MIN_PCT, right - left), track, byRole });
@@ -442,6 +444,13 @@ function renderPoint(agent, p) {
   return item;
 }
 
+// Which points the page shows: only point 1 (the first onset of each interviewed type), or all of them.
+let pointMode = "first";
+const shown = (points) => (pointMode === "first" ? points.filter((p) => p.rule === "before_onset") : points);
+function viewOf(a) {
+  return { ...a, points: shown(a.points), tracks: tracksOf(a).map((t) => ({ ...t, points: shown(t.points) })) };
+}
+
 function tracksOf(a) {
   return a.tracks || [{ type: a.main_type, type_label: a.main_type_label, hours: a.main_type_hours, episodes: a.main_type_episodes, shape: a.shape, spells: a.spells, points: a.points }];
 }
@@ -508,6 +517,7 @@ function render() {
     review: (l, r) => reviewed(l) - reviewed(r)
   };
   const visible = selection.agents
+    .map(viewOf)
     .filter((a) => !type || tracksOf(a).some((t) => t.type === type))
     .filter((a) => !shape || tracksOf(a).some((t) => t.shape === shape))
     .filter((a) => !rule || a.points.some((p) => p.rule === rule))
@@ -522,7 +532,7 @@ function render() {
     .sort((l, r) => (sorters[sort] || sorters.hours)(l, r) || l.agent.localeCompare(r.agent));
   const list = document.querySelector("#ip-list");
   list.replaceChildren(...(visible.length ? visible.map(renderCard) : [element("p", "empty", "No agents match these filters.")]));
-  const all = selection.agents.flatMap((a) => a.points.map((p) => statusOf(a.agent, p)));
+  const all = selection.agents.map(viewOf).flatMap((a) => a.points.map((p) => statusOf(a.agent, p)));
   document.querySelector("#ip-meta").textContent =
     `${visible.length} of ${selection.agents.length} agents · ${all.length} points · ${all.filter((s) => s !== "open").length} reviewed`;
 }
@@ -541,6 +551,11 @@ function initialize() {
   RULE_ORDER.forEach((id) => {
     const n = selection.agents.filter((a) => a.points.some((p) => p.rule === id)).length;
     if (n) ruleSelect.append(new Option(`${RULES[id].n} · ${RULES[id].label} (${n})`, id));
+  });
+  document.querySelector("#ip-points").addEventListener("change", (event) => {
+    pointMode = event.target.value;
+    zoomByAgent.clear();  // a zoom fitted to the other set of points no longer fits
+    render();
   });
   ["#ip-sort", "#ip-type", "#ip-shape", "#ip-rule", "#ip-status"].forEach((id) => document.querySelector(id).addEventListener("change", render));
   document.querySelector("#ip-search").addEventListener("input", render);
