@@ -282,6 +282,14 @@ def interventions(conn, agents: list) -> dict:
 
 
 _TOOLS = "((input ? 'tools') or ((input->'config') ? 'tools'))"
+# Memory steps that some harnesses send with tools attached; the same test as exact_lib.kind_of.
+SESSION_END_PREFIX = "Now that you are consolidating your session"
+COMPACTION_MARK = "Your memory is getting too large"
+
+
+def _is_memory_step(request) -> bool:
+    text = json.dumps(request, ensure_ascii=False)
+    return COMPACTION_MARK in text or SESSION_END_PREFIX in text[-20000:]
 
 
 def agent_ids(conn, name: str) -> list:
@@ -290,7 +298,8 @@ def agent_ids(conn, name: str) -> list:
 
 def _nearest_turn(conn, ids, lo, hi, newest_first: bool):
     """The nearest turn call in [lo, hi]. Candidates come from the (agent_id, created_at) index without
-    reading any request; only those few are checked for tools, one at a time, nearest first."""
+    reading any request; only those few are checked for tools, one at a time, nearest first, and memory
+    steps (session end, compaction) are passed over."""
     order = "desc" if newest_first else "asc"
     cands = []
     for aid in ids:  # one agent id per query, so the index returns rows already in order
@@ -301,9 +310,11 @@ def _nearest_turn(conn, ids, lo, hi, newest_first: bool):
         ).fetchall()
     cands.sort(key=lambda r: r[1], reverse=newest_first)
     for cid, _ in cands:
-        row = conn.execute(f"select id, created_at, output from llm_calls where id = %s and {_TOOLS}", (cid,)).fetchone()
-        if row:
-            return row
+        row = conn.execute(
+            f"select id, created_at, output, input from llm_calls where id = %s and {_TOOLS}", (cid,)
+        ).fetchone()
+        if row and not _is_memory_step(row[3]):
+            return row[:3]
     return None
 
 
