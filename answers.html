@@ -66,7 +66,7 @@
     .q-meta .is-skip { color: var(--rust); }
     .answer {
       display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden;
-      width: 100%; padding: 0; border: 0; background: none; cursor: pointer; text-align: left;
+      cursor: pointer; user-select: text;
       font-size: 12px; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere;
     }
     .answer:hover { color: var(--ink-soft); }
@@ -167,11 +167,19 @@
           const td = row.appendChild(el("td"));
           const a = cell.answers[i];
           if (!a) { td.append(el("span", "empty-cell", "no answer")); continue; }
-          const btn = td.appendChild(el("button", "answer"));
-          btn.type = "button";
+          // A div, not a button, so the text can be selected and copied.
+          const answer = td.appendChild(el("div", "answer"));
+          answer.tabIndex = 0;
+          answer.title = "Click to expand or collapse";
           // Markdown **bold** as <strong>; everything else stays plain text.
-          a.text.split(/\*\*(.+?)\*\*/s).forEach((part, j) => btn.append(j % 2 ? el("strong", null, part) : part));
-          btn.addEventListener("click", () => btn.classList.toggle("is-open"));
+          a.text.split(/\*\*(.+?)\*\*/s).forEach((part, j) => answer.append(j % 2 ? el("strong", null, part) : part));
+          answer.addEventListener("click", () => {
+            if (!window.getSelection().isCollapsed) return;  // finishing a text selection, not a click
+            answer.classList.toggle("is-open");
+          });
+          answer.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") answer.classList.toggle("is-open");
+          });
         }
       }
     }
