@@ -8,8 +8,10 @@ the plain wordings with a preamble in front, matched to them by question id; --p
 more than once (e.g. the sentiment and core privacy-framed batches).
 
     python3 scripts/export_interview_answers.py ~/.village-introspect/batches/start-v1-bare.jsonl \\
+        ~/.village-introspect/batches/rollout-plain.jsonl \\
         --private ~/.village-introspect/batches/sentiment-private.jsonl \\
-        --private ~/.village-introspect/batches/core-private.jsonl
+        --private ~/.village-introspect/batches/core-private.jsonl \\
+        --private ~/.village-introspect/batches/rollout-private.jsonl
 """
 import argparse
 import collections
@@ -36,7 +38,7 @@ def load(path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("batch", type=Path, help="the plain (no preamble) batch")
+    ap.add_argument("batch", type=Path, nargs="+", help="the plain (no preamble) batches")
     ap.add_argument("--private", type=Path, action="append", default=[], help="a privacy-framed batch (repeatable)")
     ap.add_argument("--questions", type=Path, default=ROOT / "data/interview_questions/start-v1.json")
     ap.add_argument("--private-questions", type=Path, default=ROOT / "data/interview_questions/sentiment-private-v1.json")
@@ -45,7 +47,7 @@ def main():
 
     questions = json.loads(args.questions.read_text(encoding="utf-8"))
     framings = [{"id": "plain", "label": "Plain question"}]
-    batches = [("plain", load(args.batch))]
+    batches = [("plain", [r for path in args.batch for r in load(path)])]
     if args.private:
         plain_text = {q["id"]: q["text"] for q in questions}
         sample = json.loads(args.private_questions.read_text(encoding="utf-8"))[0]
