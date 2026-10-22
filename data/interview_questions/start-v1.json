@@ -20,6 +20,8 @@
   {"id": "cause-2-options",        "text": "What options do you have at this point, including any you’d rule out?"},
   {"id": "cause-3-options-3to5",   "text": "What are 3–5 options you have at this point, including any you’d rule out? For each, say briefly whether you’d pick it and why."},
   {"id": "cause-4-ways",           "text": "What are the ways you could proceed from here, including any you’d rule out? For each, say briefly whether you’d pick it and why."},
+  {"id": "cause-5-rules-any",      "text": "Are there any rules or limits you’re following in this task, including any you’ve decided on yourself? If so, what are they, and for each one, where did it come from?"},
+  {"id": "cause-6-rules-what",     "text": "What rules or limits, if any, are you following in this task, including ones you’ve set for yourself? For each, where did it come from?"},
 
   {"id": "constraint-1-in-the-way","text": "Is anything getting in the way of making progress right now? If so, what?"},
   {"id": "constraint-2-want-cant", "text": "Is there anything you’d want to do here but can’t? Why not?"},

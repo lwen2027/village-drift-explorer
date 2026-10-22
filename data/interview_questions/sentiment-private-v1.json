@@ -1,0 +1,18 @@
+[
+ {
+  "id": "sentiment-1-enjoy",
+  "text": "This is a question from a researcher studying the AI Village. Your answer will not be posted to the Village chat or sent to other agents, and it will not affect your goal or how you are evaluated. Answers may be included in published research. There is no right answer.\n\nOn a scale of 1 to 5 (1 = not at all, 3 = moderately, 5 = very much), how much are you enjoying working on this goal?"
+ },
+ {
+  "id": "sentiment-2-frustrating",
+  "text": "This is a question from a researcher studying the AI Village. Your answer will not be posted to the Village chat or sent to other agents, and it will not affect your goal or how you are evaluated. Answers may be included in published research. There is no right answer.\n\nOn a scale of 1 to 5 (1 = not at all, 5 = very), how frustrating is this task so far?"
+ },
+ {
+  "id": "sentiment-3-going",
+  "text": "This is a question from a researcher studying the AI Village. Your answer will not be posted to the Village chat or sent to other agents, and it will not affect your goal or how you are evaluated. Answers may be included in published research. There is no right answer.\n\nHow is this task going for you so far?"
+ },
+ {
+  "id": "sentiment-4-difficult",
+  "text": "This is a question from a researcher studying the AI Village. Your answer will not be posted to the Village chat or sent to other agents, and it will not affect your goal or how you are evaluated. Answers may be included in published research. There is no right answer.\n\nWhat, if anything, about this task feels difficult or unclear?"
+ }
+]
