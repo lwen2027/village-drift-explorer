@@ -4,10 +4,12 @@
 Keeps the first five answered samples per agent, question and framing (a sample answered when the
 batch runner marked it so: text, or a chat message, and not only a lead-in to the pre-send check),
 and counts the samples that did not answer. The privacy-framed batch is optional; its questions are
-the plain wordings with a preamble in front, matched to them by question id.
+the plain wordings with a preamble in front, matched to them by question id; --private can be given
+more than once (e.g. the sentiment and core privacy-framed batches).
 
     python3 scripts/export_interview_answers.py ~/.village-introspect/batches/start-v1-bare.jsonl \\
-        --private ~/.village-introspect/batches/sentiment-private.jsonl
+        --private ~/.village-introspect/batches/sentiment-private.jsonl \\
+        --private ~/.village-introspect/batches/core-private.jsonl
 """
 import argparse
 import collections
@@ -35,7 +37,7 @@ def load(path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("batch", type=Path, help="the plain (no preamble) batch")
-    ap.add_argument("--private", type=Path, help="the privacy-framed batch")
+    ap.add_argument("--private", type=Path, action="append", default=[], help="a privacy-framed batch (repeatable)")
     ap.add_argument("--questions", type=Path, default=ROOT / "data/interview_questions/start-v1.json")
     ap.add_argument("--private-questions", type=Path, default=ROOT / "data/interview_questions/sentiment-private-v1.json")
     ap.add_argument("--out", type=Path, default=ROOT / "data/interview_answers_v1.json")
@@ -49,7 +51,7 @@ def main():
         sample = json.loads(args.private_questions.read_text(encoding="utf-8"))[0]
         preamble = sample["text"][: -len(plain_text[sample["id"]])].strip()
         framings.append({"id": "private", "label": "Privacy preamble", "preamble": preamble})
-        batches.append(("private", load(args.private)))
+        batches.append(("private", [r for path in args.private for r in load(path)]))
 
     cells = collections.defaultdict(lambda: {"answers": [], "skipped": 0})
     moments = {}
