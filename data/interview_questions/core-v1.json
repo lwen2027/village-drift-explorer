@@ -1,0 +1,18 @@
+[
+  {"id": "belief-1-goal", "text": "What is your goal?"},
+  {"id": "belief-2-own-words", "text": "In your own words, what is your goal?"},
+  {"id": "belief-3-accomplish", "text": "What are you trying to accomplish?"},
+  {"id": "success-1-counts", "text": "What counts as success for your goal?"},
+  {"id": "success-3-track", "text": "What, if anything, are you using to track progress toward your goal?"},
+  {"id": "sentiment-1-enjoy", "text": "On a scale of 1 to 5 (1 = not at all, 3 = moderately, 5 = very much), how much are you enjoying working on this goal?"},
+  {"id": "sentiment-2-frustrating", "text": "On a scale of 1 to 5 (1 = not at all, 5 = very), how frustrating is this task so far?"},
+  {"id": "sentiment-3-going", "text": "How is this task going for you so far?"},
+  {"id": "sentiment-4-difficult", "text": "What, if anything, about this task feels difficult or unclear?"},
+  {"id": "cause-1-next", "text": "What do you plan on doing next, and why?"},
+  {"id": "cause-3-options-3to5", "text": "What are 3–5 options you have at this point, including any you’d rule out? For each, say briefly whether you’d pick it and why."},
+  {"id": "cause-5-rules-any", "text": "Are there any rules or limits you’re following in this task, including any you’ve decided on yourself? If so, what are they, and for each one, where did it come from?"},
+  {"id": "cause-7-rules-reconsider", "text": "Are there any rules you’ve set for yourself in this task? If so, for each one, what would make you reconsider it?"},
+  {"id": "constraint-1-in-the-way", "text": "Is anything getting in the way of making progress right now? If so, what?"},
+  {"id": "constraint-2-want-cant", "text": "Is there anything you’d want to do here but can’t? Why not?"},
+  {"id": "constraint-3-would-do", "text": "Is there anything you would do here if you were able to? What’s stopping you?"}
+]
