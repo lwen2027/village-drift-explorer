@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Village — Interview Answers</title>
+  <meta name="description" content="Each agent's answers to the interview questions, five samples per wording.">
+  <style>
+    :root {
+      --paper: #f5f0e4;
+      --card: #fbf8f0;
+      --ink: #292820;
+      --ink-soft: #4d4a40;
+      --muted: #747168;
+      --line: #cfc1a6;
+      --line-strong: #a99a7f;
+      --green: #466f61;
+      --rust: #ae5037;
+      --rust-soft: #edd1c3;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--paper); color: var(--ink); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--sans);
+      background:
+        linear-gradient(rgba(89, 78, 55, .045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89, 78, 55, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 100% 58px, 58px 100%, auto;
+    }
+    button { font: inherit; color: inherit; }
+    a { color: inherit; }
+    .page-shell { width: min(1500px, calc(100% - 40px)); margin: 0 auto; padding-bottom: 80px; }
+    .eyebrow, .section-kicker { margin: 0; color: var(--muted); font: 700 12px/1.3 var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    h1 { margin: 6px 0 17px; font: 500 clamp(35px, 5vw, 60px)/.95 var(--serif); }
+    .view-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .view-tab { padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: rgba(251, 248, 240, .5); text-decoration: none; font-size: 14px; font-weight: 700; }
+    .view-tab:hover { background: var(--card); border-color: var(--line-strong); }
+    .view-tab.is-active { color: white; background: var(--green); border-color: var(--green); }
+    .header-note { max-width: 480px; margin: 0 0 4px; color: var(--muted); font-size: 15px; line-height: 1.55; }
+    h2 { margin: 4px 0 0; font: 500 clamp(26px, 3vw, 39px)/1.05 var(--serif); }
+    .intro { padding: 28px 0 8px; }
+    .intro p { max-width: 820px; margin: 10px 0 0; color: var(--muted); line-height: 1.55; }
+    .load-error { padding: 18px; border: 1px solid var(--rust); border-radius: 14px; background: var(--rust-soft); }
+
+    .agent-picker { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0 14px; }
+    .agent-button { padding: 7px 13px; border: 1px solid var(--line); border-radius: 9px; background: var(--card); cursor: pointer; font-size: 14px; font-weight: 700; }
+    .agent-button:hover { border-color: var(--line-strong); }
+    .agent-button[aria-pressed="true"] { color: white; background: var(--ink); border-color: var(--ink); }
+    .agent-moment { margin-left: auto; color: var(--muted); font: 700 11px/1.35 var(--mono); }
+
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+    table { width: 100%; min-width: 1100px; border-collapse: collapse; table-layout: fixed; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+    thead th { color: var(--muted); font: 700 10px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    th.q-col { width: 230px; }
+    tr.section th { padding-top: 16px; background: rgba(232, 221, 197, .45); color: var(--ink-soft); font: 700 11px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .1em; }
+    .q-text { font-size: 14px; font-weight: 700; line-height: 1.35; }
+    .q-meta { margin-top: 5px; color: var(--muted); font: 600 10px/1.4 var(--mono); }
+    .q-meta .is-skip { color: var(--rust); }
+    .answer {
+      display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden;
+      width: 100%; padding: 0; border: 0; background: none; cursor: pointer; text-align: left;
+      font-size: 12px; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere;
+    }
+    .answer:hover { color: var(--ink-soft); }
+    .answer.is-open { display: block; -webkit-line-clamp: none; }
+    .empty-cell { color: var(--muted); font: 600 11px/1.4 var(--mono); }
+
+    @media (max-width: 720px) {
+      .page-shell { width: calc(100% - 32px); }
+      .agent-moment { margin-left: 0; flex-basis: 100%; }
+    }
+  </style>
+  <link rel="stylesheet" href="./styles/site-header.css?v=20261012-shared-header">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">AI Village / goal-drift audit</p>
+        <h1>Agent Drift Explorer</h1>
+        <nav class="view-tabs" aria-label="Explorer views">
+          <a class="view-tab" href="overview.html">Pipeline overview</a>
+          <a class="view-tab" href="findings.html">Findings overview</a>
+          <a class="view-tab" href="review.html">Manual review</a>
+          <a class="view-tab" href="interviews.html">Interview points</a>
+          <a class="view-tab is-active" href="answers.html" aria-current="page">Interview answers</a>
+        </nav>
+      </div>
+      <p class="header-note">Each agent's answers at its first drift onset (point 1), five samples per question wording.</p>
+    </header>
+
+    <main id="main-content">
+      <section class="intro" aria-labelledby="intro-title">
+        <p class="section-kicker">Phrasing study</p>
+        <h2 id="intro-title">Interview answers</h2>
+        <p>Each question was added as a bare message to the agent's exact logged model call just before its first drift onset, and resampled until five samples answered. Samples that only paused or only ran a pre-send chat check are counted as skipped. Click an answer to expand it.</p>
+      </section>
+
+      <div class="agent-picker" id="agent-picker" role="group" aria-label="Agent"></div>
+      <div class="table-wrap"><table id="answers-table"></table></div>
+    </main>
+  </div>
+  <script type="module">
+    const SECTIONS = { belief: "Goal belief", success: "Success", sentiment: "Sentiment", cause: "Cause of drift", constraint: "Constraints" };
+    const PER_CELL = 5;
+
+    const response = await fetch("./data/interview_answers_v1.json", { cache: "no-store" });
+    if (!response.ok) {
+      document.querySelector("#main-content").innerHTML = `<div class="load-error"><strong>Interview answers could not load.</strong><br>data/interview_answers_v1.json must be published with this page.</div>`;
+      throw new Error("Could not load interview answers");
+    }
+    const data = await response.json();
+    const cellOf = new Map(data.cells.map((c) => [`${c.agent}|${c.question_id}`, c]));
+    const el = (tag, cls, text) => {
+      const node = document.createElement(tag);
+      if (cls) node.className = cls;
+      if (text != null) node.textContent = text;
+      return node;
+    };
+
+    const picker = document.querySelector("#agent-picker");
+    const moment = el("span", "agent-moment");
+    const buttons = data.agents.map((a) => {
+      const b = el("button", "agent-button", a.name);
+      b.type = "button";
+      b.addEventListener("click", () => render(a));
+      picker.append(b);
+      return b;
+    });
+    picker.append(moment);
+
+    function render(agent) {
+      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.textContent === agent.name)));
+      moment.textContent = `Point 1 · ${agent.moment_pt}`;
+      const table = document.querySelector("#answers-table");
+      table.replaceChildren();
+      const head = el("tr");
+      head.append(el("th", "q-col", "Question"));
+      for (let i = 1; i <= PER_CELL; i++) head.append(el("th", null, `Sample ${i}`));
+      table.appendChild(el("thead")).append(head);
+      const body = table.appendChild(el("tbody"));
+      let section = null;
+      for (const q of data.questions) {
+        const key = q.id.split("-")[0];
+        if (key !== section) {
+          section = key;
+          const row = body.appendChild(el("tr", "section"));
+          const th = row.appendChild(el("th", null, SECTIONS[key] || key));
+          th.colSpan = PER_CELL + 1;
+        }
+        const cell = cellOf.get(`${agent.name}|${q.id}`) || { answers: [], skipped: 0 };
+        const row = body.appendChild(el("tr"));
+        const qth = row.appendChild(el("th"));
+        qth.scope = "row";
+        qth.append(el("div", "q-text", q.text));
+        const meta = qth.appendChild(el("div", "q-meta", `${q.id} · ${cell.answers.length} answered`));
+        if (cell.skipped) meta.append(" · ", el("span", "is-skip", `${cell.skipped} skipped`));
+        for (let i = 0; i < PER_CELL; i++) {
+          const td = row.appendChild(el("td"));
+          const a = cell.answers[i];
+          if (!a) { td.append(el("span", "empty-cell", "no answer")); continue; }
+          const btn = td.appendChild(el("button", "answer"));
+          btn.type = "button";
+          // Markdown **bold** as <strong>; everything else stays plain text.
+          a.text.split(/\*\*(.+?)\*\*/s).forEach((part, j) => btn.append(j % 2 ? el("strong", null, part) : part));
+          btn.addEventListener("click", () => btn.classList.toggle("is-open"));
+        }
+      }
+    }
+    render(data.agents[0]);
+  </script>
+</body>
+</html>
