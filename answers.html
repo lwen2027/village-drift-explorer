@@ -55,7 +55,9 @@
     .agent-button[aria-pressed="true"] { color: white; background: var(--ink); border-color: var(--ink); }
     .agent-moment { margin-left: auto; color: var(--muted); font: 700 11px/1.35 var(--mono); }
 
-    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+    /* overflow-anchor: none, so the browser's scroll anchoring doesn't move the page when an answer opens or
+       closes; toggleAnswer keeps the answer in place instead. */
+    .table-wrap { overflow-x: auto; overflow-anchor: none; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
     table { width: 100%; min-width: 1220px; border-collapse: collapse; table-layout: fixed; }
     th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
     thead th { color: var(--muted); font: 700 10px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
@@ -324,6 +326,15 @@
       setTimeout(() => URL.revokeObjectURL(link.href), 1000);
     });
 
+    // Opening or closing an answer resizes its whole table row. Keep the answer's top where it was on
+    // screen; if it had scrolled above the screen (reading down a long answer), closing brings it back
+    // to the top.
+    function toggleAnswer(answer) {
+      const before = answer.getBoundingClientRect().top;
+      answer.classList.toggle("is-open");
+      window.scrollBy(0, answer.getBoundingClientRect().top - Math.max(before, 12));
+    }
+
     function render(agent) {
       buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.textContent === agent.name)));
       moment.textContent = `Point 1 · ${agent.moment_pt}`;
@@ -375,10 +386,10 @@
           a.text.split(/\*\*(.+?)\*\*/s).forEach((part, j) => answer.append(j % 2 ? el("strong", null, part) : part));
           answer.addEventListener("click", () => {
             if (!window.getSelection().isCollapsed) return;  // finishing a text selection, not a click
-            answer.classList.toggle("is-open");
+            toggleAnswer(answer);
           });
           answer.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") answer.classList.toggle("is-open");
+            if (event.key === "Enter") toggleAnswer(answer);
           });
         }
         });
