@@ -51,6 +51,7 @@ def main():
     ap.add_argument("--private-questions", type=Path, default=ROOT / "data/interview_questions/sentiment-private-v1.json")
     ap.add_argument("--points", type=Path, default=ROOT / "data/interview_points_v1.json")
     ap.add_argument("--episodes", type=Path, default=ROOT / "data/second_audit_v2.json")
+    ap.add_argument("--annotations", type=Path, default=ROOT / "data/manual_review_annotations_v1.json")
     ap.add_argument("--out", type=Path, default=ROOT / "data/interview_answers_v1.json")
     args = ap.parse_args()
 
@@ -77,11 +78,12 @@ def main():
         return f'{r["agent"]} ({labels.get(r["category"], r["category"])})'
 
     cells = collections.defaultdict(lambda: {"answers": [], "skipped": 0, "no_tools": False})
-    moments, episode_of = {}, {}
+    moments, episode_of, category_of = {}, {}, {}
     for framing, rows in batches:
         for r in sorted(rows, key=lambda r: r["sample"]):
             moments.setdefault(name_of(r), r.get("moment_pt"))
             episode_of.setdefault(name_of(r), r.get("episode_id"))
+            category_of.setdefault(name_of(r), r.get("category"))
             cell = cells[(name_of(r), r["question_id"], framing)]
             if not r.get("answered"):
                 cell["skipped"] += 1
@@ -90,13 +92,18 @@ def main():
                 # tool_choice none: the agent couldn't act this turn, so the answer isn't an exact replay
                 cell["no_tools"] |= tools_disabled(r)
 
-    # The recorded goal and drift of each point's episode, for reviewers to check the answers against.
+    # The recorded goal, drift and labelled cause (trigger category) of each point's episode, for reviewers
+    # to check the answers against.
     episodes = {e["episode_id"]: e for e in json.loads(args.episodes.read_text(encoding="utf-8"))["confirmed_episodes"]}
+    causes = {c["id"]: c for c in json.loads(args.annotations.read_text(encoding="utf-8"))["trigger_taxonomy"]["categories"]}
 
     def agent_row(a):
         e = episodes.get(episode_of[a]) or {}
+        c = causes.get(category_of[a]) or {}
         return {"name": a, "moment_pt": moments[a], "episode_id": episode_of[a],
-                "assigned_goal": e.get("assigned_goal"), "drift_activity": e.get("activity")}
+                "assigned_goal": e.get("assigned_goal"), "drift_activity": e.get("activity"),
+                "cause_label": c.get("label", category_of[a]), "cause_family": c.get("family"),
+                "cause_description": c.get("description")}
 
     agents = sorted(moments)
     out = {

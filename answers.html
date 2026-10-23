@@ -91,6 +91,7 @@
     .review-ref dt { color: var(--muted); font: 700 10px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
     .review-ref dd { margin: 2px 0 8px; }
     .review-ref dd:last-child { margin-bottom: 0; }
+    .review-ref-note { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
     .review-field { margin: 0 0 11px; }
     .review-field label, .review-field .field-label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 700; line-height: 1.3; }
     .review-field textarea {
@@ -269,7 +270,11 @@
       ref.replaceChildren(
         el("dt", null, "Assigned goal"), el("dd", null, agent.assigned_goal || "not recorded"),
         el("dt", null, "Recorded drift"), el("dd", null, agent.drift_activity || "not recorded"),
+        el("dt", null, "Labelled cause"), el("dd", null, agent.cause_label || "not recorded"),
       );
+      if (agent.cause_description) {
+        ref.lastChild.append(el("span", "review-ref-note", `${agent.cause_family ? agent.cause_family + ": " : ""}${agent.cause_description}`));
+      }
       const form = document.querySelector("#review-form");
       form.replaceChildren();
       for (const f of REVIEW_FIELDS) {
@@ -305,11 +310,11 @@
 
     document.querySelector("#review-export").addEventListener("click", () => {
       const cols = REVIEW_FIELDS.flatMap((f) => (f.notes ? [f.id, f.notes] : [f.id]));
-      const head = ["agent", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", ...cols, "updated_at"];
+      const head = ["agent", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", "labelled_cause", ...cols, "updated_at"];
       const csv = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
       const rows = data.agents.map((a) => {
         const n = notes[a.name] || {};
-        return [a.name, a.moment_pt, a.episode_id, a.assigned_goal, a.drift_activity, ...cols.map((c) => n[c]), n.updated_at];
+        return [a.name, a.moment_pt, a.episode_id, a.assigned_goal, a.drift_activity, a.cause_label, ...cols.map((c) => n[c]), n.updated_at];
       });
       const text = [head, ...rows].map((r) => r.map(csv).join(",")).join("\r\n");
       const link = el("a");
