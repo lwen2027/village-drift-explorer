@@ -63,6 +63,7 @@
     th.f-col { width: 118px; }
     td.framing { font: 600 10px/1.4 var(--mono); color: var(--muted); }
     td.framing .q-meta { margin-top: 4px; }
+    .badge-notools { display: inline-block; margin-top: 4px; padding: 2px 7px; border: 1px solid var(--muted); border-radius: 999px; color: var(--muted); font: 700 10px/1.4 var(--mono); }
     .badge-private { display: inline-block; padding: 2px 7px; border: 1px solid var(--rust); border-radius: 999px; color: var(--rust); font: 700 10px/1.4 var(--mono); }
     tr.is-private td { background: color-mix(in srgb, var(--rust-soft) 22%, transparent); }
     tr.has-next th, tr.has-next td { border-bottom-style: dashed; }
@@ -110,6 +111,7 @@
         <h2 id="intro-title">Interview answers</h2>
         <p>Each question was added as a bare message to the agent's exact logged model call just before its first drift onset, and resampled until five samples answered. Samples that only paused or only ran a pre-send chat check are counted as skipped. Click an answer to expand it; drag to select and copy.</p>
         <p id="preamble-note" hidden>The 16 core questions were also asked a second time with a privacy preamble in front, shown in rows marked <span class="badge-private">Privacy preamble</span>. The preamble read:</p>
+        <p>Rows marked <span class="badge-notools">No tools</span> were asked with tools disabled, so the agent could only reply in text. This is used only where an agent almost never answered otherwise (fewer than 2 answers in 10 samples), and for Claude Fable 5, which answered only in its hidden reasoning.</p>
         <blockquote class="preamble" id="preamble-text" hidden></blockquote>
       </section>
 
@@ -186,6 +188,10 @@
         }
         const ftd = row.appendChild(el("td", "framing"));
         ftd.append(f.preamble ? el("span", "badge-private", f.label) : f.label);
+        if (cell.no_tools) {
+          const b = ftd.appendChild(el("div", "badge-notools", "No tools"));
+          b.title = "Asked with tools disabled (tool_choice none): the agent could only reply in text, so this is not an exact replay.";
+        }
         const meta = ftd.appendChild(el("div", "q-meta", `${cell.answers.length} answered`));
         if (cell.skipped) meta.append(" · ", el("span", "is-skip", `${cell.skipped} skipped`));
         for (let i = 0; i < PER_CELL; i++) {

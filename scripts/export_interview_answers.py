@@ -68,7 +68,7 @@ def main():
             return r["agent"]
         return f'{r["agent"]} ({labels.get(r["category"], r["category"])})'
 
-    cells = collections.defaultdict(lambda: {"answers": [], "skipped": 0})
+    cells = collections.defaultdict(lambda: {"answers": [], "skipped": 0, "no_tools": False})
     moments = {}
     for framing, rows in batches:
         for r in sorted(rows, key=lambda r: r["sample"]):
@@ -78,6 +78,8 @@ def main():
                 cell["skipped"] += 1
             elif len(cell["answers"]) < PER_CELL:
                 cell["answers"].append({"sample": r["sample"], "text": answer_text(r)})
+                # tool_choice none: the agent couldn't act this turn, so the answer isn't an exact replay
+                cell["no_tools"] |= any(e.get("op") == "no_tools" for e in r.get("edits") or [])
 
     agents = sorted(moments)
     out = {
