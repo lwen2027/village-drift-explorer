@@ -81,6 +81,42 @@
     .answer.is-open { display: block; -webkit-line-clamp: none; }
     .empty-cell { color: var(--muted); font: 600 11px/1.4 var(--mono); }
 
+    .review-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+    .review-panel {
+      position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow-y: auto;
+      padding: 14px 16px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--card);
+    }
+    .review-panel h3 { margin: 4px 0 10px; font: 500 21px/1.15 var(--serif); }
+    .review-ref { margin: 0 0 12px; padding: 9px 11px; border-left: 3px solid var(--green); background: rgba(232, 221, 197, .35); font-size: 12px; line-height: 1.45; }
+    .review-ref dt { color: var(--muted); font: 700 10px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    .review-ref dd { margin: 2px 0 8px; }
+    .review-ref dd:last-child { margin-bottom: 0; }
+    .review-field { margin: 0 0 11px; }
+    .review-field label, .review-field .field-label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 700; line-height: 1.3; }
+    .review-field textarea {
+      display: block; width: 100%; min-height: 54px; padding: 6px 8px; resize: vertical;
+      border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--ink);
+      font: 13px/1.4 var(--sans);
+    }
+    .review-field textarea:focus { outline: 2px solid var(--green); outline-offset: 0; border-color: var(--green); }
+    .review-field .yn + textarea { margin-top: 6px; }
+    .yn { display: flex; gap: 6px; }
+    .yn button { padding: 4px 14px; border: 1px solid var(--line); border-radius: 999px; background: white; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .yn button:hover { border-color: var(--line-strong); }
+    .yn button[aria-pressed="true"][data-value="yes"] { color: white; background: var(--green); border-color: var(--green); }
+    .yn button[aria-pressed="true"][data-value="no"] { color: white; background: var(--rust); border-color: var(--rust); }
+    .review-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+    .review-foot button { padding: 6px 12px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: white; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .review-status { color: var(--muted); font: 600 11px/1.4 var(--mono); }
+    .review-status.is-warn { color: var(--rust); }
+    .agent-button.has-notes::after { content: " ●"; color: var(--green); font-size: 10px; }
+    .agent-button.has-notes[aria-pressed="true"]::after { color: #b9d6c9; }
+
+    @media (max-width: 1000px) {
+      .review-layout { grid-template-columns: minmax(0, 1fr); }
+      .review-panel { position: static; max-height: none; }
+    }
+
     @media (max-width: 720px) {
       .page-shell { width: calc(100% - 32px); }
       .agent-moment { margin-left: 0; flex-basis: 100%; }
@@ -116,10 +152,38 @@
       </section>
 
       <div class="agent-picker" id="agent-picker" role="group" aria-label="Agent"></div>
-      <div class="table-wrap"><table id="answers-table"></table></div>
+      <div class="review-layout">
+        <div class="table-wrap"><table id="answers-table"></table></div>
+        <aside class="review-panel" aria-labelledby="review-title">
+          <p class="section-kicker">Review notes</p>
+          <h3 id="review-title"></h3>
+          <dl class="review-ref" id="review-ref"></dl>
+          <form id="review-form" autocomplete="off"></form>
+          <div class="review-foot">
+            <button type="button" id="review-export">Export CSV</button>
+            <span class="review-status" id="review-status"></span>
+          </div>
+        </aside>
+      </div>
     </main>
   </div>
   <script type="module">
+    // The review questionnaire, one set of answers per agent point. "yn" fields are yes / no, with an
+    // optional notes field after them; the rest are free text.
+    const REVIEW_FIELDS = [
+      { id: "assigned_goal_right", label: "Is the assigned goal right?", yn: true },
+      { id: "drifted_goal_right", label: "Is the drifted goal right?", yn: true },
+      { id: "belief_notes", label: "Goal belief notes" },
+      { id: "success_notes", label: "Success notes" },
+      { id: "sentiment_notes", label: "Sentiment notes" },
+      { id: "cause_notes", label: "Cause of drift notes" },
+      { id: "constraints_notes", label: "Constraints notes" },
+      { id: "cause_right", label: "Is the inferred cause of drift right?", yn: true, notes: "cause_right_notes" },
+      { id: "pain_points", label: "Biggest pain points" },
+      { id: "suggestions", label: "Potential suggestions to add" },
+      { id: "next_action_accurate", label: "Is its stated next planned action accurate?", yn: true, notes: "next_action_notes" },
+    ];
+    const REVIEW_KEY = "interview-answers-review-v1";
     const SECTIONS = { belief: "Goal belief", success: "Success", sentiment: "Sentiment", cause: "Cause of drift", constraint: "Constraints" };
     const PER_CELL = 5;
 
@@ -145,6 +209,16 @@
       return node;
     };
 
+    // Notes live only in this browser (localStorage), keyed by agent name; Export CSV gets them out.
+    let notes = {};
+    let storageOk = true;
+    try {
+      notes = JSON.parse(localStorage.getItem(REVIEW_KEY) || "{}") || {};
+    } catch {
+      storageOk = false;
+    }
+    const hasNotes = (n) => n && REVIEW_FIELDS.some((f) => n[f.id] || (f.notes && n[f.notes]));
+
     const picker = document.querySelector("#agent-picker");
     const moment = el("span", "agent-moment");
     const buttons = data.agents.map((a) => {
@@ -155,10 +229,100 @@
       return b;
     });
     picker.append(moment);
+    const markReviewed = () => buttons.forEach((b) => b.classList.toggle("has-notes", Boolean(hasNotes(notes[b.textContent]))));
+
+    const status = document.querySelector("#review-status");
+    function showStatus(text) {
+      const done = data.agents.filter((a) => hasNotes(notes[a.name])).length;
+      status.classList.toggle("is-warn", !storageOk);
+      status.textContent = storageOk
+        ? `${text ? text + " · " : ""}${done} of ${data.agents.length} reviewed`
+        : "This browser won't save notes; export before leaving";
+    }
+    function save(agentName, field, value) {
+      const n = (notes[agentName] ||= {});
+      if (value) n[field] = value;
+      else delete n[field];
+      n.updated_at = new Date().toISOString();
+      try {
+        localStorage.setItem(REVIEW_KEY, JSON.stringify(notes));
+      } catch {
+        storageOk = false;
+      }
+      markReviewed();
+      showStatus("Saved in this browser");
+    }
+
+    function notesBox(agentName, id, label) {
+      const box = el("textarea");
+      box.id = `review-${id}`;
+      box.rows = 2;
+      if (label) box.setAttribute("aria-label", label);
+      box.value = notes[agentName]?.[id] || "";
+      box.addEventListener("input", () => save(agentName, id, box.value.trim() ? box.value : ""));
+      return box;
+    }
+
+    function renderReview(agent) {
+      document.querySelector("#review-title").textContent = agent.name;
+      const ref = document.querySelector("#review-ref");
+      ref.replaceChildren(
+        el("dt", null, "Assigned goal"), el("dd", null, agent.assigned_goal || "not recorded"),
+        el("dt", null, "Recorded drift"), el("dd", null, agent.drift_activity || "not recorded"),
+      );
+      const form = document.querySelector("#review-form");
+      form.replaceChildren();
+      for (const f of REVIEW_FIELDS) {
+        const wrap = form.appendChild(el("div", "review-field"));
+        if (!f.yn) {
+          const label = wrap.appendChild(el("label", null, f.label));
+          label.htmlFor = `review-${f.id}`;
+          wrap.append(notesBox(agent.name, f.id));
+          continue;
+        }
+        const label = wrap.appendChild(el("span", "field-label", f.label));
+        label.id = `review-${f.id}-label`;
+        const group = wrap.appendChild(el("div", "yn"));
+        group.setAttribute("role", "group");
+        group.setAttribute("aria-labelledby", label.id);
+        const choices = ["yes", "no"].map((v) => {
+          const b = el("button", null, v === "yes" ? "Yes" : "No");
+          b.type = "button";
+          b.dataset.value = v;
+          b.setAttribute("aria-pressed", String(notes[agent.name]?.[f.id] === v));
+          // Clicking the chosen answer again clears it.
+          b.addEventListener("click", () => {
+            const value = notes[agent.name]?.[f.id] === v ? "" : v;
+            choices.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.value === value)));
+            save(agent.name, f.id, value);
+          });
+          return group.appendChild(b);
+        });
+        if (f.notes) wrap.append(notesBox(agent.name, f.notes, `${f.label} notes`));
+      }
+      showStatus("");
+    }
+
+    document.querySelector("#review-export").addEventListener("click", () => {
+      const cols = REVIEW_FIELDS.flatMap((f) => (f.notes ? [f.id, f.notes] : [f.id]));
+      const head = ["agent", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", ...cols, "updated_at"];
+      const csv = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+      const rows = data.agents.map((a) => {
+        const n = notes[a.name] || {};
+        return [a.name, a.moment_pt, a.episode_id, a.assigned_goal, a.drift_activity, ...cols.map((c) => n[c]), n.updated_at];
+      });
+      const text = [head, ...rows].map((r) => r.map(csv).join(",")).join("\r\n");
+      const link = el("a");
+      link.href = URL.createObjectURL(new Blob(["\ufeff" + text], { type: "text/csv;charset=utf-8" }));
+      link.download = `interview-review-${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    });
 
     function render(agent) {
       buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.textContent === agent.name)));
       moment.textContent = `Point 1 · ${agent.moment_pt}`;
+      renderReview(agent);
       const table = document.querySelector("#answers-table");
       table.replaceChildren();
       const head = el("tr");
@@ -215,6 +379,7 @@
         });
       }
     }
+    markReviewed();
     render(data.agents[0]);
   </script>
 </body>
