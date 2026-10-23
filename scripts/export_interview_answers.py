@@ -42,6 +42,7 @@ def main():
     ap.add_argument("--private", type=Path, action="append", default=[], help="a privacy-framed batch (repeatable)")
     ap.add_argument("--questions", type=Path, default=ROOT / "data/interview_questions/start-v1.json")
     ap.add_argument("--private-questions", type=Path, default=ROOT / "data/interview_questions/sentiment-private-v1.json")
+    ap.add_argument("--points", type=Path, default=ROOT / "data/interview_points_v1.json")
     ap.add_argument("--out", type=Path, default=ROOT / "data/interview_answers_v1.json")
     args = ap.parse_args()
 
@@ -55,12 +56,24 @@ def main():
         framings.append({"id": "private", "label": "Privacy preamble", "preamble": preamble})
         batches.append(("private", [r for path in args.private for r in load(path)]))
 
+    # An agent with a second drift type has a second point; label each by its drift type.
+    labels = {t["type"]: t["type_label"] for a in json.loads(args.points.read_text(encoding="utf-8"))["agents"] for t in a["tracks"]}
+    tracks = collections.defaultdict(set)
+    for _, rows in batches:
+        for r in rows:
+            tracks[r["agent"]].add(r["category"])
+
+    def name_of(r):
+        if len(tracks[r["agent"]]) < 2:
+            return r["agent"]
+        return f'{r["agent"]} ({labels.get(r["category"], r["category"])})'
+
     cells = collections.defaultdict(lambda: {"answers": [], "skipped": 0})
     moments = {}
     for framing, rows in batches:
         for r in sorted(rows, key=lambda r: r["sample"]):
-            moments.setdefault(r["agent"], r.get("moment_pt"))
-            cell = cells[(r["agent"], r["question_id"], framing)]
+            moments.setdefault(name_of(r), r.get("moment_pt"))
+            cell = cells[(name_of(r), r["question_id"], framing)]
             if not r.get("answered"):
                 cell["skipped"] += 1
             elif len(cell["answers"]) < PER_CELL:
