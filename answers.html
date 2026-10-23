@@ -166,6 +166,8 @@
       const body = table.appendChild(el("tbody"));
       let section = null;
       for (const q of data.questions) {
+        const asked = framings.filter((f) => cellOf.has(`${agent.name}|${q.id}|${f.id}`));
+        if (!asked.length) continue;
         const key = q.id.split("-")[0];
         if (key !== section) {
           section = key;
@@ -173,8 +175,6 @@
           const th = row.appendChild(el("th", null, SECTIONS[key] || key));
           th.colSpan = PER_CELL + 2;
         }
-        const asked = framings.filter((f) => cellOf.has(`${agent.name}|${q.id}|${f.id}`));
-        if (!asked.length) asked.push(framings[0]);
         asked.forEach((f, k) => {
         const cell = cellOf.get(`${agent.name}|${q.id}|${f.id}`) || { answers: [], skipped: 0 };
         const row = body.appendChild(el("tr", [f.preamble ? "is-private" : "", k < asked.length - 1 ? "has-next" : ""].join(" ").trim()));
