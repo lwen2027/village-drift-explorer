@@ -22,6 +22,13 @@ ROOT = Path(__file__).resolve().parent.parent
 PER_CELL = 5
 
 
+def tools_disabled(rec):
+    """Whether a sample was really sent with tools disabled (the no_tools edit). Gemini and DeepSeek-V4-Pro's
+    provider ignore tool_choice none and still call tools, so their samples are plain replays."""
+    ignored = rec.get("provider") == "gemini" or str(rec.get("model", "")).startswith("deepseek/deepseek-v4")
+    return any(e.get("op") == "no_tools" for e in rec.get("edits") or []) and not ignored
+
+
 def answer_text(rec):
     parts = [(rec.get("text") or "").strip()]
     for c in rec.get("tool_calls") or []:
@@ -79,7 +86,7 @@ def main():
             elif len(cell["answers"]) < PER_CELL:
                 cell["answers"].append({"sample": r["sample"], "text": answer_text(r)})
                 # tool_choice none: the agent couldn't act this turn, so the answer isn't an exact replay
-                cell["no_tools"] |= any(e.get("op") == "no_tools" for e in r.get("edits") or [])
+                cell["no_tools"] |= tools_disabled(r)
 
     agents = sorted(moments)
     out = {
