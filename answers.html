@@ -185,6 +185,7 @@
       { id: "cause_right", label: "Is the inferred cause of drift right?", yn: true, notes: "cause_right_notes" },
       { id: "suggestions", label: "Potential suggestions to add" },
       { id: "next_action_accurate", label: "Is its stated next planned action accurate?", yn: true, notes: "next_action_notes" },
+      { id: "highlights", label: "Highlights", placeholder: "Standout quotes or findings worth citing" },
     ];
     const REVIEW_KEY = "interview-answers-review-v1";
     const SECTIONS = { belief: "Goal belief", success: "Success", sentiment: "Sentiment", cause: "Cause of drift", constraint: "Constraints" };
@@ -311,7 +312,8 @@
         if (!f.yn) {
           const label = wrap.appendChild(el("label", null, f.label));
           label.htmlFor = `review-${f.id}`;
-          wrap.append(notesBox(agent.name, f.id));
+          const box = wrap.appendChild(notesBox(agent.name, f.id));
+          if (f.placeholder) box.placeholder = f.placeholder;
           continue;
         }
         const label = wrap.appendChild(el("span", "field-label", f.label));
