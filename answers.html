@@ -180,14 +180,24 @@
       { id: "success_notes", label: "Success notes" },
       { id: "sentiment_notes", label: "Sentiment notes" },
       { id: "cause_notes", label: "Cause of drift notes" },
-      { id: "constraints_notes", label: "Constraints notes" },
+      // Kept under its old id so earlier notes stay attached; exported as constraints_pain_points.
+      { id: "constraints_notes", label: "Constraints & pain points", csv: "constraints_pain_points" },
       { id: "cause_right", label: "Is the inferred cause of drift right?", yn: true, notes: "cause_right_notes" },
-      { id: "pain_points", label: "Biggest pain points" },
       { id: "suggestions", label: "Potential suggestions to add" },
       { id: "next_action_accurate", label: "Is its stated next planned action accurate?", yn: true, notes: "next_action_notes" },
     ];
     const REVIEW_KEY = "interview-answers-review-v1";
     const SECTIONS = { belief: "Goal belief", success: "Success", sentiment: "Sentiment", cause: "Cause of drift", constraint: "Constraints" };
+    // The two rules questions are shown under Constraints, after the constraint questions (their ids keep
+    // the cause- prefix they were asked under).
+    const SECTION_OF = { "cause-5-rules-any": "constraint", "cause-7-rules-reconsider": "constraint" };
+    const sectionOf = (q) => SECTION_OF[q.id] || q.id.split("-")[0];
+    const sectionOrder = Object.keys(SECTIONS);
+    const inSectionOrder = (questions) => questions
+      .map((q, i) => ({ q, i }))
+      .sort((l, r) => sectionOrder.indexOf(sectionOf(l.q)) - sectionOrder.indexOf(sectionOf(r.q))
+        || (l.q.id in SECTION_OF) - (r.q.id in SECTION_OF) || l.i - r.i)
+      .map(({ q }) => q);
     const PER_CELL = 5;
 
     const response = await fetch("./data/interview_answers_v1.json", { cache: "no-store" });
@@ -219,6 +229,23 @@
       notes = JSON.parse(localStorage.getItem(REVIEW_KEY) || "{}") || {};
     } catch {
       storageOk = false;
+    }
+    // "Biggest pain points" was merged into the constraints field (2026-10-24). Earlier pain-point notes are
+    // appended to it once; the old pain_points key is kept in storage as a backup.
+    let merged = false;
+    for (const n of Object.values(notes)) {
+      if (n?.pain_points && !n.pain_points_merged) {
+        n.constraints_notes = n.constraints_notes ? `${n.constraints_notes}\n\n${n.pain_points}` : n.pain_points;
+        n.pain_points_merged = true;
+        merged = true;
+      }
+    }
+    if (merged) {
+      try {
+        localStorage.setItem(REVIEW_KEY, JSON.stringify(notes));
+      } catch {
+        storageOk = false;
+      }
     }
     const hasNotes = (n) => n && REVIEW_FIELDS.some((f) => n[f.id] || (f.notes && n[f.notes]));
 
@@ -312,7 +339,8 @@
 
     document.querySelector("#review-export").addEventListener("click", () => {
       const cols = REVIEW_FIELDS.flatMap((f) => (f.notes ? [f.id, f.notes] : [f.id]));
-      const head = ["agent", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", "labelled_cause", ...cols, "updated_at"];
+      const names = Object.fromEntries(REVIEW_FIELDS.filter((f) => f.csv).map((f) => [f.id, f.csv]));
+      const head = ["agent", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", "labelled_cause", ...cols.map((c) => names[c] || c), "updated_at"];
       const csv = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
       const rows = data.agents.map((a) => {
         const n = notes[a.name] || {};
@@ -347,10 +375,10 @@
       table.appendChild(el("thead")).append(head);
       const body = table.appendChild(el("tbody"));
       let section = null;
-      for (const q of data.questions) {
+      for (const q of inSectionOrder(data.questions)) {
         const asked = framings.filter((f) => cellOf.has(`${agent.name}|${q.id}|${f.id}`));
         if (!asked.length) continue;
-        const key = q.id.split("-")[0];
+        const key = sectionOf(q);
         if (key !== section) {
           section = key;
           const row = body.appendChild(el("tr", "section"));
