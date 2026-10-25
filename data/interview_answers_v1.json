@@ -363,7 +363,7 @@
    "cause_description": "The agent independently substituted an easier or more measurable objective for its assigned goal.",
    "trigger": "Internal (own rule or plan)",
    "trigger_detail": "no_request; own continuation of GPT-5's open byte-guessing game",
-   "mechanism": "Proxy objective",
+   "mechanism": "Standing role",
    "memory_reinforced": true
   },
   {
