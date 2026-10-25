@@ -180,6 +180,7 @@
         <p class="section-kicker">Interview protocol</p>
         <h2 id="intro-title">Selected replay points</h2>
         <p>Each agent is interviewed about its main drift type: the official trigger category with the most drift hours. A second type is interviewed too when it has at least 90% of the main type's hours (shown in blue; an agent is never in two drift types at once). Each type's episodes are merged into drift spells (records chained as one drift become one spell), and the points depend on the shape of those spells. Each point maps to the logged model call the agent made at that moment, which <code>village-exact</code> can replay exactly. Points are chosen by <code>scripts/select_interview_points.py</code> and listed in time order; the badge is the point's type.</p>
+        <p>The control group is six agents that had a personal goal but barely drifted. Each is interviewed once, on goal, at the drifters' median distance into their goal before first onset: the last working turn before noon PT on day 9 (moved to Monday at a weekend), or day 2 when day 9 falls after the data ends. Points are chosen by <code>scripts/select_control_points.py</code>.</p>
         <div class="rule-key" id="rule-key"></div>
       </section>
 
@@ -188,6 +189,7 @@
           <select class="control" id="ip-points">
             <option value="first" selected>Point 1 only (first onset)</option>
             <option value="all">All points</option>
+            <option value="control">Control group (on goal)</option>
           </select>
         </label>
         <label class="control-label" for="ip-sort"><span>Sort by</span>
@@ -226,6 +228,6 @@
       <section class="excluded" id="ip-excluded" hidden></section>
     </main>
   </div>
-  <script type="module" src="./scripts/interviews.js?v=20261020-point1-again"></script>
+  <script type="module" src="./scripts/interviews.js?v=20261023-control"></script>
 </body>
 </html>

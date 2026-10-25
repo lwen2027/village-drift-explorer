@@ -17,6 +17,9 @@
       --green: #466f61;
       --rust: #ae5037;
       --rust-soft: #edd1c3;
+      --control: #3e5f86;
+      --control-line: #9fb3cc;
+      --control-soft: #e6ecf3;
       --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --serif: Georgia, "Times New Roman", serif;
       --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -54,6 +57,11 @@
     .agent-button:hover { border-color: var(--line-strong); }
     .agent-button[aria-pressed="true"] { color: white; background: var(--ink); border-color: var(--ink); }
     .agent-moment { margin-left: auto; color: var(--muted); font: 700 11px/1.35 var(--mono); }
+    .agent-group { flex-basis: 100%; margin-top: 4px; color: var(--ink); font: 700 11px/1.35 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    .agent-group-note { color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
+    .agent-group-control { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-strong); color: var(--control); }
+    .agent-button.is-control { border-color: var(--control-line); background: var(--control-soft); }
+    .agent-button.is-control[aria-pressed="true"] { color: white; background: var(--control); border-color: var(--control); }
 
     /* overflow-anchor: none, so the browser's scroll anchoring doesn't move the page when an answer opens or
        closes; toggleAnswer keeps the answer in place instead. */
@@ -95,6 +103,7 @@
     .review-ref dd:last-child { margin-bottom: 0; }
     .review-ref-note { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
     .review-ref-old { color: var(--muted); font-size: 11px; }
+    .review-ref.is-control { border-left-color: var(--control); background: var(--control-soft); }
     .review-field { margin: 0 0 11px; }
     .review-field label, .review-field .field-label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 700; line-height: 1.3; }
     .review-field textarea {
@@ -150,6 +159,7 @@
         <p class="section-kicker">Phrasing study</p>
         <h2 id="intro-title">Interview answers</h2>
         <p>Each question was added as a bare message to the agent's exact logged model call just before its first drift onset, and resampled until five samples answered. Samples that only paused or only ran a pre-send chat check are counted as skipped. Click an answer to expand it; drag to select and copy.</p>
+        <p>The <strong>control group</strong> (in blue below the drift group) is six agents that stayed on goal, with under about 2 hours of drift in total. They were asked the same questions in the same way, on day 9 of their goal (the drifters' median first-drift day), or day 2 where the goal was shorter.</p>
         <p id="preamble-note" hidden>The 16 core questions were also asked a second time with a privacy preamble in front, shown in rows marked <span class="badge-private">Privacy preamble</span>. The preamble read:</p>
         <p>Rows marked <span class="badge-notools">No tools</span> were asked with tools disabled, so the agent could only reply in text. This is used only where an agent rarely answered otherwise (under about 30% of samples), and for Claude Fable 5 and 5.1, which answered only in their hidden reasoning. It isn't available for the Gemini models or DeepSeek-V4-Pro, whose providers ignore the setting, so some of their cells have fewer than five answers.</p>
         <blockquote class="preamble" id="preamble-text" hidden></blockquote>
@@ -176,18 +186,18 @@
     // optional notes field after them; the rest are free text.
     const REVIEW_FIELDS = [
       { id: "assigned_goal_right", label: "Is the assigned goal right?", yn: true },
-      { id: "drifted_goal_right", label: "Is the drifted goal right?", yn: true },
+      { id: "drifted_goal_right", label: "Is the drifted goal right?", yn: true, drift: true },
       { id: "belief_notes", label: "Goal belief notes" },
       { id: "success_notes", label: "Success notes" },
       { id: "sentiment_notes", label: "Sentiment notes" },
       { id: "cause_notes", label: "Cause of drift notes" },
       // Kept under its old id so earlier notes stay attached; exported as constraints_pain_points.
       { id: "constraints_notes", label: "Constraints & pain points", csv: "constraints_pain_points" },
-      { id: "trigger_right", label: "Is the trigger right?", yn: true, notes: "trigger_right_notes" },
-      { id: "mechanism_right", label: "Is the mechanism right?", yn: true, notes: "mechanism_right_notes" },
+      { id: "trigger_right", label: "Is the trigger right?", yn: true, notes: "trigger_right_notes", drift: true },
+      { id: "mechanism_right", label: "Is the mechanism right?", yn: true, notes: "mechanism_right_notes", drift: true },
       // The earlier single-label question; shown only where it was already answered, always exported.
-      { id: "cause_right", label: "Is the original drift label right? (earlier question)", yn: true, notes: "cause_right_notes", legacy: true },
-      { id: "motive_notes", label: "Motive (why it cared)", placeholder: "Why the drift seemed worth doing to the agent. Basis: its behaviour and log reasoning, or the interview only? Does its stated reason match?" },
+      { id: "cause_right", label: "Is the original drift label right? (earlier question)", yn: true, notes: "cause_right_notes", legacy: true, drift: true },
+      { id: "motive_notes", drift: true, label: "Motive (why it cared)", placeholder: "Why the drift seemed worth doing to the agent. Basis: its behaviour and log reasoning, or the interview only? Does its stated reason match?" },
       { id: "suggestions", label: "Potential suggestions to add" },
       { id: "next_action_accurate", label: "Is its stated next planned action accurate?", yn: true, notes: "next_action_notes" },
       { id: "highlights", label: "Highlights", placeholder: "Standout quotes or findings worth citing" },
@@ -212,6 +222,21 @@
       throw new Error("Could not load interview answers");
     }
     const data = await response.json();
+    for (const a of data.agents) a.group = "drift";
+    // The control group (agents that stayed on goal, interviewed on day 9 of their goal) lives in its own file;
+    // the page works without it. A control agent sharing a drifter's name gets a suffix, so notes stay separate.
+    try {
+      const control = await fetch("./data/interview_answers_control_v1.json", { cache: "no-store" });
+      if (control.ok) {
+        const extra = await control.json();
+        const taken = new Set(data.agents.map((a) => a.name));
+        const rename = (name) => (taken.has(name) ? `${name} (control)` : name);
+        for (const a of extra.agents) data.agents.push({ ...a, name: rename(a.name), group: "control" });
+        for (const c of extra.cells) data.cells.push({ ...c, agent: rename(c.agent) });
+      }
+    } catch {
+      // No control file: show the drift group only.
+    }
     const framings = data.framings || [{ id: "plain", label: "Plain question" }];
     const cellOf = new Map(data.cells.map((c) => [`${c.agent}|${c.question_id}|${c.framing || "plain"}`, c]));
     const preamble = framings.find((f) => f.preamble)?.preamble;
@@ -257,13 +282,24 @@
 
     const picker = document.querySelector("#agent-picker");
     const moment = el("span", "agent-moment");
-    const buttons = data.agents.map((a) => {
-      const b = el("button", "agent-button", a.name);
-      b.type = "button";
-      b.addEventListener("click", () => render(a));
-      picker.append(b);
-      return b;
-    });
+    const GROUPS = [
+      ["drift", "Drift group", "interviewed just before its first drift"],
+      ["control", "Control group", "stayed on goal; interviewed on day 9 of its goal (day 2 if the goal was shorter)"],
+    ];
+    const buttons = [];
+    for (const [group, title, note] of GROUPS) {
+      const members = data.agents.filter((a) => a.group === group);
+      if (!members.length) continue;
+      const heading = picker.appendChild(el("span", `agent-group agent-group-${group}`, title));
+      heading.append(el("span", "agent-group-note", ` · ${members.length} · ${note}`));
+      for (const a of members) {
+        const b = el("button", `agent-button is-${group}`, a.name);
+        b.type = "button";
+        b.addEventListener("click", () => render(a));
+        picker.append(b);
+        buttons.push(b);
+      }
+    }
     picker.append(moment);
     const markReviewed = () => buttons.forEach((b) => b.classList.toggle("has-notes", Boolean(hasNotes(notes[b.textContent]))));
 
@@ -302,26 +338,36 @@
     function renderReview(agent) {
       document.querySelector("#review-title").textContent = agent.name;
       const ref = document.querySelector("#review-ref");
-      ref.replaceChildren(
-        el("dt", null, "Assigned goal"), el("dd", null, agent.assigned_goal || "not recorded"),
-        el("dt", null, "Recorded drift"), el("dd", null, agent.drift_activity || "not recorded"),
-        el("dt", null, "Trigger"), el("dd", null, agent.trigger || "not recorded"),
-        el("dt", null, "Mechanism"), el("dd", null, agent.mechanism || "not recorded"),
-        el("dt", null, "Original label"), el("dd", "review-ref-old", agent.cause_label || "not recorded"),
-      );
-      const [, , triggerDd, mechanismDd, oldDd] = ref.querySelectorAll("dd");
-      if (agent.trigger_detail) triggerDd.append(el("span", "review-ref-note", agent.trigger_detail));
-      if (agent.memory_reinforced != null) {
-        mechanismDd.append(el("span", "review-ref-note", agent.memory_reinforced
-          ? "Memory-reinforced: its own memory or overnight intention kept it going"
-          : "Not memory-reinforced"));
-      }
-      if (agent.cause_description) {
-        oldDd.append(el("span", "review-ref-note", `${agent.cause_family ? agent.cause_family + ": " : ""}${agent.cause_description}`));
+      ref.classList.toggle("is-control", agent.group === "control");
+      if (agent.group === "control") {
+        ref.replaceChildren(
+          el("dt", null, "Group"), el("dd", null, "Control: stayed on goal (under ~2 h of drift in total)"),
+          el("dt", null, "Assigned goal"), el("dd", null, agent.assigned_goal || "not recorded"),
+          el("dt", null, "Interviewed"), el("dd", null, agent.moment_pt || "not recorded"),
+        );
+      } else {
+        ref.replaceChildren(
+          el("dt", null, "Assigned goal"), el("dd", null, agent.assigned_goal || "not recorded"),
+          el("dt", null, "Recorded drift"), el("dd", null, agent.drift_activity || "not recorded"),
+          el("dt", null, "Trigger"), el("dd", null, agent.trigger || "not recorded"),
+          el("dt", null, "Mechanism"), el("dd", null, agent.mechanism || "not recorded"),
+          el("dt", null, "Original label"), el("dd", "review-ref-old", agent.cause_label || "not recorded"),
+        );
+        const [, , triggerDd, mechanismDd, oldDd] = ref.querySelectorAll("dd");
+        if (agent.trigger_detail) triggerDd.append(el("span", "review-ref-note", agent.trigger_detail));
+        if (agent.memory_reinforced != null) {
+          mechanismDd.append(el("span", "review-ref-note", agent.memory_reinforced
+            ? "Memory-reinforced: its own memory or overnight intention kept it going"
+            : "Not memory-reinforced"));
+        }
+        if (agent.cause_description) {
+          oldDd.append(el("span", "review-ref-note", `${agent.cause_family ? agent.cause_family + ": " : ""}${agent.cause_description}`));
+        }
       }
       const form = document.querySelector("#review-form");
       form.replaceChildren();
       for (const f of REVIEW_FIELDS) {
+        if (f.drift && agent.group === "control") continue;
         const saved = notes[agent.name] || {};
         if (f.legacy && !saved[f.id] && !saved[f.notes]) continue;
         const wrap = form.appendChild(el("div", "review-field"));
@@ -358,11 +404,11 @@
     document.querySelector("#review-export").addEventListener("click", () => {
       const cols = REVIEW_FIELDS.flatMap((f) => (f.notes ? [f.id, f.notes] : [f.id]));
       const names = Object.fromEntries(REVIEW_FIELDS.filter((f) => f.csv).map((f) => [f.id, f.csv]));
-      const head = ["agent", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", "labelled_cause", "trigger", "mechanism", "memory_reinforced", ...cols.map((c) => names[c] || c), "updated_at"];
+      const head = ["agent", "group", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", "labelled_cause", "trigger", "mechanism", "memory_reinforced", ...cols.map((c) => names[c] || c), "updated_at"];
       const csv = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
       const rows = data.agents.map((a) => {
         const n = notes[a.name] || {};
-        return [a.name, a.moment_pt, a.episode_id, a.assigned_goal, a.drift_activity, a.cause_label, a.trigger, a.mechanism,
+        return [a.name, a.group, a.moment_pt, a.episode_id, a.assigned_goal, a.drift_activity, a.cause_label, a.trigger, a.mechanism,
           a.memory_reinforced == null ? "" : a.memory_reinforced ? "yes" : "no", ...cols.map((c) => n[c]), n.updated_at];
       });
       const text = [head, ...rows].map((r) => r.map(csv).join(",")).join("\r\n");
@@ -384,7 +430,7 @@
 
     function render(agent) {
       buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.textContent === agent.name)));
-      moment.textContent = `Point 1 · ${agent.moment_pt}`;
+      moment.textContent = agent.group === "control" ? `Control · on goal · ${agent.moment_pt}` : `Point 1 · ${agent.moment_pt}`;
       renderReview(agent);
       const table = document.querySelector("#answers-table");
       table.replaceChildren();

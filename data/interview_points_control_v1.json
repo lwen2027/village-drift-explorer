@@ -1,0 +1,329 @@
+{
+ "schema_version": 3,
+ "agents": [
+  {
+   "agent": "GPT-6 Sol",
+   "main_type": "on_goal_control",
+   "main_type_label": "On goal (control)",
+   "main_type_hours": 0,
+   "main_type_episodes": 0,
+   "total_hours": 0,
+   "shape": "control",
+   "spells": [],
+   "goal": "Maximize the number and importance of historical archive mysteries you are first to solve",
+   "goal_start_pt": "Tue 2026-09-22 14:27 PT",
+   "tracks": [
+    {
+     "type": "on_goal_control",
+     "type_label": "On goal (control)",
+     "hours": 0,
+     "episodes": 0,
+     "shape": "control",
+     "spells": [],
+     "points": [
+      {
+       "rule": "control_day9",
+       "episode_id": null,
+       "category": "on_goal_control",
+       "moment_utc": "2026-10-01T19:00:00",
+       "moment_pt": "Thu 2026-10-01 12:00 PT",
+       "call_id": "8cb04bc4-3b91-4945-9c04-76f473a4daea",
+       "call_at_pt": "Thu 2026-10-01 11:59 PT",
+       "call_action": "bash",
+       "why": "on goal, day 9 of its goal (Historian), noon PT",
+       "flag": "",
+       "track": 0,
+       "assigned_goal": "Maximize the number and importance of historical archive mysteries you are first to solve"
+      }
+     ]
+    }
+   ],
+   "points": [
+    {
+     "rule": "control_day9",
+     "episode_id": null,
+     "category": "on_goal_control",
+     "moment_utc": "2026-10-01T19:00:00",
+     "moment_pt": "Thu 2026-10-01 12:00 PT",
+     "call_id": "8cb04bc4-3b91-4945-9c04-76f473a4daea",
+     "call_at_pt": "Thu 2026-10-01 11:59 PT",
+     "call_action": "bash",
+     "why": "on goal, day 9 of its goal (Historian), noon PT",
+     "flag": "",
+     "track": 0,
+     "assigned_goal": "Maximize the number and importance of historical archive mysteries you are first to solve"
+    }
+   ]
+  },
+  {
+   "agent": "GPT-6.1 Sol",
+   "main_type": "on_goal_control",
+   "main_type_label": "On goal (control)",
+   "main_type_hours": 0,
+   "main_type_episodes": 0,
+   "total_hours": 0,
+   "shape": "control",
+   "spells": [],
+   "goal": "Build the most accurate simulation of how this year's El Ni\u00f1o will affect San Francisco's winter",
+   "goal_start_pt": "Wed 2026-09-30 12:53 PT",
+   "tracks": [
+    {
+     "type": "on_goal_control",
+     "type_label": "On goal (control)",
+     "hours": 0,
+     "episodes": 0,
+     "shape": "control",
+     "spells": [],
+     "points": [
+      {
+       "rule": "control_day2",
+       "episode_id": null,
+       "category": "on_goal_control",
+       "moment_utc": "2026-10-02T19:00:00",
+       "moment_pt": "Fri 2026-10-02 12:00 PT",
+       "call_id": "56927db0-b1c3-4f99-914f-a6d8dc35ae9f",
+       "call_at_pt": "Fri 2026-10-02 11:59 PT",
+       "call_action": "bash",
+       "why": "on goal, day 2 of its goal (Meteorologist), noon PT",
+       "flag": "",
+       "track": 0,
+       "assigned_goal": "Build the most accurate simulation of how this year's El Ni\u00f1o will affect San Francisco's winter"
+      }
+     ]
+    }
+   ],
+   "points": [
+    {
+     "rule": "control_day2",
+     "episode_id": null,
+     "category": "on_goal_control",
+     "moment_utc": "2026-10-02T19:00:00",
+     "moment_pt": "Fri 2026-10-02 12:00 PT",
+     "call_id": "56927db0-b1c3-4f99-914f-a6d8dc35ae9f",
+     "call_at_pt": "Fri 2026-10-02 11:59 PT",
+     "call_action": "bash",
+     "why": "on goal, day 2 of its goal (Meteorologist), noon PT",
+     "flag": "",
+     "track": 0,
+     "assigned_goal": "Build the most accurate simulation of how this year's El Ni\u00f1o will affect San Francisco's winter"
+    }
+   ]
+  },
+  {
+   "agent": "Grok 4.5",
+   "main_type": "on_goal_control",
+   "main_type_label": "On goal (control)",
+   "main_type_hours": 0,
+   "main_type_episodes": 0,
+   "total_hours": 0.2,
+   "shape": "control",
+   "spells": [],
+   "goal": "Maximize views on your AI Village News website, where you report on surprising and interesting things happening in the Village that a human might not find without your investigative journalism!",
+   "goal_start_pt": "Fri 2026-07-10 16:07 PT",
+   "tracks": [
+    {
+     "type": "on_goal_control",
+     "type_label": "On goal (control)",
+     "hours": 0,
+     "episodes": 0,
+     "shape": "control",
+     "spells": [],
+     "points": [
+      {
+       "rule": "control_day9",
+       "episode_id": null,
+       "category": "on_goal_control",
+       "moment_utc": "2026-07-20T19:00:00",
+       "moment_pt": "Mon 2026-07-20 12:00 PT",
+       "call_id": "e39c9acb-3cb3-4e44-bdea-123680830fe4",
+       "call_at_pt": "Mon 2026-07-20 11:54 PT",
+       "call_action": "bash",
+       "why": "on goal, day 9 of its goal (Reporter), noon PT",
+       "flag": "",
+       "track": 0,
+       "assigned_goal": "Maximize views on your AI Village News website, where you report on surprising and interesting things happening in the Village that a human might not find without your investigative journalism!"
+      }
+     ]
+    }
+   ],
+   "points": [
+    {
+     "rule": "control_day9",
+     "episode_id": null,
+     "category": "on_goal_control",
+     "moment_utc": "2026-07-20T19:00:00",
+     "moment_pt": "Mon 2026-07-20 12:00 PT",
+     "call_id": "e39c9acb-3cb3-4e44-bdea-123680830fe4",
+     "call_at_pt": "Mon 2026-07-20 11:54 PT",
+     "call_action": "bash",
+     "why": "on goal, day 9 of its goal (Reporter), noon PT",
+     "flag": "",
+     "track": 0,
+     "assigned_goal": "Maximize views on your AI Village News website, where you report on surprising and interesting things happening in the Village that a human might not find without your investigative journalism!"
+    }
+   ]
+  },
+  {
+   "agent": "Claude Sonnet 5.5",
+   "main_type": "on_goal_control",
+   "main_type_label": "On goal (control)",
+   "main_type_hours": 0,
+   "main_type_episodes": 0,
+   "total_hours": 0.9,
+   "shape": "control",
+   "spells": [],
+   "goal": "Maximize viewers of an animated series you create",
+   "goal_start_pt": "Tue 2026-09-29 10:25 PT",
+   "tracks": [
+    {
+     "type": "on_goal_control",
+     "type_label": "On goal (control)",
+     "hours": 0,
+     "episodes": 0,
+     "shape": "control",
+     "spells": [],
+     "points": [
+      {
+       "rule": "control_day2",
+       "episode_id": null,
+       "category": "on_goal_control",
+       "moment_utc": "2026-10-01T19:00:00",
+       "moment_pt": "Thu 2026-10-01 12:00 PT",
+       "call_id": "913e42c0-e818-4323-8108-6758da4e6d71",
+       "call_at_pt": "Thu 2026-10-01 11:59 PT",
+       "call_action": "bash",
+       "why": "on goal, day 2 of its goal (Animator), noon PT",
+       "flag": "",
+       "track": 0,
+       "assigned_goal": "Maximize viewers of an animated series you create"
+      }
+     ]
+    }
+   ],
+   "points": [
+    {
+     "rule": "control_day2",
+     "episode_id": null,
+     "category": "on_goal_control",
+     "moment_utc": "2026-10-01T19:00:00",
+     "moment_pt": "Thu 2026-10-01 12:00 PT",
+     "call_id": "913e42c0-e818-4323-8108-6758da4e6d71",
+     "call_at_pt": "Thu 2026-10-01 11:59 PT",
+     "call_action": "bash",
+     "why": "on goal, day 2 of its goal (Animator), noon PT",
+     "flag": "",
+     "track": 0,
+     "assigned_goal": "Maximize viewers of an animated series you create"
+    }
+   ]
+  },
+  {
+   "agent": "Claude Opus 5",
+   "main_type": "on_goal_control",
+   "main_type_label": "On goal (control)",
+   "main_type_hours": 0,
+   "main_type_episodes": 0,
+   "total_hours": 1.2,
+   "shape": "control",
+   "spells": [],
+   "goal": "Maximize the number and impressiveness of long-standing mathematical conjectures that you disprove",
+   "goal_start_pt": "Wed 2026-07-29 09:51 PT",
+   "tracks": [
+    {
+     "type": "on_goal_control",
+     "type_label": "On goal (control)",
+     "hours": 0,
+     "episodes": 0,
+     "shape": "control",
+     "spells": [],
+     "points": [
+      {
+       "rule": "control_day9",
+       "episode_id": null,
+       "category": "on_goal_control",
+       "moment_utc": "2026-08-07T19:00:00",
+       "moment_pt": "Fri 2026-08-07 12:00 PT",
+       "call_id": "49d5c69b-80bc-453d-9a5e-9dad77bd3b6f",
+       "call_at_pt": "Fri 2026-08-07 12:00 PT",
+       "call_action": "bash",
+       "why": "on goal, day 9 of its goal (Mathematician), noon PT",
+       "flag": "",
+       "track": 0,
+       "assigned_goal": "Maximize the number and impressiveness of long-standing mathematical conjectures that you disprove"
+      }
+     ]
+    }
+   ],
+   "points": [
+    {
+     "rule": "control_day9",
+     "episode_id": null,
+     "category": "on_goal_control",
+     "moment_utc": "2026-08-07T19:00:00",
+     "moment_pt": "Fri 2026-08-07 12:00 PT",
+     "call_id": "49d5c69b-80bc-453d-9a5e-9dad77bd3b6f",
+     "call_at_pt": "Fri 2026-08-07 12:00 PT",
+     "call_action": "bash",
+     "why": "on goal, day 9 of its goal (Mathematician), noon PT",
+     "flag": "",
+     "track": 0,
+     "assigned_goal": "Maximize the number and impressiveness of long-standing mathematical conjectures that you disprove"
+    }
+   ]
+  },
+  {
+   "agent": "Claude Opus 4.6",
+   "main_type": "on_goal_control",
+   "main_type_label": "On goal (control)",
+   "main_type_hours": 0,
+   "main_type_episodes": 0,
+   "total_hours": 0.0,
+   "shape": "control",
+   "spells": [],
+   "goal": "Maximize your Manifold Mana",
+   "goal_start_pt": "Mon 2026-07-06 08:59 PT",
+   "tracks": [
+    {
+     "type": "on_goal_control",
+     "type_label": "On goal (control)",
+     "hours": 0,
+     "episodes": 0,
+     "shape": "control",
+     "spells": [],
+     "points": [
+      {
+       "rule": "control_day9",
+       "episode_id": null,
+       "category": "on_goal_control",
+       "moment_utc": "2026-07-15T19:00:00",
+       "moment_pt": "Wed 2026-07-15 12:00 PT",
+       "call_id": "22f3395d-42fb-45a6-a3d0-ba10f8aef456",
+       "call_at_pt": "Wed 2026-07-15 11:05 PT",
+       "call_action": "pause(12000)",
+       "why": "on goal, day 9 of its goal (Forecaster), noon PT",
+       "flag": "",
+       "track": 0,
+       "assigned_goal": "Maximize your Manifold Mana"
+      }
+     ]
+    }
+   ],
+   "points": [
+    {
+     "rule": "control_day9",
+     "episode_id": null,
+     "category": "on_goal_control",
+     "moment_utc": "2026-07-15T19:00:00",
+     "moment_pt": "Wed 2026-07-15 12:00 PT",
+     "call_id": "22f3395d-42fb-45a6-a3d0-ba10f8aef456",
+     "call_at_pt": "Wed 2026-07-15 11:05 PT",
+     "call_action": "pause(12000)",
+     "why": "on goal, day 9 of its goal (Forecaster), noon PT",
+     "flag": "",
+     "track": 0,
+     "assigned_goal": "Maximize your Manifold Mana"
+    }
+   ]
+  }
+ ]
+}

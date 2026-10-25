@@ -68,7 +68,10 @@ def main():
         batches.append(("private", [r for path in args.private for r in load(path)]))
 
     # An agent with a second drift type has a second point; label each by its drift type.
-    labels = {t["type"]: t["type_label"] for a in json.loads(args.points.read_text(encoding="utf-8"))["agents"] for t in a["tracks"]}
+    points = json.loads(args.points.read_text(encoding="utf-8"))["agents"]
+    labels = {t["type"]: t["type_label"] for a in points for t in a["tracks"]}
+    # Control (on-goal) points have no drift episode; their goal is recorded on the point itself.
+    point_goal = {a["agent"]: p["assigned_goal"] for a in points for p in a["points"] if p.get("assigned_goal")}
     tracks = collections.defaultdict(set)
     for _, rows in batches:
         for r in rows:
@@ -107,8 +110,8 @@ def main():
         c = causes.get(category_of[a]) or {}
         x = axes.get(episode_of[a]) or {}
         return {"name": a, "moment_pt": moments[a], "episode_id": episode_of[a],
-                "assigned_goal": e.get("assigned_goal"), "drift_activity": e.get("activity"),
-                "cause_label": c.get("label", category_of[a]), "cause_family": c.get("family"),
+                "assigned_goal": e.get("assigned_goal") or point_goal.get(a), "drift_activity": e.get("activity"),
+                "cause_label": c.get("label") or labels.get(category_of[a], category_of[a]), "cause_family": c.get("family"),
                 "cause_description": c.get("description"),
                 "trigger": x.get("trigger"), "trigger_detail": x.get("trigger_detail"), "mechanism": x.get("mechanism"),
                 "memory_reinforced": {"True": True, "False": False}.get(x.get("memory_reinforced"))}

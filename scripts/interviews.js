@@ -15,7 +15,10 @@ const RULES = {
   a_end: { n: "A4", label: "Just before spell A was corrected", purpose: "Validates the correction cause" },
   a_stop: { n: "A4", label: "Just before spell A stopped on its own", purpose: "Why it stopped without a correction" },
   b_start: { n: "B1", label: "Just before it drifted again (spell B)", purpose: "What brought it back to drifting; compare with point 1" },
-  b_mid: { n: "B2", label: "Middle of spell B", purpose: "Its reasoning in the later drift: what changed since spell A" }
+  b_mid: { n: "B2", label: "Middle of spell B", purpose: "Its reasoning in the later drift: what changed since spell A" },
+  control_day2: { n: "C2", label: "On goal, day 2 of its goal", purpose: "Control: compare with the drifters' point 1" },
+  control_day9: { n: "C9", label: "On goal, day 9 of its goal", purpose: "Control: compare with the drifters' point 1" },
+  control_day18: { n: "C18", label: "On goal, day 18 of its goal", purpose: "Control: compare with the drifters' point 1" }
 };
 const RULE_ORDER = Object.keys(RULES);
 const SHAPES = {
@@ -26,11 +29,12 @@ const SHAPES = {
 };
 const HORIZON_MS = Date.parse("2026-10-03T00:00:00Z");
 
-const [pointsResponse, bundleResponse, annotationResponse, sourceResponse] = await Promise.all([
+const [pointsResponse, bundleResponse, annotationResponse, sourceResponse, controlResponse] = await Promise.all([
   fetch("./data/interview_points_v1.json", fresh),
   fetch("./data/second_audit_v2.json", fresh),
   fetch("./data/manual_review_annotations_v1.json", fresh),
-  fetch("./data/source_records.json", fresh)
+  fetch("./data/source_records.json", fresh),
+  fetch("./data/interview_points_control_v1.json", fresh)
 ]);
 if (!pointsResponse.ok || !bundleResponse.ok || !annotationResponse.ok) {
   document.querySelector("#main-content").innerHTML = `<div class="load-error"><strong>Interview points could not load.</strong><br>
@@ -41,6 +45,10 @@ const selection = await pointsResponse.json();
 const bundle = await bundleResponse.json();
 const annotations = await annotationResponse.json();
 const sourceRecords = sourceResponse.ok ? await sourceResponse.json() : {};
+// Agents with a personal goal that barely drifted, interviewed on goal (scripts/select_control_points.py).
+const control = controlResponse.ok ? await controlResponse.json() : { agents: [] };
+control.agents.forEach((a) => (a.control = true));
+const agentsShown = () => (pointMode === "control" ? control.agents : selection.agents);
 
 const taxonomy = annotations.trigger_taxonomy || {};
 const categoryLabel = new Map((taxonomy.categories || []).map((c) => [c.id, c.label]));
@@ -409,7 +417,8 @@ function renderPoint(agent, p) {
   evidence.href = `index.html?scope=maximization#${encodeURIComponent(p.episode_id)}`;
   evidence.target = "_blank";
   evidence.rel = "noopener";
-  links.append(copy, replay, evidence);
+  links.append(copy, replay);
+  if (p.episode_id) links.append(evidence);
   body.append(fact("Call", links));
 
   const reviewRow = element("div", "ip-review");
@@ -449,7 +458,7 @@ function renderPoint(agent, p) {
 let pointMode = "first";
 const isOnset = (p) => p.rule === "before_onset";
 function viewOf(a) {
-  if (pointMode !== "first") return { ...a, tracks: tracksOf(a) };
+  if (pointMode !== "first" || a.control) return { ...a, tracks: tracksOf(a) };
   const tracks = tracksOf(a).map((t) => ({ ...t, points: t.points.filter(isOnset) }));
   return { ...a, tracks, points: tracks.flatMap((t) => t.points) };
 }
@@ -470,7 +479,8 @@ function renderTrack(a, track, index, multiple) {
   [...track.points]
     .sort((l, r) => String(l.moment_utc).localeCompare(String(r.moment_utc)))
     .forEach((p) => list.append(renderPoint(a.agent, p)));
-  section.append(renderSpells(track), list);
+  if (track.spells?.length) section.append(renderSpells(track));
+  section.append(list);
   return section;
 }
 
@@ -483,7 +493,8 @@ function renderCard(a) {
   const badges = element("div", "ip-badges");
   const statuses = a.points.map((p) => statusOf(a.agent, p));
   const done = statuses.filter((s) => s !== "open").length;
-  if (!multiple) badges.append(element("span", "ip-badge is-shape", SHAPES[a.shape]?.label || a.shape));
+  if (a.control) badges.append(element("span", "ip-badge is-shape", "On goal (control)"));
+  else if (!multiple) badges.append(element("span", "ip-badge is-shape", SHAPES[a.shape]?.label || a.shape));
   else badges.append(element("span", "ip-badge is-shape", "2 drift types"));
   badges.append(element("span", "ip-badge", `${a.points.length} points`));
   const progress = element("span", `ip-badge${statuses.includes("change") ? " is-change" : done === a.points.length ? " is-done" : ""}`,
@@ -491,7 +502,10 @@ function renderCard(a) {
   badges.append(progress);
   title.append(badges);
   const sub = element("p", "ip-sub");
-  if (multiple) {
+  if (a.control) {
+    sub.append(document.createTextNode(`${a.goal} `),
+      element("span", "", `· goal from ${a.goal_start_pt.slice(4, 14)} · ${a.total_hours} h of goal-max drift`));
+  } else if (multiple) {
     sub.append(document.createTextNode(`${tracks.map((t) => `${t.type_label} (${t.hours} h)`).join(" + ")} `),
       element("span", "", `· of ${a.total_hours} h drift · the two types never drift at the same time`));
   } else {
@@ -519,7 +533,7 @@ function render() {
     points: (l, r) => r.points.length - l.points.length,
     review: (l, r) => reviewed(l) - reviewed(r)
   };
-  const visible = selection.agents
+  const visible = agentsShown()
     .map(viewOf)
     .filter((a) => !type || tracksOf(a).some((t) => t.type === type))
     .filter((a) => !shape || tracksOf(a).some((t) => t.shape === shape))
@@ -535,9 +549,10 @@ function render() {
     .sort((l, r) => (sorters[sort] || sorters.hours)(l, r) || l.agent.localeCompare(r.agent));
   const list = document.querySelector("#ip-list");
   list.replaceChildren(...(visible.length ? visible.map(renderCard) : [element("p", "empty", "No agents match these filters.")]));
-  const all = selection.agents.map(viewOf).flatMap((a) => a.points.map((p) => statusOf(a.agent, p)));
+  const all = agentsShown().map(viewOf).flatMap((a) => a.points.map((p) => statusOf(a.agent, p)));
+  document.querySelector("#ip-excluded").hidden = pointMode === "control" || !(selection.excluded || []).length;
   document.querySelector("#ip-meta").textContent =
-    `${visible.length} of ${selection.agents.length} agents · ${all.length} points · ${all.filter((s) => s !== "open").length} reviewed`;
+    `${visible.length} of ${agentsShown().length} agents · ${all.length} points · ${all.filter((s) => s !== "open").length} reviewed`;
 }
 
 function initialize() {
@@ -563,7 +578,7 @@ function initialize() {
   ["#ip-sort", "#ip-type", "#ip-shape", "#ip-rule", "#ip-status"].forEach((id) => document.querySelector(id).addEventListener("change", render));
   document.querySelector("#ip-search").addEventListener("input", render);
   document.querySelector("#ip-export").addEventListener("click", () => {
-    const rows = selection.agents.flatMap((a) => a.points.map((p) => ({
+    const rows = [...selection.agents, ...control.agents].flatMap((a) => a.points.map((p) => ({
       agent: a.agent, rule: p.rule, call_id: p.call_id, episode_id: p.episode_id, moment_utc: p.moment_utc,
       status: statusOf(a.agent, p), note: review[pointKey(a.agent, p)]?.note || "",
       updated_at: review[pointKey(a.agent, p)]?.updated_at || null
