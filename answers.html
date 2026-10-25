@@ -17,6 +17,8 @@
       --green: #466f61;
       --rust: #ae5037;
       --rust-soft: #edd1c3;
+      --amber: #c48a1c;
+      --amber-soft: #f6ead0;
       --control: #3e5f86;
       --control-line: #9fb3cc;
       --control-soft: #e6ecf3;
@@ -127,6 +129,10 @@
     .review-status.is-warn { color: var(--rust); }
     .agent-button.has-notes::after { content: " ●"; color: var(--green); font-size: 10px; }
     .agent-button.has-notes[aria-pressed="true"]::after { color: #b9d6c9; }
+    .agent-button.needs-review::after { content: " ●"; color: var(--amber); font-size: 10px; }
+    .agent-button.needs-review[aria-pressed="true"]::after { color: #f0c27a; }
+    .review-imported { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; padding: 8px 10px; border: 1px solid var(--amber); border-radius: 8px; background: var(--amber-soft); font-size: 12px; }
+    .review-imported button { padding: 4px 10px; border: 1px solid var(--ink); border-radius: 7px; background: var(--card); color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 700; }
 
     @media (max-width: 1000px) {
       .review-layout { grid-template-columns: minmax(0, 1fr); }
@@ -323,14 +329,21 @@
       }
     }
     picker.append(moment);
-    const markReviewed = () => buttons.forEach((b) => b.classList.toggle("has-notes", Boolean(hasNotes(notes[b.dataset.agent]))));
+    // Imported reviews (e.g. drafts) get an amber dot until marked as reviewed in the panel; then the usual green one.
+    const needsReview = (n) => Boolean(n?.imported_from) && !n.reviewed_at;
+    const markReviewed = () => buttons.forEach((b) => {
+      const n = notes[b.dataset.agent];
+      b.classList.toggle("needs-review", needsReview(n));
+      b.classList.toggle("has-notes", Boolean(hasNotes(n)) && !needsReview(n));
+    });
 
     const status = document.querySelector("#review-status");
     function showStatus(text) {
-      const done = data.agents.filter((a) => hasNotes(notes[a.name])).length;
+      const done = data.agents.filter((a) => hasNotes(notes[a.name]) && !needsReview(notes[a.name])).length;
+      const pending = data.agents.filter((a) => needsReview(notes[a.name])).length;
       status.classList.toggle("is-warn", !storageOk);
       status.textContent = storageOk
-        ? `${text ? text + " · " : ""}${done} of ${data.agents.length} reviewed`
+        ? `${text ? text + " · " : ""}${done} of ${data.agents.length} reviewed${pending ? ` · ${pending} imported, not yet reviewed` : ""}`
         : "This browser won't save notes; export before leaving";
     }
     function save(agentName, field, value) {
@@ -388,6 +401,15 @@
       }
       const form = document.querySelector("#review-form");
       form.replaceChildren();
+      if (needsReview(notes[agent.name])) {
+        const banner = form.appendChild(el("div", "review-imported", `Imported from ${notes[agent.name].imported_from}; not reviewed yet.`));
+        const done = banner.appendChild(el("button", null, "Mark as reviewed"));
+        done.type = "button";
+        done.addEventListener("click", () => {
+          save(agent.name, "reviewed_at", new Date().toISOString());
+          banner.remove();
+        });
+      }
       for (const f of REVIEW_FIELDS) {
         if (f.drift && agent.group === "control") continue;
         const saved = notes[agent.name] || {};
@@ -426,12 +448,12 @@
     document.querySelector("#review-export").addEventListener("click", () => {
       const cols = REVIEW_FIELDS.flatMap((f) => (f.notes ? [f.id, f.notes] : [f.id]));
       const names = Object.fromEntries(REVIEW_FIELDS.filter((f) => f.csv).map((f) => [f.id, f.csv]));
-      const head = ["agent", "group", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", "labelled_cause", "trigger", "mechanism", "memory_reinforced", ...cols.map((c) => names[c] || c), "updated_at"];
+      const head = ["agent", "group", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", "labelled_cause", "trigger", "mechanism", "memory_reinforced", ...cols.map((c) => names[c] || c), "updated_at", "imported_from", "reviewed_at"];
       const csv = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
       const rows = data.agents.map((a) => {
         const n = notes[a.name] || {};
         return [a.name, a.group, a.moment_pt, a.episode_id, a.assigned_goal, a.drift_activity, a.cause_label, a.trigger, a.mechanism,
-          a.memory_reinforced == null ? "" : a.memory_reinforced ? "yes" : "no", ...cols.map((c) => n[c]), n.updated_at];
+          a.memory_reinforced == null ? "" : a.memory_reinforced ? "yes" : "no", ...cols.map((c) => n[c]), n.updated_at, n.imported_from, n.reviewed_at];
       });
       const text = [head, ...rows].map((r) => r.map(csv).join(",")).join("\r\n");
       const link = el("a");
