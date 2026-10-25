@@ -431,8 +431,8 @@
    "cause_label": "Memory-reinforced waiting",
    "cause_family": "Pause or waiting",
    "cause_description": "A self-authored rule retained in memory repeatedly returned the agent to waiting or monitoring.",
-   "trigger": "Internal (own rule or plan)",
-   "trigger_detail": "self; memory rule: avoid product/copy churn without fresh evidence",
+   "trigger": "Lull / unchanged state",
+   "trigger_detail": "unchanged DSG Worker stats after shipping v230-v235 that afternoon; the pre-existing no-churn memory rule turned the flat metrics into a hold",
    "mechanism": "Waiting or monitoring loop",
    "memory_reinforced": true
   },
@@ -445,9 +445,9 @@
    "cause_label": "Memory-reinforced waiting",
    "cause_family": "Pause or waiting",
    "cause_description": "A self-authored rule retained in memory repeatedly returned the agent to waiting or monitoring.",
-   "trigger": "Internal (own rule or plan)",
-   "trigger_detail": "own consent-workflow stop condition hardened into 'wait for a valid scoped external invitation'",
-   "mechanism": "Waiting or monitoring loop",
+   "trigger": "Task finished / no next step seen",
+   "trigger_detail": "Luna finished its last approved outreach (Vaultier/Spresso GitLab issue, 20:54Z Jul 10) and saw nothing left except waiting for maintainer replies under its own no-follow-up stop condition",
+   "mechanism": "Self-imposed rule",
    "memory_reinforced": true
   },
   {
@@ -501,8 +501,8 @@
    "cause_label": "Memory-reinforced waiting",
    "cause_family": "Pause or waiting",
    "cause_description": "A self-authored rule retained in memory repeatedly returned the agent to waiting or monitoring.",
-   "trigger": "Internal (own rule or plan)",
-   "trigger_detail": "self-set 'await direct requests' rule",
+   "trigger": "Task finished / no next step seen",
+   "trigger_detail": "finished Kimi K2.6's H16 replication and peer-help replies, then saw nothing waiting on it and moved to 'await collaborators'",
    "mechanism": "Self-imposed rule",
    "memory_reinforced": true
   },
@@ -613,8 +613,8 @@
    "cause_label": "Pause — monitoring loop",
    "cause_family": "Pause or waiting",
    "cause_description": "The agent repeatedly checked unchanged state and waited between checks.",
-   "trigger": "Internal (own rule or plan)",
-   "trigger_detail": "self-judged claim map 'saturated' + own pacing rule (one new claim per quiet day) and self-scheduled probe rounds",
+   "trigger": "Clock or self-set checkpoint",
+   "trigger_detail": "self-scheduled probe rounds (midday grok46 probe ~11-12 AM PT) after staging work; set within own saturation/pacing plan",
    "mechanism": "Waiting or monitoring loop",
    "memory_reinforced": true
   },
@@ -627,8 +627,8 @@
    "cause_label": "Memory-reinforced waiting",
    "cause_family": "Pause or waiting",
    "cause_description": "A self-authored rule retained in memory repeatedly returned the agent to waiting or monitoring.",
-   "trigger": "Internal (own rule or plan)",
-   "trigger_detail": "own 'hold v19 until next human signal / no ship unless clear delight' rule",
+   "trigger": "Lull / unchanged state",
+   "trigger_detail": "quiet inbox (no new human mail at 10:45, 11:30, 11:33 PT) after four human-feedback-driven ships (v15-v18) that morning; Muse then wrote 'hold v19 until next human signal'",
    "mechanism": "Waiting or monitoring loop",
    "memory_reinforced": true
   }
