@@ -122,6 +122,7 @@
     .yn button[aria-pressed="true"][data-value="no"] { color: white; background: var(--rust); border-color: var(--rust); }
     .review-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
     .review-foot button { padding: 6px 12px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: white; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .review-foot button.is-secondary { background: var(--card); color: var(--ink); }
     .review-status { color: var(--muted); font: 600 11px/1.4 var(--mono); }
     .review-status.is-warn { color: var(--rust); }
     .agent-button.has-notes::after { content: " ●"; color: var(--green); font-size: 10px; }
@@ -179,6 +180,7 @@
           <form id="review-form" autocomplete="off"></form>
           <div class="review-foot">
             <button type="button" id="review-export" title="One CSV with a row for every agent point, reviewed or not">Export all agents' notes (CSV)</button>
+            <button type="button" id="review-import" class="is-secondary" title="Add reviews from a CSV in the export format. Runs only if every agent in the file has no notes in this browser.">Import reviews (CSV)</button>
             <span class="review-status" id="review-status"></span>
           </div>
         </aside>
@@ -437,6 +439,82 @@
       link.download = `interview-review-${new Date().toISOString().slice(0, 10)}.csv`;
       link.click();
       setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    });
+
+    // Import reviews from a CSV in the export format (e.g. drafted reviews). All or nothing: it runs only when every
+    // agent in the file is on this page, appears once, and has no notes at all in this browser, so it can never
+    // overwrite or mix into anything already written here.
+    function parseCsv(text) {
+      const rows = [];
+      let row = [], field = "", quoted = false;
+      text = text.replace(/^﻿/, "");
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (quoted) {
+          if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+          else if (c === '"') quoted = false;
+          else field += c;
+        } else if (c === '"') quoted = true;
+        else if (c === ",") { row.push(field); field = ""; }
+        else if (c === "\n" || c === "\r") {
+          if (c === "\r" && text[i + 1] === "\n") i++;
+          row.push(field); rows.push(row); row = []; field = "";
+        } else field += c;
+      }
+      if (field || row.length) { row.push(field); rows.push(row); }
+      return rows.filter((r) => r.some((v) => v !== ""));
+    }
+    const anyNote = (n) => Boolean(n) && Object.entries(n).some(([k, v]) => k !== "updated_at" && v);
+    const importButton = document.querySelector("#review-import");
+    const importInput = el("input");
+    importInput.type = "file";
+    importInput.accept = ".csv,text/csv";
+    importInput.hidden = true;
+    importButton.after(importInput);
+    importButton.addEventListener("click", () => importInput.click());
+    importInput.addEventListener("change", async () => {
+      const file = importInput.files[0];
+      importInput.value = "";
+      if (!file) return;
+      const [head = [], ...rows] = parseCsv(await file.text());
+      // Columns as the export names them (the constraints field is exported under its csv name).
+      const fieldOf = {};
+      for (const f of REVIEW_FIELDS) {
+        fieldOf[f.csv || f.id] = f.id;
+        if (f.notes) fieldOf[f.notes] = f.notes;
+      }
+      const agentCol = head.indexOf("agent");
+      if (agentCol < 0) { alert("That file has no agent column, so nothing was imported."); return; }
+      const known = new Set(data.agents.map((a) => a.name));
+      const seen = new Set(), unknown = [], taken = [], repeated = [], plan = [];
+      for (const r of rows) {
+        const name = r[agentCol];
+        const values = Object.fromEntries(head.map((h, i) => [fieldOf[h], (r[i] || "").trim()]).filter(([k, v]) => k && v));
+        if (!Object.keys(values).length) continue;
+        if (seen.has(name)) repeated.push(name);
+        else if (!known.has(name)) unknown.push(name);
+        else if (anyNote(notes[name])) taken.push(name);
+        else plan.push([name, values]);
+        seen.add(name);
+      }
+      if (unknown.length || taken.length || repeated.length) {
+        const list = (title, names) => (names.length ? `\n\n${title}:\n- ${names.join("\n- ")}` : "");
+        alert("Nothing was imported." + list("Already have notes in this browser", taken)
+          + list("Not on this page", unknown) + list("Listed more than once", repeated));
+        return;
+      }
+      if (!plan.length) { alert("That file has no review fields filled in, so nothing was imported."); return; }
+      if (!confirm(`Import reviews for ${plan.length} agents from ${file.name}?\nNone of them has notes in this browser yet.`)) return;
+      const stamp = new Date().toISOString();
+      for (const [name, values] of plan) notes[name] = { ...values, updated_at: stamp, imported_from: file.name };
+      try {
+        localStorage.setItem(REVIEW_KEY, JSON.stringify(notes));
+      } catch {
+        storageOk = false;
+      }
+      markReviewed();
+      if (current) render(current);
+      showStatus(`Imported ${plan.length} agents`);
     });
 
     // Opening or closing an answer resizes its whole table row. Keep the answer's top where it was on
