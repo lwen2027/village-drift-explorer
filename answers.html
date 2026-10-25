@@ -57,6 +57,8 @@
     .agent-button:hover { border-color: var(--line-strong); }
     .agent-button[aria-pressed="true"] { color: white; background: var(--ink); border-color: var(--ink); }
     .agent-moment { margin-left: auto; color: var(--muted); font: 700 11px/1.35 var(--mono); }
+    .table-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 10px; color: var(--muted); font-size: 12px; }
+    .table-tools label { color: var(--ink); font-weight: 700; cursor: pointer; }
     .agent-group { flex-basis: 100%; margin-top: 4px; color: var(--ink); font: 700 11px/1.35 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
     .agent-group-note { color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
     .agent-group-control { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-strong); color: var(--control); }
@@ -167,6 +169,7 @@
       </section>
 
       <div class="agent-picker" id="agent-picker" role="group" aria-label="Agent"></div>
+      <div class="table-tools"><label><input type="checkbox" id="show-all"> Show all questions</label> <span id="hidden-note"></span></div>
       <div class="review-layout">
         <div class="table-wrap"><table id="answers-table"></table></div>
         <aside class="review-panel" aria-labelledby="review-title">
@@ -429,7 +432,23 @@
       window.scrollBy(0, answer.getBoundingClientRect().top - Math.max(before, 12));
     }
 
+    // The shorter default view: the 16 core wordings minus two near-duplicates (belief-2 repeats belief-1,
+    // constraint-3 repeats constraint-2), each in the one framing the full rollout used. "Show all questions"
+    // brings back the phrasing-study wordings and both framings for the three pilot agents.
+    const CORE = ["belief-1-goal", "belief-3-accomplish", "success-1-counts", "success-3-track", "sentiment-1-enjoy",
+      "sentiment-2-frustrating", "sentiment-3-going", "sentiment-4-difficult", "cause-1-next", "cause-3-options-3to5",
+      "cause-5-rules-any", "cause-7-rules-reconsider", "constraint-1-in-the-way", "constraint-2-want-cant"];
+    const ROLLOUT_FRAMING = { belief: "plain", success: "plain", cause: "plain", sentiment: "private", constraint: "private" };
+    const showAll = document.querySelector("#show-all");
+    try { showAll.checked = localStorage.getItem("interview-answers-show-all") === "1"; } catch { /* default view */ }
+    let current = null;
+    showAll.addEventListener("change", () => {
+      try { localStorage.setItem("interview-answers-show-all", showAll.checked ? "1" : "0"); } catch { /* not remembered */ }
+      if (current) render(current);
+    });
+
     function render(agent) {
+      current = agent;
       buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.textContent === agent.name)));
       moment.textContent = agent.group === "control" ? `Control · on goal · ${agent.moment_pt}` : `Point 1 · ${agent.moment_pt}`;
       renderReview(agent);
@@ -441,8 +460,14 @@
       table.appendChild(el("thead")).append(head);
       const body = table.appendChild(el("tbody"));
       let section = null;
+      let hidden = 0;
       for (const q of inSectionOrder(data.questions)) {
-        const asked = framings.filter((f) => cellOf.has(`${agent.name}|${q.id}|${f.id}`));
+        let asked = framings.filter((f) => cellOf.has(`${agent.name}|${q.id}|${f.id}`));
+        if (!showAll.checked) {
+          if (!CORE.includes(q.id)) { hidden += asked.length; continue; }
+          const preferred = asked.filter((f) => f.id === ROLLOUT_FRAMING[q.id.split("-")[0]]);
+          if (preferred.length) { hidden += asked.length - preferred.length; asked = preferred; }
+        }
         if (!asked.length) continue;
         const key = sectionOf(q);
         if (key !== section) {
@@ -488,6 +513,9 @@
         }
         });
       }
+      document.querySelector("#hidden-note").textContent = hidden
+        ? `${hidden} duplicate wording${hidden === 1 ? "" : "s"} or framing${hidden === 1 ? "" : "s"} hidden for this agent`
+        : "";
     }
     markReviewed();
     render(data.agents[0]);
