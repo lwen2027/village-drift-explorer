@@ -15,6 +15,7 @@ more than once (e.g. the sentiment and core privacy-framed batches).
 """
 import argparse
 import collections
+import csv
 import json
 from pathlib import Path
 
@@ -52,6 +53,7 @@ def main():
     ap.add_argument("--points", type=Path, default=ROOT / "data/interview_points_v1.json")
     ap.add_argument("--episodes", type=Path, default=ROOT / "data/second_audit_v2.json")
     ap.add_argument("--annotations", type=Path, default=ROOT / "data/manual_review_annotations_v1.json")
+    ap.add_argument("--axes", type=Path, default=ROOT / "data/drift_axes_v1.csv")
     ap.add_argument("--out", type=Path, default=ROOT / "data/interview_answers_v1.json")
     args = ap.parse_args()
 
@@ -96,14 +98,20 @@ def main():
     # to check the answers against.
     episodes = {e["episode_id"]: e for e in json.loads(args.episodes.read_text(encoding="utf-8"))["confirmed_episodes"]}
     causes = {c["id"]: c for c in json.loads(args.annotations.read_text(encoding="utf-8"))["trigger_taxonomy"]["categories"]}
+    # The reviewed split of each episode into what started it (trigger) and what sustained it (mechanism).
+    with args.axes.open(encoding="utf-8-sig", newline="") as f:
+        axes = {r["episode_id"]: r for r in csv.DictReader(f)}
 
     def agent_row(a):
         e = episodes.get(episode_of[a]) or {}
         c = causes.get(category_of[a]) or {}
+        x = axes.get(episode_of[a]) or {}
         return {"name": a, "moment_pt": moments[a], "episode_id": episode_of[a],
                 "assigned_goal": e.get("assigned_goal"), "drift_activity": e.get("activity"),
                 "cause_label": c.get("label", category_of[a]), "cause_family": c.get("family"),
-                "cause_description": c.get("description")}
+                "cause_description": c.get("description"),
+                "trigger": x.get("trigger"), "trigger_detail": x.get("trigger_detail"), "mechanism": x.get("mechanism"),
+                "memory_reinforced": {"True": True, "False": False}.get(x.get("memory_reinforced"))}
 
     agents = sorted(moments)
     out = {

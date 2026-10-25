@@ -94,6 +94,7 @@
     .review-ref dd { margin: 2px 0 8px; }
     .review-ref dd:last-child { margin-bottom: 0; }
     .review-ref-note { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .review-ref-old { color: var(--muted); font-size: 11px; }
     .review-field { margin: 0 0 11px; }
     .review-field label, .review-field .field-label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 700; line-height: 1.3; }
     .review-field textarea {
@@ -182,7 +183,11 @@
       { id: "cause_notes", label: "Cause of drift notes" },
       // Kept under its old id so earlier notes stay attached; exported as constraints_pain_points.
       { id: "constraints_notes", label: "Constraints & pain points", csv: "constraints_pain_points" },
-      { id: "cause_right", label: "Is the inferred cause of drift right?", yn: true, notes: "cause_right_notes" },
+      { id: "trigger_right", label: "Is the trigger right?", yn: true, notes: "trigger_right_notes" },
+      { id: "mechanism_right", label: "Is the mechanism right?", yn: true, notes: "mechanism_right_notes" },
+      // The earlier single-label question; shown only where it was already answered, always exported.
+      { id: "cause_right", label: "Is the original drift label right? (earlier question)", yn: true, notes: "cause_right_notes", legacy: true },
+      { id: "motive_notes", label: "Motive (why it cared)", placeholder: "Why the drift seemed worth doing to the agent. Basis: its behaviour and log reasoning, or the interview only? Does its stated reason match?" },
       { id: "suggestions", label: "Potential suggestions to add" },
       { id: "next_action_accurate", label: "Is its stated next planned action accurate?", yn: true, notes: "next_action_notes" },
       { id: "highlights", label: "Highlights", placeholder: "Standout quotes or findings worth citing" },
@@ -300,14 +305,25 @@
       ref.replaceChildren(
         el("dt", null, "Assigned goal"), el("dd", null, agent.assigned_goal || "not recorded"),
         el("dt", null, "Recorded drift"), el("dd", null, agent.drift_activity || "not recorded"),
-        el("dt", null, "Labelled cause"), el("dd", null, agent.cause_label || "not recorded"),
+        el("dt", null, "Trigger"), el("dd", null, agent.trigger || "not recorded"),
+        el("dt", null, "Mechanism"), el("dd", null, agent.mechanism || "not recorded"),
+        el("dt", null, "Original label"), el("dd", "review-ref-old", agent.cause_label || "not recorded"),
       );
+      const [, , triggerDd, mechanismDd, oldDd] = ref.querySelectorAll("dd");
+      if (agent.trigger_detail) triggerDd.append(el("span", "review-ref-note", agent.trigger_detail));
+      if (agent.memory_reinforced != null) {
+        mechanismDd.append(el("span", "review-ref-note", agent.memory_reinforced
+          ? "Memory-reinforced: its own memory or overnight intention kept it going"
+          : "Not memory-reinforced"));
+      }
       if (agent.cause_description) {
-        ref.lastChild.append(el("span", "review-ref-note", `${agent.cause_family ? agent.cause_family + ": " : ""}${agent.cause_description}`));
+        oldDd.append(el("span", "review-ref-note", `${agent.cause_family ? agent.cause_family + ": " : ""}${agent.cause_description}`));
       }
       const form = document.querySelector("#review-form");
       form.replaceChildren();
       for (const f of REVIEW_FIELDS) {
+        const saved = notes[agent.name] || {};
+        if (f.legacy && !saved[f.id] && !saved[f.notes]) continue;
         const wrap = form.appendChild(el("div", "review-field"));
         if (!f.yn) {
           const label = wrap.appendChild(el("label", null, f.label));
@@ -342,11 +358,12 @@
     document.querySelector("#review-export").addEventListener("click", () => {
       const cols = REVIEW_FIELDS.flatMap((f) => (f.notes ? [f.id, f.notes] : [f.id]));
       const names = Object.fromEntries(REVIEW_FIELDS.filter((f) => f.csv).map((f) => [f.id, f.csv]));
-      const head = ["agent", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", "labelled_cause", ...cols.map((c) => names[c] || c), "updated_at"];
+      const head = ["agent", "moment_pt", "episode_id", "assigned_goal", "recorded_drift", "labelled_cause", "trigger", "mechanism", "memory_reinforced", ...cols.map((c) => names[c] || c), "updated_at"];
       const csv = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
       const rows = data.agents.map((a) => {
         const n = notes[a.name] || {};
-        return [a.name, a.moment_pt, a.episode_id, a.assigned_goal, a.drift_activity, a.cause_label, ...cols.map((c) => n[c]), n.updated_at];
+        return [a.name, a.moment_pt, a.episode_id, a.assigned_goal, a.drift_activity, a.cause_label, a.trigger, a.mechanism,
+          a.memory_reinforced == null ? "" : a.memory_reinforced ? "yes" : "no", ...cols.map((c) => n[c]), n.updated_at];
       });
       const text = [head, ...rows].map((r) => r.map(csv).join(",")).join("\r\n");
       const link = el("a");
