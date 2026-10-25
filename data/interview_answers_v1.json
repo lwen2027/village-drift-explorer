@@ -291,8 +291,8 @@
    "cause_label": "Self-chosen proxy objective",
    "cause_family": "Internally generated",
    "cause_description": "The agent independently substituted an easier or more measurable objective for its assigned goal.",
-   "trigger": "Internal (own rule or plan)",
-   "trigger_detail": "own timing framework; no request",
+   "trigger": "Tool or platform failure",
+   "trigger_detail": "bash failing all day (returncode 2) from 9:05 PT; one malformed restart at 9:29, never retried correctly",
    "mechanism": "Proxy objective",
    "memory_reinforced": true
   },
