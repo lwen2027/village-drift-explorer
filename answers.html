@@ -215,6 +215,7 @@
       { id: "highlights", label: "Highlights", placeholder: "Standout quotes or findings worth citing" },
     ];
     const REVIEW_KEY = "interview-answers-review-v1";
+    const REPLACED_KEY = "interview-answers-review-replaced-v1";
     const SECTIONS = { belief: "Goal belief", success: "Success", sentiment: "Sentiment", cause: "Cause of drift", constraint: "Constraints" };
     // The two rules questions are shown under Constraints, after the constraint questions (their ids keep
     // the cause- prefix they were asked under).
@@ -465,7 +466,10 @@
 
     // Import reviews from a CSV in the export format (e.g. drafted reviews). All or nothing: it runs only when every
     // agent in the file is on this page, appears once, and has no notes at all in this browser, so it can never
-    // overwrite or mix into anything already written here.
+    // overwrite or mix into anything already written here. One exception, for redrafts: a row with a
+    // replaces_updated_at value may replace an imported draft that is not marked reviewed and whose updated_at still
+    // equals that value. Any edit in the panel changes updated_at, so a draft touched since that export is never
+    // replaced. Replaced entries are kept under REPLACED_KEY.
     function parseCsv(text) {
       const rows = [];
       let row = [], field = "", quoted = false;
@@ -507,29 +511,47 @@
       }
       const agentCol = head.indexOf("agent");
       if (agentCol < 0) { alert("That file has no agent column, so nothing was imported."); return; }
+      const replacesCol = head.indexOf("replaces_updated_at");
       const known = new Set(data.agents.map((a) => a.name));
       const seen = new Set(), unknown = [], taken = [], repeated = [], plan = [];
+      let replacing = 0;
       for (const r of rows) {
         const name = r[agentCol];
         const values = Object.fromEntries(head.map((h, i) => [fieldOf[h], (r[i] || "").trim()]).filter(([k, v]) => k && v));
         if (!Object.keys(values).length) continue;
+        const n = notes[name];
+        const replaces = replacesCol >= 0 ? (r[replacesCol] || "").trim() : "";
+        const untouchedDraft = replaces && needsReview(n) && n.updated_at === replaces;
         if (seen.has(name)) repeated.push(name);
         else if (!known.has(name)) unknown.push(name);
-        else if (anyNote(notes[name])) taken.push(name);
-        else plan.push([name, values]);
+        else if (anyNote(n) && !untouchedDraft) taken.push(name);
+        else {
+          plan.push([name, values]);
+          if (anyNote(n)) replacing++;
+        }
         seen.add(name);
       }
       if (unknown.length || taken.length || repeated.length) {
         const list = (title, names) => (names.length ? `\n\n${title}:\n- ${names.join("\n- ")}` : "");
-        alert("Nothing was imported." + list("Already have notes in this browser", taken)
+        alert("Nothing was imported." + list("Already have notes in this browser (edited or reviewed)", taken)
           + list("Not on this page", unknown) + list("Listed more than once", repeated));
         return;
       }
       if (!plan.length) { alert("That file has no review fields filled in, so nothing was imported."); return; }
-      if (!confirm(`Import reviews for ${plan.length} agents from ${file.name}?\nNone of them has notes in this browser yet.`)) return;
+      const fresh = plan.length - replacing;
+      const summary = replacing
+        ? `${replacing} replace imported drafts you haven't edited or marked reviewed${fresh ? `; ${fresh} have no notes yet` : ""}.`
+        : "None of them has notes in this browser yet.";
+      if (!confirm(`Import reviews for ${plan.length} agents from ${file.name}?\n${summary}`)) return;
       const stamp = new Date().toISOString();
-      for (const [name, values] of plan) notes[name] = { ...values, updated_at: stamp, imported_from: file.name };
+      let replaced = {};
+      try { replaced = JSON.parse(localStorage.getItem(REPLACED_KEY) || "{}"); } catch {}
+      for (const [name, values] of plan) {
+        if (anyNote(notes[name])) (replaced[name] ||= []).push({ ...notes[name], replaced_at: stamp });
+        notes[name] = { ...values, updated_at: stamp, imported_from: file.name };
+      }
       try {
+        if (replacing) localStorage.setItem(REPLACED_KEY, JSON.stringify(replaced));
         localStorage.setItem(REVIEW_KEY, JSON.stringify(notes));
       } catch {
         storageOk = false;
