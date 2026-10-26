@@ -559,10 +559,12 @@
       const same = (a, b) => (a || "").replace(/\r\n?/g, "\n").trim() === (b || "").replace(/\r\n?/g, "\n").trim();
       const known = new Set(data.agents.map((a) => a.name));
       const plan = [], problems = [], seen = new Set();
+      let applied = 0;
       for (const r of rows) {
         const name = r[col("agent")], field = fieldOf[r[col("field")]], key = `${name}|${field}`;
         if (!known.has(name) || !field) problems.push(`${name} · ${r[col("field")]}: not on this page`);
         else if (seen.has(key)) problems.push(`${name} · ${r[col("field")]}: listed more than once`);
+        else if (same(notes[name]?.[field], r[col("new_value")])) applied++; // already has the new text
         else if (!same(notes[name]?.[field], r[col("old_value")])) problems.push(`${name} · ${r[col("field")]}: changed since that export`);
         else plan.push([name, field, (r[col("new_value")] || "").trim()]);
         seen.add(key);
@@ -571,7 +573,10 @@
         alert(`Nothing was changed.\n\n- ${problems.join("\n- ")}`);
         return;
       }
-      if (!plan.length) { alert("That file has no edits, so nothing was changed."); return; }
+      if (!plan.length) {
+        alert(applied ? `All ${applied} edits in that file are already in this browser.` : "That file has no edits, so nothing was changed.");
+        return;
+      }
       const agents = new Set(plan.map(([name]) => name)).size;
       if (!confirm(`Apply ${plan.length} field edits to ${agents} agents from ${file.name}?\nEach field still matches the text the edit was written against; previous text is kept as a backup.`)) return;
       const stamp = new Date().toISOString();

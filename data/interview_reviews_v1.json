@@ -1,10 +1,7 @@
 {
  "source": "interview_review_2026-10-26_v3.csv",
  "edits": [
-  "fable5_motive_swap_2026-10-26.csv",
-  "gpt6sol_helper_todo_2026-10-26.csv",
-  "audit_edits_2026-10-26.csv",
-  "note_fixes_2026-10-26.csv"
+  "all_fixes_2026-10-26.csv"
  ],
  "exported_at": "2026-10-26T02:42:49.679Z",
  "reviews": {
