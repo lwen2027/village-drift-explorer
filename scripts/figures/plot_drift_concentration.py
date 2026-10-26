@@ -1,6 +1,6 @@
 """Figures for the drift paper: how concentrated each mechanism and trigger is in a few agents.
 
-Main figure, figures/drift/drift_concentration.png: (a) mechanisms, (b) triggers grouped into families.
+Main figure, figures/drift/drift_concentration.png: (a) mechanisms, (b) triggers, each sorted by hours.
 Each bar is drift hours split into the largest contributing agent, the 2nd-3rd agents and all others; the label
 gives total hours, the number of agents and the top agent's share.
 
@@ -32,16 +32,11 @@ SHADES = ["#1f5fa8", "#6f9fd8", "#c3d6ee"]
 SHADE_LABELS = ["Top agent", "2nd–3rd agents", "All other agents"]
 MECHANISMS = ["Waiting or monitoring loop", "Self-imposed rule", "Proxy objective", "Standing role",
               "Bounded side task", "Early stop", "Carry-over from previous goal"]
-TRIGGER_FAMILIES = [
-    ("Internal", ["Internal (own rule or plan)"]),
-    ("Ordinary events", ["Task finished / no next step seen", "Pending dependency", "Lull / unchanged state",
-                         "Clock or self-set checkpoint"]),
-    ("Messages and requests", ["Agent message (no request)", "Human request", "Agent message exposing a need",
-                               "Agent request", "Human message (no request)"]),
-    ("Errors and misreadings", ["Perceived blocker (misperceived)", "Tool or platform failure",
-                                "Misread state or clock"]),
-    ("Operator", ["Operator decision"]),
-]
+TRIGGERS = ["Internal (own rule or plan)", "Task finished / no next step seen", "Pending dependency",
+            "Lull / unchanged state", "Clock or self-set checkpoint", "Agent message (no request)", "Human request",
+            "Agent message exposing a need", "Agent request", "Human message (no request)",
+            "Perceived blocker (misperceived)", "Tool or platform failure", "Misread state or clock",
+            "Operator decision"]
 FONT = 7.5
 TITLE_FONT = "Lora"  # matches the AI Village site; bundled in scripts/figures/fonts (SIL OFL)
 for _f in (Path(__file__).parent / "fonts").glob("*.ttf"):
@@ -86,35 +81,19 @@ def bar_row(ax, y, c, xmax):
 def concentration(rows):
     mech, trig = hours_by(rows, "mechanism"), hours_by(rows, "trigger")
     assert set(mech) == set(MECHANISMS), set(mech) ^ set(MECHANISMS)
-    assert set(trig) == {t for _, ts in TRIGGER_FAMILIES for t in ts}
+    assert set(trig) == set(TRIGGERS), set(trig) ^ set(TRIGGERS)
     xmax = max(sum(c.values()) for c in list(mech.values()) + list(trig.values()))
 
-    # Trigger rows: families in the order above, each family's rows sorted by hours, with a header row between.
-    trig_rows = []  # (label, counter or None for a header)
-    for fam, ts in TRIGGER_FAMILIES:
-        trig_rows.append((fam, None))
-        trig_rows += [(t, trig[t]) for t in sorted(ts, key=lambda t: -sum(trig[t].values()))]
+    trig_rows = [(t, trig[t]) for t in sorted(TRIGGERS, key=lambda t: -sum(trig[t].values()))]
     mech_rows = [(m, mech[m]) for m in sorted(MECHANISMS, key=lambda m: -sum(mech[m].values()))]
 
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(7.0, 7.4), sharex=True,
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(7.0, 6.4), sharex=True,
                                    gridspec_kw={"height_ratios": [len(mech_rows), len(trig_rows)], "hspace": 0.12})
     for ax, data, letter, name in ((ax1, mech_rows, "a", "Mechanism (what kept the drift going)"),
                                    (ax2, trig_rows, "b", "Trigger (what started it)")):
-        ylabels = []
         for i, (label, c) in enumerate(data):
-            y = len(data) - 1 - i  # first row at the top
-            if c is None:
-                ylabels.append((y, label, True))
-            else:
-                bar_row(ax, y, c, xmax)
-                ylabels.append((y, label, False))
-        ax.set_yticks([y for y, _, _ in ylabels], [l for _, l, _ in ylabels])
-        for tick, (_, _, header) in zip(ax.get_yticklabels(), ylabels):
-            if header:
-                tick.set_fontweight("semibold")
-                tick.set_fontfamily(TITLE_FONT)
-                tick.set_color(INK_2)
-                tick.set_fontsize(FONT - 0.5)
+            bar_row(ax, len(data) - 1 - i, c, xmax)  # first row at the top
+        ax.set_yticks(range(len(data)), [label for label, _ in reversed(data)])
         ax.set_ylim(-0.6, len(data) - 0.4)
         ax.set_title(f"({letter}) {name}", loc="left", fontsize=FONT + 2, color=INK, fontweight="semibold", pad=6, fontfamily=TITLE_FONT)
         style(ax)
@@ -132,7 +111,7 @@ def profile(rows):
     agents = [a for a, _ in agent_total.most_common()]
     mech, trig = hours_by(rows, "mechanism"), hours_by(rows, "trigger")
     mech_cols = sorted(MECHANISMS, key=lambda m: -sum(mech[m].values()))
-    trig_cols = [t for _, ts in TRIGGER_FAMILIES for t in sorted(ts, key=lambda t: -sum(trig[t].values()))]
+    trig_cols = sorted(TRIGGERS, key=lambda t: -sum(trig[t].values()))
     cmap = LinearSegmentedColormap.from_list("seq", ["#ffffff", "#c3d6ee", "#6f9fd8", "#1f5fa8", "#0f3466"])
     norm = Normalize(0, 100)
 
@@ -162,11 +141,6 @@ def profile(rows):
             ax.set_yticks(range(len(agents)), [f"{agent_total[a]:,.0f} h" if agent_total[a] >= 1 else "<1 h" for a in agents], minor=False,
                           fontsize=FONT - 1.5, color=INK_2)
             ax.yaxis.tick_right()
-            # Light dividers between trigger families.
-            edge = 0
-            for _, ts in TRIGGER_FAMILIES[:-1]:
-                edge += len(ts)
-                ax.axvline(edge - 0.5, color=INK_2, linewidth=0.6)
     fig.subplots_adjust(left=0.2, right=0.92, top=0.96, bottom=0.25)
     return fig
 
