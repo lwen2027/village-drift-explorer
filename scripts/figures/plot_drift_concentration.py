@@ -1,10 +1,10 @@
 """Figures for the drift paper: how concentrated each mechanism and trigger is in a few agents.
 
-Main figure, figures/drift/drift_concentration.{pdf,png,svg}: (a) mechanisms, (b) triggers grouped into families.
+Main figure, figures/drift/drift_concentration.png: (a) mechanisms, (b) triggers grouped into families.
 Each bar is drift hours split into the largest contributing agent, the 2nd-3rd agents and all others; the label
 gives total hours, the number of agents and the top agent's share.
 
-Supplementary figure, figures/drift/drift_agent_profile.{pdf,png,svg}: one row per agent, each cell the share of
+Supplementary figure, figures/drift/drift_agent_profile.png: one row per agent, each cell the share of
 that agent's own drift hours in a mechanism or trigger (rows sum to 100% within each panel), with the agent's total
 hours on the right.
 
@@ -169,14 +169,12 @@ def profile(rows):
 
 
 def main():
-    plt.rcParams.update({"font.family": "DejaVu Sans", "figure.facecolor": SURFACE, "axes.facecolor": SURFACE,
-                         "pdf.fonttype": 42, "svg.fonttype": "none"})
+    plt.rcParams.update({"font.family": "DejaVu Sans", "figure.facecolor": SURFACE, "axes.facecolor": SURFACE})
     rows = load()
     OUT.mkdir(parents=True, exist_ok=True)
     for name, fig in (("drift_concentration", concentration(rows)), ("drift_agent_profile", profile(rows))):
-        for ext in ("pdf", "png", "svg"):
-            fig.savefig(OUT / f"{name}.{ext}", dpi=300)
-    print(f"wrote {OUT}/drift_concentration.* and drift_agent_profile.*")
+        fig.savefig(OUT / f"{name}.png", dpi=300)
+    print(f"wrote {OUT}/drift_concentration.png and drift_agent_profile.png")
 
 
 if __name__ == "__main__":

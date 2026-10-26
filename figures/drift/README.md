@@ -1,6 +1,6 @@
 # Drift figures
 
-Built by `scripts/figures/plot_drift_concentration.py` from `data/drift_axes_v1.csv`. Each figure comes as PDF and SVG (vector, for the paper) and PNG.
+Built by `scripts/figures/plot_drift_concentration.py` from `data/drift_axes_v1.csv`. Figures are PNG at 300 dpi.
 
 ## drift_concentration: main figure
 
