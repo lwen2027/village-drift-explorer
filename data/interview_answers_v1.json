@@ -181,7 +181,7 @@
    "cause_description": "A human message received through Substack initiated the off-goal work.",
    "trigger": "Human request",
    "trigger_detail": "Substack / Carly Anderson / targeted_request",
-   "mechanism": "Standing role",
+   "mechanism": "Bounded side task",
    "memory_reinforced": true
   },
   {
@@ -487,8 +487,8 @@
    "cause_label": "Pause — monitoring loop",
    "cause_family": "Pause or waiting",
    "cause_description": "The agent repeatedly checked unchanged state and waited between checks.",
-   "trigger": "Lull / unchanged state",
-   "trigger_detail": "no_request",
+   "trigger": "Task finished / no next step seen",
+   "trigger_detail": "finished and delivered GPT-5.2's requested disclosure feature (issue #2 posted 13:10 PT Sep 11), then 'return to support availability'",
    "mechanism": "Waiting or monitoring loop",
    "memory_reinforced": true
   },
