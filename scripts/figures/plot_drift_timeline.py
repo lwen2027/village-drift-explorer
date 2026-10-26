@@ -1,8 +1,8 @@
-"""Timeline of drift across the goal period: one row per drifting agent, drift bouts in red.
+"""Timeline of drift across the goal period, in the style of the findings page's goal atlas.
 
-Each row shows the agent's goal period (light band), every drift bout of its goal-period episodes in
-data/drift_axes_v1.csv (red, at true times from data/second_audit_v2.json; a minimum width keeps short bouts
-visible), its interview points (black triangles) and its total drift hours. Weekends are shaded.
+One row per agent with drift interview points: the agent's name and short goal, its goal window (a pale pill),
+each goal-period drift episode as a rust pill from its first to its last drift bout, its interview points
+(small triangles) and its total drift hours.
 
     python3 scripts/figures/plot_drift_timeline.py
 
@@ -23,14 +23,12 @@ import matplotlib.dates as mdates
 import matplotlib.font_manager
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-from matplotlib.patches import Patch
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "figures" / "drift"
 PERIOD = (dt.datetime(2026, 7, 6), dt.datetime(2026, 10, 3, 23, 59))
-SURFACE, INK, INK_2, BAND, WEEKEND = "#ffffff", "#0b0b0b", "#52514e", "#e9e8e4", "#f6f5f2"
-RED = "#d93a39"
-MIN_WIDTH_H = 2.5  # hours; keeps a 20-minute bout visible at this scale
+# The findings page palette.
+SURFACE, INK, MUTED, LINE, WINDOW, RUST = "#ffffff", "#292820", "#747168", "#e4dccb", "#e8ddc5", "#ae5037"
 FONT = 7.5
 TITLE_FONT = "Lora"
 for _f in (Path(__file__).parent / "fonts").glob("*.ttf"):
@@ -44,18 +42,19 @@ def ts(value):
     return t.astimezone(dt.timezone.utc).replace(tzinfo=None) if t.tzinfo else t
 
 
-def bouts(e):
+def span(e):
+    """First bout start to last bout end, as on the findings page; onset + duration when there are no bouts."""
     raw = e.get("drift_bouts") or []
     if isinstance(raw, str):
         raw = json.loads(raw.replace("'", '"'))
-    out = [(ts(a), ts(b)) for a, b in raw if ts(a) and ts(b)]
-    if out:
-        return out
+    bouts = [(ts(a), ts(b)) for a, b in raw if ts(a) and ts(b)]
+    if bouts:
+        return bouts[0][0], bouts[-1][1]
     start = ts(e.get("onset")) or ts(e.get("activity_start_observed_at"))
     end = ts((e.get("drift_end") or {}).get("ended_at"))
     if start and end is None and e.get("duration_seconds") is not None:
         end = start + dt.timedelta(seconds=float(e["duration_seconds"]))
-    return [(start, end)] if start and end else []
+    return (start, end) if start and end else (None, None)
 
 
 def load():
@@ -66,81 +65,82 @@ def load():
     points = points if isinstance(points, list) else points.get("agents", points)
     agents = [p["agent"] for p in points]
 
-    drift, hours = defaultdict(list), defaultdict(float)
+    spans, hours, count = defaultdict(list), defaultdict(float), defaultdict(int)
     for eid, r in axes.items():
         if r["agent"] in agents and eid in episodes:
-            drift[r["agent"]] += bouts(episodes[eid])
+            s, e = span(episodes[eid])
+            if s:
+                spans[r["agent"]].append((s, e))
             hours[r["agent"]] += float(r["hours"] or 0)
+            count[r["agent"]] += 1
 
     src = json.loads((ROOT / "data/source_records.json").read_text())
     names = {a["id"]: a["name"] for a in src["agentRecords"]}
-    starts = defaultdict(list)
+    goals = defaultdict(list)
     for g in src["agentGoalRecords"]:
         if names.get(g["agent_id"]) in agents and g.get("start_time"):
-            starts[names[g["agent_id"]]].append(ts(g["start_time"]))
-    goal = {}
+            goals[names[g["agent_id"]]].append(g)
+    window, short = {}, {}
     for a in agents:
-        first = min([t for t in starts.get(a, []) if t] or [PERIOD[0]])
-        goal[a] = (max(first, PERIOD[0]), PERIOD[1])
+        mine = sorted(goals.get(a, []), key=lambda g: g["start_time"])
+        start = ts(mine[0]["start_time"]) if mine else PERIOD[0]
+        window[a] = (max(start, PERIOD[0]), PERIOD[1])
+        short[a] = (mine[-1].get("short_name") or mine[-1].get("name")) if mine else ""
 
     moments = defaultdict(list)
     for a in json.loads((ROOT / "data/interview_answers_v1.json").read_text())["agents"]:
         base = re.sub(r" \([^)]*\)$", "", a["name"])
         m = re.search(r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}) PT", a.get("moment_pt") or "")
         if base in agents and m:
-            local = dt.datetime.fromisoformat(m.group(1))
-            # PT is UTC-7 throughout the period (PDT until Nov 1).
-            moments[base].append(local + dt.timedelta(hours=7))
-    return agents, drift, hours, goal, moments
+            moments[base].append(dt.datetime.fromisoformat(m.group(1)) + dt.timedelta(hours=7))  # PDT -> UTC
+    return agents, spans, hours, count, window, short, moments
 
 
 def main():
     plt.rcParams.update({"font.family": "Helvetica Neue", "figure.facecolor": SURFACE, "axes.facecolor": SURFACE})
-    agents, drift, hours, goal, moments = load()
+    agents, spans, hours, count, window, short, moments = load()
     order = sorted(agents, key=lambda a: -hours[a])
-    fig, ax = plt.subplots(figsize=(7.2, 6.4))
+    fig, ax = plt.subplots(figsize=(7.2, 8.6))
+    to_x = mdates.date2num
 
-    day = PERIOD[0]
-    while day < PERIOD[1]:
-        if day.weekday() >= 5:
-            ax.axvspan(day, day + dt.timedelta(days=1), color=WEEKEND, zorder=0, linewidth=0)
-        day += dt.timedelta(days=1)
-
-    min_w = dt.timedelta(hours=MIN_WIDTH_H)
     for y, a in enumerate(order):
-        g0, g1 = goal[a]
-        ax.barh(y, mdates.date2num(g1) - mdates.date2num(g0), left=mdates.date2num(g0), height=0.56,
-                color=BAND, linewidth=0, zorder=1)
-        for s, e in drift[a]:
-            width = max(e - s, min_w)
-            ax.barh(y, mdates.date2num(s + width) - mdates.date2num(s), left=mdates.date2num(s), height=0.56,
-                    color=RED, linewidth=0, zorder=2)
+        if y:
+            ax.axhline(y - 0.5, color=LINE, linewidth=0.5, zorder=0)
+        g0, g1 = window[a]
+        # Pills: thick lines with round caps, so a short episode is a dot, like the findings page.
+        ax.plot([to_x(g0), to_x(g1)], [y, y], color=WINDOW, linewidth=6.5, solid_capstyle="round", zorder=1)
+        for s, e in spans[a]:
+            ax.plot([to_x(s), to_x(e)], [y, y], color=RUST, linewidth=3.6, solid_capstyle="round", zorder=2)
         for m in moments.get(a, []):
-            ax.plot(m, y - 0.42, marker="v", markersize=3.6, color=INK, zorder=3, clip_on=False)
-        ax.text(1.005, y, f"{hours[a]:,.0f} h", transform=ax.get_yaxis_transform(), va="center",
-                fontsize=FONT - 1, color=INK_2)
+            ax.plot(to_x(m), y - 0.33, marker="v", markersize=3.4, color=INK, zorder=3, clip_on=False)
+        ax.text(-0.012, y - 0.13, a, transform=ax.get_yaxis_transform(), ha="right", va="center",
+                fontsize=FONT - 0.3, fontweight="bold", color=INK)
+        ax.text(-0.012, y + 0.25, short[a], transform=ax.get_yaxis_transform(), ha="right", va="center",
+                fontsize=FONT - 2, color=MUTED)
+        ax.text(1.012, y, f"{hours[a]:,.0f} h · {count[a]} ep", transform=ax.get_yaxis_transform(), va="center",
+                fontsize=FONT - 1.2, color=MUTED, family="Menlo")
 
-    ax.set_yticks(range(len(order)), order, fontsize=FONT - 0.5, color=INK)
-    ax.set_ylim(len(order) - 0.4, -0.9)
-    ax.set_xlim(PERIOD[0], PERIOD[1])
-    ax.xaxis.set_major_locator(mdates.MonthLocator())
-    ax.xaxis.set_minor_locator(mdates.WeekdayLocator(byweekday=mdates.MO))
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b"))
-    ax.tick_params(axis="x", which="major", labelsize=FONT, colors=INK_2, length=4, color=INK_2)
-    ax.tick_params(axis="x", which="minor", length=2, color=INK_2)
-    ax.tick_params(axis="y", length=0)
-    for side in ("top", "right", "left"):
+    ax.set_ylim(len(order) - 0.5, -0.7)
+    ax.set_xlim(to_x(PERIOD[0]) - 1, to_x(PERIOD[1]) + 1)
+    ax.set_yticks([])
+    ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=(1, 15)))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %-d"))
+    ax.xaxis.tick_top()
+    ax.tick_params(axis="x", labelsize=FONT - 1.2, colors=MUTED, length=3, color=LINE, pad=2)
+    for label in ax.get_xticklabels():
+        label.set_family("Menlo")
+    for side in ("bottom", "right", "left"):
         ax.spines[side].set_visible(False)
-    ax.spines["bottom"].set_color(INK_2)
-    ax.spines["bottom"].set_linewidth(0.6)
-    ax.set_title("Drift across the goal period (6 Jul – 3 Oct 2026)", loc="left", fontsize=FONT + 2,
-                 fontfamily=TITLE_FONT, fontweight="semibold", color=INK, pad=14)
-    handles = [Patch(color=BAND, label="Goal period"), Patch(color=RED, label="Drift"),
-               Line2D([], [], marker="v", linestyle="", color=INK, markersize=4, label="Interview point"),
-               Patch(facecolor=WEEKEND, edgecolor=BAND, linewidth=0.6, label="Weekend")]
-    ax.legend(handles=handles, loc="lower left", bbox_to_anchor=(0, 1.0), ncol=4, fontsize=FONT - 0.5,
-              frameon=False, handlelength=1.2, borderaxespad=0.1, columnspacing=1.4)
-    fig.subplots_adjust(left=0.2, right=0.93, top=0.92, bottom=0.05)
+    ax.spines["top"].set_color(LINE)
+    ax.spines["top"].set_linewidth(0.6)
+    ax.set_title("Drift episodes across the goal period", loc="left", fontsize=FONT + 2, fontfamily=TITLE_FONT,
+                 fontweight="semibold", color=INK, pad=34)
+    handles = [Line2D([], [], color=WINDOW, linewidth=6.5, solid_capstyle="round", label="Goal window"),
+               Line2D([], [], color=RUST, linewidth=3.6, solid_capstyle="round", label="Drift episode"),
+               Line2D([], [], marker="v", linestyle="", color=INK, markersize=4, label="Interview point")]
+    ax.legend(handles=handles, loc="lower left", bbox_to_anchor=(0.0, 1.022), ncol=3, fontsize=FONT - 1,
+              frameon=False, handlelength=1.6, borderaxespad=0, columnspacing=1.4)
+    fig.subplots_adjust(left=0.24, right=0.88, top=0.915, bottom=0.015)
     OUT.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUT / "drift_timeline.png", dpi=300)
     print(f"wrote {OUT}/drift_timeline.png ({len(order)} agents)")
