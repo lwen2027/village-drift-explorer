@@ -195,7 +195,7 @@
           <form id="review-form" autocomplete="off"></form>
           <div class="review-foot">
             <button type="button" id="review-export" title="One CSV with a row for every agent point, reviewed or not">Export all agents' notes (CSV)</button>
-            <button type="button" id="review-import" class="is-secondary" title="Add reviews from a CSV in the export format. Runs only if every agent in the file has no notes in this browser.">Import reviews (CSV)</button>
+            <button type="button" id="review-import" class="is-secondary" title="Add reviews from a CSV in the export format (only for agents with no notes here), or apply a field-edit CSV (agent, field, old_value, new_value) to fields that still match.">Import reviews (CSV)</button>
             <span class="review-status" id="review-status"></span>
           </div>
         </aside>
@@ -550,6 +550,51 @@
       return rows.filter((r) => r.some((v) => v !== ""));
     }
     const anyNote = (n) => Boolean(n) && Object.entries(n).some(([k, v]) => k !== "updated_at" && v);
+
+    // Field edits (columns agent, field, old_value, new_value), e.g. resolved TODOs written into existing notes.
+    // Compare-and-swap, all or nothing: each field changes only if its text in this browser still equals old_value,
+    // so anything edited since the export blocks the whole file. Previous values are kept under REPLACED_KEY.
+    function importEdits(file, head, rows, fieldOf) {
+      const col = (h) => head.indexOf(h);
+      const same = (a, b) => (a || "").replace(/\r\n?/g, "\n").trim() === (b || "").replace(/\r\n?/g, "\n").trim();
+      const known = new Set(data.agents.map((a) => a.name));
+      const plan = [], problems = [], seen = new Set();
+      for (const r of rows) {
+        const name = r[col("agent")], field = fieldOf[r[col("field")]], key = `${name}|${field}`;
+        if (!known.has(name) || !field) problems.push(`${name} · ${r[col("field")]}: not on this page`);
+        else if (seen.has(key)) problems.push(`${name} · ${r[col("field")]}: listed more than once`);
+        else if (!same(notes[name]?.[field], r[col("old_value")])) problems.push(`${name} · ${r[col("field")]}: changed since that export`);
+        else plan.push([name, field, (r[col("new_value")] || "").trim()]);
+        seen.add(key);
+      }
+      if (problems.length) {
+        alert(`Nothing was changed.\n\n- ${problems.join("\n- ")}`);
+        return;
+      }
+      if (!plan.length) { alert("That file has no edits, so nothing was changed."); return; }
+      const agents = new Set(plan.map(([name]) => name)).size;
+      if (!confirm(`Apply ${plan.length} field edits to ${agents} agents from ${file.name}?\nEach field still matches the text the edit was written against; previous text is kept as a backup.`)) return;
+      const stamp = new Date().toISOString();
+      let replaced = {};
+      try { replaced = JSON.parse(localStorage.getItem(REPLACED_KEY) || "{}"); } catch {}
+      for (const [name, field, value] of plan) {
+        // An agent with no notes yet gets them as an import, so it shows as not yet reviewed.
+        if (!hasNotes(notes[name])) notes[name] = { ...(notes[name] || {}), imported_from: file.name };
+        (replaced[name] ||= []).push({ [field]: notes[name][field], replaced_at: stamp, edit_file: file.name });
+        if (value) notes[name][field] = value;
+        else delete notes[name][field];
+        notes[name].updated_at = stamp;
+      }
+      try {
+        localStorage.setItem(REPLACED_KEY, JSON.stringify(replaced));
+        localStorage.setItem(REVIEW_KEY, JSON.stringify(notes));
+      } catch {
+        storageOk = false;
+      }
+      markReviewed();
+      if (current) render(current);
+      showStatus(`Applied ${plan.length} edits`);
+    }
     const importButton = document.querySelector("#review-import");
     const importInput = el("input");
     importInput.type = "file";
@@ -570,6 +615,10 @@
       }
       const agentCol = head.indexOf("agent");
       if (agentCol < 0) { alert("That file has no agent column, so nothing was imported."); return; }
+      if (["field", "old_value", "new_value"].every((h) => head.includes(h))) {
+        importEdits(file, head, rows, fieldOf);
+        return;
+      }
       const replacesCol = head.indexOf("replaces_updated_at");
       const known = new Set(data.agents.map((a) => a.name));
       const seen = new Set(), unknown = [], taken = [], repeated = [], plan = [];

@@ -421,34 +421,6 @@ function renderPoint(agent, p) {
   if (p.episode_id) links.append(evidence);
   body.append(fact("Call", links));
 
-  const reviewRow = element("div", "ip-review");
-  const name = `review-${pointKey(agent, p)}`;
-  [["open", "Not reviewed"], ["ok", "Looks right"], ["change", "Needs change"]].forEach(([value, label]) => {
-    const option = element("label");
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = name;
-    input.value = value;
-    input.checked = status === value;
-    input.addEventListener("change", () => {
-      review[pointKey(agent, p)] = { ...(review[pointKey(agent, p)] || {}), status: value, updated_at: new Date().toISOString() };
-      saveReview();
-      render();
-    });
-    option.append(input, document.createTextNode(label));
-    reviewRow.append(option);
-  });
-  const note = element("input", "ip-note");
-  note.type = "text";
-  note.placeholder = "Note (e.g. better moment, wrong episode)";
-  note.value = review[pointKey(agent, p)]?.note || "";
-  note.addEventListener("change", () => {
-    review[pointKey(agent, p)] = { status: statusOf(agent, p), ...(review[pointKey(agent, p)] || {}), note: note.value, updated_at: new Date().toISOString() };
-    saveReview();
-  });
-  reviewRow.append(note);
-  body.append(reviewRow);
-
   item.append(element("span", "ip-num", r.n), body);
   return item;
 }
