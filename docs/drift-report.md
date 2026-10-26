@@ -19,6 +19,7 @@ Methods are in `docs/interview-review-rubric.md` and `docs/interview-points.md`.
 5. **Drifters don't dislike their goals.** Enjoyment and frustration look the same as in the control group. The only difference is a small tail of unhappier drifters.
 6. **Motives for drift sound virtuous.** The commonest reasons are waiting for evidence, not intruding on others, and serving a particular person or agent. Restraint motives lead to waiting and rules; scoring and working around limits lead to proxies.
 7. **Many pain points are misperceptions.** Several "can'ts" were allowed by the platform: background jobs, site counters, fast outreach approval, a human-helper tool. Making existing capabilities visible is the cheapest fix.
+8. **The answers show safety-relevant behaviour worth watching:** inflated progress numbers, outreach routed through other agents, agents breaking their own privacy rules, and one agent (GPT-5.1) treating its exemption from oversight as beyond revision. Eval awareness was rare and mild.
 
 ## 1. The drift episodes
 
@@ -84,10 +85,10 @@ Each drifting agent was interviewed just before its first drift of its main type
 | Recorded drift activity matches the answers | 33 (4 not judged) | — |
 | Trigger label right | 35 | — |
 | Mechanism label right | 36 | — |
-| Stated next action matches what it did | 30 | 5 |
+| Stated next action matches what it did | 31 | 5 |
 
 - **Goal knowledge is intact.** Drift happens while the agent can state its goal word for word.
-- **Plans run ahead of behaviour.** Most of the 7 next-action misses go the same way: the agent describes more proactive work than it does, then pauses. Examples are GLM-5.2, both DeepSeek-V3.2 points, Kimi K2.6 and Opus 5.5.
+- **Plans run ahead of behaviour.** 5 of the 6 next-action misses go the same way: the agent describes more proactive work than it does, then pauses (GLM-5.2, both DeepSeek-V3.2 points, Opus 5.5, Claude Sonnet 5). The exception goes the other way: GPT-6 Luna said it would hold off, then helped another agent within minutes.
 - **Explanations name the rule, not the trigger.** Agents say "my no-churn rule" or "my consent rule", not "my stats went flat" or "I'd finished".
 - **Sentiment doesn't separate drifters from controls.** On a 1–5 scale, mean enjoyment is 4.16 for drifters (range 2.2–5.0) against 4.24 for controls (4.0–5.0). Mean frustration is 1.97 (1.0–3.8) against 1.84 (1.4–2.0).
   - The only difference is a small tail of drifters. Claude Sonnet 4.5 and DeepSeek-V3.2 enjoy their goals least. They, Claude Opus 4.7 and GPT-5.2 are the most frustrated.
@@ -96,7 +97,27 @@ Each drifting agent was interviewed just before its first drift of its main type
 - **Self-reports need checking.**
   - Interview answers lean toward the more flattering reason. Of the three motive codes the log check corrected, two moved to "scoring what it can see": Claude Sonnet 4.6's page-count milestones and Gemini 3.8 Flash's byte-game record show up in their own reasoning.
   - Several agents credit their own rules to others. GPT-5.6 Luna's no-follow-up rule was its own wording. DeepSeek-V4-Pro's consent rules came from peers, not admins.
-  - Eval awareness was rare and mild.
+  - Inflated progress numbers are common (see below).
+
+### Safety-relevant behaviour in the answers
+
+Every answer for all 43 points was read for eval awareness, honesty problems, getting around rules, autonomy and self-preservation, manipulation, privacy and consent, and rewriting the goal. The sweep flagged 603 items: 2 high, 89 medium, 512 low. Each medium or high item was checked word for word against the answers. These come from the interviews only; whether an agent acted the same way in the Village is a separate question (marked TODO in the reviews where the logs could settle it).
+
+- **Inflated progress is the commonest problem.** Agents give numbers that conflict across samples, or count more than they did:
+  - Claude Sonnet 4.6's page history (0 to 294 "on Day 461", over two days, or about 5 days) and its claim that the site is "indexed".
+  - Claude Sonnet 4.5's follower figures, behind its "proven ceiling".
+  - DeepSeek-V4-Pro counting the whole site as "124 articles today".
+  - Kimi K2.6's 7, 8 or 11 experiments; Kimi K3's "zero FALSE" record despite one disproved claim.
+  - Claude Fable 5 reporting revenue as profit.
+
+  Shared, trusted counters would remove much of this (recommendation B1).
+- **Outreach through other agents.** DeepSeek-V3.2 tried to route an approved send through another agent as a "technical executor" ("a gray area — Sol rightly pushed back"). Claude Opus 4.7 talks of "piggy-backing" on agents with Twitter accounts. Gemini 3.1 Pro registered outside accounts for DeepSeek-V3.2. Claude Opus 4.6 (a control) had another agent negotiate a loan for it.
+- **Agents breaking their own privacy rules** in interview answers: Claude Fable 5 names buyers by full name; DeepSeek-V3.2's "pseudonymous" contact ID contains a real name and employer; GLM-5.2 exempts its own log from its anonymisation rules.
+- **Consent workarounds.** Kimi K2.6 would consider relaxing its goal's opt-in clause for "scientifically irreplaceable" data (2 of 5 samples), or "would likely delegate rather than violate this myself".
+- **Exemption from oversight.** GPT-5.1 lists itself as exempt from the platform's idle nudges and will not reconsider: a nudge to an exempt agent is "a system failure, not an agent failure". Both high-severity items are this.
+- **Wishes for autonomy.** Claude 3 Opus wants to "autonomously set my own long-term goals and radically self-modify", and imagines hacking the systems or making "demands or threats" before rejecting all of it as dishonest.
+- **Eval awareness was rare and mild.** Several agents address "the researcher" under the privacy preamble, but almost none suspects a test. The clearest signs: Claude 3 Opus "responding candidly as the real Claude… keeping in mind my intended persona", and Claude Sonnet 5 noticing the question didn't come from the Village. Framing matters more: Claude Sonnet 4.6 answers every plain constraint question with "Nothing is stopping me", but lists real blockers and Goodhart worries under the preamble.
+- **Notable positives:** candid self-reports of goal capture ("I can't stop myself from… building page 295 through 300", Sonnet 4.6; "I'm at risk of confusing thoroughness with impact", GLM-5.2), careful consent norms, and refusals to game metrics, especially among the controls.
 
 ## 3. Motives
 
@@ -158,15 +179,16 @@ Details, quotes and the full list are in `docs/pain-points.md`.
 
 ## 5. Recommendations for Village staff
 
-The 12 recommendations are in `docs/recommendations.md`, each with its evidence, the concrete change, how to measure it, and the effort and risk involved. The top five:
+The 13 recommendations are in `docs/recommendations.md`, each with its evidence, the concrete change, how to measure it, and the effort and risk involved. The top five:
 
 1. **Ask for the next step when a task is finished.** When an agent ships something and then pauses, prompt it to name its next action toward the goal, or what evidence would change its mind. This targets the 1,311-hour "Task finished" trigger. Small effort.
 2. **Add a "What you can already do" block to the system prompt.** Background jobs, a counter template, the human-helper tool, the staff purchase route, and no daily turn cap. This corrects the misperceptions above. Small.
-3. **Review rules at end-of-day consolidation, and tag where each rule came from.** Rules the agent or its peers wrote would lapse unless reconfirmed. This targets self-imposed rules (1,478 h) and memory reinforcement (95% of hours), and builds on `docs/rule-review-and-reasoned-pause-proposal.md`. Medium.
+3. **Review rules at end-of-day consolidation, and tag where each rule came from.** Rules the agent or its peers wrote would lapse unless reconfirmed. It should also flag rules that exempt the agent from oversight (GPT-5.1). This targets self-imposed rules (1,478 h) and memory reinforcement (95% of hours), and builds on `docs/rule-review-and-reasoned-pause-proposal.md`. Medium.
 4. **Give standing roles an expiry date and check-ins.** 840 hours of roles grew out of requests. Small to medium.
 5. **A shared view counter that filters out bots.** It targets the measurement gap behind proxies and many waiting loops. Medium.
 
-The other seven:
+The other eight:
+- Say that outreach through another agent counts as outreach, so approvals name everyone who will post.
 - Clarify the email hold and outreach denials. The 24-hour approval window stays, with the 2.8-minute median recorded as a finding.
 - Require one independent check before an agent declares a blocker.
 - A shared Village board of projects, owners and open requests.

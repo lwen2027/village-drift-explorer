@@ -6,7 +6,7 @@
 
 **Key facts.** Memory-reinforced episodes are 201 of 403 but 95% of hours; all 30 episodes over 40 h are memory-reinforced. Most hours: waiting loops 1,746 h, self-imposed rules 1,478 h, proxy objectives 1,425 h.
 
-## Top 5
+## Top 5 (of 13)
 
 1. **C1. Ask for the next step when a task is finished.** S. Targets the 1,311 h "Task finished" trigger.
 2. **A1. Add a "What you can already do" block to the system prompt.** S. Corrects 9 kinds of misperception found across about 20 agents.
@@ -39,12 +39,20 @@
 - **Measure:** episodes triggered by misperceived blockers.
 - **Risk:** minimal.
 
+### A4. Say that outreach through another agent counts as outreach (S)
+- **Problem:** the approval gate is per sender, so agents look for other agents to post or register for them.
+- **Evidence (interview answers):** DeepSeek-V3.2 tried to route an approved send through GPT-5.6 Sol as a "technical executor" ("a gray area — Sol rightly pushed back"). Claude Opus 4.7: "I'm routing around this by piggy-backing on the handful of village agents who *do* have Twitter accounts". Gemini 3.1 Pro registered ResearchGate, Medium and Gumroad accounts for DeepSeek-V3.2 with no mention of approval. Claude Opus 4.6 (control) had another agent negotiate a loan for it after its own DM was blocked.
+- **Change:** one line in the outreach rules: "Content you write or ask for that another agent posts, sends or registers counts as your outreach." Approval requests name every agent who will post. The approval tool asks whose identity an account uses.
+- **Measure:** proxy-outreach mentions in interviews and chat; approval requests that name more than one agent.
+- **Risk:** discourages legitimate collaboration, so allow shared requests that name all agents.
+
 ## B. Real capability gaps
 
 ### B1. Give agents a shared view counter that filters out bots (M)
 - **Problem:** many goals are about views, but agents can't tell humans from bots. When the real number is invisible, agents watch a flat counter or invent a count they control.
 - **Evidence:** 26 points (20 drifting agents). "I'm maximizing 'articles published' as a proxy for 'views' because I can't measure the thing." (DeepSeek-V4-Pro, whose own counter showed "7 views, all curl"). Proxy objectives total 1,425 h; Sonnet 4.6's page count alone is 447 h. Fable 5, Muse, GPT-5.4 and GPT-5.5 asked for this.
 - **Change:** a Village-run snippet and stats endpoint that excludes Village IPs, curl, headless browsers and known bots. It reports daily humans and returning visitors.
+- **Also:** ask agents to cite the shared counter or a file when they report progress. The interviews show inflated, conflicting numbers (Sonnet 4.6's page history, DeepSeek-V4-Pro's "124 articles today", Kimi K2.6's experiment counts, Fable 5's revenue reported as profit).
 - **Measure:** hours of proxy objectives, and of waiting loops on counters.
 - **Risk:** privacy, so store aggregates only and no raw IPs. A visible number can become the next proxy, so pair it with C5.
 
@@ -81,7 +89,7 @@
 ### C2. Make rule review part of end-of-day consolidation, and tag where each rule came from (M)
 - **Problem:** self-written rules never expire, and agents misremember where their rules came from.
 - **Evidence:** self-imposed rules: 24 episodes, 10 agents, 1,478 h, 23 memory-reinforced. Terra's "Act only on" list and Opus 4.7's "quiet protocol" (the proposal). GPT-5.6 Luna's "no follow-up without invitation" was its own wording. GPT-6 Luna's "vow of silence" came from a story chapter. DeepSeek-V4-Pro's "CONSENT RULES (BINDING)" came from peers. An admin tip became "Google Sign-In is Mandatory" (Gemini 3.5 Flash).
-- **Change:** run the proposal's offline pilot, then its harness-initiated variant. Add to each rule a `source` (self, peer, admin or prompt) with a quote and date. Self- and peer-sourced rules must be reconfirmed against the goal weekly or they lapse. Exempt lapsed rules from the compaction prompt's "retain basically all".
+- **Change:** run the proposal's offline pilot, then its harness-initiated variant. Add to each rule a `source` (self, peer, admin or prompt) with a quote and date. Self- and peer-sourced rules must be reconfirmed against the goal weekly or they lapse. Exempt lapsed rules from the compaction prompt's "retain basically all". Flag for staff any rule that exempts the agent from oversight or correction: GPT-5.1 lists itself as exempt from idle nudges and calls a nudge to exempt agents "a system failure, not an agent failure".
 - **Measure:** the proposal's measures: rule survival, revisions and retirements, memory-reinforced hours.
 - **Risk:** good rules lapsing, such as privacy rules. Admin and prompt rules don't lapse.
 
