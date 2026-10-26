@@ -1,6 +1,6 @@
 # Drift figures
 
-Built by `scripts/figures/plot_drift_concentration.py` from `data/drift_axes_v1.csv`. Figures are PNG at 300 dpi. Titles and section headers use Lora, the AI Village site's serif, bundled in `scripts/figures/fonts/` under the SIL Open Font License. Other text uses Helvetica Neue; on a machine without it, matplotlib falls back to its default font.
+Built by `scripts/figures/plot_drift_concentration.py` and `scripts/figures/plot_drift_timeline.py` from `data/drift_axes_v1.csv`. Figures are PNG at 300 dpi. Titles and section headers use Lora, the AI Village site's serif, bundled in `scripts/figures/fonts/` under the SIL Open Font License. Other text uses Helvetica Neue; on a machine without it, matplotlib falls back to its default font.
 
 ## drift_concentration: main figure
 
@@ -9,3 +9,7 @@ Drift hours by (a) mechanism and (b) trigger across 403 goal-period episodes (36
 ## drift_agent_profile: supplementary figure
 
 Each agent's drift broken down by (a) mechanism and (b) trigger, as the share of that agent's own drift hours. Rows sum to 100% within each panel. Cells of 5% or more are numbered, and the agent's total drift hours are on the right. Agents are sorted by total drift hours. Rows for agents with very little drift (the control agents at the bottom, under 2 h) rest on one or two short episodes.
+
+## drift_timeline
+
+Drift across the goal period (6 Jul – 3 Oct 2026) for the 31 agents with drift interview points, sorted by total drift hours. The grey band is the agent's goal period, and red marks are drift bouts at their true times (each drawn at least 2.5 h wide so short bouts stay visible). Triangles mark interview points, and weekends are shaded. Most of the heaviest drifters drift on almost every workday from the first weeks onward, with the bouts recurring day after day, which is the memory-sustained pattern; others drift in a few separate spells.
