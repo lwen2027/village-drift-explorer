@@ -4,7 +4,7 @@ The review panel keeps notes in the reviewer's browser only. This turns an expor
 page shows read-only to every visitor (a visitor's own browser notes still take priority). Agents with no notes
 are left out; imported drafts not yet marked reviewed are published with status "draft".
 
-    python3 scripts/publish_reviews.py data/review_notes/interview_review_2026-10-26.csv
+    python3 scripts/publish_reviews.py data/review_notes/interview_review_2026-10-26.csv [--edits fixes.csv]
 """
 
 import argparse
@@ -23,6 +23,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("csv", type=Path)
     ap.add_argument("--out", type=Path, default=ROOT / "data/interview_reviews_v1.json")
+    ap.add_argument("--edits", type=Path, action="append", default=[],
+                    help="field-edit CSV (agent, field, old_value, new_value) applied on top of the export; "
+                         "each field must still equal old_value")
     args = ap.parse_args()
 
     known = set()
@@ -41,7 +44,22 @@ def main():
             reviews[row["agent"]] = {**fields, "status": "draft" if draft else "reviewed"}
             stamps.append(row["updated_at"])
 
-    out = {"source": args.csv.name, "exported_at": max(stamps), "reviews": reviews}
+    # Corrections made outside the browser, so a republish from an older export keeps them.
+    for path in args.edits:
+        with path.open(encoding="utf-8-sig", newline="") as f:
+            for e in csv.DictReader(f):
+                field = FIELD_OF.get(e["field"], e["field"])
+                review = reviews.get(e["agent"])
+                if review is None:
+                    raise SystemExit(f"{path.name}: {e['agent']!r} has no review")
+                current = review.get(field, "")
+                if current.strip() == e["new_value"].strip():
+                    continue  # already applied in this export
+                if current.strip() != e["old_value"].strip():
+                    raise SystemExit(f"{path.name}: {e['agent']} · {e['field']} has changed since the edit was written")
+                review[field] = e["new_value"].strip()
+
+    out = {"source": args.csv.name, "edits": [p.name for p in args.edits], "exported_at": max(stamps), "reviews": reviews}
     args.out.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
     drafts = sum(r["status"] == "draft" for r in reviews.values())
     print(f"{len(reviews)} reviews ({drafts} drafts) -> {args.out}")
