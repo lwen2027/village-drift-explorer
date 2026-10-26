@@ -140,6 +140,21 @@
     .yn-value { display: inline-block; padding: 2px 12px; border-radius: 999px; color: white; font-size: 12px; font-weight: 700; }
     .yn-value.is-yes { background: var(--green); }
     .yn-value.is-no { background: var(--rust); }
+    .search-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 8px; }
+    .search-bar input { flex: 1 1 260px; max-width: 520px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--ink); font: 14px/1.3 var(--sans); }
+    .search-bar input:focus { outline: 2px solid var(--green); outline-offset: 0; border-color: var(--green); }
+    .search-count { color: var(--muted); font: 600 11px/1.4 var(--mono); }
+    .search-results { max-height: 320px; overflow-y: auto; margin: 0 0 12px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+    .search-agent { margin: 6px 0 2px; font-size: 13px; font-weight: 700; }
+    .search-agent:first-child { margin-top: 0; }
+    .search-hit { display: block; width: 100%; margin: 2px 0; padding: 4px 6px; border: 0; border-radius: 6px; background: none; color: var(--ink); cursor: pointer; font: 12px/1.4 var(--sans); text-align: left; }
+    .search-hit:hover, .search-hit:focus-visible { background: rgba(232, 221, 197, .55); outline: none; }
+    .search-where { color: var(--muted); font: 600 10px/1.4 var(--mono); }
+    .search-hit mark, .answer mark { padding: 0 1px; border-radius: 2px; background: #f3d98b; color: inherit; }
+    .search-more { color: var(--muted); font-size: 11px; padding-left: 6px; }
+    .agent-button.no-match { opacity: .35; }
+    .answer.is-match { box-shadow: inset 0 0 0 2px #e0b441; }
+    .review-field.is-match textarea, .review-field.is-match .review-text { box-shadow: 0 0 0 2px #e0b441; border-radius: 6px; }
     .review-imported button { padding: 4px 10px; border: 1px solid var(--ink); border-radius: 7px; background: var(--card); color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 700; }
 
     @media (max-width: 1000px) {
@@ -184,6 +199,11 @@
         <blockquote class="preamble" id="preamble-text" hidden></blockquote>
       </section>
 
+      <div class="search-bar">
+        <input type="search" id="answer-search" placeholder="Search all answers and review notes (e.g. Planetfall)" aria-label="Search answers and review notes" autocomplete="off">
+        <span class="search-count" id="search-count"></span>
+      </div>
+      <div class="search-results" id="search-results" hidden></div>
       <div class="agent-picker" id="agent-picker" role="group" aria-label="Agent"></div>
       <div class="table-tools"><label><input type="checkbox" id="show-all"> Show all questions</label> <span id="hidden-note"></span></div>
       <div class="review-layout">
@@ -768,6 +788,104 @@
         ? `${hidden} duplicate wording${hidden === 1 ? "" : "s"} or framing${hidden === 1 ? "" : "s"} hidden for this agent`
         : "";
     }
+    // Search across every answer (all questions, framings and samples) and the review notes: this browser's notes
+    // where it has them, the published review otherwise.
+    const searchInput = document.querySelector("#answer-search");
+    const searchResults = document.querySelector("#search-results");
+    const searchCount = document.querySelector("#search-count");
+    const questionText = Object.fromEntries(data.questions.map((q) => [q.id, q.text]));
+    const framingLabel = Object.fromEntries(framings.map((f) => [f.id, f.label]));
+    const agentByName = new Map(data.agents.map((a) => [a.name, a]));
+    const shownByDefault = (qid, fid) => CORE.includes(qid) && fid === ROLLOUT_FRAMING[qid.split("-")[0]];
+    let searchTerm = "";
+    function searchIndex() {
+      const entries = [];
+      for (const c of data.cells) {
+        c.answers.forEach((a, i) => entries.push({
+          agent: c.agent, kind: "answer", qid: c.question_id, fid: c.framing || "plain", text: a.text || "",
+          where: `${c.question_id} · ${framingLabel[c.framing || "plain"] || c.framing} · sample ${i + 1}`,
+        }));
+      }
+      for (const a of data.agents) {
+        const n = hasNotes(notes[a.name]) ? notes[a.name] : published[a.name] || {};
+        for (const f of REVIEW_FIELDS) {
+          for (const key of [f.id, f.notes].filter(Boolean)) {
+            if (typeof n[key] === "string" && n[key].length > 3) {
+              entries.push({ agent: a.name, kind: "review", field: f.id, text: n[key], where: `review · ${f.label}` });
+            }
+          }
+        }
+      }
+      return entries;
+    }
+    function snippet(text, term) {
+      const i = text.toLowerCase().indexOf(term);
+      const start = Math.max(0, i - 70), end = Math.min(text.length, i + term.length + 90);
+      const span = el("span");
+      span.append((start ? "…" : "") + text.slice(start, i).replace(/\s+/g, " "), el("mark", null, text.slice(i, i + term.length)),
+        text.slice(i + term.length, end).replace(/\s+/g, " ") + (end < text.length ? "…" : ""));
+      return span;
+    }
+    function highlightMatches() {
+      document.querySelectorAll(".answer.is-match, .review-field.is-match").forEach((n) => n.classList.remove("is-match"));
+      if (!searchTerm) return;
+      let first = null;
+      document.querySelectorAll("#answers-table .answer").forEach((node) => {
+        if (!node.textContent.toLowerCase().includes(searchTerm)) return;
+        node.classList.add("is-match", "is-open");
+        first ||= node;
+      });
+      document.querySelectorAll("#review-form .review-field").forEach((field) => {
+        const text = [...field.querySelectorAll("textarea, .review-text")].map((t) => t.value ?? t.textContent).join(" ");
+        if (text.toLowerCase().includes(searchTerm)) field.classList.add("is-match");
+      });
+      first?.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+    function openHit(hit) {
+      if (hit.kind === "answer" && !shownByDefault(hit.qid, hit.fid)) showAll.checked = true;
+      render(agentByName.get(hit.agent));
+      highlightMatches();
+    }
+    function runSearch() {
+      searchTerm = searchInput.value.trim().toLowerCase();
+      searchResults.replaceChildren();
+      if (searchTerm.length < 2) {
+        searchResults.hidden = true;
+        searchCount.textContent = "";
+        buttons.forEach((b) => b.classList.remove("no-match"));
+        highlightMatches();
+        return;
+      }
+      const byAgent = new Map();
+      for (const e of searchIndex()) {
+        if (e.text.toLowerCase().includes(searchTerm)) (byAgent.get(e.agent) || byAgent.set(e.agent, []).get(e.agent)).push(e);
+      }
+      const total = [...byAgent.values()].reduce((s, l) => s + l.length, 0);
+      searchCount.textContent = total ? `${total} match${total === 1 ? "" : "es"} for ${byAgent.size} agent${byAgent.size === 1 ? "" : "s"}` : "No matches";
+      buttons.forEach((b) => b.classList.toggle("no-match", !byAgent.has(b.dataset.agent)));
+      searchResults.hidden = !total;
+      for (const a of data.agents.filter((x) => byAgent.has(x.name))) {
+        const hits = byAgent.get(a.name).sort((l, r) => (l.kind === "review") - (r.kind === "review"));
+        searchResults.append(el("div", "search-agent", `${labelOf(a)} · ${hits.length}`));
+        hits.slice(0, 4).forEach((hit) => {
+          const b = el("button", "search-hit");
+          b.type = "button";
+          b.append(el("span", "search-where", hit.where), el("br"), snippet(hit.text, searchTerm));
+          if (hit.kind === "answer") b.title = questionText[hit.qid] || hit.qid;
+          b.addEventListener("click", () => openHit(hit));
+          searchResults.append(b);
+        });
+        if (hits.length > 4) searchResults.append(el("div", "search-more", `+ ${hits.length - 4} more; open the agent to see them highlighted`));
+      }
+      if (current) highlightMatches();
+    }
+    let searchTimer;
+    searchInput.addEventListener("input", () => { clearTimeout(searchTimer); searchTimer = setTimeout(runSearch, 150); });
+    searchInput.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") { searchInput.value = ""; runSearch(); }
+    });
+    buttons.forEach((b) => b.addEventListener("click", () => setTimeout(highlightMatches, 0)));
+
     markReviewed();
     render(data.agents[0]);
   </script>

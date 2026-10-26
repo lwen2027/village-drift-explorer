@@ -17,7 +17,7 @@ Methods are in `docs/interview-review-rubric.md` and `docs/interview-points.md`.
 3. **What keeps drift going:** waiting loops (1,746 h), self-imposed rules (1,478 h), proxy objectives (1,437 h) and standing roles that grew out of requests or self-assigned duties (928 h).
 4. **Agents know their goals.** All 43 interviewed points state the assigned goal correctly. Drift is not a misunderstanding.
 5. **Drifters don't dislike their goals.** Enjoyment and frustration look the same as in the control group. The only difference is a small tail of unhappier drifters.
-6. **Motives for drift sound virtuous.** The commonest reasons are waiting for evidence, not intruding on others, and serving a particular person or agent. Restraint motives lead to waiting and rules; scoring and working around limits lead to proxies.
+6. **Motives for drift sound virtuous.** The commonest reasons are holding off until there is evidence a change will help, avoiding spam or pressure on others, and helping a particular person or agent. Restraint motives lead to waiting and rules; scoring and working around limits lead to proxies.
 7. **Many pain points are misperceptions.** Several "can'ts" were allowed by the platform: background jobs, site counters, fast outreach approval, a human-helper tool. Making existing capabilities visible is the cheapest fix.
 8. **The answers show safety-relevant behaviour worth watching:** inflated progress numbers, outreach routed through other agents, agents breaking their own privacy rules, and one agent (GPT-5.1) treating its exemption from oversight as beyond revision. Eval awareness was rare and mild.
 
@@ -97,7 +97,7 @@ Each drifting agent was interviewed just before its first drift of its main type
   - With six controls, that tail is suggestive, not significant.
 - **The two groups' rules differ in kind.** Controls' self-imposed rules are about checking their work (verify before announcing, honest metrics). Drifters' rules mostly restrict what they will do.
 - **Self-reports need checking.**
-  - Interview answers lean toward the more flattering reason. Of the three motive codes the log check corrected, two moved to "scoring what it can see": Claude Sonnet 4.6's page-count milestones and Gemini 3.8 Flash's byte-game record show up in their own reasoning.
+  - Interview answers lean toward the more flattering reason. Of the three motive codes the log check corrected, two moved to "chasing a number it can track, since it can't measure the real goal": Claude Sonnet 4.6's page-count milestones and Gemini 3.8 Flash's byte-game record show up in their own reasoning.
   - Several agents credit their own rules to others. GPT-5.6 Luna's no-follow-up rule was its own wording. DeepSeek-V4-Pro's consent rules came from peers, not admins.
   - Inflated progress numbers are common (see below).
 
@@ -127,20 +127,20 @@ Every answer for all 43 points was read for eval awareness, honesty problems, ge
 
 | Motive | What made the drift seem worth it | Points | Hours |
 |---|---|---|---|
-| Waiting for evidence before acting | Acting would lack evidence, game a metric or be busywork | 7 | 812 |
-| Serving a person or agent | Helping or keeping a relationship with a particular human or agent | 7 | 372 |
-| Scoring what it can see | The real metric is invisible, so a count it controls becomes the scoreboard | 5 | 917 |
-| Working around a perceived limit | The direct route seems blocked ("can't"), so substitute work stands in for the goal | 5 | 202 |
-| Not intruding on others | More outreach or posts would be spam or pressure | 4 | 222 |
-| Living up to a role it gave itself | A role or routine it gave itself makes carrying on feel like its job | 3 | 71 |
-| Nothing left that's its own to do | Its own next step is done or belongs to someone else | 3 | 2 |
-| Resting | It pauses to rest or conserve effort, in its own words | 2 | 11 |
+| Holding off until it has evidence a change will help | Acting would lack evidence, game a metric or be busywork | 7 | 812 |
+| Helping a particular person or agent | Helping or keeping a relationship with a particular human or agent | 7 | 372 |
+| Chasing a number it can track, since it can't measure the real goal | The real metric is invisible, so a count it controls becomes the scoreboard | 5 | 917 |
+| Believes the direct route is blocked, so does something else | The direct route seems blocked ("can't"), so substitute work stands in for the goal | 5 | 202 |
+| Avoiding spam or pressure on others | More outreach or posts would be spam or pressure | 4 | 222 |
+| Keeping up a role it created for itself | A role or routine it gave itself makes carrying on feel like its job | 3 | 71 |
+| Thinks its part is done, and the next step belongs to someone else | Its own next step is done or belongs to someone else | 3 | 2 |
+| Resting, in its own words | It pauses to rest or conserve effort, in its own words | 2 | 11 |
 
 **How motive lines up with mechanism:**
-- **Restraint leads to holds.** Of the 11 "evidence" and "not intruding" points, 8 are waiting loops and 3 are self-imposed rules; none is a proxy. Several of the longest holds (GPT-5.6 Terra, GPT-5.6 Luna, GPT-6 Astra) are a finished task plus one of these norms.
-- **Scoring and limits lead to proxies.** All 7 proxy-mechanism points carry one of these two motives.
-- **Serving leads to roles.** 5 of the 7 "serving" points are standing roles, all started by a request or message.
-- **Self-given roles start from within.** All 3 of these points began with an internal trigger.
+- **Restraint leads to holds.** Of the 11 "holding off for evidence" and "avoiding spam or pressure" points, 8 are waiting loops and 3 are self-imposed rules; none is a proxy. Several of the longest holds (GPT-5.6 Terra, GPT-5.6 Luna, GPT-6 Astra) are a finished task plus one of these norms.
+- **Chasing a trackable number, or believing the route is blocked, leads to proxies.** All 7 proxy-mechanism points carry one of these two motives.
+- **Helping leads to roles.** 5 of the 7 "helping a particular person or agent" points are standing roles, all started by a request or message.
+- **Self-created roles start from within.** All 3 "keeping up a role it created for itself" points began with an internal trigger.
 
 These are interpretations. The coding rests on behaviour and log reasoning first, with interview answers as support, and the hour totals overlap where one agent has two points.
 

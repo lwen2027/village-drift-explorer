@@ -27,8 +27,8 @@ from matplotlib.patches import Patch
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "figures" / "drift"
 SURFACE, INK, INK_2, GRID = "#ffffff", "#0b0b0b", "#52514e", "#e3e2de"
-# One hue, three steps (largest agent, 2nd-3rd, all others); the lightest is dark enough to hold up in print.
-SHADES = ["#1f5fa8", "#6f9fd8", "#c3d6ee"]
+# One hue, three steps (largest agent, 2nd-3rd, all others); the lightest still holds up in print.
+SHADES = ["#8d3b26", "#c97559", "#ebc5b6"]  # rust ramp: drift is always rust; blue is reserved for the control group
 SHADE_LABELS = ["Top agent", "2nd–3rd agents", "All other agents"]
 MECHANISMS = ["Waiting or monitoring loop", "Self-imposed rule", "Proxy objective", "Standing role",
               "Bounded side task", "Early stop", "Carry-over from previous goal"]
@@ -112,7 +112,7 @@ def profile(rows):
     mech, trig = hours_by(rows, "mechanism"), hours_by(rows, "trigger")
     mech_cols = sorted(MECHANISMS, key=lambda m: -sum(mech[m].values()))
     trig_cols = sorted(TRIGGERS, key=lambda t: -sum(trig[t].values()))
-    cmap = LinearSegmentedColormap.from_list("seq", ["#ffffff", "#c3d6ee", "#6f9fd8", "#1f5fa8", "#0f3466"])
+    cmap = LinearSegmentedColormap.from_list("seq", ["#ffffff", "#f2d9cf", "#d99a83", "#ae5037", "#6e2a19"])
     norm = Normalize(0, 100)
 
     fig, axes = plt.subplots(1, 2, figsize=(7.2, 7.8),
