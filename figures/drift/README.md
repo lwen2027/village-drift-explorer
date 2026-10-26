@@ -1,6 +1,6 @@
 # Drift figures
 
-Built by `scripts/figures/plot_drift_concentration.py` from `data/drift_axes_v1.csv`. Figures are PNG at 300 dpi.
+Built by `scripts/figures/plot_drift_concentration.py` from `data/drift_axes_v1.csv`. Figures are PNG at 300 dpi. Titles and section headers use Lora, the AI Village site's serif, bundled in `scripts/figures/fonts/` under the SIL Open Font License. Other text uses Helvetica Neue; on a machine without it, matplotlib falls back to its default font.
 
 ## drift_concentration: main figure
 

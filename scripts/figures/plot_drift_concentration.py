@@ -11,11 +11,13 @@ hours on the right.
     python3 scripts/figures/plot_drift_concentration.py
 """
 
+import argparse
 import csv
 from collections import Counter, defaultdict
 from pathlib import Path
 
 import matplotlib
+import matplotlib.font_manager
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -41,6 +43,9 @@ TRIGGER_FAMILIES = [
     ("Operator", ["Operator decision"]),
 ]
 FONT = 7.5
+TITLE_FONT = "Lora"  # matches the AI Village site; bundled in scripts/figures/fonts (SIL OFL)
+for _f in (Path(__file__).parent / "fonts").glob("*.ttf"):
+    matplotlib.font_manager.fontManager.addfont(str(_f))
 
 
 def load():
@@ -107,11 +112,12 @@ def concentration(rows):
         ax.set_yticks([y for y, _, _ in ylabels], [l for _, l, _ in ylabels])
         for tick, (_, _, header) in zip(ax.get_yticklabels(), ylabels):
             if header:
-                tick.set_fontweight("bold")
+                tick.set_fontweight("semibold")
+                tick.set_fontfamily(TITLE_FONT)
                 tick.set_color(INK_2)
                 tick.set_fontsize(FONT - 0.5)
         ax.set_ylim(-0.6, len(data) - 0.4)
-        ax.set_title(f"({letter}) {name}", loc="left", fontsize=FONT + 1.5, color=INK, fontweight="bold", pad=4)
+        ax.set_title(f"({letter}) {name}", loc="left", fontsize=FONT + 2, color=INK, fontweight="semibold", pad=6, fontfamily=TITLE_FONT)
         style(ax)
     ax2.set_xlim(0, xmax * 2.0)
     ax2.set_xticks([0, 500, 1000, 1500])
@@ -147,7 +153,7 @@ def profile(rows):
         ax.set_xticks(range(len(cols)), cols, rotation=60, ha="right", rotation_mode="anchor",
                       fontsize=FONT - 1, color=INK)
         ax.set_yticks(range(len(agents)), agents if i == 0 else [], fontsize=FONT - 1, color=INK)
-        ax.set_title(title, loc="left", fontsize=FONT + 1, color=INK, fontweight="bold", pad=4)
+        ax.set_title(title, loc="left", fontsize=FONT + 2, color=INK, fontweight="semibold", pad=4, fontfamily=TITLE_FONT)
         ax.tick_params(length=0)
         for s in ax.spines.values():
             s.set_visible(False)
@@ -169,12 +175,16 @@ def profile(rows):
 
 
 def main():
-    plt.rcParams.update({"font.family": "DejaVu Sans", "figure.facecolor": SURFACE, "axes.facecolor": SURFACE})
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--font", default="Helvetica Neue")
+    ap.add_argument("--out", type=Path, default=OUT)
+    args = ap.parse_args()
+    plt.rcParams.update({"font.family": args.font, "figure.facecolor": SURFACE, "axes.facecolor": SURFACE})
     rows = load()
-    OUT.mkdir(parents=True, exist_ok=True)
+    args.out.mkdir(parents=True, exist_ok=True)
     for name, fig in (("drift_concentration", concentration(rows)), ("drift_agent_profile", profile(rows))):
-        fig.savefig(OUT / f"{name}.png", dpi=300)
-    print(f"wrote {OUT}/drift_concentration.png and drift_agent_profile.png")
+        fig.savefig(args.out / f"{name}.png", dpi=300)
+    print(f"wrote {args.out}/drift_concentration.png and drift_agent_profile.png")
 
 
 if __name__ == "__main__":
