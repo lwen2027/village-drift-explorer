@@ -61,12 +61,11 @@ def hours_by(rows, key):
 
 
 def style(ax):
-    ax.xaxis.grid(True, color=GRID, linewidth=0.6)
-    ax.set_axisbelow(True)
-    for side in ("top", "right", "left"):
+    # No gridlines or x-axis: every bar is labelled with its hours, and gridlines would run through the labels.
+    for side in ("top", "right", "left", "bottom"):
         ax.spines[side].set_visible(False)
-    ax.spines["bottom"].set_color(GRID)
-    ax.tick_params(axis="x", colors=INK_2, labelsize=FONT)
+    ax.axvline(0, color=INK_2, linewidth=0.6)
+    ax.tick_params(axis="x", bottom=False, labelbottom=False)
     ax.tick_params(axis="y", length=0, labelsize=FONT, colors=INK)
 
 
@@ -120,11 +119,9 @@ def concentration(rows):
         ax.set_title(f"({letter}) {name}", loc="left", fontsize=FONT + 2, color=INK, fontweight="semibold", pad=6, fontfamily=TITLE_FONT)
         style(ax)
     ax2.set_xlim(0, xmax * 2.0)
-    ax2.set_xticks([0, 500, 1000, 1500])
-    ax2.set_xlabel("Drift hours", fontsize=FONT, color=INK_2)
     ax1.legend(handles=[Patch(color=s, label=l) for s, l in zip(SHADES, SHADE_LABELS)], loc="lower right",
                fontsize=FONT - 0.5, frameon=False, handlelength=1.2, borderaxespad=0.2)
-    fig.subplots_adjust(left=0.3, right=0.99, top=0.96, bottom=0.07)
+    fig.subplots_adjust(left=0.3, right=0.99, top=0.96, bottom=0.03)
     return fig
 
 
