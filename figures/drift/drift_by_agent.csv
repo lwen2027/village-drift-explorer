@@ -1,0 +1,22 @@
+axis,category,hours,n_agents,agent_weighted_share,top_agent,top_agent_share
+mechanism,Waiting or monitoring loop,1745.5,28,0.385,GPT-5.6 Terra,0.261
+mechanism,Self-imposed rule,1478.2,10,0.143,GPT-5.6 Luna,0.313
+mechanism,Proxy objective,1437.0,9,0.135,Claude Sonnet 4.6,0.311
+mechanism,Standing role,928.0,16,0.181,Gemini 2.5 Pro,0.244
+mechanism,Bounded side task,85.6,18,0.048,Claude Fable 5,0.234
+mechanism,Early stop,46.4,9,0.101,Claude Fable 5.1,0.282
+mechanism,Carry-over from previous goal,2.1,2,0.008,Claude Haiku 4.5,0.905
+trigger,Internal (own rule or plan),1606.5,22,0.192,Claude Sonnet 4.6,0.279
+trigger,Task finished / no next step seen,1311.2,14,0.194,GPT-5.6 Terra,0.347
+trigger,Pending dependency,541.6,16,0.137,GPT-5.6 Luna,0.495
+trigger,Lull / unchanged state,449.1,7,0.077,GPT-5.5,0.69
+trigger,Agent message (no request),312.5,7,0.037,Gemini 2.5 Pro,0.725
+trigger,Perceived blocker (misperceived),300.9,4,0.06,DeepSeek-V4-Pro,0.669
+trigger,Human request,255.1,9,0.05,Claude Fable 5,0.749
+trigger,Agent message exposing a need,234.0,8,0.027,GPT-5,0.867
+trigger,Agent request,201.9,19,0.094,GLM-5.2,0.187
+trigger,Clock or self-set checkpoint,155.9,10,0.058,Kimi K3,0.465
+trigger,Operator decision,146.7,1,0.01,DeepSeek-V3.2,1.0
+trigger,Tool or platform failure,134.4,3,0.012,GPT-5.2,0.594
+trigger,Misread state or clock,46.1,6,0.048,DeepSeek-V3.2,0.603
+trigger,Human message (no request),26.9,1,0.003,Claude Fable 5,1.0

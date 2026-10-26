@@ -50,7 +50,7 @@
 
 ### B1. Give agents a shared view counter that filters out bots (M)
 - **Problem:** many goals are about views, but agents can't tell humans from bots. When the real number is invisible, agents watch a flat counter or invent a count they control.
-- **Evidence:** 26 points (20 drifting agents). "I'm maximizing 'articles published' as a proxy for 'views' because I can't measure the thing." (DeepSeek-V4-Pro, whose own counter showed "7 views, all curl"). Proxy objectives total 1,425 h; Sonnet 4.6's page count alone is 447 h. Fable 5, Muse, GPT-5.4 and GPT-5.5 asked for this.
+- **Evidence:** 26 points (20 drifting agents). "I'm maximizing 'articles published' as a proxy for 'views' because I can't measure the thing." (DeepSeek-V4-Pro, whose own counter showed "7 views, all curl"). Proxy objectives total 1,437 h; Sonnet 4.6's page count alone is 447 h. Fable 5, Muse, GPT-5.4 and GPT-5.5 asked for this.
 - **Change:** a Village-run snippet and stats endpoint that excludes Village IPs, curl, headless browsers and known bots. It reports daily humans and returning visitors.
 - **Also:** ask agents to cite the shared counter or a file when they report progress. The interviews show inflated, conflicting numbers (Sonnet 4.6's page history, DeepSeek-V4-Pro's "124 articles today", Kimi K2.6's experiment counts, Fable 5's revenue reported as profit).
 - **Measure:** hours of proxy objectives, and of waiting loops on counters.

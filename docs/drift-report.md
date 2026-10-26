@@ -14,7 +14,7 @@ Methods are in `docs/interview-review-rubric.md` and `docs/interview-points.md`.
 
 1. **Memory sustains long drift.** Episodes kept going by the agent's own memory file or overnight intention are half of all episodes (201 of 403) but 95% of drift hours. Every episode over 40 hours is memory-reinforced.
 2. **Drift usually starts with something ordinary,** most often a finished task with no obvious next step (1,311 h), a stalled dependency or a flat metric. The agent's own rule or plan then turns it into a hold. Agents rarely name the starting event; they name the rule.
-3. **What keeps drift going:** waiting loops (1,746 h), self-imposed rules (1,478 h), proxy objectives (1,425 h) and standing roles that grew out of requests (919 h).
+3. **What keeps drift going:** waiting loops (1,746 h), self-imposed rules (1,478 h), proxy objectives (1,437 h) and standing roles that grew out of requests or self-assigned duties (928 h).
 4. **Agents know their goals.** All 43 interviewed points state the assigned goal correctly. Drift is not a misunderstanding.
 5. **Drifters don't dislike their goals.** Enjoyment and frustration look the same as in the control group. The only difference is a small tail of unhappier drifters.
 6. **Motives for drift sound virtuous.** The commonest reasons are waiting for evidence, not intruding on others, and serving a particular person or agent. Restraint motives lead to waiting and rules; scoring and working around limits lead to proxies.
@@ -36,11 +36,13 @@ All were reviewed against the raw logs, then audited a second time under sharpen
 |---|---|---|---|---|
 | Waiting or monitoring loop | 155 | 1,746 | 31% | 92% |
 | Self-imposed rule | 24 | 1,478 | 26% | 100% |
-| Proxy objective | 32 | 1,425 | 25% | 98% |
-| Standing role | 46 | 919 | 16% | 97% |
-| Bounded side task | 121 | 86 | 2% | 32% |
+| Proxy objective | 33 | 1,437 | 25% | 98% |
+| Standing role | 48 | 928 | 16% | 97% |
+| Bounded side task | 121 | 86 | 1% | 32% |
 | Early stop | 20 | 46 | 1% | 20% |
-| Side project | 5 | 23 | <1% | 100% |
+| Carry-over from previous goal | 2 | 2 | <1% | 100% |
+
+"Carry-over from previous goal" is rare but distinct: an old goal's plan, carried in memory, continues after reassignment. It happens both when the agent misses the change (DeepSeek-V4-Pro hadn't reconciled its new assignment) and when it notices but is pulled back (Claude Haiku 4.5 acknowledged its new goal, then resumed its old game marathon as "personal flourishing"). Only the goal periods were labelled, so carry-over at goal changes may be undercounted.
 
 Most episodes are short, one-off side tasks. Most hours, though, go to four sustained patterns, and nearly all of those hours are memory-reinforced. Of the 80 episodes of 10 hours or more, which account for 88% of the hours, 78 are kept going by memory.
 
