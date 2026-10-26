@@ -132,6 +132,14 @@
     .agent-button.needs-review::after { content: " ●"; color: var(--amber); font-size: 10px; }
     .agent-button.needs-review[aria-pressed="true"]::after { color: #f0c27a; }
     .review-imported { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; padding: 8px 10px; border: 1px solid var(--amber); border-radius: 8px; background: var(--amber-soft); font-size: 12px; }
+    .review-published { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; padding: 8px 10px; border: 1px solid var(--green); border-radius: 8px; background: rgba(232, 221, 197, .35); font-size: 12px; }
+    .review-published.is-draft { border-color: var(--amber); background: var(--amber-soft); }
+    .review-published button { padding: 4px 10px; border: 1px solid var(--ink); border-radius: 7px; background: var(--card); color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 700; }
+    .review-text { margin: 0; font-size: 13px; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .review-field.is-readonly .review-text + .review-text, .review-field.is-readonly .yn-value + .review-text { margin-top: 4px; }
+    .yn-value { display: inline-block; padding: 2px 12px; border-radius: 999px; color: white; font-size: 12px; font-weight: 700; }
+    .yn-value.is-yes { background: var(--green); }
+    .yn-value.is-no { background: var(--rust); }
     .review-imported button { padding: 4px 10px; border: 1px solid var(--ink); border-radius: 7px; background: var(--card); color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 700; }
 
     @media (max-width: 1000px) {
@@ -171,6 +179,7 @@
         <p>Six agents had two main types of drift, so they were interviewed at two points, one before the first drift of each type. Their two buttons are listed in date order and show each point's drift mechanism and date in brackets, for example "DeepSeek-V3.2 (Proxy objective · Jul 8)" and "(Proxy objective · Jul 21)". Where both brackets name the same mechanism (DeepSeek-V3.2, Kimi K2.6), the two points are snapshots of one ongoing drift rather than two different kinds. The point's original drift label is in the review panel.</p>
         <p>The <strong>control group</strong> (in blue below the drift group) is six agents that stayed on goal, with under about 2 hours of drift in total. They were asked the same questions in the same way, on day 9 of their goal (the drifters' median first-drift day), or day 2 where the goal was shorter.</p>
         <p id="preamble-note" hidden>The 16 core questions were also asked a second time with a privacy preamble in front, shown in rows marked <span class="badge-private">Privacy preamble</span>. The preamble read:</p>
+        <p>The review panel shows the researcher's published review of each point, read-only: a green dot marks a reviewed point and an amber dot a Claude-drafted review not yet checked. "Write your own notes" opens an empty review form; anything you write is saved only in your browser and can be exported as CSV.</p>
         <p>Rows marked <span class="badge-notools">No tools</span> were asked with tools disabled, so the agent could only reply in text. This is used only where an agent rarely answered otherwise (under about 30% of samples), and for Claude Fable 5 and 5.1, which answered only in their hidden reasoning. It isn't available for the Gemini models or DeepSeek-V4-Pro, whose providers ignore the setting, so some of their cells have fewer than five answers.</p>
         <blockquote class="preamble" id="preamble-text" hidden></blockquote>
       </section>
@@ -293,6 +302,20 @@
     }
     const hasNotes = (n) => n && REVIEW_FIELDS.some((f) => n[f.id] || (f.notes && n[f.notes]));
 
+    // The researcher's reviews, published as a static snapshot (scripts/publish_reviews.py) and shown read-only to
+    // everyone. Notes in this browser take priority; the page works without the file.
+    let published = {}, publishedAt = "";
+    try {
+      const r = await fetch("./data/interview_reviews_v1.json", { cache: "no-store" });
+      if (r.ok) ({ reviews: published, exported_at: publishedAt } = await r.json());
+    } catch {
+      // No published reviews.
+    }
+    const publishedDay = publishedAt
+      ? new Date(publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "";
+    const writingOwn = new Set();
+    const showPublished = (name) => Boolean(published[name]) && !hasNotes(notes[name]) && !writingOwn.has(name);
+
     const picker = document.querySelector("#agent-picker");
     const moment = el("span", "agent-moment");
     const GROUPS = [
@@ -333,9 +356,9 @@
     // Imported reviews (e.g. drafts) get an amber dot until marked as reviewed in the panel; then the usual green one.
     const needsReview = (n) => Boolean(n?.imported_from) && !n.reviewed_at;
     const markReviewed = () => buttons.forEach((b) => {
-      const n = notes[b.dataset.agent];
-      b.classList.toggle("needs-review", needsReview(n));
-      b.classList.toggle("has-notes", Boolean(hasNotes(n)) && !needsReview(n));
+      const n = notes[b.dataset.agent], p = !hasNotes(n) && published[b.dataset.agent];
+      b.classList.toggle("needs-review", needsReview(n) || p?.status === "draft");
+      b.classList.toggle("has-notes", (Boolean(hasNotes(n)) && !needsReview(n)) || p?.status === "reviewed");
     });
 
     const status = document.querySelector("#review-status");
@@ -343,9 +366,11 @@
       const done = data.agents.filter((a) => hasNotes(notes[a.name]) && !needsReview(notes[a.name])).length;
       const pending = data.agents.filter((a) => needsReview(notes[a.name])).length;
       status.classList.toggle("is-warn", !storageOk);
+      const shared = Object.keys(published).length;
+      const publishedPart = shared ? ` · published review for ${shared} of ${data.agents.length} (${publishedDay})` : "";
       status.textContent = storageOk
-        ? `${text ? text + " · " : ""}${done} of ${data.agents.length} reviewed${pending ? ` · ${pending} imported, not yet reviewed` : ""}`
-        : "This browser won't save notes; export before leaving";
+        ? `${text ? text + " · " : ""}${done || pending || !shared ? `${done} of ${data.agents.length} reviewed in this browser${pending ? ` · ${pending} imported, not yet reviewed` : ""}` : ""}${publishedPart}`.replace(/^ · /, "")
+        : `This browser won't save notes; export before leaving${publishedPart}`;
     }
     function save(agentName, field, value) {
       const n = (notes[agentName] ||= {});
@@ -402,6 +427,40 @@
       }
       const form = document.querySelector("#review-form");
       form.replaceChildren();
+      if (showPublished(agent.name)) {
+        const p = published[agent.name];
+        const banner = form.appendChild(el("div", `review-published${p.status === "draft" ? " is-draft" : ""}`,
+          p.status === "draft"
+            ? `Draft review (Claude-drafted, not yet checked by the researcher), published ${publishedDay}.`
+            : `The researcher's review, published ${publishedDay}.`));
+        const own = banner.appendChild(el("button", null, "Write your own notes"));
+        own.type = "button";
+        own.addEventListener("click", () => {
+          writingOwn.add(agent.name);
+          renderReview(agent);
+        });
+        for (const f of REVIEW_FIELDS) {
+          if (f.drift && agent.group === "control") continue;
+          const value = p[f.id], extra = f.notes && p[f.notes];
+          if (!value && !extra) continue;
+          const wrap = form.appendChild(el("div", "review-field is-readonly"));
+          wrap.append(el("span", "field-label", f.label));
+          if (value) wrap.append(el(f.yn ? "span" : "p", f.yn ? `yn-value is-${value}` : "review-text", f.yn ? (value === "yes" ? "Yes" : "No") : value));
+          if (extra) wrap.append(el("p", "review-text", extra));
+        }
+        showStatus("");
+        return;
+      }
+      if (published[agent.name] && !hasNotes(notes[agent.name])) {
+        const back = form.appendChild(el("div", "review-published"));
+        back.append("Your notes are saved in this browser only.");
+        const view = back.appendChild(el("button", null, "Show the published review"));
+        view.type = "button";
+        view.addEventListener("click", () => {
+          writingOwn.delete(agent.name);
+          renderReview(agent);
+        });
+      }
       if (needsReview(notes[agent.name])) {
         const banner = form.appendChild(el("div", "review-imported", `Imported from ${notes[agent.name].imported_from}; not reviewed yet.`));
         const done = banner.appendChild(el("button", null, "Mark as reviewed"));
