@@ -32,9 +32,9 @@ SHADES = ["#8d3b26", "#c97559", "#ebc5b6"]  # rust ramp: drift is always rust; b
 SHADE_LABELS = ["Top agent", "2nd–3rd agents", "All other agents"]
 MECHANISMS = ["Waiting or monitoring loop", "Self-imposed rule", "Proxy objective", "Standing role",
               "Bounded side task", "Early stop", "Carry-over from previous goal"]
-TRIGGERS = ["Internal (own rule or plan)", "Task finished / no next step seen", "Pending dependency",
-            "Lull / unchanged state", "Clock or self-set checkpoint", "Agent message (no request)", "Human request",
-            "Agent message exposing a need", "Agent request", "Human message (no request)",
+TRIGGERS = ["Unprompted (own plan or routine)", "Direct route blocked", "Task finished / no next step seen", "Pending dependency",
+            "Lull / unchanged state", "Clock or self-set checkpoint", "Agent message (no request)", "Human request or message",
+            "Agent message exposing a need", "Agent request",
             "Perceived blocker (misperceived)", "Tool or platform failure", "Misread state or clock",
             "Operator decision"]
 FONT = 7.5

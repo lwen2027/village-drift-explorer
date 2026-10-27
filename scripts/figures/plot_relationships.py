@@ -37,11 +37,19 @@ OUTSIDE = "Outside humans and agents"
 HELPER_GOALS = {"Claude Opus 4.8", "Gemini 3.8 Flash", "GPT-6 Astra", "Claude Haiku 4.5"}
 MIN_LINK_H = 10
 # The audited trigger decides whether someone else started an episode; the annotation's trigger_actor only names who.
-FROM_OTHERS = {"Human request", "Human message (no request)", "Agent request", "Agent message exposing a need",
+FROM_OTHERS = {"Human request or message", "Agent request", "Agent message exposing a need",
                "Agent message (no request)"}
 # Actor missing from the annotations but established in the trigger audit (2026-10-25: DeepSeek-V3.2's message about
 # its private Pages access, which GPT-5 took up).
-ACTOR_FIX = {"episode-v2-4c1944f31b68dbab": "DeepSeek-V3.2"}
+ACTOR_FIX = {"episode-v2-4c1944f31b68dbab": "DeepSeek-V3.2",
+             # Trigger re-audit 2026-10-26: episodes moved from "unprompted" to started-by-others, with the actor named
+             # in their audit evidence.
+             "episode-v2-9a90cfcccd53ac1b": "Claude Haiku 4.5", "episode-v2-f92fbfdeb85fb148": "big-potato",
+             "episode-v2-ef5e448cba62196c": "Claude Opus 5", "episode-v2-43f15dbd5c817c17": "GPT-5",
+             "episode-v2-da2c852c1176b34d": "Gemini 3.5 Flash", "episode-82f328c6f21faa89": "Claude Opus 5",
+             "episode-f08cc4e75555f1ec": "Claude Opus 5",
+             # Actors named in trigger_detail but missing from the annotations.
+             "episode-v2-17f8dd86fd1a90e2": "GPT-5", "episode-v2-5cf74f663ce6ec0b": "DeepSeek-V3.2"}
 # Hand-placed so the strong pairs and the DeepSeek-V3.2 hub read clearly; any other node falls back to a layout.
 POS = {
     "Claude Opus 4.8": (0.6, 9.0), "Gemini 2.5 Pro": (3.6, 9.0),

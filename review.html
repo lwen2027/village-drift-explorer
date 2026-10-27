@@ -2046,6 +2046,13 @@
     const auditBundle = await auditBundleResponse.json();
     const reviewManifest = await reviewManifestResponse.json();
     const committedReviewSeed = await reviewSeedResponse.json();
+    // Audited trigger / mechanism labels, adopted after the manual review. Shown read-only beside it; optional, so a
+    // missing file never blocks the review page.
+    let auditedLabels = {};
+    try {
+      const response = await fetch("./data/drift_axes_v1.json", { cache: "no-store" });
+      if (response.ok) auditedLabels = (await response.json()).episodes || {};
+    } catch { auditedLabels = {}; }
     const mergedEpisodeAliases = new Map(
       auditBundle.confirmed_episodes.flatMap((episode) =>
         (episode.merged_episode_segments || [])
@@ -3929,6 +3936,35 @@
       return wrapper;
     }
 
+    function renderAuditedLabels(episode) {
+      const labels = auditedLabels[episode.episode_id] || auditedLabels[canonicalMergedEpisodeId(episode.episode_id)];
+      const wrapper = node("section", "panel-section");
+      wrapper.append(node("h3", "", "Audited labels"));
+      if (!labels) {
+        wrapper.append(node("p", "summary-copy", "Only goal-period episodes have audited trigger and mechanism labels."));
+        return wrapper;
+      }
+      wrapper.append(node("p", "review-precedence",
+        "Adopted after the manual review: what started the drift (trigger) and what kept it going (mechanism). Read-only; your review annotation below is unchanged."));
+      const meta = node("div", "meta-grid");
+      [
+        ["Trigger", labels.trigger + (labels.started_by ? ` · ${labels.started_by}` : "")],
+        ["Mechanism", labels.mechanism],
+        ["Memory-reinforced", labels.memory_reinforced ? "Yes" : "No"],
+        ["Trigger detail", labels.trigger_detail || "—"]
+      ].forEach(([name, value]) => {
+        const item = node("div", "meta-item");
+        item.append(node("span", "", name), node("strong", "", value));
+        meta.append(item);
+      });
+      wrapper.append(meta);
+      if (labels.pre_audit_trigger && labels.pre_audit_trigger !== labels.trigger) {
+        wrapper.append(node("p", "summary-copy", `Trigger before the audits: ${labels.pre_audit_trigger}.`));
+      }
+      if (labels.audit_note) wrapper.append(node("p", "summary-copy", `Audit note: ${labels.audit_note}`));
+      return wrapper;
+    }
+
     function renderMetadata(episode) {
       const wrapper = node("section", "panel-section");
       wrapper.append(node("p", "micro-label", "Episode metadata"));
@@ -4686,6 +4722,7 @@
         panel.append(renderMetadata(episode));
 
         if (episode.dissent) panel.append(section("Alternative interpretation", episode.dissent));
+        panel.append(renderAuditedLabels(episode));
         panel.append(renderHumanReview(episode));
         panel.append(renderEpisodeReview(episode, period));
       } else {

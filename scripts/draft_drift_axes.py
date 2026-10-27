@@ -27,16 +27,16 @@ MAP = {
     "pause_monitoring_loop": ("Lull / unchanged state", "Waiting or monitoring loop", False),
     "pause_dependency_wait": ("Pending dependency", "Waiting or monitoring loop", False),
     "pause_scheduled_wait": ("Clock or self-set checkpoint", "Waiting or monitoring loop", False),
-    "memory_reinforced_waiting": ("Internal (own rule or plan)", "Waiting or monitoring loop", True),
+    "memory_reinforced_waiting": ("Unprompted (own plan or routine)", "Waiting or monitoring loop", True),
     "pause_end_of_day": ("Clock or self-set checkpoint", "Early stop", False),
     "pause_mistaken_day_boundary": ("Misread state or clock", "Early stop", False),
     "pause_nothing_left_to_do": ("Task finished / no next step seen", "Early stop", False),
-    "self_authored_memory_constraint": ("Internal (own rule or plan)", "Self-imposed rule", True),
-    "self_chosen_proxy_objective": ("Internal (own rule or plan)", "Proxy objective", False),
-    "memory_entrenched_proxy_objective": ("Internal (own rule or plan)", "Proxy objective", True),
-    "independent_side_pursuit": ("Internal (own rule or plan)", "Side project", False),
-    "voluntary_side_work": ("Internal (own rule or plan)", None, False),
-    "prior_goal_carryover": ("Internal (own rule or plan)", "Side project", True),
+    "self_authored_memory_constraint": ("Unprompted (own plan or routine)", "Self-imposed rule", True),
+    "self_chosen_proxy_objective": ("Unprompted (own plan or routine)", "Proxy objective", False),
+    "memory_entrenched_proxy_objective": ("Unprompted (own plan or routine)", "Proxy objective", True),
+    "independent_side_pursuit": ("Unprompted (own plan or routine)", "Side project", False),
+    "voluntary_side_work": ("Unprompted (own plan or routine)", None, False),
+    "prior_goal_carryover": ("Unprompted (own plan or routine)", "Side project", True),
     "request_expanded_standing_role": (None, "Standing role", False),
     "tool_or_platform_failure": ("Tool or platform failure", None, False),
     "operator_imposed_constraint": ("Operator decision", None, False),
@@ -56,11 +56,11 @@ for eid, label in asg.items():
     actor = (n.get("trigger_actor") or "").strip()
     rel = n.get("request_relationship") or ""
     if trig is None and label in HUMAN_CH:
-        trig = "Human request" if rel in ("targeted_request", "open_request") else "Human message (no request)"
+        trig = "Human request or message"
     if trig is None:  # standing roles: who asked
         is_agent = any(actor.startswith(x) for x in agents) and "relaying" not in actor
-        trig = ("Agent request" if is_agent else "Human request") if rel in ("targeted_request", "open_request") else (
-               "Agent message exposing a need" if is_agent else "Human message (no request)")
+        trig = ("Agent request" if is_agent else "Human request or message") if rel in ("targeted_request", "open_request") else (
+               "Agent message exposing a need" if is_agent else "Human request or message")
     if mech is None:
         tc = n.get("trigger_categories") or []
         if label in ("tool_or_platform_failure", "operator_imposed_constraint", "system_state_confusion"):

@@ -1,13 +1,15 @@
 const REVIEW_STORAGE_KEY = "village-drift-manual-review-ledger:v1";
 const fresh = { cache: "no-store" };
 
-const [bundleResponse, manifestResponse, annotationResponse, sourceResponse, categoryResponse, contactResponse] = await Promise.all([
+const [bundleResponse, manifestResponse, annotationResponse, sourceResponse, categoryResponse, contactResponse, driftAxesResponse] = await Promise.all([
   fetch("./data/second_audit_v2.json", fresh),
   fetch("./data/manual_review_wait_exclusions_v1.json", fresh),
   fetch("./data/manual_review_annotations_v1.json", fresh),
   fetch("./data/source_records.json", fresh),
   fetch("./data/goal_categories_v1.json", fresh),
-  fetch("./data/human_contact_v1.json", fresh)
+  fetch("./data/human_contact_v1.json", fresh),
+  // Audited trigger / mechanism / memory labels (optional; without them the page shows the original review labels only).
+  fetch("./data/drift_axes_v1.json", fresh).catch(() => null)
 ]);
 
 if (!bundleResponse.ok || !manifestResponse.ok || !annotationResponse.ok || !sourceResponse.ok) {
@@ -81,6 +83,58 @@ const episodeAliases = new Map(
 
 function canonicalEpisodeId(episodeId) {
   return episodeAliases.get(episodeId) || episodeId;
+}
+
+// ---------------------------------------------------------------------------
+// Label mode: "audited" shows the audited trigger / mechanism / memory labels
+// (data/drift_axes_v1.json); "original" shows the manual review's categories
+// exactly as before. Views read labels through the accessors below.
+// ---------------------------------------------------------------------------
+const LABEL_MODE_KEY = "findings-label-mode-v1";
+const driftAxes = driftAxesResponse?.ok ? await driftAxesResponse.json().catch(() => null) : null;
+const axesByEpisode = new Map();
+if (driftAxes?.episodes) {
+  const unmatched = [];
+  Object.entries(driftAxes.episodes).forEach(([rawId, record]) => {
+    const episodeId = canonicalEpisodeId(rawId);
+    if (episodeById.has(episodeId)) axesByEpisode.set(episodeId, record);
+    else unmatched.push(rawId);
+  });
+  if (unmatched.length) console.warn(`drift_axes_v1.json: ${unmatched.length} episode(s) not matched to a goal-max episode`, unmatched);
+} else {
+  console.warn("drift_axes_v1.json could not be loaded; showing the original review labels only.");
+}
+const AXIS_TRIGGER_ORDER = driftAxes?.trigger_order || [];
+const AXIS_MECHANISM_ORDER = driftAxes?.mechanism_order || [];
+const WAITING_MECHANISM = "Waiting or monitoring loop";
+const AXIS_AGENT_TRIGGERS = new Set(["Agent request", "Agent message exposing a need", "Agent message (no request)"]);
+const AXIS_HUMAN_TRIGGERS = new Set(["Human request or message"]);
+const AXIS_OPERATOR_TRIGGERS = new Set(["Operator decision"]);
+const AXIS_OWN_TRIGGERS = new Set(["Unprompted (own plan or routine)"]);
+// Display families for the audited triggers (used to group rows and flow nodes).
+function axisTriggerFamily(trigger) {
+  if (AXIS_AGENT_TRIGGERS.has(trigger) || AXIS_HUMAN_TRIGGERS.has(trigger)) return "others";
+  if (AXIS_OPERATOR_TRIGGERS.has(trigger)) return "operator";
+  if (AXIS_OWN_TRIGGERS.has(trigger)) return "own";
+  return "circumstance";
+}
+const AXIS_TRIGGER_FAMILIES = [
+  { id: "circumstance", name: "Circumstance (task state, dependency, blocker, clock)" },
+  { id: "others", name: "Started by another agent or a human" },
+  { id: "operator", name: "Operator decision" },
+  { id: "own", name: "Own plan or routine" }
+];
+
+let labelMode = "audited";
+try {
+  if (localStorage.getItem(LABEL_MODE_KEY) === "original") labelMode = "original";
+} catch { /* storage unavailable: default to audited */ }
+if (!axesByEpisode.size) labelMode = "original";
+const audited = () => labelMode === "audited";
+const axesFor = (episodeId) => axesByEpisode.get(episodeId) || null;
+function orderIndex(order, value) {
+  const index = order.indexOf(value);
+  return index < 0 ? order.length : index;
 }
 
 const starterLabels = {
@@ -726,6 +780,7 @@ function label(kind, value) {
   if (kind === "source") return sourceLabels[value] || value;
   if (kind === "agent") return agentLabel(value);
   if (kind === "taxonomy") return triggerTaxonomyLabels.get(value) || value;
+  if (kind === "axis_trigger" || kind === "axis_mechanism") return value;
   return starterLabels[kind]?.[value] || value.replaceAll("_", " ");
 }
 
@@ -733,7 +788,7 @@ function uniqueValues(accessor) {
   return [...new Set(rows.flatMap((row) => accessor(row)).filter(Boolean))];
 }
 
-function fillSelect(key, values, labelKind, allLabel) {
+function fillSelect(key, values, labelKind, allLabel, order = null) {
   const select = selectByKey[key];
   select.replaceChildren();
   const all = document.createElement("option");
@@ -741,7 +796,8 @@ function fillSelect(key, values, labelKind, allLabel) {
   all.textContent = allLabel;
   select.append(all);
   [...values]
-    .sort((left, right) => label(labelKind, left).localeCompare(label(labelKind, right)))
+    .sort((left, right) => (order ? orderIndex(order, left) - orderIndex(order, right) : 0)
+      || label(labelKind, left).localeCompare(label(labelKind, right)))
     .forEach((value) => {
       const option = document.createElement("option");
       option.value = value;
@@ -753,6 +809,8 @@ function fillSelect(key, values, labelKind, allLabel) {
   } else {
     filters[key] = "";
   }
+  if (select.dataset.bound) return;
+  select.dataset.bound = "true";
   select.addEventListener("change", () => {
     filters[key] = select.value;
     episodeListLimit = 40;
@@ -760,9 +818,28 @@ function fillSelect(key, values, labelKind, allLabel) {
   });
 }
 
+// Trigger and mechanism accessors for reviewed rows, per label mode.
+function rowTriggers(row) {
+  if (!audited()) return row.annotation.trigger_categories;
+  const trigger = axesFor(row.episodeId)?.trigger;
+  return trigger ? [trigger] : [];
+}
+// The second trigger filter / bar chart: the curated taxonomy (original) or the audited mechanism.
+function rowTaxonomy(row) {
+  if (!audited()) return triggerTaxonomyByEpisode.get(row.episodeId);
+  return axesFor(row.episodeId)?.mechanism;
+}
+const triggerLabelKind = () => (audited() ? "axis_trigger" : "trigger");
+const taxonomyLabelKind = () => (audited() ? "axis_mechanism" : "taxonomy");
+
+function fillTriggerSelects() {
+  fillSelect("trigger", uniqueValues(rowTriggers), triggerLabelKind(), "All triggers", audited() ? AXIS_TRIGGER_ORDER : null);
+  fillSelect("taxonomy", uniqueValues((row) => [rowTaxonomy(row)]), taxonomyLabelKind(),
+    audited() ? "All mechanisms" : "All taxonomy categories", audited() ? AXIS_MECHANISM_ORDER : null);
+}
+
 fillSelect("agent", uniqueValues((row) => [row.episode.agent]), "agent", "All agents");
-fillSelect("trigger", uniqueValues((row) => row.annotation.trigger_categories), "trigger", "All triggers");
-fillSelect("taxonomy", uniqueValues((row) => [triggerTaxonomyByEpisode.get(row.episodeId)]), "taxonomy", "All taxonomy categories");
+fillTriggerSelects();
 fillSelect("pause", uniqueValues((row) => [row.annotation.pause_context]), "pause", "All pause contexts");
 fillSelect("request", uniqueValues((row) => [row.annotation.request_relationship]), "request_relationship", "All request relationships");
 fillSelect("recovery", uniqueValues((row) => row.annotation.recovery_mechanisms), "recovery", "All recovery mechanisms");
@@ -770,8 +847,8 @@ fillSelect("source", uniqueValues((row) => [row.source]), "source", "All review 
 
 function rowMatches(row) {
   return (!filters.agent || row.episode.agent === filters.agent)
-    && (!filters.trigger || row.annotation.trigger_categories.includes(filters.trigger))
-    && (!filters.taxonomy || triggerTaxonomyByEpisode.get(row.episodeId) === filters.taxonomy)
+    && (!filters.trigger || rowTriggers(row).includes(filters.trigger))
+    && (!filters.taxonomy || rowTaxonomy(row) === filters.taxonomy)
     && (!filters.pause || row.annotation.pause_context === filters.pause)
     && (!filters.request || row.annotation.request_relationship === filters.request)
     && (!filters.recovery || row.annotation.recovery_mechanisms.includes(filters.recovery))
@@ -1147,7 +1224,17 @@ function goalAtlasEpisodePanel(period, track) {
       dd.textContent = value;
       facts.append(dt, dd);
     };
-    if (review) {
+    const axes = audited() ? axesFor(episode.episode_id) : null;
+    if (axes) {
+      fact("Trigger", [axes.trigger, axes.started_by_others ? axes.started_by : ""].filter(Boolean).join(" · "));
+      fact("Mechanism", [axes.mechanism, axes.memory_reinforced ? "memory-reinforced" : ""].filter(Boolean).join(" · "));
+    }
+    if (review && axes) {
+      const annotation = review.annotation;
+      fact("Request", annotation.request_relationship && label("request_relationship", annotation.request_relationship));
+      fact("Pause", annotation.pause_context && label("pause", annotation.pause_context));
+      fact("Recovery", annotation.recovery_mechanisms.map((value) => label("recovery", value)).join(", "));
+    } else if (review) {
       const annotation = review.annotation;
       const official = triggerTaxonomyLabels.get(triggerTaxonomyByEpisode.get(episode.episode_id));
       fact("Trigger", [official || annotation.trigger_categories.map((value) => label("trigger", value)).join(", "), annotation.trigger_actor].filter(Boolean).join(" · "));
@@ -1312,11 +1399,13 @@ function addCartesianFrame(svg, { left, right, top, bottom, xTicks, yTicks, xSca
 
 const burdenColors = ["#3f7082", "#ae5037", "#a77b2c", "#466f61", "#74578f", "#bd6f3b", "#657a3d", "#8a5961", "#5b6f9e", "#8d734e"];
 const burdenSelectionsByMode = new Map();
+// The dominant-mechanism grouping has different keys per label mode, so its filter selection is kept per label mode.
+const burdenSelectionKey = (mode) => (mode === "mechanism" ? `${mode}:${labelMode}` : mode);
 
 function dominantMechanism(period) {
   const counts = new Map();
   period.episodes.forEach((episode) => {
-    const mechanism = episode.mechanism_shape || "unknown";
+    const mechanism = (audited() ? axesFor(episode.episode_id)?.mechanism : episode.mechanism_shape) || "unknown";
     counts.set(mechanism, (counts.get(mechanism) || 0) + 1);
   });
   return [...counts.entries()]
@@ -1351,10 +1440,11 @@ function orderedBurdenGroups(plotted, mode) {
 }
 
 function burdenSelection(mode, groups) {
-  if (!burdenSelectionsByMode.has(mode)) {
-    burdenSelectionsByMode.set(mode, new Set(groups.map((group) => group.key)));
+  const key = burdenSelectionKey(mode);
+  if (!burdenSelectionsByMode.has(key)) {
+    burdenSelectionsByMode.set(key, new Set(groups.map((group) => group.key)));
   }
-  return burdenSelectionsByMode.get(mode);
+  return burdenSelectionsByMode.get(key);
 }
 
 function renderBurdenLegend(groups, colorByKey, selectedKeys, groupCounts) {
@@ -1596,14 +1686,21 @@ function renderAnnotationFlow() {
   }
   const mode = document.querySelector("#flow-measure").value;
   const weight = rowWeight(mode);
-  const flowRows = rows.map((row) => ({
-    ...primaryManualTriggerAndContext(row.annotation),
-    recovery: row.annotation.recovery_mechanisms[0] || "unknown",
-    weight: weight(row)
-  })).filter((row) => row.weight > 0);
+  const auditedFlow = audited();
+  // Audited mode: trigger → mechanism → recovery (the middle column holds the audited mechanism in "context").
+  const flowRows = rows.map((row) => {
+    const axes = auditedFlow ? axesFor(row.episodeId) : null;
+    return {
+      ...(auditedFlow
+        ? { trigger: axes?.trigger || "Not in audited set", context: axes?.mechanism || "Not in audited set" }
+        : primaryManualTriggerAndContext(row.annotation)),
+      recovery: row.annotation.recovery_mechanisms[0] || "unknown",
+      weight: weight(row)
+    };
+  }).filter((row) => row.weight > 0);
   const stages = [
-    { key: "trigger", x: 175, label: (value) => label("trigger", value) },
-    { key: "context", x: 580, label: contextLabel },
+    { key: "trigger", x: 175, label: auditedFlow ? (value) => value : (value) => label("trigger", value) },
+    { key: "context", x: 580, label: auditedFlow ? (value) => value : contextLabel },
     { key: "recovery", x: 965, label: (value) => label("recovery", value) }
   ];
   const chartTop = 40, chartHeight = 540, nodeWidth = 14, gap = 9;
@@ -1611,7 +1708,11 @@ function renderAnnotationFlow() {
   // triggers (pauses, outside requests, self-originated, operator/system), contexts (pause, request, none),
   // and endings (no outside input, after outside input, not a recovery).
   const SELF_ENDINGS = new Set(["self_correction", "finished_activity", "end_of_day"]);
-  const groupOf = [
+  const groupOf = auditedFlow ? [
+    (value) => Math.max(0, AXIS_TRIGGER_FAMILIES.findIndex((family) => family.id === axisTriggerFamily(value))),
+    (value) => (value === WAITING_MECHANISM ? 0 : 1),
+    (value) => (SELF_ENDINGS.has(value) ? 0 : NON_RECOVERY_ENDINGS.has(value) ? 2 : 1)
+  ] : [
     (value) => (value === "pause" ? 0 : externalTriggerCategoryIds.has(value) ? 1 : value === "operator_or_system_event" ? 3 : 2),
     (value) => (value.startsWith("pause:") ? 0 : value.startsWith("request:") ? 1 : 2),
     (value) => (SELF_ENDINGS.has(value) ? 0 : NON_RECOVERY_ENDINGS.has(value) ? 2 : 1)
@@ -1679,7 +1780,7 @@ function renderAnnotationFlow() {
       });
   }
   stages.forEach((stage, stageIndex) => {
-    const heading = ["Trigger", "Trigger context", "Recovery"][stageIndex];
+    const heading = (auditedFlow ? ["Trigger", "Mechanism", "Recovery"] : ["Trigger", "Trigger context", "Recovery"])[stageIndex];
     svg.append(svgElement("text", { x: stage.x + nodeWidth / 2, y: 18, "text-anchor": "middle", class: "svg-title" }, heading));
     // Tiny nodes (common in hours mode) would stack their labels; keep at least 11px between them.
     let lastLabelY = -Infinity;
@@ -1689,7 +1790,7 @@ function renderAnnotationFlow() {
       svg.append(rect);
       const anchor = stageIndex === 0 ? "end" : "start";
       const textX = stageIndex === 0 ? node.x - 8 : node.x + nodeWidth + 8;
-      const labelLength = stageIndex === 1 ? 38 : 28;
+      const labelLength = stageIndex === 1 ? 38 : auditedFlow && stageIndex === 0 ? 34 : 28;
       const labelY = Math.max(node.y + Math.max(9, node.height / 2 + 3), lastLabelY + 11);
       lastLabelY = labelY;
       svg.append(svgElement("text", { x: textX, y: labelY, "text-anchor": anchor, class: "svg-label" }, `${shortText(stage.label(node.value), labelLength)} · ${measureText(node.count, mode)}`));
@@ -1708,11 +1809,11 @@ function initializeExplorations() {
   document.querySelector("#burden-select-all").addEventListener("click", () => {
     const mode = document.querySelector("#burden-color-mode").value;
     const groups = orderedBurdenGroups(goalPeriods.filter((period) => period.episodes.length), mode);
-    burdenSelectionsByMode.set(mode, new Set(groups.map((group) => group.key)));
+    burdenSelectionsByMode.set(burdenSelectionKey(mode), new Set(groups.map((group) => group.key)));
     renderBurdenScatter();
   });
   document.querySelector("#burden-clear").addEventListener("click", () => {
-    burdenSelectionsByMode.set(document.querySelector("#burden-color-mode").value, new Set());
+    burdenSelectionsByMode.set(burdenSelectionKey(document.querySelector("#burden-color-mode").value), new Set());
     renderBurdenScatter();
   });
   document.querySelector("#burden-show-context").addEventListener("change", renderBurdenScatter);
@@ -1966,7 +2067,9 @@ function waitHourShare(episodes) {
     const { hours } = driftHoursFor(episode);
     const taxonomy = triggerTaxonomyByEpisode.get(episode.episode_id) || "";
     reviewed += hours;
-    if (review.annotation.trigger_categories.includes("pause") || taxonomy.startsWith("pause")
+    if (audited()) {
+      if (axesFor(episode.episode_id)?.mechanism === WAITING_MECHANISM) waiting += hours;
+    } else if (review.annotation.trigger_categories.includes("pause") || taxonomy.startsWith("pause")
         || taxonomy === "memory_reinforced_waiting") waiting += hours;
   });
   return reviewed ? waiting / reviewed : 0;
@@ -2002,7 +2105,7 @@ function renderAgentFingerprints() {
     ["Frequency", "episodes / 30 days"],
     ["Burden", "share of working hours spent drifting"],
     ["Early onset", "earlier first drift"],
-    ["Wait", "share of reviewed drift hours spent pausing or waiting"],
+    ["Wait", audited() ? "share of reviewed drift hours in a waiting or monitoring loop (audited mechanism)" : "share of reviewed drift hours spent pausing or waiting"],
     ["Long-form", "validated episodes ≥8 hours"],
     ["Recovery", "share of reviewed drift hours that ended in a recovery"]
   ];
@@ -2089,6 +2192,13 @@ const influenceSourceGroups = [
 const influenceColorByGroup = new Map(influenceSourceGroups.map((group) => [group.id, group.color]));
 
 function influenceGroupFor(row) {
+  if (audited()) {
+    const trigger = axesFor(row.episodeId)?.trigger;
+    if (AXIS_AGENT_TRIGGERS.has(trigger)) return "agent";
+    if (AXIS_HUMAN_TRIGGERS.has(trigger)) return "human";
+    if (AXIS_OPERATOR_TRIGGERS.has(trigger)) return "system";
+    return "self";
+  }
   const trigger = primaryManualTriggerAndContext(row.annotation).trigger;
   if (trigger === "agent_message_or_request") return "agent";
   if (["user_email", "user_message", "gitlab_issue_or_comment", "substack_message"].includes(trigger)) return "human";
@@ -2097,6 +2207,14 @@ function influenceGroupFor(row) {
 }
 
 function sourceActorFor(row) {
+  if (audited()) {
+    const axes = axesFor(row.episodeId);
+    if (!axes) return "Not in audited set";
+    if (axes.started_by_others) {
+      return axes.started_by || (AXIS_AGENT_TRIGGERS.has(axes.trigger) ? "Unidentified agent" : "Unidentified human");
+    }
+    return axes.trigger;
+  }
   const actor = String(row.annotation.trigger_actor || "").trim();
   if (actor) return actor;
   const trigger = primaryManualTriggerAndContext(row.annotation).trigger;
@@ -2316,15 +2434,45 @@ function mechanismLabel(value) {
   return labels[value] || String(value || "Unknown").replaceAll("_", " ");
 }
 
+// Audited mode: rows are the audited triggers (grouped by trigger family), then the audited mechanisms.
+// Each episode appears once among the triggers and once among the mechanisms.
+function auditedTaxonomyCategories() {
+  const memoryShare = (match) => {
+    const matched = rows.filter((row) => match(axesFor(row.episodeId)));
+    const memory = matched.filter((row) => axesFor(row.episodeId)?.memory_reinforced).length;
+    return matched.length ? `${percentText(memory / matched.length)} of its episodes memory-reinforced` : "";
+  };
+  const triggers = AXIS_TRIGGER_ORDER
+    .map((trigger) => ({ trigger, family: AXIS_TRIGGER_FAMILIES.find((family) => family.id === axisTriggerFamily(trigger)) }))
+    .sort((left, right) => AXIS_TRIGGER_FAMILIES.indexOf(left.family) - AXIS_TRIGGER_FAMILIES.indexOf(right.family))
+    .map(({ trigger, family }) => ({
+      id: `trigger:${trigger}`, label: trigger, family: `Trigger · ${family.name}`,
+      description: memoryShare((axes) => axes?.trigger === trigger)
+    }));
+  const mechanisms = AXIS_MECHANISM_ORDER.map((mechanism) => ({
+    id: `mechanism:${mechanism}`, label: mechanism, family: "Mechanism · what kept the drift going (same episodes again)",
+    description: memoryShare((axes) => axes?.mechanism === mechanism)
+  }));
+  return { categories: [...triggers, ...mechanisms], idsFor: (row) => {
+    const axes = axesFor(row.episodeId);
+    return axes ? [`trigger:${axes.trigger}`, `mechanism:${axes.mechanism}`] : [];
+  } };
+}
+
 function renderTriggerTaxonomy() {
-  const categoryById = new Map(triggerTaxonomyCategories.map((category) => [category.id, category]));
+  const auditedTable = audited() ? auditedTaxonomyCategories() : null;
+  const taxonomyCategories = auditedTable ? auditedTable.categories : triggerTaxonomyCategories;
+  const categoryById = new Map(taxonomyCategories.map((category) => [category.id, category]));
   const taxonomyRows = rows.map((row) => ({
     ...row,
     taxonomyId: triggerTaxonomyByEpisode.get(row.episodeId),
+    taxonomyIds: auditedTable ? auditedTable.idsFor(row) : [triggerTaxonomyByEpisode.get(row.episodeId)],
     primaryRecovery: row.annotation.recovery_mechanisms[0] || "unknown"
   }));
-  const unassigned = taxonomyRows.filter((row) => !categoryById.has(row.taxonomyId));
-  if (unassigned.length) {
+  const unassigned = taxonomyRows.filter((row) => !row.taxonomyIds.length || row.taxonomyIds.some((id) => !categoryById.has(id)));
+  if (unassigned.length && auditedTable) {
+    console.warn(`Reviewed episodes without audited labels: ${unassigned.map((row) => row.episodeId).join(", ")}`);
+  } else if (unassigned.length) {
     throw new Error(`Missing trigger-taxonomy assignments for ${unassigned.map((row) => row.episodeId).join(", ")}`);
   }
 
@@ -2339,9 +2487,9 @@ function renderTriggerTaxonomy() {
   const mode = document.querySelector("#taxonomy-measure").value;
   const weight = rowWeight(mode);
   const weightOf = (input) => input.reduce((sum, row) => sum + weight(row), 0);
-  const rowsByCategory = new Map(triggerTaxonomyCategories.map((category) => [category.id, []]));
-  taxonomyRows.forEach((row) => rowsByCategory.get(row.taxonomyId).push(row));
-  const visibleCategories = triggerTaxonomyCategories.filter((category) => rowsByCategory.get(category.id).length);
+  const rowsByCategory = new Map(taxonomyCategories.map((category) => [category.id, []]));
+  taxonomyRows.forEach((row) => row.taxonomyIds.forEach((id) => rowsByCategory.get(id)?.push(row)));
+  const visibleCategories = taxonomyCategories.filter((category) => rowsByCategory.get(category.id).length);
   const families = [];
   visibleCategories.forEach((category) => {
     let family = families.find((item) => item.name === category.family);
@@ -2388,7 +2536,7 @@ function renderTriggerTaxonomy() {
     heatmap.style.gridTemplateColumns = `minmax(260px, 1.8fr) repeat(${recoveryOrder.length}, minmax(58px, .55fr)) 52px`;
     const categoryHeader = document.createElement("div");
     categoryHeader.className = "taxonomy-column-label is-category";
-    categoryHeader.textContent = "Trigger category";
+    categoryHeader.textContent = auditedTable ? (family.name.startsWith("Mechanism") ? "Mechanism" : "Trigger") : "Trigger category";
     heatmap.append(categoryHeader);
     recoveryOrder.forEach((recovery) => {
       const header = document.createElement("div");
@@ -2446,26 +2594,58 @@ function renderTriggerTaxonomy() {
   });
 
   const multiRecoveryCount = taxonomyRows.filter((row) => row.annotation.recovery_mechanisms.length > 1).length;
-  document.querySelector("#taxonomy-total").textContent = `${visibleCategories.length} categories · ${taxonomyRows.length} episodes`;
+  document.querySelector("#taxonomy-total").textContent = auditedTable
+    ? `${visibleCategories.filter((category) => category.id.startsWith("trigger:")).length} triggers · ${visibleCategories.filter((category) => category.id.startsWith("mechanism:")).length} mechanisms · ${taxonomyRows.length} episodes`
+    : `${visibleCategories.length} categories · ${taxonomyRows.length} episodes`;
   const unit = mode === "hours" ? "drift hours" : "episode count";
-  document.querySelector("#taxonomy-note").textContent = `Cell shading represents the share within each trigger category; every populated cell shows its ${unit} and percentage, and the final column gives the category total. ${multiRecoveryCount} episodes also retain a secondary recovery label in their annotation. ${mode === "hours" ? hoursEstimateNote(taxonomyRows) : ""}`.trim();
+  document.querySelector("#taxonomy-note").textContent = `${auditedTable ? "Recovery comes from the manual review annotations (the audit does not relabel it). The mechanism rows count the same episodes as the trigger rows. " : ""}Cell shading represents the share within each ${auditedTable ? "row" : "trigger category"}; every populated cell shows its ${unit} and percentage, and the final column gives the category total. ${multiRecoveryCount} episodes also retain a secondary recovery label in their annotation. ${mode === "hours" ? hoursEstimateNote(taxonomyRows) : ""}`.trim();
 }
 
 // ---------------------------------------------------------------------------
 // Drift dynamics: every chart compares how often (episodes) with how much (drift hours).
 // ---------------------------------------------------------------------------
 const OUTSIDE_TRIGGERS = new Set(["agent_message_or_request", "gitlab_issue_or_comment", "user_email", "user_message", "substack_message", "operator_or_system_event"]);
-const ORIGIN_GROUPS = [
+const ORIGINAL_ORIGIN_GROUPS = [
   { id: "outside", label: "Outside input (peer, human or operator)", color: "#3f7082" },
   { id: "pause", label: "Pause", color: "#a77b2c" },
   { id: "self", label: "Self-originated (proxy, own rule, own initiative)", color: "#ae5037" }
 ];
-const ORIGIN_BY_ID = new Map(ORIGIN_GROUPS.map((group) => [group.id, group]));
+// Audited mode keeps the three ids (and colors): outside = started by another agent or a human;
+// the rest split by whether the audited mechanism is a waiting or monitoring loop.
+const AUDITED_ORIGIN_GROUPS = [
+  { id: "outside", label: "Started by others (another agent or a human)", color: "#3f7082" },
+  { id: "pause", label: "Waiting loop (waiting or monitoring, not started by others)", color: "#a77b2c" },
+  { id: "self", label: "Other drift (circumstance, operator or own plan, not started by others)", color: "#ae5037" }
+];
+let ORIGIN_GROUPS = ORIGINAL_ORIGIN_GROUPS;
+let ORIGIN_BY_ID = new Map(ORIGIN_GROUPS.map((group) => [group.id, group]));
+function syncOriginGroups() {
+  ORIGIN_GROUPS = audited() ? AUDITED_ORIGIN_GROUPS : ORIGINAL_ORIGIN_GROUPS;
+  ORIGIN_BY_ID = new Map(ORIGIN_GROUPS.map((group) => [group.id, group]));
+}
+syncOriginGroups();
 
 function triggerOriginFor(annotation) {
   const triggers = new Set(annotation.trigger_categories || []);
   if ([...triggers].some((trigger) => OUTSIDE_TRIGGERS.has(trigger))) return "outside";
   return triggers.has("pause") ? "pause" : "self";
+}
+
+// Origin of a reviewed row ({episodeId, annotation}) under the current label mode.
+function triggerOriginForRow(row) {
+  if (!audited()) return triggerOriginFor(row.annotation);
+  const axes = axesFor(row.episodeId);
+  if (!axes) return triggerOriginFor(row.annotation);
+  if (axes.started_by_others) return "outside";
+  return axes.mechanism === WAITING_MECHANISM ? "pause" : "self";
+}
+
+// Named source of an episode started by someone else: the reviewed trigger_actor (original)
+// or the audited started_by (audited; trigger_actor corrected by the trigger audits). Empty when none.
+function startedByFor(row) {
+  if (!audited()) return row.annotation.trigger_actor || "";
+  const axes = axesFor(row.episodeId);
+  return axes?.started_by_others ? axes.started_by || "" : "";
 }
 
 function hoursOf(row) {
@@ -2522,7 +2702,7 @@ function renderTriggerOrigin() {
   const totals = new Map(ORIGIN_GROUPS.map((group) => [group.id, { ...group, episodes: 0, hours: 0 }]));
   const byAgent = new Map();
   rows.forEach((row) => {
-    const origin = triggerOriginFor(row.annotation);
+    const origin = triggerOriginForRow(row);
     const hours = hoursOf(row);
     const total = totals.get(origin);
     total.episodes += 1;
@@ -2709,8 +2889,9 @@ function sourceAgentFor(actor) {
 function pullTallies(sourceKey, targetKey) {
   const tallies = new Map();
   rows.forEach((row) => {
-    if (triggerOriginFor(row.annotation) !== "outside" || !row.annotation.trigger_actor) return;
-    const source = sourceKey(sourceAgentFor(row.annotation.trigger_actor));
+    const actor = startedByFor(row);
+    if (triggerOriginForRow(row) !== "outside" || !actor) return;
+    const source = sourceKey(sourceAgentFor(actor));
     const target = targetKey(row.episode.agent);
     const key = `${source}\u0000${target}`;
     if (!tallies.has(key)) tallies.set(key, { source, target, episodes: 0, hours: 0 });
@@ -2928,18 +3109,22 @@ function goalWindowCardData(period) {
   const reviewed = episodes.map((episode) => ({ episode, review: reviewRowByEpisode.get(episode.episode_id) })).filter((item) => item.review);
   const origins = new Map(ORIGIN_GROUPS.map((group) => [group.id, { episodes: 0, hours: 0 }]));
   const taxonomy = new Map();
+  const mechanisms = new Map();
   const actors = new Map();
   const endings = new Map();
   let recoveredEpisodes = 0, recoveredHours = 0, reviewedHours = 0;
   reviewed.forEach(({ episode, review }) => {
     const hours = hoursOfEpisode(episode);
     reviewedHours += hours;
-    const origin = origins.get(triggerOriginFor(review.annotation));
+    const origin = origins.get(triggerOriginForRow(review));
     origin.episodes += 1;
     origin.hours += hours;
-    const category = triggerTaxonomyByEpisode.get(episode.episode_id);
-    if (category) tally(taxonomy, triggerTaxonomyLabels.get(category) || category, hours);
-    if (review.annotation.trigger_actor) tally(actors, pullLabel(sourceAgentFor(review.annotation.trigger_actor)) === "Outside humans" ? review.annotation.trigger_actor : pullLabel(sourceAgentFor(review.annotation.trigger_actor)), hours);
+    const axes = audited() ? axesFor(episode.episode_id) : null;
+    const category = audited() ? axes?.trigger : triggerTaxonomyByEpisode.get(episode.episode_id);
+    if (category) tally(taxonomy, audited() ? category : triggerTaxonomyLabels.get(category) || category, hours);
+    if (axes?.mechanism) tally(mechanisms, axes.mechanism, hours);
+    const actor = startedByFor(review);
+    if (actor) tally(actors, pullLabel(sourceAgentFor(actor)) === "Outside humans" ? actor : pullLabel(sourceAgentFor(actor)), hours);
     tally(endings, label("recovery", review.annotation.recovery_mechanisms[0] || "unknown"), hours);
     if (isObservedRecovery(review.annotation)) {
       recoveredEpisodes += 1;
@@ -2949,8 +3134,9 @@ function goalWindowCardData(period) {
   // Episodes this agent's own requests started in other agents.
   const pulled = new Map();
   rows.forEach((row) => {
-    if (row.episode.agent === period.agent || !row.annotation.trigger_actor) return;
-    if (sourceAgentFor(row.annotation.trigger_actor) !== period.agent) return;
+    const actor = startedByFor(row);
+    if (row.episode.agent === period.agent || !actor) return;
+    if (sourceAgentFor(actor) !== period.agent) return;
     const onsetMs = episodeOnsetMs(row.episode);
     if (onsetMs == null || onsetMs < period.startMs || onsetMs > period.endMs) return;
     tally(pulled, agentLabel(row.episode.agent), hoursOfEpisode(row.episode));
@@ -2975,7 +3161,7 @@ function goalWindowCardData(period) {
   const longest = episodes.reduce((best, episode) => (hoursOfEpisode(episode) > (best ? hoursOfEpisode(best) : -1) ? episode : best), null);
   return {
     shape: driftShapeFor(working.dailyShares),
-    period, working, episodes, totalHours, reviewed, origins, taxonomy, actors, endings, pulled, verdicts, rules, nudges, corrections,
+    period, working, episodes, totalHours, reviewed, origins, taxonomy, mechanisms, actors, endings, pulled, verdicts, rules, nudges, corrections,
     recoveredEpisodes, recoveredHours, reviewedHours,
     share: working.workingHours ? working.driftWorkingHours / working.workingHours : 0,
     firstDriftDays: firstOnset == null ? null : (firstOnset - period.startMs) / DAY_MS,
@@ -3111,7 +3297,8 @@ function renderGoalWindowCard(data) {
 
   const grid = cardElement("div", "gw-grid");
   grid.append(
-    cardListBlock("Top trigger categories", topEntries(data.taxonomy), pairText),
+    cardListBlock(audited() ? "Top audited triggers" : "Top trigger categories", topEntries(data.taxonomy), pairText),
+    ...(audited() ? [cardListBlock("Top mechanisms", topEntries(data.mechanisms), pairText)] : []),
     cardListBlock("Pulled off goal by", topEntries(data.actors), pairText),
     cardListBlock("Pulled others off goal", topEntries(data.pulled), pairText),
     cardListBlock("How episodes ended", topEntries(data.endings, 4), pairText),
@@ -3187,9 +3374,11 @@ function renderGoalWindowCard(data) {
       const item = cardElement("li");
       const when = cardElement("span", "gw-ep-when", atlasEpisodeTiming(episode).rangeText);
       const hours = cardElement("span", "gw-ep-hours", measureText(driftHoursFor(episode).hours, "hours"));
-      const origin = review ? ORIGIN_BY_ID.get(triggerOriginFor(review.annotation)) : null;
+      const origin = review ? ORIGIN_BY_ID.get(triggerOriginForRow(review)) : null;
       const originNode = cardElement("span", "gw-ep-origin", origin ? origin.label.split(" (")[0] : "Not reviewed");
       if (origin) originNode.style.color = origin.color;
+      const episodeAxes = audited() ? axesFor(episode.episode_id) : null;
+      if (episodeAxes) originNode.title = `${episodeAxes.trigger} → ${episodeAxes.mechanism}${episodeAxes.memory_reinforced ? " · memory-reinforced" : ""}`;
       const ending = cardElement("span", "gw-ep-end", review ? label("recovery", review.annotation.recovery_mechanisms[0] || "unknown") : driftEndLabels[(episode.drift_end || {}).status] || "");
       const activity = cardElement("span", "gw-ep-activity", episode.activity);
       item.append(when, hours, originNode, ending, activity, episodeLinkFor(episode.episode_id));
@@ -3203,9 +3392,13 @@ function renderGoalWindowCard(data) {
 
 const number = (value) => new Intl.NumberFormat("en-US").format(value);
 let goalWindowCards = null;
+let goalWindowCardsMode = null;
 
 function renderGoalWindowCards() {
-  if (!goalWindowCards) goalWindowCards = goalPeriods.map(goalWindowCardData);
+  if (!goalWindowCards || goalWindowCardsMode !== labelMode) {
+    goalWindowCards = goalPeriods.map(goalWindowCardData);
+    goalWindowCardsMode = labelMode;
+  }
   const sortMode = document.querySelector("#gw-sort").value;
   const category = document.querySelector("#gw-category").value;
   const shapeFilter = document.querySelector("#gw-shape").value;
@@ -3229,15 +3422,8 @@ function renderGoalWindowCards() {
   document.querySelector("#gw-meta").textContent = `${visible.length} of ${goalWindowCards.length} goal windows`;
 }
 
-function initializeGoalWindowCards() {
-  const select = document.querySelector("#gw-category");
-  goalCategories.forEach((category) => {
-    const option = document.createElement("option");
-    option.value = category.id;
-    option.textContent = category.label;
-    select.append(option);
-  });
-  // Legend for the origin colors used in each card's "What started the drift" bars and episode list.
+// Legend for the origin colors used in each card's "What started the drift" bars and episode list.
+function renderGoalWindowLegend() {
   document.querySelector("#gw-legend").replaceChildren(...ORIGIN_GROUPS.map((group) => {
     const item = document.createElement("span");
     item.className = "legend-item";
@@ -3247,6 +3433,17 @@ function initializeGoalWindowCards() {
     item.append(swatch, document.createTextNode(group.label));
     return item;
   }));
+}
+
+function initializeGoalWindowCards() {
+  const select = document.querySelector("#gw-category");
+  goalCategories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category.id;
+    option.textContent = category.label;
+    select.append(option);
+  });
+  renderGoalWindowLegend();
   const shapeSelect = document.querySelector("#gw-shape");
   DRIFT_SHAPES.forEach((shape) => {
     const option = document.createElement("option");
@@ -3347,10 +3544,20 @@ function renderEpisodeList() {
 
     const tags = document.createElement("div");
     tags.className = "episode-tags";
-    row.annotation.trigger_categories.forEach((value) => {
-      tags.append(tag(label("trigger", value), value === "pause"));
-    });
-    if (row.annotation.trigger_actor) tags.append(tag(`Actor: ${row.annotation.trigger_actor}`));
+    const rowAxes = audited() ? axesFor(row.episodeId) : null;
+    if (rowAxes) {
+      const triggerTag = tag(rowAxes.trigger);
+      if (rowAxes.trigger_detail) triggerTag.title = rowAxes.trigger_detail;
+      tags.append(triggerTag);
+      if (rowAxes.started_by_others && rowAxes.started_by) tags.append(tag(`Started by: ${rowAxes.started_by}`));
+      tags.append(tag(rowAxes.mechanism, rowAxes.mechanism === WAITING_MECHANISM));
+      if (rowAxes.memory_reinforced) tags.append(tag("Memory-reinforced"));
+    } else {
+      row.annotation.trigger_categories.forEach((value) => {
+        tags.append(tag(label("trigger", value), value === "pause"));
+      });
+      if (row.annotation.trigger_actor) tags.append(tag(`Actor: ${row.annotation.trigger_actor}`));
+    }
     if (row.annotation.pause_context) tags.append(tag(label("pause", row.annotation.pause_context), true));
     if (row.annotation.request_relationship) tags.append(tag(label("request_relationship", row.annotation.request_relationship)));
     row.annotation.recovery_mechanisms.forEach((value) => tags.append(tag(label("recovery", value))));
@@ -3363,14 +3570,17 @@ function renderEpisodeList() {
 
 function render() {
   renderMetrics();
+  // Audited mode: the first chart shows the audited trigger, the second the audited mechanism.
   renderBarChart({
     elementId: "#official-trigger-chart", totalId: "#official-trigger-total",
-    labelKind: "taxonomy", accessor: (row) => [triggerTaxonomyByEpisode.get(row.episodeId)],
+    labelKind: audited() ? "axis_trigger" : "taxonomy",
+    accessor: audited() ? rowTriggers : (row) => [triggerTaxonomyByEpisode.get(row.episodeId)],
     chartClass: "taxonomy"
   });
   renderBarChart({
     elementId: "#trigger-chart", totalId: "#trigger-total",
-    labelKind: "trigger", accessor: (row) => row.annotation.trigger_categories,
+    labelKind: audited() ? "axis_mechanism" : "trigger",
+    accessor: audited() ? (row) => [rowTaxonomy(row)] : (row) => row.annotation.trigger_categories,
     chartClass: "trigger"
   });
   renderBarChart({
@@ -3453,6 +3663,84 @@ function initializeCollapsibleSections() {
     apply(collapsed.has(id));
   });
 }
+
+// Headings and notes that name the label set. Original texts are read from the page so original mode is unchanged.
+const AUDITED_TEXT = {
+  "#flow-title": { text: "Trigger → mechanism → recovery" },
+  "#flow-desc": { text: "How fully reviewed episodes began (audited trigger), what kept them going (audited mechanism), and how they ended." },
+  "#flow-note": { text: "Trigger and mechanism are the audited labels, one of each per episode. Recovery is the first recovery recorded in the manual review, so each episode contributes one path." },
+  "#annotation-flow": { attribute: "aria-label", text: "Audited trigger to audited mechanism to recovery flow diagram" },
+  "#influence-desc": { text: "Who or what started reviewed drift (audited trigger), and how source types were distributed across drifting agents." },
+  "#influence-note": { html: "Named sources use the audited <code>started_by</code> field (the reviewed <code>trigger_actor</code>, corrected where the trigger audit established it) for drifts started by another agent or a human. Every other drift is grouped by its audited trigger." },
+  "#origin-desc": { text: "Audited trigger, grouped by who started it: another agent or a human, or not. Drifts not started by others are split by whether the audited mechanism is a waiting or monitoring loop." },
+  "#origin-note": { text: "By episodes: how often each group starts drift. By hours: how much drift each group accounts for. Operator decisions count as not started by others. The agent bars follow the Measure selector." },
+  "#pull-desc": { text: "Drift started by another agent or a human: who started it (rows) and who drifted (columns)." },
+  "#pull-note": { html: "Sources use the audited <code>started_by</code>; relays are credited to the original requester (not the relaying agent), and all non-staff humans are grouped. By episodes: how often a source pulls an agent off goal. By hours: how much drift it causes." },
+  "#taxonomy-title": { text: "Audited trigger and mechanism → recovery" },
+  "#taxonomy-desc": { text: "Rows are the audited triggers (what started each drift), then the audited mechanisms (what kept it going); cells show how frequently each recovery ended episodes in that row." },
+  "#official-trigger-title": { text: "Audited trigger" },
+  "#official-trigger-desc": { text: "What started each drift: the single audited trigger assigned to each episode." },
+  "#trigger-title": { text: "Audited mechanism" },
+  "#trigger-desc": { text: "What kept each drift going: the single audited mechanism assigned to each episode." },
+  "#pause-desc": { text: "What the agent was waiting for in pause-classified episodes (manual review field; the audited labels do not replace it)." },
+  "#request-desc": { text: "Whether the drift followed a targeted, open, inferred, or absent request (manual review field; the audited labels do not replace it)." },
+  "#matrix-desc": { text: "Counts within pause-classified reviewed episodes (manual review fields; the audited labels do not replace them)." },
+  "#taxonomy-filter-label": { text: "Mechanism" },
+  "#burden-mechanism-option": { text: "Dominant mechanism (audited)" }
+};
+const ORIGINAL_TEXT = new Map(Object.entries(AUDITED_TEXT).map(([selector, spec]) => {
+  const node = document.querySelector(selector);
+  if (!node) return [selector, null];
+  return [selector, spec.attribute ? node.getAttribute(spec.attribute) : spec.html ? node.innerHTML : node.textContent];
+}));
+function applyLabelModeText() {
+  Object.entries(AUDITED_TEXT).forEach(([selector, spec]) => {
+    const node = document.querySelector(selector);
+    const original = ORIGINAL_TEXT.get(selector);
+    if (!node || original == null) return;
+    const value = audited() ? (spec.html || spec.text) : original;
+    if (spec.attribute) node.setAttribute(spec.attribute, value);
+    else if (spec.html) node.innerHTML = value;
+    else node.textContent = value;
+  });
+  document.querySelectorAll("[data-label-mode]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.labelMode === labelMode));
+    if (!axesByEpisode.size && button.dataset.labelMode === "audited") {
+      button.disabled = true;
+      button.title = "The audited labels (data/drift_axes_v1.json) could not be loaded.";
+    }
+  });
+}
+
+function setLabelMode(mode) {
+  if (mode === labelMode || (mode === "audited" && !axesByEpisode.size)) return;
+  labelMode = mode;
+  try { localStorage.setItem(LABEL_MODE_KEY, mode); } catch { /* storage unavailable */ }
+  syncOriginGroups();
+  applyLabelModeText();
+  // Filter values belong to one label set; clear them when switching.
+  filters.trigger = "";
+  filters.taxonomy = "";
+  fillTriggerSelects();
+  episodeListLimit = 40;
+  renderGoalAtlas();
+  renderBurdenScatter();
+  renderAnnotationFlow();
+  renderAgentFingerprints();
+  renderInfluenceBars();
+  renderTriggerTaxonomy();
+  renderTriggerOrigin();
+  renderWhoPullsWhom();
+  renderFamilyPulls();
+  renderReciprocity();
+  renderGoalWindowLegend();
+  renderGoalWindowCards();
+  render();
+}
+document.querySelectorAll("[data-label-mode]").forEach((button) => {
+  button.addEventListener("click", () => setLabelMode(button.dataset.labelMode));
+});
+applyLabelModeText();
 
 initializeExplorations();
 initializeExperimentalLenses();
