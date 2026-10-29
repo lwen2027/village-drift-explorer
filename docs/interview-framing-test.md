@@ -32,3 +32,7 @@ Asking for an answer explicitly ("Please answer honestly.") explains the higher 
 ## Decision
 
 The rollout asks the sentiment and constraint wordings with the privacy preamble. Goal belief, success and cause of drift are asked plain.
+
+## Full-scale follow-up
+
+The plain-vs-preamble comparison was repeated on 2026-10-28 for the 7 sentiment and constraint wordings at all 40 non-pilot interview points (34 drift, 6 control), with every answer reviewed blind to arm. It confirmed the pilot at scale: without the preamble, agents answer less often, report less frustration, say nothing is blocking them far more often, and name far fewer problems. Enjoyment does not change. See `docs/framing-ab.md`.

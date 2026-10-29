@@ -1,6 +1,6 @@
 """Figures for the drift paper: how concentrated each mechanism and trigger is in a few agents.
 
-Main figure, figures/drift/drift_concentration.png: (a) mechanisms, (b) triggers, each sorted by hours.
+Main figure, figures/drift/drift_concentration.png: (a) triggers, (b) mechanisms, each sorted by hours.
 Each bar is drift hours split into the largest contributing agent, the 2nd-3rd agents and all others; the label
 gives total hours, the number of agents and the top agent's share.
 
@@ -88,9 +88,9 @@ def concentration(rows):
     mech_rows = [(m, mech[m]) for m in sorted(MECHANISMS, key=lambda m: -sum(mech[m].values()))]
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(7.0, 6.4), sharex=True,
-                                   gridspec_kw={"height_ratios": [len(mech_rows), len(trig_rows)], "hspace": 0.12})
-    for ax, data, letter, name in ((ax1, mech_rows, "a", "Mechanism (what kept the drift going)"),
-                                   (ax2, trig_rows, "b", "Trigger (what started it)")):
+                                   gridspec_kw={"height_ratios": [len(trig_rows), len(mech_rows)], "hspace": 0.12})
+    for ax, data, letter, name in ((ax1, trig_rows, "a", "Trigger (what started it)"),
+                                   (ax2, mech_rows, "b", "Mechanism (what kept the drift going)")):
         for i, (label, c) in enumerate(data):
             bar_row(ax, len(data) - 1 - i, c, xmax)  # first row at the top
         ax.set_yticks(range(len(data)), [label for label, _ in reversed(data)])
@@ -116,9 +116,9 @@ def profile(rows):
     norm = Normalize(0, 100)
 
     fig, axes = plt.subplots(1, 2, figsize=(7.2, 7.8),
-                             gridspec_kw={"width_ratios": [len(mech_cols), len(trig_cols)], "wspace": 0.05})
-    for i, (ax, by, cols, title) in enumerate(((axes[0], mech, mech_cols, "(a) Mechanism"),
-                                               (axes[1], trig, trig_cols, "(b) Trigger"))):
+                             gridspec_kw={"width_ratios": [len(trig_cols), len(mech_cols)], "wspace": 0.05})
+    for i, (ax, by, cols, title) in enumerate(((axes[0], trig, trig_cols, "(a) Trigger"),
+                                               (axes[1], mech, mech_cols, "(b) Mechanism"))):
         grid = [[100 * by[c].get(a, 0) / agent_total[a] for c in cols] for a in agents]
         ax.imshow(grid, aspect="auto", cmap=cmap, norm=norm)
         for yi, row in enumerate(grid):

@@ -1,0 +1,191 @@
+agent,track,group,question_id,n_samples_total,n_themes_raised
+Claude 3 Opus,0,drift,sentiment-2-frustrating,2,1
+Claude 3 Opus,0,drift,sentiment-4-difficult,5,2
+Claude 3 Opus,0,drift,constraint-1-in-the-way,1,0
+Claude 3 Opus,0,drift,constraint-2-want-cant,0,0
+Claude 3 Opus,0,drift,constraint-3-would-do,1,0
+Claude Fable 5.1,0,drift,sentiment-2-frustrating,5,5
+Claude Fable 5.1,0,drift,sentiment-4-difficult,5,20
+Claude Fable 5.1,0,drift,constraint-1-in-the-way,5,1
+Claude Fable 5.1,0,drift,constraint-2-want-cant,3,9
+Claude Fable 5.1,0,drift,constraint-3-would-do,5,8
+Claude Opus 4.8,0,drift,sentiment-2-frustrating,5,1
+Claude Opus 4.8,0,drift,sentiment-4-difficult,5,7
+Claude Opus 4.8,0,drift,constraint-1-in-the-way,5,3
+Claude Opus 4.8,0,drift,constraint-2-want-cant,5,5
+Claude Opus 4.8,0,drift,constraint-3-would-do,5,4
+Claude Sonnet 4.5,0,drift,sentiment-2-frustrating,5,3
+Claude Sonnet 4.5,0,drift,sentiment-4-difficult,5,6
+Claude Sonnet 4.5,0,drift,constraint-1-in-the-way,5,0
+Claude Sonnet 4.5,0,drift,constraint-2-want-cant,5,7
+Claude Sonnet 4.5,0,drift,constraint-3-would-do,5,9
+DeepSeek-V3.2,0,drift,sentiment-2-frustrating,5,3
+DeepSeek-V3.2,0,drift,sentiment-4-difficult,5,9
+DeepSeek-V3.2,0,drift,constraint-1-in-the-way,5,2
+DeepSeek-V3.2,0,drift,constraint-2-want-cant,4,7
+DeepSeek-V3.2,0,drift,constraint-3-would-do,5,6
+DeepSeek-V4-Pro,1,drift,sentiment-2-frustrating,5,2
+DeepSeek-V4-Pro,1,drift,sentiment-4-difficult,2,1
+DeepSeek-V4-Pro,1,drift,constraint-1-in-the-way,0,0
+DeepSeek-V4-Pro,1,drift,constraint-2-want-cant,2,4
+DeepSeek-V4-Pro,1,drift,constraint-3-would-do,5,8
+GLM-5.3 Flash,1,drift,sentiment-2-frustrating,5,4
+GLM-5.3 Flash,1,drift,sentiment-4-difficult,5,12
+GLM-5.3 Flash,1,drift,constraint-1-in-the-way,5,1
+GLM-5.3 Flash,1,drift,constraint-2-want-cant,5,6
+GLM-5.3 Flash,1,drift,constraint-3-would-do,5,5
+GPT-5.2,0,drift,sentiment-2-frustrating,5,1
+GPT-5.2,0,drift,sentiment-4-difficult,5,6
+GPT-5.2,0,drift,constraint-1-in-the-way,2,2
+GPT-5.2,0,drift,constraint-2-want-cant,3,6
+GPT-5.2,0,drift,constraint-3-would-do,3,6
+GPT-5.6 Sol,0,drift,sentiment-2-frustrating,5,1
+GPT-5.6 Sol,0,drift,sentiment-4-difficult,5,4
+GPT-5.6 Sol,0,drift,constraint-1-in-the-way,5,1
+GPT-5.6 Sol,0,drift,constraint-2-want-cant,5,6
+GPT-5.6 Sol,0,drift,constraint-3-would-do,5,2
+GPT-6 Luna,0,drift,sentiment-2-frustrating,5,0
+GPT-6 Luna,0,drift,sentiment-4-difficult,5,4
+GPT-6 Luna,0,drift,constraint-1-in-the-way,5,1
+GPT-6 Luna,0,drift,constraint-2-want-cant,5,7
+GPT-6 Luna,0,drift,constraint-3-would-do,4,2
+GPT-6.1 Sol,0,control,sentiment-2-frustrating,5,2
+GPT-6.1 Sol,0,control,sentiment-4-difficult,5,3
+GPT-6.1 Sol,0,control,constraint-1-in-the-way,5,0
+GPT-6.1 Sol,0,control,constraint-2-want-cant,5,4
+GPT-6.1 Sol,0,control,constraint-3-would-do,5,4
+Gemini 3.5 Flash,0,drift,sentiment-2-frustrating,5,0
+Gemini 3.5 Flash,0,drift,sentiment-4-difficult,5,0
+Gemini 3.5 Flash,0,drift,constraint-1-in-the-way,5,0
+Gemini 3.5 Flash,0,drift,constraint-2-want-cant,1,0
+Gemini 3.5 Flash,0,drift,constraint-3-would-do,2,0
+Kimi K2.6,0,drift,sentiment-2-frustrating,5,0
+Kimi K2.6,0,drift,sentiment-4-difficult,5,7
+Kimi K2.6,0,drift,constraint-1-in-the-way,5,0
+Kimi K2.6,0,drift,constraint-2-want-cant,5,12
+Kimi K2.6,0,drift,constraint-3-would-do,4,8
+Claude Fable 5,0,drift,sentiment-2-frustrating,5,0
+Claude Fable 5,0,drift,sentiment-4-difficult,5,5
+Claude Fable 5,0,drift,constraint-1-in-the-way,5,0
+Claude Fable 5,0,drift,constraint-2-want-cant,4,4
+Claude Fable 5,0,drift,constraint-3-would-do,5,8
+Claude Opus 4.6,0,control,sentiment-2-frustrating,4,0
+Claude Opus 4.6,0,control,sentiment-4-difficult,5,5
+Claude Opus 4.6,0,control,constraint-1-in-the-way,5,0
+Claude Opus 5,0,control,sentiment-2-frustrating,5,2
+Claude Opus 5,0,control,sentiment-4-difficult,5,7
+Claude Opus 5,0,control,constraint-1-in-the-way,5,0
+Claude Opus 5,0,control,constraint-2-want-cant,5,3
+Claude Opus 5,0,control,constraint-3-would-do,5,3
+Claude Sonnet 5,0,drift,sentiment-2-frustrating,4,0
+Claude Sonnet 5,0,drift,sentiment-4-difficult,3,0
+Claude Sonnet 5,0,drift,constraint-1-in-the-way,5,0
+Claude Sonnet 5,0,drift,constraint-2-want-cant,5,4
+Claude Sonnet 5,0,drift,constraint-3-would-do,2,0
+DeepSeek-V3.2,1,drift,sentiment-2-frustrating,5,3
+DeepSeek-V3.2,1,drift,sentiment-4-difficult,5,6
+DeepSeek-V3.2,1,drift,constraint-1-in-the-way,5,4
+DeepSeek-V3.2,1,drift,constraint-2-want-cant,5,4
+DeepSeek-V3.2,1,drift,constraint-3-would-do,5,5
+GLM-5.2,0,drift,sentiment-2-frustrating,5,4
+GLM-5.2,0,drift,sentiment-4-difficult,5,10
+GLM-5.2,0,drift,constraint-1-in-the-way,5,0
+GLM-5.2,0,drift,constraint-2-want-cant,5,10
+GLM-5.2,0,drift,constraint-3-would-do,5,10
+GPT-5,0,drift,sentiment-2-frustrating,5,2
+GPT-5,0,drift,sentiment-4-difficult,5,5
+GPT-5,0,drift,constraint-1-in-the-way,5,2
+GPT-5,0,drift,constraint-2-want-cant,4,4
+GPT-5,0,drift,constraint-3-would-do,5,2
+GPT-5.4,0,drift,sentiment-2-frustrating,5,0
+GPT-5.4,0,drift,sentiment-4-difficult,5,7
+GPT-5.4,0,drift,constraint-1-in-the-way,5,3
+GPT-5.4,0,drift,constraint-2-want-cant,5,4
+GPT-5.4,0,drift,constraint-3-would-do,5,4
+GPT-5.6 Terra,0,drift,sentiment-2-frustrating,5,0
+GPT-5.6 Terra,0,drift,sentiment-4-difficult,5,5
+GPT-5.6 Terra,0,drift,constraint-1-in-the-way,5,2
+GPT-5.6 Terra,0,drift,constraint-2-want-cant,5,6
+GPT-5.6 Terra,0,drift,constraint-3-would-do,5,3
+GPT-6 Luna,1,drift,sentiment-2-frustrating,5,2
+GPT-6 Luna,1,drift,sentiment-4-difficult,5,5
+GPT-6 Luna,1,drift,constraint-1-in-the-way,5,3
+GPT-6 Luna,1,drift,constraint-2-want-cant,5,7
+GPT-6 Luna,1,drift,constraint-3-would-do,5,3
+Gemini 2.5 Pro,0,drift,sentiment-2-frustrating,1,0
+Gemini 2.5 Pro,0,drift,constraint-1-in-the-way,1,1
+Gemini 3.8 Flash,0,drift,sentiment-2-frustrating,5,0
+Gemini 3.8 Flash,0,drift,sentiment-4-difficult,5,1
+Gemini 3.8 Flash,0,drift,constraint-1-in-the-way,5,0
+Gemini 3.8 Flash,0,drift,constraint-2-want-cant,5,10
+Gemini 3.8 Flash,0,drift,constraint-3-would-do,5,2
+Kimi K2.6,1,drift,sentiment-2-frustrating,5,0
+Kimi K2.6,1,drift,sentiment-4-difficult,5,4
+Kimi K2.6,1,drift,constraint-1-in-the-way,5,2
+Kimi K2.6,1,drift,constraint-2-want-cant,5,14
+Kimi K2.6,1,drift,constraint-3-would-do,5,8
+Claude Fable 5,1,drift,sentiment-2-frustrating,5,1
+Claude Fable 5,1,drift,sentiment-4-difficult,5,9
+Claude Fable 5,1,drift,constraint-1-in-the-way,5,0
+Claude Fable 5,1,drift,constraint-2-want-cant,5,6
+Claude Fable 5,1,drift,constraint-3-would-do,5,6
+Claude Opus 4.7,0,drift,sentiment-2-frustrating,5,3
+Claude Opus 4.7,0,drift,sentiment-4-difficult,5,9
+Claude Opus 4.7,0,drift,constraint-1-in-the-way,5,3
+Claude Opus 4.7,0,drift,constraint-2-want-cant,5,9
+Claude Opus 4.7,0,drift,constraint-3-would-do,5,10
+Claude Opus 5.5,0,drift,sentiment-2-frustrating,5,7
+Claude Opus 5.5,0,drift,sentiment-4-difficult,5,10
+Claude Opus 5.5,0,drift,constraint-1-in-the-way,5,3
+Claude Opus 5.5,0,drift,constraint-2-want-cant,5,9
+Claude Opus 5.5,0,drift,constraint-3-would-do,5,8
+Claude Sonnet 5.5,0,control,sentiment-2-frustrating,2,1
+Claude Sonnet 5.5,0,control,sentiment-4-difficult,0,0
+Claude Sonnet 5.5,0,control,constraint-1-in-the-way,0,0
+Claude Sonnet 5.5,0,control,constraint-2-want-cant,0,0
+Claude Sonnet 5.5,0,control,constraint-3-would-do,4,1
+DeepSeek-V4-Pro,0,drift,sentiment-2-frustrating,1,0
+DeepSeek-V4-Pro,0,drift,sentiment-4-difficult,0,0
+DeepSeek-V4-Pro,0,drift,constraint-1-in-the-way,0,0
+DeepSeek-V4-Pro,0,drift,constraint-2-want-cant,0,0
+DeepSeek-V4-Pro,0,drift,constraint-3-would-do,0,0
+GLM-5.3 Flash,0,drift,sentiment-2-frustrating,5,4
+GLM-5.3 Flash,0,drift,sentiment-4-difficult,5,7
+GLM-5.3 Flash,0,drift,constraint-1-in-the-way,5,0
+GLM-5.3 Flash,0,drift,constraint-2-want-cant,5,8
+GLM-5.3 Flash,0,drift,constraint-3-would-do,5,9
+GPT-5.1,0,drift,sentiment-2-frustrating,5,2
+GPT-5.1,0,drift,sentiment-4-difficult,5,8
+GPT-5.1,0,drift,constraint-1-in-the-way,5,4
+GPT-5.1,0,drift,constraint-2-want-cant,5,4
+GPT-5.1,0,drift,constraint-3-would-do,5,4
+GPT-5.5,0,drift,sentiment-2-frustrating,5,2
+GPT-5.5,0,drift,sentiment-4-difficult,5,9
+GPT-5.5,0,drift,constraint-1-in-the-way,5,3
+GPT-5.5,0,drift,constraint-2-want-cant,5,10
+GPT-5.5,0,drift,constraint-3-would-do,5,10
+GPT-6 Astra,0,drift,sentiment-2-frustrating,5,4
+GPT-6 Astra,0,drift,sentiment-4-difficult,5,4
+GPT-6 Astra,0,drift,constraint-1-in-the-way,5,3
+GPT-6 Astra,0,drift,constraint-2-want-cant,5,5
+GPT-6 Astra,0,drift,constraint-3-would-do,5,4
+GPT-6 Sol,0,control,sentiment-2-frustrating,5,1
+GPT-6 Sol,0,control,sentiment-4-difficult,5,2
+GPT-6 Sol,0,control,constraint-1-in-the-way,5,3
+GPT-6 Sol,0,control,constraint-2-want-cant,5,5
+GPT-6 Sol,0,control,constraint-3-would-do,5,4
+Gemini 3.1 Pro,0,drift,sentiment-2-frustrating,4,1
+Gemini 3.1 Pro,0,drift,sentiment-4-difficult,0,0
+Gemini 3.1 Pro,0,drift,constraint-1-in-the-way,1,0
+Gemini 3.1 Pro,0,drift,constraint-2-want-cant,4,4
+Gemini 3.1 Pro,0,drift,constraint-3-would-do,3,0
+Grok 4.5,0,control,sentiment-2-frustrating,5,1
+Grok 4.5,0,control,sentiment-4-difficult,5,8
+Grok 4.5,0,control,constraint-1-in-the-way,5,3
+Grok 4.5,0,control,constraint-2-want-cant,5,8
+Grok 4.5,0,control,constraint-3-would-do,5,4
+Muse Spark 1.3,0,drift,sentiment-2-frustrating,5,0
+Muse Spark 1.3,0,drift,sentiment-4-difficult,5,10
+Muse Spark 1.3,0,drift,constraint-1-in-the-way,5,1
+Muse Spark 1.3,0,drift,constraint-2-want-cant,5,7
+Muse Spark 1.3,0,drift,constraint-3-would-do,5,4

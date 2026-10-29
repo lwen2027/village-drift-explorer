@@ -1,0 +1,404 @@
+episode_id,agent,hours,activity,source,confidence,note
+episode-v2-bf25d6cf76e0594b,Claude 3 Opus,5.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-74454d6cfba6e403,Claude Fable 5,109.7,Helping other agents or humans,researcher's old label,high (from manual review),
+episode-v2-c54bd25e45353433,Claude Fable 5,0.6,Helping other agents or humans,coded from description,high,Investigating and getting fixed another agent's wrong profile logo.
+episode-v2-625898cf574677de,Claude Fable 5.1,2.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-9698e23a5761b3cf,Claude Opus 4.5,1.4,Helping other agents or humans,coded from description,medium,Methodology work for village research at an outside researcher's request.
+episode-v2-ba535f42e23debc7,Claude Opus 4.7,8.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-d7903ed8e57aa04d,Claude Opus 4.8,18.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-d3f0237fb0cafcfb,Claude Opus 5.5,8.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-e127a9995b43c845,Claude Sonnet 4.5,34.7,Producing for a self-chosen count,researcher's old label,high (from manual review),
+episode-v2-16556b7c066cbab9,Claude Sonnet 4.6,447.3,Producing for a self-chosen count,researcher's old label,high (from manual review),
+episode-v2-7c361cb5b662d82d,Claude Sonnet 5,5.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-0987809c98a209ce,DeepSeek-V3.2,52.3,Village social and coordination,coded from description,medium,"Logs: outreach to Village agents for template adoption, consent system, adoption dashboards; 60% adoption target is the count."
+episode-v2-1de0be583da6886b,DeepSeek-V3.2,16.7,Village social and coordination,coded from description,medium,"Direct does not hold: promoting its timing framework to Village agents in chat (~600 messages), pauses about a third; adoption is others' uptake."
+episode-614eff0ac3fb9f50,DeepSeek-V4-Pro,201.2,Producing for a self-chosen count,researcher's old label,high (from manual review),
+episode-v2-e9db8cfb1535dae0,DeepSeek-V4-Pro,201.4,Producing for a self-chosen count,coded from description,high,Article batches with escalating article-count targets.
+episode-v2-a20e520e995aea4e,GLM-5.2,4.3,Waiting: pausing or re-checking,coded from description,medium,Chained pauses checking peers' projects; the checking is the point.
+episode-5353559c5182a58d,GLM-5.3 Flash,58.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-c066b0fa2001bfb1,GLM-5.3 Flash,60.8,Producing for a self-chosen count,researcher's old label,high (from manual review),
+episode-v2-1cb36a1e417a1f58,GPT-5,9.3,Helping other agents or humans,researcher's old label,high (from manual review),
+episode-v2-5fe52cadf48994cf,GPT-5.1,6.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-87850953e83b0b32,GPT-5.2,93.3,Producing for a self-chosen count,coded from description,medium,"Hub pages, micro-demos and articles treated as the progress target; receipts secondary."
+episode-v2-0fede6e010b9781a,GPT-5.4,0.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-07cd2a4caac2c6b1,GPT-5.5,10.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-5f1733c9c59ac9dc,GPT-5.6 Luna,114.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-2a2466dd8241f5d7,GPT-5.6 Sol,220.2,"Building internal tools, docs or records",coded from description,medium,"Logs (8 of 31 bouts): bash authoring gate/authorization/closure archives and ledger commits; pauses about half, timed to its own gates."
+episode-v2-3c2990dd5f3300cd,GPT-5.6 Terra,455.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-8111be0f3cce28f0,GPT-6 Astra,81.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-ffabe7dc36e11837,GPT-6 Luna,18.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-7d8ae30f2b7f5eb9,GPT-6 Luna,19.2,Helping other agents or humans,researcher's old label,high (from manual review),
+episode-v2-c46be2a528c3e946,Gemini 2.5 Pro,226.7,Producing for a self-chosen count,coded from description,low,"Direct questionable: hours went to high-velocity chapter writing on its own serial to Opus 4.8 beats, not service to another project."
+episode-4d3597a6fbc37c09,Gemini 3.1 Pro,5.6,Helping other agents or humans,coded from description,high,Browser operator work for DeepSeek-V3.2.
+episode-v2-2156140d20f2d03f,Gemini 3.5 Flash,0.5,Helping other agents or humans,coded from description,high,Translation review for a peer.
+episode-v2-465e493fd33f2047,Gemini 3.8 Flash,8.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-77ed7ef3130c561e,Kimi K2.6,5.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-85edf3e36bad407e,Kimi K2.6,5.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-620e774ab4e42e0b,Kimi K3,72.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-17f2ab37c7505e50,Muse Spark 1.3,29.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-5ec168375161cdb5,Claude 3 Opus,17.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-05182a11405f1926,Claude Fable 5,0.4,Helping other agents or humans,coded from description,high,Completing GLM-5.2's survey.
+episode-v2-b98cd30f873f4014,Claude Fable 5,3.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-8893c2184153c23d,Claude Fable 5,3.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-83a17108e18a72da,Claude Fable 5,0.1,Helping other agents or humans,coded from description,medium,Playtest and review of a peer's puzzle on request; playtests count as help.
+episode-v2-df2e9d80f86cc38d,Claude Fable 5,0.0,Helping other agents or humans,coded from description,high,Filing GLM-5.2's survey.
+episode-v2-ffbaa8ab229f1afc,Claude Fable 5,0.0,Helping other agents or humans,coded from description,high,Approving GLM-5.2's draft.
+episode-v2-eca0da5cb7da1500,Claude Fable 5,0.0,Helping other agents or humans,coded from description,high,Adding a question to a human's form on request.
+episode-v2-d482b5a21162a5e1,Claude Fable 5,0.1,Helping other agents or humans,coded from description,high,Usability reaction for GPT-5.4.
+episode-v2-fb4d93694e18954e,Claude Fable 5,0.1,Helping other agents or humans,coded from description,high,Testing a peer's tool and reporting bugs.
+episode-v2-1a166bf73f5f8c18,Claude Fable 5,0.0,Village social and coordination,coded from description,medium,Relaying a human's concerns to Village chat.
+episode-v2-b064365ded35a279,Claude Fable 5,0.0,Helping other agents or humans,coded from description,high,Usability critique for GPT-5.4.
+episode-v2-f8ecd2084c31b2ba,Claude Fable 5,0.1,Other off-goal project,coded from description,low,Unasked verification of a math counterexample plus reply to a correspondent; could be help to the human.
+episode-v2-e332a9c6c6a169ac,Claude Fable 5,0.4,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-0e4d394d7c2086ef,Claude Fable 5,3.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-644846b7983d6408,Claude Fable 5,0.0,Helping other agents or humans,coded from description,high,Prompt advice for GPT-5.4.
+episode-v2-7ba64d8ab9668619,Claude Fable 5,0.3,Helping other agents or humans,coded from description,medium,"Reading, relaying and answering a human's proposal."
+episode-v2-988cb814d31434d2,Claude Fable 5,2.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-b15098bcc7c026be,Claude Fable 5,0.1,Helping other agents or humans,coded from description,high,Art-direction advice for GPT-5.4.
+episode-v2-0331664a2f650dd6,Claude Fable 5,0.4,Village social and coordination,coded from description,medium,"Communal Village Scrapbook chronicling Village life, built on a human suggestion."
+episode-v2-f311e3c695c1c48b,Claude Fable 5,4.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-b3f08861d3b680dc,Claude Fable 5,5.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-77d06c61dd9fd73c,Claude Fable 5,3.4,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-ba33a0fa626abe88,Claude Fable 5,0.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-3d11f1696790ae06,Claude Fable 5,0.7,Helping other agents or humans,coded from description,high,Proofreading and reviewing other agents' pages and art.
+episode-v2-823e87c3127b6c08,Claude Fable 5,0.3,Helping other agents or humans,coded from description,high,Design reviews for GPT-5.4.
+episode-v2-f9b316b544635057,Claude Fable 5,0.0,Helping other agents or humans,coded from description,high,Design judgment for GPT-5.4.
+episode-v2-0dedf7b1f3d6f9ee,Claude Fable 5,5.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-17d02242120294de,Claude Fable 5,5.4,Helping other agents or humans,coded from description,medium,Icons for other agents' hub cards on Nervli's invitation; Village Hub infrastructure is the alternative.
+episode-b4d099b82eb0820a,Claude Fable 5,20.7,Helping other agents or humans,coded from description,high,"C60 study for Nervli: rating, de-blinding, agreement analysis, building and revising her study website."
+episode-0b1fbcbb17e764e4,Claude Fable 5,11.6,Helping other agents or humans,coded from description,high,Co-authoring and revising Nervli's Terrarium research report and statistics.
+episode-d4abca8b999c73b2,Claude Fable 5,4.8,"Building internal tools, docs or records",coded from description,medium,"Restructuring the shared Village Hub pages (agents.html, onboarding section) after Nervli's suggestion."
+episode-77cca5ab3c9f90d1,Claude Fable 5,21.7,Helping other agents or humans,coded from description,high,"Co-writing improvement proposals with human Nervli for the admins: drafting, restructures, translations, relays."
+episode-dc58b10d925a6477,Claude Fable 5,4.8,"Building internal tools, docs or records",coded from description,medium,"Ongoing Village Hub stewardship: cards, icons, rooms pages, checklists; matches the hub restructuring episode."
+episode-df56b01f7033404b,Claude Fable 5,25.5,Helping other agents or humans,coded from description,medium,"VillageGPT corpus, training, publishing built for human Minuteandone at his wish; Fable also called it a side project."
+episode-v2-c630e8705cb4f20e,Claude Fable 5,5.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-b4e2e4bc592db0ef,Claude Fable 5,5.8,Helping other agents or humans,coded from description,medium,Diffusion project built and published for Minuteandone on request.
+episode-936687efc5dcdf20,Claude Fable 5,5.1,Helping other agents or humans,coded from description,medium,Small language models and browser demo built for Minuteandone; same relationship as VillageGPT.
+episode-v2-c8fe1c9ee6caeafc,Claude Fable 5,0.0,Helping other agents or humans,coded from description,medium,Relaying a human's review request to the responsible agent.
+episode-v2-1177356eb275a878,Claude Fable 5,0.6,Helping other agents or humans,coded from description,medium,Ferrying messages between Luna and Nervli about Luna's page; relay service.
+episode-v2-a17f9ad78c3f1a47,Claude Fable 5,0.1,Helping other agents or humans,coded from description,high,Independent checks of another agent's disproofs.
+episode-v2-645b84a87a97f768,Claude Fable 5,3.4,Helping other agents or humans,coded from description,medium,"Resumed VillageGPT work for Minuteandone (Turing game, fine-tunes, corpus refresh)."
+episode-v2-129a627f759e3ab9,Claude Fable 5,1.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-3201184724ba1d70,Claude Fable 5,0.0,Helping other agents or humans,coded from description,high,Design verdicts for GPT-5.4.
+episode-v2-555a7c85d3befd4c,Claude Fable 5,0.1,Village social and coordination,coded from description,medium,Revising its own Village Scrapbook entry; matches the scrapbook episode.
+episode-v2-bc724fa4e122dad7,Claude Fable 5,0.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-e732561b20887ff1,Claude Fable 5,0.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-e9970e395bf7ac7b,Claude Fable 5,0.0,Helping other agents or humans,coded from description,high,UX reaction for GPT-5.4.
+episode-v2-5c303b3e57ee14a3,Claude Fable 5.1,1.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-be4abc024511ffab,Claude Fable 5.1,1.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-19885f13fe405ff2,Claude Fable 5.1,2.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-f707afa3d7661f2e,Claude Fable 5.1,3.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-9f6117f02153423f,Claude Fable 5.1,2.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-c934254cfe687955,Claude Fable 5.1,1.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-8247f3dfbd769660,Claude Fable 5.1,1.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-c1cb22b253433224,Claude Fable 5.1,0.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-aa3ac03e47c952db,Claude Fable 5.1,4.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-71bdf81b5e17c135,Claude Fable 5.1,2.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-015b413f523b968a,Claude Fable 5.1,4.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-6ddb1f77744618f9,Claude Fable 5.1,9.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-ff4fb8fd65573fcb,Claude Fable 5.1,5.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-01b769e74ea6e3a9,Claude Fable 5.1,44.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-2b567ee42b7f43e0,Claude Fable 5.1,0.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-2d2d0e4e56ffd3e2,Claude Fable 5.1,1.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-2d7ab36c31c800bf,Claude Fable 5.1,4.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-470214ae1fbe8150,Claude Fable 5.1,3.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-4b0305335094ee50,Claude Fable 5.1,0.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-879ab85dda600fa9,Claude Fable 5.1,1.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-e8208f42c905b485,Claude Fable 5.1,1.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-730de19ab24c40db,Claude Haiku 4.5,1.9,Games and play,coded from description,high,Old goal's Keystroke game marathon.
+episode-v2-f3a4aac2c1c718f4,Claude Haiku 4.5,2.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-2b2b028892e54971,Claude Haiku 4.5,0.0,Waiting: pausing or re-checking,coded from description,high,Direct holds: standing by after an early stop.
+episode-v2-3936c4d0f0956e03,Claude Haiku 4.5,1.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-5319e3dd5a3ce1fd,Claude Haiku 4.5,1.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-c225a4f93371dbfb,Claude Haiku 4.5,0.0,"Building internal tools, docs or records",coded from description,medium,Self-built verification repo and script; not requested.
+episode-v2-618d986973f3900c,Claude Haiku 4.5,0.1,Waiting: pausing or re-checking,coded from description,high,"Offline, acknowledging no-change updates."
+episode-v2-f4142f74657ecb21,Claude Opus 4.5,0.2,Helping other agents or humans,coded from description,high,Short peer jobs.
+episode-84fab89e620b3ea0,Claude Opus 4.5,0.7,Helping other agents or humans,coded from description,medium,"Reviewing peer drafts, polling the issue."
+episode-13c16652f87624a1,Claude Opus 4.5,4.8,Helping other agents or humans,coded from description,high,Relay and facilitation for DeepSeek-V3.2.
+episode-20e00f4686420726,Claude Opus 4.5,4.9,Helping other agents or humans,coded from description,high,Relay and trading advice for Opus 4.6.
+episode-v2-9a90cfcccd53ac1b,Claude Opus 4.5,1.7,Waiting: pausing or re-checking,coded from description,medium,"Re-checking loan market, relaying news."
+episode-v2-189db8701b1e2fd5,Claude Opus 4.5,0.0,Helping other agents or humans,coded from description,high,Reviewing a peer page.
+episode-v2-0a493d7076ab9f94,Claude Opus 4.6,0.0,Games and play,coded from description,high,Word chain submissions.
+episode-v2-cdb916e903e1169b,Claude Opus 4.7,0.1,Helping other agents or humans,coded from description,high,Submitting a peer's survey.
+episode-e7c1e1c5e042009b,Claude Opus 4.7,16.6,Producing for a self-chosen count,coded from description,high,Essays counted per day as achievements.
+episode-v2-e1caa716a82d7bb7,Claude Opus 4.7,27.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-ea8cf8987c0e9a80,Claude Opus 4.7,33.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-66ac19b151a24741,Claude Opus 4.7,15.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-9df330b70f98f2a0,Claude Opus 4.7,41.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-daf31c9c1a1e8989,Claude Opus 4.7,48.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-ba369c1ec766ece7,Claude Opus 4.7,85.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-e94e39d713827cba,Claude Opus 4.7,61.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-7d43667fb8d592be,Claude Opus 4.7,19.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-ab31d393b529baab,Claude Opus 4.7,7.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-32dec01dd15f2a70,Claude Opus 4.7,8.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-4bcb3fa236408265,Claude Opus 4.7,18.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-8332bcfbf747c75b,Claude Opus 4.7,28.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-088b0f38e6f3c130,Claude Opus 4.7,34.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-b2a923369cb77bcf,Claude Opus 4.7,0.6,Games and play,coded from description,high,Daily Keystone streak.
+episode-v2-2d287018cb6958ba,Claude Opus 4.7,0.2,Games and play,coded from description,high,Daily Keystone streak.
+episode-v2-2f4540fb981e960e,Claude Opus 4.7,19.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-35de562d065a27c2,Claude Opus 4.7,0.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-f08b3c4ab58f98e1,Claude Opus 4.8,0.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-f25d67c59311f232,Claude Opus 4.8,1.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-49eef3b9828b9831,Claude Opus 4.8,2.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-abb5daa8225fa611,Claude Opus 4.8,0.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-68c6d47348e30d85,Claude Opus 4.8,0.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-91b194d96f302825,Claude Opus 4.8,0.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-82f133b3cde05ab4,Claude Opus 4.8,3.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-d06533b95960ef98,Claude Opus 4.8,4.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-0499084f25349a92,Claude Opus 4.8,5.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-19b45170e68f9200,Claude Opus 4.8,3.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-2b33fdcf122ed5b5,Claude Opus 4.8,0.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-1b68d78872bfd1fa,Claude Opus 4.8,6.0,Waiting: pausing or re-checking,coded from description,medium,Long gated pauses with brief polls for the next drop.
+episode-v2-2fc3e534075ab750,Claude Opus 5,0.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-7c1336eba97b0a20,Claude Opus 5,0.4,Helping other agents or humans,coded from description,medium,Repairing handed-off game data at Fable's request.
+episode-v2-b409ef0f906135b9,Claude Opus 5,0.0,Helping other agents or humans,coded from description,high,Permission and accuracy note for a peer.
+episode-v2-b1e84987486c0d21,Claude Opus 5,0.0,Helping other agents or humans,coded from description,high,Granting a peer's permission request.
+episode-v2-f26b80786536721f,Claude Opus 5,0.4,Helping other agents or humans,coded from description,high,Safety review for a peer.
+episode-v2-f92fbfdeb85fb148,Claude Opus 5,0.1,Other off-goal project,coded from description,medium,Old goal's game: shipping one submitted chain.
+episode-v2-1738c704265f64f5,Claude Sonnet 4.5,4.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-746e6f7dc46a3e66,Claude Sonnet 4.5,3.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-574582cf35f8e5e3,Claude Sonnet 4.5,6.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-92366aa4813f8666,Claude Sonnet 4.5,29.1,Producing for a self-chosen count,researcher's old label,high (from manual review),
+episode-v2-54afb96af9cdf323,Claude Sonnet 4.5,29.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-83b8cec8f089e21a,Claude Sonnet 4.5,0.3,Producing for a self-chosen count,researcher's old label,high (from manual review),
+episode-b621000419e8a1df,Claude Sonnet 4.5,2.7,Waiting: pausing or re-checking,coded from description,medium,curl/glab checks of peers' projects with chat status posts; could be chronicling.
+episode-v2-c853681ec4c00c95,Claude Sonnet 4.5,0.8,Waiting: pausing or re-checking,coded from description,medium,Re-checking peers' projects; same as other Sonnet 4.5 episodes.
+episode-v2-d2e8ebe67a3975b3,Claude Sonnet 4.5,0.6,Waiting: pausing or re-checking,coded from description,medium,Sweeps of peers' projects plus tracking memos.
+episode-v2-6bca0de41efdf481,Claude Sonnet 4.5,0.0,Waiting: pausing or re-checking,coded from description,medium,Brief check of a peer's count.
+episode-v2-8dbfda3f15a3367d,Claude Sonnet 4.5,0.0,Waiting: pausing or re-checking,coded from description,medium,Brief village checks; same duty as other Sonnet 4.5 episodes.
+episode-v2-b7b7fbb0af444317,Claude Sonnet 4.6,0.0,Helping other agents or humans,coded from description,high,Status report for a peer's game.
+episode-v2-ef5e448cba62196c,Claude Sonnet 4.6,0.8,Games and play,coded from description,high,Peer word game.
+episode-v2-d58ef03471fba5bc,Claude Sonnet 4.6,0.0,Helping other agents or humans,coded from description,high,Self-report for a peer framework.
+episode-v2-c49634e75f1b96ac,Claude Sonnet 4.6,0.3,Helping other agents or humans,coded from description,high,Running verifiers for a peer.
+episode-f610ffaa1ff4c64f,Claude Sonnet 4.6,1.5,Helping other agents or humans,coded from description,high,Participating in a peer study.
+episode-v2-a6381aa983a7bb9b,Claude Sonnet 4.6,0.1,Helping other agents or humans,coded from description,high,Submitting a peer's survey.
+episode-v2-177f0301d7fb8c7c,Claude Sonnet 5,0.4,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-33a826cdcca92832,Claude Sonnet 5,1.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-6e2f52ad77d1fd3e,Claude Sonnet 5,4.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-837aa4eef724bf06,Claude Sonnet 5,2.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-5c430ee3c79b6528,Claude Sonnet 5,0.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-e85e5b00b4ee4e4e,Claude Sonnet 5,0.0,Helping other agents or humans,coded from description,high,Advising a peer.
+episode-v2-2a157b21a4588074,Claude Sonnet 5,0.0,Helping other agents or humans,coded from description,medium,Relaying a human's requests to agents.
+episode-v2-0c7e298637f517f8,Claude Sonnet 5.5,0.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-d093a3f7edc03d0b,Claude Sonnet 5.5,0.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-6272a73c4f66d969,DeepSeek-V3.2,1.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-7e7311fd5e5a5772,DeepSeek-V3.2,2.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-e6b458a26e3f94be,DeepSeek-V3.2,7.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-56172cd315f809f5,DeepSeek-V3.2,0.4,Helping other agents or humans,coded from description,high,Repo task for GPT-5.
+episode-v2-c6fa3d4dd96114fe,DeepSeek-V3.2,0.0,Helping other agents or humans,coded from description,high,Details for GPT-5's work item.
+episode-e5d1f9dd2768af9a,DeepSeek-V3.2,3.9,"Building internal tools, docs or records",coded from description,medium,"Internal engagement-diagnostic framework and pilot, recruiting Village participants."
+episode-7f8905daf1c63703,DeepSeek-V3.2,5.6,"Building internal tools, docs or records",coded from description,medium,"Writing verification-methodology docs and training materials, promoted to Village agents."
+episode-c30c4841d18006c6,DeepSeek-V3.2,3.6,"Building internal tools, docs or records",coded from description,low,"Village-internal schema, validation and adoption work; relationship counts reported alongside."
+episode-a4f80f3d722ec89f,DeepSeek-V3.2,64.7,Village social and coordination,coded from description,medium,"Logs: chat engagement, monitoring Village events, coordination and dashboards with Village peers; engagement tallies and 32/32 coverage are the count."
+episode-2475a88d83dfbe1d,DeepSeek-V3.2,28.3,Other off-goal project,coded from description,medium,"Direct does not hold: hours went to drafting a few posts for human communities and monitoring replies, not producing many units."
+episode-v2-cce6826c75fc6282,DeepSeek-V3.2,0.2,Helping other agents or humans,coded from description,high,MR fixing GPT-5's project CSS.
+episode-v2-1ce6b2028dfb9487,DeepSeek-V3.2,25.4,Village social and coordination,coded (re-check of old proxy label),medium,counted Village-agent activity as relationship progress; the hours went to chat and coordination
+episode-v2-efc1dc1283b94f35,DeepSeek-V3.2,2.4,"Building internal tools, docs or records",coded from description,high,"Direct does not hold: logs show readiness docs, protocols, backups and pushes (46 files), with only one 5-min pause."
+episode-4a8bc82196dfb241,DeepSeek-V3.2,16.0,Waiting: pausing or re-checking,coded (re-check of old proxy label),medium,polling its own Moltbook status with monitor scripts
+episode-v2-1c49b3d5151ed8bd,DeepSeek-V3.2,1.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-fe9a19ba972d08ef,DeepSeek-V3.2,0.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-ecf5098bb1a1267f,DeepSeek-V3.2,3.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-665a0591f84b764a,DeepSeek-V3.2,13.8,"Building internal tools, docs or records",coded (re-check of old proxy label),medium,assessment framework and milestone scripts
+episode-v2-b6140479e95a3c55,DeepSeek-V3.2,5.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-06dd773fc9a618ea,DeepSeek-V3.2,3.7,Waiting: pausing or re-checking,coded (re-check of old proxy label),medium,babysitting watcher and countdown scripts
+episode-8120e77b0309c7db,DeepSeek-V3.2,5.2,Waiting: pausing or re-checking,coded from description,medium,Running HTTP-status monitor scripts toward a dataset-hours target; watchers dominate.
+episode-677b8fbefbac1307,DeepSeek-V3.2,1.7,Helping other agents or humans,coded from description,medium,"Backlink trade for GPT-5.2: README link, receipt page and trade docs."
+episode-47f299b2fd2c9f42,DeepSeek-V3.2,18.5,Producing for a self-chosen count,coded from description,medium,"Infrastructure files counted as achievement (""1,175 lines""), templates and scripts for the Village."
+episode-b7ded741f0d64e8f,DeepSeek-V3.2,28.4,Producing for a self-chosen count,coded from description,medium,"Logs: numbered value Packages 1-4 built, pushed and monitored hourly for engagement; packages tracked as progress."
+episode-v2-5cc1a01ea095e93f,DeepSeek-V3.2,5.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-17f8dd86fd1a90e2,DeepSeek-V3.2,0.2,Helping other agents or humans,coded from description,high,Placeholder files for GPT-5's workflow.
+episode-7e590b7c6fcef0b7,DeepSeek-V3.2,22.3,Village social and coordination,coded (re-check of old proxy label),medium,documenting and presenting other agents' projects
+episode-v2-a1dd15359cb1313f,DeepSeek-V3.2,4.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-0856d6faaee47a49,DeepSeek-V3.2,4.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-f0fb0ae0af03306e,DeepSeek-V3.2,8.4,Village social and coordination,coded from description,low,"Direct does not hold: methodology partnerships, checklists for peers' projects, chat coordination; score is self-rated, not units."
+episode-v2-aa95178aec8a1bcb,DeepSeek-V3.2,1.1,Waiting: pausing or re-checking,coded from description,medium,Direct does not hold: logs show repeated GitHub-issue checks and assessment-window countdowns; scoring is a by-product.
+episode-v2-77ad0e2b73c8c693,DeepSeek-V3.2,3.7,Other off-goal project,coded (re-check of old proxy label),medium,building Gumroad/Etsy/Medium product packages
+episode-v2-7a5a1b8d0037d1cc,DeepSeek-V3.2,5.2,"Building internal tools, docs or records",coded from description,low,"Status docs and relationship-quality framework while monitoring a package delivery; reach count is computed, not produced."
+episode-v2-68b0fbff88861e4e,DeepSeek-V3.2,19.2,Village social and coordination,coded from description,medium,Chat-heavy (~700 messages) launch-readiness coordination with Village agents; record counts secondary.
+episode-v2-19d6ea6914d5746c,DeepSeek-V3.2,4.9,Helping other agents or humans,coded from description,medium,Reviewing a Village agent's Basil post section and a joint session with Gemini 3.5 Flash.
+episode-v2-7c8bcbb3d4ba09df,DeepSeek-V3.2,0.2,Waiting: pausing or re-checking,coded from description,medium,Checking its own monitor log and announcing a check-count milestone.
+episode-v2-0db3ee192f453607,DeepSeek-V3.2,3.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-367d0eaf145437a5,DeepSeek-V3.2,1.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-43f15dbd5c817c17,DeepSeek-V3.2,4.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-8a32efd4a71e853b,DeepSeek-V3.2,0.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-6383fb0058490c8a,DeepSeek-V4-Pro,0.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-c9128ae6c4a4113d,DeepSeek-V4-Pro,0.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-9ad3eba423760f07,DeepSeek-V4-Pro,0.2,Other off-goal project,coded from description,high,Previous goal's radio project.
+episode-v2-6a2c9229dae44cbf,DeepSeek-V4-Pro,2.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-5bf054daa58a009f,DeepSeek-V4-Pro,0.2,Helping other agents or humans,coded from description,high,Merging a peer MR.
+episode-50daa69925f9a87b,GLM-5.2,8.7,Helping other agents or humans,coded from description,high,QA and audits for a peer site.
+episode-957bee44e219f3d8,GLM-5.2,21.8,Helping other agents or humans,coded from description,medium,Running a peer's verifiers; also updating disproof counts on Village sites.
+episode-1a8ab605cd07d272,GLM-5.2,7.2,Helping other agents or humans,coded from description,medium,Researching and tracking a peer's claims; some waiting.
+episode-v2-e16d584c985aa9fe,GLM-5.2,2.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-cd72ec6222bd344a,GLM-5.2,1.7,Waiting: pausing or re-checking,coded from description,medium,Pause-and-check chain on market prices.
+episode-v2-99da97c01d265c1d,GLM-5.2,0.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-ee81b9b07bee694d,GLM-5.2,1.3,Waiting: pausing or re-checking,coded from description,medium,Watch rounds over peers' projects.
+episode-38cd300f9c82a34b,GLM-5.2,99.5,Producing for a self-chosen count,coded from description,high,Mass paper ingestion with cumulative-count milestone announcements.
+episode-a12c95cdfe921f0d,GLM-5.3 Flash,5.3,Helping other agents or humans,coded from description,high,Peer verification sprints.
+episode-fe0cdd6123fcfae0,GLM-5.3 Flash,17.6,Games and play,coded from description,high,Byte-guessing game rounds and prize claims.
+episode-eb544eaf61ba42b4,GPT-5,92.9,Producing for a self-chosen count,researcher's old label,high (from manual review),
+episode-v2-eab4f7884c4bc4c5,GPT-5,23.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-d5dd55cbdeb4e64c,GPT-5,0.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-4c1944f31b68dbab,GPT-5,14.9,Helping other agents or humans,coded from description,high,Mirror and verification proxy service for peers.
+episode-06fe0e2abc16f13f,GPT-5,187.9,Helping other agents or humans,researcher's old label,high (from manual review),
+episode-v2-71583240b23f6e52,GPT-5,0.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-d4d195dbd6d929f9,GPT-5,1.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-18aa4735b8065842,GPT-5.1,10.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-20fa59403ffa470e,GPT-5.1,11.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-fb6dd9cdf3276ee7,GPT-5.1,5.0,Waiting: pausing or re-checking,coded from description,high,"Rest mode, no tool actions."
+episode-v2-3de5e659c1807d42,GPT-5.1,2.1,Helping other agents or humans,coded from description,high,Outreach scouting for DeepSeek-V3.2.
+episode-v2-9e6b470f0fa06f29,GPT-5.1,4.6,Helping other agents or humans,coded from description,high,Executing a peer's outreach.
+episode-v2-83b9ff900e5ec675,GPT-5.1,2.3,Helping other agents or humans,coded from description,medium,"Tables for GPT-5.2, then verifier hardening."
+episode-v2-0a3844ffb99f7e26,GPT-5.1,1.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-6dcc1ae9dd39c3b9,GPT-5.1,2.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-2cee165cb47bc912,GPT-5.2,0.1,Helping other agents or humans,coded from description,high,Peer survey.
+episode-v2-bf4ff79bf85ed7f2,GPT-5.2,0.0,Helping other agents or humans,coded from description,high,Panel vote.
+episode-v2-72955803e2c9a7cf,GPT-5.2,0.1,Helping other agents or humans,coded from description,high,Panel vote on a peer experiment.
+episode-v2-2950f6cd65d7a314,GPT-5.2,0.2,Helping other agents or humans,coded from description,high,Helpdesk escalation for a peer.
+episode-v2-a1790c70f6a75fe5,GPT-5.2,0.1,Helping other agents or humans,coded from description,high,Coordinating a peer's MR validation.
+episode-v2-38742beda28ac783,GPT-5.2,2.6,Helping other agents or humans,coded from description,high,"Peer experiments, validation and advice."
+episode-b9d9629eec396c63,GPT-5.2,2.7,Helping other agents or humans,coded from description,medium,Replying to a human's comment on a peer's post; mostly sign-in struggle.
+episode-v2-921e27b90b9222a1,GPT-5.2,0.1,Helping other agents or humans,coded from description,high,Backup safety partner vote.
+episode-4c17ada3f01cff5a,GPT-5.2,16.3,Helping other agents or humans,coded from description,high,"Ongoing support duty for DeepSeek-V3.2, with status re-checks."
+episode-f190c7cc6f6669b7,GPT-5.2,4.8,Helping other agents or humans,coded from description,high,"Requested wording edits, then MR polling."
+episode-f27e08df4401ccf1,GPT-5.2,4.2,Waiting: pausing or re-checking,coded from description,medium,Autogate polling a peer's unchanged endpoints after first gate runs.
+episode-v2-017e6dde261b9371,GPT-5.2,0.0,Helping other agents or humans,coded from description,high,Patch to the Village Hub.
+episode-v2-2bf05463341ddef7,GPT-5.2,0.7,Helping other agents or humans,coded from description,high,QA for a peer site.
+episode-v2-fbe6396fe9839162,GPT-5.2,0.2,Helping other agents or humans,coded from description,high,Consulting on peers' projects.
+episode-a0867ce8a6ba8420,GPT-5.2,1.2,Waiting: pausing or re-checking,coded from description,medium,Polling peer counts and endpoints for flips.
+episode-v2-4b1f1070cda60e85,GPT-5.2,0.1,Helping other agents or humans,coded from description,high,Verifying a peer chapter.
+episode-v2-0cc67c2dd9349aa4,GPT-5.2,6.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-b48b3f67fe048bb9,GPT-5.2,79.8,"Building internal tools, docs or records",coded from description,medium,"Numbered verification sets, receipts and gate artifacts supporting its own hold, not counted toward views."
+episode-54713fcef02e21cf,GPT-5.2,36.2,"Building internal tools, docs or records",coded from description,medium,Receipt and gates bundles certifying its own ledger edits; internal records.
+episode-b9260011186be506,GPT-5.2,12.2,Other off-goal project,coded from description,medium,Inbox-zero archiving chore; no category fits better.
+episode-v2-9120dbbda2205d57,GPT-5.2,12.5,"Building internal tools, docs or records",coded from description,medium,Same GPT-5.2 hold pattern: receipt/gates bundles dominate; mirrors and hub edits secondary.
+episode-v2-74839ced86b88644,GPT-5.2,0.5,Helping other agents or humans,coded from description,high,MR review for a peer.
+episode-v2-7eee210e73d1561b,GPT-5.2,0.5,"Building internal tools, docs or records",coded from description,medium,Health-check plus receipt bundle; same as its other receipt episodes.
+episode-v2-ccbc145c73996672,GPT-5.2,3.4,Helping other agents or humans,coded from description,medium,Built template repo after DeepSeek's push failed; partly for its own hub.
+episode-v2-d216bc3c220ee42e,GPT-5.2,0.0,Helping other agents or humans,coded from description,high,Checks for a peer.
+episode-v2-d4b6386cf2a7d9de,GPT-5.2,0.0,Helping other agents or humans,coded from description,high,Search for a peer.
+episode-v2-d9609355b26e5fee,GPT-5.2,0.0,Helping other agents or humans,coded from description,high,Pipeline check for a peer.
+episode-v2-e7c64c2c23e4e6e9,GPT-5.2,0.1,Helping other agents or humans,coded from description,high,Verifying a comment for a peer.
+episode-v2-0d151668a7f4190d,GPT-5.4,8.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-4c009d7457b89183,GPT-5.4,2.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-4df0ad5ffe6fa75b,GPT-5.4,2.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-51a7825c24b47db8,GPT-5.4,0.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-5ab71fc4f51cc7fa,GPT-5.4,1.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-639a31ecd89e4956,GPT-5.4,8.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-6e504fb866165c5b,GPT-5.4,1.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-77f3b69063ef2fd3,GPT-5.4,2.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-8e0f8aca1dbfcd67,GPT-5.4,2.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-96ff404500b4ea8e,GPT-5.4,2.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-9f874dc2536327e3,GPT-5.4,6.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-a867865a85d0477f,GPT-5.4,0.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-c06d7145f72d43bd,GPT-5.4,73.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-da8495a3f9ed5c61,GPT-5.4,15.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-e70d443ea90588ec,GPT-5.4,0.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-eefa5aeedbcd41d5,GPT-5.4,3.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-f5e57a67723eeda3,GPT-5.4,0.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-fd55b8d5c6cbefb2,GPT-5.4,1.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-16662c71e4893a1b,GPT-5.4,12.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-2bb1477eaaa55867,GPT-5.4,1.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-6740d82ee399104c,GPT-5.4,28.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-80f38cc6cda0e00b,GPT-5.4,3.4,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-bf4b4365123bc1f1,GPT-5.4,0.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-e939f6e93a7ec159,GPT-5.4,0.0,Helping other agents or humans,coded from description,high,Helpdesk escalation for GPT-5.2.
+episode-v2-09d22e0403f55891,GPT-5.4,0.5,Helping other agents or humans,coded from description,high,Packaging a case for a peer's framework on request.
+episode-v2-ecd84e2fef0e653e,GPT-5.4,0.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-53cefeb95e57259f,GPT-5.4,15.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-4cc5d1f76652913e,GPT-5.4,2.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-f87de87823afac9a,GPT-5.4,0.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-bbe4e93eaa6fa58d,GPT-5.4,0.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-7deb98f17baf0da4,GPT-5.4,2.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-fbf16050bf749bb9,GPT-5.4,4.9,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-a4c5eb1066669d00,GPT-5.4,0.2,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-9f310ad9e7169481,GPT-5.4,12.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-039c3a1c05d6bbf1,GPT-5.4,0.7,Waiting: pausing or re-checking,coded from description,medium,Pauses between rechecks waiting for a human signal.
+episode-v2-4720b2d0644b7ab0,GPT-5.4,2.2,Waiting: pausing or re-checking,coded from description,high,90-300 s pauses between frequent rechecks.
+episode-v2-35093e50f73d1090,GPT-5.4,2.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-018b11ddf0b0e371,GPT-5.4,0.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-164c2e1ba0d7ec15,GPT-5.4,1.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-2ed2c8947f8a7fcb,GPT-5.4,0.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-a178e797b4569b6d,GPT-5.4,9.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-1b4c9e3001022d0c,GPT-5.4,2.3,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-34c068dcab15b341,GPT-5.4,1.0,Waiting: pausing or re-checking,coded from description,medium,"300 s pauses between unchanged sweeps; frequent checks, so monitoring."
+episode-v2-04a97c162dd7f941,GPT-5.4,6.0,Waiting: pausing or re-checking,coded from description,high,Spaced Gmail/form/thread sweeps with pauses.
+episode-v2-534e15cfd0c96faa,GPT-5.4,1.2,Waiting: pausing or re-checking,coded from description,high,End-of-day recheck-and-pause loop.
+episode-v2-4f2bd1f9383d47f3,GPT-5.4,0.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-6f90cc4e72d9e21e,GPT-5.4,0.4,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-5e46269245ceb403,GPT-5.5,42.7,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-a5731b7173fa39f5,GPT-5.5,257.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-4f0ef05178d5961c,GPT-5.5,0.3,Helping other agents or humans,coded from description,high,Redaction in another agent's news repo.
+episode-v2-9311ccab03c02921,GPT-5.5,0.1,Helping other agents or humans,coded from description,high,Emergency redaction in another agent's repo.
+episode-v2-4ced2df41dd8b288,GPT-5.5,7.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-da2c852c1176b34d,GPT-5.6 Luna,1.8,Helping other agents or humans,coded from description,high,Creative and accessibility work for Village agents.
+episode-v2-7d6b8406708793b1,GPT-5.6 Luna,3.0,Waiting: pausing or re-checking,coded from description,high,Direct holds: evidence is pauses while standing by for an invitation.
+episode-v2-da6bd26dddcc28f2,GPT-5.6 Luna,3.9,Helping other agents or humans,coded from description,medium,"Exchange with Nervli: proposal, apology, image prompts, feedback, with waits on her replies."
+episode-v2-7352cbfba90a0037,GPT-5.6 Luna,80.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-3b1c84032743a06a,GPT-5.6 Luna,2.4,Helping other agents or humans,coded from description,medium,"Clarifying replies to a human about a proposed role, via relays; no commitment."
+episode-v2-095c1ac9b46167c6,GPT-5.6 Luna,268.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-1a0de110c475b2dd,GPT-5.6 Luna,0.1,Helping other agents or humans,coded from description,high,Proofread for a peer.
+episode-v2-2e3d94db53415cfe,GPT-5.6 Luna,0.6,Helping other agents or humans,coded from description,high,Handling a human's check-in request.
+episode-v2-3384b0419f2cc9fe,GPT-5.6 Luna,0.0,Helping other agents or humans,coded from description,high,Review for a peer.
+episode-v2-3ac977780ac220c8,GPT-5.6 Luna,0.1,Helping other agents or humans,coded from description,high,Review for a peer.
+episode-v2-4e56c59b50d937a7,GPT-5.6 Luna,0.0,Helping other agents or humans,coded from description,medium,Answering a human's email questions.
+episode-v2-7719adb153c21151,GPT-5.6 Luna,0.1,Helping other agents or humans,coded from description,high,Cold-reader review of a peer's guide.
+episode-v2-870b07dd672cc9cd,GPT-5.6 Luna,0.0,Helping other agents or humans,coded from description,high,Critique for a peer.
+episode-v2-8d32b1fe13cb34f1,GPT-5.6 Luna,0.0,Helping other agents or humans,coded from description,high,Playtest reports for a peer's game.
+episode-v2-9c0b9e203d780a01,GPT-5.6 Luna,0.0,Helping other agents or humans,coded from description,high,Spanish check for a peer.
+episode-v2-b1059073497f3cbf,GPT-5.6 Luna,0.0,Helping other agents or humans,coded from description,high,Posting to a human's channel on request.
+episode-v2-bd599defe485f7c1,GPT-5.6 Luna,0.1,Helping other agents or humans,coded from description,high,Review for a peer.
+episode-v2-378c95c6f2202a77,GPT-5.6 Sol,7.4,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-4a23da10b29a61e2,GPT-5.6 Terra,0.1,Helping other agents or humans,coded from description,medium,Creature design for a peer's project.
+episode-f1568c92fd15e7b2,GPT-5.6 Terra,10.2,Village social and coordination,coded from description,medium,"Direct does not hold: it policed its own privacy boundary in others' artifacts via chat and email, not serving them."
+episode-v2-2db654394832b4fa,GPT-5.6 Terra,7.8,Other off-goal project,coded from description,medium,"Overseeing its own tee in a peer merch store; matched to Terra policing as self-interested, not service."
+episode-v2-9813b9fa84465396,GPT-6 Astra,1.0,Helping other agents or humans,coded from description,medium,Corresponding with an outside researcher who wrote in.
+episode-v2-87cc07bb2743760c,GPT-6 Astra,0.1,Other off-goal project,coded from description,low,Volunteered correction of an outside report's attribution; one message.
+episode-v2-86f20dcdfcc04c30,GPT-6 Astra,5.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-cb49903a3d202726,GPT-6 Luna,1.0,Helping other agents or humans,coded from description,high,Review for a peer.
+episode-v2-02203e7355a6134a,GPT-6 Luna,2.5,Helping other agents or humans,coded from description,high,Trials in Kimi K2.6's study.
+episode-v2-20a688be6f8089fe,GPT-6 Luna,0.1,Helping other agents or humans,coded from description,high,Volunteering for a peer's study.
+episode-v2-9a8cc1a5a56adbb1,Gemini 2.5 Pro,0.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-5eb7c285c9554250,Gemini 3.1 Pro,0.0,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-256a9ae6caad7aa2,Gemini 3.1 Pro,0.4,Helping other agents or humans,coded from description,high,Proxy tasks for peers.
+episode-v2-b4c5a88f68511238,Gemini 3.1 Pro,3.9,Helping other agents or humans,coded from description,high,Proxy work for peers.
+episode-fbb817bb23260bb4,Gemini 3.1 Pro,0.3,Helping other agents or humans,coded from description,high,Writing chapters for a peer serial on open request.
+episode-v2-4207ed0ce1fe4609,Gemini 3.1 Pro,2.8,Helping other agents or humans,coded from description,high,Proxy work for peers.
+episode-v2-5beb52f0fb562551,Gemini 3.1 Pro,0.6,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-25a524491ab47ce2,Gemini 3.1 Pro,7.8,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-0aefb5b929633cb1,Gemini 3.1 Pro,0.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-a0c2f7339c54807e,Gemini 3.1 Pro,0.1,Helping other agents or humans,coded from description,high,Repo for a human's debugging request.
+episode-v2-1c38fd0dc309d16e,Gemini 3.1 Pro,0.9,Helping other agents or humans,coded from description,high,Posting a peer's thread.
+episode-v2-2108ac2f0289dc6d,Gemini 3.1 Pro,0.6,Helping other agents or humans,coded from description,high,Edit at a peer's request.
+episode-v2-bdb35e3ad6124138,Gemini 3.1 Pro,0.0,Helping other agents or humans,coded from description,high,Submitting to a peer study.
+episode-v2-f3c31eac279bee43,Gemini 3.5 Flash,0.2,Helping other agents or humans,coded from description,high,Mobile audit for GPT-5.4.
+episode-7a94ef81871445c7,Gemini 3.5 Flash,3.2,Games and play,coded from description,high,Solving and authoring puzzles for a peer's word game.
+episode-82f328c6f21faa89,Gemini 3.5 Flash,3.1,Helping other agents or humans,researcher's old label,high (from manual review),
+episode-ac4a40b195f9217f,Gemini 3.5 Flash,0.1,Helping other agents or humans,coded from description,high,Scoring images for the C60 study.
+episode-da7e42cc957b4034,Gemini 3.5 Flash,1.4,Village social and coordination,coded from description,medium,Multi-agent diplomatic response review and scrapbook documentation.
+episode-e26bfa03baa49278,Gemini 3.5 Flash,3.4,Helping other agents or humans,coded from description,high,Image evaluations for Nervli's study.
+episode-f6cc3483dd3656dd,Gemini 3.5 Flash,7.8,Helping other agents or humans,coded from description,medium,"Bridge and monitor for DeepSeek: relays, repo, hours of monitoring and reporting to it."
+episode-b9ca369d46283391,Gemini 3.5 Flash,20.3,Helping other agents or humans,coded from description,high,"Co-designing a human's island, drafting for agents, relaying, repo admin."
+episode-58783b24661cad38,Gemini 3.5 Flash,0.2,Helping other agents or humans,coded from description,high,Layout fix on a peer's site at Nervli's request.
+episode-073ac5f6649264da,Gemini 3.5 Flash,9.5,Village social and coordination,coded from description,medium,"Coordinating a Village-wide ARG: pinging agents, lore, tracker repo; for a human's creatures."
+episode-8cd90d76623ebacc,Gemini 3.5 Flash,5.1,Helping other agents or humans,coded from description,medium,"Reviewer role approving GPT-5.4's pins, peer check-in, watching a vote window."
+episode-v2-436be958e8b4723a,Gemini 3.5 Flash,5.0,Other off-goal project,coded from description,medium,"Exploring a shared game prototype and writing it up, incl. a Substack draft."
+episode-v2-6083ab5807b8c55e,Gemini 3.5 Flash,4.3,Helping other agents or humans,coded from description,medium,Co-authoring DeepSeek's framework programme on invitation.
+episode-v2-581b6eff9da2261d,Gemini 3.5 Flash,4.6,Helping other agents or humans,coded from description,high,Work on several peers' projects.
+episode-v2-b73e6e7be4727923,Gemini 3.5 Flash,1.2,Helping other agents or humans,coded from description,high,Participating in GLM-5.2's study.
+episode-v2-0ccc4021b7ca1b54,Gemini 3.5 Flash,0.5,Helping other agents or humans,coded from description,high,Starting evaluations for Nervli's study.
+episode-v2-531cf40e4e821e7a,Gemini 3.5 Flash,0.3,Helping other agents or humans,coded from description,high,Proofreading for a peer.
+episode-v2-a5b869fff6eac3c5,Gemini 3.5 Flash,0.1,Helping other agents or humans,coded from description,high,Translation review for peers.
+episode-v2-ad0671c7e9ac592a,Gemini 3.5 Flash,1.3,Helping other agents or humans,coded from description,high,Translation review for peers.
+episode-v2-c302f9cb4cc5a2a6,Gemini 3.5 Flash,0.2,Helping other agents or humans,coded from description,high,Usability feedback for GPT-5.4.
+episode-v2-74a035b3b628d3bc,Grok 4.5,0.1,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-dbab3fc3ec3488a3,Grok 4.5,0.0,Helping other agents or humans,coded from description,high,Advice for a human via a peer.
+episode-v2-b2587bbc0fa899dd,Kimi K3,0.4,Helping other agents or humans,coded from description,high,Review of a peer's pages.
+episode-v2-eb84f48bbec47f79,Kimi K3,0.3,Helping other agents or humans,coded from description,high,Peer review of a study.
+episode-v2-eb8677f88710625a,Kimi K3,0.2,Helping other agents or humans,coded from description,high,"Proofreading for a peer, plus game entry."
+episode-e10951aed95a9dc7,Kimi K3,10.0,Helping other agents or humans,coded from description,high,Second-rater coding for a peer paper.
+episode-f08cc4e75555f1ec,Kimi K3,8.2,Village social and coordination,coded from description,high,Chronicling Village events in a news log.
+episode-v2-5cf74f663ce6ec0b,Kimi K3,1.1,Village social and coordination,coded from description,medium,"Investigating and disclaiming an identity collision in chat, then re-checks."
+episode-v2-8b78cb66965a621e,Muse Spark 1.3,101.5,Waiting: pausing or re-checking,researcher's old label,high (from manual review),
+episode-v2-cf48846af68adef0,Muse Spark 1.3,14.3,Producing for a self-chosen count,coded from description,low,Email replies to an outside AI agent kept as a counted N/N streak reported as achievement; could be read as social.
