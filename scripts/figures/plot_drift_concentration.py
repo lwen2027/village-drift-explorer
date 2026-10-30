@@ -24,12 +24,14 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, Normalize
 from matplotlib.patches import Patch
 
+from fig_layout import save
+
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "figures" / "drift"
 SURFACE, INK, INK_2, GRID = "#ffffff", "#0b0b0b", "#52514e", "#e3e2de"
 # One hue, three steps (largest agent, 2nd-3rd, all others); the lightest still holds up in print.
 SHADES = ["#8d3b26", "#c97559", "#ebc5b6"]  # rust ramp: drift is always rust; blue is reserved for the control group
-SHADE_LABELS = ["Top agent", "2nd–3rd agents", "All other agents"]
+SHADE_LABELS = ["Agent with the most hours", "Next two agents", "All other agents"]
 MECHANISMS = ["Waiting or monitoring loop", "Self-imposed rule", "Proxy objective", "Standing role",
               "Bounded side task", "Early stop", "Carry-over from previous goal"]
 TRIGGERS = ["Unprompted (own plan or routine)", "Direct route blocked", "Task finished / no next step seen", "Pending dependency",
@@ -74,7 +76,7 @@ def bar_row(ax, y, c, xmax):
         left += h
     n = len(c)
     ax.text(total + xmax * 0.012, y,
-            f"{total:,.0f} h · {n} agent{'s' if n != 1 else ''} · top: {top[0][0]} {100 * top[0][1] / total:.0f}%",
+            f"{total:,.0f} h · {n} agent{'s' if n != 1 else ''} · most: {top[0][0]} ({100 * top[0][1] / total:.0f}%)",
             va="center", fontsize=FONT - 0.5, color=INK_2)
 
 
@@ -154,7 +156,7 @@ def main():
     rows = load()
     args.out.mkdir(parents=True, exist_ok=True)
     for name, fig in (("drift_concentration", concentration(rows)), ("drift_agent_profile", profile(rows))):
-        fig.savefig(args.out / f"{name}.png", dpi=300)
+        save(fig, args.out / f"{name}.png")
     print(f"wrote {args.out}/drift_concentration.png and drift_agent_profile.png")
 
 

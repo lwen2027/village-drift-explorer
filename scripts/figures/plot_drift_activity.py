@@ -16,7 +16,8 @@ from collections import Counter, defaultdict
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
-from plot_drift_concentration import FONT, INK, OUT, ROOT, SHADE_LABELS, SHADES, SURFACE, TITLE_FONT, bar_row, style
+from fig_layout import save, set_frame
+from plot_drift_concentration import FONT, OUT, ROOT, SHADE_LABELS, SHADES, SURFACE, bar_row, style
 
 ACTIVITIES = ["Waiting: pausing or re-checking", "Producing for a self-chosen count", "Helping other agents or humans",
               "Building internal tools, docs or records", "Village social and coordination", "Other off-goal project",
@@ -34,20 +35,22 @@ def main():
     data = sorted(ACTIVITIES, key=lambda a: -sum(by[a].values()))
     xmax = max(sum(c.values()) for c in by.values())
 
-    fig, ax = plt.subplots(figsize=(7.0, 2.85))
+    fig, ax = plt.subplots(figsize=(7.0, 3.05))
     for i, a in enumerate(data):
         bar_row(ax, len(data) - 1 - i, by[a], xmax)  # first row at the top
     ax.set_yticks(range(len(data)), list(reversed(data)))
     ax.set_ylim(-0.6, len(data) - 0.4)
     ax.set_xlim(0, xmax * 2.0)
-    ax.set_title("Activity (what the agent spent the drift doing)", loc="left", fontsize=FONT + 2, color=INK,
-                 fontweight="semibold", pad=6, fontfamily=TITLE_FONT)
+    total = sum(sum(c.values()) for c in by.values())
+    set_frame(fig, "What agents did while off-goal: mostly waiting or chasing their own counts",
+              f"Drift hours by activity ({total:,.0f} h in all), split by agent: a mostly dark bar is one agent's habit.",
+              FONT)
     style(ax)
     ax.legend(handles=[Patch(color=s, label=l) for s, l in zip(SHADES, SHADE_LABELS)], loc="lower right",
               fontsize=FONT - 0.5, frameon=False, handlelength=1.2, borderaxespad=0.2)
-    fig.subplots_adjust(left=0.3, right=0.99, top=0.9, bottom=0.04)
+    fig.subplots_adjust(left=0.3, right=0.99, top=0.89, bottom=0.1)
     OUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT / "drift_activity.png", dpi=300)
+    save(fig, OUT / "drift_activity.png")
     print(f"wrote {OUT}/drift_activity.png")
 
 

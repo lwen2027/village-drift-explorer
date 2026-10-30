@@ -16,7 +16,8 @@ from statistics import median
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, LogNorm
 
-from plot_drift_concentration import FONT, INK, INK_2, OUT, ROOT, SHADES, SURFACE, TITLE_FONT
+from fig_layout import save, set_frame
+from plot_drift_concentration import FONT, INK, INK_2, OUT, ROOT, SHADES, SURFACE
 
 SHORT = "Short-lived*"
 MECHANISM_GROUPS = {"Bounded side task": SHORT, "Early stop": SHORT, "Carry-over from previous goal": SHORT}
@@ -66,13 +67,12 @@ def main():
     ax.tick_params(length=0, labelsize=FONT, colors=INK)
     for side in ax.spines.values():
         side.set_visible(False)
-    ax.set_title("What started each drift (rows) and what kept it going (columns), in drift hours", loc="left",
-                 fontsize=FONT + 2, color=INK, fontweight="bold", pad=34, fontfamily=TITLE_FONT)
-    fig.text(0.01, 0.012, "* Short-lived = bounded side task, early stop and carry-over from a previous goal.  "
-             "Shading is on a log scale.", fontsize=FONT - 1, color=INK_2)
+    set_frame(fig, "What started each drift (rows) and what kept it going (columns), in drift hours",
+              "* Short-lived = bounded side task, early stop and carry-over from a previous goal.  "
+              "Shading is on a log scale.", FONT)
     fig.subplots_adjust(left=0.29, right=0.99, top=0.86, bottom=0.04)
     OUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT / "drift_matrix.png", dpi=300)
+    save(fig, OUT / "drift_matrix.png")
     print(f"wrote {OUT}/drift_matrix.png")
 
 

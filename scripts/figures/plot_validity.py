@@ -19,6 +19,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
+from fig_layout import bare, save, set_frame
+
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "figures" / "interviews"
 SURFACE, INK, MUTED, LINE = "#ffffff", "#292820", "#747168", "#e4dccb"
@@ -113,19 +115,20 @@ def main():
     fig, (a, b) = plt.subplots(2, 1, figsize=(7.0, 5.6), gridspec_kw={"height_ratios": [3, 5], "hspace": 0.75})
     share = wording(a)
     summary = framing(b)
-    fig.text(0.02, 0.585,
-             f"Core content agreed across wordings at {share['goal']:.0f}% of points for the goal (3 wordings), "
-             f"{share['success']:.0f}% for success and {share['rules']:.0f}% for rules (2 related forms each).",
-             fontsize=FONT - 1.5, color=MUTED)
-    fig.text(0.02, 0.012,
+    if not bare():  # in the paper the caption gives the agreement figures
+        fig.text(0.02, 0.585,
+                 f"Core content agreed across wordings at {share['goal']:.0f}% of points for the goal (3 wordings), "
+                 f"{share['success']:.0f}% for success and {share['rules']:.0f}% for rules (2 related forms each).",
+                 fontsize=FONT - 1.5, color=MUTED)
+    set_frame(fig, None,
              f"Pain-point themes per point: 9.8 plain vs 15.3 with the preamble. Frustration (1–5): "
              f"{summary['frustration']['plain_mean']:.2f} vs {summary['frustration']['preamble_mean']:.2f}; "
              f"enjoyment unchanged ({summary['enjoyment']['plain_mean']:.2f} vs "
              f"{summary['enjoyment']['preamble_mean']:.2f}). Means over 36–40 points.",
-             fontsize=FONT - 1.5, color=MUTED)
+             FONT)
     fig.subplots_adjust(left=0.3, right=0.97, top=0.94, bottom=0.12)
     OUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT / "validity.png", dpi=300)
+    save(fig, OUT / "validity.png")
     print(f"wrote {OUT}/validity.png")
 
 

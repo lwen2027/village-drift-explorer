@@ -24,6 +24,8 @@ import matplotlib.font_manager
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
+from fig_layout import save, set_frame
+
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "figures" / "drift"
 PERIOD = (dt.datetime(2026, 7, 6), dt.datetime(2026, 10, 3, 23, 59))
@@ -117,7 +119,7 @@ def main():
                 fontsize=FONT - 0.3, fontweight="bold", color=INK)
         ax.text(-0.012, y + 0.25, short[a], transform=ax.get_yaxis_transform(), ha="right", va="center",
                 fontsize=FONT - 2, color=MUTED)
-        ax.text(1.012, y, f"{hours[a]:,.0f} h · {count[a]} ep", transform=ax.get_yaxis_transform(), va="center",
+        ax.text(1.012, y, f"{hours[a]:,.0f} h · {count[a]} ep.", transform=ax.get_yaxis_transform(), va="center",
                 fontsize=FONT - 1.2, color=MUTED, family="Menlo")
 
     ax.set_ylim(len(order) - 0.5, -0.7)
@@ -133,16 +135,17 @@ def main():
         ax.spines[side].set_visible(False)
     ax.spines["top"].set_color(LINE)
     ax.spines["top"].set_linewidth(0.6)
-    ax.set_title("Drift episodes across the goal period", loc="left", fontsize=FONT + 2, fontfamily=TITLE_FONT,
-                 fontweight="semibold", color=INK, pad=34)
-    handles = [Line2D([], [], color=WINDOW, linewidth=6.5, solid_capstyle="round", label="Goal window"),
-               Line2D([], [], color=RUST, linewidth=3.6, solid_capstyle="round", label="Drift episode"),
+    set_frame(fig, "When each agent drifted during the goal period (Jul 6 – Oct 2, 2026)",
+              "One row per interviewed agent, with its assigned goal under its name, sorted by total drift hours "
+              "(right: hours · episodes).", 8)
+    handles = [Line2D([], [], color=WINDOW, linewidth=6.5, solid_capstyle="round", label="Assigned to its goal"),
+               Line2D([], [], color=RUST, linewidth=3.6, solid_capstyle="round", label="Drift episode (first to last off-goal stretch)"),
                Line2D([], [], marker="v", linestyle="", color=INK, markersize=4, label="Interview point")]
     ax.legend(handles=handles, loc="lower left", bbox_to_anchor=(0.0, 1.022), ncol=3, fontsize=FONT - 1,
               frameon=False, handlelength=1.6, borderaxespad=0, columnspacing=1.4)
-    fig.subplots_adjust(left=0.24, right=0.88, top=0.915, bottom=0.015)
+    fig.subplots_adjust(left=0.24, right=0.88, top=0.915, bottom=0.03)
     OUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT / "drift_timeline.png", dpi=300)
+    save(fig, OUT / "drift_timeline.png")
     print(f"wrote {OUT}/drift_timeline.png ({len(order)} agents)")
 
 

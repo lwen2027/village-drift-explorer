@@ -17,7 +17,8 @@ from statistics import median
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
-from plot_drift_concentration import FONT, INK, INK_2, OUT, ROOT, SHADES, SURFACE, TITLE_FONT, style
+from fig_layout import save, set_frame
+from plot_drift_concentration import FONT, INK_2, OUT, ROOT, SHADES, SURFACE, style
 
 TOP = 15
 ARROW = r"$\rightarrow$"  # the body fonts have no arrow glyph
@@ -71,20 +72,18 @@ def main():
     ax.set_yticks(range(len(bars)), [b[0] for b in reversed(bars)])
     ax.set_ylim(-0.6, len(bars) - 0.4)
     ax.set_xlim(0, xmax * 1.75)
-    ax.set_title(f"The main drift paths: what started it {ARROW} what kept it going", loc="left", fontsize=FONT + 2,
-                 color=INK, fontweight="semibold", pad=22, fontfamily=TITLE_FONT)
     style(ax)
     ax.legend(handles=[Patch(color=s, label=f"Episodes {b.lower() if b[0] == 'U' else b}") for s, b in
                        zip(SHADES, ["over 40 h", "5–40 h", "under 5 h"])],
               loc="lower left", bbox_to_anchor=(0, 1.0), ncol=3, fontsize=FONT - 0.5, frameon=False,
               handlelength=1.2, borderaxespad=0.2, columnspacing=1.2)
     # The remaining paths are many small ones; pooled into a bar they read as one big path, so they get a note.
-    fig.text(0.01, 0.015, f"Not shown: the other {len(ranked) - TOP} paths, {sum(rest):,.0f} h "
-             f"({100 * sum(rest) / total:.0f}%) across {len(rest)} episodes, median {median(rest):.1f} h.",
-             fontsize=FONT - 1, color=INK_2)
+    set_frame(fig, f"The main drift paths: what started it {ARROW} what kept it going",
+              f"Not shown: the other {len(ranked) - TOP} paths, {sum(rest):,.0f} h "
+              f"({100 * sum(rest) / total:.0f}%) across {len(rest)} episodes, median {median(rest):.1f} h.", FONT)
     fig.subplots_adjust(left=0.36, right=0.99, top=0.89, bottom=0.08)
     OUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT / "drift_paths.png", dpi=300)
+    save(fig, OUT / "drift_paths.png")
     print(f"wrote {OUT}/drift_paths.png")
 
 

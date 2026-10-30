@@ -20,6 +20,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.font_manager
 import matplotlib.pyplot as plt
+
+from fig_layout import save, set_frame
 from matplotlib.patches import Rectangle
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -43,8 +45,7 @@ def load():
 
 
 def title(fig, text, sub):
-    fig.text(0.04, 0.95, text, fontsize=FONT + 4, fontfamily=TITLE_FONT, fontweight="semibold", color=INK, va="top")
-    fig.text(0.04, 0.95 - 0.075, sub, fontsize=FONT, color=MUTED, va="top")
+    set_frame(fig, text, sub, FONT)
 
 
 def waffle(rows, hours, days):
@@ -135,7 +136,7 @@ def main():
     data = load()
     OUT.mkdir(parents=True, exist_ok=True)
     for name, make in (("waffle", waffle), ("agents", agents), ("facts", facts)):
-        make(*data).savefig(OUT / f"drift_summary_{name}.png", dpi=300)
+        save(make(*data), OUT / f"drift_summary_{name}.png")
     print(f"wrote {OUT}/drift_summary_{{waffle,agents,facts}}.png")
 
 

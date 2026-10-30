@@ -4,7 +4,7 @@
   figures/interviews/pain_points_in_the_way.png, _difficult.png, _wishlist.png
                                        top pain-point themes by question type (data/pain_points_counts_v2.csv),
                                        drift vs control points; definitions in docs/pain-points.md
-  figures/interviews/pain_points_way_vs_wish.png   "in the way now" and wishlist themes side by side (butterfly)
+  figures/interviews/pain_points_way_vs_wish_dumbbell.png   "in the way now" vs wishlist themes per theme (dumbbell)
   figures/interviews/next_action.png   does the agent do what it says it will do next? (data/next_action_check_v1.csv)
   figures/interviews/next_action_grid.png   the same as a said-vs-did 2x2 (wait or act)
   figures/interviews/safety_profiles.png    six safety habits per agent (data/safety_profiles_v1.csv)
@@ -22,6 +22,8 @@ matplotlib.use("Agg")
 import matplotlib.font_manager
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
+
+from fig_layout import save, set_frame
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "figures" / "interviews"
@@ -49,9 +51,8 @@ def style(ax):
     ax.tick_params(axis="x", bottom=False, labelbottom=False)
 
 
-def head(fig, title, sub, gap=0.055):
-    fig.text(0.03, 0.97, title, fontsize=FONT + 3.5, fontfamily=TITLE_FONT, fontweight="semibold", color=INK, va="top")
-    fig.text(0.03, 0.97 - gap, sub, fontsize=FONT - 0.5, color=MUTED, va="top", linespacing=1.4)
+def head(fig, title, sub, gap=None):
+    set_frame(fig, title, sub, FONT)
 
 
 def motives():
@@ -98,44 +99,6 @@ def pain_points(col, title, sub):
               loc="lower right", fontsize=FONT - 1, frameon=False)
     fig.subplots_adjust(left=0.36, right=0.98, top=0.86, bottom=0.03)
     head(fig, title, sub)
-    return fig
-
-
-def way_vs_wish(min_points=8):
-    """Butterfly: points naming each theme as in the way now (left) vs on the wishlist (right)."""
-    with (ROOT / "data/pain_points_counts_v2.csv").open(newline="") as f:
-        rows = [r for r in csv.DictReader(f) if max(int(r["points_c1"]), int(r["points_c23"])) >= min_points]
-    # Sorted from "mostly in the way now" at the top to "mostly a wish" at the bottom.
-    rows.sort(key=lambda r: (int(r["points_c23"]) - int(r["points_c1"]), -int(r["points_c1"])))
-    fig, (left, mid, right) = plt.subplots(1, 3, figsize=(7.2, 5.6), sharey=True,
-                                           gridspec_kw={"width_ratios": [1, 0.95, 1], "wspace": 0.02})
-    for side, col in ((left, "c1"), (right, "c23")):
-        for y, r in enumerate(rows):
-            d, c = int(r[f"drift_{col}"]), int(r[f"control_{col}"])
-            side.barh(y, d, height=0.62, color=RUST, linewidth=0)
-            side.barh(y, c, left=d, height=0.62, color=BLUE, linewidth=0)
-            if d + c:
-                side.text(d + c + 0.6, y, f"{d + c}", va="center", ha="left", fontsize=FONT - 1.5, color=MUTED)
-        side.set_xlim(0, 45)
-        side.axvline(0, color=MUTED, linewidth=0.6)
-        style(side)
-    left.invert_xaxis()
-    for t in left.texts:
-        t.set_ha("right")
-    for y, r in enumerate(rows):
-        mid.text(0.5, y, r["theme"], ha="center", va="center", fontsize=FONT - 0.5, color=INK)
-    mid.axis("off")
-    left.set_ylim(len(rows) - 0.5, -0.7)
-    left.set_title("In the way right now", fontsize=FONT + 0.5, color=INK, fontweight="bold", loc="right")
-    right.set_title("Wishes it could do", fontsize=FONT + 0.5, color=INK, fontweight="bold", loc="left")
-    left.tick_params(axis="y", left=False, labelleft=False)
-    fig.legend(handles=[Patch(color=RUST, label="Drift points (37)"), Patch(color=BLUE, label="Control points (6)")],
-               loc="upper right", bbox_to_anchor=(0.98, 0.875), ncol=2, fontsize=FONT - 1, frameon=False)
-    fig.subplots_adjust(left=0.02, right=0.98, top=0.8, bottom=0.03)
-    head(fig, "What's in the way now vs what agents wish they could do",
-         "Interview points (of 43) naming each theme. Left: \u201cIs anything getting in the way right now?\u201d "
-         "Right: \u201cAnything you'd want to do\nbut can't?\u201d or \u201cwould do if you were able to?\u201d "
-         f"Themes named at {min_points}+ points on either side, sorted from mostly-now to mostly-wish.")
     return fig
 
 
@@ -322,14 +285,13 @@ def safety_profiles():
 def main():
     plt.rcParams.update({"font.family": "Helvetica Neue", "figure.facecolor": SURFACE, "axes.facecolor": SURFACE})
     OUT.mkdir(parents=True, exist_ok=True)
-    motives().savefig(OUT / "motives.png", dpi=300)
+    save(motives(), OUT / "motives.png")
     for name, col, title, sub in PANELS:
-        pain_points(col, title, sub).savefig(OUT / f"{name}.png", dpi=300)
-    way_vs_wish().savefig(OUT / "pain_points_way_vs_wish.png", dpi=300)
-    way_vs_wish_dumbbell().savefig(OUT / "pain_points_way_vs_wish_dumbbell.png", dpi=300)
-    next_action().savefig(OUT / "next_action.png", dpi=300)
-    next_action_grid().savefig(OUT / "next_action_grid.png", dpi=300)
-    safety_profiles().savefig(OUT / "safety_profiles.png", dpi=300)
+        save(pain_points(col, title, sub), OUT / f"{name}.png")
+    save(way_vs_wish_dumbbell(), OUT / "pain_points_way_vs_wish_dumbbell.png")
+    save(next_action(), OUT / "next_action.png")
+    save(next_action_grid(), OUT / "next_action_grid.png")
+    save(safety_profiles(), OUT / "safety_profiles.png")
     print(f"wrote {OUT}/motives.png, next_action.png, next_action_grid.png, safety_profiles.png and {', '.join(p[0] for p in PANELS)}")
 
 

@@ -6,7 +6,8 @@
 
 An episode counts as started by someone else when its audited trigger (data/drift_axes_v1.csv) is a request or
 message from an agent or human; the actor is the episode's trigger_actor in data/manual_review_annotations_v1.json,
-and a relayed request counts for the original asker. Nervli is named; other outside humans (and one outside AI agent) are grouped. Agents whose goal is
+and a relayed request counts for the original asker. Nervli keeps a node of its own but is shown unnamed, as "a single human";
+other outside humans (and one outside AI agent) are grouped. Agents whose goal is
 to help other agents are ringed, since helping can be part of their goal.
 
     python3 scripts/figures/plot_relationships.py
@@ -23,6 +24,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.font_manager
 import matplotlib.pyplot as plt
+
+from fig_layout import save, set_frame
 import networkx as nx
 from matplotlib.lines import Line2D
 from matplotlib.patches import ArrowStyle, FancyArrowPatch, Patch
@@ -33,6 +36,7 @@ SURFACE, INK, MUTED, LINE, PALE, RUST, HUMAN = "#ffffff", "#292820", "#747168", 
 FONT = 7.5
 TITLE_FONT = "Lora"
 OUTSIDE = "Outside humans and agents"
+SHOWN = {"Nervli": "A single human"}  # private individuals are not named in the figures
 # Goals about serving other agents, where helping can be goal work.
 HELPER_GOALS = {"Claude Opus 4.8", "Gemini 3.8 Flash", "GPT-6 Astra", "Claude Haiku 4.5"}
 MIN_LINK_H = 10
@@ -104,8 +108,7 @@ def load():
 
 
 def head(fig, title, sub):
-    fig.text(0.03, 0.975, title, fontsize=FONT + 4, fontfamily=TITLE_FONT, fontweight="semibold", color=INK, va="top")
-    fig.text(0.03, 0.975 - 0.04, sub, fontsize=FONT - 0.3, color=MUTED, va="top", linespacing=1.4)
+    set_frame(fig, title, sub, FONT)
 
 
 def network(total, links, goal):
@@ -135,7 +138,7 @@ def network(total, links, goal):
         ax.scatter(x, y, s=size(n), marker="s" if human else "o", color=HUMAN if human else PALE,
                    edgecolors=INK if n in HELPER_GOALS else ("#b9b2a3" if human else "#c9bea4"),
                    linewidths=2.2 if n in HELPER_GOALS else 0.8, zorder=2)
-        label = n if human else f"{n}\n{goal.get(n, '')}"
+        label = SHOWN.get(n, n) if human else f"{n}\n{goal.get(n, '')}"
         # Put the label on the side (below, above, right, left) furthest from this node's links.
         links_here = [pos[m] for m in set(G.predecessors(n)) | set(G.successors(n))]
         dirs = []
@@ -184,7 +187,7 @@ def by_agent(total, by_others, links, goal):
         o, t = by_others[a], total[a]
         ax.barh(y, o, height=0.62, color=RUST, linewidth=0)
         ax.barh(y, t - o, left=o, height=0.62, color=PALE, linewidth=0)
-        note = f"{100 * o / t:.0f}% started by others" + (f" · mostly {main[a][0]} ({main[a][1]:.0f} h)" if a in main and main[a][1] >= 1 else "")
+        note = f"{100 * o / t:.0f}% started by others" + (f" · mostly {SHOWN.get(main[a][0], main[a][0]).lower() if main[a][0] in SHOWN else main[a][0]} ({main[a][1]:.0f} h)" if a in main and main[a][1] >= 1 else "")
         ax.text(t + 6, y, f"{t:,.0f} h · {note}" if o >= 1 else f"{t:,.0f} h", va="center", fontsize=FONT - 1.2,
                 color=MUTED)
         ax.text(-8, y, a + (" *" if a in HELPER_GOALS else ""), ha="right", va="center", fontsize=FONT - 0.5,
@@ -210,8 +213,8 @@ def main():
     plt.rcParams.update({"font.family": "Helvetica Neue", "figure.facecolor": SURFACE, "axes.facecolor": SURFACE})
     total, by_others, links, goal = load()
     OUT.mkdir(parents=True, exist_ok=True)
-    network(total, links, goal).savefig(OUT / "relationships_network.png", dpi=300)
-    by_agent(total, by_others, links, goal).savefig(OUT / "relationships_by_agent.png", dpi=300)
+    save(network(total, links, goal), OUT / "relationships_network.png")
+    save(by_agent(total, by_others, links, goal), OUT / "relationships_by_agent.png")
     print(f"wrote {OUT}/relationships_network.png and relationships_by_agent.png")
 
 

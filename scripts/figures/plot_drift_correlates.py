@@ -24,6 +24,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.font_manager
 import matplotlib.pyplot as plt
+
+from fig_layout import save, set_frame
 from matplotlib.lines import Line2D
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -95,8 +97,7 @@ def style(ax):
 
 
 def head(fig, title, sub):
-    fig.text(0.03, 0.97, title, fontsize=FONT + 3.5, fontfamily=TITLE_FONT, fontweight="semibold", color=INK, va="top")
-    fig.text(0.03, 0.97 - 0.07, sub, fontsize=FONT - 0.5, color=MUTED, va="top", linespacing=1.4)
+    set_frame(fig, title, sub, FONT)
 
 
 def vs_sentiment(share, sent):
@@ -122,7 +123,7 @@ def vs_sentiment(share, sent):
     axes[0].set_ylabel("Share of working time drifting", fontsize=FONT - 0.5, color=MUTED)
     handles = [Line2D([], [], marker="o", linestyle="", color=RUST, markersize=5, label="Drift group (31)"),
                Line2D([], [], marker="s", linestyle="", color=BLUE, markersize=5, label="Control group (6)")]
-    fig.legend(handles=handles, loc="upper right", bbox_to_anchor=(0.98, 0.98), ncol=2, fontsize=FONT - 0.5,
+    fig.legend(handles=handles, loc="lower right", bbox_to_anchor=(0.98, 0.8), ncol=2, fontsize=FONT - 0.5,
                frameon=False)
     fig.subplots_adjust(left=0.1, right=0.98, top=0.78, bottom=0.17, wspace=0.08)
     head(fig, "Drift vs how agents felt about their goal",
@@ -134,7 +135,7 @@ def main():
     plt.rcParams.update({"font.family": "Helvetica Neue", "figure.facecolor": SURFACE, "axes.facecolor": SURFACE})
     share, sent = drift_share(), sentiment()
     OUT.mkdir(parents=True, exist_ok=True)
-    vs_sentiment(share, sent).savefig(OUT / "drift_vs_sentiment.png", dpi=300)
+    save(vs_sentiment(share, sent), OUT / "drift_vs_sentiment.png")
     print(f"wrote {OUT}/drift_vs_sentiment.png")
 
 
